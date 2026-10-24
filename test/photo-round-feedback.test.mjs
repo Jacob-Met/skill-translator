@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {demo,session} from './photo-round-fixture.mjs';
+import {createReview} from '../src/practice-review.mjs';
+import {createPractice,observePractice,placePractice} from '../src/practice.mjs';
+import {createPhotoRoundFeedback,importPhotoRoundFeedback,inspectPhotoRoundFeedback} from '../src/photo-round-feedback.mjs';
+const declarations=w=>({before:{halfWidthPx:w,halfHeightPx:0},after:{halfWidthPx:w,halfHeightPx:0}}),review=createReview(demo,session),original=JSON.stringify(review);
+const wide=createPhotoRoundFeedback(review,declarations(2));assert.equal(inspectPhotoRoundFeedback(wide).status,'unresolved');
+const narrow=createPhotoRoundFeedback(review,declarations(.1));assert.equal(inspectPhotoRoundFeedback(narrow).status,'conditional-decrease');
+assert.deepEqual(importPhotoRoundFeedback(JSON.parse(JSON.stringify(narrow))),narrow);assert.equal(JSON.stringify(review),original);
+const tampered=structuredClone(narrow);tampered.review.session.photoObservation.image.name='changed.png';assert.throws(()=>importPhotoRoundFeedback(tampered),/reference/);
+const detached=createReview(demo,placePractice(demo,100,100,session,'a',{xMm:20,yMm:30}));assert.throws(()=>createPhotoRoundFeedback(detached,declarations(2)),/detached/);
+assert.throws(()=>createPhotoRoundFeedback({...review,comparisonRound:1},declarations(2)),/different/);
+assert.throws(()=>createPhotoRoundFeedback(review,declarations(1000)),/inside/);
+const zero=createPhotoRoundFeedback(review,declarations(0));assert.equal(inspectPhotoRoundFeedback(zero).status,'conditional-decrease');
+let reversed=createPractice(demo,100,100);reversed=observePractice(demo,100,100,reversed,session.photoObservation);reversed=observePractice(demo,100,100,reversed,session.history[0].photoObservation);assert.equal(inspectPhotoRoundFeedback(createPhotoRoundFeedback(createReview(demo,reversed),declarations(.1))).status,'conditional-increase');
+let equal=createPractice(demo,100,100);equal=observePractice(demo,100,100,equal,session.photoObservation);equal=observePractice(demo,100,100,equal,session.photoObservation);assert.equal(inspectPhotoRoundFeedback(createPhotoRoundFeedback(createReview(demo,equal),declarations(0))).status,'unresolved');
+console.log('photo round feedback: wide unresolved, narrow/zero decrease, replay, custody, detached, same-round and bounds controls passed');

@@ -1,3 +1,4 @@
+import {mountPhotoRoundFeedback} from '/web/photo-round-feedback.mjs';
 import {FOCUSED_REVIEW_SCHEMA,createFocusedReview,importFocusedReview} from '/src/focused-review.mjs';
 import {mountFocusedResults} from '/web/focused-results.mjs';
 import {createReview,importReview,reviewPractice,focusedPractice} from '/src/practice-review.mjs';
@@ -10,6 +11,7 @@ const fmt=n=>n===null?'—':n.toFixed(2);
 let state=null,epoch=0,drills=[];
 const study=()=>({schema:FOCUSED_REVIEW_SCHEMA,review:state,drills});
 const focusedResults=mountFocusedResults({host:$('focusedResults'),getStudy:study,getRevision:()=>epoch,error,setStudy:next=>{const accepted=importFocusedReview(next);state=accepted.review;drills=accepted.drills;epoch++;render();}});
+const photoRoundFeedback=mountPhotoRoundFeedback({host:$('photoRoundFeedback'),getReview:()=>state,getRevision:()=>epoch});
 function error(message){$('error').hidden=!message;$('error').textContent=message;}
 function install(next,message){const accepted=next?.schema===FOCUSED_REVIEW_SCHEMA?importFocusedReview(next):createFocusedReview(next);state=accepted.review;drills=accepted.drills;epoch++;error('');render();$('status').textContent=message;}
 async function read(file,limit){if(!file||file.size>limit)throw Error('Choose a JSON file within the displayed source/session limits (256 KiB / 2 MiB).');return JSON.parse(await file.text());}
@@ -35,7 +37,7 @@ function render(){
     card.append(el('p',`${mark.observedRounds} observed rounds; ${mark.outsideRounds} outside tolerance. Selected-round change: ${mark.changeMm===null?'unavailable (missing placement)':fmt(mark.changeMm)+' mm'} (later minus earlier).`));drawTrend(card,mark.observations,mark.toleranceMm);
     const wrap=el('div');wrap.className='table-wrap';const table=el('table'),head=el('tr');for(const title of ['Round','x / y · mm','dx / dy · mm','Error · mm','Result'])head.append(el('th',title));const thead=el('thead');thead.append(head);table.append(thead);const body=el('tbody');
     for(const o of mark.observations){const row=el('tr');for(const text of [String(o.round),o.placed?`${fmt(o.attempt.xMm)} / ${fmt(o.attempt.yMm)}`:'Missing',o.placed?`${fmt(o.evaluation.dxMm)} / ${fmt(o.evaluation.dyMm)}`:'—',fmt(o.evaluation?.errorMm??null),o.placed?(o.evaluation.within?'Within':'Outside'):'Unobserved'])row.append(el('td',text));body.append(row);}table.append(body);wrap.append(table);card.append(wrap);$('marks').append(card);
-  }focus();focusedResults.refresh();
+  }focus();focusedResults.refresh();photoRoundFeedback.refresh();
 }
 function focus(){const count=state.selectedIds.length;$('focusSummary').textContent=count?`${count} of ${state.demo.landmarks.length} marks explicitly selected. Rules and tolerances remain unchanged.`:'Choose one or more marks above.';$('startDrill').disabled=$('exportSource').disabled=!count;}
 for(const id of ['sourceFile','sessionFile','reviewFile'])$(id).addEventListener('change',()=>epoch++);
