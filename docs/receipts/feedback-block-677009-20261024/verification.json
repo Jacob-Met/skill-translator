@@ -1,0 +1,67 @@
+{
+  "schema": "skill-translator-feedback-block-receipt/v1",
+  "base_commit": "0924d6bd44644f0db0baafb451e44b3c83aad970",
+  "base_tree": "1b93eace827039b2ba529a1b5b65cb4052a5b05e",
+  "source_files": {
+    "src/feedback-block.mjs": "26ee5423af7314b41b19b865cde8f460af20569c",
+    "test/feedback-block.test.mjs": "3fdffe9b9ce3582a43fa218e90d6078eab7125a3",
+    "web/feedback-block.html": "34dd8b30c574dc1836624da06d4f1640404d983a",
+    "web/feedback-block.css": "5bbd716fda0422e50b48c0505bf6edeb9efd45b2",
+    "web/feedback-block.mjs": "125c20017bb8c26c6c655335b67c52c6bb87b128",
+    "server.mjs": "5483db4447d79e4550dfe1b0254a419826d313b9",
+    "web/rehearsal.html": "ddb3104066ddd51afd908c9d0ba11e6762049abc",
+    "tools/browser-feedback-block.mjs": "1e1ce6dcd47a6be59e15abddc970c386a7028d40",
+    "docs/FEEDBACK_BLOCK.md": "6a4cdb846a895c67e77f7e0630732a843e43e06d"
+  },
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "node": "24.19.0",
+    "tests": 497,
+    "passed": 497,
+    "failed": 0,
+    "skipped": 0,
+    "focused_cases": 7,
+    "tested_base_commit": "8c599ef7f3fe6b0d6c92be8b8f6ce1c95b19864c"
+  },
+  "browser": {
+    "groups": [
+      "actual ordinary-course link starts a fresh fixed policy; first judgment and commit save/reopen without any populated outcome feedback",
+      "second actual commitment stays withheld while requested targets remain real recorded help",
+      "mirrored keyboard placement and a partial final sheet commit the block without automatic reveal; complete unreviewed reopening preserves the boundary",
+      "explicit final review exposes unchanged outcomes and earlier-sheet geometry at its original size; standard raw export preserves exact actions and discloses exposure",
+      "backdated review and ordinary-record relabeling refuse; a newer plan draft cancels an older delayed import",
+      "desktop and390px final outcomes, policy and keyboard export remain usable",
+      "ordinary rehearsal still exposes committed scores from the explicitly disclosed raw export",
+      "maximum2048-action/30-mark input retains complete history and final review (1761ms including download)"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "scope": "Application feedback policy on authored diagram practice; no authentication, hidden knowledge, physical skill or educational efficacy claim",
+    "tested_base_commit": "0924d6bd44644f0db0baafb451e44b3c83aad970"
+  },
+  "runtime": {
+    "user": "nobody",
+    "puppeteer": "25.16.0",
+    "sandbox": "Chrome namespace, PID, network, Seccomp and TSYNC independently verified enabled; no sandbox bypass",
+    "temporary_storage": "Memory-backed temporary profile and downloads; artifacts copied before namespace exit"
+  },
+  "visual_review": "Worker inspected actual390px full course. Outcome sections retain all three sheets, partial missing marks and first judgments; final review boundary and standard-export disclosure are visible. Own-page links have readable contrast and disabled controls are visually subdued. Desktop1280 retained.",
+  "harness_correction": "Puppeteer HTMLElement-only focus helper initially refused the SVG. Harness uses the actual SVG DOM focus method followed by keyboard input; application source unchanged for that correction. Entire final8group course passed.",
+  "independent_review": {
+    "reviewer": "MATERIALTRUTH contributor, same retained team",
+    "focused_native_cases": 7,
+    "passed": 7,
+    "finding": "All target-derived result, actualAdequate and agreement fields masked until exact final review; maintained mutators/source and actual help retained; partial missing states preserved. Explicit standard export is a disclosed application boundary. No core blocker."
+  },
+  "final_composition": {
+    "note": "Incoming0924 photo-round receiver adds separate source/client assets and three server routes. None of12modules imported by ordinary/deferred rehearsal changed. Sharedserver composed from exact0924 source plus four deferred routes. Final8group browser course received this composition including review-only sheet selection; no unchanged full-native rerun needed.",
+    "focused_checks_passed": 8,
+    "http_routes_passed": 8,
+    "execution_receipt": "437289"
+  },
+  "limits": [
+    "Fresh application feedback policy only; no retrospective unseen claim.",
+    "Source files and ordinary consumers can expose answers; not security or proctoring.",
+    "No physical skill, authentication or educational efficacy qualification."
+  ],
+  "review_completion": "Added review-only sheet selector after final course review found earlier geometry could not be revisited. Actual receiver verifies first100mm sheet and second200mm sheet targets/placements at their own dimensions, preserves exact raw study on export, and withholds selector before final review. Final8groups passed on composed0924 source."
+}
