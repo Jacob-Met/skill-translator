@@ -1,0 +1,62 @@
+{
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/34",
+  "maintainedBase": "1adcb5a73aacb764b9c6b49617591e936ecca93f",
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "runtime": "Node 24.19.0",
+    "passed": 162,
+    "failed": 0,
+    "newTests": 7
+  },
+  "browser": {
+    "evidence": "Authored analytic receiving, no measured learning claim",
+    "tests": [
+      "actual focused practice preserves a passing first round and a failing second round in exported raw placements",
+      "focused results attach separately without completing the unpracticed original mark",
+      "explicit round choice and new wrapper download retain both original and focused raw sessions",
+      "changed focused rules refuse transactionally without losing accepted drill evidence",
+      "fresh 390px reopen recomputes subset scope and selected-round findings",
+      "fresh full-task receiver restores all original marks and no inherited performance",
+      "late drill-source read cannot attach into a newly accepted original review",
+      "no browser exceptions or offsite requests"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "result": "PASS",
+    "errors": [],
+    "offsite": []
+  },
+  "regression": {
+    "evidence": "Authored analytic controls; not a learner study",
+    "tests": [
+      "existing practice raw exports receive with common-mark comparison and explicit missingness",
+      "authored full-to-partial example retains per-mark raw coordinates and worsening/missing evidence",
+      "changed-source bundle refuses transactionally without losing the accepted selection",
+      "actual downloads preserve original source and selected unchanged semantics",
+      "focused source reaches maintained practice as a fresh empty task with targets hidden",
+      "fresh 390px browser reopens raw rounds and selection without page overflow",
+      "late file read cannot overwrite a newer accepted example and selection",
+      "no browser exceptions or offsite requests"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "result": "PASS",
+    "errors": [],
+    "offsite": []
+  },
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "sourceSha256": {
+    "src/focused-review.mjs": "02a21b98921dcef8994e211a362bba1e74b96f3331c4f79be20d01c9cc19b22d",
+    "web/focused-results.mjs": "c43241e203f14783c7a86df06dc9d2aa8959a84c7aa8200513a78dcc16644659",
+    "web/practice-review.mjs": "f1be8a3965dbaf90eb9b23ecc79d2571ab5754a02558151d1f41674395cd29ff",
+    "web/practice-review.html": "2cf4885b0723f0e084e7d7de5d7a6dca116cecc8107c709206f5e078f5ea84fb",
+    "server.mjs": "8e77b10c776e5cad8fc09027355dd6da6db8d12968426f0e61d7fcee94207cc8",
+    "test/focused-review.test.mjs": "b9732f5f9dc6389566f8711dacbe3092599205dd0daa912fbaece9365f4ba2a4",
+    "tools/browser-focused-results.mjs": "8ea11b215ad4850719484c282bfe7ceb750db6054d0c41225be34f7d38863c27",
+    "docs/PRACTICE_REVIEW.md": "50adee1a9376606b62fe78c110aa4704845b873aa0a4e3bb92ba9e304f7b2f26"
+  },
+  "limits": [
+    "Authored controls; no physical-learning or acquired-skill evidence",
+    "Explicit source-equivalent attachment does not verify chronology or association to one unique earlier practice session",
+    "Local receiving only, no deployment/provider qualification",
+    "Browser course used approved local loopback runtime and explicit no-sandbox flag required for root execution; production behavior unchanged"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "evidence": "Authored analytic receiving, no measured learning claim",
+  "tests": [
+    "actual focused practice preserves a passing first round and a failing second round in exported raw placements",
+    "focused results attach separately without completing the unpracticed original mark",
+    "explicit round choice and new wrapper download retain both original and focused raw sessions",
+    "changed focused rules refuse transactionally without losing accepted drill evidence",
+    "fresh 390px reopen recomputes subset scope and selected-round findings",
+    "fresh full-task receiver restores all original marks and no inherited performance",
+    "late drill-source read cannot attach into a newly accepted original review",
+    "no browser exceptions or offsite requests"
+  ],
+  "browser": "Chrome/156.0.8078.47",
+  "result": "PASS",
+  "errors": [],
+  "offsite": []
+}

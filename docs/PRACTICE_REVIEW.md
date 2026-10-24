@@ -37,6 +37,42 @@ comparison population; it does not make those observations representative.
 Photo-backed source metadata is retained but this page does not authenticate
 the source image or the learner's physical actions.
 
+## Receive a focused result without losing the full task
+
+After practicing a selected set, export its source annotations and practice
+session from Complete Task. Reopen the original review and use **Bring a focused
+attempt back** to attach those files with an explicit label. The receiver checks
+the original task reference and uses the maintained practice importer to verify
+both the supplied source and the unchanged selected subset of the original task.
+Changed source geometry, rules, tolerances or target dimensions are refused.
+
+Up to eight separate drill sessions may be retained. Select the particular
+original and drill rounds to compare. Raw archived and current placements remain
+available; the paired RMS uses only marks actually present in both selected
+rounds. Every original mark stays visible, including those not practiced in the
+drill. A passing subset cannot complete or replace the original full-task result.
+The user may remove an attached drill without altering the original rounds.
+
+The source reference identifies compatible task geometry, not a unique earlier
+practice session. Attaching a source-equivalent drill to this review is an
+explicit user association. Its declared source review round numbers are retained
+as metadata; they do not verify that it followed the particular original rounds
+shown here. No acquired-skill or temporal improvement claim is made.
+
+Saving a review with attached results uses the separate
+`skill-translator-focused-review/v1` wrapper, retaining the original review and
+each focused source/session. This avoids an older simple-review reader silently
+accepting and dropping attachments. The current page accepts both formats and
+recomputes findings. A late result import cannot attach into a newer original
+review. **Open a fresh full-task retest** restores all original marks into the
+maintained practice page, with no inherited placements and with targets hidden.
+Save the complete review before leaving.
+
+The focused-result browser course is `node tools/browser-focused-results.mjs`,
+using the same existing test runtime configuration described below. Its authored
+controls include an actual two-round focused session, selected-round comparison,
+wrong-source refusal, mobile reopen and a fresh complete-task receiver.
+
 ## Verification
 
 `node --test --test-isolation=none test/*.test.mjs` on Node 24 (or the ordinary
