@@ -1,44 +1,88 @@
 {
-  "baseCommit": "bfc9cffc587afdcd0f7bee13b6d1c38dcbde624e",
+  "baseCommit": "e979955cfb2238b53bcff0b4159b932078a77f3a",
+  "composes": [
+    "source photo capture PR6",
+    "merged additional-demonstration evidence PR5"
+  ],
   "scope": "skill-translator issue 4",
+  "sourceBlobs": {
+    "package.json": "606f8d32d75315976559fbe14469b9405cd91175",
+    "server.mjs": "11522e330a1f6dc63e1890c428961a2f89b227cb",
+    "src/authoring.mjs": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5",
+    "src/capture.mjs": "3540268aa6a9ca7f173aa421350254bde14c8310",
+    "src/demo.mjs": "553193f32c562d16a71a65c877bcac4bf66d5967",
+    "src/evidence.mjs": "43aa6401161b39bfc936ffd3fa5bbc0105692291",
+    "src/geometry.mjs": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061",
+    "src/hypotheses.mjs": "3e219b1568380b88cc049a875194410ef5df7ea5",
+    "test/authoring.test.mjs": "d37eaba57a24c60f94d6b3953c080c1ee337aab1",
+    "test/capture.test.mjs": "fe7c5bff1a95353fbdfe49ffa481578a8063b718",
+    "test/evidence.test.mjs": "8f1f4e0d8cc8391d676fd8d17ba41ab363b73ade",
+    "test/geometry.test.mjs": "33f72c7f86f54ea045f3bc8df7bfa39e0c4a686b",
+    "test/hypotheses.test.mjs": "7aff16dbef7b94d4f9bd4e8622e4adae77fc9e1f",
+    "test/server.test.mjs": "e7c6fac79902fbf69242e8073b6372ef8ca55c90",
+    "tools/browser-evidence.mjs": "f6ce5f56d447d466512a42c9220b630a143fcd55",
+    "tools/browser-smoke.mjs": "ed8cfbb9043f13e0d6474c61bef31edd724f993a",
+    "tools/capture-browser-smoke.mjs": "aa0a35c9b40dee1a7d9ac5ea42d14033461e4c2f",
+    "web/app.mjs": "e3672bfb1922972bf0684c3668f7280928a2076c",
+    "web/capture.css": "83b057b62e20770b3b1fd664279243d4634477fe",
+    "web/capture.html": "c18b1c3ab5b1430840e8a0426adc8714b649d3ec",
+    "web/capture.mjs": "188793c2c4a092b41629fd87cdf273120e2dc6db",
+    "web/image-input.mjs": "954e74a63557cfd2adf53c7be028f134b287e59f",
+    "web/index.html": "ae2acd1c6f15ee66710bbc8f716b96a635278ad9",
+    "web/styles.css": "f541f3fd091191bf223a75a55b47ded7d61b64fc"
+  },
   "execution": {
-    "host": "verified Linux RDC cursor 5717955b-9462-4c8b-9aa9-ee1be62004c9",
+    "host": "Linux RDC cursor 5717955b-9462-4c8b-9aa9-ee1be62004c9",
     "node": "22.23.4",
+    "browser": "Chrome/156.0.8078.47",
     "native": {
       "command": "npm test",
-      "pass": 28,
+      "pass": 41,
       "fail": 0
     },
-    "existingBrowser": {
-      "command": "node tools/browser-smoke.mjs",
-      "passGroups": 14,
-      "note": "Rerun on final production source including source-import ordering and input reset"
-    },
-    "captureBrowser": {
-      "command": "node tools/capture-browser-smoke.mjs",
-      "course": "source photo calibration and maintained workbench receiving",
-      "fixture": "original authored bitmap; not a physical craft demonstration",
-      "browser": "Chrome/156.0.8078.47",
-      "result": "PASS",
-      "tests": [
-        "decoded local PNG shown; malformed replacement preserves accepted pixels",
-        "actual pointer-selected corners calibrate a skewed photo and retain a human-authored edge mark",
-        "invalid marks/calibration preserve prior work and draft edits cannot be exported as accepted calibration",
-        "downloaded annotations match independently hashed image bytes without embedding the photo",
-        "maintained workbench imports captured marks, requires exact original pixels and preserves correct pairing on mismatch",
-        "malformed source metadata is transactional; legacy authored source imports remove stale photo pairing",
-        "a slower prior source import cannot replace a newer source or its image-pairing state",
-        "JPEG decoding and numeric keyboard corner authoring use the same calibrated contract",
-        "EXIF-rotated JPEG uses displayed orientation for source pixel coordinates",
-        "390px source studio has no horizontal overflow",
-        "no page exceptions or offsite requests"
-      ],
-      "errors": [],
-      "offsite": []
-    }
+    "browserCourses": [
+      {
+        "command": "node tools/capture-browser-smoke.mjs",
+        "passGroups": 13,
+        "result": "PASS"
+      },
+      {
+        "command": "node tools/browser-evidence.mjs",
+        "passGroups": 13,
+        "result": "PASS"
+      },
+      {
+        "command": "node tools/browser-smoke.mjs",
+        "passGroups": 14,
+        "result": "PASS"
+      }
+    ],
+    "pageExceptions": 0,
+    "offsiteRequests": 0,
+    "screenshotsReviewed": [
+      "source studio at 390px",
+      "composed evidence workbench at desktop"
+    ]
   },
+  "review": {
+    "independentWorker": "hamon-dcda535a8765-20261023/materialtruth",
+    "reviewedOriginalHead": "c50c1605152292aabded6384f99715dca610beee",
+    "nativeCaptureCases": 9,
+    "blockingFindings": 0,
+    "addressedFinding": "Retain original image object URLs when pagehide.persisted is true."
+  },
+  "negativeFindings": [
+    {
+      "check": "Actual browser Back with default no-store page",
+      "result": "Page reloaded instead of entering back/forward cache; no cache-admission claim. Persisted-pagehide event and fresh image decoding checked directly on both source surfaces."
+    },
+    {
+      "check": "First composed evidence browser run",
+      "result": "Malformed image correctly refused, but prior exact SHA-256 error wording expectation timed out. Assertion now checks SHA-256 identity refusal and retained observations; final full course passed."
+    }
+  ],
   "limits": [
-    "Browser fixture is an original authored bitmap, not physical bookbinding evidence.",
-    "No cloud/model inference, deployment, physical-skill validation or competition submission."
+    "Fixtures are original authored bitmaps and analytic geometry, not physical craft demonstrations.",
+    "No cloud/model inference, deployed service, physical-skill validation or competition submission."
   ]
 }

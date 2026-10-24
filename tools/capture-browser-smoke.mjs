@@ -20,6 +20,18 @@ async function value(page,id,value){await page.$eval("#"+id,(el,v)=>{el.value=St
 async function svgClick(page,id,x,y){await page.$eval("#"+id,el=>el.scrollIntoView({block:"center"}));const p=await page.$eval("#"+id,(el,p)=>{const v=el.createSVGPoint();v.x=p.x;v.y=p.y;const s=v.matrixTransform(el.getScreenCTM());return{x:s.x,y:s.y};},{x,y});await page.mouse.click(p.x,p.y);}
 async function upload(page,id,path){const input=await page.$("#"+id);await input.uploadFile(path);}
 function watch(page){page.on("pageerror",e=>errors.push(String(e)));page.on("request",r=>{if(!r.url().startsWith(origin+"/")&&!r.url().startsWith("blob:"))offsite.push(r.url());});}
+async function preserveCachedPixels(page,selector){
+  // Chrome may reload a no-store page rather than cache it. Exercise the
+  // persisted lifecycle explicitly; do not claim this proves cache admission.
+  await page.evaluate(()=>window.dispatchEvent(new PageTransitionEvent("pagehide",{persisted:true})));
+  const state=await page.evaluate(async selector=>{
+    const element=document.querySelector(selector),image=new Image();
+    if(element)image.src=element.getAttribute("href");
+    let decoded=false;try{await image.decode();decoded=true;}catch{}
+    return {decoded};
+  },selector);
+  assert.deepEqual(state,{decoded:true});
+}
 try{
   browser=await puppeteer.launch({headless:true,executablePath:process.env.CHROME_BINARY||"/usr/bin/google-chrome",args:["--no-first-run","--disable-extensions","--no-default-browser-check"]});
   report.browser=await browser.version();const page=await browser.newPage();watch(page);
@@ -58,6 +70,7 @@ try{
   assert.equal(demo.source.image.sha256,digest);assert.equal(demo.source.image.widthPx,800);assert.equal(demo.landmarks.length,1);assert.equal(demo.landmarks[0].edge,"left");assert.equal(JSON.stringify(demo).includes("data:image"),false);
   await writeFile(out+"/capture.json",JSON.stringify(demo));await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:out+"/studio-desktop.png",fullPage:true});
   record("downloaded annotations match independently hashed image bytes without embedding the photo");
+  await preserveCachedPixels(page,"#captureSvg image");assert.match(await page.$eval("#markCount",el=>el.textContent),/1 source mark/);record("persisted pagehide keeps source-studio pixels available for decoding and annotations intact");
   await page.goto(origin+"/",{waitUntil:"networkidle0"});await upload(page,"demoFile",out+"/capture.json");await page.waitForFunction(()=>document.querySelectorAll("#markChoices button").length===1);
   assert.equal(await page.$$eval("#sourceSvg image",els=>els.length),0);
   await upload(page,"sourcePhoto",out+"/wrong.png");await page.waitForFunction(()=>document.querySelector("#error").textContent.includes("does not match"));assert.equal(await page.$$eval("#sourceSvg image",els=>els.length),0);
@@ -65,9 +78,18 @@ try{
   const originalUrl=await page.$eval("#sourceSvg image",el=>el.getAttribute("href"));
   await upload(page,"sourcePhoto",out+"/wrong.png");await page.waitForFunction(()=>document.querySelector("#error").textContent.includes("does not match"));assert.equal(await page.$eval("#sourceSvg image",el=>el.getAttribute("href")),originalUrl);
   record("maintained workbench imports captured marks, requires exact original pixels and preserves correct pairing on mismatch");
+  await page.evaluate(()=>{
+    for(const [id,value] of Object.entries({obsLabel:"Authored photo comparison",obsClass:"authored-example",obsWidth:200,obsHeight:160,obsX:20,obsY:60,obsUncertainty:1}))document.getElementById(id).value=String(value);
+    document.getElementById("observationForm").requestSubmit();
+    const create=URL.createObjectURL.bind(URL);URL.createObjectURL=blob=>{if(blob.type==="application/json")window.__photoEvidence=blob;return create(blob);};
+  });
+  assert.equal(await page.$$eval("#observationRows tr",els=>els.length),1);await page.click("#exportObservations");
+  const evidence=await page.evaluate(async()=>JSON.parse(await window.__photoEvidence.text()));assert.equal(evidence.observations[0].sourceReference.source.image.sha256,digest);
+  await preserveCachedPixels(page,"#sourceSvg image");assert.equal(await page.$$eval("#observationRows tr",els=>els.length),1);record("photo-backed evidence exports the image anchor and retains paired pixels through persisted pagehide");
   const invalid=structuredClone(demo);invalid.source.image.sha256="bad";await writeFile(out+"/invalid-source.json",JSON.stringify(invalid));await upload(page,"demoFile",out+"/invalid-source.json");await page.waitForFunction(()=>document.querySelector("#error").textContent.includes("Source rejected"));assert.equal(await page.$eval("#sourceSvg image",el=>el.getAttribute("href")),originalUrl);
   await upload(page,"sourcePhoto",out+"/png.png");await page.waitForFunction(()=>document.querySelector("#error").hidden);await page.screenshot({path:out+"/workbench-photo.png",fullPage:true});
   await writeFile(out+"/legacy-source.json",JSON.stringify(demonstration));await upload(page,"demoFile",out+"/legacy-source.json");await page.waitForFunction(()=>document.querySelectorAll("#markChoices button").length===3);assert.equal(await page.$$eval("#sourceSvg image",els=>els.length),0);
+  assert.equal(await page.$$eval("#observationRows tr",els=>els.length),0);
   record("malformed source metadata is transactional; legacy authored source imports remove stale photo pairing");
   await page.evaluate(({older,newer})=>{
     const input=document.querySelector("#demoFile");

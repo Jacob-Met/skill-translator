@@ -73,5 +73,5 @@ $("downloadCapture").addEventListener("click",()=>{
   try{if(calibrationDirty)throw Error("Apply or revert calibration edits before exporting.");validateCapturedDemo(demo);const url=URL.createObjectURL(new Blob([JSON.stringify(demo,null,2)],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download="skill-photo-annotations.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
   catch(error){problem(error.message);}
 });
-window.addEventListener("pagehide",()=>releaseImage(media));
+window.addEventListener("pagehide",event=>{if(!event.persisted)releaseImage(media);});
 render();

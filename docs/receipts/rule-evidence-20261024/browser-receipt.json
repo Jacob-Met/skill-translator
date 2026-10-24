@@ -1,0 +1,23 @@
+{
+  "course": "additional-demonstration evidence loop",
+  "evidence": "authored analytic controls",
+  "tests": [
+    "source does not automatically count as a discriminating demonstration",
+    "entered dimensions and mark select only the analytically compatible fixed-left rule",
+    "a second unfamiliar sheet tests the same rule without refitting",
+    "contradictory evidence eliminates every candidate; removing that record restores support",
+    "actual downloaded JSON retains observation origin, source anchor and measurement radius",
+    "mismatched-source evidence import is refused without damaging prior observations",
+    "same-size ambiguity remains visible and the proposed test respects measurement precision",
+    "saved evidence reopens transactionally and each source selects its visual comparison",
+    "a refused source replacement preserves the evidence attached to the prior source",
+    "malformed source-image identity is refused before replacing the current source or evidence",
+    "fresh 390px browser reopens source and evidence without document overflow",
+    "replacing the source clears prior evidence and rejects stale-source replay",
+    "no observed browser exception or offsite request"
+  ],
+  "browser": "Chrome/156.0.8078.47",
+  "result": "PASS",
+  "errors": [],
+  "offsite": []
+}
