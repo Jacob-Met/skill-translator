@@ -322,3 +322,23 @@ Verification: `node test/contact-footprint.test.mjs` and `node tools/footprint-b
 ## Feature separation
 
 Open `/feature-clearance` to compare declared circular feature footprints across workpiece sizes. The original source and adaptation rules remain unchanged. Inspect every pair's nominal gap and minimum gap over declared placement tolerances, save/reopen the source and declarations, then hand the selected size to existing practice. This is prospective planar geometry, separate from the center-placement score and tool/edge access. See [Feature separation](docs/FEATURE_CLEARANCE.md).
+
+## Reuse declared relationship criteria
+
+In the relationship review, export the current review if you want to retain it,
+then choose **Next practice session JSON** and **Replace session, keep declared
+relationships**. The new session must match the same original source task.
+The declared pairs, relation kinds and tolerances stay unchanged. Reference
+separations adapt from the source rules to the new session's displayed target
+dimensions. Only that incoming session's rounds are retained; previous rounds
+are not merged into it.
+
+A mismatched source refuses while preserving the accepted review. Focused
+drills with a different landmark subset remain distinct sources and cannot be
+silently attached to the full-task criteria. Selecting another file, loading
+another review or changing criteria cancels a pending older session read.
+Export/reopen retains the resulting source, session and criteria.
+
+This supports using the same authored criteria across attempts. It does not
+authenticate when those criteria were chosen, prove that they predate an
+attempt, combine different learners, or establish learning benefit.

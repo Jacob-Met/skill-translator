@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createPractice,placePractice,retryPractice} from '../src/practice.mjs';
-import {evaluateRelationships,createRelationshipReview,importRelationshipReview,reviewRounds} from '../src/task-relationships.mjs';
+import {evaluateRelationships,createRelationshipReview,importRelationshipReview,reviewRounds,applyRelationshipSession} from '../src/task-relationships.mjs';
 const source={title:'Authored pair',provenance:'analytic example',source:{widthMm:100,heightMm:80,corners:[{x:0,y:0},{x:100,y:0},{x:100,y:80},{x:0,y:80}]},landmarks:[{id:'a',label:'A',kind:'fraction',sourcePx:{x:20,y:30},toleranceMm:5},{id:'b',label:'B',kind:'fraction',sourcePx:{x:60,y:30},toleranceMm:5}]};
 const rule=(kind='horizontal')=>({id:'alignment',label:'Authored registration',from:'a',to:'b',kind,toleranceMm:1});
 const points=(a,b)=>[{id:'a',xMm:a[0],yMm:a[1]},{id:'b',xMm:b[0],yMm:b[1]}];
@@ -14,3 +14,27 @@ test('reopen retains raw rounds and recomputes verdicts',()=>{let s=createPracti
 test('changed source and invalid relationships refuse',()=>{const s=createPractice(source,100,80),b=createRelationshipReview(source,s,[rule()]);b.source.landmarks[0].sourcePx.x++;assert.throws(()=>importRelationshipReview(b),/differ/);for(const bad of [{...rule(),to:'a'},{...rule(),to:'unknown'},{...rule(),toleranceMm:NaN},{...rule(),kind:'rotation'}])assert.throws(()=>createRelationshipReview(source,s,[bad]));assert.throws(()=>createRelationshipReview(source,s,[rule(),{...rule(),id:'second'}]),/already/);});
 test('malformed source unknowns refuse before an accepted review is built',()=>{const bad={...source,unknowns:'not an array'},s=createPractice(bad,100,80);assert.throws(()=>createRelationshipReview(bad,s,[rule()]),/unknowns/);});
 test('zero tolerance admits homography roundoff but retains a genuine small difference',()=>{const d=structuredClone(source);d.landmarks[0].sourcePx.x=13.7;d.landmarks[1].sourcePx.x=50;const exact=points([13.7,30],[50,30]),zero={...rule(),toleranceMm:0};assert.equal(evaluateRelationships(d,100,80,exact,[zero]).passed,true);assert.equal(evaluateRelationships(d,100,80,points([13.7,30],[50.000001,30]),[zero]).passed,false);});
+
+test('reused relationships adapt to a new matching-source session without combining rounds',()=>{
+ let previous=createPractice(source,100,80);
+ previous=placePractice(source,100,80,previous,'a',{xMm:24,yMm:30});
+ previous=retryPractice(source,100,80,previous);
+ const bundle=createRelationshipReview(source,previous,[rule()]),before=structuredClone(bundle);
+ let incoming=createPractice(source,200,160);
+ incoming=placePractice(source,200,160,incoming,'a',{xMm:40,yMm:60});
+ incoming=placePractice(source,200,160,incoming,'b',{xMm:120,yMm:60});
+ const applied=applyRelationshipSession(bundle,incoming);
+ assert.deepEqual(applied.rules,bundle.rules);assert.deepEqual(bundle,before);
+ assert.equal(applied.session.round,1);assert.deepEqual(applied.session.history,[]);
+ assert.deepEqual(applied.session.attempts,incoming.attempts);
+ const rounds=reviewRounds(applied);assert.equal(rounds.length,1);
+ assert.equal(rounds[0].results[0].expectedMm,80);assert.equal(rounds[0].passed,true);
+ assert.deepEqual(importRelationshipReview(applied),applied);
+});
+test('reusing criteria refuses mismatched source or empty criteria without changing accepted review',()=>{
+ const session=createPractice(source,100,80),bundle=createRelationshipReview(source,session,[rule()]),before=structuredClone(bundle);
+ const wrong=structuredClone(session);wrong.reference.source.widthMm++;
+ assert.throws(()=>applyRelationshipSession(bundle,wrong),/differ/);
+ assert.deepEqual(bundle,before);
+ assert.throws(()=>applyRelationshipSession(createRelationshipReview(source,session,[]),session),/Declare/);
+});

@@ -42,3 +42,9 @@ export function reviewRounds(bundle){
  const accepted=importRelationshipReview(bundle),{widthMm,heightMm}=accepted.session.reference.target;
  return [...accepted.session.history,{round:accepted.session.round,attempts:accepted.session.attempts}].map(r=>({round:r.round,...evaluateRelationships(accepted.source,widthMm,heightMm,r.attempts,accepted.rules)}));
 }
+
+export function applyRelationshipSession(bundle, session) {
+ const accepted=importRelationshipReview(bundle);
+ fail(accepted.rules.length>0,'Declare at least one relationship before reusing criteria');
+ return createRelationshipReview(accepted.source,session,accepted.rules);
+}

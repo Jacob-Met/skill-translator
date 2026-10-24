@@ -1,11 +1,11 @@
 {
   "format": "skill-tool-current-integration/v1",
-  "base": "a7de70eca8b3e77ada0ccc71415c4e11ca61c71c",
+  "base": "47759a09ff445da69356b06bdcb27fd2a61db7ac",
   "node": "v22.23.4",
   "chrome": "156.0.8078.47",
   "native": {
     "command": "npm test",
-    "passed": 257,
+    "passed": 267,
     "failed": 0,
     "skipped": 0
   },
@@ -18,19 +18,7 @@
     "downloadSha256": "5473b8866af63f5f1c7fa086cda3c92b3a1e11a9ec54169a3149c032f0629878",
     "narrowLabelCssPixels": 13.078787878787878
   },
-  "composition": "Incoming feature-clearance/contact-footprint/calibrated-state-change and earlier learner-photo/rehearsal/decision/practice remain preserved. Removing tool additions from README/server/index reproduces exact base bytes.",
-  "review": "CHRONOS independent source review and root source/browser/visual review; no remaining blocker.",
-  "priorQualifiedCompositions": [
-    {
-      "base": "95eda27c24caf55755c4d6a024cc219aa6bc22d7",
-      "nativePassed": 198,
-      "browserGroups": 12
-    },
-    {
-      "base": "6526e26969edf4d04747e8023592fc62ea714941",
-      "nativePassed": 233,
-      "browserGroups": 12
-    }
-  ],
-  "limits": "Declared nominal planar approach geometry. No tool-body collision, tolerance-region clearance, force, physical safety or learning qualification."
+  "composition": "Latest feature-practice and relationship reuse retained. Removing tool additions from current README/server reproduces exact upstream bytes. Earlier feature/contact/state/practice features remain preserved.",
+  "review": "Independent CHRONOS review; root current-source/native/browser/visual review. No remaining blocker.",
+  "limits": "Declared nominal planar approach geometry, without physical tool-body, tolerance-region, force, safety or learned-skill qualification."
 }
