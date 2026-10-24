@@ -23,3 +23,14 @@ node tools/rehearsal-browser.mjs
 ```
 
 Browser scripts use the existing `PUPPETEER_PATH`, `CHROME_BINARY`, and `QA_OUTPUT` conventions. The new receiver script makes placements and requests in the actual rehearsal UI, downloads its record, opens the review through the producer link, checks same-mark and missing-mark findings, reopens the original exported record, rejects an invalid history, checks desktop/narrow layout and keyboard table inspection, and receives the admitted 2,048-action, 30-mark, 2,017-request capacity case with bounded table rendering.
+
+
+## Retrace a mark’s revisions
+
+After a trial is committed, open **Replay every revision for a mark**. Choose a task mark and use the action slider or Previous/Next buttons. This retains every edit of that mark and every target-request/commit boundary, using the original global action indices. Other marks may have been edited between the displayed actions. Brown points/segments precede the first recorded target request; teal ones follow a recorded request. The selected action shows its exact coordinate, error against the unchanged target and displacement from the previous placement. Missing points remain missing, repeated placements remain visible in the action record, and worsening revisions are not labeled improvements.
+
+The spatial display supports mirrored viewing without changing the physical coordinates or original saved rehearsal. Its connecting lines represent diagram edits, not a physical trajectory. For example, retained edits45→30→target request→25 can expose a20→5mm error change before recorded target help separately from the later5→0mm change. Neither change establishes why it happened or whether the learner can perform a physical task independently.
+
+Traces load only when requested. One selected mark is displayed at a time, and the complete bounded producer history remains available. Unsubmitted trials do not expose target feedback or revision traces. No additional export schema, rewritten action history or replacement practice score is introduced.
+
+Additional verification: `node test/assistance-trace.test.mjs` and `node tools/browser-assistance-trace.mjs`. The browser course uses actual rehearsal edits, mirrored coordinates, original input download, interleaved actions, no-help and unsubmitted trials,390px keyboard scrubbing, and a2,048-action/30-mark capacity input.
