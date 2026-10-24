@@ -1,0 +1,21 @@
+{
+  "course": "complete landmark task practice",
+  "evidence": "authored analytic controls",
+  "tests": [
+    "workbench transfers source, dimensions and hidden mirrored view into complete-task practice",
+    "empty and partial actual placement sets remain incomplete",
+    "retained whole-set failure exposes shared displacement without applying a correction",
+    "mirrored keyboard adjustment preserves other marks and physical coordinates",
+    "invalid source import retains every existing placement",
+    "retry archives the failed round and a genuinely corrected full round passes",
+    "actual download retains original and corrected placements, not fabricated verdicts",
+    "mismatched setup import refuses stale evidence without damaging the current round",
+    "reopened session recomputes outcomes from saved placements",
+    "fresh mobile browser reopens and reviews complete task with no horizontal overflow",
+    "no browser exceptions or offsite requests"
+  ],
+  "browser": "Chrome/156.0.8078.47",
+  "result": "PASS",
+  "errors": [],
+  "offsite": []
+}

@@ -457,6 +457,12 @@ $("useTargetSize").addEventListener("click",()=>{
   $("obsWidth").value=target.widthMm;$("obsHeight").value=target.heightMm;
 });
 $("planUncertainty").addEventListener("input",updateEvidenceProposal);
+$("practiceTask").addEventListener("click",()=>{
+  try{sessionStorage.setItem("skill-translator-practice-input/v1",JSON.stringify({demo,
+    widthMm:target.widthMm,heightMm:target.heightMm,mirrored:mirrored(),showGoals:$("showGoal").checked}));
+    location.assign("/practice");
+  }catch(err){error("Practice setup could not be opened. Export the source annotations to retain them. "+err.message);}
+});
 $("exportObservations").addEventListener("click",()=>{
   const url=URL.createObjectURL(new Blob([JSON.stringify(exportEvidence(demo,observations),null,2)],{type:"application/json"}));
   const link=document.createElement("a");link.href=url;link.download="skill-observations.json";
