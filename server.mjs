@@ -5,6 +5,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/feature-practice.mjs":["src/feature-practice.mjs","text/javascript; charset=utf-8"],
+  "/web/feature-practice.mjs":["web/feature-practice.mjs","text/javascript; charset=utf-8"],
   "/sequence-change":["web/sequence-change.html","text/html; charset=utf-8"],
   "/web/sequence-change.html":["web/sequence-change.html","text/html; charset=utf-8"],
   "/web/sequence-change.mjs":["web/sequence-change.mjs","text/javascript; charset=utf-8"],

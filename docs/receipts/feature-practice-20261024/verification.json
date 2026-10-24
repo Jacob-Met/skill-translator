@@ -1,0 +1,53 @@
+{
+  "baseCommit": "9e4474c2831a1c05e50dad2d15757573a374af55",
+  "verifiedUnchangedNonReceiptBlobs": 158,
+  "mismatches": [],
+  "sha256": {
+    "src/feature-practice.mjs": "916fd8c578fc1d17a7a0f201f82c55d133a9bf4783ff2822532f02fdd538ba2f",
+    "web/feature-practice.mjs": "9fd18ba96868e6f64b870d7b75786455c9412cb53f6bc3668029955d34894e4a",
+    "web/feature-clearance.mjs": "607dea1daf0dc4b1ba60622147d1d4860ab12abe5511261985d5a1eebcd3fff3",
+    "web/feature-clearance.html": "b42cf34a6dc6f50b50491e8af4d27c5e281a3bad54054539a0b41523d8a8cb8d",
+    "test/feature-practice.test.mjs": "a22436c2e7144d4da4775aed9446855d8f976bda370384eee954972ec6ddbc7c",
+    "tools/browser-feature-practice.mjs": "0550014d8f5fcee1960b4129de0c3c36a7069ba6060fe0591c5a6d8db2a9cf11",
+    "docs/FEATURE_PRACTICE.md": "c0536c3815cb5309fc5e3d8ff5faebf8ee48d39964cdbd817f7a1cff99ee5091",
+    "docs/FEATURE_CLEARANCE.md": "6edb8a92fe84c76c03de11c951160fda93de562fcc0665632ac508a703d82bd1",
+    "server.mjs": "cf741772ab189612ad2f24834d6c1edb84132426122f4121176b76bf5a669629"
+  },
+  "nodeSummary": "# tests 245\n# pass 245\n# fail 0\n# skipped 0\n# duration_ms 822.896436",
+  "browser": {
+    "browser": "Chrome/156.0.8078.47",
+    "groups": [
+      "actual practice placement, retry and completed export receive with historical/current choice and distinct feature findings",
+      "completed wrapper download reopens full source, declarations and raw session on a fresh page",
+      "mismatched retained source tolerance refuses transactionally",
+      "another declared size replaces session/history without merging; missing pairs stay unresolved",
+      "superseded read cannot replace state or clear a newer pending selection",
+      "v2 raw photo identity/calibration/pixels, history and manual detachments survive completed export",
+      "desktop and 390px receiving layout",
+      "comparison edits invalidate attached review rather than silently reusing assumptions"
+    ],
+    "errors": [],
+    "offsite": [],
+    "limits": "Authored coordinate and photo-record controls; no image decoding, physical outcome or learned-skill claim."
+  },
+  "receivedAt": "2026-10-24T06:35:35.467856+00:00",
+  "schema": "hamon.product-receiving/v1",
+  "owner": "hamon-583a018f54af-20261023",
+  "runtime": {
+    "node": "22.23.4",
+    "browser": "Chrome 156.0.8078.47",
+    "sandbox": true
+  },
+  "sourceScope": "All non-receipt base blobs not replaced by this candidate matched Git identities. Earlier receipts remain in the Git base tree.",
+  "commands": [
+    "npm test",
+    "PUPPETEER_PATH=<existing module> CHROME_BINARY=/usr/local/bin/google-chrome QA_OUTPUT=<fresh output> node tools/browser-feature-practice.mjs"
+  ],
+  "independentReview": {
+    "reviewer": "worldlaw",
+    "focusedTests": 8,
+    "independent": "Three-mark 3–4–5 gap, incomplete pairs, current/history separation, unchanged scorer and inputs.",
+    "result": "No blocker; local dependency differed only by one trailing blank line; authoritative Git dependency was composed."
+  },
+  "limits": "Authored software controls; no physical acquisition/outcome, provider qualification, deployment or submission."
+}
