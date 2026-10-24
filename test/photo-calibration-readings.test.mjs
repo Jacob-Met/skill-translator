@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {base,corners} from './photo-calibration-fixture.mjs';
+import {createPhotoCalibrationReadings,importPhotoCalibrationReadings,inspectPhotoCalibrationReadings,exportPhotoCalibrationReadings} from '../src/photo-calibration-readings.mjs';
+const original=JSON.stringify(base),alternative={id:'left-four',label:'Proposed page boundary four pixels left',basis:'proposed-reading',corners:corners(6,10,100)};
+const raw=createPhotoCalibrationReadings(base,{before:[],after:[alternative]}),report=inspectPhotoCalibrationReadings(raw);
+assert.equal(report.status,'reading-sensitive');assert.deepEqual(report.scenarios.map(s=>s.status),['conditional-decrease','conditional-increase']);assert.deepEqual(report.commonMarks,['a','b']);assert.equal(JSON.stringify(base),original);
+for(const scenario of report.scenarios)scenario.rounds.forEach((r,i)=>{assert.deepEqual(r.image,i?base.reference.rounds[1].photoObservation.image:base.reference.rounds[0].photoObservation.image);assert.deepEqual(r.marks.map(m=>m.id),['a','b']);});
+assert.deepEqual(importPhotoCalibrationReadings(JSON.parse(exportPhotoCalibrationReadings(raw))),raw);
+const bad=structuredClone(raw);bad.readings.after[0].reference.observation.points[0].pixel.x++;assert.throws(()=>importPhotoCalibrationReadings(bad),/different retained/);
+const moved=structuredClone(raw);moved.source.review.session.photoObservation.points[0].pixel.x++;assert.throws(()=>importPhotoCalibrationReadings(moved));
+assert.throws(()=>createPhotoCalibrationReadings(base,{after:Array.from({length:4},(_,i)=>({...alternative,id:'r'+i}))}),/three/);
+assert.throws(()=>createPhotoCalibrationReadings(base,{after:[{...alternative,corners:corners(-1,10,100)}]}),/image|outside/);
+assert.throws(()=>createPhotoCalibrationReadings(base,{after:[{...alternative,id:'original'}]}),/distinct/);
+assert.throws(()=>createPhotoCalibrationReadings(base,{after:[{...alternative,basis:'verified'}]}),/Declare/);
+const both=createPhotoCalibrationReadings(base,{before:[{...alternative,id:'earlier-left'}],after:[alternative]});assert.equal(inspectPhotoCalibrationReadings(both).scenarios.length,4);
+assert.equal(inspectPhotoCalibrationReadings(createPhotoCalibrationReadings(base)).status,'all-named-readings-decrease');
+console.log('photo calibration readings: coherent reversal, complete matrix, real image identity, original immutability, replay, tamper, finite limits and invalid reading controls passed');
