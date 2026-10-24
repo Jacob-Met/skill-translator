@@ -1,5 +1,5 @@
 {
-  "baseCommit": "511e0936b470e83ec34b7dd4964e5c7ffedd7b45",
+  "baseCommit": "96b786995ffe51c4ef5019b3449a6d1024285413",
   "dateUtc": "2026-10-24",
   "scope": "Explicit evidence-conditioned rule choice into maintained practice",
   "environment": {
@@ -10,7 +10,7 @@
   "checks": [
     {
       "command": "node --test test/*.test.mjs",
-      "passed": 84,
+      "passed": 96,
       "failed": 0
     },
     {
@@ -23,6 +23,11 @@
       "command": "node tools/browser-smoke.mjs",
       "passedGroups": 14,
       "failed": 0
+    },
+    {
+      "command": "node tools/browser-calibration-evidence.mjs",
+      "passedGroups": 13,
+      "failed": 0
     }
   ],
   "sourceSha256": {
@@ -32,9 +37,9 @@
     "web/rule-adoption.mjs": "7ca3c783c32d8c864d31180992c3ebba5e659d53bd80f7505957802931a58211",
     "web/rule-adoption.css": "476301722de224c981077aec63fb8166521c2439d0e7ab4fe8a805c4dcbe4502",
     "tools/browser-rule-adoption.mjs": "fe2e31cf302517916df69d1d85ba1df0fb177e04cc5a5491665aa7ffc027fee7",
-    "server.mjs": "7acb5fc97a57e6e9e8f902addee45d62567650561883e4f21f10e615d00299fa",
-    "test/server.test.mjs": "4300c4a7a9114e027d50934532fd0e9ed8a77927dbc353f2ae1361a387836ae6",
-    "web/index.html": "e7ed8df9848aac8a1d08cc7102def30a666311f4f13119ace302f44c5e5cc442",
+    "server.mjs": "daf80357b71e2e88e1181d1e319cac733ed7b956b978a8c8e1560b4a36819d99",
+    "test/server.test.mjs": "77688ba2b53382764054c7dcd4ec30498a4f4c53f3c4a7e882a7438e060be042",
+    "web/index.html": "13bbee9758294e7255d13cebf5215163d83fd0896fe314e77a25535d10a7d36b",
     "web/app.mjs": "b0a7105923cbad8a24b61a1d85cf19877346e23fe4752ae740f9bd42378bf24e"
   },
   "visualInspection": "Desktop and 390px mobile screenshots inspected; controls and comparisons are legible, with no document overflow.",

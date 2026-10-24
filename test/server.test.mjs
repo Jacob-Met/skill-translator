@@ -8,14 +8,16 @@ test("actual HTTP serves interactive app assets without internet dependencies or
   try{
     for(const [url,type] of [
       ["/","text/html"],["/web/styles.css","text/css"],
+      ["/rule-adoption","text/html"],["/web/rule-adoption.mjs","text/javascript"],
+      ["/web/rule-adoption.css","text/css"],["/src/rule-adoption.mjs","text/javascript"],
+      ["/calibration","text/html"],["/web/calibration.css","text/css"],
+      ["/web/calibration.mjs","text/javascript"],["/src/calibration-evidence.mjs","text/javascript"],
       ["/web/app.mjs","text/javascript"],["/src/geometry.mjs","text/javascript"],
       ["/src/demo.mjs","text/javascript"],
       ["/src/hypotheses.mjs","text/javascript"],
       ["/src/authoring.mjs","text/javascript"],
       ["/calibration-checks","text/html"],["/web/calibration-checks.mjs","text/javascript"],
-      ["/web/calibration-checks.css","text/css"],["/src/calibration-checks.mjs","text/javascript"],
-      ["/rule-adoption","text/html"],["/web/rule-adoption.mjs","text/javascript"],
-      ["/web/rule-adoption.css","text/css"],["/src/rule-adoption.mjs","text/javascript"]
+      ["/web/calibration-checks.css","text/css"],["/src/calibration-checks.mjs","text/javascript"]
     ]){
       const r=await fetch(base+url);
       assert.equal(r.status,200,url);

@@ -1,0 +1,113 @@
+{
+  "base_commit": "a874dc3594b8ca2fa9b7bad9ae867d81b4b5fb78",
+  "scope": "Finite source-calibration hypotheses and coherent multi-observation rule comparison",
+  "source_manifest": {
+    "README.md": {
+      "sha256": "ddcf8a3d7a05de8903e0ed2bc35a5d5be4cfe83540d8afb96d42e10a4d17812e",
+      "git_blob": "07ca00203f73312ed44ab15c7adccab5e356ed59"
+    },
+    "server.mjs": {
+      "sha256": "c697a1bce17b0d6f882f343b0c7964845622a78b7900bb29f96cafc8ad931fd1",
+      "git_blob": "b758cefd59da7d4f9322f8455f982dbe5ef43c23"
+    },
+    "src/evidence.mjs": {
+      "sha256": "4b38bb0babc7a8798919d80edeb732a92cec00d5c91ef97af1d9bd12206d53b0",
+      "git_blob": "0a1f69ed0e2807d7ae2be92765cd02b5bed0c86c"
+    },
+    "src/calibration-evidence.mjs": {
+      "sha256": "5bea3b8791b2d159c0ed36965705694040d5928cf7f8dd53768951cfd37ed68a",
+      "git_blob": "cd97514ad7ecf1ea3d53d6cd6b48b3f2f3573bbd"
+    },
+    "test/server.test.mjs": {
+      "sha256": "6fdb2eaeefb8b439cd0ce9314783b1d9e9210ea5eeed562a7f63948f34fd83d9",
+      "git_blob": "2e4ad4c2b78cc827b892565a65370433b08c3b78"
+    },
+    "test/calibration-evidence.test.mjs": {
+      "sha256": "1450919af306235cabe5060285518f4e19d3bef7935680df14a5bc133ab6cbb4",
+      "git_blob": "47cbbcf2c76af18ce3232de0c98c865cdedae66a"
+    },
+    "tools/browser-calibration-evidence.mjs": {
+      "sha256": "360c0542c2400eb28806341424382612a27f6234585eaf1c53c90f68536f22f2",
+      "git_blob": "1555794f7b0f646fadf8481f602f4fb1827fb595"
+    },
+    "web/index.html": {
+      "sha256": "b87d012c5baa5f3508ec6cd32136184a5c8664b484aa05c141e7eba1e49a7adc",
+      "git_blob": "4696bbacd4e78b3da059e8cdf393820db58158a5"
+    },
+    "web/calibration.html": {
+      "sha256": "c797fd3f156828055e697e5bccaf2119ed684dfaf22781be6caced9b4b94c8fe",
+      "git_blob": "aa59af349c98daa6de7eb477ee82124757e18f2f"
+    },
+    "web/calibration.css": {
+      "sha256": "cf6d44b87a8428da27d969546068654a87dae5acc673378ce152189ab7f3eff0",
+      "git_blob": "ea01e0f5ff35c8051cb81d5148e250e882ef5ca0"
+    },
+    "web/calibration.mjs": {
+      "sha256": "14e3d62bcca9e4b7ab2450c699c067f8ba5352e39b4a4c16d470409df85b9bb8",
+      "git_blob": "991ca4181015f6fb23325353b19e58617785434e"
+    }
+  },
+  "native": {
+    "command": "npm test",
+    "runtime": "Node 22.23.4, authorized isolated Linux RDC workspace",
+    "tests": 78,
+    "passed": 78,
+    "failed": 0
+  },
+  "browser": {
+    "command": "PUPPETEER_PATH=<existing Puppeteer installation> node tools/browser-calibration-evidence.mjs",
+    "course": "source-calibration hypothesis investigation",
+    "evidence": "authored analytic inputs only",
+    "tests": [
+      "existing Task Space links to a working calibration investigation with no invented evidence",
+      "authored changed source reading reopens a nominally single-rule result and displays both geometries",
+      "source and observed-result plots follow the selected accepted hypothesis",
+      "authoring and removing an alternative reading updates the full inference while retaining its stated origin",
+      "collapsed calibration is refused without replacing accepted source readings",
+      "additional unfamiliar and contradictory results challenge complete explanations without averaging contradictions away",
+      "next-observation prediction-set comparison refuses unresolvable or invalid observation precision",
+      "actual exported JSON retains original source and observation anchors beside explicit alternative assumptions",
+      "mismatched observation and tampered investigation imports leave previous accepted evidence intact",
+      "unrenderable photo-coordinate source replacement is refused before changing the accepted study",
+      "rendered consumer rejects per-trial switching between mutually inconsistent source calibrations",
+      "fresh 390px browser reopens the complete investigation without document overflow",
+      "browser reports no uncaught JavaScript exceptions or offsite requests"
+    ],
+    "errors": [],
+    "offsite": [],
+    "browser": "Chrome/156.0.8078.47",
+    "passed": true
+  },
+  "composition_regression": {
+    "base_commit": "a874dc3594b8ca2fa9b7bad9ae867d81b4b5fb78",
+    "command": "PUPPETEER_PATH=<existing Puppeteer installation> node tools/browser-calibration.mjs",
+    "course": "Independent calibration checks, preserved from current main",
+    "groups": 15,
+    "passed": true,
+    "browser": "Chrome/156.0.8078.47",
+    "errors": [],
+    "offsite": []
+  },
+  "earlier_composed_regressions": {
+    "base_commit": "436800f5f247c1f040bbbd635d39a2109c382bc0",
+    "native_passed": 62,
+    "actual_chrome_groups": {
+      "original_workbench": 14,
+      "source_photo_capture": 13,
+      "rule_evidence": 13,
+      "complete_task_practice": 11
+    },
+    "passed": true
+  },
+  "review": {
+    "independent": "Direct worker worldlaw reviewed coherent (rule, source-reading) conjunction across all observations, explicit switching refusal, immutable original anchors, minimum cross-set separation and analytic controls. No blocking finding.",
+    "final": "Lead reviewed transaction rejection for invalid image coordinates, retained nominal validation, stable generated IDs, invalid planner-radius handling, and current-main route/test/document composition. The existing independent-calibration browser harness is preserved; this course uses its own filename."
+  },
+  "retained_constraints": [
+    "Local sandbox refuses HTTP bind (EPERM); HTTP and browser receiving ran through the authorized RDC execution route.",
+    "Inputs are authored analytic controls. No physical measurement, source-reading plausibility, expert intent, calibrated probability or skill-learning result is established.",
+    "The finite source alternatives and 16-dimension search do not cover continuous calibration uncertainty or unknown rule families.",
+    "Selecting alternatives after seeing results is exploratory. Independent prospective challenge remains a separate capability.",
+    "No provider inference, public deployment or physical qualification occurred."
+  ]
+}
