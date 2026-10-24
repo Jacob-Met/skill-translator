@@ -1,12 +1,14 @@
+import {inspectDistancePairRegions} from './distance-pair-region.mjs';
 // Conditional extrema over two independently declared photo regions.
 import {inspectAnnotationBound,annotationContext} from './annotation-bound.mjs';
 import {evaluateRelationships} from './task-relationships.mjs';
 export function inspectDirectedPairRegion(setup,observation,rule,declarations){
- if(!['horizontal','vertical'].includes(rule.kind))throw Error('This experiment admits only directed axis relationships');
+ if(!['horizontal','vertical','distance'].includes(rule.kind))throw Error('Choose a supported relationship criterion');
  if(!Array.isArray(declarations)||declarations.length!==2||declarations[0].id!==rule.from||declarations[1].id!==rule.to)throw Error('Declare both endpoint regions in relationship order');
  const context=annotationContext(setup,observation);
  const nominal=evaluateRelationships(setup.demo,setup.widthMm,setup.heightMm,context.attempts,[rule]);
  const regions=declarations.map(d=>inspectAnnotationBound(setup,observation,d)),axis=rule.kind==='horizontal'?'x':'y';
+ if(rule.kind==='distance')return inspectDistancePairRegions(nominal,regions,rule.toleranceMm);
  const extreme=(r,min)=>r.polygon.reduce((best,p)=>min?p[axis]<best[axis]?p:best:p[axis]>best[axis]?p:best);
  const witnesses={minimum:[extreme(regions[0],false),extreme(regions[1],true)],maximum:[extreme(regions[0],true),extreme(regions[1],false)]};
  const minMm=witnesses.minimum[1][axis]-witnesses.minimum[0][axis],maxMm=witnesses.maximum[1][axis]-witnesses.maximum[0][axis];
