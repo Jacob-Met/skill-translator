@@ -1,0 +1,79 @@
+{
+  "schema": "hamon.receiving/v1",
+  "repository": "Jacob-Met/skill-translator",
+  "issue": 66,
+  "base_commit": "bc8169e6f647070df0ff9f8ff0f918cfaf409807",
+  "previous_tested_base": "47759a09ff445da69356b06bdcb27fd2a61db7ac",
+  "qualified_files_sha256": {
+    "src/prerequisite-rehearsal.mjs": "45ffa47e98b6d2813ac4db9d86af9fa39a8804c180364e181ffb65ca195493e9",
+    "test/prerequisite-rehearsal.test.mjs": "a8995c8fe48e1267031228ce79687fa80e952cfef8def74d09a4cbb03b3fd2bb",
+    "web/prerequisite-rehearsal.html": "8a5dd557058c0d31f7955b43bf91225cda9341567cf0b665a36c7a77075c0ee6",
+    "web/prerequisite-rehearsal.css": "647ea2c3da7555faf800edf2f79a4cc307cdb60b094da5477739cf185cf77ba9",
+    "web/prerequisite-rehearsal.mjs": "b8bfa42d93fe6b2acc9676f292f8486fdd38562f6e422438f27adb1542243db3",
+    "tools/browser-prerequisite-rehearsal.mjs": "d2dce04fb7724a6a41d3b404235a2f3ce918dc64f4fed26ca7e329c60c0fceb5",
+    "server.mjs": "76cc927497943da58327571a53981b214577302b06ffe0d64794c4231358ff17",
+    "web/sequence.html": "7e596bf3b206f43a600acc48291143d7c4774a8a0df6a44957167d964ecf3f75",
+    "docs/PREREQUISITE_REHEARSAL.md": "99698de9409c0fc3e40925b3219554c59ecc3b2b37a9145ee211fcbf3a50e020",
+    "README.md": "7b0e39667760a8bdf2095f2eb14a7270b059775cdc2c336dcd8fad05edb7918a"
+  },
+  "composition": {
+    "overlapping_paths": [
+      "server.mjs",
+      "README.md"
+    ],
+    "resolution": "Preserved current maintained source; inserted only four prerequisite routes and appended only scoped sensitivity CSS. Other paths composed without conflicts."
+  },
+  "environment": {
+    "node": "v22.23.4",
+    "platform": "Linux x86_64",
+    "browser": "Chrome/156.0.8078.47",
+    "playwright": "1.64.1",
+    "puppeteer_core": "25.16.0"
+  },
+  "native": {
+    "tests": 274,
+    "pass": 274,
+    "fail": 0,
+    "skipped": 0
+  },
+  "optional_skips": [],
+  "commands": {
+    "native": "npm test",
+    "consumer": "node tools/browser-prerequisite-rehearsal.mjs",
+    "dependency_paths": "Browser dependencies supplied through documented environment variables; browser binaries were not downloaded by the project."
+  },
+  "browser_receiving": {
+    "checks": [
+      "maintained sequence route opens a rehearsal with all checked source frames",
+      "saved unsubmitted declarations reopen for continued authoring",
+      "keyboard begins rehearsal; a reversed prerequisite retains the exact first attempt and declared reason",
+      "a valid alternative order passes despite reversing filmed chronology",
+      "a valid partial prefix stays incomplete and identifies the available next step",
+      "actual saved first attempt reopens with locked declarations and a 390px layout",
+      "changed source and missing saved constraints refuse without replacing the accepted attempt",
+      "delayed saved-file completion cannot overwrite a newer restarted rehearsal and selection",
+      "an overlapping old-source save is refused after replacement import commits, with no stale download"
+    ],
+    "errors": [],
+    "offsite": [],
+    "failure": null,
+    "browser": "Chrome/156.0.8078.47",
+    "node": "v22.23.4",
+    "inputSHA256": "5352a2ea83942ab9a6c5f71b4145d956c55025cfd4ba9be783b8402a1405214a",
+    "evidence": "Authored retained PNG frames and software-control prerequisites; no demonstrated learning or physical skill claim."
+  },
+  "independent_review": {
+    "reviewer": "retained MECHANISM contributor",
+    "scope": "Independent source review, then follow-up acceptance of explicit saved constraints and source/session identity checks. Exact forced stale-save browser control reviewed. No remaining source blocker. Reviewer did not execute tests; lead inspected actual pixels."
+  },
+  "visual_inspection": {
+    "lead": true,
+    "desktop": "desktop.png",
+    "narrow": "narrow.png",
+    "note": "Actual launched consumer pixels, not mockups. WORLDLAW includes scoped contrast/font-size repair; MECHANISM uses balanced drive-rate controls."
+  },
+  "limits": [
+    "Agreement with declared prerequisites, not causal necessity, learning measurement, expert authority or physical skill.",
+    "First submitted attempt retained within a rehearsal; manual JSON rewrites are not an authenticated audit trail."
+  ]
+}
