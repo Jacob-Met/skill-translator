@@ -5,6 +5,12 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+"/decision-comparison":["web/decision-comparison.html", "text/html; charset=utf-8"],
+"/src/decision-comparison.mjs":["src/decision-comparison.mjs", "text/javascript; charset=utf-8"],
+"/web/decision-comparison-input.mjs":["web/decision-comparison-input.mjs", "text/javascript; charset=utf-8"],
+"/web/decision-comparison.mjs":["web/decision-comparison.mjs", "text/javascript; charset=utf-8"],
+"/web/decision-comparison.css":["web/decision-comparison.css", "text/css; charset=utf-8"],
+
   "/affine-candidates":["web/affine-candidates.html","text/html; charset=utf-8"],
   "/src/affine-candidates.mjs":["src/affine-candidates.mjs","text/javascript; charset=utf-8"],
   "/web/affine-candidates-worker.mjs":["web/affine-candidates-worker.mjs","text/javascript; charset=utf-8"],
@@ -210,3 +216,4 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
