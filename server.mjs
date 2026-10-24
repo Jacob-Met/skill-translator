@@ -5,6 +5,13 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/width-allowance.mjs":["src/width-allowance.mjs","text/javascript; charset=utf-8"],
+  "/web/width-allowance.mjs":["web/width-allowance.mjs","text/javascript; charset=utf-8"],
+  "/raw-affine-challenge":["web/raw-affine-challenge.html","text/html; charset=utf-8"],
+  "/web/raw-affine-challenge.css":["web/raw-affine-challenge.css","text/css; charset=utf-8"],
+  "/web/raw-affine-challenge.mjs":["web/raw-affine-challenge.mjs","text/javascript; charset=utf-8"],
+  "/web/raw-challenge-image.mjs":["web/raw-challenge-image.mjs","text/javascript; charset=utf-8"],
+  "/src/raw-affine-challenge.mjs":["src/raw-affine-challenge.mjs","text/javascript; charset=utf-8"],
   "/response-demonstrations":["web/response-demonstrations.html","text/html; charset=utf-8"],
   "/web/response-demonstrations.css":["web/response-demonstrations.css","text/css; charset=utf-8"],
   "/web/response-demonstrations.mjs":["web/response-demonstrations.mjs","text/javascript; charset=utf-8"],
@@ -54,8 +61,6 @@ const routes=Object.freeze({
   "/web/feature-clearance.mjs":["web/feature-clearance.mjs","text/javascript; charset=utf-8"],
   "/src/feature-clearance.mjs":["src/feature-clearance.mjs","text/javascript; charset=utf-8"],
   "/src/feature-width.mjs":["src/feature-width.mjs","text/javascript; charset=utf-8"],
-  "/src/width-allowance.mjs":["src/width-allowance.mjs","text/javascript; charset=utf-8"],
-  "/web/width-allowance.mjs":["web/width-allowance.mjs","text/javascript; charset=utf-8"],
   "/web/feature-width.mjs":["web/feature-width.mjs","text/javascript; charset=utf-8"],
   "/observe-attempt":["web/observe-attempt.html","text/html; charset=utf-8"],
   "/web/observe-attempt.css":["web/observe-attempt.css","text/css; charset=utf-8"],

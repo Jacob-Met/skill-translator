@@ -1,0 +1,100 @@
+{
+  "schema": "hamon.receiving/v1",
+  "base": "5f7b2df2de4cf0ee5cb78afa1f2adbc63f11eae7",
+  "testedBase": "f768e3d0356b32a28566fff40ba273c17f141137",
+  "unchangedBaseFilesVerified": 249,
+  "sourceFiles": [
+    {
+      "path": "src/width-allowance.mjs",
+      "sha256": "cc2831eae7737563842813afe7db943244089c71ca9a154c0664030f8dcdec1f",
+      "bytes": 4863
+    },
+    {
+      "path": "web/width-allowance.mjs",
+      "sha256": "897b6c8fbefe410a10bfb74dee29ec9aefd2ce0507291fdcdd2bdb70b5d6cd22",
+      "bytes": 7545
+    },
+    {
+      "path": "web/feature-width.mjs",
+      "sha256": "41fea4c416301b30d99a313210da1d70b68a25c656bbfd33b6a2fefbcdb77169",
+      "bytes": 7077
+    },
+    {
+      "path": "server.mjs",
+      "sha256": "0bfcb9ff30bbd885d2f98b6302ab12bc7874633205dffc7720394a8ec2e12df5",
+      "bytes": 14317
+    },
+    {
+      "path": "test/width-allowance.test.mjs",
+      "sha256": "73bd74a7a4c43eab5062fdd3755ac7b6ea0a29370924de491df46e5bc52a5ec7",
+      "bytes": 6169
+    },
+    {
+      "path": "tools/browser-width-allowance.mjs",
+      "sha256": "d1b31a8291ae9a1f8a6202a184c351336a0f6da212bf7fe62d7b9a82471d43f4",
+      "bytes": 9526
+    },
+    {
+      "path": "WIDTH_ALLOWANCE_INTEGRATION.md",
+      "sha256": "a4cf99b81fe4c439d2215a4278fd2df0aa4b72729474580f20b6869b1af1ab5d",
+      "bytes": 3061
+    }
+  ],
+  "native": {
+    "pass": 347,
+    "skipped": 0,
+    "tests": 347
+  },
+  "browser": {
+    "newGroups": 7,
+    "maintainedGroups": 9
+  },
+  "environment": {
+    "system": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "node": "v22.23.4",
+    "chrome": "Google Chrome 156.0.8078.47",
+    "sandbox": true
+  },
+  "logHashes": {
+    "/tmp/hamon-583a-skill/allowance-verify.log": "b1104ffeaaf0519eb16cc3f6ea83c1287bf729cf0a69221bb8507570ba017812",
+    "/tmp/hamon-583a-skill/allowance-browser.log": "11c7d857538b57cfa86257d1d35c8bd5c8907104c2e9cdbf8efb191f99279c89",
+    "/tmp/hamon-583a-skill/allowance-regression.log": "68da336f2ddb16e6fabac67bea02e4189bce2ec50f4eeb2651fe31b2a5267095"
+  },
+  "artifactHashes": {
+    "comparison.json": "662859c4eedcee8662f3c63a255998d64c5740d5cb1ba9b13cd662ec081624b1",
+    "narrow-detail.png": "01ae9ae6e250a559fd6ef19c145dd187b623b3084a55016674f8bb51845b0369",
+    "boundary.json": "133d2f18bcd9cacceb665d185c6b2bbae2723a97075255683989bf0785291e09",
+    "invalid-allowance.json": "cde2631252c7bcfaaf48430755831cd4ec4a96a7bc935f0d78b982824329c826",
+    "endpoint-trap.json": "b5f367b8d934e83fca518c69d0bd27422e9c1eeb583f49ee201b0e00d849138d",
+    "desktop-detail.png": "cf79c7e13fbb6db479f622db29b50581cbcdf79ff88c120a5eb4e96f4dba07cd",
+    "allowance-disconnected-1280.png": "77aa7aac0849f7de8749a10703e1dfe1ae4cd2ee8a9e52e9847ea7f50778b9f8",
+    "allowance.json": "18cb8f055fe83c6b46ab7238a52004757b3c27a4017d7d2aa71a6d5fb93f8e0a",
+    "allowance-disconnected-390.png": "056372a56cb0ed114ce104116541e79bc3b2ef8ba47174439fd88b3b49ff26df",
+    "study.json": "91ecf2d6d48d6317569bed34d1922014600c28dc0fbd0397bf88268e28961eb5",
+    "receipt.json": "44f9955d6019a93917e16a8e67ace1c02ad3aba27b32fa4d052d434194fc7ad5"
+  },
+  "sourceTree": "6a0a05b09bd227f521ec1763cf247341bec9d61e",
+  "commands": [
+    "npm test",
+    "PUPPETEER_PATH=<installed Puppeteer module> CHROME_BINARY=/usr/local/bin/google-chrome QA_OUTPUT=<receipt directory> node tools/browser-width-allowance.mjs",
+    "PUPPETEER_PATH=<installed Puppeteer module> CHROME_BINARY=/usr/local/bin/google-chrome QA_OUTPUT=<receipt directory> node tools/browser-feature-width.mjs"
+  ],
+  "composition": {
+    "testedBase": "f768e3d0356b32a28566fff40ba273c17f141137",
+    "currentBase": "5f7b2df2de4cf0ee5cb78afa1f2adbc63f11eae7",
+    "code": "Six nonserver candidate files remain byte-identical to full native/browser receiving. Final server is exact current main plus two allowance module routes; nine live HTTP paths passed, preserving all five raw-affine challenge routes, feature-clearance and practice. Incoming unrelated source retained."
+  },
+  "reviews": [
+    {
+      "reviewer": "worldlaw",
+      "result": "No blocker; asymmetric erosion, inclusive bounds, unresolved roots, endpoint-pass/interior-fail, no extrapolation, input immutability/raw replay and nominal-only fresh practice controls passed."
+    }
+  ],
+  "limits": [
+    "Engineering numerical guard, not certified interval arithmetic or physical guarantee.",
+    "The entire actual-width interval must occupy one contiguous guarded passing band; unresolved boundaries are not adopted.",
+    "Every reported failure has a maintained rechecked width witness.",
+    "Rehearsal/practice handoff is explicitly nominal and retains the original source and scorer."
+  ],
+  "visualInspection": "Actual desktop and 390px screenshots inspected; readable allowance/basis/whole-interval result, no document overflow."
+}
