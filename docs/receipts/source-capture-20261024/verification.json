@@ -11,7 +11,8 @@
     },
     "existingBrowser": {
       "command": "node tools/browser-smoke.mjs",
-      "passGroups": 14
+      "passGroups": 14,
+      "note": "Rerun on final production source including source-import ordering and input reset"
     },
     "captureBrowser": {
       "command": "node tools/capture-browser-smoke.mjs",
@@ -28,6 +29,7 @@
         "malformed source metadata is transactional; legacy authored source imports remove stale photo pairing",
         "a slower prior source import cannot replace a newer source or its image-pairing state",
         "JPEG decoding and numeric keyboard corner authoring use the same calibrated contract",
+        "EXIF-rotated JPEG uses displayed orientation for source pixel coordinates",
         "390px source studio has no horizontal overflow",
         "no page exceptions or offsite requests"
       ],

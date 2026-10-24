@@ -32,6 +32,11 @@ try{
     const png=c.toDataURL("image/png"),jpeg=c.toDataURL("image/jpeg");x.fillStyle="#e44832";x.fillRect(0,0,40,40);return {png,jpeg,wrong:c.toDataURL("image/png")};
   });
   for(const [key,data] of Object.entries(fixture))await writeFile(out+"/"+key+(key==="jpeg"?".jpg":".png"),Buffer.from(data.split(",")[1],"base64"));
+  // Original JPEG plus a minimal authored EXIF orientation=6 entry. This
+  // exercises real browser-oriented dimensions for ordinary rotated photos.
+  const jpeg=await readFile(out+"/jpeg.jpg");
+  const exif=Buffer.from([255,225,0,34,69,120,105,102,0,0,73,73,42,0,8,0,0,0,1,0,18,1,3,0,1,0,0,0,6,0,0,0,0,0,0,0]);
+  await writeFile(out+"/rotated.jpg",Buffer.concat([jpeg.subarray(0,2),exif,jpeg.subarray(2)]));
   await writeFile(out+"/invalid.png","this is not an image");
   await upload(page,"photoFile",out+"/png.png");await page.waitForFunction(()=>document.querySelector("#photoIdentity").textContent.includes("800 × 550"));
   const identity=await page.$eval("#photoIdentity",el=>el.textContent);
@@ -61,7 +66,7 @@ try{
   await upload(page,"sourcePhoto",out+"/wrong.png");await page.waitForFunction(()=>document.querySelector("#error").textContent.includes("does not match"));assert.equal(await page.$eval("#sourceSvg image",el=>el.getAttribute("href")),originalUrl);
   record("maintained workbench imports captured marks, requires exact original pixels and preserves correct pairing on mismatch");
   const invalid=structuredClone(demo);invalid.source.image.sha256="bad";await writeFile(out+"/invalid-source.json",JSON.stringify(invalid));await upload(page,"demoFile",out+"/invalid-source.json");await page.waitForFunction(()=>document.querySelector("#error").textContent.includes("Source rejected"));assert.equal(await page.$eval("#sourceSvg image",el=>el.getAttribute("href")),originalUrl);
-  await page.$eval("#error",el=>{el.hidden=true;});await page.screenshot({path:out+"/workbench-photo.png",fullPage:true});
+  await upload(page,"sourcePhoto",out+"/png.png");await page.waitForFunction(()=>document.querySelector("#error").hidden);await page.screenshot({path:out+"/workbench-photo.png",fullPage:true});
   await writeFile(out+"/legacy-source.json",JSON.stringify(demonstration));await upload(page,"demoFile",out+"/legacy-source.json");await page.waitForFunction(()=>document.querySelectorAll("#markChoices button").length===3);assert.equal(await page.$$eval("#sourceSvg image",els=>els.length),0);
   record("malformed source metadata is transactional; legacy authored source imports remove stale photo pairing");
   await page.evaluate(({older,newer})=>{
@@ -78,6 +83,7 @@ try{
   await page.goto(origin+"/capture",{waitUntil:"networkidle0"});await upload(page,"photoFile",out+"/jpeg.jpg");await page.waitForFunction(()=>document.querySelector("#photoIdentity").textContent.includes("800 × 550"));
   for(const [i,p] of [[100,70],[700,100],[660,480],[80,440]].entries()){await value(page,"cornerX"+i,p[0]);await value(page,"cornerY"+i,p[1]);}
   await page.click("#applyCalibration");assert.match(await page.$eval("#calibrationStatus",el=>el.textContent),/Calibration applied/);record("JPEG decoding and numeric keyboard corner authoring use the same calibrated contract");
+  await upload(page,"photoFile",out+"/rotated.jpg");await page.waitForFunction(()=>document.querySelector("#photoIdentity").textContent.includes("550 × 800"));assert.equal(await page.$eval("#captureSvg",el=>el.getAttribute("viewBox")),"0 0 550 800");record("EXIF-rotated JPEG uses displayed orientation for source pixel coordinates");
   await page.setViewport({width:390,height:844,deviceScaleFactor:1});const sizes=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));assert.ok(sizes.scroll<=sizes.width+2,JSON.stringify(sizes));await page.screenshot({path:out+"/studio-mobile.png",fullPage:true});record("390px source studio has no horizontal overflow");
   assert.deepEqual(errors,[]);assert.deepEqual(offsite,[]);record("no page exceptions or offsite requests");report.result="PASS";
 }finally{

@@ -316,6 +316,7 @@ $("demoFile").addEventListener("change",async e=>{
     $("annotationStatus").textContent="Imported annotations. Click inside the source page to author another mark.";
     resetAlternativeChoice();resetAttempt();error("");paint();
   }catch(err){if(importVersion===sourceImportVersion)error("Source rejected; previous demonstration preserved. "+err.message);}
+  finally{if(importVersion===sourceImportVersion)e.target.value="";}
 });
 $("sourcePhoto").addEventListener("change",async e=>{
   const file=e.target.files[0];if(!file)return;
