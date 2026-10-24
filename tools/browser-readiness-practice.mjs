@@ -29,8 +29,8 @@ const dir=await mkdtemp(join(tmpdir(),'skill-evidence-explanation-'));
 const output=process.env.QA_OUTPUT||join(dir,'receipt');await mkdir(output,{recursive:true});
 const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const origin=`http://127.0.0.1:${server.address().port}`;
-const browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY||undefined,headless:true});
-const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e)));
+const browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY||undefined,headless:true,protocolTimeout:30000});
+const page=await browser.newPage(),errors=[];page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(String(e)));
 try{
   await page.setViewport({width:1280,height:900});
   await page.goto(origin+'/task-readiness');
@@ -68,15 +68,15 @@ try{
   });
   await page.click('#freeze');await page.waitForSelector('#lesson:not([hidden])');
   assert.equal(await page.$eval('#manual-report',e=>e.hidden),true);
-  const popup=browser.waitForTarget(t=>t.opener()===page.target());await page.click('#open-practice');const practice=await (await popup).page();practice.on('pageerror',e=>errors.push(String(e)));
+  const popup=browser.waitForTarget(t=>t.opener()===page.target());await page.click('#open-practice');const practice=await (await popup).page();practice.setDefaultTimeout(15000);practice.on('pageerror',e=>errors.push(String(e)));
   await practice.waitForSelector('#practiceMarks button[data-id="center"]');assert.match(await practice.$eval('#setupLabel',e=>e.textContent),/160 × 90 mm/);
   const practiceCdp=await practice.createCDPSession();
-  async function exportPractice(name){const folder=join(dir,name);await mkdir(folder);await practiceCdp.send('Page.setDownloadBehavior',{behavior:'allow',downloadPath:folder});await practice.click('#savePractice');await new Promise(r=>setTimeout(r,400));const path=join(folder,'skill-practice-session.json');await writeFile(join(output,name+'.json'),await readFile(path));return path;}
-  async function importPracticeFile(path,target=page){await target.select('#step','prepare');await (await target.$('#practice-file')).uploadFile(path);await target.waitForFunction(()=>!document.getElementById('retain-practice').disabled);}
+  async function exportPractice(name){await practice.bringToFront();console.log('Exporting '+name);const folder=join(dir,name);await mkdir(folder);await practiceCdp.send('Page.setDownloadBehavior',{behavior:'allow',downloadPath:folder});await practice.click('#savePractice');await new Promise(r=>setTimeout(r,400));const path=join(folder,'skill-practice-session.json');await writeFile(join(output,name+'.json'),await readFile(path));return path;}
+  async function importPracticeFile(path,target=page){await target.bringToFront();console.log('Importing '+path);await target.select('#step','prepare');await (await target.$('#practice-file')).uploadFile(path);await target.waitForFunction(()=>!document.getElementById('retain-practice').disabled);}
   async function retain(note){await page.$eval('#note',(e,t)=>{e.value=t;},note);await page.click('#retain-practice');}
   async function choose(target=page){await target.select('#step','align');await target.select('#prediction','ready');await target.type('#reason','Compare the retained placement evidence with the declared prerequisite');await target.click('#choose');}
   const empty=await exportPractice('actual-empty-practice');await importPracticeFile(empty);assert.match(await page.$eval('#practice-preview',e=>e.textContent),/unknown/);await retain('Actual empty practice session; no placed marks');await choose();assert.match(await page.$eval('#finding',e=>e.textContent),/Prerequisites are not established/);
-  async function place(id,x,y){await practice.click(`#practiceMarks button[data-id="${id}"]`);await practice.$eval('#placementX',(e,v)=>e.value=v,x);await practice.$eval('#placementY',(e,v)=>e.value=v,y);await practice.click('#placementForm button[type="submit"]');}
+  async function place(id,x,y){await practice.bringToFront();await practice.click(`#practiceMarks button[data-id="${id}"]`);await practice.$eval('#placementX',(e,v)=>e.value=v,x);await practice.$eval('#placementY',(e,v)=>e.value=v,y);await practice.click('#placementForm button[type="submit"]');}
   await place('center',83,45);await place('index',40,22.5);await practice.click('#reviewTask');
   const failed=await exportPractice('actual-failed-practice');await importPracticeFile(failed);assert.match(await page.$eval('#practice-preview',e=>e.textContent),/error 3.000 mm against 1 mm/);await retain('Actual authored control: center is three millimetres outside target');await choose();assert.match(await page.$eval('#finding',e=>e.textContent),/Prerequisites are not established/);
   await place('center',80,45);await practice.click('#reviewTask');const passed=await exportPractice('actual-passing-practice');await importPracticeFile(passed);assert.match(await page.$eval('#practice-preview',e=>e.textContent),/check: pass/);await retain('Actual authored control: both placements meet tolerance');await choose();assert.match(await page.$eval('#finding',e=>e.textContent),/Declared prerequisites are satisfied/);

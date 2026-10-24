@@ -1,0 +1,29 @@
+{
+  "base": "e3e70e2827b5bc6e5a78008051c2ed325bbf8b57",
+  "sourceFilesMatched": 31,
+  "actualBrowserGroupsPassed": 9,
+  "retainedArtifactJsonHashesMatched": 5,
+  "pixelsInspected": [
+    "1280px desktop",
+    "390px narrow"
+  ],
+  "freshNative": {
+    "command": "node test/readiness-practice.test.mjs",
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  "independentReview": {
+    "agent": "experimental_earth",
+    "originalNativePassed": 19,
+    "receiverFocusCorrectionReviewed": true
+  },
+  "composition": {
+    "changedOwnedPaths": [
+      "server.mjs"
+    ],
+    "preservedOtherMainPaths": 33,
+    "serverSha256": "f24aae40284cd928d955714cfb358e08df7f2b911291d23f92805d7060c873ca"
+  },
+  "limitations": "Authored PNG/calibration and actual UI placements; no physical completion, authenticated observation or mastery inferred. Earlier receiving timed out on background-tab polling; explicit tab handoffs passed on exact composed runtime."
+}

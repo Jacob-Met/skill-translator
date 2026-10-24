@@ -355,3 +355,17 @@ Open `/response-family` to condition an affine geometric response on an original
 ## Challenge a frozen workpiece-response family
 
 Open [the separate-workpiece challenge](/affine-challenge) from the response-family investigation. Freeze the original training account and new sizes, save that plan, then receive separate coordinate measurements. The view distinguishes individual agreement from one common model that explains every result, keeps missing outcomes untested, and recomputes raw saved accounts. [Method and actual receiving](docs/AFFINE_CHALLENGE.md). Prospective timing and measurement bounds remain supplied declarations.
+
+## Compare observed order across demonstrations
+
+The [order-evidence workspace](docs/ORDER_EVIDENCE.md) compares retained before/after intervals only after explicit step matching. Inspect repeated, opposing, overlapping or unavailable ordering evidence with original frames; then separately declare any prerequisite reason and export it into the maintained rehearsal. Complete comparison studies retain all examples and source relationships for checked reopening.
+
+## Retain the source behind each response observation
+
+Open `/response-demonstrations` to retain separately calibrated source annotations, explicitly bind their marks to the original reference relationship, and declare independent x/y discrepancy bounds. Reattach each original PNG/JPEG for exact image-identity inspection. Save the complete annotation account to keep every additional source; the separate numeric export opens in the existing Response Lab or affine challenge but does not contain those additional raw annotations. [Source custody, receiving and limits](docs/RESPONSE_DEMONSTRATIONS.md).
+
+The numeric affine challenge now bounds the complete account before accepting a result and saves the same compact JSON representation that admission measures. This prevents repeated source bindings or pretty-print expansion from producing a download that cannot reopen. Oversized additions leave the accepted account intact. [Capacity and replay details](docs/AFFINE_CHALLENGE.md).
+
+The combined current-main composition, including the ordering-evidence changes, passed **320 native checks**, **13 actual sandboxed Chrome Demonstration Sources groups**, and **13 actual sandboxed Chrome affine-challenge groups**, including capacity refusal and exact-boundary download/reopen. These authored controls qualify the source-retention workflow and capacity repair; they do not establish physical calibration accuracy, skill transfer or prospective timing. They do not qualify the separate raw-source prospective consumer, whose browser receiving remains pending.
+
+The final receiving preserves ordering-evidence routes and the complete current README. [Exact source and commands](docs/receipts/response-demonstrations-20261024/verification.json).

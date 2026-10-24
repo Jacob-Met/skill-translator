@@ -1,5 +1,7 @@
 /** Prospective receiving against one source-conditioned affine family. */
 import {validateResponseStudy,analyzeResponseStudy,createResponseObservation} from './response-family.mjs';
+export const MAX_AFFINE_CHALLENGE_BYTES=2_000_000;
+const assertCapacity=value=>{if(new TextEncoder().encode(JSON.stringify(value)).length>MAX_AFFINE_CHALLENGE_BYTES)throw Error('Complete affine challenge exceeds2MB; previous results must be retained');};
 export const AFFINE_CHALLENGE_SCHEMA='skill-translator-affine-challenge/v1';
 const copy=v=>JSON.parse(JSON.stringify(v));
 const fail=m=>{throw Error(m);};
@@ -24,8 +26,9 @@ function validatePlan(input){
  });
  return {schema:AFFINE_CHALLENGE_SCHEMA,training,plan,outcomesNotUsed:true};
 }
-export function freezeAffineChallenge(training,plan,outcomesNotUsed){return {...validatePlan({schema:AFFINE_CHALLENGE_SCHEMA,training,plan,outcomesNotUsed}),results:[]};}
+export function freezeAffineChallenge(training,plan,outcomesNotUsed){return validateAffineChallenge({schema:AFFINE_CHALLENGE_SCHEMA,training,plan,outcomesNotUsed,results:[]});}
 export function validateAffineChallenge(input){
+ assertCapacity(input);
  const accepted=validatePlan(input);
  if(!Array.isArray(input.results)||input.results.length>accepted.plan.length)fail('Supply at most one result per planned workpiece');
  const ids=new Set();
@@ -37,7 +40,7 @@ export function validateAffineChallenge(input){
   if(!same(row.sourceReference,raw.sourceReference))fail('Result refers to another frozen source reading');
   return row;
  });
- return {...accepted,results};
+ const normalized={...accepted,results};assertCapacity(normalized);return normalized;
 }
 export function receiveAffineResult(input,challengeId,reading){
  const accepted=validateAffineChallenge(input),planned=accepted.plan.find(p=>p.id===challengeId);if(!planned)fail('Choose a frozen workpiece');
@@ -61,3 +64,6 @@ export function analyzeAffineChallenge(input){
   limitations:['Training, source and the finite coefficient domain remain frozen; results cannot refit them or revive an explanation excluded by training.','One coefficient assignment per coordinate must satisfy all received results together. Individual envelope agreement is insufficient.','Missing results are untested; a known joint contradiction remains visible even when another result is missing.','The prospective declaration is user-reported, not a trusted timestamp or signed acquisition record.','Coordinate bounds and affine relationships remain supplied assumptions, not physical skill, causal necessity or validated measurement uncertainty.']};
 }
 export function exportAffineChallenge(input){return validateAffineChallenge(input);}
+
+/** The emitted compact encoding is the same representation admission bounds. */
+export function encodeAffineChallenge(input){return JSON.stringify(validateAffineChallenge(input));}
