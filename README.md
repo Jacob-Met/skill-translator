@@ -399,3 +399,20 @@ At `/affine-candidates`, open retained raw demonstration training, declare a tar
 Choose a candidate explicitly and declare that future readings were not used to choose it before saving a raw prospective plan. Save the comparison account separately to retain every candidate and its planning bounds; actual bounds remain independently declared in the maintained raw challenge receiver. Editing inputs, changing selection or withdrawing the declaration invalidates a pending handoff.
 
 See [candidate comparison semantics and receiving](docs/AFFINE_CANDIDATES.md). These are conditional geometric comparisons, not expected information, globally optimal acquisition, physical credibility or skill-transfer qualification.
+
+## Review pair relationships across changing workpieces
+
+From changing-workpiece rehearsal, open **Review declared pair relationships**.
+Import a saved rehearsal, then declare distance or directed horizontal/vertical
+separation criteria between source marks. An existing relationship review can
+supply criteria only when its complete original source matches exactly.
+Each committed trial is evaluated at its own retained dimensions through the
+maintained relationship evaluator. Original point scores, missing observations
+and target-request records remain separate. Uncommitted trials reveal no pair
+feedback. Save the complete raw account to retain source, plan, actions and
+criteria; reopening recomputes findings. These criteria can be exploratory and
+the editable record does not authenticate when they were selected. Neither pair
+success nor diagram success establishes physical skill or a learning effect.
+
+Native checks: `node test/relationship-rehearsal.test.mjs`. Browser receiving:
+`PUPPETEER_PATH=... CHROME_BINARY=... QA_OUTPUT=... node tools/browser-relationship-rehearsal.mjs`.
