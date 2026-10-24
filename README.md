@@ -247,3 +247,23 @@ After reviewing an attempt in **Complete Task**, the spacing and orientation pan
 An orientation-preserving least-squares rigid fit describes the rotation and centroid displacement between intended and observed marks, with residual error after hypothetical alignment. It excludes scaling and reflection, retains missing marks and reports configurations with no unique fitted orientation. Two points alone cannot distinguish a reflection from a rotation. No fitted transform changes placements, source rules, saved rounds or the actual pass/fail result. This is geometric description, not a diagnosis of physical cause or demonstrated learning.
 
 Focused controls: `node test/layout-feedback.test.mjs`. Actual browser receiving: `node tools/browser-layout-feedback.mjs` with the repository's existing Puppeteer/Chrome environment variables.
+
+## Reuse declared relationship criteria
+
+In the relationship review, export the current review if you want to retain it,
+then choose **Next practice session JSON** and **Replace session, keep declared
+relationships**. The new session must match the same original source task.
+The declared pairs, relation kinds and tolerances stay unchanged. Reference
+separations adapt from the source rules to the new session's displayed target
+dimensions. Only that incoming session's rounds are retained; previous rounds
+are not merged into it.
+
+A mismatched source refuses while preserving the accepted review. Focused
+drills with a different landmark subset remain distinct sources and cannot be
+silently attached to the full-task criteria. Selecting another file, loading
+another review or changing criteria cancels a pending older session read.
+Export/reopen retains the resulting source, session and criteria.
+
+This supports using the same authored criteria across attempts. It does not
+authenticate when those criteria were chosen, prove that they predate an
+attempt, combine different learners, or establish learning benefit.
