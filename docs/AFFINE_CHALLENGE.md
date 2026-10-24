@@ -37,7 +37,7 @@ A challenge is admitted only when its complete compact JSON representation fits 
 
 `encodeAffineChallenge` emits the same compact representation measured by admission. The page uses it directly and reports save failures without clearing accepted state. An exactly 2,000,000-byte account therefore downloads and reopens; one byte beyond the importer limit refuses. The focused `test/affine-challenge-capacity.test.mjs` controls also cover source-binding expansion and immutable refusal.
 
-The #77 plus capacity-repair composition passed **312 native checks** and two separate actual sandboxed Chrome courses: **13 Demonstration Sources groups** and **13 affine-challenge groups**. The latter retains the original prospective-plan and joint-contradiction controls and adds actual exact-boundary download/reopen, oversized-result retention and one-byte-oversized import refusal. Direct namespace and seccomp checks remained enabled.
+The #77 plus capacity-repair composition passed **320 native checks** and two separate actual sandboxed Chrome courses: **13 Demonstration Sources groups** and **13 affine-challenge groups**. The latter retains the original prospective-plan and joint-contradiction controls and adds actual exact-boundary download/reopen, oversized-result retention and one-byte-oversized import refusal. Direct namespace and seccomp checks remained enabled.
 
 The receiving script closes the temporary mobile page and brings the desktop page to the foreground before returning to desktop capacity controls. This resolves background-tab animation-frame polling during receiving; it does not change product behavior or relax an assertion.
 
