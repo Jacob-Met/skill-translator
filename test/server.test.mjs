@@ -8,6 +8,8 @@ test("actual HTTP serves interactive app assets without internet dependencies or
   try{
     for(const [url,type] of [
       ["/","text/html"],["/web/styles.css","text/css"],
+      ["/observe-attempt","text/html"],["/web/observe-attempt.css","text/css"],
+      ["/web/observe-attempt.mjs","text/javascript"],["/src/learner-observation.mjs","text/javascript"],
       ["/rule-adoption","text/html"],["/web/rule-adoption.mjs","text/javascript"],
       ["/web/rule-adoption.css","text/css"],["/src/rule-adoption.mjs","text/javascript"],
       ["/calibration","text/html"],["/web/calibration.css","text/css"],

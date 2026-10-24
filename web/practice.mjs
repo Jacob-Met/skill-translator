@@ -15,6 +15,34 @@ function download(name,value){
   const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:"application/json"}));
   const link=document.createElement("a");link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
 }
+function snapshot(){
+  return {demo,widthMm,heightMm,session:importPractice(demo,widthMm,heightMm,session),
+    selected,reviewed,mirrored:mirrored(),showGoals:$("practiceGoals").checked};
+}
+function photoDetails(round){
+  const record=round.photoObservation;if(!record)return null;
+  const detail=document.createElement("details");detail.className="photo-details";
+  const summary=document.createElement("summary");
+  summary.textContent=(record.evidenceClass==="authored-image-control"?"Authored image control":"Reported photo annotation")+" · "+record.points.length+" raw mark pixels retained";
+  const identity=document.createElement("p");identity.textContent=record.image.name+" · "+record.image.widthPx+" × "+record.image.heightPx+" browser-oriented pixels · SHA-256 "+record.image.sha256;
+  const calibration=document.createElement("p");calibration.textContent="Supplied planar calibration: "+record.calibration.widthMm+" × "+record.calibration.heightMm+" mm. Corners TL, TR, BR, BL: "+
+    record.calibration.corners.map(p=>"("+p.x+", "+p.y+")").join(" · ")+".";
+  const points=document.createElement("ul");
+  for(const p of record.points){
+    const row=document.createElement("li");row.textContent=p.id+": pixel ("+p.pixel.x+", "+p.pixel.y+") · "+
+      (round.detachedPhotoMarks?.includes(p.id)?"manually overridden; original annotation retained":"mapped from this annotation");
+    points.append(row);
+  }
+  detail.append(summary,identity,calibration,points);
+  if(record.note){const note=document.createElement("p");note.textContent="Observation note: "+record.note;detail.append(note);}
+  return detail;
+}
+function placementOrigin(round,id){
+  const point=round.photoObservation?.points.find(p=>p.id===id);
+  return !point?"Manual placement.":round.detachedPhotoMarks?.includes(id)?
+    "Manual placement; the original photo pixel is retained below.":
+    "Mapped from photo pixel ("+point.pixel.x.toFixed(3)+", "+point.pixel.y.toFixed(3)+") using supplied corners.";
+}
 function install(nextDemo,w,h){
   const next=createPractice(nextDemo,w,h),nextTarget=adapt(derive(nextDemo),w,h);
   demo=nextDemo;widthMm=w;heightMm=h;session=next;target=nextTarget;selected=target.landmarks[0].id;reviewed=false;
@@ -91,8 +119,17 @@ function render(){
     const verdict=document.createElement("p");verdict.className="result-verdict";
     verdict.textContent=!r.placed?"MISSING":!reviewed?"RETAINED · REVIEW WHEN READY":r.evaluation.within?"WITHIN TOLERANCE":"NEEDS ADJUSTMENT";
     const residual=document.createElement("p");residual.textContent=reviewed&&r.placed?"Error "+mm(r.evaluation.errorMm)+" / tolerance "+mm(r.evaluation.toleranceMm):"";
-    card.append(title,location,verdict,residual);cards.append(card);
+    card.append(title,location,verdict,residual);
+    if(r.placed&&session.photoObservation){const provenance=document.createElement("p");provenance.className="placement-origin";provenance.textContent=placementOrigin(session,r.id);card.append(provenance);}
+    cards.append(card);
   }
+  const photo=$("photoProvenance");photo.replaceChildren();photo.hidden=!session.photoObservation;
+  if(session.photoObservation){
+    const title=document.createElement("h2");title.textContent="This round's photo evidence";
+    const explanation=document.createElement("p");explanation.textContent="Placements were computed from the retained image annotations and supplied planar calibration. They describe those annotations; they do not independently establish a physical mark or skill. Manual changes remain distinct.";
+    photo.append(title,explanation,photoDetails(session));
+  }
+  $("observeAttempt").textContent=session.photoObservation?"Observe another learner photo":"Observe a learner photo";
   $("roundHistory").hidden=!session.history.length;const history=$("historyRows");history.replaceChildren();
   for(const round of session.history){
     const evaluated=evaluatePractice(demo,widthMm,heightMm,round.attempts),row=document.createElement("div");row.className="history-round";
@@ -100,7 +137,7 @@ function render(){
     const status=document.createElement("span");status.textContent=evaluated.placed+"/"+evaluated.total+" placed · "+
       (!evaluated.complete?"Incomplete":evaluated.passed?"Within all tolerances":"Needs adjustment")+
       (evaluated.rmsErrorMm===null?"":" · RMS "+mm(evaluated.rmsErrorMm));
-    row.append(name,status);history.append(row);
+    row.append(name,status);const provenance=photoDetails(round);if(provenance)row.append(provenance);history.append(row);
   }
 }
 function place(point){
@@ -137,9 +174,15 @@ $("practiceSource").addEventListener("change",async e=>{const file=e.target.file
 });
 $("savePractice").addEventListener("click",()=>download("skill-practice-session.json",importPractice(demo,widthMm,heightMm,session)));
 $("savePracticeSource").addEventListener("click",()=>download("skill-practice-source.json",demo));
+$("observeAttempt").addEventListener("click",()=>{
+  try{
+    sessionStorage.setItem("skill-translator-observation-input/v1",JSON.stringify(snapshot()));
+    location.href="/observe-attempt";
+  }catch(e){error("Could not preserve the practice session for photo observation. "+e.message);}
+});
 $("inspectCalibration").addEventListener("click",()=>{
   try{
-    sessionStorage.setItem("skill-translator-practice-resume/v1",JSON.stringify({demo,widthMm,heightMm,session:importPractice(demo,widthMm,heightMm,session),selected,reviewed,mirrored:mirrored(),showGoals:$("practiceGoals").checked}));
+    sessionStorage.setItem("skill-translator-practice-resume/v1",JSON.stringify(snapshot()));
     sessionStorage.setItem("skill-translator-sensitivity-input/v1",JSON.stringify({demo,widthMm,heightMm,landmarkId:selected}));
     location.href="/sensitivity";
   }catch(e){error("Could not preserve the practice session for analysis. "+e.message);}
@@ -158,15 +201,19 @@ try{
   }
 }catch(e){startupError="Previous setup was unavailable; the authored example is shown. "+e.message;}
 install(demo,widthMm,heightMm);if(startupError)error(startupError);
-if(new URL(location.href).searchParams.get("resume")==="calibration"){
+const resume=new URL(location.href).searchParams.get("resume");
+if(["calibration","observation"].includes(resume)){
   try{
-    const saved=JSON.parse(sessionStorage.getItem("skill-translator-practice-resume/v1"));
+    const key=resume==="observation"?"skill-translator-observation-result/v1":"skill-translator-practice-resume/v1";
+    const saved=JSON.parse(sessionStorage.getItem(key));
     if(!saved)throw Error("No retained practice session was found");
     const restored=importPractice(saved.demo,saved.widthMm,saved.heightMm,saved.session);
     install(saved.demo,saved.widthMm,saved.heightMm);session=restored;
     selected=target.landmarks.some(m=>m.id===saved.selected)?saved.selected:target.landmarks[0].id;
     reviewed=saved.reviewed===true;$("practiceView").value=saved.mirrored?"mirrored":"standard";$("practiceGoals").checked=saved.showGoals!==false;
-    render();$("practiceStatus").textContent="Your practice placements and rounds were retained while you inspected calibration.";
+    render();$("practiceStatus").textContent=resume==="observation"?
+      "Practice reopened with retained rounds, raw photo annotations and any manual placement changes.":
+      "Your practice placements and rounds were retained while you inspected calibration.";
   }catch(e){error("Retained practice could not be reopened. "+e.message);}
 }
 
