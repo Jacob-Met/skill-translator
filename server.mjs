@@ -5,6 +5,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/feature-width.mjs":["src/feature-width.mjs","text/javascript; charset=utf-8"],
+  "/web/feature-width.mjs":["web/feature-width.mjs","text/javascript; charset=utf-8"],
   "/src/readiness-explanation.mjs":["src/readiness-explanation.mjs","text/javascript; charset=utf-8"],
   "/web/readiness-explanation.mjs":["web/readiness-explanation.mjs","text/javascript; charset=utf-8"],
   "/web/affine-challenge.css":["web/affine-challenge.css","text/css; charset=utf-8"],
@@ -161,3 +163,4 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
