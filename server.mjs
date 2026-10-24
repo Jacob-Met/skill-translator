@@ -5,6 +5,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/photo-focus-return":["web/photo-focus-return.html","text/html; charset=utf-8"],
+  "/web/photo-focus-return.mjs":["web/photo-focus-return.mjs","text/javascript; charset=utf-8"],
+  "/src/photo-focus-return.mjs":["src/photo-focus-return.mjs","text/javascript; charset=utf-8"],
   "/recheck-rehearsal":["web/recheck-rehearsal.html","text/html; charset=utf-8"],
   "/src/recheck-rehearsal.mjs":["src/recheck-rehearsal.mjs","text/javascript; charset=utf-8"],
   "/web/recheck-rehearsal.mjs":["web/recheck-rehearsal.mjs","text/javascript; charset=utf-8"],
