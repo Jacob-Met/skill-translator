@@ -376,6 +376,14 @@ Open `/raw-affine-challenge` from Demonstration Sources and import the saved com
 
 The #81 composition on readiness-practice main `09ae668bf2194d686a0da7c81a15bb37ab124583`, preserving merged #77, passed **336 native checks with no failures or skips**, including **nine raw-challenge controls**, and **13 actual sandboxed Chrome raw-challenge groups**. This is a separate browser course from the prior Demonstration Sources and numeric affine-capacity courses. It covers complete raw download/reopen, unchanged predictions, explicit source binding, wrong-image and malformed-input retention, late-work cancellation, and 390px inspection/removal. [Received source and verification scope](docs/receipts/raw-affine-challenge-20261024/verification.json). All examples are authored analytic and PNG controls; they do not validate physical calibration, skill transfer or the declared prospective timing.
 
+## Inspect minimal contradictory outcome groups
+
+Open `/affine-outcome-conflicts` with a retained [raw prospective challenge](docs/RAW_AFFINE_CHALLENGE.md). The receiver evaluates every nonempty subset of up to six received outcomes against unchanged frozen training, then shows all inclusion-minimal contradictory groups. Each member opens its own retained calibration, explicit landmark correspondence and supplied bounds; original pixels can be reattached through exact image-identity admission.
+
+Minimality is group-local, not a recommendation to remove evidence. A conflicting group does not identify a faulty measurement, prove a causal explanation or validate skill transfer. Missing outcomes remain untested. Invalid, over-capacity or unavailable analyses are explicitly refused; previous accepted results are labeled while another import is pending or refused. Saving preserves the compact raw account, and groups recompute on reopening.
+
+See [the interpretation and receiving guide](docs/AFFINE_OUTCOME_CONFLICTS.md). The composed source passed **353 native tests, zero failures/skips**, and **nine actual sandboxed Chrome groups**, with independent source review and parent desktop/390px inspection. [Exact receiving receipt](docs/receipts/affine-outcome-conflicts-20261024/verification.json). Prior #81 receiving remains recorded separately.
+
 ### Learner-photo annotation regions
 
 From the photo observation page, open **Inspect annotation bounds in a new tab** to inspect the complete mapped region of a declared pixel rectangle under the fixed calibration. Compare conditional distance extrema with the unchanged point tolerance result, preserve missing marks, and export/reopen source-bound inputs. Original photo drafts and practice sessions remain intact. See [annotation-region assumptions and receiving](docs/ANNOTATION_BOUND.md). This does not estimate calibration uncertainty or establish physical accuracy or skill.

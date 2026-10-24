@@ -1,0 +1,21 @@
+# Minimal contradictory outcome groups
+
+Open `/affine-outcome-conflicts` with a complete raw prospective challenge account from `/raw-affine-challenge`. The receiver retains the original raw training, prospective plan and each explicitly bound outcome annotation. It evaluates every nonempty subset of the received outcomes against the same frozen training family. Six received outcomes require 63 subset evaluations; missing planned outcomes remain untested.
+
+A group is inclusion-minimal when its constraints contradict the frozen family and removing any one member makes that group compatible. This is not a search only for the smallest number of outcomes. A singleton and a different three-outcome group can both be inclusion-minimal. The displayed deletion checks are local to their group: they do not imply that removing that reading from the complete account would restore compatibility.
+
+The analysis uses the maintained bounded affine response family and its exact half-plane intersection. Each coordinate retains its two-coefficient coupling. The original source coordinate, supplied calibration, explicit correspondence, coefficient domain and discrepancy bounds remain conditioned upon. A contradictory group identifies mutually incompatible supplied constraints under those assumptions. It does not identify a bad source, causal fault or recommended removal. No outcome is edited or removed here, and future outcomes never refit the training.
+
+Select a group member to inspect its retained calibration, bound landmark, workpiece dimensions and discrepancy bounds. The source selector also retains the frozen reference and additional raw training annotations. Original images stay separate; reattachment uses the maintained exact SHA-256, dimensions, media-type and orientation admission. Geometry without reattached pixels is labeled explicitly.
+
+A complete compatible result means one conditional affine model satisfies all received outcomes. With no received outcomes, the page reports untested evidence instead. Invalid source bindings, oversized accounts, an unavailable computation or insufficient declared work budget throw/refuse; none is represented by an empty conflict list. The worker keeps exhaustive evaluation away from the UI. During a new import or after refusal, any previous completed report is labeled as belonging to the previously accepted account.
+
+Save emits the accepted compact raw challenge account, using the existing whole-account 2,000,000-byte guard. Derived groups are recomputed when reopened. Saved images, historical versions and an independent prospective timestamp are not supplied by this account format.
+
+## Verification
+
+Seven direct native groups cover the four-outcome witness with two different minimal pairs; a minimal triple alongside a singleton; all 63 subsets against an independent one-axis interval oracle; receipt-order invariance and forged-summary recomputation; missing/empty versus compatible evidence; separate x/y conflicts; and budget, binding and capacity refusal. Independent peer source review found no blocker and reran all seven groups.
+
+The authored browser receiver exercises the actual worker, source-linked group inspection, exact reference image reattachment, refused-account preservation, distinct empty/compatible states, late-file cancellation, compact save/reopen, and visible 390px controls. On merged base `5f7b2df2de4cf0ee5cb78afa1f2adbc63f11eae7`, the complete source passed **353 native tests with zero failures/skips** and **nine actual direct sandboxed Chrome groups**. The parent inspected desktop and390px screenshots. [Exact receiving receipt](receipts/affine-outcome-conflicts-20261024/verification.json) records this qualification separately from prior #81. The fixtures are analytical authored controls, not physical transfer validation.
+
+Run native controls with `node test/affine-outcome-conflicts.test.mjs`. From a composed repository, run the browser with `PUPPETEER_PATH=/tmp/hamon-f1c45f6f2aec-chronos/browser-tools/node_modules/puppeteer-core CHROME_BINARY=/opt/google/chrome/chrome QA_OUTPUT=/tmp/skill-conflicts-FRESH node tools/browser-affine-outcome-conflicts.mjs`. Direct Chrome must pass namespace and seccomp assertions. Use a fresh output directory.
