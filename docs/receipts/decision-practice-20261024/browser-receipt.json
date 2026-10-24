@@ -1,0 +1,42 @@
+{
+  "evidence": "Original authored video/software controls; no measured expert or learning claim",
+  "tests": [
+    "maintained studio receives actual authored video and exports two source-bound before/after accounts",
+    "actual before pixels appear while after pixels and authored account remain undisplayed",
+    "first response remains locked and separate from revealed pixels, missing cues and learner self-comparison",
+    "revealing during an unsubmitted draft preserves its text and records assistance before response",
+    "actual session download retains raw action order and responses without a claimed correctness result",
+    "fresh 390px browser verifies source pixels and replays complete practice with reveal history",
+    "changed authored account and swapped source PNGs refuse without losing accepted practice",
+    "a delayed session read cannot overwrite a newer learner draft",
+    "no browser exceptions or offsite requests"
+  ],
+  "sourceHashes": {
+    "src/sequence-capture.mjs": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+    "src/capture-editing.mjs": "5472d1360db646136bcc0b28fdcec1c0e8965e55f91aa0a5d000e358571109ba",
+    "src/geometry.mjs": "4d32c76422cb3a479521ecc58d0169f6d623ecbc69001de8992f1f15a43b2674",
+    "src/authoring.mjs": "d9c968eb57117e2c2be1285a4f2a87e0665347acabbc03bd30657358b8e82a95",
+    "src/practice.mjs": "972730fb0a7fd4e95cd21bac2d55d1c6e0e7454665976cc1e058e5d60ae11bef",
+    "src/decision-practice.mjs": "c643716c862e276e6c1d8e608a80d17045535d67e5a2976f4bd58a5271cb328d",
+    "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+    "src/frame-origin.mjs": "3afd28bb620f6395c2884b690720ab5a0e68fbae5a812a3d2b269913dcbe9332",
+    "src/capture.mjs": "3ebc01f35b4418ea13be10b1de5169b4f6c40869bdfb265745007f5402007acd",
+    "web/decision-practice.html": "6a14f7a1b97c7d8e926bb8d09a3672fbdf171b95432e9f0585a46d312667953c",
+    "web/decision-practice.css": "673b7435a50850feddbbbb39672e6b57a92b6b52e1c2a50ff6bc9c6db53c9f79",
+    "web/decision-practice.mjs": "0e604a93f4905c7d53cfc9073ec5e1f266e3b4f78a7d92a5e2bf8195e9f07700",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+    "web/image-input.mjs": "a8d4ea5480ee13279ab9ff1f24cd826fc8dc40b76961fe96b4d1fa8854dc742b",
+    "web/video-input.mjs": "c5ddc72227a0d5bf5b6be572592971951fa8b5ff8e25977d7703db7c1d9c3d81",
+    "web/sequence.mjs": "1b2cbcdb07ce440b29c69c626aec19dc08a99de1ee7b6d0f1d3323e1821f2dd4",
+    "web/sequence.html": "61526a50b2daf31e31f6105a55da730d569ed2572d18541ec640c7ad1a0f0420",
+    "web/sequence.css": "b9c417988a4ea558cfe7572b12da053a17f55cc04471f71814442605be368a3f",
+    "web/styles.css": "c0ca32067374c49af6ed11f129e33ca4bb141cccff0c73906a7cb452594524a4",
+    "web/index.html": "6faf729e5f5bedc5692e4659b48f1ee553bc60f31b4ad3139bf858942db10d30",
+    "tools/browser-decision-practice.mjs": "8458400ea21616058ab0b4a54449e1ecb75bbc18ef06e0b76296b4a3d7e7bb98",
+    "server.mjs": "5d583149c93c8481d2156b5dd186b7fe92cc4f4e94356f689dcab7c6447f7851"
+  },
+  "browser": "Chrome/156.0.8078.47",
+  "result": "PASS",
+  "errors": [],
+  "offsite": []
+}

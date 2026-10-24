@@ -2,6 +2,24 @@
 
 SKILL TRANSLATOR aims to explain and adapt skilled physical work without treating an expert's motion as the only correct motion. The first **working source/consumer slice** is a local browser geometry workbench, not automatic skill extraction.
 
+## Rehearse a decision from a retained demonstration
+
+Choose **Practice decisions from retained demonstrations** in Task Space, or open
+`/decision-practice`. Import a saved demonstration from the existing studio. The
+before frame and authored context are shown first; retain your expected visible
+change, decision cue and recovery judgment, or explicitly declare uncertainty.
+Reveal the actual after frame and supplied account, then record your own
+comparison. A reveal before submission stays recorded, including when a draft
+was already being typed. Earlier submitted responses remain separate from the
+source account.
+
+Save practice separately and reopen it with the matching demonstration. Source
+pixels and authored context are validated, actions are replayed, and changed or
+late imports preserve accepted work. This is reflective practice without an
+automatic correctness or physical-skill score; the source itself may be
+incomplete or mistaken. Details and test instructions are in
+[Decision Practice](docs/DECISION_PRACTICE.md).
+
 ## Try it
 
 Requires Node.js 20+, with **no dependency install and no service keys**.
@@ -80,6 +98,18 @@ Choose **Observe a learner photo** in complete-task practice. Pair a separate lo
 The image is kept locally. Its complete file digest, decoded dimensions, supplied corners, original mark pixels, evidence class and note are retained in an observation notebook and in the resulting practice round. Reopening a notebook checks that its source and workpiece match, recomputes placements from raw pixels, and requires pairing the exact image before applying. It preserves the current practice history; importing an older observation cannot replace later rounds.
 
 Applying an observation archives any existing placements and begins the next round. A subsequent manual edit is explicitly marked as a manual override while the original photo annotation remains inspectable. Practice exports preserve both current and historical raw evidence. The mapping depends on supplied measurements and annotations; it does not verify a physical mark, planarity, expertise or learned skill. See [the learner-observation guide](docs/LEARNER_OBSERVATIONS.md) for the full local workflow and authored verification controls.
+
+## Rehearse across changing workpieces
+
+Open **Rehearse across changing workpiece sizes**, or visit `/rehearsal`. Use the authored example or open your own source annotations under **Source and planned workpieces**. Declare 2–8 distinct sheet sizes. This separate diagram exercise reuses the maintained placement evaluator; it does not alter complete-task practice or its photo observations.
+
+Every sheet begins with adapted targets hidden. The source author's explanation and tolerance remain available. Place marks by clicking, keyboard or physical coordinates. **Show targets · record help** retains the request and the exact placements that existed before it. Hiding the targets does not erase that history. **Commit placements and review** freezes the sheet, including missing marks, before feedback appears. The next size starts with no placements or target requests.
+
+Export the full source, declared plan and ordered actions. Reopening recomputes assistance records and geometric results; stored verdicts are not trusted. A session contains at most 2048 actions, and exports/imports are bounded at 1 MiB. Invalid replacement files preserve accepted work. Nothing is uploaded or persisted automatically.
+
+The final comparison describes positional results and target requests for each size. It does not estimate a learning effect or establish independent performance: source explanations remain visible, outside help is unknown, and local JSON can be edited. Different workpieces may have different difficulty. Diagram success is not evidence of physical skill, expert equivalence or safe tool use.
+
+Verification: `node test/transfer-rehearsal.test.mjs` and `node tools/rehearsal-browser.mjs` (the latter requires existing Puppeteer and Chrome as described below).
 
 ## Challenge the original calibration
 

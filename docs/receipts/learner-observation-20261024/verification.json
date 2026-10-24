@@ -5,8 +5,8 @@
   "sourceFiles": [
     {
       "path": "README.md",
-      "gitBlobSha": "3abf84074c157c15276551813b1327283678f1f3",
-      "sha256": "bc14ecc38b9f35b0108d63937f06620203d8b7eac3a245e010f4b1ba362c6933"
+      "gitBlobSha": "06c97c9bc95c9960f4554bc7265bd2fe58b7c17a",
+      "sha256": "faf680836ad54f9a45102fb1db318a462fad919c6bdc73ade517edf01432ab2a"
     },
     {
       "path": "docs/LEARNER_OBSERVATIONS.md",
@@ -15,8 +15,8 @@
     },
     {
       "path": "server.mjs",
-      "gitBlobSha": "d23a6a1118b859e2d7fdd16809bfadfc869e24e9",
-      "sha256": "86c3e44726c1e331b4d53081a3e57c79b9b2e895f4f6b63566df5f53a2d8e652"
+      "gitBlobSha": "5568d870aeb49619d7ad5362bc23e77a5c6c3790",
+      "sha256": "a7b0f59f8278600c7599b4bd51be8117aef571ddb28d1238cfd47ed6b90dbffe"
     },
     {
       "path": "src/learner-observation.mjs",
@@ -124,5 +124,108 @@
     "accountMeaning": "Separate workers using one contributor account; not separate-account approvals"
   },
   "integration": "The maintained focused-result receiver preserves full-task photo/manual-override history and separately receives photo-backed drills. Latest demonstration sequence routes and all current relationship/review modules are preserved. Source-mark inspector routes and README additions are preserved; its maintained native cases are included in the 198-case receiving.",
-  "scope": "Authored mathematical image controls only; evidence class remains a declaration. Raw images stay local. No physical acquisition, skill improvement or measurement-accuracy qualification is inferred."
+  "scope": "Authored mathematical image controls only; evidence class remains a declaration. Raw images stay local. No physical acquisition, skill improvement or measurement-accuracy qualification is inferred.",
+  "receivingSourceFiles": [
+    {
+      "path": "README.md",
+      "gitBlobSha": "3abf84074c157c15276551813b1327283678f1f3",
+      "sha256": "bc14ecc38b9f35b0108d63937f06620203d8b7eac3a245e010f4b1ba362c6933"
+    },
+    {
+      "path": "docs/LEARNER_OBSERVATIONS.md",
+      "gitBlobSha": "e9ceb7820cfecac7477fae6813f3be122624383d",
+      "sha256": "be385a889b45a9726f1f14fc90f224898761ff97aa72b93f8f80b9c877724055"
+    },
+    {
+      "path": "server.mjs",
+      "gitBlobSha": "d23a6a1118b859e2d7fdd16809bfadfc869e24e9",
+      "sha256": "86c3e44726c1e331b4d53081a3e57c79b9b2e895f4f6b63566df5f53a2d8e652"
+    },
+    {
+      "path": "src/learner-observation.mjs",
+      "gitBlobSha": "f020776d665d0148c001c22dd9d7d336bd02ecb0",
+      "sha256": "8e7b0bf128ca22ef79e33e89d3f64a2906b9340911d5b41a8b5cebead5b75431"
+    },
+    {
+      "path": "src/practice.mjs",
+      "gitBlobSha": "a2bad45c47a4209f72bb99fcb18405870f85ace5",
+      "sha256": "283909901f4d436affc4382373e455fbf3951d221a1d4918d261453e9c6c3bd6"
+    },
+    {
+      "path": "test/fixtures/learner-observation/expected.json",
+      "gitBlobSha": "b9d5b3dc2a387a9d684eb8ea39b9272e61948093",
+      "sha256": "a32240f3f91b08f8413d94362d4fae989429bb0065aef731b6e2bc99cd5c238a"
+    },
+    {
+      "path": "test/fixtures/learner-observation/observation-a.png",
+      "gitBlobSha": "a6f623f2c627374206f8929c7d4f6f219d1634a3",
+      "sha256": "e74b296664380bb1e56dc81db0af1350f568e7da66476aa5e449ab6adfb0a1b7"
+    },
+    {
+      "path": "test/fixtures/learner-observation/observation-b.png",
+      "gitBlobSha": "7d5ad510de8206bbc2db81ecacfedd351872e9a0",
+      "sha256": "842c726701c3dcc1e98b195e31cb4a5ab881c2248e851fe44d291ca98c0744fd"
+    },
+    {
+      "path": "test/fixtures/learner-observation/observation-c.png",
+      "gitBlobSha": "f1fd2d79fa8d678ecae02ffe04b3fcb1cd7918d8",
+      "sha256": "7cfec9cec6910cc1eaf525a52670d3864e62f94c31458cb9ced01f1bbb33f044"
+    },
+    {
+      "path": "test/learner-observation.test.mjs",
+      "gitBlobSha": "141183d6ebe74211083dbe330cf08aa380c98ea8",
+      "sha256": "3ce8019c101baeab352c810aecdd36dc3d351b6947a95334445d5a8fad45d523"
+    },
+    {
+      "path": "test/server.test.mjs",
+      "gitBlobSha": "42ae9821e4eced26c29f9d9b1cda45b3e8b7de2b",
+      "sha256": "ac2710cd87242cfac6db0d6faa6a8dbe2d476a61430c5f8e616768e07504125f"
+    },
+    {
+      "path": "tools/browser-observation.mjs",
+      "gitBlobSha": "5bda389f3938b0cfa130c92a3cc12a883e311b79",
+      "sha256": "9f3902b953f18e96f29925a36345038f1435739cb1b4f975ba3a79baa1e46727"
+    },
+    {
+      "path": "tools/generate-learner-observation-controls.py",
+      "gitBlobSha": "a12e8cf9410b33bb597cf46f23229d2344d19e78",
+      "sha256": "b4343d0f8d275bf1d2e19115f03345256af21d2f95800f43a36edf9f87edd629"
+    },
+    {
+      "path": "web/observe-attempt.css",
+      "gitBlobSha": "fffc10875cacea6a6fd4eae5df12ceb7bb8e4cd2",
+      "sha256": "6da5866e751311c349611799f5607a729b819da2ff627da6a22af799c441605e"
+    },
+    {
+      "path": "web/observe-attempt.html",
+      "gitBlobSha": "e8d6127c4e5fa79a04d0dc82916b562d9673eeb8",
+      "sha256": "3c9807c09ed9cbdc2feb250877558e332c5997e3a9864164cb6c73a13edb6155"
+    },
+    {
+      "path": "web/observe-attempt.mjs",
+      "gitBlobSha": "1f782d3e92206cae4dccae30883c5e286e1855ee",
+      "sha256": "7893a7a27f17e691cbea6ce6b488ecd8911f35cb2dd8063f43b8e44a6da8aaef"
+    },
+    {
+      "path": "web/practice.css",
+      "gitBlobSha": "c44cef24306bf038b40e0e475852a7b1b7755a64",
+      "sha256": "f1774c223187097e381e1b352fba2c8ed22320aa3b98d3ea23a214f65ae51eea"
+    },
+    {
+      "path": "web/practice.html",
+      "gitBlobSha": "66f1669fa23aad2579d777a04c0516201b934ca9",
+      "sha256": "ede4c047ad8d55e3e0647bd582bb3dd2c6ae4c0a78127c846af234f168d8fa3a"
+    },
+    {
+      "path": "web/practice.mjs",
+      "gitBlobSha": "428a5f9c370bce0f8c2966f1d1eace0e2ba7d6dd",
+      "sha256": "8bfe8f4235eca48f0fdce362d8b50fce28916dd7cf03fe66c8f10a6b0389b56e"
+    }
+  ],
+  "compositionBase": "e6e32c11739b60700dfa30724da8a932b4550128",
+  "finalCompositionCheck": {
+    "passed": 1,
+    "command": "node --test test/server.test.mjs",
+    "scope": "Actual HTTP receiving of composed server. New upstream rehearsal/decision modules and README retained; photo/practice implementation and direct runtime dependencies remain received95 bytes."
+  }
 }

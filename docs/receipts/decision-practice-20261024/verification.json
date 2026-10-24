@@ -1,0 +1,80 @@
+{
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/39",
+  "maintainedBase": "5d9b6eca01744ca34aa8076ab30abb119a567947",
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "runtime": "Node 24.19.0",
+    "passed": 185,
+    "failed": 0,
+    "newTests": 8,
+    "qualifiedBase": "e4f1830e600e80d17adf3f10e1f22a48cb64a30e"
+  },
+  "browser": {
+    "evidence": "Original authored video/software controls; no measured expert or learning claim",
+    "tests": [
+      "maintained studio receives actual authored video and exports two source-bound before/after accounts",
+      "actual before pixels appear while after pixels and authored account remain undisplayed",
+      "first response remains locked and separate from revealed pixels, missing cues and learner self-comparison",
+      "revealing during an unsubmitted draft preserves its text and records assistance before response",
+      "actual session download retains raw action order and responses without a claimed correctness result",
+      "fresh 390px browser verifies source pixels and replays complete practice with reveal history",
+      "changed authored account and swapped source PNGs refuse without losing accepted practice",
+      "a delayed session read cannot overwrite a newer learner draft",
+      "no browser exceptions or offsite requests"
+    ],
+    "sourceHashes": {
+      "src/sequence-capture.mjs": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "src/capture-editing.mjs": "5472d1360db646136bcc0b28fdcec1c0e8965e55f91aa0a5d000e358571109ba",
+      "src/geometry.mjs": "4d32c76422cb3a479521ecc58d0169f6d623ecbc69001de8992f1f15a43b2674",
+      "src/authoring.mjs": "d9c968eb57117e2c2be1285a4f2a87e0665347acabbc03bd30657358b8e82a95",
+      "src/practice.mjs": "972730fb0a7fd4e95cd21bac2d55d1c6e0e7454665976cc1e058e5d60ae11bef",
+      "src/decision-practice.mjs": "c643716c862e276e6c1d8e608a80d17045535d67e5a2976f4bd58a5271cb328d",
+      "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "src/frame-origin.mjs": "3afd28bb620f6395c2884b690720ab5a0e68fbae5a812a3d2b269913dcbe9332",
+      "src/capture.mjs": "3ebc01f35b4418ea13be10b1de5169b4f6c40869bdfb265745007f5402007acd",
+      "web/decision-practice.html": "6a14f7a1b97c7d8e926bb8d09a3672fbdf171b95432e9f0585a46d312667953c",
+      "web/decision-practice.css": "673b7435a50850feddbbbb39672e6b57a92b6b52e1c2a50ff6bc9c6db53c9f79",
+      "web/decision-practice.mjs": "0e604a93f4905c7d53cfc9073ec5e1f266e3b4f78a7d92a5e2bf8195e9f07700",
+      "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "web/image-input.mjs": "a8d4ea5480ee13279ab9ff1f24cd826fc8dc40b76961fe96b4d1fa8854dc742b",
+      "web/video-input.mjs": "c5ddc72227a0d5bf5b6be572592971951fa8b5ff8e25977d7703db7c1d9c3d81",
+      "web/sequence.mjs": "1b2cbcdb07ce440b29c69c626aec19dc08a99de1ee7b6d0f1d3323e1821f2dd4",
+      "web/sequence.html": "61526a50b2daf31e31f6105a55da730d569ed2572d18541ec640c7ad1a0f0420",
+      "web/sequence.css": "b9c417988a4ea558cfe7572b12da053a17f55cc04471f71814442605be368a3f",
+      "web/styles.css": "c0ca32067374c49af6ed11f129e33ca4bb141cccff0c73906a7cb452594524a4",
+      "web/index.html": "6faf729e5f5bedc5692e4659b48f1ee553bc60f31b4ad3139bf858942db10d30",
+      "tools/browser-decision-practice.mjs": "8458400ea21616058ab0b4a54449e1ecb75bbc18ef06e0b76296b4a3d7e7bb98",
+      "server.mjs": "5d583149c93c8481d2156b5dd186b7fe92cc4f4e94356f689dcab7c6447f7851"
+    },
+    "browser": "Chrome/156.0.8078.47",
+    "result": "PASS",
+    "errors": [],
+    "offsite": []
+  },
+  "sourceSha256": {
+    "src/decision-practice.mjs": "c643716c862e276e6c1d8e608a80d17045535d67e5a2976f4bd58a5271cb328d",
+    "test/decision-practice.test.mjs": "14b9a43b247c5699b7a935cee4a397ff99b57d636fbac49f8a5355d64a89a775",
+    "web/decision-practice.html": "6a14f7a1b97c7d8e926bb8d09a3672fbdf171b95432e9f0585a46d312667953c",
+    "web/decision-practice.css": "673b7435a50850feddbbbb39672e6b57a92b6b52e1c2a50ff6bc9c6db53c9f79",
+    "web/decision-practice.mjs": "0e604a93f4905c7d53cfc9073ec5e1f266e3b4f78a7d92a5e2bf8195e9f07700",
+    "tools/browser-decision-practice.mjs": "8458400ea21616058ab0b4a54449e1ecb75bbc18ef06e0b76296b4a3d7e7bb98",
+    "docs/DECISION_PRACTICE.md": "2ee729aa47cfe7df272df818796d15abe39dd776feb5b3a91188150616b409e0",
+    "server.mjs": "5d583149c93c8481d2156b5dd186b7fe92cc4f4e94356f689dcab7c6447f7851",
+    "web/index.html": "6faf729e5f5bedc5692e4659b48f1ee553bc60f31b4ad3139bf858942db10d30",
+    "README.md": "2163a03b885ade1732fd7473291caae25882a109cbbb768449ef3d230f1ce5a7"
+  },
+  "fixtureSha256": {
+    "source.json": "5352a2ea83942ab9a6c5f71b4145d956c55025cfd4ba9be783b8402a1405214a",
+    "practice.json": "183253f0ed5390bdbe00a995f7fc66acdf591d953d646b51e75f7df95a2d885f",
+    "authored.webm": "fdffbb9152c02336b2a5d3abd7d8cd6be28a6af87f626617a25d163fb1337984",
+    "desktop.png": "7f22086e97d3fde2e3aac9f7b5040f0337370528f96a209f997fa7341c44f1a3",
+    "mobile.png": "cc9557fe27c6e676d5da9f108448327ec4d9514339990eb6d57d3677be5cc1c2"
+  },
+  "limits": [
+    "Original authored generated video/marker controls, no expert validity or acquired-skill evidence",
+    "First-answer and reveal history describes local interface actions; files and familiarity declarations are not authenticated chronology",
+    "Local source/browser receiving, no deployment or provider qualification",
+    "Isolated browser course ran in the approved local root execution environment with explicit no-sandbox setting; product behavior unchanged"
+  ],
+  "composition": "Preserves all twelve upstream files from e4f1830e, with only the four decision-practice routes added to upstream server. Adds calibrated v2 replay/refusal regression. Actual decision browser course repeated through updated studio and bundle reader; no claim that this course operates the calibration panel. Final main95eda27c adds an unrelated source-mark inspector; exact upstream README/server composed with only owned decision additions. Nine-group decision browser course repeated on composed routes. The 185 native result remains qualified at e4f1830e and is not relabeled as an inspector test. Final root composition to5d9b6eca preserves transfer-rehearsal README/server/index, applying only decision insertions at unchanged anchors. The nine-group decision course passed again on those exact composed routes. Native185 remains e4f1830e evidence."
+}
