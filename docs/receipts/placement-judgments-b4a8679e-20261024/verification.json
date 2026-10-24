@@ -1,0 +1,83 @@
+{
+  "native_exit_code": 0,
+  "browser_exit_code": 0,
+  "base": "d0371f8e59b1c42d825aab3e7448345d07a5eb0c",
+  "native": {
+    "tests": 424,
+    "pass": 424,
+    "fail": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "checks": [
+      "actual sandboxed Chrome",
+      "incomplete placement cannot be judged",
+      "first prediction retains reasoning and withholds result",
+      "keyboard cannot change frozen placement; wrong judgment compares after commitment",
+      "next workpiece retains uncertainty and earlier target help separately",
+      "complete raw study exact download/reopen",
+      "invalid input preserves accepted complete study",
+      "late file read cannot overwrite a newer accepted plan",
+      "390px keyboard placement and target help after first judgment",
+      "390px layout without horizontal overflow"
+    ],
+    "errors": []
+  },
+  "source_files": {
+    "src/rehearsal-judgment.mjs": {
+      "git_blob": "d0922c9ed4e463300782d79327c7949158b928b7",
+      "sha256": "152c74b4896497efc856564224cf72beffb788ced5d5979ad98c72d8d2af9195"
+    },
+    "test/rehearsal-judgment.test.mjs": {
+      "git_blob": "36a87c39c345b1f3124802e0a7cc41724e5857a5",
+      "sha256": "655718807b807d0472439ee346155433cd84b4d3aa7ce18bf413285cc8e55e89"
+    },
+    "web/rehearsal.mjs": {
+      "git_blob": "e01c89b7ce014f8ef5bff51fc206213740a697c0",
+      "sha256": "b0781962fb97d1fa657071d6ad63c966731f02a1500f94152d3e5547cd1a7009"
+    },
+    "web/rehearsal.html": {
+      "git_blob": "288eaa4162eb38b3f3a7bf8b79741b2b827401df",
+      "sha256": "7b2f6cbfafe495daf573c89362636831c42c6ccaea7f083db93351e72ba1c45c"
+    },
+    "web/rehearsal.css": {
+      "git_blob": "a29c45f0d24d8140e9a83407fbf828458e8cd2f2",
+      "sha256": "3ace2ff62836ab0ce10f198a3097e63d478ef9b58994129daa111b821e6ba94e"
+    },
+    "server.mjs": {
+      "git_blob": "b29626198a535701fadd37b947418ebc7c2ed75e",
+      "sha256": "a3fdaa47fad02f08bdce2ab27fc04c2762af697ea88c708912c6049a7cbac4a7"
+    },
+    "tools/browser-rehearsal-judgment.mjs": {
+      "git_blob": "3e695400865859052a04cb9ec078e37015f10365",
+      "sha256": "5e333becf073708b9f69f7af5f53e3e067eb77a9219ca200e19826567b228776"
+    },
+    "docs/PLACEMENT_JUDGMENTS.md": {
+      "git_blob": "816a91e29bfef098927eb5d6abfcd4447c16f102",
+      "sha256": "02a414bafcebe25b15464e863cebdbf00d467d9333ca8ec5cede7df881838f35"
+    }
+  },
+  "environment": {
+    "device": "65ff6088-8483-4ed9-9486-99d34d37d676",
+    "system": "Ubuntu Linux",
+    "node": "22.23.4",
+    "browser": "/opt/google/chrome/chrome",
+    "sandbox": "Chrome adequately sandboxed; no no-sandbox launch flag",
+    "puppeteer": "/home/ubuntu/.npm/_npx/4b4c857f6efdfb61/node_modules/puppeteer/lib/puppeteer/puppeteer.js"
+  },
+  "commands": [
+    "npm test",
+    "PUPPETEER_PATH=<qualified installed Puppeteer> CHROME_BINARY=/opt/google/chrome/chrome QA_OUTPUT=<isolated receiving directory> node tools/browser-rehearsal-judgment.mjs"
+  ],
+  "input_basis": "Authored source axes and one quarter-width mark; two declared workpiece sizes. No human learner or physical task performance was measured.",
+  "screenshots": {
+    "desktop.png": "3afecda901e3477e087715b729d29a8fee201533",
+    "narrow.png": "f5955b364f833fd31555998f1ef8279f421596b7"
+  },
+  "review": "Root independently reviewed custody/reducer reuse, guarded import lifecycle, and actual desktop/narrow pixels. Final prediction controls precede commit; original rehearsal export remains distinct.",
+  "limits": [
+    "Local JSON chronology is editable and unauthenticated.",
+    "Target help records only requests retained in these actions, not outside assistance.",
+    "Geometric agreement does not establish physical success, mastery, or learning."
+  ]
+}

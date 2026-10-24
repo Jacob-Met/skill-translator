@@ -1,0 +1,46 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createAppServer} from '../server.mjs';
+import {createRehearsal} from '../src/transfer-rehearsal.mjs';
+import {importJudgmentStudy,inspectPlacementJudgments} from '../src/rehearsal-judgment.mjs';
+const require=createRequire(import.meta.url),puppeteer=require(process.env.PUPPETEER_PATH||'puppeteer');
+const out=resolve(process.env.QA_OUTPUT||'/tmp/skill-judgment-qa');await mkdir(out,{recursive:true});
+const source={title:'Authored control',provenance:'Synthetic axes',source:{widthMm:100,heightMm:80,corners:[{x:0,y:0},{x:100,y:0},{x:100,y:80},{x:0,y:80}]},landmarks:[{id:'ratio',label:'Quarter width',kind:'fraction',sourcePx:{x:25,y:20},toleranceMm:1}]};
+await writeFile(out+'/rehearsal.json',JSON.stringify(createRehearsal(source,[{widthMm:200,heightMm:160},{widthMm:80,heightMm:120}])));
+const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY||'/opt/google/chrome/chrome',headless:true});
+const page=await browser.newPage(),errors=[],checks=[];page.on('pageerror',e=>errors.push(e.message));
+const text=id=>page.$eval('#'+id,e=>e.textContent);
+const fill=(id,value)=>page.$eval('#'+id,(e,v)=>{e.value=v;e.dispatchEvent(new Event('input',{bubbles:true}));},value);
+const upload=async path=>{await page.$eval('#fileStatus',e=>e.textContent='Awaiting file');await (await page.$('#openRehearsal')).uploadFile(path);await page.waitForFunction(()=>document.getElementById('fileStatus').textContent.includes('Accepted'));};
+const save=async()=>{await page.click('#saveJudgments');return page.evaluate(async()=>JSON.parse(await window.lastDownload.text()));};
+try{
+ await page.goto('chrome://sandbox');const sandbox=await page.$eval('body',e=>e.innerText);assert.match(sandbox,/adequately sandboxed/);assert.doesNotMatch(sandbox,/not adequately sandboxed/);checks.push('actual sandboxed Chrome');
+ await page.setViewport({width:1360,height:1000});await page.goto('http://127.0.0.1:'+server.address().port+'/rehearsal');
+ await page.evaluate(()=>{const old=URL.createObjectURL;URL.createObjectURL=function(blob){window.lastDownload=blob;return old.call(this,blob);};});
+ await upload(out+'/rehearsal.json');assert.equal(await page.$eval('#recordJudgment',e=>e.disabled),true);checks.push('incomplete placement cannot be judged');
+ await fill('placeX','55');await fill('placeY','40');await page.click('#placeMark');await page.select('#judgmentChoice','adequate');await fill('judgmentReason','I used a quarter of the width');await page.click('#recordJudgment');
+ assert.match(await text('judgmentStatus'),/Placements are frozen/);assert.equal(await page.$eval('#placeMark',e=>e.disabled),true);
+ let saved=await save();assert.equal(inspectPlacementJudgments(saved)[0].actualAdequate,null);checks.push('first prediction retains reasoning and withholds result');
+ await page.$eval('#rehearsalSheet',e=>e.focus());assert.equal(await page.$eval('#rehearsalSheet',e=>document.activeElement===e),true);await page.keyboard.press('ArrowRight');await page.click('#submitTrial');assert.match(await text('judgmentStatus'),/differs/);
+ saved=await save();assert.equal(saved.rehearsal.events[0].xMm,55);assert.equal(inspectPlacementJudgments(saved)[0].agreement,false);checks.push('keyboard cannot change frozen placement; wrong judgment compares after commitment');
+ await page.click('#nextTrial');await page.click('#requestTargets');await fill('placeX','20');await fill('placeY','30');await page.click('#placeMark');await page.select('#judgmentChoice','uncertain');await page.click('#recordJudgment');await page.click('#submitTrial');
+ saved=await save();const findings=inspectPlacementJudgments(saved);assert.equal(findings[1].agreement,null);assert.equal(findings[1].targetsRequestedBeforeJudgment,1);assert.equal(findings[1].actualAdequate,true);checks.push('next workpiece retains uncertainty and earlier target help separately');
+ await writeFile(out+'/study.json',JSON.stringify(saved));await upload(out+'/study.json');assert.deepEqual(importJudgmentStudy(await save()),importJudgmentStudy(saved));checks.push('complete raw study exact download/reopen');
+ const broken=structuredClone(saved);broken.judgments[0].atEvent=999;await writeFile(out+'/broken.json',JSON.stringify(broken));await (await page.$('#openRehearsal')).uploadFile(out+'/broken.json');await page.waitForFunction(()=>document.getElementById('rehearsalError').textContent.includes('refused'));assert.deepEqual(importJudgmentStudy(await save()),importJudgmentStudy(saved));checks.push('invalid input preserves accepted complete study');
+ await writeFile(out+'/stale.json',JSON.stringify(createRehearsal(source,[{widthMm:200,heightMm:160},{widthMm:80,heightMm:120}])));
+ await page.evaluate(()=>{const read=File.prototype.text;File.prototype.text=function(){if(this.name==='stale.json')return new Promise(resolve=>{window.releaseStale=()=>read.call(this).then(resolve);});return read.call(this);};});
+ await (await page.$('#openRehearsal')).uploadFile(out+'/stale.json');await page.waitForFunction(()=>typeof window.releaseStale==='function');
+ // Starting a fresh plan is a synchronous newer accepted source operation.
+ await page.$eval('#planForm',e=>e.requestSubmit());const newer=await save();await page.evaluate(()=>window.releaseStale());
+ await page.waitForFunction(()=>document.getElementById('openRehearsal').value==='');assert.deepEqual(importJudgmentStudy(await save()),importJudgmentStudy(newer));checks.push('late file read cannot overwrite a newer accepted plan');
+ await upload(out+'/study.json');
+ await page.screenshot({path:out+'/desktop.png',fullPage:true});await page.setViewport({width:390,height:844});
+ await upload(out+'/rehearsal.json');await fill('placeX','49');await fill('placeY','40');await page.click('#placeMark');await page.$eval('#rehearsalSheet',e=>e.focus());assert.equal(await page.$eval('#rehearsalSheet',e=>document.activeElement===e),true);await page.keyboard.press('ArrowRight');
+ await page.select('#judgmentChoice','adequate');await page.click('#recordJudgment');await page.click('#requestTargets');await page.click('#submitTrial');
+ const narrow=await save();const narrowFinding=inspectPlacementJudgments(narrow)[0];assert.equal(narrowFinding.agreement,true);assert.equal(narrowFinding.targetsRequestedBeforeJudgment,0);assert.equal(narrow.rehearsal.events.filter(e=>e.type==='reveal').length,1);checks.push('390px keyboard placement and target help after first judgment');
+ await page.screenshot({path:out+'/narrow.png',fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);checks.push('390px layout without horizontal overflow');
+ assert.deepEqual(errors,[]);await writeFile(out+'/receipt.json',JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({checks,errors}));
+}finally{await browser.close();await new Promise(r=>server.close(r));}

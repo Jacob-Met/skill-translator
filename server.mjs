@@ -13,6 +13,7 @@ const routes=Object.freeze({
 "/web/decision-transfer-input.mjs":["web/decision-transfer-input.mjs", "text/javascript; charset=utf-8"],
 "/web/decision-transfer.mjs":["web/decision-transfer.mjs", "text/javascript; charset=utf-8"],
 
+  "/src/rehearsal-judgment.mjs":["src/rehearsal-judgment.mjs","text/javascript; charset=utf-8"],
 "/decision-comparison":["web/decision-comparison.html", "text/html; charset=utf-8"],
 "/src/decision-comparison.mjs":["src/decision-comparison.mjs", "text/javascript; charset=utf-8"],
 "/web/decision-comparison-input.mjs":["web/decision-comparison-input.mjs", "text/javascript; charset=utf-8"],
@@ -224,4 +225,5 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
 
