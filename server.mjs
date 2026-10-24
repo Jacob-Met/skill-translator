@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/annotation-bound":["web/annotation-bound.html","text/html; charset=utf-8"],
+  "/web/annotation-bound.css":["web/annotation-bound.css","text/css; charset=utf-8"],
+  "/web/annotation-bound.mjs":["web/annotation-bound.mjs","text/javascript; charset=utf-8"],
+  "/src/annotation-bound.mjs":["src/annotation-bound.mjs","text/javascript; charset=utf-8"],
   "/raw-affine-challenge":["web/raw-affine-challenge.html","text/html; charset=utf-8"],
   "/web/raw-affine-challenge.css":["web/raw-affine-challenge.css","text/css; charset=utf-8"],
   "/web/raw-affine-challenge.mjs":["web/raw-affine-challenge.mjs","text/javascript; charset=utf-8"],
