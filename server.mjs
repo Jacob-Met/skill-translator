@@ -5,6 +5,12 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/mark-inspector":["web/mark-inspector.html","text/html; charset=utf-8"],
+  "/web/mark-inspector.mjs":["web/mark-inspector.mjs","text/javascript; charset=utf-8"],
+  "/web/mark-inspector.css":["web/mark-inspector.css","text/css; charset=utf-8"],
+  "/src/mark-inspection.mjs":["src/mark-inspection.mjs","text/javascript; charset=utf-8"],
+  "/vendor/microverse/pixel-observations.mjs":["vendor/microverse/pixel-observations.mjs","text/javascript; charset=utf-8"],
+  "/vendor/microverse/source-pin.mjs":["vendor/microverse/source-pin.mjs","text/javascript; charset=utf-8"],
   "/challenge":["web/challenge.html","text/html; charset=utf-8"],
   "/web/challenge.html":["web/challenge.html","text/html; charset=utf-8"],
   "/web/challenge.css":["web/challenge.css","text/css; charset=utf-8"],
