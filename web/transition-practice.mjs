@@ -29,8 +29,10 @@ function author(){
 function render(){
  if(!account)return;const report=inspectTransitionPractice(account);$('author').hidden=true;$('practice').hidden=false;
  for(const stage of ['before','after']){const session=account[stage];$(stage+'-summary').textContent=session?`Raw round ${session.round} retained: ${session.attempts.length} placement(s), ${session.history.length} prior round(s). ${session.photoObservation?'Photo annotations retained; '+session.photoObservation.evidenceClass+'.':'Manual coordinate record.'}`:'No session retained';}
- $('declare-reference').disabled=!account.before||!account.after;
+ $('declare-reference').disabled=!account.before||!account.after||!!account.prediction;
+ for(const id of ['same-reference','reference-basis'])$(id).disabled=!!account.prediction;
  $('reference-status').textContent=account.learnerReference?'Retained learner reference: '+account.learnerReference.basis:'No learner common-reference declaration retained. Receiving either state resets it.';
+ if(account.prediction){$('endpoint-prediction').value=account.prediction.endpoint;$('change-prediction').value=account.prediction.change;$('reason').value=account.prediction.reason;}
  for(const id of ['endpoint-prediction','change-prediction','reason'])$(id).disabled=!!account.prediction;
  $('predict').disabled=!account.learnerReference||!!account.prediction;$('reveal').disabled=!account.prediction||account.revealed;
  $('prediction-record').textContent=account.prediction?`Retained prediction: endpoints ${account.prediction.endpoint}; change ${account.prediction.change}. ${account.prediction.reason}`:'No prediction committed. Computed observations are withheld.';
@@ -61,10 +63,10 @@ for(const stage of ['before','after']){
  $('open-'+stage).addEventListener('click',guard(()=>{const {demo,widthMm,heightMm}=transitionTask(comparison,stage);sessionStorage.setItem('skill-translator-practice-input/v1',JSON.stringify({demo,widthMm,heightMm}));window.open('/practice','_blank');}));
  $(stage+'-file').addEventListener('change',async()=>{const file=takeFile(stage+'-file');if(!file||!account)return;const op=begin();try{
   if(file.size>256*1024)throw Error('Practice session must fit the maintained 256 KiB limit');const input=JSON.parse(await file.text());if(!current(op))return;
-  const next=receiveTransitionPractice(account,stage,input);account=next;resetDrafts();render();status(`${stage==='before'?'Before':'After'} evidence received. Reconfirm the learner reference and make a new prediction.`);
+  const next=receiveTransitionPractice(account,stage,input);if(JSON.stringify(next)===JSON.stringify(account)){status('Same normalized practice evidence retained; committed prediction and findings are unchanged.');return;}account=next;resetDrafts();render();status(`${stage==='before'?'Before':'After'} evidence received. Reconfirm the learner reference and make a new prediction.`);
  }catch(error){if(current(op))status('Session refused: '+error.message);}});
 }
-$('learner-reference').addEventListener('input',()=>{invalidate();if(account){account=declareLearnerReference(account,null);$('endpoint-prediction').value='unknown';$('change-prediction').value='unknown';$('reason').value='';render();}});
+$('learner-reference').addEventListener('input',()=>{if(account?.prediction)return;invalidate();if(account){account=declareLearnerReference(account,null);$('endpoint-prediction').value='unknown';$('change-prediction').value='unknown';$('reason').value='';render();}});
 $('declare-reference').addEventListener('click',guard(()=>{const next=declareLearnerReference(account,{samePlaneAndCorners:$('same-reference').checked,basis:$('reference-basis').value});invalidate();account=next;render();status('Common learner reference retained as a supplied declaration.');}));
 for(const id of ['endpoint-prediction','change-prediction','reason'])$(id).addEventListener('input',invalidate);
 $('predict').addEventListener('click',guard(()=>{const next=predictTransition(account,{endpoint:$('endpoint-prediction').value,change:$('change-prediction').value,reason:$('reason').value});invalidate();account=next;render();status('Prediction committed. Reveal to compare the two geometric criteria.');}));

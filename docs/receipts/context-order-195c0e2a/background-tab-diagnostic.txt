@@ -1,0 +1,10 @@
+2026-10-24T16:13:12.733Z open desktop
+2026-10-24T16:13:12.842Z open narrow second
+2026-10-24T16:13:12.925Z fill background desktop
+2026-10-24T16:13:12.945Z read enabled true
+2026-10-24T16:13:12.945Z background click begin
+2026-10-24T16:13:27.955Z background failure Runtime.callFunctionOn timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed.
+2026-10-24T16:13:27.955Z bring desktop foreground
+2026-10-24T16:13:28.011Z foreground comparison complete
+2026-10-24T16:13:28.016Z foreground witness inspected
+{"status":"Showing the original retained account for this step.","selected":"step-c7a69949-4794-487b-8ab0-1ee4d023a4f5","frames":[{"id":"moment-86be6f77-258b-475b-8c54-b97dca0689cb","complete":true,"width":160},{"id":"moment-b504dcda-7744-4e51-883a-d473aab2e163","complete":true,"width":160}]}

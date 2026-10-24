@@ -55,14 +55,29 @@ export function importTransitionPractice(raw){
   const result={format:TRANSITION_FORMAT,comparison,criteria,before,after,learnerReference,prediction,revealed:raw.revealed};
   require(bytes(result)<=MAX_TRANSITION_BYTES,'Normalized transition account exceeds 4 MB');return result;
 }
+function practiceIdentity(session){
+ if(session===null)return 'null';
+ const copy=structuredClone(session),byId=(a,b)=>a.id.localeCompare(b.id);
+ for(const round of [copy,...copy.history]){
+  round.attempts.sort(byId);
+  round.detachedPhotoMarks?.sort();
+  round.photoObservation?.points.sort(byId);
+ }
+ return JSON.stringify(copy);
+}
 export function receiveTransitionPractice(raw,stage,session){
   const current=importTransitionPractice(raw);require(stage==='before'||stage==='after','Choose before or after practice');
   require(session!==null,'Choose a raw practice session');
-  return importTransitionPractice({...current,[stage]:session,learnerReference:null,prediction:null,revealed:false});
+  const admitted=sessionFor(current.comparison,stage,session);
+  if(practiceIdentity(admitted)===practiceIdentity(current[stage]))return current;
+  return importTransitionPractice({...current,[stage]:admitted,learnerReference:null,prediction:null,revealed:false});
 }
 export function declareLearnerReference(raw,reference){
   const current=importTransitionPractice(raw);
-  return importTransitionPractice({...current,learnerReference:reference,prediction:null,revealed:false});
+  const next=importTransitionPractice({...current,learnerReference:reference,prediction:null,revealed:false});
+  if(JSON.stringify(next.learnerReference)===JSON.stringify(current.learnerReference))return current;
+  require(!current.prediction,'This reference is committed; receive changed practice evidence before revising it');
+  return next;
 }
 export function predictTransition(raw,prediction){
   const current=importTransitionPractice(raw);require(current.prediction===null,'This prediction is retained; receive changed evidence to begin another comparison');

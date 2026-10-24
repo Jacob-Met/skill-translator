@@ -21,7 +21,7 @@ test('missing before evidence leaves change unknown even when the final mapped e
 test('feedback requires a committed prediction; revised evidence resets reference, prediction and reveal',()=>{
  const f=transitionFixture(),a=populated(f);assert.equal(inspectTransitionPractice(a).findings,null);assert.throws(()=>revealTransition(a),/Commit/);
  const locked=predictTransition(a,{endpoint:'satisfied',change:'unknown',reason:'I can see final positions but lack movement evidence'});assert.equal(inspectTransitionPractice(locked).findings,null);assert.throws(()=>predictTransition(locked,locked.prediction),/retained/);
- const next=receiveTransitionPractice(revealTransition(locked),'after',a.after);assert.equal(next.prediction,null);assert.equal(next.revealed,false);assert.equal(next.learnerReference,null);assert.throws(()=>predictTransition(next,locked.prediction),/common learner/);
+ const next=receiveTransitionPractice(revealTransition(locked),'after',populated(f,20,50).after);assert.equal(next.prediction,null);assert.equal(next.revealed,false);assert.equal(next.learnerReference,null);assert.throws(()=>predictTransition(next,locked.prediction),/common learner/);
 });
 test('matching raw source, rules and original dimensions are mandatory; labels never establish correspondence',()=>{
  const f=transitionFixture(),a=populated(f),copy=structuredClone(a);
@@ -50,4 +50,20 @@ test('criterion completeness, numerical bounds and complete-account capacity ref
  for(const n of [0,-1,NaN,51]){const criteria=structuredClone(f.criteria);criteria[0].toleranceMm=n;assert.throws(()=>createTransitionPractice(f.comparison,criteria),/positive/);}
  const a=populated(f);assert.throws(()=>receiveTransitionPractice(a,'after',{...a.after,padding:'x'.repeat(256*1024)}),/256 KiB/);
  assert.throws(()=>importTransitionPractice({...a,padding:'x'.repeat(4_000_000)}),/4 MB/);
+});
+
+test('same reference and normalized practice replay preserve the first committed prediction',()=>{
+ const a=revealed(populated(transitionFixture(),30,40));
+ assert.deepEqual(declareLearnerReference(a,{...a.learnerReference,basis:'  '+a.learnerReference.basis+'  '}),a);
+ assert.throws(()=>declareLearnerReference(a,null),/committed/);
+ assert.throws(()=>declareLearnerReference(a,{samePlaneAndCorners:true,basis:'Reworded after feedback'}),/committed/);
+ for(const stage of ['before','after']){
+  assert.deepEqual(receiveTransitionPractice(a,stage,{...a[stage],fabricatedResult:'pass'}),a);
+  const index=stage==='before'?0:1,mark=a[stage].attempts[0],f=transitionFixture();
+  const reordered=placePractice(f.tasks[index],160,90,a[stage],mark.id,mark);
+  assert.notDeepEqual(reordered.attempts,a[stage].attempts);
+  assert.deepEqual(receiveTransitionPractice(a,stage,reordered),a);
+ }
+ assert.throws(()=>predictTransition(a,{endpoint:'satisfied',change:'unsatisfied',reason:'Changed after viewing feedback'}),/retained/);
+ assert.equal(inspectTransitionPractice(a).findings.change,'unsatisfied');
 });
