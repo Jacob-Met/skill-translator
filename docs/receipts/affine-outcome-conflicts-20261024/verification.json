@@ -1,0 +1,71 @@
+{
+  "schema": "skill-translator.affine-outcome-conflicts-receiving/v1",
+  "issue": 88,
+  "status": "passed",
+  "sourceFiles": {
+    "src/affine-outcome-conflicts.mjs": "60b13059edef17b4b4238ac0c1dc2163899d5a7d8d3168ef57a1887d90503dbd",
+    "test/affine-outcome-conflicts.test.mjs": "bdac9e34c19b2dade6f92d2fa57424c57894ae7aedf361ecc71ab25336aaf420",
+    "tools/browser-affine-outcome-conflicts.mjs": "87bae7b641c3eada83f3cb1819de82919255473a6926a1166fd9c3ec28196686",
+    "web/affine-outcome-conflicts-worker.mjs": "4395e9a4e5d496400bb6517e32bbf2e47bf74ed26fe0e6d35fb2480a3adb5ecc",
+    "web/affine-outcome-conflicts.css": "d0c8e03feebc780efa792569ce94459bb459e4b671e1592a29e34327fee5806e",
+    "web/affine-outcome-conflicts.html": "32a614238c604effca06753a33508badb020d97e0ecbdff8080793f596705a2e",
+    "web/affine-outcome-conflicts.mjs": "5059d21aa0db7f7a5cac3c498830030e3fafca46f571303385c41f95bbbd46e5",
+    "server.mjs": "caab01953d0a7fd6a0052fd1b0bbe4f0f0f582bce1e51c8a0e0c1b08d9da0af5",
+    "web/raw-affine-challenge.html": "60bccf95cf4e9f62bdf2723a3548bdbc3c4786abd7d9b46b961a2988f587abd1"
+  },
+  "native": {
+    "focused": {
+      "command": "node test/affine-outcome-conflicts.test.mjs",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    "composed": {
+      "command": "npm test",
+      "tests": 353,
+      "passed": 353,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "independentReview": {
+    "reviewer": "hamon-f1c45f6f2aec-20261024/microverse",
+    "focusedPassed": 7,
+    "blockingFindings": 0,
+    "scope": "Core mathematics, source custody, UI and worker revisions; actual browser not executed by reviewer"
+  },
+  "browser": {
+    "status": "passed",
+    "actualPassed": 9,
+    "namespaceSandbox": true,
+    "seccompSandbox": true,
+    "consoleErrors": 0,
+    "offsiteRequests": 0,
+    "desktopScreenshot": "desktop.png",
+    "mobile390Screenshot": "mobile.png",
+    "visualReview": "Parent inspected actual desktop/390px captures: both minimal groups, per-member inspection, exact original reference pixels, geometry-only labeling and narrow controls readable; no blocker.",
+    "runtime": "Chrome/156.0.8078.47",
+    "receipt": "browser.json"
+  },
+  "priorDelivery": {
+    "issue": 81,
+    "pullRequest": 89,
+    "receivingBase": "09ae668bf2194d686a0da7c81a15bb37ab124583",
+    "nativePassed": 336,
+    "nativeSkipped": 0,
+    "browserPassed": 13,
+    "qualification": "Prior336/13 qualification on09ae; subsequent feature-width PR87 composed in actual merge; #88 full353test course includes current merged source.",
+    "mergeCommit": "5f7b2df2de4cf0ee5cb78afa1f2adbc63f11eae7"
+  },
+  "limitations": [
+    "Authored analytical fixtures only; no physical skill transfer or measurement-accuracy qualification.",
+    "All subsets share the supplied frozen source, training, domain, correspondences and bounds.",
+    "Inclusion-minimal groups and deletion checks are group-local; no automatic correction or removal.",
+    "Maximum six received outcomes, 63 nonempty subsets; raw and expanded accounts retain existing 2MB admission."
+  ],
+  "receivingBaseCommit": "5f7b2df2de4cf0ee5cb78afa1f2adbc63f11eae7",
+  "runtime": {
+    "node": "v22.23.4",
+    "platform": "Linux x64"
+  }
+}

@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/affine-outcome-conflicts":["web/affine-outcome-conflicts.html","text/html; charset=utf-8"],
+  "/src/affine-outcome-conflicts.mjs":["src/affine-outcome-conflicts.mjs","text/javascript; charset=utf-8"],
+  "/web/affine-outcome-conflicts-worker.mjs":["web/affine-outcome-conflicts-worker.mjs","text/javascript; charset=utf-8"],
+  "/web/affine-outcome-conflicts.css":["web/affine-outcome-conflicts.css","text/css; charset=utf-8"],
+  "/web/affine-outcome-conflicts.mjs":["web/affine-outcome-conflicts.mjs","text/javascript; charset=utf-8"],
   "/raw-affine-challenge":["web/raw-affine-challenge.html","text/html; charset=utf-8"],
   "/web/raw-affine-challenge.css":["web/raw-affine-challenge.css","text/css; charset=utf-8"],
   "/web/raw-affine-challenge.mjs":["web/raw-affine-challenge.mjs","text/javascript; charset=utf-8"],
