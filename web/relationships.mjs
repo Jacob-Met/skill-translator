@@ -1,6 +1,6 @@
 import {demonstration} from '/src/demo.mjs';
 import {createPractice,placePractice,evaluatePractice,retryPractice} from '/src/practice.mjs';
-import {createRelationshipReview,importRelationshipReview,reviewRounds} from '/src/task-relationships.mjs';
+import {createRelationshipReview,importRelationshipReview,reviewRounds,applyRelationshipSession} from '/src/task-relationships.mjs';
 const $=id=>document.getElementById(id);
 let state=null,epoch=0,serial=0;
 const status=text=>{$('status').textContent=text;};
@@ -9,7 +9,9 @@ function options(element,items,selected){element.replaceChildren();for(const [va
 function accept(next){state=next;options($('from'),state.source.landmarks.map(m=>[m.id,m.label]));options($('to'),state.source.landmarks.map(m=>[m.id,m.label]));$('to').selectedIndex=Math.min(1,state.source.landmarks.length-1);options($('round'),[...state.session.history,{round:state.session.round}].map(r=>[String(r.round),'Round '+r.round]),String(state.session.round));render();}
 function render(){
  $('workspace').hidden=!state;if(!state)return;
- $('task-title').textContent=state.source.title;$('provenance').textContent=state.source.provenance;
+ const targetSize=state.session.reference.target;
+ $('task-title').textContent=(state.source.title||'Imported task')+' · '+targetSize.widthMm+' × '+targetSize.heightMm+' mm';
+ $('apply-session').disabled=state.rules.length===0;$('provenance').textContent=state.source.provenance;
  $('unknowns').textContent='Source unknowns: '+(state.source.unknowns||[]).join(' · ');
  const rounds=reviewRounds(state),round=rounds.find(r=>String(r.round)===$('round').value)||rounds.at(-1);
  $('summary').textContent='Round '+round.round+': point placement '+(round.practice.passed?'within all declared tolerances':round.practice.complete?'outside declared tolerances':'incomplete')+'. Authored relationships: '+(!round.results.length?'none declared':round.passed?'all within tolerance':round.complete?'one or more outside tolerance':'missing observations')+'.';
@@ -34,3 +36,13 @@ $('example').onclick=()=>{epoch++;let session=createPractice(demonstration,240,1
 $('rule-form').onsubmit=event=>{event.preventDefault();epoch++;try{let id;do{id='relationship-'+(++serial);}while(state.rules.some(r=>r.id===id));const rule={id,label:$('label').value,from:$('from').value,to:$('to').value,kind:$('kind').value,toleranceMm:Number($('tolerance').value)};state=createRelationshipReview(state.source,state.session,[...state.rules,rule]);render();status('Relationship declared. Original placements are unchanged.');}catch(error){status(error.message);}};
 $('round').onchange=render;$('inspect').onchange=()=>{const r=reviewRounds(state).find(r=>String(r.round)===$('round').value);draw(r);};
 $('export').onclick=()=>{try{const accepted=importRelationshipReview(state),blob=new Blob([JSON.stringify(accepted,null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='task-relationship-review.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('Review exported with source, original rounds and declared criteria.');}catch(error){status(error.message);}};
+
+$('next-session-file').onchange=()=>{epoch++;};
+$('apply-session').onclick=async()=>{
+ const ticket=++epoch,previous=state,file=$('next-session-file').files[0];
+ try{
+  const session=await read(file,1048576);if(ticket!==epoch)return;
+  const next=applyRelationshipSession(previous,session);accept(next);
+  status('New session accepted with the same declared relationships. References use its displayed target size. Only the new session rounds are retained here; the prior session was not merged.');
+ }catch(error){if(ticket===epoch)status(error.message+' Current review preserved.');}
+};
