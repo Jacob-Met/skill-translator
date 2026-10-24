@@ -1,0 +1,23 @@
+✔ equal passing totals expose a recovered length and newly failed offset (18.799693ms)
+✔ missing observations never appear as tolerance improvement (6.0714ms)
+✔ collapsed arms, missing arms and reverse comparison retain actual statuses (4.516147ms)
+✔ invalid or same rounds and changed source refuse; imported claims do not control results (8.194189ms)
+✔ all 21 rounds and 12 conditions remain inspectable; empty criteria remain undeclared (46.420299ms)
+✔ unchanged status retains changed values instead of claiming unchanged performance (1.37027ms)
+✔ mixed angular and linear criteria retain their own units and failures (0.99022ms)
+✔ all selected conditions can pass while absolute point placement fails (0.449333ms)
+✔ no condition is undeclared, missing conditions unavailable, and known failure is preserved beside missing (1.125068ms)
+✔ collapsed arms remain unresolved in the mixed profile (0.875761ms)
+✔ every raw round survives and selected round controls only the view (1.427354ms)
+✔ source mismatch, unknown kinds, duplicate identities, missing basis and excessive sets refuse (0.780811ms)
+✔ typed criteria reject silent angular and linear unit substitution (0.502281ms)
+✔ the maximum declared set retains every named condition without result truncation (1.422237ms)
+✔ sparse condition declarations refuse rather than becoming vacuous success (0.687334ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.181795

@@ -17,3 +17,36 @@ Criteria can be declared after seeing outcomes. Their supplied bases remain auth
 ## Verification
 
 Run `node --test --test-isolation=none test/*.test.mjs` for native checks and `node tools/browser-condition-set.mjs` for the receiving course. The browser script uses the established `PUPPETEER_PATH`, `CHROME_BINARY` and `QA_OUTPUT` variables. It creates six actual practice rounds, follows the maintained producer link, authors all three criterion families, checks mixed and unavailable outcomes, saves/reopens raw originals, exercises invalid and delayed imports, checks narrow keyboard inspection and receives all twelve conditions without truncation. Exact qualification is recorded in `docs/receipts/condition-set-677009-20261024/verification.json`.
+
+
+## Compare retained rounds
+
+After inspecting the set, choose a different baseline in **Compare retained rounds
+under these conditions** and press **Compare with selected round**. Both rounds
+use the exact same declared conditions, units, tolerances and authored bases.
+Each condition displays its original reference, retained value, difference,
+allowance and status in both rounds. The original complete-task point score and
+placement denominator remain separate for each round.
+
+Equal totals can conceal tradeoffs. In an authored right-angle example, the first
+round has a 21 mm arm against a 30 mm reference while preserving the third mark's
+30 mm guide offset. The second restores the arm length but moves that third mark
+to a 21 mm offset. Both rounds have two of three conditions within tolerance;
+the comparison exposes the length entering tolerance and the offset leaving it.
+
+An incomplete or numerically unresolved condition becoming evaluable is labelled
+as an availability change, even when the resulting value is within tolerance.
+Losing a mark never counts as entering tolerance. The same status does not imply
+identical values; both complete typed results remain visible. Comparisons can run
+in either selected direction and do not infer chronology from UI selection.
+
+Changing the baseline clears the old comparison. Editing the set or selected
+round hides all stale findings until inspection. Saving retains the existing raw
+condition-set format with all original rounds; the comparison is a recomputed
+view and does not add authoritative verdicts to that file. After reopening,
+select the baseline again. Declared criteria may reflect knowledge of outcomes,
+and these descriptive changes do not establish physical accuracy or learning.
+
+`node --test test/condition-changes.test.mjs` exercises equal-total tradeoffs,
+missing and collapsed-arm transitions, reverse comparisons, source mismatch,
+replay and all 21 retained rounds with twelve declarations.

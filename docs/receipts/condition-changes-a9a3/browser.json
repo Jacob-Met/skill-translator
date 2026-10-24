@@ -1,0 +1,32 @@
+{
+  "passed": 6,
+  "checks": [
+    "equal-total tradeoffs",
+    "availability transitions",
+    "real download parity",
+    "390px keyboard reopening",
+    "selected-round invalidation",
+    "unadded-draft refusal"
+  ],
+  "browserVersion": "Chrome/156.0.8078.47",
+  "sourceHashes": {
+    "/condition-set": "1448b944c195ad51a4b3313aac976c83741aae64932fa085b7aacccf41da95c1",
+    "/web/assistance-review.css": "2ea9b316e09f699c09ca772f69a94ec459b80a77964e0e7e37cc8cbaa700bc68",
+    "/web/condition-set.css": "5e8e03e8a934dc25ae678dbeaf792cf8a2531d1389f00b45dc2f41e73b3f2744",
+    "/web/condition-set.mjs": "f2ba8cd4014913451d27d92a69af42e7725da9b013409d31287f64666d34dcdb",
+    "/src/condition-changes.mjs": "756fd539b2639e44ffb8f2250909c81386a64a56cd0450b04832ffc9ef4923ed",
+    "/src/practice.mjs": "283909901f4d436affc4382373e455fbf3951d221a1d4918d261453e9c6c3bd6",
+    "/src/condition-set.mjs": "56ec93cf13bd70ab18c229c919cc2ece04f139cda56ecb661e1a73e38f91b076",
+    "/src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+    "/src/learner-observation.mjs": "8e7b0bf128ca22ef79e33e89d3f64a2906b9340911d5b41a8b5cebead5b75431",
+    "/src/task-relationships.mjs": "e1c0a8568f04302e782c50cb17ac85a661c374847ec45d70738d84696259a563",
+    "/src/guide-alignment.mjs": "bd0dd17a011e383c4e897b74f01f5e6e3a5766dc40d5867010a769dc9f59d920",
+    "/src/corner-angle.mjs": "12f1caf52b0cb8b5d01cc8b2198b1700aa9116614d8f1f89758714b41c76e9e5",
+    "/src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+    "/src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+    "/src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf"
+  },
+  "inputSha256": "31259a7df79109361a4d57c9e896319944700d6eddd176e077298717817eb868",
+  "downloadSha256": "31259a7df79109361a4d57c9e896319944700d6eddd176e077298717817eb868",
+  "errors": []
+}

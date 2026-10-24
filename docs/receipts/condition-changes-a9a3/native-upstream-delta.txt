@@ -1,0 +1,11 @@
+✔ linked exact selection, complete named matrix, conditional bounds and unchanged source sessions (680.124166ms)
+✔ all selected marks mandatory; detached marks, wrong reference and source tamper refused (533.841269ms)
+✔ finite returned calibration alternatives are whole-photo, bounded and source-custodied (659.696323ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2060.955645

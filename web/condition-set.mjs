@@ -1,3 +1,4 @@
+import {inspectConditionChanges} from '/src/condition-changes.mjs';
 import {importPractice} from '/src/practice.mjs';
 import {createConditionSet,importConditionSet,inspectConditionSet} from '/src/condition-set.mjs';
 const $=id=>document.getElementById(id);let context=null,conditions=[],accepted=null,finding=null,epoch=0,formDraft=false;
@@ -16,7 +17,7 @@ $('reopen').addEventListener('change',async()=>{const token=++epoch;try{const ne
 $('condition').addEventListener('submit',event=>{event.preventDefault();try{if(!context)throw Error('Load original practice first');let index=1;while(conditions.some(c=>c.id==='condition-'+index))index++;const k=$('kind').value,angular=k==='corner',guide=k==='guide',rule={label:$('label').value,basis:$('basis').value,from:$('from').value,to:$('to').value};if(angular){rule.vertex=$('third').value;rule.toleranceDegrees=Number($('tolerance').value);}else{rule.toleranceMm=Number($('tolerance').value);if(guide)rule.point=$('third').value;else rule.kind=k;}const candidate=[...conditions,{id:'condition-'+index,kind:angular?'corner':guide?'guide':'pair',rule}],next=createConditionSet(context.source,context.session,candidate,Number($('round').value));conditions=next.conditions;resetForm();dirty();declarations();$('error').textContent='';}catch(e){$('error').textContent=e.message;}});
 $('inspect').addEventListener('click',()=>{epoch++;try{if(formDraft)throw Error('Add or discard the unadded condition draft before inspecting the declared set');accepted=createConditionSet(context.source,context.session,conditions,Number($('round').value));render();$('error').textContent='';$('status').textContent='Every declared condition inspected against the same retained round.';}catch(e){$('error').textContent=e.message;}});
 function values(c){const r=c.result,angular=c.kind==='corner',unit=angular?'°':' mm';const fmt=n=>n==null?'Unavailable':n.toFixed(4)+unit;return [fmt(c.kind==='pair'?r.expectedMm:angular?r.reference?.degrees:r.reference?.offsetMm),fmt(c.kind==='pair'?r.observedMm:angular?r.observed?.degrees:r.observed?.offsetMm),`${fmt(angular?r.differenceDegrees:r.differenceMm)} / ±${fmt(angular?c.rule.toleranceDegrees:c.rule.toleranceMm)}`];}
-function render(){finding=inspectConditionSet(accepted);const p=finding.practice;$('point-score').textContent=`Original complete-task point score: ${!p.complete?'incomplete':p.passed?'within every original tolerance':'outside one or more original tolerances'}. ${p.placed}/${p.total} marks retained.`;$('set-score').textContent=`Declared set: ${finding.status}.`;$('availability').textContent=`${finding.counts.within} within; ${finding.counts.outside} outside; ${finding.counts.incomplete} incomplete; ${finding.counts.unresolved} unresolved. ${finding.complete?'Every declared condition is evaluable.':'The set is empty or has unavailable conditions.'}`;$('findings').replaceChildren();for(const c of finding.conditions){const tr=make('tr',undefined,$('findings'));for(const value of [c.rule.label,...values(c),c.result.status])make('td',value,tr);}options($('selected'),finding.conditions.map(c=>[c.id,c.rule.label]),finding.conditions[0]?.id);witness();$('results').hidden=false;$('save').disabled=false;}
+function render(){finding=inspectConditionSet(accepted);const p=finding.practice;$('point-score').textContent=`Original complete-task point score: ${!p.complete?'incomplete':p.passed?'within every original tolerance':'outside one or more original tolerances'}. ${p.placed}/${p.total} marks retained.`;$('set-score').textContent=`Declared set: ${finding.status}.`;$('availability').textContent=`${finding.counts.within} within; ${finding.counts.outside} outside; ${finding.counts.incomplete} incomplete; ${finding.counts.unresolved} unresolved. ${finding.complete?'Every declared condition is evaluable.':'The set is empty or has unavailable conditions.'}`;$('findings').replaceChildren();for(const c of finding.conditions){const tr=make('tr',undefined,$('findings'));for(const value of [c.rule.label,...values(c),c.result.status])make('td',value,tr);}options($('selected'),finding.conditions.map(c=>[c.id,c.rule.label]),finding.conditions[0]?.id);witness();$('results').hidden=false;$('save').disabled=false;renderComparisonSetup();}
 const point=p=>p?`${p.xMm.toFixed(4)} across / ${p.yMm.toFixed(4)} down`:'Missing';
 function svg(parent,tag,attrs){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);parent.append(e);return e;}
 function witness(){const c=finding.conditions.find(c=>c.id===$('selected').value);$('coordinates').replaceChildren();$('plot').replaceChildren();$('witness-title').textContent=c?.rule.label??'No condition declared';$('witness-basis').textContent=c?'Basis: '+c.rule.basis:'';if(!c){$('witness').textContent='Declare a condition before claiming a combined result.';return;}const r=c.result;$('witness').textContent=c.kind==='corner'?`Directed reference and retained angle use the shorter circular difference. A collapsed arm is unresolved. Numerical arm guard ${r.lengthGuard} mm; comparison guard ${r.angleGuardDegrees} degrees.`:c.kind==='guide'?`Unbounded directed-line offset. ${r.observed?.resolved?'Retained projection '+(r.observed.projectionFraction*100).toFixed(3)+'% from the first anchor toward the second; '+(r.observed.projectedBetween?'between anchors.':'beyond the anchor segment.'):'Retained projection unavailable.'} Numerical guard ${r.guardMm} mm.`:'Pair distance or directed separation is evaluated in original millimetres.';
@@ -27,3 +28,40 @@ function witness(){const c=finding.conditions.find(c=>c.id===$('selected').value
 }
 $('selected').addEventListener('change',witness);
 $('save').addEventListener('click',()=>{if(!accepted||$('save').disabled)return;const url=URL.createObjectURL(new Blob([JSON.stringify(importConditionSet(accepted))],{type:'application/json'})),a=make('a');a.href=url;a.download='skill-condition-set.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+
+
+// A comparison is a derived view over the same raw retained condition set.
+const comparison=make('section',undefined,$('results'));
+comparison.id='condition-comparison';
+make('h2','Compare retained rounds under these conditions',comparison);
+make('p','Compare the same declared criteria without treating a count as a learning score. Missing or unresolved evidence remains distinct from a tolerance change. Criteria may have been declared after viewing the rounds.',comparison);
+const baselineLabel=make('label','Compare from round ',comparison),baseline=make('select',undefined,baselineLabel);
+baseline.id='comparison-round';
+const compareButton=make('button','Compare with selected round',comparison);compareButton.id='compare-rounds';compareButton.type='button';
+const comparisonStatus=make('p','',comparison);comparisonStatus.id='comparison-status';comparisonStatus.setAttribute('aria-live','polite');
+const comparisonResults=make('div',undefined,comparison);comparisonResults.id='comparison-results';
+function renderComparisonSetup(){
+ comparisonResults.replaceChildren();
+ const rounds=Array.from({length:accepted.session.round},(_,i)=>i+1).filter(r=>r!==accepted.selectedRound);
+ options(baseline,rounds.map(r=>[r,`Round ${r}`]),rounds.at(-1));
+ baseline.disabled=!rounds.length;compareButton.disabled=!rounds.length;
+ comparisonStatus.textContent=rounds.length?`Choose a baseline to compare with retained round ${accepted.selectedRound}.`:'At least two retained rounds are needed for a comparison.';
+}
+baseline.addEventListener('change',()=>{comparisonResults.replaceChildren();comparisonStatus.textContent='Baseline changed. Compare again to inspect this pair.';});
+const transitionLabels={'unchanged':'Same status','entered-tolerance':'Entered tolerance','left-tolerance':'Left tolerance','became-evaluable':'Became evaluable','became-unavailable':'Became unavailable','availability-changed':'Unavailable status changed'};
+compareButton.addEventListener('click',()=>{
+ try{
+  const f=inspectConditionChanges(accepted,Number(baseline.value));comparisonResults.replaceChildren();
+  comparisonStatus.textContent=`Round ${f.fromRound} → round ${f.toRound}: ${f.counts['entered-tolerance']} entered tolerance; ${f.counts['left-tolerance']} left tolerance; ${f.counts['became-evaluable']} became evaluable; ${f.counts['became-unavailable']} became unavailable; ${f.counts['availability-changed']} changed unavailable status; ${f.counts.unchanged} kept the same status.`;
+  for(const [name,review]of [[`Round ${f.fromRound}`,f.before],[`Round ${f.toRound}`,f.after]])make('p',`${name}: declared set ${review.status}; ${review.counts.within}/${review.conditions.length} declared conditions within. Original point score ${!review.practice.complete?'incomplete':review.practice.passed?'within':'outside'}; ${review.practice.placed}/${review.practice.total} marks retained.`,comparisonResults);
+  if(!f.conditions.length)make('p','No conditions declared. Neither round has a passing condition set.',comparisonResults);
+  for(const c of f.conditions){
+   const card=make('article',undefined,comparisonResults);card.dataset.conditionId=c.id;
+   make('h3',c.rule.label+' · '+transitionLabels[c.transition],card);make('p','Basis: '+c.rule.basis,card);
+   for(const [round,result]of [[f.fromRound,c.before],[f.toRound,c.after]]){
+    const formatted=values({...c,result});make('p',`Round ${round}: ${result.status}. Reference ${formatted[0]}; retained ${formatted[1]}; difference / allowed ${formatted[2]}.`,card);
+   }
+  }
+  $('error').textContent='';
+ }catch(e){comparisonResults.replaceChildren();comparisonStatus.textContent='Comparison unavailable.';$('error').textContent=e.message;}
+});
