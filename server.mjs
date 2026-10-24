@@ -5,6 +5,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/layout-feedback.mjs":["src/layout-feedback.mjs","text/javascript; charset=utf-8"],
+  "/web/layout-feedback.mjs":["web/layout-feedback.mjs","text/javascript; charset=utf-8"],
   "/decision-practice":["web/decision-practice.html","text/html; charset=utf-8"],
   "/web/decision-practice.mjs":["web/decision-practice.mjs","text/javascript; charset=utf-8"],
   "/web/decision-practice.css":["web/decision-practice.css","text/css; charset=utf-8"],
