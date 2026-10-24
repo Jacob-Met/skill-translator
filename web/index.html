@@ -89,7 +89,32 @@
       <div class="hypothesis-results"><label for="alternateRule">COMPARE AGAINST AN ALTERNATIVE</label><select id="alternateRule"></select><p id="alternativeOutcome" aria-live="polite"></p><p id="variationIdea"></p></div>
     </div>
   </section>
-  <section class="limits"><div><p class="eyebrow">03 / WHAT THE EVIDENCE CANNOT SAY</p><h2>Unmeasured stays unmeasured.</h2></div><ul id="unknowns"></ul></section>
+  <section id="evidenceLab" class="evidence-lab" aria-labelledby="evidenceHeading">
+    <div class="evidence-heading"><div><p class="eyebrow">03 / CHALLENGE THE RELATIONSHIP</p><h2 id="evidenceHeading">Let another demonstration test the rule.</h2></div><p>Add a mark observed on a differently sized sheet. The five candidate rules stay anchored to the original annotation; each new observation can expose a disagreement.</p></div>
+    <p id="evidenceSummary" class="evidence-summary" aria-live="polite"></p>
+    <p id="evidenceCounts" class="input-note"></p>
+    <div class="evidence-workspace">
+      <form id="observationForm" class="observation-form">
+        <h3>Add an observation for the selected mark</h3>
+        <div class="author-grid">
+          <label class="author-wide" for="obsLabel">SOURCE LABEL<input id="obsLabel" type="text" maxlength="160" placeholder="Sheet B · overhead frame 120" required></label>
+          <label class="author-wide" for="obsClass">EVIDENCE TYPE<select id="obsClass"><option value="reported-measurement">Reported measurement</option><option value="authored-example">Authored example</option></select></label>
+          <label for="obsWidth">OBSERVED SHEET WIDTH · MM<input id="obsWidth" type="number" value="320" min="1" max="10000" step="any" required></label>
+          <label for="obsHeight">OBSERVED SHEET HEIGHT · MM<input id="obsHeight" type="number" value="190" min="1" max="10000" step="any" required></label>
+          <label for="obsX">MARK X FROM LEFT · MM<input id="obsX" type="number" min="0" max="10000" step="any" placeholder="Observed x" required></label>
+          <label for="obsY">MARK Y FROM TOP · MM<input id="obsY" type="number" min="0" max="10000" step="any" placeholder="Observed y" required></label>
+          <label class="author-wide" for="obsUncertainty">MEASUREMENT UNCERTAINTY RADIUS · MM<input id="obsUncertainty" type="number" min="0" max="1000" step="any" value="2" required></label>
+        </div>
+        <p class="input-note">Use physical sheet coordinates. This radius describes the added measurement, separately from practice tolerance. Predictions condition on the original calibration.</p>
+        <div class="author-actions"><button class="primary" type="submit">Test against all five rules</button><button id="useTargetSize" type="button">Use target dimensions</button></div>
+      </form>
+      <div class="observation-view"><svg id="evidenceSvg" viewBox="0 0 680 330" role="img" aria-label="Observed mark and measurement radius compared with numbered candidate predictions"></svg><p id="observationView" class="undergraph"></p><div class="experiment-proposal"><label for="planUncertainty">NEXT OBSERVATION UNCERTAINTY · MM<input id="planUncertainty" type="number" min="0" max="1000" step="any" value="2"></label><p id="evidenceProposal" aria-live="polite"></p><p class="input-note">Compares a bounded set of sheet sizes and keeps every compatible rule. This is a geometric experiment proposal.</p></div></div>
+    </div>
+    <div id="candidateCards" class="candidate-cards" aria-label="Candidate rule evidence"></div>
+    <div id="observationTable" class="observation-table" hidden><table><caption>Observations for the selected source mark · choose a source to inspect it</caption><thead><tr><th scope="col">Source</th><th scope="col">Sheet</th><th scope="col">Mark x / y</th><th scope="col">Uncertainty</th><th scope="col">Action</th></tr></thead><tbody id="observationRows"></tbody></table></div>
+    <div class="evidence-files"><button id="exportObservations" type="button">Export observations</button><label for="observationFile">Reopen observations for this source<input id="observationFile" type="file" accept=".json,application/json"></label><p id="evidenceStatus" role="status">Evidence stays in this browser session until you export it.</p></div>
+  </section>
+  <section class="limits"><div><p class="eyebrow">04 / WHAT THE EVIDENCE CANNOT SAY</p><h2>Unmeasured stays unmeasured.</h2></div><ul id="unknowns"></ul></section>
   <footer><span>SKILL TRANSLATOR · TASK SPACE / LOCAL GEOMETRY</span><span>Prototype · Adapted marks are proposed, not instructions for physical safety or expert certification.</span></footer>
 </main>
 </body>

@@ -2,6 +2,8 @@ import {derive,adapt,toDisplay,fromDisplay,fromImage,evaluate} from "/src/geomet
 import {appendAnnotation} from "/src/authoring.mjs";
 import {demonstration} from "/src/demo.mjs";
 import {compareInterpretations,proposeVariation} from "/src/hypotheses.mjs";
+import {createObservation,analyzeEvidence,proposeEvidenceVariation,
+  exportEvidence,importEvidence} from "/src/evidence.mjs";
 
 const $=id=>document.getElementById(id);
 const ns="http://www.w3.org/2000/svg";
@@ -15,6 +17,9 @@ const mm=x=>Number(x).toFixed(1)+" mm";
 const rounded=x=>Number(x).toFixed(3);
 let demo=demonstration,derived=derive(demo),target,selected=0,attempt=null,verdict=null;
 let alternateChoice="fraction";
+let observations=[],viewObservationId=null;
+const ruleNames={fraction:"Proportional position",left:"Fixed left clearance",
+  right:"Fixed right clearance",top:"Fixed top clearance",bottom:"Fixed bottom clearance"};
 let box={x:80,y:50,width:560,height:320},dragging=false;
 
 function error(message){$("error").textContent=message;$("error").hidden=!message;}
@@ -192,7 +197,110 @@ function feedback(){
     ". Physical displacement: "+mm(verdict.dxMm)+" across / "+
     mm(verdict.dyMm)+" down.";
 }
-function paint(){markButtons();sourceDrawing();updateAlternatives();targetDrawing();updateInfo();feedback();}
+function evidenceDrawing(result){
+  const s=$("evidenceSvg");s.replaceChildren();
+  const observed=result.observations.find(o=>o.id===viewObservationId)||result.observations.at(-1);
+  if(!observed){
+    svgEl(s,"text",{x:26,y:72,class:"svg-label"},"ADD AN OBSERVATION TO COMPARE ITS MARK WITH FIVE RULES");
+    $("observationView").textContent="Observation coordinates start at the physical top-left of the sheet.";
+    return;
+  }
+  viewObservationId=observed.id;
+  const scale=Math.min(560/(observed.widthMm+2*observed.uncertaintyMm),
+    230/(observed.heightMm+2*observed.uncertaintyMm));
+  const w=observed.widthMm*scale,h=observed.heightMm*scale;
+  const b={x:(680-w)/2,y:(330-h)/2,width:w,height:h};
+  const p=point=>({x:b.x+point.xMm*scale,y:b.y+point.yMm*scale});
+  svgEl(s,"rect",{x:b.x,y:b.y,width:w,height:h,class:"sheet-target"});
+  const measured=p(observed);
+  svgEl(s,"circle",{cx:measured.x,cy:measured.y,r:observed.uncertaintyMm*scale,
+    class:"measurement-bound"});
+  const groups=[];
+  result.candidates.forEach((candidate,i)=>{
+    const residual=candidate.residuals.find(r=>r.observationId===observed.id);
+    if(!residual?.predicted)return;
+    const predicted=residual.predicted;
+    let group=groups.find(g=>Math.hypot(g.xMm-predicted.xMm,g.yMm-predicted.yMm)<1e-7);
+    if(!group){group={...predicted,numbers:[]};groups.push(group);}
+    group.numbers.push(i+1);
+  });
+  for(const group of groups){
+    const q=p(group);
+    svgEl(s,"circle",{cx:q.x,cy:q.y,r:6,class:"prediction-point"});
+    svgEl(s,"text",{x:q.x+10,y:q.y-12,class:"svg-target-label"},group.numbers.join(", "));
+  }
+  svgEl(s,"line",{x1:measured.x-12,y1:measured.y,x2:measured.x+12,y2:measured.y,class:"measurement-cross"});
+  svgEl(s,"line",{x1:measured.x,y1:measured.y-12,x2:measured.x,y2:measured.y+12,class:"measurement-cross"});
+  svgEl(s,"text",{x:20,y:25,class:"svg-label"},"OBSERVED MARK + DECLARED UNCERTAINTY / RULE PREDICTIONS 1–5");
+  svgEl(s,"text",{x:340,y:316,class:"dim-label"},mm(observed.widthMm)+" × "+mm(observed.heightMm)+" · x right / y down");
+  $("observationView").textContent=observed.label+" · "+
+    (observed.evidenceClass==="authored-example"?"authored example":"reported measurement")+
+    ". Cross: entered location. Circle: ±"+mm(observed.uncertaintyMm)+" measurement radius. Numbered points use the rules below.";
+}
+function updateEvidence(){
+  const result=analyzeEvidence(demo,chosen().id,observations);
+  const summary=$("evidenceSummary");summary.dataset.status=result.status;
+  const count=result.compatibleRules.length;
+  summary.textContent=result.status==="no-evidence"?"No additional observations for this mark. All five rules remain untested.":
+    result.status==="none-compatible"?"All five rules are contradicted. Recheck the evidence or consider a different relationship; none is selected automatically.":
+    result.status==="single-compatible"?ruleNames[result.compatibleRules[0]]+" is the only compatible candidate in this five-rule set. It is still a hypothesis to challenge.":
+    count+" rules remain compatible. The current observations do not resolve their differences.";
+  $("evidenceCounts").textContent=result.authoredCount+" authored examples · "+result.reportedCount+
+    " reported measurements for “"+chosen().label+"”.";
+  const cards=$("candidateCards");cards.replaceChildren();
+  result.candidates.forEach((candidate,i)=>{
+    const card=document.createElement("article");card.className="candidate-card "+candidate.status;
+    card.dataset.rule=candidate.rule;card.dataset.status=candidate.status;
+    const title=document.createElement("h4");title.textContent=(i+1)+" / "+ruleNames[candidate.rule];
+    const status=document.createElement("strong");status.textContent=candidate.status.toUpperCase();
+    const detail=document.createElement("p");
+    detail.textContent=!candidate.residuals.length?"Waiting for an additional demonstration.":
+      candidate.maxErrorMm===null?"Cannot fit at least one observed sheet.":"Largest positional residual: "+mm(candidate.maxErrorMm)+".";
+    const failures=document.createElement("p");failures.className="candidate-detail";
+    failures.textContent=candidate.contradictions.length?"Contradicted by: "+candidate.contradictions
+      .map(id=>result.observations.find(o=>o.id===id).label).join("; "):
+      candidate.residuals.length?"Every entered mark is within its declared measurement radius.":"";
+    card.append(title,status,detail,failures);cards.append(card);
+  });
+  const list=$("observationRows");list.replaceChildren();
+  for(const observation of result.observations){
+    const row=document.createElement("tr");
+    const source=document.createElement("td"),view=document.createElement("button");
+    view.type="button";view.className="observation-link";view.textContent=observation.label;
+    view.addEventListener("click",()=>{viewObservationId=observation.id;evidenceDrawing(result);});source.append(view);
+    const type=document.createElement("small");type.textContent=observation.evidenceClass==="authored-example"?"Authored example":"Reported measurement";
+    source.append(type);row.append(source);
+    for(const text of [mm(observation.widthMm)+" × "+mm(observation.heightMm),
+      mm(observation.xMm)+" / "+mm(observation.yMm),"±"+mm(observation.uncertaintyMm)]){
+      const td=document.createElement("td");td.textContent=text;row.append(td);
+    }
+    const action=document.createElement("td"),remove=document.createElement("button");
+    remove.type="button";remove.textContent="Remove";remove.setAttribute("aria-label","Remove "+observation.label);
+    remove.addEventListener("click",()=>{observations=observations.filter(o=>o.id!==observation.id);updateEvidence();});
+    action.append(remove);row.append(action);list.append(row);
+  }
+  $("observationTable").hidden=!result.observations.length;
+  evidenceDrawing(result);updateEvidenceProposal();
+}
+function updateEvidenceProposal(){
+  const el=$("evidenceProposal");
+  try{
+    const result=analyzeEvidence(demo,chosen().id,observations);
+    if(!$("planUncertainty").value.trim())throw Error("Enter the next observation's measurement uncertainty.");
+    const uncertainty=Number($("planUncertainty").value);
+    const proposal=proposeEvidenceVariation(demo,chosen().id,observations,uncertainty);
+    if(!proposal){
+      el.textContent=!result.compatibleRules.length?"Review contradictory observations before proposing another comparison.":
+        result.compatibleRules.length===1?"Only one rule remains compatible. Challenge it on an unfamiliar sheet; compatibility does not establish expert intention.":
+        "No tested sheet size can accommodate all remaining rules.";return;
+    }
+    el.textContent=proposal.separablePairs?"Try observing a "+mm(proposal.widthMm)+" × "+mm(proposal.heightMm)+
+      " sheet. At ±"+mm(uncertainty)+" measurement radius, "+proposal.separablePairs+" of "+proposal.totalPairs+
+      " remaining rule pairs predict non-overlapping positions. Enter the observed result above to challenge them.":
+      "None of the tested sheet sizes separates the remaining rules at this measurement uncertainty.";
+  }catch(err){el.textContent=err.message;}
+}
+function paint(){markButtons();sourceDrawing();updateAlternatives();targetDrawing();updateInfo();feedback();updateEvidence();}
 function recompute(){
   try{
     const next=adapt(derived,Number($("widthMm").value),Number($("heightMm").value));
@@ -294,10 +402,12 @@ $("demoFile").addEventListener("change",async e=>{
     if(file.size>256*1024)throw Error("Annotated demonstration must be ≤256 KB");
     const parsed=JSON.parse(await file.text());
     const next=derive(parsed);
+    analyzeEvidence(parsed,next.landmarks[0].id,[]);
     const nextTarget=adapt(next,Number($("widthMm").value),Number($("heightMm").value));
     demo=parsed;derived=next;target=nextTarget;selected=0;
+    observations=[];viewObservationId=null;
     $("sourceX").value="";$("sourceY").value="";
-    $("annotationStatus").textContent="Imported annotations. Click inside the source page to author another mark.";
+    $("annotationStatus").textContent="Imported annotations. Prior observation comparisons cleared because their source changed.";
     resetAlternativeChoice();resetAttempt();error("");paint();
   }catch(err){error("Source rejected; previous demonstration preserved. "+err.message);}
 });
@@ -318,11 +428,48 @@ $("export").addEventListener("click",()=>{
     learnerAttempt:attempt,
     evaluation:verdict,
     competingInterpretation:hypothesis(),
+    observationEvidence:exportEvidence(demo,observations),
     limits:Array.isArray(demo.unknowns)?demo.unknowns:[]
   };
   const url=URL.createObjectURL(new Blob([JSON.stringify(receipt,null,2)],
     {type:"application/json"}));
   const link=document.createElement("a");link.href=url;link.download="skill-task-space-evidence.json";
   link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+});
+$("observationForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  try{
+    if(observations.length>=60)throw Error("Keep at most 60 observations; export and remove older trials first.");
+    let n=1;while(observations.some(o=>o.id==="observation-"+n))n++;
+    const numeric=id=>{
+      if(!$(id).value.trim())throw Error("Complete all observation measurements.");
+      return Number($(id).value);
+    };
+    const added=createObservation(demo,{id:"observation-"+n,landmarkId:chosen().id,
+      label:$("obsLabel").value,evidenceClass:$("obsClass").value,
+      widthMm:numeric("obsWidth"),heightMm:numeric("obsHeight"),
+      xMm:numeric("obsX"),yMm:numeric("obsY"),uncertaintyMm:numeric("obsUncertainty")});
+    observations=[...observations,added];viewObservationId=added.id;error("");updateEvidence();
+    $("evidenceStatus").textContent="Observation retained in this session. Export observations to keep the evidence.";
+  }catch(err){error("Observation refused; previous evidence retained. "+err.message);}
+});
+$("useTargetSize").addEventListener("click",()=>{
+  $("obsWidth").value=target.widthMm;$("obsHeight").value=target.heightMm;
+});
+$("planUncertainty").addEventListener("input",updateEvidenceProposal);
+$("exportObservations").addEventListener("click",()=>{
+  const url=URL.createObjectURL(new Blob([JSON.stringify(exportEvidence(demo,observations),null,2)],{type:"application/json"}));
+  const link=document.createElement("a");link.href=url;link.download="skill-observations.json";
+  link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+});
+$("observationFile").addEventListener("change",async e=>{
+  const file=e.target.files[0];if(!file)return;
+  try{
+    if(file.size>256*1024)throw Error("Observation file must be ≤256 KB");
+    const next=importEvidence(demo,JSON.parse(await file.text()));
+    observations=next;viewObservationId=null;error("");updateEvidence();
+    $("evidenceStatus").textContent="Imported "+next.length+" source-matched observations.";
+  }catch(err){error("Observation import refused; previous evidence retained. "+err.message);}
+  e.target.value="";
 });
 recompute();

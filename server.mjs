@@ -12,6 +12,7 @@ const routes=Object.freeze({
   "/src/geometry.mjs":["src/geometry.mjs","text/javascript; charset=utf-8"],
   "/src/demo.mjs":["src/demo.mjs","text/javascript; charset=utf-8"],
   "/src/hypotheses.mjs":["src/hypotheses.mjs","text/javascript; charset=utf-8"],
+  "/src/evidence.mjs":["src/evidence.mjs","text/javascript; charset=utf-8"],
   "/src/authoring.mjs":["src/authoring.mjs","text/javascript; charset=utf-8"]
 });
 export function createAppServer(){
