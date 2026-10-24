@@ -1,9 +1,28 @@
 import {createRequire} from 'node:module';
 import {mkdtemp,writeFile,readFile,mkdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
-import {join} from 'node:path';
+import {join,resolve,dirname,relative} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {createAppServer} from '../server.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
+async function sourceManifest(){
+  const pending=['server.mjs','web/task-readiness.html','web/task-readiness.css','web/task-readiness.mjs','tools/browser-task-readiness.mjs'],seen=new Set(),files=[];
+  while(pending.length){
+    const path=pending.pop();if(seen.has(path))continue;seen.add(path);
+    const absolute=resolve(root,path);if(!absolute.startsWith(root))throw Error('Source dependency escaped checkout');
+    const bytes=await readFile(absolute);files.push({path,sha256:sha256(bytes),bytes:bytes.length});
+    if(!path.endsWith('.mjs'))continue;
+    for(const match of bytes.toString('utf8').matchAll(/(?:from\s+|import\s*\()\s*['"]([^'"]+)['"]/g)){
+      const spec=match[1];if(spec.startsWith('/src/')||spec.startsWith('/web/')||spec.startsWith('/vendor/'))pending.push(spec.slice(1));
+      else if(spec.startsWith('.'))pending.push(relative(root,resolve(dirname(absolute),spec)));
+    }
+  }
+  return files.sort((a,b)=>a.path.localeCompare(b.path));
+}
+const sources=await sourceManifest();
 const require=createRequire(import.meta.url);
 const puppeteer=require(process.env.PUPPETEER_PATH||'puppeteer');
 const dir=await mkdtemp(join(tmpdir(),'skill-readiness-'));
@@ -20,6 +39,7 @@ try{
   const bundle=await page.evaluate(async()=>{
     const {createSequence,appendMoment,upsertStep}=await import('/src/demonstration-sequence.mjs');
     const {frameOrigin}=await import('/src/frame-origin.mjs');
+    const {createPrerequisiteRehearsal}=await import('/src/prerequisite-rehearsal.mjs');
     const clip={name:'authored-readiness.webm',mimeType:'video/webm',sizeBytes:1234,sha256:'a'.repeat(64),durationSeconds:10};
     let sequence=createSequence(clip,{title:'Authored support, alignment and joining control'});const frames=[];
     for(let i=0;i<5;i++){
@@ -30,15 +50,20 @@ try{
       frames.push({momentId:`moment-${i}`,pngBase64:canvas.toDataURL('image/png').split(',')[1]});
     }
     for(const [i,id] of ['prepare','align','finish','inspect'].entries())sequence=upsertStep(sequence,{id,beforeMomentId:`moment-${i}`,afterMomentId:`moment-${i+1}`,title:id,intent:`Authored ${id} intention`,visibleChange:'Supplied account',sensoryCue:'Not measured',recoveryCue:'Reassess prerequisites'});
-    return {format:'skill-translator.sequence-bundle/v1',sequence,frames};
+    const rehearsal=createPrerequisiteRehearsal(sequence,[{before:'prepare',after:'align',reason:'Support before registration'},{before:'align',after:'finish',reason:'Registration before joining'}]);
+    rehearsal.attempt=['prepare','align'];
+    return {format:'skill-translator.prerequisite-bundle/v1',sourceBundle:{format:'skill-translator.sequence-bundle/v1',sequence,frames},rehearsal};
   });
   const sourcePath=join(dir,'authored-sequence.json');await writeFile(sourcePath,JSON.stringify(bundle));
+  await writeFile(join(output,'authored-prerequisite-bundle.json'),await readFile(sourcePath));
   await (await page.$('#source-file')).uploadFile(sourcePath);await page.waitForSelector('#authoring:not([hidden])');
   await page.evaluate(()=>{
     const fields=[...document.querySelectorAll('#definitions fieldset')];
     fields.forEach((f,i)=>{f.querySelector('.prompt').value=['Sheet is supported','Edges are aligned','Join is retained','Reference is visible'][i];f.querySelector('.basis').value='Explicit authored teaching control';});
-    fields[1].querySelector('input[value="prepare"]').click();fields[2].querySelector('input[value="align"]').click();
+
   });
+  assert.equal(await page.$$eval('#definitions .requires',n=>n.length),0);
+  assert.match(await page.$eval('#definitions',n=>n.textContent),/Support before registration/);
   await page.click('#freeze');await page.waitForSelector('#lesson:not([hidden])');
   await page.select('#step','align');await page.select('#prediction','ready');await page.type('#reason','I overlooked the missing support evidence');await page.click('#choose');
   assert.match(await page.$eval('#finding',n=>n.textContent),/not established/);
@@ -60,7 +85,10 @@ try{
   await (await page.$('#study-file')).uploadFile(join(dir,'task-readiness.json'));
   await page.waitForFunction(()=>document.getElementById('note').value==='');
   assert.equal(await page.$eval('#value',n=>n.value),'unknown');assert.equal(await page.$eval('#reason',n=>n.value),'');assert.equal(await page.$eval('#prediction',n=>n.value),'uncertain');
-  const saved=JSON.parse(await readFile(join(dir,'task-readiness.json'),'utf8'));
+  const exportedBytes=await readFile(join(dir,'task-readiness.json'));
+  await writeFile(join(output,'exported-and-reopened-readiness.json'),exportedBytes);
+  const saved=JSON.parse(exportedBytes.toString('utf8'));
+  assert.deepEqual(saved.study.prerequisites,bundle.rehearsal);
   saved.study.source.steps[0].intent+=' changed account';const badPath=join(dir,'mismatched-study.json');await writeFile(badPath,JSON.stringify(saved));
   const acceptedHistory=await page.$eval('#history',n=>n.textContent);
   await (await page.$('#study-file')).uploadFile(badPath);await page.waitForFunction(()=>document.getElementById('message').textContent.includes('changed'));
@@ -74,6 +102,10 @@ try{
   await mobile.waitForFunction(()=>document.querySelectorAll('#frames img').length>0&&[...document.querySelectorAll('#frames img')].every(i=>i.complete&&i.naturalWidth>0));
   assert.ok(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await mobile.screenshot({path:join(output,'mobile.png'),fullPage:true});
-  assert.deepEqual(errors,[]);await writeFile(join(output,'receipt.json'),JSON.stringify({course:'task-readiness',passed:true,controls:['retained PNG admission','committed judgment and prerequisite witness','upstream revision invalidation','independent branch retention','actual download and fresh mobile reopen','390px overflow'],errors},null,2));
+  assert.deepEqual(errors,[]);assert.deepEqual(await sourceManifest(),sources,'Runtime source changed during receiving');
+  const artifacts=[];for(const path of ['authored-prerequisite-bundle.json','exported-and-reopened-readiness.json','desktop.png','mobile.png']){const bytes=await readFile(join(output,path));artifacts.push({path,sha256:sha256(bytes),bytes:bytes.length});}
+  await writeFile(join(output,'source-sha256.json'),JSON.stringify({files:sources},null,2));
+  const runtime={node:process.version,platform:process.platform,arch:process.arch,browser:await browser.version(),configuredChrome:process.env.CHROME_BINARY??null,launchedExecutable:browser.process()?.spawnfile??null,sandboxFlags:browser.process()?.spawnargs.filter(arg=>arg.includes('sandbox'))??[]};
+  await writeFile(join(output,'receipt.json'),JSON.stringify({course:'task-readiness',passed:true,runtime,sources,artifacts,viewports:{desktop:{width:1280,height:900},mobile:{width:390,height:844}},inputBasis:'Original authored PNG controls wrapped using the maintained prerequisite validator; not a physical demonstration or upstream UI recording',controls:['retained PNG admission and upstream declaration reuse','committed judgment and prerequisite witness','upstream revision invalidation','independent branch retention','actual download and fresh mobile reopen','context draft reset and changed-source refusal','390px overflow'],errors},null,2));
   console.log(JSON.stringify({passed:true,output}));
 }finally{await browser.close();await new Promise(r=>server.close(r));}

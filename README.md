@@ -342,3 +342,7 @@ Export/reopen retains the resulting source, session and criteria.
 This supports using the same authored criteria across attempts. It does not
 authenticate when those criteria were chosen, prove that they predate an
 attempt, combine different learners, or establish learning benefit.
+
+## Rehearse declared prerequisites
+
+Open **Rehearse prerequisites** from Demonstration Sequence to retain reasons for step dependencies, try valid alternate orders, and inspect full or partial first attempts against the same checked source frames. [The rehearsal guide](docs/PREREQUISITE_REHEARSAL.md) explains source-bound reopening, actual browser receiving and the limits of this declared-order comparison.

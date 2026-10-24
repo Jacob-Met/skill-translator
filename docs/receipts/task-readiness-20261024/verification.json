@@ -1,0 +1,29 @@
+{
+  "source_base_commit": "05525d4badf6aaeeab1c9647b10f479106d773ca",
+  "native": {
+    "readiness_tests": 5,
+    "maintained_prerequisite_tests": 7,
+    "failures": 0
+  },
+  "independent_review": {
+    "reviewer": "direct worker /root/experimental_earth",
+    "focused_reproduced": 12,
+    "blocking_findings": 0,
+    "additional_controls": [
+      "fully correct upstream ordering earns no completion credit",
+      "changed coherent frame hash refuses retained study"
+    ]
+  },
+  "browser": {
+    "groups": 7,
+    "pixels_inspected": true,
+    "desktop_width": 1280,
+    "mobile_width": 390
+  },
+  "integration": {
+    "upstream_issue": 66,
+    "upstream_validator": "src/prerequisite-rehearsal.mjs",
+    "requires_authorship": "upstream only"
+  },
+  "limitations": "Authored PNG software controls and reported observations; no physical readiness, safe operation, learned skill or physical demonstration validated."
+}

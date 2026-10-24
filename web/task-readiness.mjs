@@ -1,7 +1,8 @@
 import {createReadiness,importReadiness,readinessFindings,recordReadiness} from '/src/task-readiness.mjs';
+import {importPrerequisiteRehearsal} from '/src/prerequisite-rehearsal.mjs';
 import {openReadinessBundle,saveReadinessBundle} from '/web/task-readiness-source.mjs';
 const $=id=>document.getElementById(id);
-let evidence=null,study=null,revision=0;
+let evidence=null,study=null,declaration=null,revision=0;
 const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 const message=t=>{$('message').textContent=t;};
 const guard=fn=>()=>{try{fn();}catch(error){message(error.message);}};
@@ -14,9 +15,7 @@ function author(){
     const field=el('fieldset');field.dataset.stepId=step.id;field.append(el('legend',step.title),el('p','Authored intent: '+step.intent));
     const details=el('details');details.append(el('summary','Inspect retained before/after evidence'));
     for(const id of [step.beforeMomentId,step.afterMomentId]){const m=evidence.sequence.moments.find(x=>x.id===id),fig=el('figure'),img=el('img');img.src=evidence.urlFor(id);img.alt=m.label;fig.append(img,el('figcaption',`${m.label} · ${m.origin.mediaTimeSeconds}s · ${m.visibleState}`));details.append(fig);}field.append(details);
-    for(const other of evidence.sequence.steps.filter(s=>s.id!==step.id)){
-      const label=el('label'),check=el('input');check.type='checkbox';check.value=other.id;check.className='requires';label.append(check,document.createTextNode(' Requires '+other.title));field.append(label);
-    }
+    for(const edge of declaration.dependencies.filter(e=>e.after===step.id))field.append(el('p',`Declared prerequisite: ${evidence.sequence.steps.find(s=>s.id===edge.before).title} — ${edge.reason}`));
     for(const [key,title] of [['prompt','Observable completion check'],['basis','Expert explanation of this check']]){const label=el('label',title),input=el('textarea');input.className=key;input.maxLength=1600;label.append(input);field.append(label);}
     $('definitions').append(field);
   }
@@ -44,10 +43,11 @@ async function load(file,saved){
     if(file.size>70_000_000)throw Error('Keep the retained bundle below 70 MB');
     const data=JSON.parse(await file.text());
     if(saved&&data.format!=='skill-translator.readiness-bundle/v1')throw Error('Unsupported saved readiness bundle');
-    const next=await openReadinessBundle(saved?data.evidence:data);
-    let accepted;try{accepted=saved?importReadiness(next.sequence,data.study):null;}catch(error){next.dispose();throw error;}
+    if(!saved&&data.format!=='skill-translator.prerequisite-bundle/v1')throw Error('Open a saved prerequisite rehearsal from the maintained prerequisite page');
+    const next=await openReadinessBundle(saved?data.evidence:data.sourceBundle);
+    let accepted,prerequisites;try{accepted=saved?importReadiness(next.sequence,data.study):null;prerequisites=saved?accepted.prerequisites:importPrerequisiteRehearsal(next.sequence,data.rehearsal);}catch(error){next.dispose();throw error;}
     if(token!==revision){next.dispose();return;}
-    evidence?.dispose();evidence=next;study=accepted;$('source-title').textContent=evidence.sequence.title;
+    evidence?.dispose();evidence=next;study=accepted;declaration=prerequisites;$('source-title').textContent=evidence.sequence.title;
     resetDrafts();clearReveal();if(study)render();else author();message('Source frames validated. No physical outcome is inferred.');
   }catch(error){if(token===revision)message(error.message);}
 }
@@ -55,8 +55,8 @@ $('source-file').addEventListener('change',e=>load(e.target.files[0],false));
 $('study-file').addEventListener('change',e=>load(e.target.files[0],true));
 for(const id of ['authoring','lesson'])$(id).addEventListener('input',()=>{revision++;});
 $('freeze').addEventListener('click',guard(()=>{
-  const definitions=[...$('definitions').children].map(f=>({stepId:f.dataset.stepId,requires:[...f.querySelectorAll('.requires:checked')].map(x=>x.value),checks:[{id:'completion',prompt:f.querySelector('.prompt').value,basis:f.querySelector('.basis').value}]}));
-  study=createReadiness(evidence.sequence,definitions);revision++;render();message('Declarations frozen. The observation journal starts empty.');
+  const definitions=[...$('definitions').children].map(f=>({stepId:f.dataset.stepId,checks:[{id:'completion',prompt:f.querySelector('.prompt').value,basis:f.querySelector('.basis').value}]}));
+  study=createReadiness(evidence.sequence,declaration,definitions);revision++;render();message('Declarations frozen. The observation journal starts empty.');
 }));
 $('step').addEventListener('change',()=>{revision++;populateChecks();resetDrafts();clearReveal();});
 $('check').addEventListener('change',()=>{revision++;resetObservation();});
@@ -64,6 +64,7 @@ $('choose').addEventListener('click',guard(()=>{
   study=recordReadiness(evidence.sequence,study,{type:'choose',stepId:$('step').value,prediction:$('prediction').value,reason:$('reason').value});revision++;render();
   const s=readinessFindings(evidence.sequence,study).steps.find(s=>s.stepId===$('step').value),source=evidence.sequence.steps.find(x=>x.id===s.stepId);
   $('finding').append(el('h3',s.ready?'Declared prerequisites are satisfied':'Prerequisites are not established'),el('p',s.blockedBy.length?'Inspect these uncompleted prerequisites: '+s.blockedBy.join(', '):'This concerns the declared prerequisites only. Completion checks still require observations.'),el('p','Author intended result: '+source.intent));
+  for(const edge of study.prerequisites.dependencies.filter(e=>e.after===s.stepId))$('finding').append(el('p',`Declared prerequisite ${edge.before}: ${edge.reason}`));
   for(const c of s.checks)$('finding').append(el('p',`${c.prompt} — Expert basis: ${c.basis}`));
   const moments=new Set([source.beforeMomentId,source.afterMomentId]);for(const id of s.blockedBy){const dep=evidence.sequence.steps.find(x=>x.id===id);moments.add(dep.afterMomentId);}
   for(const id of moments){const m=evidence.sequence.moments.find(x=>x.id===id),fig=el('figure'),img=el('img');img.src=evidence.urlFor(id);img.alt=m.label;fig.append(img,el('figcaption',`${m.label} · presented ${m.origin.mediaTimeSeconds}s · ${m.visibleState}`));$('frames').append(fig);}

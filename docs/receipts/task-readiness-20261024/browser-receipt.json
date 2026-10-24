@@ -1,0 +1,143 @@
+{
+  "course": "task-readiness",
+  "passed": true,
+  "runtime": {
+    "node": "v22.23.4",
+    "platform": "linux",
+    "arch": "x64",
+    "browser": "Chrome/156.0.8078.47",
+    "configuredChrome": "/opt/google/chrome/chrome",
+    "launchedExecutable": "/opt/google/chrome/chrome",
+    "sandboxFlags": []
+  },
+  "sources": [
+    {
+      "path": "server.mjs",
+      "sha256": "5b249821a1df1e3ff6ba0efd05839d2f3c09c6def88806d22b898e136a220108",
+      "bytes": 11422
+    },
+    {
+      "path": "src/authoring.mjs",
+      "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "bytes": 1825
+    },
+    {
+      "path": "src/capture-editing.mjs",
+      "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+      "bytes": 3930
+    },
+    {
+      "path": "src/capture.mjs",
+      "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "bytes": 6096
+    },
+    {
+      "path": "src/demonstration-sequence.mjs",
+      "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "bytes": 10025
+    },
+    {
+      "path": "src/frame-origin.mjs",
+      "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "bytes": 3292
+    },
+    {
+      "path": "src/geometry.mjs",
+      "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "bytes": 7305
+    },
+    {
+      "path": "src/prerequisite-rehearsal.mjs",
+      "sha256": "45ffa47e98b6d2813ac4db9d86af9fa39a8804c180364e181ffb65ca195493e9",
+      "bytes": 4275
+    },
+    {
+      "path": "src/sequence-capture.mjs",
+      "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "bytes": 1672
+    },
+    {
+      "path": "src/task-readiness.mjs",
+      "sha256": "e0669fb4acb0a7e061b217ced3643b07fa6e9409c17122a15d02a95f58e4350c",
+      "bytes": 5850
+    },
+    {
+      "path": "tools/browser-task-readiness.mjs",
+      "sha256": "7b1884badee2293aab9a5eaaf3e2bd55d6461a7ef95d0704db9a32c3d0000d01",
+      "bytes": 11805
+    },
+    {
+      "path": "web/image-input.mjs",
+      "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "bytes": 1511
+    },
+    {
+      "path": "web/sequence-input.mjs",
+      "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "bytes": 4361
+    },
+    {
+      "path": "web/task-readiness-source.mjs",
+      "sha256": "67447bcf580b13daa7e7dacc55c1124c4eaf80a8a1d0237a97c0a66c23e6a240",
+      "bytes": 706
+    },
+    {
+      "path": "web/task-readiness.css",
+      "sha256": "0a00d000d19572766d573015b9702d84a1d4a45c2c664cf040bd87d151e52fa9",
+      "bytes": 1164
+    },
+    {
+      "path": "web/task-readiness.html",
+      "sha256": "2329581c6b0423d3556116a898aa93d1fffb54310aeb82b724521089739e1e1f",
+      "bytes": 3446
+    },
+    {
+      "path": "web/task-readiness.mjs",
+      "sha256": "1d2385fbda09dc19bcb2406e092f97629af487c69956b45459c647fd88e7a843",
+      "bytes": 8122
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "authored-prerequisite-bundle.json",
+      "sha256": "1c2a48db241538fa61c35b0248cfba6fb1c3e62486b8b26ba3e6d3922e8a1afb",
+      "bytes": 51542
+    },
+    {
+      "path": "exported-and-reopened-readiness.json",
+      "sha256": "cfe91c0c3230d7d227175371603357dc79914d0130ef771cf0014ad820840094",
+      "bytes": 67752
+    },
+    {
+      "path": "desktop.png",
+      "sha256": "47f8403f2c3f81d2b2ae0edc83833feee2d6d7f7d4467ed642c76f2e46a9caee",
+      "bytes": 295723
+    },
+    {
+      "path": "mobile.png",
+      "sha256": "bc322dd24c0c3333a6f209d11261c1cc0899dc21eed313fffbb6fbf23257bd19",
+      "bytes": 278207
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 900
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  "inputBasis": "Original authored PNG controls wrapped using the maintained prerequisite validator; not a physical demonstration or upstream UI recording",
+  "controls": [
+    "retained PNG admission and upstream declaration reuse",
+    "committed judgment and prerequisite witness",
+    "upstream revision invalidation",
+    "independent branch retention",
+    "actual download and fresh mobile reopen",
+    "context draft reset and changed-source refusal",
+    "390px overflow"
+  ],
+  "errors": []
+}
