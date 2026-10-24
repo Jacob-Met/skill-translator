@@ -26,3 +26,35 @@ test('ordered transitions retain each step and prohibit skip, duplicate or prema
 test('changed pixels, timing and authored interpretation refuse existing responses',()=>{const s=source(),p=createDecisionPractice(s);for(const mutate of [v=>v.steps[0].intent='Different intent',v=>v.steps[0].sensoryCue='New authored cue',v=>v.moments[0].visibleState='New visible state',v=>{v.moments[0].image.sha256='f'.repeat(64);v.moments[0].origin.frameSha256='f'.repeat(64);},v=>v.moments[0].origin.mediaTimeSeconds=1.1]){const changed=structuredClone(s);mutate(changed);assert.throws(()=>importDecisionPractice(changed,p));}const reordered=JSON.parse(JSON.stringify(s));reordered.steps[0]=Object.fromEntries(Object.entries(reordered.steps[0]).reverse());assert.deepEqual(importDecisionPractice(reordered,p),p);});
 test('reopen replays retained actions and ignores forged claimed results',()=>{const s=source();let p=createDecisionPractice(s);p=add(s,p,'answer',{response:answer});p=add(s,p,'reveal');const value=JSON.parse(JSON.stringify({...p,correct:true,complete:true}));assert.deepEqual(importDecisionPractice(s,value),p);assert.equal(decisionPracticeFindings(s,value).complete,false);const bad=structuredClone(p);bad.events.reverse();assert.deepEqual(decisionPracticeFindings(s,bad).revealedBeforeAnswer,['step-1']);});
 test('bounded source selections, event types and learner fields refuse without mutation',()=>{const s=source();for(const ids of [[],['missing'],['step-1','step-1']])assert.throws(()=>createDecisionPractice(s,ids));const p=createDecisionPractice(s),before=JSON.stringify(p);for(const event of [{type:'award',stepId:'step-1'},{type:'answer',stepId:'step-1',response:{...answer,cue:'x'.repeat(1201)}},{type:'answer',stepId:'step-1',response:{...answer,uncertain:'no'}}])assert.throws(()=>recordDecisionAction(s,p,event));assert.equal(JSON.stringify(p),before);assert.throws(()=>importDecisionPractice(s,{...p,events:Array(97).fill({type:'reveal',stepId:'step-1'})}));});
+
+test('evidence-linked reconsideration retains the first answer and resolves exact source anchors',()=>{
+  const s=source(),original=JSON.stringify(s);let p=createDecisionPractice(s,['step-1']);
+  p=add(s,p,'answer',{response:answer});p=add(s,p,'reveal');
+  const reconsideration={anchors:['after','sensoryCue','recoveryCue'],judgment:'I would inspect the edge before continuing',question:'What resistance did the author feel?'};
+  p=add(s,p,'reflect',{comparison:'unsure',note:'The camera cannot establish resistance',reconsideration});
+  assert.equal(p.format,'skill-translator.decision-practice/v2');
+  const r=decisionPracticeFindings(s,p);assert.deepEqual(r.steps[0].response,answer);
+  assert.deepEqual(r.steps[0].reflection.reconsideration,reconsideration);
+  const frame=r.steps[0].evidence.find(e=>e.key==='after');assert.equal(frame.momentId,'moment-2');assert.equal(frame.image.sha256,'2'.repeat(64));assert.equal(frame.presentedSeconds,2);
+  assert.deepEqual(r.steps[0].evidence.find(e=>e.key==='sensoryCue'),{key:'sensoryCue',kind:'authored-account',available:false,text:''});
+  assert.equal(r.steps[0].evidence.find(e=>e.key==='recoveryCue').text,s.steps[0].recoveryCue);
+  const forged=structuredClone(p);forged.events[2].reconsideration.evidence=[{key:'sensoryCue',text:'invented'}];
+  assert.deepEqual(importDecisionPractice(s,forged),p);assert.deepEqual(importDecisionPractice(s,JSON.parse(JSON.stringify(p))),p);
+  assert.equal(JSON.stringify(s),original);assert.equal(r.correctnessAssessed,false);
+  assert.throws(()=>importDecisionPractice(s,{...p,format:'skill-translator.decision-practice/v1'}),/requires v2/);
+});
+test('reconsideration requires a retained anchor and meaningful judgment or question',()=>{
+  const s=source();let p=add(s,createDecisionPractice(s),'answer',{response:answer});
+  assert.throws(()=>add(s,p,'reflect',{comparison:'unsure',note:'',reconsideration:{anchors:['before'],judgment:'check',question:''}}));p=add(s,p,'reveal');
+  const before=JSON.stringify(p),good={anchors:['before'],judgment:'Check the edge',question:''};
+  for(const bad of [{...good,anchors:[]},{...good,anchors:['force']},{...good,anchors:['before','before']},{...good,judgment:'',question:' '},{...good,question:'x'.repeat(1601)}])assert.throws(()=>add(s,p,'reflect',{comparison:'unsure',note:'',reconsideration:bad}));
+  assert.equal(JSON.stringify(p),before);
+  const questionOnly=add(s,p,'reflect',{comparison:'unsure',note:'',reconsideration:{anchors:['sensoryCue'],judgment:'',question:'What was felt?'}});
+  assert.equal(decisionPracticeFindings(s,questionOnly).steps[0].evidence[0].available,false);
+  const changed=structuredClone(s);changed.steps[0].sensoryCue='New account';assert.throws(()=>importDecisionPractice(changed,questionOnly));
+});
+test('ordinary reflections keep v1 while v2 continues across selected steps',()=>{
+  const s=source();let p=createDecisionPractice(s);p=add(s,p,'answer',{response:answer});p=add(s,p,'reveal');p=add(s,p,'reflect',{comparison:'consistent',note:''});
+  assert.equal(p.format,'skill-translator.decision-practice/v1');p=add(s,p,'advance');p=add(s,p,'answer',{response:answer});p=add(s,p,'reveal');p=add(s,p,'reflect',{comparison:'different',note:'',reconsideration:{anchors:['intent'],judgment:'The goal matters more than my proposed motion',question:''}});
+  assert.equal(decisionPracticeFindings(s,p).complete,true);assert.equal(p.format,'skill-translator.decision-practice/v2');assert.deepEqual(importDecisionPractice(s,p),p);
+});

@@ -1,4 +1,4 @@
-import {createDecisionPractice,importDecisionPractice,recordDecisionAction,decisionPracticeFindings} from '/src/decision-practice.mjs';
+import {createDecisionPractice,importDecisionPractice,recordDecisionAction,decisionPracticeFindings,decisionEvidence} from '/src/decision-practice.mjs';
 import {readSequenceBundle,releaseSequenceAssets} from '/web/sequence-input.mjs';
 const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 let source=null,assets=new Map(),session=null,revision=0,generation=0,controller=null,busy=false,predictionDirty=false,reflectionDirty=false;
@@ -27,8 +27,17 @@ function render(){
   $('account').replaceChildren();$('account').hidden=!state.revealed;
   if(state.revealed){$('account').append(node('h3','Authored account — inspect, do not treat as an automatic answer key'));const dl=node('dl');for(const [label,key]of [['Intended result','intent'],['Visible change','visibleChange'],['Supplied sensory cue','sensoryCue'],['Recovery cue','recoveryCue']])dl.append(node('dt',label),node('dd',step[key]||'Not supplied by the author.'));$('account').append(dl);}
   $('reflectionForm').hidden=!(state.response&&state.revealed);$('comparison').value=state.reflection?.comparison||'unsure';$('reflection').value=state.reflection?.note||'';$('comparison').disabled=$('reflection').disabled=!!state.reflection;
+  $('evidenceChoices').replaceChildren();
+  const labels={before:'Before frame',after:'After frame',intent:'Intended result',visibleChange:'Visible change',sensoryCue:'Sensory cue',recoveryCue:'Recovery cue'};
+  if(state.revealed)for(const evidence of decisionEvidence(source,state.id)){
+    const label=node('label'),input=node('input');label.className='check';input.type='checkbox';input.value=evidence.key;input.checked=state.reflection?.reconsideration?.anchors.includes(evidence.key)||false;input.disabled=!!state.reflection;
+    input.addEventListener('input',()=>{reflectionDirty=true;revision++;sync();});
+    label.append(input,document.createTextNode(' '+labels[evidence.key]+(evidence.available?'':' — not supplied; unknown')));$('evidenceChoices').append(label);
+  }
+  $('revisedJudgment').value=state.reflection?.reconsideration?.judgment||'';$('remainingQuestion').value=state.reflection?.reconsideration?.question||'';
+  $('revisedJudgment').disabled=$('remainingQuestion').disabled=!!state.reflection;
   $('progress').textContent=`${result.answered}/${result.steps.length} responses retained · ${result.selfComparisons.length} self-comparisons · ${result.revealedBeforeAnswer.length} source reveals before response. Declared familiarity: ${result.priorFamiliarity}. No correctness or physical skill score is produced.`;
-  $('history').replaceChildren();for(const entry of result.steps){const title=source.steps.find(s=>s.id===entry.id).title,card=node('article');card.append(node('h3',title));if(entry.response){for(const [label,key]of [['Expected change','expectedChange'],['Decision cue','cue'],['Recovery judgment','recovery']])card.append(node('p',`${label}: ${entry.response[key]||'Not supplied'}`));card.append(node('p',`Uncertainty declared: ${entry.response.uncertain?'yes':'no'}. Source revealed before response: ${entry.revealedBeforeAnswer?'yes':'no'}.`));}else card.append(node('p','No response retained.'));if(entry.reflection)card.append(node('p',`Learner self-comparison: ${entry.reflection.comparison}. ${entry.reflection.note}`));$('history').append(card);}sync();
+  $('history').replaceChildren();for(const entry of result.steps){const title=source.steps.find(s=>s.id===entry.id).title,card=node('article');card.append(node('h3',title));if(entry.response){for(const [label,key]of [['Expected change','expectedChange'],['Decision cue','cue'],['Recovery judgment','recovery']])card.append(node('p',`${label}: ${entry.response[key]||'Not supplied'}`));card.append(node('p',`Uncertainty declared: ${entry.response.uncertain?'yes':'no'}. Source revealed before response: ${entry.revealedBeforeAnswer?'yes':'no'}.`));}else card.append(node('p','No response retained.'));if(entry.reflection)card.append(node('p',`Learner self-comparison: ${entry.reflection.comparison}. ${entry.reflection.note}`));if(entry.reflection?.reconsideration){const r=entry.reflection.reconsideration;card.append(node('p',`Reconsidered judgment: ${r.judgment||'Not supplied'}`),node('p',`Remaining question: ${r.question||'Not supplied'}`));for(const e of entry.evidence)card.append(node('p',`${labels[e.key]}: ${e.kind==='retained-frame'?`${e.momentId} · ${e.presentedSeconds} s · SHA-256 ${e.image.sha256}`:e.available?e.text:'Not supplied — unknown'}`));}$('history').append(card);}sync();
 }
 function act(type,fields={}){try{
   const draft=type==='reveal'&&predictionDirty?{expectedChange:$('expectedChange').value,cue:$('decisionCue').value,recovery:$('recovery').value,uncertain:$('uncertain').checked}:null;
@@ -52,10 +61,10 @@ $('sessionFile').addEventListener('change',async event=>{
 $('restart').addEventListener('click',()=>{if(!source)return;session=createDecisionPractice(source,undefined,$('familiarity').value);predictionDirty=reflectionDirty=false;revision++;error('');render();$('status').textContent='A new empty exercise has begun on the same accepted source.';});
 $('familiarity').addEventListener('change',()=>{revision++;$('status').textContent='Start a new exercise to apply this familiarity declaration. The accepted exercise is unchanged.';});
 for(const id of ['expectedChange','decisionCue','recovery','uncertain'])$(id).addEventListener('input',()=>{predictionDirty=true;revision++;sync();});
-for(const id of ['comparison','reflection'])$(id).addEventListener('input',()=>{reflectionDirty=true;revision++;sync();});
+for(const id of ['comparison','reflection','revisedJudgment','remainingQuestion'])$(id).addEventListener('input',()=>{reflectionDirty=true;revision++;sync();});
 $('predictionForm').addEventListener('submit',event=>{event.preventDefault();act('answer',{response:{expectedChange:$('expectedChange').value,cue:$('decisionCue').value,recovery:$('recovery').value,uncertain:$('uncertain').checked}});});
 $('reveal').addEventListener('click',()=>act('reveal'));
-$('reflectionForm').addEventListener('submit',event=>{event.preventDefault();act('reflect',{comparison:$('comparison').value,note:$('reflection').value});});
+$('reflectionForm').addEventListener('submit',event=>{event.preventDefault();const anchors=[...$('evidenceChoices').querySelectorAll('input:checked')].map(input=>input.value),judgment=$('revisedJudgment').value,question=$('remainingQuestion').value;act('reflect',{comparison:$('comparison').value,note:$('reflection').value,...(anchors.length||judgment.trim()||question.trim()?{reconsideration:{anchors,judgment,question}}:{})});});
 $('advance').addEventListener('click',()=>act('advance'));
 $('saveSession').addEventListener('click',()=>{try{if(predictionDirty||reflectionDirty)throw Error('Retain your draft before exporting');const accepted=importDecisionPractice(source,session),blob=new Blob([JSON.stringify(accepted,null,2)],{type:'application/json'});if(blob.size>1024*1024)throw Error('Practice exceeds the 1 MiB export limit');const url=URL.createObjectURL(blob),link=node('a');link.href=url;link.download='decision-practice.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){error(e.message);}});
 window.addEventListener('beforeunload',()=>{controller?.abort();releaseSequenceAssets(assets);});

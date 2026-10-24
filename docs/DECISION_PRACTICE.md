@@ -52,3 +52,25 @@ draft races and 390px layout. Runtime configuration follows the other browser
 courses; only explicitly admitted isolated environments should use the optional
 `CHROME_TEST_NO_SANDBOX=1` setting. Authored browser controls establish software
 behavior, not expert validity or a measured learning benefit.
+
+## Evidence-linked reconsideration
+
+After retaining your first prediction and revealing the account, the optional
+reconsideration panel lets you select the original before/after frame or a specific
+authored intent, visible-change, sensory or recovery note. Record what you would
+judge differently, what still needs to be asked or observed, or both. These are
+learner-authored explanations, not automated findings about the expert or a grade.
+A missing sensory note can be referenced as a question, but is displayed as
+**not supplied — unknown**, never as proof that no sensory cue was involved.
+
+The history shows each selected frame's identity, presented time and SHA-256, or
+the exact supplied account text, beside the reconsidered judgment and question.
+The first response, assistance order and original source are unchanged. References
+are restricted to the current retained step; their contents are recomputed from
+the matching source on reopening. Any source correction requires a new exercise.
+
+Exercises using this panel export `skill-translator.decision-practice/v2` so older
+readers refuse rather than silently discard reconsideration. Existing v1 files
+remain readable and ordinary reflections still export v1. The same event and file
+bounds apply. Selected references do not establish physical causation, validate an
+authored account, or demonstrate learning.
