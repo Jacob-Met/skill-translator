@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/joint-calibration":["web/joint-calibration.html","text/html; charset=utf-8"],
+  "/web/joint-calibration.html":["web/joint-calibration.html","text/html; charset=utf-8"],
+  "/web/joint-calibration.css":["web/joint-calibration.css","text/css; charset=utf-8"],
+  "/web/joint-calibration.mjs":["web/joint-calibration.mjs","text/javascript; charset=utf-8"],
+  "/src/joint-calibration.mjs":["src/joint-calibration.mjs","text/javascript; charset=utf-8"],
   "/challenge":["web/challenge.html","text/html; charset=utf-8"],
   "/web/challenge.html":["web/challenge.html","text/html; charset=utf-8"],
   "/web/challenge.css":["web/challenge.css","text/css; charset=utf-8"],

@@ -1,0 +1,114 @@
+{
+  "format": "skill-translator-joint-calibration-verification/v1",
+  "date": "2026-10-24",
+  "qualifiedBase": "641f03187b4e369476dfce8d749aab496f6a0461",
+  "sourcePayloadSha256": "5d4e931ef8a0a41954740a8a735e60a4a66990b14697d2ace61d76ff2319ef14",
+  "sources": [
+    {
+      "path": "README.md",
+      "sha256": "9fc68413ead4827efff9e8997b7e4c7f55e0c46e2ac7a8097cecfcb17eb916f3",
+      "baseBlob": "0574c277172ba8e36a05a6779aaf791e55203a00"
+    },
+    {
+      "path": "server.mjs",
+      "sha256": "82fda406ed64e521eea0e26052a6867047f11e3bfe88cd08fa6488bc4e878a0e",
+      "baseBlob": "3cea956021ea615c136d0f7507009750c497ccd6"
+    },
+    {
+      "path": "src/joint-calibration.mjs",
+      "sha256": "39bf81c7bbb7d10c0e8aeadc40baa6237ce3e7110809f40b04c41d867154b73d",
+      "baseBlob": null
+    },
+    {
+      "path": "test/joint-calibration.test.mjs",
+      "sha256": "25efdf0e3195436c7b5da976f926a5e67d7a69a78d223d02e9c9800e6a21a111",
+      "baseBlob": null
+    },
+    {
+      "path": "tools/browser-joint-calibration.mjs",
+      "sha256": "87d3a37c3a60dd047d6d2ac47ad09ed2b109322a0698623fb312248a43636654",
+      "baseBlob": null
+    },
+    {
+      "path": "web/calibration.html",
+      "sha256": "688ae44f643b89465e8cd8d1bfc8e66685f706067a62fb2dddb5c99af48ab5cb",
+      "baseBlob": "449449ff5fb82d299919c9f4aca3a583732b626c"
+    },
+    {
+      "path": "web/calibration.mjs",
+      "sha256": "0a7386e36e6c3e05228b7858940c58d5b41cf105d2c226a783a3b2c85a46aca6",
+      "baseBlob": "d9b3b4007d8a93ebc4e641ee1b8add6377056970"
+    },
+    {
+      "path": "web/index.html",
+      "sha256": "92e0cdf2260cc418031f04ed77e7eb4300f86eeea22d6737b9403e7db88e7ab6",
+      "baseBlob": "5a80106ffce4c971f06526b07cfa54e42da39c57"
+    },
+    {
+      "path": "web/joint-calibration.css",
+      "sha256": "bc8ee8eede90256fef4e144e9b3e3290c06f2a89698112d3d73292ff2f6661d3",
+      "baseBlob": null
+    },
+    {
+      "path": "web/joint-calibration.html",
+      "sha256": "9e15b16f289de32213485f1d5ffbe54b0d5475736123870ffc390cbb56641b9b",
+      "baseBlob": null
+    },
+    {
+      "path": "web/joint-calibration.mjs",
+      "sha256": "88cce1be9c58978c2a21a66cb72160db03bdf9f264032dfe2103f04b7bea5fa3",
+      "baseBlob": null
+    }
+  ],
+  "receiving": {
+    "device": "a3bc4a35-65d3-4f5b-9578-e136049e0095",
+    "node": "22.23.4",
+    "chrome": "156.0.8078.47",
+    "native": {
+      "passed": 141,
+      "failed": 0,
+      "skipped": 0
+    },
+    "browser": {
+      "course": "shared-source cross-mark consistency",
+      "tests": [
+        "actual calibration handoff preserves three original marks and permits two-mark scope",
+        "each marginal mark fits but source-switch trap has no coherent global reading",
+        "coherent shared width supports both fixed rules and input-only export reopens identically",
+        "numeric full-source alternative and observation add/remove update inference without changing original",
+        "source then anchored observations import separately; another source refuses without replacing evidence",
+        "tampered source and single-mark alternative invalid for another original mark refuse atomically",
+        "late file completion cannot overwrite a newer authored action",
+        "actual13-mark single investigation handoff includes last selected mark and its decisive evidence",
+        "fresh390px numeric keyboard flow and annotation-only diagram have no page overflow"
+      ],
+      "errors": [],
+      "offsite": [],
+      "browser": "Chrome/156.0.8078.47"
+    },
+    "regressions": {
+      "calibrationHypothesesGroups": 13,
+      "prospectiveChallengeGroups": 9,
+      "errors": [],
+      "offsite": []
+    }
+  },
+  "review": {
+    "independentCoreTests": 14,
+    "independentUI": "The single-mark handoff could omit a focused mark beyond the first twelve. Fixed to retain the focused mark, then verified through an actual thirteen-mark calibration-page handoff and joint export.",
+    "analyticControls": "Marginal source-switch trap refuses a joint explanation; a coherent shared-width reading supports both marks. Independent analytic oracle, fixed-rule coherence, full original-source bounds, source identity and input-only reopening tested."
+  },
+  "limits": [
+    "Candidate combinations count compatible declared possibilities, not confidence or probability.",
+    "Alternatives must supply all original mark pixels and one shared source geometry. Rules may differ by mark but cannot switch between its observations.",
+    "The displayed diagram represents annotations, not a measured image or accuracy claim.",
+    "No instrument measurement, skill transfer success or physical outcome is established by this authored receiving course."
+  ],
+  "screenshot": {
+    "path": "mobile.png",
+    "width": 390,
+    "bytes": 404869,
+    "sha256": "4d973d8b7b4fd750a8b11589bb8cce5cf2bf3d8a6a5380b47d0254892853b968",
+    "gitBlob": "e8de4e9750fb959d25fd071bc8fbae256fe80945"
+  }
+}
