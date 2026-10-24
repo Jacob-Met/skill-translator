@@ -105,7 +105,7 @@ try{
   const badImage=structuredClone(fixture);badImage.source.image={sha256:"invalid",widthPx:100,heightPx:80};
   await writeFile(out+"/bad-image-source.json",JSON.stringify(badImage));
   await (await page.$("#demoFile")).uploadFile(out+"/bad-image-source.json");
-  await page.waitForFunction(()=>document.getElementById("error").textContent.includes("Source image needs its SHA-256 identity"));
+  await page.waitForFunction(()=>/Source rejected.*SHA-256 identity/.test(document.getElementById("error").textContent));
   assert.equal(await page.$$eval("#observationRows tr",els=>els.length),2);
   assert.equal(await page.$eval("#evidenceSummary",e=>e.dataset.status),"single-compatible");
   record("malformed source-image identity is refused before replacing the current source or evidence");

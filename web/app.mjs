@@ -2,6 +2,8 @@ import {derive,adapt,toDisplay,fromDisplay,fromImage,evaluate} from "/src/geomet
 import {appendAnnotation} from "/src/authoring.mjs";
 import {demonstration} from "/src/demo.mjs";
 import {compareInterpretations,proposeVariation} from "/src/hypotheses.mjs";
+import {imageMetadata,validateCapturedDemo,assertImageMatches} from "/src/capture.mjs";
+import {loadLocalImage,releaseImage} from "/web/image-input.mjs";
 import {createObservation,analyzeEvidence,proposeEvidenceVariation,
   exportEvidence,importEvidence} from "/src/evidence.mjs";
 
@@ -21,6 +23,7 @@ let observations=[],viewObservationId=null;
 const ruleNames={fraction:"Proportional position",left:"Fixed left clearance",
   right:"Fixed right clearance",top:"Fixed top clearance",bottom:"Fixed bottom clearance"};
 let box={x:80,y:50,width:560,height:320},dragging=false;
+let sourceMedia=null,sourceLoadVersion=0,sourceImportVersion=0;
 
 function error(message){$("error").textContent=message;$("error").hidden=!message;}
 function mirrored(){return $("handed").value==="mirrored";}
@@ -113,31 +116,37 @@ function draftSourcePoint(){
 }
 function sourceDrawing(){
   const s=$("sourceSvg");s.replaceChildren();
-  svgEl(s,"text",{x:24,y:32,class:"svg-label"},"OBSERVED PIXEL COORDINATES / AUTHORED");
+  const meta=demo.source.image?imageMetadata(demo.source.image):null;
+  const scale=meta?Math.max(meta.widthPx/520,meta.heightPx/390):1;
+  s.setAttribute("viewBox",meta?`0 0 ${meta.widthPx} ${meta.heightPx}`:"0 0 520 390");
+  if(sourceMedia&&meta)svgEl(s,"image",{href:sourceMedia.url,x:0,y:0,width:meta.widthPx,height:meta.heightPx});
+  if(!meta)svgEl(s,"text",{x:24,y:32,class:"svg-label"},"OBSERVED PIXEL COORDINATES / AUTHORED");
+  $("sourcePhotoStatus").textContent=meta?(sourceMedia?"Original pixels paired · ":"Choose the original photo to see its pixels · ")+meta.name+" · "+meta.widthPx+" × "+meta.heightPx+" px · SHA-256 "+meta.sha256.slice(0,16)+"…":"The included source is an authored illustration. Start in Source Studio to annotate a local photo.";
   const corners=demo.source.corners;
   const pts=corners.map(p=>p.x+","+p.y).join(" ");
-  svgEl(s,"polygon",{points:pts,class:"sheet"});
+  svgEl(s,"polygon",{points:pts,class:sourceMedia?"photo-boundary":"sheet","stroke-width":1.5*scale});
   for(const [a,b] of [[0,2],[1,3]]){
+    if(sourceMedia)continue;
     svgEl(s,"line",{x1:corners[a].x,y1:corners[a].y,
       x2:corners[b].x,y2:corners[b].y,class:"sheet-grid"});
   }
   corners.forEach((p,i)=>{
-    svgEl(s,"circle",{cx:p.x,cy:p.y,r:4.6,fill:"#233f37",stroke:"#faf5d6","stroke-width":2});
-    svgEl(s,"text",{x:p.x+7,y:p.y-9,class:"svg-label"},"C"+(i+1));
+    svgEl(s,"circle",{cx:p.x,cy:p.y,r:4.6*scale,fill:"#233f37",stroke:"#faf5d6","stroke-width":2*scale});
+    svgEl(s,"text",{x:p.x+7*scale,y:p.y-9*scale,class:meta?"photo-caption":"svg-label","font-size":11*scale},"C"+(i+1));
   });
   derived.landmarks.forEach((mark,i)=>{
-    const attrs={cx:mark.sourcePx.x,cy:mark.sourcePx.y,r:i===selected?13:10,
-      class:"mark-ring"+(i===selected?" selected":"")};
+    const attrs={cx:mark.sourcePx.x,cy:mark.sourcePx.y,r:(i===selected?13:10)*scale,
+      class:(meta?"source-photo-mark":"mark-ring")+(i===selected?" selected":""),"stroke-width":2*scale};
     svgEl(s,"circle",attrs);
     svgEl(s,"text",{x:mark.sourcePx.x,y:mark.sourcePx.y,
-      class:"mark-num"},String(i+1));
+      class:meta?"photo-mark-number":"mark-num","font-size":12*scale},String(i+1));
   });
   const draft=draftSourcePoint();
   if(draft){
-    svgEl(s,"circle",{cx:draft.x,cy:draft.y,r:16,class:"source-draft"});
-    svgEl(s,"text",{x:draft.x+17,y:draft.y-16,class:"svg-label"},"NEW MARK");
+    svgEl(s,"circle",{cx:draft.x,cy:draft.y,r:16*scale,class:"source-draft"});
+    svgEl(s,"text",{x:draft.x+17*scale,y:draft.y-16*scale,class:meta?"photo-caption":"svg-label","font-size":11*scale},"NEW MARK");
   }
-  svgEl(s,"text",{x:24,y:373,class:"svg-label"},
+  if(!meta)svgEl(s,"text",{x:24,y:373,class:"svg-label"},
     "TL · TR · BR · BL  →  NORMALIZED PLANAR COORDINATES");
 }
 function targetDrawing(){
@@ -398,19 +407,42 @@ $("heightMm").addEventListener("change",recompute);
 $("handed").addEventListener("change",()=>{if(target){targetDrawing();feedback();}});
 $("demoFile").addEventListener("change",async e=>{
   const file=e.target.files[0];if(!file)return;
+  const importVersion=++sourceImportVersion;
+  ++sourceLoadVersion;
   try{
     if(file.size>256*1024)throw Error("Annotated demonstration must be ≤256 KB");
-    const parsed=JSON.parse(await file.text());
+    const sourceText=await file.text();
+    if(importVersion!==sourceImportVersion)return;
+    const parsed=JSON.parse(sourceText);
+    if(parsed?.source?.image)validateCapturedDemo(parsed);
     const next=derive(parsed);
     analyzeEvidence(parsed,next.landmarks[0].id,[]);
     const nextTarget=adapt(next,Number($("widthMm").value),Number($("heightMm").value));
+    ++sourceLoadVersion;
+    if(sourceMedia){try{assertImageMatches(parsed,sourceMedia.image);}catch{releaseImage(sourceMedia);sourceMedia=null;}}
     demo=parsed;derived=next;target=nextTarget;selected=0;
     observations=[];viewObservationId=null;
     $("sourceX").value="";$("sourceY").value="";
     $("annotationStatus").textContent="Imported annotations. Prior observation comparisons cleared because their source changed.";
     resetAlternativeChoice();resetAttempt();error("");paint();
-  }catch(err){error("Source rejected; previous demonstration preserved. "+err.message);}
+  }catch(err){if(importVersion===sourceImportVersion)error("Source rejected; previous demonstration preserved. "+err.message);}
+  finally{if(importVersion===sourceImportVersion)e.target.value="";}
 });
+$("sourcePhoto").addEventListener("change",async e=>{
+  const file=e.target.files[0];if(!file)return;
+  const version=++sourceLoadVersion,expectedDemo=demo;
+  let candidate=null;
+  try{
+    if(!demo.source.image)throw Error("Import photo-backed source annotations from Source Studio first.");
+    candidate=await loadLocalImage(file);
+    if(version!==sourceLoadVersion||expectedDemo!==demo){releaseImage(candidate);return;}
+    assertImageMatches(demo,candidate.image);
+    releaseImage(sourceMedia);sourceMedia=candidate;candidate=null;
+    error("");sourceDrawing();
+  }catch(err){releaseImage(candidate);if(version===sourceLoadVersion)error("Photo rejected; previous source preserved. "+err.message);}
+  finally{e.target.value="";}
+});
+window.addEventListener("pagehide",event=>{if(!event.persisted)releaseImage(sourceMedia);});
 $("export").addEventListener("click",()=>{
   if(!target)return;
   const receipt={

@@ -92,3 +92,14 @@ footer{border-top:1px solid #31473c;padding:24px 0 40px;display:flex;gap:30px;ju
 @media(max-width:620px){.evidence-lab{padding:17px}.observation-form{padding:14px}.candidate-cards{grid-template-columns:1fr}.observation-table th,.observation-table td{padding:9px 5px}.evidence-files>*{width:100%}.observation-table table{min-width:570px}}
 @media(max-width:750px){.hypothesis-box{grid-template-columns:1fr}}
 @media(max-width:620px){.author-grid{grid-template-columns:1fr}.topbar{flex-wrap:wrap}.brand{font-size:.72rem}.hero{padding:31px 0}.toolbar{grid-template-columns:1fr;gap:15px;padding:18px}.panel-head{padding:14px}.panel-head h2{font-size:1rem}.panel-badge{font-size:.58rem}.inspector{padding:17px}.detail-grid,.limits{grid-template-columns:1fr}.detail-grid>div:not(:last-child){border-right:0;border-bottom:1px solid #385147;padding:0 0 12px}footer{display:block}footer span{display:block;margin-bottom:10px}.actions button{flex:1;min-width:160px}}
+/* A local image can be paired only with its exact source annotations. */
+.capture-link{color:#d6ecad;font-size:.78rem;text-decoration:none;display:inline-block;margin-top:4px}
+.source-photo-tools{padding:0 22px 14px}
+.source-photo-tools label{font-size:.65rem;letter-spacing:.08em;display:block;margin-bottom:8px}
+.source-photo-tools input{max-width:100%;width:100%}
+.source-photo-tools p{color:#9eb6a5;font-size:.72rem;line-height:1.6;overflow-wrap:anywhere}
+.photo-boundary{fill:transparent;stroke:#e7f7ae}
+.source-photo-mark{fill:#263d31;stroke:#d0e6ac}
+.source-photo-mark.selected{fill:#f0be83;stroke:#fff7dc}
+.photo-caption{font-family:monospace;fill:#fff6d6;paint-order:stroke;stroke:#183325}
+.photo-mark-number{fill:#15231c;font-family:monospace;text-anchor:middle;dominant-baseline:central;font-weight:700}
