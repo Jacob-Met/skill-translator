@@ -1,12 +1,15 @@
-import {createSequence,validateSequence,appendMoment,editMoment,removeMoment,upsertStep,removeStep,sequenceFindings,assertSequenceClip,MAX_MOMENTS} from '/src/demonstration-sequence.mjs';
+import {createSequence,validateSequence,appendMoment,editMoment,removeMoment,upsertStep,removeStep,sequenceFindings,assertSequenceClip,MAX_MOMENTS,attachMomentCalibration,removeMomentCalibration,momentTask} from '/src/demonstration-sequence.mjs';
+import {MAX_ANNOTATION_BYTES} from '/src/sequence-capture.mjs';
+import {createPractice} from '/src/practice.mjs';
 import {frameOrigin} from '/src/frame-origin.mjs';
 import {loadLocalVideo,releaseVideo,capturePresentedFrame} from '/web/video-input.mjs';
 import {loadLocalImage,releaseImage} from '/web/image-input.mjs';
-import {makeSequenceBundle,readSequenceBundle,releaseSequenceAssets,MAX_FRAME_BYTES} from '/web/sequence-input.mjs';
+import {makeSequenceBundle,readSequenceBundle,releaseSequenceAssets,exportMomentFrame,MAX_FRAME_BYTES} from '/web/sequence-input.mjs';
 
 const $=id=>document.getElementById(id);
 let sequence=null,clip=null,assets=new Map(),selectedStep=null,editingStep=null,editingMoment=null;
 let stepDirty=false,busy=false,revision=0,generation=0,controller=null;
+let selectedCalibration=null;
 const status=message=>{$('status').textContent=message;};
 const uid=prefix=>prefix+'-'+crypto.randomUUID();
 const time=value=>value.toFixed(3)+' s';
@@ -16,6 +19,8 @@ function beginIO(){controller?.abort();controller=new AbortController();busy=tru
 const current=request=>request.generation===generation&&!request.signal.aborted;
 function endIO(request){if(current(request)){busy=false;controller=null;syncButtons();}}
 function commit(next){sequence=validateSequence(next);revision++;render();}
+function download(blob,name){const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+const calibrationMoment=()=>sequence?.moments.find(m=>m.id===selectedCalibration);
 function syncButtons(){
   $('capture-moment').disabled=busy||(!editingMoment&&(!clip||!sequence||sequence.moments.length>=MAX_MOMENTS));
   $('capture-moment').textContent=editingMoment?'Save moment notes':'Retain this moment';
@@ -25,6 +30,10 @@ function syncButtons(){
   $('export-sequence').disabled=busy||!sequence?.steps.length||stepDirty||Boolean(editingMoment);
   $('draft-status').textContent=stepDirty?'Unsaved step draft. Save or clear it before exporting.':editingStep?'Editing the selected step. Its retained frame identities stay unchanged.':sequence?.moments.length>=2?'Choose the evidence, then describe the intended change.':'Retain two moments to explain a change.';
   for(const button of document.querySelectorAll('.moment-actions button,.detail-heading button'))button.disabled=busy;
+  const moment=calibrationMoment(),task=moment?.calibratedTask;
+  $('calibration-moment').disabled=!sequence?.moments.length;$('moment-annotations').disabled=!moment;
+  $('save-moment-png').disabled=busy||!moment;$('remove-moment-task').disabled=busy||!task;
+  for(const id of ['practice-moment','save-moment-task'])$(id).disabled=busy||!task||stepDirty||Boolean(editingMoment);
 }
 function fillMomentOptions(select,preferred,fallback){
   select.replaceChildren();for(const moment of sequence?.moments||[]){const option=element('option',moment.label+' · '+time(moment.origin.mediaTimeSeconds));option.value=moment.id;select.append(option);}
@@ -77,14 +86,62 @@ function render(){
     const actions=element('div',undefined,'moment-actions');
     actions.append(button('Use as before',()=>{$('step-before').value=moment.id;stepDirty=true;revision++;syncButtons();}),button('Use as after',()=>{$('step-after').value=moment.id;stepDirty=true;revision++;syncButtons();}),
       button('Edit notes',()=>{editingMoment=moment.id;$('moment-label').value=moment.label;$('moment-state').value=moment.visibleState;$('moment-time').value=moment.origin.requestedTimeSeconds;syncButtons();$('moment-label').focus();}),
+      button('Calibrate / practice',()=>{selectedCalibration=moment.id;revision++;renderCalibration();syncButtons();$('calibration-heading').scrollIntoView({block:'start'});}),
       button('Remove',()=>{try{const next=removeMoment(sequence,moment.id),old=assets.get(moment.id);assets.delete(moment.id);if(editingMoment===moment.id)resetMomentEditor();commit(next);releaseImage(old.media);status('Moment removed. Remaining source identities are unchanged.');}catch(e){status(e.message);}}));
     body.append(actions);card.append(image,body);$('moments').append(card);
   }
   const identity=sequence?{clip:sequence.clip,frames:sequence.moments.map(m=>({id:m.id,imageSha256:m.image.sha256,presentedSeconds:m.origin.mediaTimeSeconds,requestedSeconds:m.origin.requestedTimeSeconds}))}:null;
   $('source-identity').textContent=identity?JSON.stringify(identity,null,2):'No source retained.';
   $('clip-summary').textContent=clip?clip.identity.name+' · '+time(clip.identity.durationSeconds)+' · original file paired.':sequence?'Saved frames are available. Choose the matching original clip to retain another moment.':'The video and retained images stay in your browser.';
-  renderDetail();syncButtons();
+  renderDetail();renderCalibration();syncButtons();
 }
+function renderCalibration(){
+  if(!sequence?.moments.some(m=>m.id===selectedCalibration))selectedCalibration=sequence?.moments.at(-1)?.id||null;
+  fillMomentOptions($('calibration-moment'),selectedCalibration,selectedCalibration);
+  const moment=calibrationMoment(),task=moment?.calibratedTask,preview=$('calibration-preview');
+  preview.replaceChildren();preview.hidden=!moment;$('calibration-marks').replaceChildren();
+  $('calibration-source').textContent=moment?moment.label+' · presented '+time(moment.origin.mediaTimeSeconds)+' · requested '+time(moment.origin.requestedTimeSeconds)+'. The saved PNG is byte-for-byte the retained frame.':'Retain a source moment to begin.';
+  $('calibration-summary').textContent=task?`${task.landmarks.length} calibrated mark${task.landmarks.length===1?'':'s'} · supplied workpiece ${task.source.widthMm} × ${task.source.heightMm} mm. Timeline and authored account remain attached.`:'No calibrated task attached.';
+  if(!moment)return;
+  const image=element('img');image.src=assets.get(moment.id).media.url;image.alt='Retained source for '+moment.label;preview.append(image);
+  if(!task)return;
+  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${moment.image.widthPx} ${moment.image.heightPx}`);svg.setAttribute('aria-hidden','true');
+  const radius=Math.max(moment.image.widthPx,moment.image.heightPx)/55;
+  task.landmarks.forEach((mark,i)=>{
+    const circle=document.createElementNS(ns,'circle');circle.setAttribute('cx',mark.sourcePx.x);circle.setAttribute('cy',mark.sourcePx.y);circle.setAttribute('r',radius);
+    const label=document.createElementNS(ns,'text');label.setAttribute('x',mark.sourcePx.x);label.setAttribute('y',mark.sourcePx.y);label.setAttribute('font-size',radius*1.1);label.textContent=String(i+1);svg.append(circle,label);
+    const meaning=mark.kind==='fraction'?'Proportional position':`Fixed ${mark.edge} clearance`;
+    const item=element('li',mark.label);item.append(element('small',`${meaning} · tolerance ${mark.toleranceMm} mm · source (${mark.sourcePx.x}, ${mark.sourcePx.y}) px`));$('calibration-marks').append(item);
+  });preview.append(svg);
+}
+function currentMomentTask(){return momentTask({...sequence,title:$('sequence-title').value,context:$('sequence-context').value},selectedCalibration);}
+$('calibration-moment').addEventListener('change',()=>{selectedCalibration=$('calibration-moment').value;revision++;renderCalibration();syncButtons();});
+$('save-moment-png').addEventListener('click',async()=>{
+  const moment=calibrationMoment();if(!moment)return;const request=beginIO(),version=revision;
+  try{const blob=await exportMomentFrame(moment,assets.get(moment.id),{signal:request.signal});if(!current(request))return;
+    if(version!==revision){status('The selected account changed while saving. Save the current moment again.');return;}
+    download(blob,moment.id+'.png');status('Saved the exact retained PNG. Open it in Source capture, then attach the exported annotations here.');
+  }catch(error){reportFailure(request,error);}finally{endIO(request);}
+});
+$('moment-annotations').addEventListener('change',async()=>{
+  const input=$('moment-annotations'),file=input.files[0],momentId=selectedCalibration;if(!file||!momentId)return;
+  const request=beginIO(),version=revision;
+  try{if(file.size<1||file.size>MAX_ANNOTATION_BYTES)throw Error('Choose annotations up to 256 KiB.');
+    const text=await file.text();if(!current(request))return;
+    if(version!==revision){status('The account changed while reading annotations. Current work was preserved; attach again when ready.');return;}
+    const next=attachMomentCalibration(sequence,momentId,JSON.parse(text));commit(next);status('Calibrated annotations attached to the exact retained moment. Save the sequence to retain them with its PNG.');
+  }catch(error){reportFailure(request,error);}finally{if(input.files[0]===file)input.value='';endIO(request);}
+});
+$('remove-moment-task').addEventListener('click',()=>{try{commit(removeMomentCalibration(sequence,selectedCalibration));status('Annotations removed. The original frame, timeline and authored steps remain.');}catch(error){status(error.message);}});
+$('save-moment-task').addEventListener('click',()=>{try{download(new Blob([JSON.stringify(currentMomentTask(),null,2)],{type:'application/json'}),'sequence-moment-task.json');status('Saved the calibrated task with its exact frame identity and current authored step context.');}catch(error){status(error.message);}});
+$('practice-moment').addEventListener('click',()=>{
+  const key='skill-translator-practice-input/v1';let previous=null,wrote=false;
+  try{const demo=currentMomentTask(),widthMm=demo.source.widthMm,heightMm=demo.source.heightMm;createPractice(demo,widthMm,heightMm);
+    previous=sessionStorage.getItem(key);sessionStorage.setItem(key,JSON.stringify({demo,widthMm,heightMm,mirrored:false,showGoals:false}));wrote=true;
+    const page=window.open('/practice','_blank');if(!page)throw Error('The new practice tab was blocked. Save the task source and open it in Practice.');page.opener=null;
+    status('Practice opened in a new tab. This sequence remains here; practice assesses only the selected geometric state.');
+  }catch(error){if(wrote){if(previous===null)sessionStorage.removeItem(key);else sessionStorage.setItem(key,previous);}status(error.message);}
+});
 function reportFailure(request,error){if(current(request))status(error.message);}
 $('clip-file').addEventListener('change',async()=>{
   const file=$('clip-file').files[0];if(!file)return;const request=beginIO();let candidate;
