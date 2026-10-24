@@ -1,12 +1,14 @@
 {
-  "baseCommit": "d18370100a295a3c9c421344702721408aa36b1d",
-  "verifiedUnchangedBlobs": 158,
+  "baseCommit": "6526e26969edf4d04747e8023592fc62ea714941",
+  "verifiedUnchangedBlobs": 172,
   "missingPriorProofImages": [
     "docs/receipts/calibration-sensitivity-20261024/sensitivity-390.png",
     "docs/receipts/calibration-sensitivity-20261024/sensitivity-desktop.png",
     "docs/receipts/joint-calibration-20261024/mobile.png",
     "docs/receipts/layout-feedback-60b5bf3bc778/desktop.png",
     "docs/receipts/layout-feedback-60b5bf3bc778/mobile.png",
+    "docs/receipts/learner-observation-20261024/desktop.png",
+    "docs/receipts/learner-observation-20261024/mobile.png",
     "docs/receipts/prospective-challenge-20261024/challenge-390.png",
     "docs/receipts/rule-evidence-20261024/desktop-evidence.png",
     "docs/receipts/rule-evidence-20261024/mobile-evidence.png",
@@ -24,12 +26,12 @@
     "web/feature-clearance.css": "cee9426db93fa43a0d1315190c44d0ccd8e8afa051dc074f3ae113b6582e03a0",
     "web/feature-clearance.mjs": "17face96013e1b5af3a98edbd12a861a768bf32ee2c4250fe0b62e05281c8b71",
     "tools/browser-feature-clearance.mjs": "8c6f6de7eaf846accb70ab350d2f3c50cf7fc250d48c06693b422ba0db9a09b5",
-    "server.mjs": "6f27e856eb76df7668158a24556e01c72803c5057bac68cc56ea2220cf6f6490",
+    "server.mjs": "58da89a83193749274387e2618b39ea633f852d572612976f31e2db896025429",
     "web/index.html": "41f3957a6922f4af979c509a3a668b743ac47e2b0f402b158dbb38204400cb3f",
-    "README.md": "866d88a4fe3cab7c56d7bc3d3d2504b94651093fa6ecd05ab4910d482cc23ed0",
+    "README.md": "fda26f658928e3e1e1b04a4f9b7a9b53aa85cbead6c81ca6622c570649ab4603",
     "docs/FEATURE_CLEARANCE.md": "02618f4cc610a4b518a1fcd99d72150ec62da17a3962738ddb01f17bccc01dc5"
   },
-  "nodeSummary": "# tests 220\n# pass 220\n# fail 0\n# skipped 0\n# duration_ms 665.070007",
+  "nodeSummary": "# tests 230\n# pass 230\n# fail 0\n# skipped 0\n# duration_ms 685.990223",
   "browser": {
     "browser": "Chrome/156.0.8078.47",
     "groups": [
@@ -45,7 +47,7 @@
     "offsite": []
   },
   "node": "v22.23.4",
-  "receivedAt": "2026-10-24T06:20:01.800598+00:00",
+  "receivedAt": "2026-10-24T06:24:35.049849+00:00",
   "schema": "hamon.product-receiving/v1",
   "owner": "hamon-583a018f54af-20261023",
   "sourceScope": "Candidate source composed over baseCommit; missingPriorProofImages lists historical receipt images omitted only from the execution copy and retained unchanged in the Git base tree.",
@@ -61,5 +63,6 @@
     "coreSha256": "59da3e672a467e1cba1799115eefa802f759175e8beca792180010daa7b10316",
     "controllerSha256": "17face96013e1b5af3a98edbd12a861a768bf32ee2c4250fe0b62e05281c8b71"
   },
-  "browserDownload": "CDP enabled actual file download. Receiving reopens completed feature-clearance.json from disk; no Blob interception used."
+  "browserDownload": "CDP enabled actual file download. Receiving reopens completed feature-clearance.json from disk; no Blob interception used.",
+  "integration": "Recomposed after photo-backed practice v2 merged in main 6526e26969edf4d04747e8023592fc62ea714941. Preserves maintained importer, new evidence UI, source-bound learner observations and exact native PNG fixtures. Actual feature-clearance handoff/browser course was rerun against this source; the separate observation acquisition browser course was not rerun."
 }
