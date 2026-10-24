@@ -83,3 +83,32 @@ the end to refuse a mixed-source receipt. The PNG controls are original authored
 images; the upstream-format input uses the maintained prerequisite validator,
 not a recording of clicks in the upstream authoring UI. These receipts do not
 establish physical execution, learning, or provider qualification.
+
+## Inspect the evidence behind a blocked step
+
+After committing a readiness judgment, **Which evidence is still missing?** now
+follows the unresolved prerequisite ancestry. It shows the earliest checks whose
+reports are absent, explicitly unknown or reported unsatisfied. A prerequisite
+shared by two branches appears once; the disclosure retains every dependency
+reason that connects the selected step to those requests. This is a compact
+representation of the declared graph, not a list of all possible paths.
+
+Each request retains the check rationale, exact latest report and journal event,
+and its original before/after source frames. These frames illustrate the expert's
+account; they do not authenticate the learner's report. Reporting a previously
+missing upstream check can expose separate checks farther along each branch.
+Revising an upstream report clears downstream completion credit through the
+existing journal, and the previous explanation disappears until another judgment
+is committed. A ready prerequisite set does not establish the chosen step's own
+completion.
+
+The explanation uses the maintained prerequisite declaration and raw readiness
+replay. It adds no authoring format, order score, implicit source correspondence,
+physical action recommendation or inference that a reported failure is true.
+Source/check/report exports remain unchanged and reopening recomputes the view.
+
+Native course: `node test/readiness-explanation.test.mjs`. Actual browser course:
+`node tools/browser-readiness-explanation.mjs`, with the same existing
+`PUPPETEER_PATH`, direct `CHROME_BINARY` and separate `QA_OUTPUT` convention.
+The new course retains its own exact input/reopened study, runtime/source hashes
+and screenshots; it does not overwrite the original task-readiness receipt.

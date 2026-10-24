@@ -1,0 +1,34 @@
+{
+  "source_base_commit": "6d3f61c4faf2a45d6ff9cf23bdffdd517191169c",
+  "native": {
+    "added": 5,
+    "maintained_readiness": 5,
+    "failures": 0
+  },
+  "independent_review": {
+    "reviewer": "direct worker /root/mechanism",
+    "reproduced": 10,
+    "blocking_findings": 0,
+    "scope": [
+      "distinct unobserved/unknown/failed evidence",
+      "exact raw event, note and source-frame attribution",
+      "shared ancestry retains every declared edge without enumerating paths",
+      "maximum24-step/276-edge compact graph",
+      "revision and reopen recompute from authoritative journal"
+    ]
+  },
+  "browser": {
+    "groups": 7,
+    "desktop": [
+      1280,
+      900
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "pixels_inspected": true
+  },
+  "limits": "An explanation of missing reports under declared prerequisites. Source frames depict the retained demonstration, not newly reported learner outcomes; no physical readiness or learning efficacy established.",
+  "integration": "Preserved PR78 affine-challenge routes; readiness runtime unchanged apart from combined router."
+}
