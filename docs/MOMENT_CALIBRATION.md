@@ -25,6 +25,12 @@ supplies calibration and the existing practice workbench receives the task.
 
 Replacing annotations is explicit. Removing them removes only the selected
 moment's calibrated task; its image, time, notes and connected steps remain.
+
+With both moments of a step calibrated, save the sequence and open the
+[calibrated-state comparison](STATE_CHANGE.md). It keeps the original views beside
+explicitly paired points on a declared common reference, showing endpoint and
+separation changes without inferring the intervening motion.
+
 Calibration is supplied by the author. The application does not infer a surface,
 dimensions, contact, force, expert intention or a successful physical action.
 
