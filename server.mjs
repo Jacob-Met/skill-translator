@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/web/response-holdout.css":["web/response-holdout.css","text/css; charset=utf-8"],
+  "/response-holdout":["web/response-holdout.html","text/html; charset=utf-8"],
+  "/src/response-holdout.mjs":["src/response-holdout.mjs","text/javascript; charset=utf-8"],
+  "/web/response-holdout.mjs":["web/response-holdout.mjs","text/javascript; charset=utf-8"],
+  "/web/response-holdout-worker.mjs":["web/response-holdout-worker.mjs","text/javascript; charset=utf-8"],
   "/guide-alignment":["web/guide-alignment.html","text/html; charset=utf-8"],
   "/src/guide-alignment.mjs":["src/guide-alignment.mjs","text/javascript; charset=utf-8"],
   "/web/guide-alignment.mjs":["web/guide-alignment.mjs","text/javascript; charset=utf-8"],

@@ -421,3 +421,11 @@ Native checks: `node test/relationship-rehearsal.test.mjs`. Browser receiving:
 ## Inspect placements before target help
 
 The workpiece rehearsal links to `/assistance-review`. Open its original exported rehearsal to compare each retained pre-request snapshot with committed placements. Missing marks, newly added marks, later help requests and paired same-mark errors remain distinct. Uncommitted trials receive no calculated feedback; saved files retain the original producer input. This descriptive review does not estimate a causal learning effect. See [assistance review](docs/ASSISTANCE_REVIEW.md).
+
+## Audit omitted demonstrations
+
+Open **Audit omitted demonstrations** from Workpiece Response, or visit `/response-holdout`. Import its saved source and declarations. Each additional observation is omitted once while the fixed source, coefficient domain and all other observations remain unchanged. Exact extrema describe the complete remaining family at that omitted sheet size. Inspect whether every prediction lies inside the supplied coordinate bounds, only some do, or none do. An incompatible remainder has no predictive family. All observations, their declared provenance and the original complete-family result remain visible.
+
+Save the original study and reopen it to recompute the audit. Invalid or late imports preserve accepted work. The authored three-size control shows independent width, height and mixed changes; it is not a physical measurement. This is retrospective model sensitivity, not an independent validation study, bad-measurement detector or learning score. Repeated and correlated evidence can appear reassuring, and the original source point is never held out. No measurements are removed or ranked.
+
+Verification: `node --test --test-isolation=none test/response-holdout.test.mjs`. The consumer uses the maintained response-family and pinned CHRONOS exact arithmetic; it does not replace either solver.
