@@ -1,0 +1,18 @@
+{
+  "reviewer": "hamon-a9a3aa15-20261024/microverse; independent direct worker, same connected account",
+  "source_sha256": {
+    "src/condition-changes.mjs": "756fd539b2639e44ffb8f2250909c81386a64a56cd0450b04832ffc9ef4923ed",
+    "web/condition-set.mjs": "f2ba8cd4014913451d27d92a69af42e7725da9b013409d31287f64666d34dcdb"
+  },
+  "command": "node test/condition-changes.test.mjs",
+  "result": "6 passed,0 failed",
+  "review": [
+    "Same accepted typed declarations are revalidated for both selected rounds, preserving array identity/order alignment.",
+    "Missing/unresolved to available transitions remain availability changes, distinct from tolerance crossings.",
+    "Historical and current rounds use the maintained evaluator; reversed comparison retains directional meanings.",
+    "Unchanged status retains changed numeric values.",
+    "Dirty form hides the parent results, including comparison; baseline selection clears derived cards; accepted rerender resets comparison controls."
+  ],
+  "blockers": [],
+  "limits": "Local source review and authored native tests only; actual browser receiving handled separately by root."
+}

@@ -1,0 +1,29 @@
+{
+  "issue": 156,
+  "native_command": "node --test --test-isolation=none test/condition-changes.test.mjs test/condition-set.test.mjs",
+  "native_passes": 15,
+  "native_failures": 0,
+  "source_sha256": {
+    "src/condition-changes.mjs": "756fd539b2639e44ffb8f2250909c81386a64a56cd0450b04832ffc9ef4923ed",
+    "web/condition-set.mjs": "f2ba8cd4014913451d27d92a69af42e7725da9b013409d31287f64666d34dcdb",
+    "server.mjs": "00148de6d5e7e23485bd431c71cb5503c410d078a28407bc887dc721787feb6c",
+    "test/condition-changes.test.mjs": "22e5a23a3dcff8dc8bd63e779a9c3f657b7fbd4b53d884f0471f9c98dc466449",
+    "tools/browser-condition-changes.mjs": "a245706868f491f970a2dafcecb10163a892863cff6a11dee3c9bbe63d90c2ad",
+    "docs/CONDITION_SET.md": "004c774078eadf73b607d7d4f2f6103d1e3291bc1a88604f917881f2eb2301e9"
+  },
+  "browser": "pending actual receiving",
+  "initial_failure": "Three new tests caught a result-object rather than result.status argument; corrected before passing run.",
+  "full_native": {
+    "tests": 520,
+    "passed": 519,
+    "failed": 1,
+    "reason": "Only server.test.mjs failed because local loopback listen is sandbox-denied EPERM. HTTP receiving is pending authorized remote host.",
+    "http_followup": {
+      "command": "node --test --test-isolation=none test/server.test.mjs",
+      "permission": "require_escalated approved by automatic review",
+      "passed": 1,
+      "failed": 0
+    },
+    "resolved_result": "All520 native tests passed across full519 logic run and separate authorized HTTP run; no skipped tests."
+  }
+}
