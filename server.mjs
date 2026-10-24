@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/feature-clearance":["web/feature-clearance.html","text/html; charset=utf-8"],
+  "/web/feature-clearance.html":["web/feature-clearance.html","text/html; charset=utf-8"],
+  "/web/feature-clearance.css":["web/feature-clearance.css","text/css; charset=utf-8"],
+  "/web/feature-clearance.mjs":["web/feature-clearance.mjs","text/javascript; charset=utf-8"],
+  "/src/feature-clearance.mjs":["src/feature-clearance.mjs","text/javascript; charset=utf-8"],
   "/observe-attempt":["web/observe-attempt.html","text/html; charset=utf-8"],
   "/web/observe-attempt.css":["web/observe-attempt.css","text/css; charset=utf-8"],
   "/web/observe-attempt.mjs":["web/observe-attempt.mjs","text/javascript; charset=utf-8"],
