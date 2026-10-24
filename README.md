@@ -2,6 +2,24 @@
 
 SKILL TRANSLATOR aims to explain and adapt skilled physical work without treating an expert's motion as the only correct motion. The first **working source/consumer slice** is a local browser geometry workbench, not automatic skill extraction.
 
+## Rehearse a decision from a retained demonstration
+
+Choose **Practice decisions from retained demonstrations** in Task Space, or open
+`/decision-practice`. Import a saved demonstration from the existing studio. The
+before frame and authored context are shown first; retain your expected visible
+change, decision cue and recovery judgment, or explicitly declare uncertainty.
+Reveal the actual after frame and supplied account, then record your own
+comparison. A reveal before submission stays recorded, including when a draft
+was already being typed. Earlier submitted responses remain separate from the
+source account.
+
+Save practice separately and reopen it with the matching demonstration. Source
+pixels and authored context are validated, actions are replayed, and changed or
+late imports preserve accepted work. This is reflective practice without an
+automatic correctness or physical-skill score; the source itself may be
+incomplete or mistaken. Details and test instructions are in
+[Decision Practice](docs/DECISION_PRACTICE.md).
+
 ## Try it
 
 Requires Node.js 20+, with **no dependency install and no service keys**.
