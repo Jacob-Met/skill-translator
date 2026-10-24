@@ -1,0 +1,132 @@
+{
+  "schema": "skill-translator.verification/state-change/v1",
+  "recordedDate": "2026-10-24",
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/44",
+  "implementation": {
+    "baseMain": "aa7f28365a35cf976ea8c860c9a824aa29ef9743",
+    "localImplementation": "50ddc9f",
+    "composition": "Preserves learner-photo, layout-feedback and finite-feature-clearance changes on current main. Adds only six comparison routes to its exact server; all comparison dependencies retain their browser-received bytes.",
+    "browserSourceSha256": {
+      "src/sequence-change.mjs": "1abe0f2392f47ca18477097ea3d100aff4a92ecc1815f87e3a1800e02f80d81e",
+      "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "src/sequence-capture.mjs": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "src/capture-editing.mjs": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+      "src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "web/sequence-change.mjs": "126d0eabcf61fd2e0a1ff494f18bc20fad3b663630b81ba2da97069334bb3b8d",
+      "web/sequence-change-input.mjs": "c1452e7c8be99517d49025f3297fcbcd66aba30ac202db2221dbed163beaf355",
+      "web/sequence-change.html": "3f48576320a0b86327a3f62fd319c729ae3981ad4de629e19ae742f687570778",
+      "web/sequence-change.css": "be7d0fa8418a0be79c4a08075c6c0c6613a3ec81a29463f761858740789541f0",
+      "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "server.mjs": "2b7af12103f32f7e6103a13b065658cff9e5bff8e498cc10c8017b952cca4601",
+      "tools/browser-sequence-change.mjs": "12a429a4fdec004992cd0485a1d8981d664b7f155b6d39fffd349958eb6b9db5"
+    }
+  },
+  "native": [
+    {
+      "result": "PASS",
+      "cases": 210,
+      "failures": 0,
+      "skipped": 0,
+      "sourceMain": "e6e32c11739b60700dfa30724da8a932b4550128",
+      "scope": "Composed maintained native and HTTP suite, including seven new state-change controls.",
+      "log": "/tmp/skill-sequence-change-composed-native.log"
+    },
+    {
+      "result": "PASS",
+      "cases": 8,
+      "failures": 0,
+      "skipped": 0,
+      "sourceMain": "6526e26969edf4d04747e8023592fc62ea714941",
+      "command": "node --test test/server.test.mjs test/sequence-change.test.mjs",
+      "scope": "Seven state-change cases plus actual HTTP routing and application constraints after current-main composition.",
+      "runtime": "Node.js 22.23.4",
+      "device": "5717955b-9462-4c8b-9aa9-ee1be62004c9",
+      "processId": 80206
+    },
+    {
+      "result": "PASS",
+      "cases": 8,
+      "failures": 0,
+      "skipped": 0,
+      "sourceMain": "aa7f28365a35cf976ea8c860c9a824aa29ef9743",
+      "command": "node --test test/server.test.mjs test/sequence-change.test.mjs",
+      "scope": "Same eight focused native/HTTP cases after additive finite-feature-clearance route composition.",
+      "runtime": "Node.js 22.23.4",
+      "device": "5717955b-9462-4c8b-9aa9-ee1be62004c9",
+      "processId": 80508
+    }
+  ],
+  "independentReview": {
+    "contributor": "MICROVERSE worker in hamon-dcda535a8765-20261023",
+    "result": "PASS",
+    "nativeCases": 7,
+    "coreSnapshot": "64ad43fae53cd08e0fe68e0b2e138a3a1847e524",
+    "scope": [
+      "Existing source-ID alphabet, strict source/calibration/reference validation, immutable one-to-one correspondences and physical endpoints/separation.",
+      "Complete-source bundle binding, byte bounds and cleanup.",
+      "Final UI generation/abort/revision fences, stale asset release, accepted-state preservation, same-file retry, full-source export and pagehide lifecycle."
+    ],
+    "limits": "Independent source/native review; no separate peer browser rerun and no claim of a distinct GitHub approval identity."
+  },
+  "browser": {
+    "fixture": "Original authored PNGs, analytic planar projection and supplied timeline; no physical demonstration or tracking claim",
+    "result": "PASS",
+    "sourceHashes": {
+      "src/sequence-change.mjs": "1abe0f2392f47ca18477097ea3d100aff4a92ecc1815f87e3a1800e02f80d81e",
+      "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "src/sequence-capture.mjs": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "src/capture-editing.mjs": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+      "src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "web/sequence-change.mjs": "126d0eabcf61fd2e0a1ff494f18bc20fad3b663630b81ba2da97069334bb3b8d",
+      "web/sequence-change-input.mjs": "c1452e7c8be99517d49025f3297fcbcd66aba30ac202db2221dbed163beaf355",
+      "web/sequence-change.html": "3f48576320a0b86327a3f62fd319c729ae3981ad4de629e19ae742f687570778",
+      "web/sequence-change.css": "be7d0fa8418a0be79c4a08075c6c0c6613a3ec81a29463f761858740789541f0",
+      "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "server.mjs": "2b7af12103f32f7e6103a13b065658cff9e5bff8e498cc10c8017b952cca4601",
+      "tools/browser-sequence-change.mjs": "12a429a4fdec004992cd0485a1d8981d664b7f155b6d39fffd349958eb6b9db5"
+    },
+    "tests": [
+      "actual retained PNGs render; missing/different calibration and undeclared common reference refuse comparison",
+      "declared one-to-one points recover analytic physical endpoints despite changed perspective and expose changed separation",
+      "complete source PNGs, calibration, actual/requested times and declarations survive export/reopen while derived output is recomputed",
+      "wrong PNG/source pairing refuses without replacing the accepted comparison",
+      "newer reference edits and newer source imports supersede a delayed comparison read",
+      "an actual retained-byte export cannot silently save an older reference draft",
+      "desktop and 390px controls retain original source evidence while correspondence removal leaves unpaired marks explicit",
+      "strict application CSP, no offsite requests or page errors, and exact source stability"
+    ],
+    "errors": [],
+    "offsite": [],
+    "csp": [],
+    "browser": "156.0.8078.47",
+    "command": "CHROME_BINARY=/usr/local/bin/google-chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=/tmp/hamon-dcda-issue44-change/final-receipts node tools/browser-sequence-change.mjs",
+    "device": "5717955b-9462-4c8b-9aa9-ee1be62004c9",
+    "processId": 80508,
+    "receivingDirectory": "/tmp/hamon-dcda-issue44-change",
+    "visualInspection": "Root inspected desktop and 390px views on identical UI bytes before the final additive server composition; the final course repeats no-overflow and source-pixel checks.",
+    "testHarnessCorrection": "An initial control attempted fetch(blob:) under connect-src none. It was corrected to permitted Image.decode() without changing production CSP. Node-side polling avoids old Playwright in-page evaluation."
+  },
+  "contract": {
+    "source": "Complete maintained sequence with original PNGs, calibrated tasks, requested/presented times and supplied evidence classes.",
+    "declarations": "Common planar reference, corresponding physical corner meanings, identical dimensions and explicit one-to-one point pairs.",
+    "limits": "At most 30 point pairs; existing 48 MiB source-bundle bound plus 64 KiB comparison settings and formatting.",
+    "recomputation": "Reopen binds settings to admitted source and recomputes derived geometry; export rehashes retained PNG bytes.",
+    "singleComparison": "Selecting another step starts a fresh comparison. Save the current comparison first."
+  },
+  "evidenceLimits": [
+    "Original authored PNGs and independent analytic planar projections; no newly decoded physical demonstration in this course.",
+    "Two endpoints do not establish intervening path, distance traveled, instantaneous speed, contact, force or physical necessity.",
+    "Reference identity, dimensions, corner meanings and point identities remain supplied declarations.",
+    "No physical accuracy, tracking benchmark, expert agreement, learner study, provider workload, installed deployment or low-end-device performance is claimed."
+  ]
+}

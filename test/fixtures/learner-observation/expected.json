@@ -1,0 +1,293 @@
+{
+  "format": "skill-translator.authored-learner-observation-controls/v1",
+  "evidence": "Authored mathematical image controls; no photograph or physical acquisition.",
+  "projection": {
+    "u": "xMm/300",
+    "v": "yMm/200",
+    "px": "(600*u+100*v+80)/(0.25*u+0.15*v+1)",
+    "py": "(50*u+400*v+50)/(0.25*u+0.15*v+1)"
+  },
+  "sheetMm": {
+    "width": 300,
+    "height": 200
+  },
+  "sourceTask": {
+    "widthMm": 200,
+    "heightMm": 100,
+    "pixelRectangle": [
+      0,
+      0,
+      400,
+      200
+    ],
+    "marksPixels": {
+      "guide": [
+        40,
+        100
+      ],
+      "center": [
+        200,
+        100
+      ]
+    },
+    "transferRule": "fractional source rectangle position to fractional destination sheet position",
+    "toleranceMm": 2
+  },
+  "cornerOrder": "top-left, top-right, bottom-right, bottom-left",
+  "corners": [
+    {
+      "physicalMm": [
+        0,
+        0
+      ],
+      "rawPixel": [
+        80.0,
+        50.0
+      ],
+      "rawPixelExact": [
+        "80",
+        "50"
+      ]
+    },
+    {
+      "physicalMm": [
+        300,
+        0
+      ],
+      "rawPixel": [
+        544.0,
+        80.0
+      ],
+      "rawPixelExact": [
+        "544",
+        "80"
+      ]
+    },
+    {
+      "physicalMm": [
+        300,
+        200
+      ],
+      "rawPixel": [
+        557.1428571428571,
+        357.14285714285717
+      ],
+      "rawPixelExact": [
+        "3900/7",
+        "2500/7"
+      ]
+    },
+    {
+      "physicalMm": [
+        0,
+        200
+      ],
+      "rawPixel": [
+        156.52173913043478,
+        391.30434782608694
+      ],
+      "rawPixelExact": [
+        "3600/23",
+        "9000/23"
+      ]
+    }
+  ],
+  "targets": {
+    "guide": {
+      "physicalMm": [
+        30,
+        100
+      ],
+      "rawPixel": [
+        172.72727272727272,
+        231.8181818181818
+      ],
+      "rawPixelExact": [
+        "1900/11",
+        "2550/11"
+      ]
+    },
+    "center": {
+      "physicalMm": [
+        150,
+        100
+      ],
+      "rawPixel": [
+        358.3333333333333,
+        229.16666666666666
+      ],
+      "rawPixelExact": [
+        "1075/3",
+        "1375/6"
+      ]
+    }
+  },
+  "cases": {
+    "A": {
+      "file": "observation-a.png",
+      "sha256": "e74b296664380bb1e56dc81db0af1350f568e7da66476aa5e449ab6adfb0a1b7",
+      "bytes": 43574,
+      "pixelWidth": 700,
+      "pixelHeight": 500,
+      "observations": {
+        "guide": {
+          "physicalMm": [
+            36,
+            96
+          ],
+          "rawPixel": [
+            181.48820326678765,
+            225.0453720508167
+          ],
+          "rawPixelExact": [
+            "100000/551",
+            "124000/551"
+          ],
+          "errorVectorMm": [
+            6,
+            -4
+          ],
+          "errorSquaredMm2": 52,
+          "errorMm": 7.211102550927978,
+          "withinTolerance": false
+        },
+        "center": {
+          "physicalMm": [
+            150,
+            100
+          ],
+          "rawPixel": [
+            358.3333333333333,
+            229.16666666666666
+          ],
+          "rawPixelExact": [
+            "1075/3",
+            "1375/6"
+          ],
+          "errorVectorMm": [
+            0,
+            0
+          ],
+          "errorSquaredMm2": 0,
+          "errorMm": 0.0,
+          "withinTolerance": true
+        }
+      },
+      "allMarksWithinTolerance": false,
+      "identityUse": "Correct identity for its own observations."
+    },
+    "B": {
+      "file": "observation-b.png",
+      "sha256": "842c726701c3dcc1e98b195e31cb4a5ab881c2248e851fe44d291ca98c0744fd",
+      "bytes": 43814,
+      "pixelWidth": 700,
+      "pixelHeight": 500,
+      "observations": {
+        "guide": {
+          "physicalMm": [
+            30,
+            100
+          ],
+          "rawPixel": [
+            172.72727272727272,
+            231.8181818181818
+          ],
+          "rawPixelExact": [
+            "1900/11",
+            "2550/11"
+          ],
+          "errorVectorMm": [
+            0,
+            0
+          ],
+          "errorSquaredMm2": 0,
+          "errorMm": 0.0,
+          "withinTolerance": true
+        },
+        "center": {
+          "physicalMm": [
+            150,
+            100
+          ],
+          "rawPixel": [
+            358.3333333333333,
+            229.16666666666666
+          ],
+          "rawPixelExact": [
+            "1075/3",
+            "1375/6"
+          ],
+          "errorVectorMm": [
+            0,
+            0
+          ],
+          "errorSquaredMm2": 0,
+          "errorMm": 0.0,
+          "withinTolerance": true
+        }
+      },
+      "allMarksWithinTolerance": true,
+      "identityUse": "Correct identity for its own observations."
+    },
+    "C": {
+      "file": "observation-c.png",
+      "sha256": "7cfec9cec6910cc1eaf525a52670d3864e62f94c31458cb9ced01f1bbb33f044",
+      "bytes": 43662,
+      "pixelWidth": 700,
+      "pixelHeight": 500,
+      "observations": {
+        "guide": {
+          "physicalMm": [
+            30,
+            100
+          ],
+          "rawPixel": [
+            172.72727272727272,
+            231.8181818181818
+          ],
+          "rawPixelExact": [
+            "1900/11",
+            "2550/11"
+          ],
+          "errorVectorMm": [
+            0,
+            0
+          ],
+          "errorSquaredMm2": 0,
+          "errorMm": 0.0,
+          "withinTolerance": true
+        },
+        "center": {
+          "physicalMm": [
+            150,
+            100
+          ],
+          "rawPixel": [
+            358.3333333333333,
+            229.16666666666666
+          ],
+          "rawPixelExact": [
+            "1075/3",
+            "1375/6"
+          ],
+          "errorVectorMm": [
+            0,
+            0
+          ],
+          "errorSquaredMm2": 0,
+          "errorMm": 0.0,
+          "withinTolerance": true
+        }
+      },
+      "allMarksWithinTolerance": true,
+      "identityUse": "Wrong-image control: same geometry/marks as B but different bytes; reject when bound to B."
+    }
+  },
+  "rendering": {
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "supersampling": 3,
+    "resample": "LANCZOS",
+    "coordinateMeaning": "Continuous ideal image coordinates before rasterization; do not replace with rounded click coordinates."
+  }
+}

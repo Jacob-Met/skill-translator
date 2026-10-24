@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Feature separation · Skill Translator</title><link rel="stylesheet" href="/web/feature-clearance.css"></head>
+<body><main><nav><a href="/">Task space</a> · <a href="/practice">Practice</a></nav>
+<h1>Will the features stay separated?</h1>
+<p>Compare circular feature footprints when an annotated task moves to another workpiece size. Supply the feature radii and required gap; source mark rules remain unchanged.</p>
+<p class="notice">This checks declared 2D feature separation only. It does not check sheet edges, tool access, force, materials or physical safety. The tolerance envelope assumes independent Euclidean center errors up to each source mark's tolerance; it is a conservative geometric bound, not a probability or measured outcome.</p>
+<section><h2>Source and saved comparisons</h2><button id="example" type="button">Load authored example</button>
+<label>Annotated source JSON (256 KiB maximum)<input id="sourceFile" type="file" accept=".json,application/json"></label>
+<label>Reopen comparison JSON (512 KiB maximum)<input id="bundleFile" type="file" accept=".json,application/json"></label>
+<p id="status" role="status">Load a source to begin.</p><p id="error" role="alert" hidden></p></section>
+<section id="editor" hidden><h2 id="sourceTitle">Source</h2><p id="provenance"></p>
+<form id="settings"><h3>Explicit feature assumptions</h3><div id="features"></div>
+<label>Required gap between feature boundaries · mm<input id="gap" type="number" min="0" max="10000" step="any" required></label>
+<label>Workpiece sizes · width,height in mm, one per line (up to eight)<textarea id="sizes" rows="4" required></textarea></label>
+<label class="check"><input id="assumption" type="checkbox" required>These are circular features centered on the source marks; assess independent placement-tolerance envelopes.</label>
+<button type="submit">Compare declared sizes</button></form></section>
+<section id="results" hidden><h2>Adapted feature relationships</h2><p>Each nominal gap subtracts both radii from the center distance. The minimum tolerance gap allows both centers to move toward each other within their declared tolerances. Negative gaps mean overlap. Meeting this constraint does not establish task success.</p>
+<label>Inspect workpiece<select id="selected"></select></label><p id="summary"></p><div id="diagram"></div>
+<div class="table-wrap"><table><thead><tr><th>Pair</th><th>Center distance · mm</th><th>Nominal gap · mm</th><th>Minimum tolerance gap · mm</th><th>Declared gap result</th></tr></thead><tbody id="pairs"></tbody></table></div>
+<button id="save" type="button">Save comparison</button><button id="practice" type="button">Open this unchanged task in fresh practice</button>
+<p>Practice evaluates mark centers using the existing rules. This feature-separation comparison remains a separate declaration, and its results are not practice scores.</p></section>
+</main><script type="module" src="/web/feature-clearance.mjs"></script></body></html>

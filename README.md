@@ -2,6 +2,24 @@
 
 SKILL TRANSLATOR aims to explain and adapt skilled physical work without treating an expert's motion as the only correct motion. The first **working source/consumer slice** is a local browser geometry workbench, not automatic skill extraction.
 
+## Rehearse a decision from a retained demonstration
+
+Choose **Practice decisions from retained demonstrations** in Task Space, or open
+`/decision-practice`. Import a saved demonstration from the existing studio. The
+before frame and authored context are shown first; retain your expected visible
+change, decision cue and recovery judgment, or explicitly declare uncertainty.
+Reveal the actual after frame and supplied account, then record your own
+comparison. A reveal before submission stays recorded, including when a draft
+was already being typed. Earlier submitted responses remain separate from the
+source account.
+
+Save practice separately and reopen it with the matching demonstration. Source
+pixels and authored context are validated, actions are replayed, and changed or
+late imports preserve accepted work. This is reflective practice without an
+automatic correctness or physical-skill score; the source itself may be
+incomplete or mistaken. Details and test instructions are in
+[Decision Practice](docs/DECISION_PRACTICE.md).
+
 ## Try it
 
 Requires Node.js 20+, with **no dependency install and no service keys**.
@@ -72,6 +90,26 @@ Choose **Practice the complete task** to carry the current source, dimensions an
 For two or more placements, a descriptive common-translation diagnostic separates mean displacement from remaining local errors. It shows a hypothetical shared shift while leaving actual coordinates and the pass/fail result untouched. It does not identify a physical cause, prove learning or move marks for the user. **Try a fresh round** archives the previous complete or partial attempt and clears the new round; up to 21 rounds can be retained before beginning a new exported session.
 
 Export the session and source annotations to reopen the same setup. Outcomes are recomputed from placements; saved verdict fields are not trusted. Sessions bind source geometry, image identity where present, transfer rules, tolerances and target dimensions. Mismatched imports are refused transactionally. Open `/practice` directly to use the authored example.
+
+### Observe a learner's photographed attempt
+
+Choose **Observe a learner photo** in complete-task practice. Pair a separate local PNG or JPEG, identify the four corners of the practice workpiece and annotate the existing task marks. The practice dimensions stay fixed. The page maps these raw pixels through the supplied planar calibration and evaluates them using the same target geometry and tolerances as manual practice. Missing marks remain incomplete.
+
+The image is kept locally. Its complete file digest, decoded dimensions, supplied corners, original mark pixels, evidence class and note are retained in an observation notebook and in the resulting practice round. Reopening a notebook checks that its source and workpiece match, recomputes placements from raw pixels, and requires pairing the exact image before applying. It preserves the current practice history; importing an older observation cannot replace later rounds.
+
+Applying an observation archives any existing placements and begins the next round. A subsequent manual edit is explicitly marked as a manual override while the original photo annotation remains inspectable. Practice exports preserve both current and historical raw evidence. The mapping depends on supplied measurements and annotations; it does not verify a physical mark, planarity, expertise or learned skill. See [the learner-observation guide](docs/LEARNER_OBSERVATIONS.md) for the full local workflow and authored verification controls.
+
+## Rehearse across changing workpieces
+
+Open **Rehearse across changing workpiece sizes**, or visit `/rehearsal`. Use the authored example or open your own source annotations under **Source and planned workpieces**. Declare 2–8 distinct sheet sizes. This separate diagram exercise reuses the maintained placement evaluator; it does not alter complete-task practice or its photo observations.
+
+Every sheet begins with adapted targets hidden. The source author's explanation and tolerance remain available. Place marks by clicking, keyboard or physical coordinates. **Show targets · record help** retains the request and the exact placements that existed before it. Hiding the targets does not erase that history. **Commit placements and review** freezes the sheet, including missing marks, before feedback appears. The next size starts with no placements or target requests.
+
+Export the full source, declared plan and ordered actions. Reopening recomputes assistance records and geometric results; stored verdicts are not trusted. A session contains at most 2048 actions, and exports/imports are bounded at 1 MiB. Invalid replacement files preserve accepted work. Nothing is uploaded or persisted automatically.
+
+The final comparison describes positional results and target requests for each size. It does not estimate a learning effect or establish independent performance: source explanations remain visible, outside help is unknown, and local JSON can be edited. Different workpieces may have different difficulty. Diagram success is not evidence of physical skill, expert equivalence or safe tool use.
+
+Verification: `node test/transfer-rehearsal.test.mjs` and `node tools/rehearsal-browser.mjs` (the latter requires existing Puppeteer and Chrome as described below).
 
 ## Challenge the original calibration
 
@@ -210,6 +248,14 @@ Open `/relationships` to pair the source JSON and an exported Practice session. 
 
 The authored example demonstrates a 4 mm spacing discrepancy despite all individual points meeting their tolerances. Its second round remains empty. Export/reopen retains the complete source and raw practice rounds, revalidates their binding, and recomputes findings. Rules can be removed without changing the session; malformed or mismatched imports preserve the accepted review. Criteria selected after looking at outcomes are exploratory. Native controls: `node --test test/task-relationships.test.mjs`.
 
+## Inspect spacing and orientation in practice
+
+After reviewing an attempt in **Complete Task**, the spacing and orientation panel compares pair distances through the maintained task-relationship evaluator. A distance error larger than the two marks' positional tolerances combined is incompatible with both positions being correct. Passing that necessary check does not establish correct location or orientation.
+
+An orientation-preserving least-squares rigid fit describes the rotation and centroid displacement between intended and observed marks, with residual error after hypothetical alignment. It excludes scaling and reflection, retains missing marks and reports configurations with no unique fitted orientation. Two points alone cannot distinguish a reflection from a rotation. No fitted transform changes placements, source rules, saved rounds or the actual pass/fail result. This is geometric description, not a diagnosis of physical cause or demonstrated learning.
+
+Focused controls: `node test/layout-feedback.test.mjs`. Actual browser receiving: `node tools/browser-layout-feedback.mjs` with the repository's existing Puppeteer/Chrome environment variables.
+
 ## Adapt a declared edge-fed tool setup
 
 Choose **Adapt this task to a tool** in Task Space to carry the current source and
@@ -257,3 +303,22 @@ QA_OUTPUT=/path/to/receipts node tools/browser-tool-access.mjs` exercises actual
 browser handoff, import/export, conflict inspection and mobile receiving when the
 optional existing browser dependencies are available. These are authored geometry
 controls, not a physical task or learning study.
+
+## Inspect the extent of a declared contact patch
+
+Open **Inspect a declared contact patch at the task point**, or visit `/footprint`. Load your task annotations or use the authored source. Declare a rectangular or circular patch, its dimensions, orientation, and the registration point inside it that must coincide with the adapted task mark. Coordinates for that registration point are measured from the patch center before rotation, with +x right and +y down. Positive rotation is clockwise in physical sheet coordinates; mirroring changes the view only.
+
+The instrument reuses the maintained task adaptation without changing the source point, rule, tolerance or practice verdict. It computes the full rectangle's oriented support extrema or the circle's analytic extrema, then reports signed clearance from each workpiece edge. Positive values lie inward; negative values are overhang. Values near floating-point precision are labeled **numerical boundary**, which is not a physical measurement tolerance or a certified accuracy interval. The complete declared extent remains visible in the scaled drawing.
+
+The authored control compares a 50 × 10 mm rectangle at 0° and 90°. On a task point 20 mm from the left edge, the first orientation overhangs by 5 mm; the second can fit that same point on a sufficiently tall sheet. This is analytic geometry, not a measured tool, an inferred contact state or a recommended operation.
+
+Retain up to eight alternatives with explicit authored/reported labels and dimension provenance. Revisions keep their IDs. Setup or declaration drafts hide old comparisons and disable export until applied or discarded. Save the full task, declarations and source reference to reopen with results recomputed; source/rule/setup mismatches and invalid replacements are refused transactionally. Source files are bounded at 256 KiB and studies at 512 KiB. No images or measurements are uploaded.
+
+Only the declared planar patch is modeled. Tool body, handle, reach, force, friction, support stiffness, other obstacles and out-of-plane geometry remain unknown. A workpiece boundary is not automatically a forbidden zone, and containment does not establish safe use or physical task success. Decide whether full containment is relevant from actual task knowledge.
+
+Verification: `node test/contact-footprint.test.mjs` and `node tools/footprint-browser.mjs` (actual browser receiving needs the existing Puppeteer/Chrome setup).
+
+
+## Feature separation
+
+Open `/feature-clearance` to compare declared circular feature footprints across workpiece sizes. The original source and adaptation rules remain unchanged. Inspect every pair's nominal gap and minimum gap over declared placement tolerances, save/reopen the source and declarations, then hand the selected size to existing practice. This is prospective planar geometry, separate from the center-placement score and tool/edge access. See [Feature separation](docs/FEATURE_CLEARANCE.md).
