@@ -47,6 +47,17 @@ try{
   assert.equal(await page.$eval('[data-mark="guide"]',e=>e.value),"left");assert.match(await page.$eval("#targetChanges",e=>e.textContent),/Proposed \(20.0, 75.0\)/);
   assert.equal(await page.$eval("#widthMm",e=>Number(e.value)),400);
   record("reopening recomputes the derived source instead of trusting a forged saved result");
+  await writeFile(out+"/slow-decision.json",JSON.stringify(bundle));
+  await page.evaluate(()=>{const original=File.prototype.text;File.prototype.text=function(){const read=original.call(this);return this.name==="slow-decision.json"?read.then(text=>new Promise(resolve=>{window.__releaseDecision=()=>resolve(text);})):read;};});
+  await (await page.$("#decisionFile")).uploadFile(out+"/slow-decision.json");await page.waitForFunction(()=>typeof window.__releaseDecision==="function");
+  await page.select('[data-mark="guide"]',"");
+  await page.$eval("#widthMm",e=>{e.value="450";e.dispatchEvent(new Event("input",{bubbles:true}));});
+  await page.click("#mirror");
+  await page.evaluate(async()=>{window.__releaseDecision();await new Promise(resolve=>setTimeout(resolve,0));});
+  assert.equal(await page.$eval('[data-mark="guide"]',e=>e.value),"");assert.equal(await page.$eval("#widthMm",e=>Number(e.value)),450);
+  assert.equal(await page.$eval("#mirror",e=>e.checked),true);assert.equal(await page.$eval("#practiceChosen",e=>e.disabled),true);
+  record("a delayed decision read cannot overwrite newer explicit rule, target or display edits");
+  await (await page.$("#decisionFile")).uploadFile(out+"/decision.json");await page.waitForFunction(()=>document.querySelector("#status").textContent.includes("recomputed"));
   const stale=structuredClone(bundle);stale.originalDemo.source.widthMm=201;await writeFile(out+"/stale.json",JSON.stringify(stale));
   await (await page.$("#decisionFile")).uploadFile(out+"/stale.json");await page.waitForFunction(()=>document.querySelector("#error").textContent.includes("refused"));
   assert.equal(await page.$eval('[data-mark="guide"]',e=>e.value),"left");record("stale source anchors are refused without replacing the accepted decision");

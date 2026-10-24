@@ -52,7 +52,7 @@ function render(){
     const select=document.createElement("select");select.dataset.mark=review.landmarkId;select.setAttribute("aria-label","Rule choice for "+review.label);
     const keep=document.createElement("option");keep.value="";keep.textContent="Keep original annotation (no new decision)";select.append(keep);
     for(const candidate of review.candidates){const option=document.createElement("option");option.value=candidate.rule;option.textContent=ruleName[candidate.rule]+" · "+candidate.status;option.disabled=candidate.status!=="compatible";select.append(option);}
-    select.value=selected.get(review.landmarkId)||"";select.addEventListener("change",()=>{clear();if(select.value)selected.set(review.landmarkId,select.value);else selected.delete(review.landmarkId);invalidate();updateDecision();});
+    select.value=selected.get(review.landmarkId)||"";select.addEventListener("change",()=>{readVersion++;clear();if(select.value)selected.set(review.landmarkId,select.value);else selected.delete(review.landmarkId);invalidate();updateDecision();});
     row.append(description,select);$("ruleChoices").append(row);
   }
   updateDecision();
@@ -76,7 +76,8 @@ $("decisionFile").addEventListener("change",event=>openFile(event,value=>{
   install(a.originalDemo,a.observations,a.decisions.map(d=>({landmarkId:d.landmarkId,rule:d.chosenRule})));
   $("status").textContent="Decision reopened. Support and proposed targets have been recomputed from retained inputs.";
 }));
-for(const id of["widthMm","heightMm"])$(id).addEventListener("input",()=>{clear();invalidate();updateDecision();});
+for(const id of["widthMm","heightMm"])$(id).addEventListener("input",()=>{readVersion++;clear();invalidate();updateDecision();});
+for(const id of["mirror","showGoals"])$(id).addEventListener("input",()=>{readVersion++;});
 $("acknowledge").addEventListener("change",()=>{$("practiceChosen").disabled=!adoption||!$("acknowledge").checked;});
 function download(name,value){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)+"\n"],{type:"application/json"})),a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $("saveDecision").addEventListener("click",()=>{if(adoption)download("skill-rule-decision.json",{...exportRuleAdoption(adoption),practiceSetup:{widthMm:comparison.widthMm,heightMm:comparison.heightMm,mirrored:$("mirror").checked,showGoals:$("showGoals").checked}});});

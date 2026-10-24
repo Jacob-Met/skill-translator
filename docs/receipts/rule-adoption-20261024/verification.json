@@ -15,7 +15,7 @@
     },
     {
       "command": "node tools/browser-rule-adoption.mjs",
-      "passedGroups": 12,
+      "passedGroups": 13,
       "failed": 0,
       "receipt": "browser-receipt.json"
     },
@@ -34,9 +34,9 @@
     "src/rule-adoption.mjs": "2aa95a0195623c99cb5152b87ec6ed2a634e5ab44a24c829f9b0d460d149dd9e",
     "test/rule-adoption.test.mjs": "3ad073dc935b17c8ab081a9799810be863dae8afc6331dc43b799a3ebf86f9be",
     "web/rule-adoption.html": "eb31fb06ed893e07e2a3c7d9c8ce05ac265327226f87123f950ae355b6235924",
-    "web/rule-adoption.mjs": "7ca3c783c32d8c864d31180992c3ebba5e659d53bd80f7505957802931a58211",
+    "web/rule-adoption.mjs": "4d4c29355d4df350a191dc9f03afa3075bedb57ec79c134e1cde8990a0b51d1c",
     "web/rule-adoption.css": "476301722de224c981077aec63fb8166521c2439d0e7ab4fe8a805c4dcbe4502",
-    "tools/browser-rule-adoption.mjs": "fe2e31cf302517916df69d1d85ba1df0fb177e04cc5a5491665aa7ffc027fee7",
+    "tools/browser-rule-adoption.mjs": "5ba25271ec93025a5029e6fa729c282e0fe123229af8d998cbcfc56b2ff4b781",
     "server.mjs": "daf80357b71e2e88e1181d1e319cac733ed7b956b978a8c8e1560b4a36819d99",
     "test/server.test.mjs": "77688ba2b53382764054c7dcd4ec30498a4f4c53f3c4a7e882a7438e060be042",
     "web/index.html": "13bbee9758294e7255d13cebf5215163d83fd0896fe314e77a25535d10a7d36b",
@@ -49,5 +49,6 @@
     "Only the maintained five-rule family is compared; unobserved marks retain their original annotation.",
     "Ambiguous survivors remain unresolved even after a user chooses one.",
     "No cloud deployment, physical execution, contest qualification or learning transfer is established."
-  ]
+  ],
+  "reviewFix": "Independent review identified delayed imports overwriting newer manual decisions. Manual rule, target and display edits now invalidate pending reads; real-browser delayed-read control passes."
 }
