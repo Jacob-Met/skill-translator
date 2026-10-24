@@ -91,7 +91,7 @@ alphabet. The independent MICROVERSE contributor reproduced all seven and
 reviewed the core and complete-source bundle helper without a blocking finding.
 
 The composition with main `e6e32c1` passes 210 native/HTTP cases. After the
-learner-photo and layout-feedback changes on main `6526e26`, eight focused
+learner-photo, layout-feedback and finite-feature-clearance changes on main `aa7f283`, eight focused
 native/HTTP controls and the complete comparison browser course pass again.
 The actual Chrome 156.0.8078.47 course passes eight groups using original authored PNGs and an
 independent analytic perspective projection. It exercises actual source pixels,

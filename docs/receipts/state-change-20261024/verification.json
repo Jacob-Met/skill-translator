@@ -3,9 +3,9 @@
   "recordedDate": "2026-10-24",
   "issue": "https://github.com/Jacob-Met/skill-translator/issues/44",
   "implementation": {
-    "baseMain": "6526e26969edf4d04747e8023592fc62ea714941",
+    "baseMain": "aa7f28365a35cf976ea8c860c9a824aa29ef9743",
     "localImplementation": "50ddc9f",
-    "composition": "Preserves learner-photo and layout-feedback changes on current main. Adds only six sequence-change routes to its exact server. The sequence/calibration/image/geometry dependencies remain the exact browser-received bytes.",
+    "composition": "Preserves learner-photo, layout-feedback and finite-feature-clearance changes on current main. Adds only six comparison routes to its exact server; all comparison dependencies retain their browser-received bytes.",
     "browserSourceSha256": {
       "src/sequence-change.mjs": "1abe0f2392f47ca18477097ea3d100aff4a92ecc1815f87e3a1800e02f80d81e",
       "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
@@ -22,7 +22,7 @@
       "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
       "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
       "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
-      "server.mjs": "62a18f279267fc835e9039f18e66a6aaa91d521e738afd447cd7d62a075f44a4",
+      "server.mjs": "2b7af12103f32f7e6103a13b065658cff9e5bff8e498cc10c8017b952cca4601",
       "tools/browser-sequence-change.mjs": "12a429a4fdec004992cd0485a1d8981d664b7f155b6d39fffd349958eb6b9db5"
     }
   },
@@ -47,6 +47,18 @@
       "runtime": "Node.js 22.23.4",
       "device": "5717955b-9462-4c8b-9aa9-ee1be62004c9",
       "processId": 80206
+    },
+    {
+      "result": "PASS",
+      "cases": 8,
+      "failures": 0,
+      "skipped": 0,
+      "sourceMain": "aa7f28365a35cf976ea8c860c9a824aa29ef9743",
+      "command": "node --test test/server.test.mjs test/sequence-change.test.mjs",
+      "scope": "Same eight focused native/HTTP cases after additive finite-feature-clearance route composition.",
+      "runtime": "Node.js 22.23.4",
+      "device": "5717955b-9462-4c8b-9aa9-ee1be62004c9",
+      "processId": 80508
     }
   ],
   "independentReview": {
@@ -80,7 +92,7 @@
       "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
       "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
       "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
-      "server.mjs": "62a18f279267fc835e9039f18e66a6aaa91d521e738afd447cd7d62a075f44a4",
+      "server.mjs": "2b7af12103f32f7e6103a13b065658cff9e5bff8e498cc10c8017b952cca4601",
       "tools/browser-sequence-change.mjs": "12a429a4fdec004992cd0485a1d8981d664b7f155b6d39fffd349958eb6b9db5"
     },
     "tests": [
@@ -97,9 +109,9 @@
     "offsite": [],
     "csp": [],
     "browser": "156.0.8078.47",
-    "command": "CHROME_BINARY=/usr/local/bin/google-chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=/tmp/hamon-dcda-issue44-change/latest-receipts node tools/browser-sequence-change.mjs",
+    "command": "CHROME_BINARY=/usr/local/bin/google-chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=/tmp/hamon-dcda-issue44-change/final-receipts node tools/browser-sequence-change.mjs",
     "device": "5717955b-9462-4c8b-9aa9-ee1be62004c9",
-    "processId": 80206,
+    "processId": 80508,
     "receivingDirectory": "/tmp/hamon-dcda-issue44-change",
     "visualInspection": "Root inspected desktop and 390px views on identical UI bytes before the final additive server composition; the final course repeats no-overflow and source-pixel checks.",
     "testHarnessCorrection": "An initial control attempted fetch(blob:) under connect-src none. It was corrected to permitted Image.decode() without changing production CSP. Node-side polling avoids old Playwright in-page evaluation."
