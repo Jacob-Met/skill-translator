@@ -1,0 +1,39 @@
+import {importPractice} from '/src/practice.mjs';
+import {createGuideAlignment,importGuideAlignment,reviewGuideRounds} from '/src/guide-alignment.mjs';
+const $=id=>document.getElementById(id);let context=null,accepted=null,epoch=0;
+const mm=n=>n===null?'Unavailable':`${n.toFixed(4)} mm`,point=p=>p?`${mm(p.xMm)} across / ${mm(p.yMm)} down`:'Missing';
+function options(node,rows,selected){node.replaceChildren();for(const [value,label]of rows){const o=document.createElement('option');o.value=value;o.textContent=label;node.append(o);}node.value=String(selected);}
+function populate(source,session,rule=null,selectedRound=session.round){
+ const marks=source.landmarks.map(m=>[m.id,m.label]);for(const [id,index]of [['from',0],['to',2],['point',1]])options($(id),marks,rule?.[id]??marks[index][0]);
+ options($('round'),Array.from({length:session.round},(_,i)=>[String(i+1),`Round ${i+1}`]),selectedRound);
+ $('label').value=rule?.label??'Guide alignment';$('basis').value=rule?.basis??'';$('tolerance').value=rule?.toleranceMm??.5;
+ const size=session.reference.target;$('source-title').textContent=`${source.title||'Retained source'} · ${size.widthMm} × ${size.heightMm} mm`;$('workspace').hidden=false;
+}
+function dirty(){epoch++;$('results').hidden=true;$('save').disabled=true;$('status').textContent='Criterion or round changed. Inspect before reading or saving new findings.';}
+for(const id of ['from','to','point','round','label','basis','tolerance'])$(id).addEventListener('input',dirty);
+for(const id of ['source-file','session-file'])$(id).addEventListener('change',()=>{epoch++;});
+async function read(file,limit){if(!file)throw Error('Select the required JSON file');if(file.size>limit)throw Error('File exceeds its stated size limit');return JSON.parse(await file.text());}
+$('load').addEventListener('click',async()=>{const token=++epoch;try{const [source,raw]=await Promise.all([read($('source-file').files[0],256*1024),read($('session-file').files[0],1024*1024)]);if(token!==epoch)return;if(source.landmarks?.length<3)throw Error('A guide requires at least three source marks');const size=raw.reference?.target;if(!size)throw Error('Open a retained practice session');const session=importPractice(source,size.widthMm,size.heightMm,raw);context={source,session};accepted=null;populate(source,session);$('results').hidden=true;$('save').disabled=true;$('error').textContent='';$('status').textContent='Original source and complete practice history accepted. Declare a guide relationship.';}catch(e){if(token===epoch)$('error').textContent=`Input refused; previous accepted review retained. ${e.message}`;}});
+$('reopen').addEventListener('change',async()=>{const token=++epoch;try{const next=importGuideAlignment(await read($('reopen').files[0],2*1024*1024));if(token!==epoch)return;context={source:next.source,session:next.session};accepted=next;populate(next.source,next.session,next.rule,next.selectedRound);render();$('error').textContent='';$('status').textContent='Raw review reopened; source, rounds and declared criterion revalidated.';}catch(e){if(token===epoch)$('error').textContent=`Review refused; previous accepted review retained. ${e.message}`;}finally{if(token===epoch)$('reopen').value='';}});
+$('criterion').addEventListener('submit',event=>{event.preventDefault();epoch++;try{if(!context)throw Error('Open source and practice first');const rule={from:$('from').value,to:$('to').value,point:$('point').value,label:$('label').value,basis:$('basis').value,toleranceMm:Number($('tolerance').value)};const next=createGuideAlignment(context.source,context.session,rule,Number($('round').value));accepted=next;render();$('error').textContent='';$('status').textContent='Declared guide inspected; original placements and point criteria are unchanged.';}catch(e){$('error').textContent=e.message;}});
+function svg(parent,tag,attrs,text){const node=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [key,value]of Object.entries(attrs))node.setAttribute(key,String(value));if(text!==undefined)node.textContent=text;parent.append(node);return node;}
+function render(){
+ const result=reviewGuideRounds(accepted).find(r=>r.round===accepted.selectedRound),practice=result.practice;
+ $('point-score').textContent=`Original complete-task point score: ${!practice.complete?'incomplete':practice.passed?'within every original tolerance':'outside one or more original tolerances'}. ${practice.placed}/${practice.total} marks retained.`;
+ $('guide-score').textContent=`Declared guide relationship: ${result.status}.`;
+ $('measurement').textContent=result.differenceMm===null?`No offset comparison: ${result.missing.length?'missing '+result.missing.join(', '):!result.reference.resolved?'reference guide anchors are unresolved':'observed guide anchors are unresolved'}.`:`Reference signed offset ${mm(result.reference.offsetMm)}; observed ${mm(result.observed.offsetMm)}; difference ${mm(result.differenceMm)} against allowed ±${mm(result.rule.toleranceMm)}.`;
+ $('projection').textContent=result.observed?.resolved?`Observed guide length ${mm(result.observed.lengthMm)}. Along-guide projection ${(result.observed.projectionFraction*100).toFixed(3)}% from the From anchor toward To: ${result.observed.projectedBetween?'between the anchors':'beyond the anchor segment'}. This is separate from the unbounded-line offset criterion.`:'Along-guide projection unavailable.';
+ $('guard').textContent=`Numerical length and comparison guard: ${result.guardMm} mm. This is a computational convention, not a physical measurement uncertainty.`;$('boundary').textContent=result.boundary;
+ $('coordinates').replaceChildren();result.guide.forEach((row,i)=>{const tr=document.createElement('tr');for(const value of [`${['From anchor','To anchor','Compared mark'][i]} · ${row.label}`,point(row.target),point(row.attempt)]){const td=document.createElement('td');td.textContent=value;tr.append(td);}$('coordinates').append(tr);});
+ draw(result);$('results').hidden=false;$('save').disabled=false;
+}
+function draw(result){
+ const plot=$('guide-plot'),{widthMm:w,heightMm:h}=accepted.session.reference.target;plot.replaceChildren();const pad=Math.max(w,h)*.07;plot.setAttribute('viewBox',`${-pad} ${-pad} ${w+2*pad} ${h+2*pad}`);
+ const defs=svg(plot,'defs',{}),clip=svg(defs,'clipPath',{id:'guide-paper-clip'});svg(clip,'rect',{x:0,y:0,width:w,height:h});svg(plot,'rect',{x:0,y:0,width:w,height:h,fill:'#eef3ed',stroke:'#638374','stroke-width':Math.max(w,h)/300});const group=svg(plot,'g',{'clip-path':'url(#guide-paper-clip)'}),unit=Math.max(w,h)/180;
+ for(const [key,measurement,color,dash]of [['target',result.reference,'#216a9c','4 3'],['attempt',result.observed,'#ad5000','']]){
+  const [a,b,p]=result.guide.map(row=>row[key]);if(a&&b&&Math.hypot(b.xMm-a.xMm,b.yMm-a.yMm)>result.guardMm){const length=Math.hypot(b.xMm-a.xMm,b.yMm-a.yMm),ux=(b.xMm-a.xMm)/length,uy=(b.yMm-a.yMm)/length,extent=(w+h)*2;svg(group,'line',{x1:a.xMm-ux*extent,y1:a.yMm-uy*extent,x2:a.xMm+ux*extent,y2:a.yMm+uy*extent,stroke:color,'stroke-width':unit,'stroke-dasharray':dash?`${4*unit} ${3*unit}`:''});}
+  if(p&&measurement?.resolved)svg(group,'line',{x1:p.xMm,y1:p.yMm,x2:measurement.projection.xMm,y2:measurement.projection.yMm,stroke:color,'stroke-width':unit,'stroke-dasharray':`${unit} ${2*unit}`});
+  [a,b,p].forEach((point,i)=>{if(!point)return;svg(group,i===2?'rect':'circle',i===2?{x:point.xMm-unit*2,y:point.yMm-unit*2,width:unit*4,height:unit*4,fill:color}:{cx:point.xMm,cy:point.yMm,r:unit*2,fill:color});});
+ }
+}
+$('save').addEventListener('click',()=>{if(!accepted||$('save').disabled)return;const blob=new Blob([JSON.stringify(importGuideAlignment(accepted))],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='skill-guide-alignment.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});

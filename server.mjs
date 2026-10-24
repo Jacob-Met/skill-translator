@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/guide-alignment":["web/guide-alignment.html","text/html; charset=utf-8"],
+  "/src/guide-alignment.mjs":["src/guide-alignment.mjs","text/javascript; charset=utf-8"],
+  "/web/guide-alignment.mjs":["web/guide-alignment.mjs","text/javascript; charset=utf-8"],
+  "/web/guide-alignment.css":["web/guide-alignment.css","text/css; charset=utf-8"],
   "/src/assistance-trace.mjs":["src/assistance-trace.mjs","text/javascript; charset=utf-8"],
   "/web/assistance-trace-view.mjs":["web/assistance-trace-view.mjs","text/javascript; charset=utf-8"],
 
