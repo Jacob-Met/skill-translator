@@ -1,0 +1,99 @@
+{
+  "artifacts_sha256": {
+    "authored-controls.tar.xz": "fa7dffc3283d22920cee944e93a892dabc6af889fe23dbc3ea26ecae8454cb89",
+    "desktop.png": "58f210a87914a981a57f256131503b5ef410641edbe1a6d7459ed71854176e04",
+    "narrow.png": "feac0e261d1ee811932f7003323ed38ee240dfc56027f4581576c9826da59c66"
+  },
+  "base_commit": "48a50ce68d50215481258c664f97c983c87b6009",
+  "browser": {
+    "browser": "Chrome/156.0.8078.47",
+    "checks": [
+      "two distinct original clips pass actual Studio frame capture and saved-source export",
+      "actual source entry preserves unmapped uncertainty despite matching authored labels",
+      "explicit changed correspondences flip stable order to opposing witnesses; duplicate targets refuse",
+      "renaming an already retained demonstration does not create additional evidence",
+      "downloaded declaration is received by maintained rehearsal and distinguishes correct from reversed order",
+      "fresh390px study reopening checks original frames and recomputes exact matches and expert declarations",
+      "forged findings are recomputed; swapped PNGs and omitted raw comparisons refuse transactionally",
+      "aggregate byte/pixel arithmetic boundaries and multi-source pixel preflight refuse excess before decoding",
+      "single-flight admission drains superseded decodes and adopts only the latest of three source requests",
+      "a delayed whole-study read cannot overwrite a newer expert draft",
+      "old-source save completing after replacement commit is refused without a stale download",
+      "no browser exceptions or offsite requests; exact source hashes stayed unchanged throughout"
+    ],
+    "errors": [],
+    "evidence": "Two original authored clips and actual browser/PNG software controls; no physical-skill, causal-necessity or learning-efficacy claim.",
+    "failure": null,
+    "node": "v22.23.4",
+    "offsite": [],
+    "sourceHashes": {
+      "server.mjs": "adc949e3622eb98758ee1894b5a5f0d0c1fbb45e49abcf3496e46833d4df0e67",
+      "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "src/order-evidence.mjs": "e5e3e02a13ddf7a7b7214cf18ab6ee0f79a52a564a507d96a70f7a6465eb297d",
+      "src/prerequisite-rehearsal.mjs": "45ffa47e98b6d2813ac4db9d86af9fa39a8804c180364e181ffb65ca195493e9",
+      "tools/browser-order-evidence.mjs": "594223b0abad55203e8dccd2173fe6b6528f2410368a7f3522c6a527de2893ea",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "web/order-evidence-input.mjs": "7729d7af646d19715abd17f840403f5f95a1b8c0193a3e3b046b1b6a418394a2",
+      "web/order-evidence.css": "24b628710c914dba21517c7f70ce3b4686bbe13db0b5449c98ecd1f02f26f773",
+      "web/order-evidence.html": "3b05bbcd92e3f4f150815e6517e6482d980c1615a9bb974c0d134f8220eafd90",
+      "web/order-evidence.mjs": "c3203512bdc7d232d68e23c828ef68d7cb7f75a9bf52cd7efc35e8d414a20463",
+      "web/prerequisite-rehearsal.mjs": "b8bfa42d93fe6b2acc9676f292f8486fdd38562f6e422438f27adb1542243db3",
+      "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "web/sequence.mjs": "1b2cbcdb07ce440b29c69c626aec19dc08a99de1ee7b6d0f1d3323e1821f2dd4"
+    }
+  },
+  "changed_source_sha256": {
+    "README.md": "afcc09cfebc06a2cf05c31eff01dea092be5f11042040bb07a6008b763c0941c",
+    "docs/ORDER_EVIDENCE.md": "d3a35956b2143bec1e5b1c385b50b4740c6e284ac6875156b7a7fca17f927607",
+    "server.mjs": "adc949e3622eb98758ee1894b5a5f0d0c1fbb45e49abcf3496e46833d4df0e67",
+    "src/order-evidence.mjs": "e5e3e02a13ddf7a7b7214cf18ab6ee0f79a52a564a507d96a70f7a6465eb297d",
+    "test/order-evidence.test.mjs": "8974d8ec02ef7087804705cf461486230ffcf6c8dab1bd19620fa743224c7860",
+    "tools/browser-order-evidence.mjs": "594223b0abad55203e8dccd2173fe6b6528f2410368a7f3522c6a527de2893ea",
+    "web/order-evidence-input.mjs": "7729d7af646d19715abd17f840403f5f95a1b8c0193a3e3b046b1b6a418394a2",
+    "web/order-evidence.css": "24b628710c914dba21517c7f70ce3b4686bbe13db0b5449c98ecd1f02f26f773",
+    "web/order-evidence.html": "3b05bbcd92e3f4f150815e6517e6482d980c1615a9bb974c0d134f8220eafd90",
+    "web/order-evidence.mjs": "c3203512bdc7d232d68e23c828ef68d7cb7f75a9bf52cd7efc35e8d414a20463",
+    "web/prerequisite-rehearsal.html": "dd0e7aadee0e31a2a675e68ac30e7fb74d4a5df7d1b92e91b01807c1cf210720",
+    "web/sequence.html": "2cb9c1d4c02fd45fbe59e3c77b93872402b106e861df5af7011c24afc8d91821"
+  },
+  "composition": {
+    "preserved_current_work": [
+      "README retains current response-family/challenge sections and adds order guide",
+      "server retains every current readiness/response/challenge route and adds five explicit order routes",
+      "sequence navigation retains current readiness entry and adds order link"
+    ],
+    "prior_feature_base": "05525d4badf6aaeeab1c9647b10f479106d773ca"
+  },
+  "created_utc": "2026-10-24T15:17:09.147132+00:00",
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/73",
+  "limits": [
+    "Original clips are authored software controls, not recorded experts or verified physical success.",
+    "Retained frame intervals are not measured action durations; shared endpoints mean at-or-before.",
+    "Agreement across explicitly mapped examples is chronology, not causal necessity or independent sampling.",
+    "Expert prerequisites are separately supplied reasons; exported rehearsal retains reference source and declarations, while complete comparison study retains all examples.",
+    "32 MB PNG and 32 megapixel shared retained budgets are not process-heap guarantees.",
+    "No physical skill, learning efficacy, readiness inference or hardware action qualification."
+  ],
+  "native": {
+    "failed": 0,
+    "new_focused_groups": 8,
+    "passed": 307,
+    "skipped": 0
+  },
+  "review": {
+    "author_and_lead_pixels": "actual desktop/narrow source-frame comparison inspected; replaced verbose UUID labels with source-local ordinals while exact IDs remain in retained values.",
+    "development_fixes": [
+      "normalize declared reasons before saving",
+      "serialize complete admission/adoption/cleanup operations while invalidating immediately",
+      "compare source epochs and accepted-state identity after asynchronous save",
+      "canonicalize equal-start interval multiset for duplicate-source refusal",
+      "wait for actual import completion in receiving course instead of prior status text"
+    ],
+    "execution": "root executed all native and actual browser courses on composed source.",
+    "independent_source": "retained MECHANISM contributor read core, bundle admission, UI state/async races and tests; no remaining blocking defect; did not independently execute."
+  },
+  "schema": "skill-translator.integration-receipt/v1",
+  "team": "hamon-195c0e2a763d-20261023"
+}

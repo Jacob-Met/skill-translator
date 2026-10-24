@@ -5,8 +5,15 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
-  "/src/feature-width.mjs":["src/feature-width.mjs","text/javascript; charset=utf-8"],
-  "/web/feature-width.mjs":["web/feature-width.mjs","text/javascript; charset=utf-8"],
+  "/response-demonstrations":["web/response-demonstrations.html","text/html; charset=utf-8"],
+  "/web/response-demonstrations.css":["web/response-demonstrations.css","text/css; charset=utf-8"],
+  "/web/response-demonstrations.mjs":["web/response-demonstrations.mjs","text/javascript; charset=utf-8"],
+  "/src/response-demonstrations.mjs":["src/response-demonstrations.mjs","text/javascript; charset=utf-8"],
+  "/order-evidence":["web/order-evidence.html","text/html; charset=utf-8"],
+  "/web/order-evidence.mjs":["web/order-evidence.mjs","text/javascript; charset=utf-8"],
+  "/web/order-evidence-input.mjs":["web/order-evidence-input.mjs","text/javascript; charset=utf-8"],
+  "/src/order-evidence.mjs":["src/order-evidence.mjs","text/javascript; charset=utf-8"],
+  "/web/order-evidence.css":["web/order-evidence.css","text/css; charset=utf-8"],
   "/src/readiness-explanation.mjs":["src/readiness-explanation.mjs","text/javascript; charset=utf-8"],
   "/web/readiness-explanation.mjs":["web/readiness-explanation.mjs","text/javascript; charset=utf-8"],
   "/web/affine-challenge.css":["web/affine-challenge.css","text/css; charset=utf-8"],
@@ -44,6 +51,8 @@ const routes=Object.freeze({
   "/web/feature-clearance.css":["web/feature-clearance.css","text/css; charset=utf-8"],
   "/web/feature-clearance.mjs":["web/feature-clearance.mjs","text/javascript; charset=utf-8"],
   "/src/feature-clearance.mjs":["src/feature-clearance.mjs","text/javascript; charset=utf-8"],
+  "/src/feature-width.mjs":["src/feature-width.mjs","text/javascript; charset=utf-8"],
+  "/web/feature-width.mjs":["web/feature-width.mjs","text/javascript; charset=utf-8"],
   "/observe-attempt":["web/observe-attempt.html","text/html; charset=utf-8"],
   "/web/observe-attempt.css":["web/observe-attempt.css","text/css; charset=utf-8"],
   "/web/observe-attempt.mjs":["web/observe-attempt.mjs","text/javascript; charset=utf-8"],
@@ -163,4 +172,3 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
-
