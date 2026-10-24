@@ -1,0 +1,245 @@
+{
+  "course": "transition-practice",
+  "passed": true,
+  "runtime": {
+    "browser": "Chrome/156.0.8078.47",
+    "node": "v22.23.4",
+    "platform": "linux",
+    "arch": "x64",
+    "configuredChrome": "/opt/google/chrome/chrome",
+    "launchedExecutable": "/opt/google/chrome/chrome",
+    "sandboxFlags": []
+  },
+  "sources": [
+    {
+      "path": "server.mjs",
+      "sha256": "24e97ba80ac3c51a0f945df5466abe00a99a9b743c7eae1d96c28f6078b71741",
+      "bytes": 16121
+    },
+    {
+      "path": "src/authoring.mjs",
+      "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "bytes": 1825
+    },
+    {
+      "path": "src/capture-editing.mjs",
+      "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+      "bytes": 3930
+    },
+    {
+      "path": "src/capture.mjs",
+      "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "bytes": 6096
+    },
+    {
+      "path": "src/demo.mjs",
+      "sha256": "dac54e87c24314966e58b73c752e4ee06573057bf49cb5d9f6d934ebcf386657",
+      "bytes": 1390
+    },
+    {
+      "path": "src/demonstration-sequence.mjs",
+      "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "bytes": 10025
+    },
+    {
+      "path": "src/frame-origin.mjs",
+      "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "bytes": 3292
+    },
+    {
+      "path": "src/geometry.mjs",
+      "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "bytes": 7305
+    },
+    {
+      "path": "src/layout-feedback.mjs",
+      "sha256": "bc9ff4fab54557b563f9a5b409cff29c262087f30d9c8aef686f77950fea50d8",
+      "bytes": 3186
+    },
+    {
+      "path": "src/learner-observation.mjs",
+      "sha256": "8e7b0bf128ca22ef79e33e89d3f64a2906b9340911d5b41a8b5cebead5b75431",
+      "bytes": 2466
+    },
+    {
+      "path": "src/practice.mjs",
+      "sha256": "283909901f4d436affc4382373e455fbf3951d221a1d4918d261453e9c6c3bd6",
+      "bytes": 7944
+    },
+    {
+      "path": "src/sequence-capture.mjs",
+      "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "bytes": 1672
+    },
+    {
+      "path": "src/sequence-change.mjs",
+      "sha256": "1abe0f2392f47ca18477097ea3d100aff4a92ecc1815f87e3a1800e02f80d81e",
+      "bytes": 7167
+    },
+    {
+      "path": "src/task-relationships.mjs",
+      "sha256": "e1c0a8568f04302e782c50cb17ac85a661c374847ec45d70738d84696259a563",
+      "bytes": 3771
+    },
+    {
+      "path": "src/transition-practice.mjs",
+      "sha256": "c87e04d35f0918519f7646e11e57f3429481fb8ae95e180601ac05a34de652b9",
+      "bytes": 8288
+    },
+    {
+      "path": "tools/browser-transition-practice.mjs",
+      "sha256": "060ddc5c0e54a148e9efbae10f7e0de470491a81a36beb5caf3f30b34897295a",
+      "bytes": 18436
+    },
+    {
+      "path": "web/image-input.mjs",
+      "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "bytes": 1511
+    },
+    {
+      "path": "web/layout-feedback.mjs",
+      "sha256": "4ab9cb15d9c3a67cfbc0232b5c26a108028d4fe9d2ccaad3189e5b6b95f30ee8",
+      "bytes": 2136
+    },
+    {
+      "path": "web/practice.css",
+      "sha256": "f1774c223187097e381e1b352fba2c8ed22320aa3b98d3ea23a214f65ae51eea",
+      "bytes": 6158
+    },
+    {
+      "path": "web/practice.html",
+      "sha256": "ede4c047ad8d55e3e0647bd582bb3dd2c6ae4c0a78127c846af234f168d8fa3a",
+      "bytes": 4844
+    },
+    {
+      "path": "web/practice.mjs",
+      "sha256": "6bcdaca3f5978714abb3087d202adf776688cd5f83c4c9bb1def3bc8e9842ccd",
+      "bytes": 17111
+    },
+    {
+      "path": "web/sequence-change-input.mjs",
+      "sha256": "c1452e7c8be99517d49025f3297fcbcd66aba30ac202db2221dbed163beaf355",
+      "bytes": 2084
+    },
+    {
+      "path": "web/sequence-change.css",
+      "sha256": "be7d0fa8418a0be79c4a08075c6c0c6613a3ec81a29463f761858740789541f0",
+      "bytes": 4037
+    },
+    {
+      "path": "web/sequence-change.html",
+      "sha256": "be4a1d1dbb87b5d80885bac8d9e3e47ff097b918afc6208f37d1d8efa5f025b6",
+      "bytes": 5460
+    },
+    {
+      "path": "web/sequence-change.mjs",
+      "sha256": "126d0eabcf61fd2e0a1ff494f18bc20fad3b663630b81ba2da97069334bb3b8d",
+      "bytes": 12500
+    },
+    {
+      "path": "web/sequence-input.mjs",
+      "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "bytes": 4361
+    },
+    {
+      "path": "web/styles.css",
+      "sha256": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "bytes": 13526
+    },
+    {
+      "path": "web/transition-practice-view.mjs",
+      "sha256": "5888761c5c7ba6ba15bdbd25e1b6bd572e540d8c652f5c0ab7dfb3bd379f68f5",
+      "bytes": 3922
+    },
+    {
+      "path": "web/transition-practice.css",
+      "sha256": "ed67909a123a0ae53d06f778d7c1ab8f7836504102332452728b378ee245742f",
+      "bytes": 2180
+    },
+    {
+      "path": "web/transition-practice.html",
+      "sha256": "9287aa3b9ef9edecae15d36a897f00b8240e20e0dd96030615bbf02b01bbf716",
+      "bytes": 4280
+    },
+    {
+      "path": "web/transition-practice.mjs",
+      "sha256": "9f487b50d40cffe137163bc6ebbcd8e83dba85e45cfda86c4251bc6e8aeef834",
+      "bytes": 10251
+    }
+  ],
+  "checks": [
+    "actual maintained producer receives original PNG sequence, retains explicit reference/pairs and exports source-bound comparison",
+    "actual before30→after40 passes final endpoint but differs from source change by10mm; locked prediction precedes feedback",
+    "identical session reimport and disabled reference resubmission preserve the original prediction after feedback",
+    "changed actual after50 reproduces displacement while failing endpoint; revisions clear reference/prediction/reveal",
+    "actual both-pass control and fresh empty before round keep final agreement separate from unknown change",
+    "foreign practice dimensions refuse without replacing accepted evidence or revealed findings",
+    "later learner-reference edit cancels delayed incoming session without assigning it to accepted context",
+    "actual keyboard export and fresh390px reopen retain source PNGs, raw sessions, first prediction and separate computed observations",
+    "forged saved derived findings are ignored and recomputed from raw source/practice inputs"
+  ],
+  "artifacts": [
+    {
+      "path": "authored-sequence.json",
+      "sha256": "79438dee555b56f6901699433aa29b5399cd48174e4652c96337024b708ceafb",
+      "bytes": 21595
+    },
+    {
+      "path": "actual-producer-comparison.json",
+      "sha256": "86a93185fec7a09ee39a67211d5603d85b3af0a93b602ab9653880b3a116198c",
+      "bytes": 27139
+    },
+    {
+      "path": "actual-before-30.json",
+      "sha256": "b8f032070aba166383b90139342a4806214afb1cf6840a67fce6328ac6628bfa",
+      "bytes": 1298
+    },
+    {
+      "path": "actual-after-40.json",
+      "sha256": "730637d91fec5aa3f3acb125c8360120b9ba984dfa15fdff93688a7c6b40d8a2",
+      "bytes": 1298
+    },
+    {
+      "path": "actual-after-40-reordered.json",
+      "sha256": "d9d08752553e6f2cbff28e23f4fa6ae736c9dfdc5f279a4042bc998c24a90138",
+      "bytes": 1298
+    },
+    {
+      "path": "actual-after-50.json",
+      "sha256": "3a280aacf5dd5885efa634ee9dc977b0ec5ae7643d69f8e73cecefbbe82d93e8",
+      "bytes": 1298
+    },
+    {
+      "path": "actual-before-20.json",
+      "sha256": "6220e1918978e2e8c12411c89f4367f43fa37e7eedc30e0bede4c723be3b864d",
+      "bytes": 1298
+    },
+    {
+      "path": "actual-before-empty.json",
+      "sha256": "3cfb2e31e56e2b63cd091f7f44b66d66376e71b2099900a059cbd294b9e6e7d2",
+      "bytes": 1396
+    },
+    {
+      "path": "exported-and-reopened-transition.json",
+      "sha256": "d9edfd9e1a88129e7c05a1bf4d87c4245737f9c557458f77d7851dbd991c4c68",
+      "bytes": 30199
+    },
+    {
+      "path": "desktop.png",
+      "sha256": "6fd22641b88528e6c98692f2c79a2e4259f920dfd832baa01e01780f7f89cf35",
+      "bytes": 465396
+    },
+    {
+      "path": "desktop-findings.png",
+      "sha256": "f1da6e444c24d9c25fe7fe865459753072f9890d069e78de042c90601e930257",
+      "bytes": 170315
+    },
+    {
+      "path": "mobile.png",
+      "sha256": "e2dbfd85d87bdf021767be48c5d24fa587de3d0dbc81b4e1baf115fc5c828127",
+      "bytes": 463892
+    }
+  ],
+  "errors": [],
+  "inputBasis": "Original authored PNG/calibration sequence; actual maintained comparison UI declarations/export, actual practice forms/downloads, actual learner comparison UI. No recorded physical action or efficacy qualification."
+}

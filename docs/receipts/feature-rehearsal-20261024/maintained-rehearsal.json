@@ -1,0 +1,22 @@
+{
+  "schema": "skill-translator.rehearsal-browser-receipt/v1",
+  "browser": "Chrome/156.0.8078.47",
+  "groups": [
+    "maintained workbench opens rehearsal with targets and feedback withheld",
+    "own source and explicit distinct workpieces are accepted",
+    "help records pre-reveal placements and hiding targets does not erase assistance",
+    "partial commitment retains missing marks and locks further editing",
+    "next workpiece starts without old placements, feedback or target reveals",
+    "mirrored physical keyboard placement and complete changed-size review reuse geometric assessment",
+    "invalid replay is rejected transactionally",
+    "invalid plan replacement preserves committed work",
+    "new accepted plan cancels a delayed older file replacement",
+    "new coordinate drafts cancel delayed source/session replacement without being overwritten",
+    "fresh narrow browser reopens source, all actions and recomputed committed outcomes",
+    "header links retain computed contrast at least4.5 on desktop and390px",
+    "no page exceptions or offsite requests"
+  ],
+  "errors": [],
+  "offsite": [],
+  "source": "Authored geometric controls; no physical or learning claim"
+}

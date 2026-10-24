@@ -1,0 +1,114 @@
+{
+  "schema": "skill-translator.context-order-receiving/v1",
+  "base_commit": "67493e063462d97086e655d81a6b0b71fa761f9d",
+  "source_sha256": {
+    "src/context-order.mjs": "0d08ac28deba749fb6136a3725394c67ad1872c33005e829094b1cd0d3578d32",
+    "test/context-order.test.mjs": "90762c26d5c3be3dfedeb9c202ba8fe5e6debabea76c3489cca7a19abddc10cf",
+    "web/context-order-input.mjs": "d297739385a16b375fba6a0ac7b14f30129d5f29753d3a8163754979320e90fd",
+    "web/context-order.mjs": "1972a351b7a7bb04ba1d16de83712ade7689458fed593dd4cee3017b92e09579",
+    "web/context-order.html": "8647b522dd5eb56a3439671e17980b42d10a1c3cdc8538fc1b162cee4e324d58",
+    "web/context-order.css": "2367575de2d4aabe6cd3b6c7cf3d264fafa840b32dee470e3b1ab9dad4e32d13",
+    "tools/browser-context-order.mjs": "7cb4e5e466d57fc1c77087637431511edc92a2e583462f27975df3f89ddb6bc2",
+    "web/prerequisite-rehearsal.html": "14ed23f7aa58e0ff3f7b9789220042595a15f7c93962b3a9e355bc1589feaffb",
+    "docs/CONTEXT_ORDER_MODEL.md": "62128a9c80673d868f5e8437ca0c2cb7e108b7f06852321311aa6796ebab2bd9",
+    "server.mjs": "52d7d1a0cd198a03f1ceb2086a267517f8ff0fdd4517801c5269fca5bc1be8d2",
+    "README.md": "8799d2adf1ebe3b8b04495f692f89a8997a9d260db695718d07ce437db5237df"
+  },
+  "native": {
+    "command": "npm test",
+    "tests": 377,
+    "pass": 377,
+    "fail": 0,
+    "skipped": 0,
+    "new_groups": 8,
+    "independent_oracle_dags": 120,
+    "maximum_steps": 16,
+    "maximum_optimal_order_count": 20922789888000,
+    "maximum_typed_array_bytes": 10485760
+  },
+  "browser": {
+    "checks": [
+      {
+        "name": "Original authored clip retained through Studio and prerequisite first proposal",
+        "passed": true
+      },
+      {
+        "name": "Partial declarations preserve normalized original prerequisite record",
+        "passed": true
+      },
+      {
+        "name": "Exact conditional grouping changes while retained source witnesses remain inspectable",
+        "passed": true
+      },
+      {
+        "name": "Actual maintained rehearsal receives unchanged first proposal instead of optimum",
+        "passed": true
+      },
+      {
+        "name": "Fresh 390px reopen recomputes and changed explicit contexts change optimum and count",
+        "passed": true
+      },
+      {
+        "name": "Changed declared DAG changes optimum without changing source images",
+        "passed": true
+      },
+      {
+        "name": "Forged output ignored and missing declarations or mismatched PNG refuse transactionally",
+        "passed": true
+      },
+      {
+        "name": "Seventeen-step admission refuses before PNG decode without truncation",
+        "passed": true
+      },
+      {
+        "name": "Single-flight admission discards queued superseded sources and adopts latest complete source",
+        "passed": true
+      },
+      {
+        "name": "Newer author edits invalidate delayed source admission without losing accepted context truth",
+        "passed": true
+      },
+      {
+        "name": "Old-source save cannot export after pending replacement commits",
+        "passed": true
+      },
+      {
+        "name": "Exact tested source stayed unchanged and browser made no offsite requests or errors",
+        "passed": true
+      }
+    ],
+    "errors": [],
+    "offsite": [],
+    "failure": null,
+    "browser": "Chrome/156.0.8078.47",
+    "node": "v22.23.4",
+    "sourceHashes": {
+      "src/context-order.mjs": "0d08ac28deba749fb6136a3725394c67ad1872c33005e829094b1cd0d3578d32",
+      "src/prerequisite-rehearsal.mjs": "45ffa47e98b6d2813ac4db9d86af9fa39a8804c180364e181ffb65ca195493e9",
+      "web/context-order-input.mjs": "d297739385a16b375fba6a0ac7b14f30129d5f29753d3a8163754979320e90fd",
+      "web/context-order.mjs": "1972a351b7a7bb04ba1d16de83712ade7689458fed593dd4cee3017b92e09579",
+      "web/context-order.html": "8647b522dd5eb56a3439671e17980b42d10a1c3cdc8538fc1b162cee4e324d58",
+      "web/context-order.css": "2367575de2d4aabe6cd3b6c7cf3d264fafa840b32dee470e3b1ab9dad4e32d13",
+      "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "web/prerequisite-rehearsal.mjs": "b8bfa42d93fe6b2acc9676f292f8486fdd38562f6e422438f27adb1542243db3",
+      "web/sequence.mjs": "1b2cbcdb07ce440b29c69c626aec19dc08a99de1ee7b6d0f1d3323e1821f2dd4",
+      "tools/browser-context-order.mjs": "7cb4e5e466d57fc1c77087637431511edc92a2e583462f27975df3f89ddb6bc2",
+      "server.mjs": "52d7d1a0cd198a03f1ceb2086a267517f8ff0fdd4517801c5269fca5bc1be8d2"
+    },
+    "evidence": "Original authored clip, supplied prerequisite/context assumptions and software receiving. No physical effort, safety, readiness, completion or learning claim."
+  },
+  "archive_sha256": "a89f69e9b88992f09b67e5005d2bc64f2abfc611d5804d88aeda2f5633de5931",
+  "first_run_diagnosis": "Original source/partial save passed, then a background-tab ElementHandle operation timed out. Controlled two-tab A/B reproduced timeout at 15 seconds and completed comparison/witness immediately after bringToFront. Harness foregrounds the surface before interaction; product source unchanged. Exact selected-step/before-after moment assertions added before final receiving. No timeout increase or product gate relaxation.",
+  "review": {
+    "reviewer": "independent retained MECHANISM contributor",
+    "scope": "actual core, eight native groups, input/UI/browser sources, executed receipt and actual desktop/narrow pixels; no independent runtime execution claimed",
+    "findings": "No blockers; requested stronger exact frame-identity assertion is present in the passing course."
+  },
+  "preserved": [
+    "raw affine challenge routes and source",
+    "task readiness journal and practice",
+    "original imported prerequisite record and first learner proposal"
+  ],
+  "qualification": "Original authored clip and declared context/prerequisite assumptions, exact bounded integer-model comparison, actual software source/frame receiving. No physical efficiency, safety, readiness, completion, learning, provider or contest qualification."
+}

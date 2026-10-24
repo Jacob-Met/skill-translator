@@ -383,3 +383,11 @@ Open `/affine-outcome-conflicts` with a retained [raw prospective challenge](doc
 Minimality is group-local, not a recommendation to remove evidence. A conflicting group does not identify a faulty measurement, prove a causal explanation or validate skill transfer. Missing outcomes remain untested. Invalid, over-capacity or unavailable analyses are explicitly refused; previous accepted results are labeled while another import is pending or refused. Saving preserves the compact raw account, and groups recompute on reopening.
 
 See [the interpretation and receiving guide](docs/AFFINE_OUTCOME_CONFLICTS.md). The composed source passed **353 native tests, zero failures/skips**, and **nine actual sandboxed Chrome groups**, with independent source review and parent desktop/390px inspection. [Exact receiving receipt](docs/receipts/affine-outcome-conflicts-20261024/verification.json). Prior #81 receiving remains recorded separately.
+
+### Learner-photo annotation regions
+
+From the photo observation page, open **Inspect annotation bounds in a new tab** to inspect the complete mapped region of a declared pixel rectangle under the fixed calibration. Compare conditional distance extrema with the unchanged point tolerance result, preserve missing marks, and export/reopen source-bound inputs. Original photo drafts and practice sessions remain intact. See [annotation-region assumptions and receiving](docs/ANNOTATION_BOUND.md). This does not estimate calibration uncertainty or establish physical accuracy or skill.
+
+## Compare declared context changes
+
+Open `/context-order` from Prerequisite rehearsal to compare complete sequential orders under imported prerequisites and explicitly authored context labels. The bounded exact solver reports one representative and the count of optimal orders, while retaining original frames and the learner’s first proposal unchanged. Save partial declarations, reopen and recompute, or export the original rehearsal. Fewer declared context changes does not establish physical efficiency, readiness, completion or learning. See [the context-order model](docs/CONTEXT_ORDER_MODEL.md) for assumptions and receiving.

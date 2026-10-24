@@ -5,6 +5,21 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/transition-practice":["web/transition-practice.html","text/html; charset=utf-8"],
+  "/src/transition-practice.mjs":["src/transition-practice.mjs","text/javascript; charset=utf-8"],
+  "/web/transition-practice.mjs":["web/transition-practice.mjs","text/javascript; charset=utf-8"],
+  "/web/transition-practice-view.mjs":["web/transition-practice-view.mjs","text/javascript; charset=utf-8"],
+  "/web/transition-practice.css":["web/transition-practice.css","text/css; charset=utf-8"],
+  '/context-order':['web/context-order.html','text/html; charset=utf-8'],
+  '/web/context-order.mjs':['web/context-order.mjs','text/javascript; charset=utf-8'],
+  '/web/context-order-input.mjs':['web/context-order-input.mjs','text/javascript; charset=utf-8'],
+  '/src/context-order.mjs':['src/context-order.mjs','text/javascript; charset=utf-8'],
+  '/web/context-order.css':['web/context-order.css','text/css; charset=utf-8'],
+
+  "/annotation-bound":["web/annotation-bound.html","text/html; charset=utf-8"],
+  "/web/annotation-bound.css":["web/annotation-bound.css","text/css; charset=utf-8"],
+  "/web/annotation-bound.mjs":["web/annotation-bound.mjs","text/javascript; charset=utf-8"],
+  "/src/annotation-bound.mjs":["src/annotation-bound.mjs","text/javascript; charset=utf-8"],
   "/affine-outcome-conflicts":["web/affine-outcome-conflicts.html","text/html; charset=utf-8"],
   "/src/affine-outcome-conflicts.mjs":["src/affine-outcome-conflicts.mjs","text/javascript; charset=utf-8"],
   "/web/affine-outcome-conflicts-worker.mjs":["web/affine-outcome-conflicts-worker.mjs","text/javascript; charset=utf-8"],

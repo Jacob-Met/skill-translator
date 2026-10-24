@@ -1,0 +1,73 @@
+{
+  "schema": "skill-translator-practice/v1",
+  "reference": {
+    "provenance": "User-selected local image; human-authored calibration and relationships.",
+    "source": {
+      "widthMm": 160,
+      "heightMm": 90,
+      "corners": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 320,
+          "y": 0
+        },
+        {
+          "x": 320,
+          "y": 180
+        },
+        {
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "image": {
+        "sha256": "3b517b10e496305fcaddd64e1a28845a64aef37bb2f708fb35edf9759b0aa5cc",
+        "widthPx": 320,
+        "heightPx": 180
+      }
+    },
+    "landmarks": [
+      {
+        "id": "hold-1",
+        "sourcePx": {
+          "x": 160,
+          "y": 120
+        },
+        "kind": "fraction",
+        "edge": null,
+        "toleranceMm": 1
+      },
+      {
+        "id": "move-1",
+        "sourcePx": {
+          "x": 80,
+          "y": 60
+        },
+        "kind": "fraction",
+        "edge": null,
+        "toleranceMm": 1
+      }
+    ],
+    "target": {
+      "widthMm": 160,
+      "heightMm": 90
+    }
+  },
+  "round": 1,
+  "history": [],
+  "attempts": [
+    {
+      "id": "hold-1",
+      "xMm": 80,
+      "yMm": 60
+    },
+    {
+      "id": "move-1",
+      "xMm": 40,
+      "yMm": 30
+    }
+  ]
+}

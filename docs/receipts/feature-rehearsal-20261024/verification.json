@@ -1,0 +1,134 @@
+{
+  "base": "170be69c68c0807c83753f2e072f035680670940",
+  "unchangedRuntimeSupportBlobsVerified": 282,
+  "excludedBaseArchives": [
+    "docs/receipts/",
+    "evidence/"
+  ],
+  "sourceFiles": [
+    {
+      "path": "src/feature-placement.mjs",
+      "sha256": "d86850fd9241f8969ed8aa31599a728bb35a97fbe8b81b6c5465707112e21b65",
+      "bytes": 1330
+    },
+    {
+      "path": "src/feature-practice.mjs",
+      "sha256": "9fe7b219720b076a6b95806791d48e81a13a2ad2503fab68de6f409b0583918b",
+      "bytes": 1881
+    },
+    {
+      "path": "src/feature-rehearsal.mjs",
+      "sha256": "9877f4c060b5a283eff45f3a5f7a30858cbd3c059b0ce24ec5c4bff2a6649192",
+      "bytes": 2748
+    },
+    {
+      "path": "web/feature-rehearsal.html",
+      "sha256": "d580cdcee15088b3c38ecd830eef2632a6831674b1049f19f406fd958463220c",
+      "bytes": 2606
+    },
+    {
+      "path": "web/feature-rehearsal.mjs",
+      "sha256": "bf361525023e2ede96fe1c63a5523d4bb1a74f8fab7463f830e59a8979da02e6",
+      "bytes": 6111
+    },
+    {
+      "path": "web/feature-clearance.html",
+      "sha256": "0ce1b97ec1260962f0ff894270e4397b71fcec3e090a436fcfc64380d5512efe",
+      "bytes": 3301
+    },
+    {
+      "path": "web/feature-clearance.mjs",
+      "sha256": "3c9c3f9e1fbea1c0e3c8c442dda0c7fd2db566fa678fdde21f2579d0347cf07b",
+      "bytes": 8819
+    },
+    {
+      "path": "web/rehearsal.html",
+      "sha256": "06069801ef9815c4f19727fdf8d62eeff15c3c423f059dbdb7fb32b5df4220f4",
+      "bytes": 4348
+    },
+    {
+      "path": "web/rehearsal.mjs",
+      "sha256": "4f1927b24841f2c9d4f80c623fc3e208f4628345b088bfa10c2f01d6dc7f364f",
+      "bytes": 10865
+    },
+    {
+      "path": "server.mjs",
+      "sha256": "7a9c2e53b036160cbcd78c45cddd3601053da0fd9f15c8a7ef7d405505853358",
+      "bytes": 16488
+    },
+    {
+      "path": "test/feature-rehearsal.test.mjs",
+      "sha256": "0a48b140c75aa98961593c2a3377134727c9336dd1ab3a738d7df99bf02d57ef",
+      "bytes": 5826
+    },
+    {
+      "path": "tools/browser-feature-rehearsal.mjs",
+      "sha256": "042b9716c8ea56e3eb3801b728e647e426d0ecef961203bb1b14c924077c2efe",
+      "bytes": 9136
+    },
+    {
+      "path": "FEATURE_REHEARSAL_INTEGRATION.md",
+      "sha256": "d012d539ec24d9f7f3bb563fda8213363497e06ce7c83811d18e018cade6f4cb",
+      "bytes": 3387
+    }
+  ],
+  "native": {
+    "pass": 393,
+    "skip": 0
+  },
+  "browser": {
+    "newGroups": 7,
+    "featurePractice": 8,
+    "maintainedRehearsal": 13
+  },
+  "review": {
+    "independentGroups": 4,
+    "generatedDifferentialSessions": 60
+  },
+  "artifacts": {
+    "comparison.json": {
+      "sha256": "f2ead488f6daf91f0b5a2194cace16555e48b7c006237b78cef0c9cd8f72acef",
+      "gitBlob": "d627b1d6615248b036c08d2cbad506e9d9719fc6",
+      "bytes": 704
+    },
+    "feature-rehearsal-1280.png": {
+      "sha256": "7080891027f703b614e16a441600410bc4885711b77de096b8529eb4a0203f7e",
+      "gitBlob": "d657178df5060e13d3127b02a5468de4807bbae6",
+      "bytes": 159249
+    },
+    "wrong-session.json": {
+      "sha256": "f9fa8520af2a45c17c9d2bc63165bd0a268d526c1b80500a6724ab21b1032bca",
+      "gitBlob": "df5cb3f4f0e8c36865c94864b9f24ecb41392529",
+      "bytes": 789
+    },
+    "receipt.json": {
+      "sha256": "dfc77af1dfc1b5ac6006617c758507a28fc0a859bc07de2fdd0afed533bd5e58",
+      "gitBlob": "75825eaaee1b43c24ed29feabab8a628816da6a9",
+      "bytes": 926
+    },
+    "feature-rehearsal-390.png": {
+      "sha256": "0dfa93505073ac18c2d14701ee2fb3a351b4bca04e32a8d0582b3cac325f5640",
+      "gitBlob": "4d176d2cfad1d266e9e9e890bc540918f94d2ddd",
+      "bytes": 151244
+    },
+    "fresh-session.json": {
+      "sha256": "2c6a7f93bff34a2a471bc40cb5a70a2d58334f70c6494fda9e858b6c63b89ed4",
+      "gitBlob": "bc4d6419e62664c391380b0b2c1784c7c4ba5fc7",
+      "bytes": 541
+    }
+  },
+  "nativeLogSHA256": "9369dd0c61a07a6550fb75758c0514b8572707e0a470a885f30e90871105585b",
+  "nativeLogGzipSHA256": "e9d19dba6cace9f63989b6af8b3b06ac69a92d2d1dc7493ce6068849d0db8567",
+  "environment": {
+    "system": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "node": "v22.23.4",
+    "chrome": "Google Chrome 156.0.8078.47",
+    "chromiumSandbox": true
+  },
+  "routes": {
+    "routes": 171,
+    "status": "all served exact maintained file bytes and declared content types",
+    "serverSHA256": "7a9c2e53b036160cbcd78c45cddd3601053da0fd9f15c8a7ef7d405505853358",
+    "base": "170be69c68c0807c83753f2e072f035680670940"
+  }
+}

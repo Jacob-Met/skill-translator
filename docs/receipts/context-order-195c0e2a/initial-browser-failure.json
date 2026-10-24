@@ -1,0 +1,32 @@
+{
+  "checks": [
+    {
+      "name": "Original authored clip retained through Studio and prerequisite first proposal",
+      "passed": true
+    },
+    {
+      "name": "Partial declarations preserve normalized original prerequisite record",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "offsite": [],
+  "failure": "ProtocolError: Runtime.callFunctionOn timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed.\n    at <instance_members_initializer> (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/common/CallbackRegistry.js:108:14)\n    at new Callback (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/common/CallbackRegistry.js:112:16)\n    at CallbackRegistry.create (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/common/CallbackRegistry.js:27:26)\n    at Connection._rawSend (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/cdp/Connection.js:125:26)\n    at CdpCDPSession.send (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/cdp/CdpSession.js:72:14)\n    at #evaluate (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:374:50)\n    at ExecutionContext.evaluate (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:36)\n    at IsolatedWorld.evaluate (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:30)\n    at CdpJSHandle.evaluate (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/api/JSHandle.js:154:37)\n    at CdpElementHandle.evaluate (file:///home/ubuntu/hamon-195c0e2a763d/browser-deps/node_modules/puppeteer-core/lib/puppeteer/api/ElementHandle.js:344:38)",
+  "browser": "Chrome/156.0.8078.47",
+  "node": "v22.23.4",
+  "sourceHashes": {
+    "src/context-order.mjs": "0d08ac28deba749fb6136a3725394c67ad1872c33005e829094b1cd0d3578d32",
+    "src/prerequisite-rehearsal.mjs": "45ffa47e98b6d2813ac4db9d86af9fa39a8804c180364e181ffb65ca195493e9",
+    "web/context-order-input.mjs": "d297739385a16b375fba6a0ac7b14f30129d5f29753d3a8163754979320e90fd",
+    "web/context-order.mjs": "1972a351b7a7bb04ba1d16de83712ade7689458fed593dd4cee3017b92e09579",
+    "web/context-order.html": "8647b522dd5eb56a3439671e17980b42d10a1c3cdc8538fc1b162cee4e324d58",
+    "web/context-order.css": "2367575de2d4aabe6cd3b6c7cf3d264fafa840b32dee470e3b1ab9dad4e32d13",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+    "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+    "web/prerequisite-rehearsal.mjs": "b8bfa42d93fe6b2acc9676f292f8486fdd38562f6e422438f27adb1542243db3",
+    "web/sequence.mjs": "1b2cbcdb07ce440b29c69c626aec19dc08a99de1ee7b6d0f1d3323e1821f2dd4",
+    "tools/browser-context-order.mjs": "aac90e06524e2b12ca9f64d1b44687612c1d186948ee8e0194a1c75274761f75",
+    "server.mjs": "3f49083ddfc92c93a55c0606256708696d75d9e8cca765f3fd98690d87a89b84"
+  },
+  "evidence": "Original authored clip, supplied prerequisite/context assumptions and software receiving. No physical effort, safety, readiness, completion or learning claim."
+}
