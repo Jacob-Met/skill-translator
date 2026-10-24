@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/corner-angle":["web/corner-angle.html","text/html; charset=utf-8"],
+  "/src/corner-angle.mjs":["src/corner-angle.mjs","text/javascript; charset=utf-8"],
+  "/web/corner-angle.mjs":["web/corner-angle.mjs","text/javascript; charset=utf-8"],
+  "/web/corner-angle.css":["web/corner-angle.css","text/css; charset=utf-8"],
   "/guide-alignment":["web/guide-alignment.html","text/html; charset=utf-8"],
   "/src/guide-alignment.mjs":["src/guide-alignment.mjs","text/javascript; charset=utf-8"],
   "/web/guide-alignment.mjs":["web/guide-alignment.mjs","text/javascript; charset=utf-8"],

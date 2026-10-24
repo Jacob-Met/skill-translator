@@ -1,0 +1,72 @@
+{
+  "schema": "skill-translator-corner-angle-receipt/v1",
+  "base_commit": "fff8c08c72301ce7663a40cbe21ee01c82e7e83c",
+  "base_tree": "b4b806f725f867a6fcaf2aa7ff8a4da3b0fbe2e8",
+  "source_files": {
+    "src/corner-angle.mjs": "0c49db9d3cd633efb07e0c8dde6af7ba82c603fb",
+    "test/corner-angle.test.mjs": "424fe26fcc52bbdde39c93975d1e349aa3a50bae",
+    "web/corner-angle.html": "9f2283f0ecf61ca2eaebe2f521d64912bb92f08e",
+    "web/corner-angle.css": "a556eb742051f5d5ce439f7a29f26162fd39332e",
+    "web/corner-angle.mjs": "e458efb607bb2f01540edbd314c5b0eca7d9f025",
+    "server.mjs": "833fd181d3efe8fdb34b671c931baa80c39c1ee0",
+    "web/practice.html": "e855ef74a25589f14428cb8588619049d39d50f9",
+    "tools/browser-corner-angle.mjs": "10341b1f366992d071d4c7b12288d613e1600202",
+    "docs/CORNER_ANGLE.md": "224b4d176b8a60f1a5939517d954d63281d116a4"
+  },
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "node": "24.19.0",
+    "tests": 474,
+    "passed": 474,
+    "failed": 0,
+    "skipped": 0,
+    "focused_cases": 10,
+    "tested_base_commit": "5a5cec15b9a5af16b74e2907f99a2059e85fe908"
+  },
+  "browser": {
+    "groups": [
+      "actual maintained practice records bent, rotated/scaled, reflected, collapsed-arm and empty rounds with original criteria",
+      "missing marks and coincident retained corner arms remain unavailable rather than passing",
+      "rotation and scale preserve angle while point scores fail; reflection changes direction; bent corner passes points but fails its angle criterion",
+      "completed source-only download and fresh reopen retain exact original source, all five rounds and selected criterion",
+      "mismatched source criterion refuses while preserving accepted original review",
+      "newer criterion draft cancels a delayed original-file replacement and hides stale findings",
+      "desktop and390px geometry, explicit coordinate witnesses and keyboard table inspection remain usable"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "scope": "Authored directed corner relationships; no contact, correction, motion or physical skill qualification",
+    "tested_base_commit": "5a5cec15b9a5af16b74e2907f99a2059e85fe908"
+  },
+  "runtime": {
+    "user": "nobody",
+    "puppeteer": "25.16.0",
+    "sandbox": "Chrome namespace, PID, network, Seccomp and TSYNC independently verified enabled; no sandbox bypass",
+    "temporary_storage": "Memory-backed temporary profile and downloads; artifacts copied before namespace exit"
+  },
+  "visual_review": "Worker inspected actual390px focused results: reference and retained angular arcs visible, distinct assessments readable, exact coordinate table horizontally scrollable with keyboard focus and no document overflow. Desktop1280 retained.",
+  "limits": [
+    "Authored planar directed-corner criterion only.",
+    "No contact, fit, suggested correction movement, physical accuracy, physical skill or causal learning qualification.",
+    "Original practice producer/schema and guide-alignment consumer remain unchanged."
+  ],
+  "independent_review": {
+    "reviewer": "Root contributor, team hamon-6770099628af-20261024",
+    "native_cases": 10,
+    "passed": 10,
+    "core": "Directed corner, circular difference, adapted reference and original-score separation accepted; no blocker.",
+    "visual": "Root inspected actual390px directed-angle diagram, coordinates and point/corner distinction.",
+    "consumer": "Root accepted JavaScript lifecycle and arc drawing source; source/draft receiving follows established guide lifecycle."
+  },
+  "final_composition": {
+    "changed": "Incoming distance-photo-region capability adds two server routes and separate photo-region modules/tests; practice footer and all13modules in practice/corner imported runtime closure are unchanged. Only owned server composition required updating.",
+    "focused_native_passed": 17,
+    "http_routes_passed": 9,
+    "execution_receipt": "de303c",
+    "browser_scope": "Previous actual7group browser course runs identical producer/client/core bytes (except harmless original source-recovery trailing newlines); no unchanged browser repeat needed."
+  },
+  "peer_review": {
+    "reviewer": "SECOND GROUND contributor of same team",
+    "focused_native_passed": 10,
+    "finding": "Normalized arms, signed circular branch, across/down direction, missing/collapsed states and source/round custody accepted; no blocker."
+  }
+}
