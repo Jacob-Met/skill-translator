@@ -1,20 +1,24 @@
 // Explicit author-supplied account amendments, preserving the learner's question.
 import {upsertStep} from './demonstration-sequence.mjs';
 import {createDecisionPractice,importDecisionPractice,decisionPracticeFindings} from './decision-practice.mjs';
+import {CUE_PRACTICE_FORMAT,importCuePractice,inspectCuePractice} from './cue-practice.mjs';
 import {GeometryError} from './geometry.mjs';
 export const CLARIFICATION_FORMAT='skill-translator.decision-clarification/v1';
 const fields=['intent','visibleChange','sensoryCue','recoveryCue'];
 const check=(ok,message)=>{if(!ok)throw new GeometryError(message);};
 function text(value,label,max){check(typeof value==='string'&&value.length<=max&&value.trim(),`${label} must contain text within ${max} characters`);return value.trim();}
+export function importClarificationPractice(source,value){
+  return value?.format===CUE_PRACTICE_FORMAT?importCuePractice(source,value):importDecisionPractice(source,value);
+}
 export function clarificationQuestions(source,practice){
-  const accepted=importDecisionPractice(source,practice),findings=decisionPracticeFindings(source,accepted);
+  const accepted=importClarificationPractice(source,practice),findings=accepted.format===CUE_PRACTICE_FORMAT?inspectCuePractice(source,accepted):decisionPracticeFindings(source,accepted);
   return findings.steps.filter(s=>s.reflection?.reconsideration?.question).map(s=>({stepId:s.id,
     question:s.reflection.reconsideration.question,firstResponse:structuredClone(s.response),
     reconsideredJudgment:s.reflection.reconsideration.judgment,
-    evidence:structuredClone(s.evidence),fields:s.reflection.reconsideration.anchors.filter(k=>fields.includes(k))}));
+    evidence:structuredClone(s.evidence),...(accepted.format===CUE_PRACTICE_FORMAT?{cueRequests:structuredClone(s.cueRequests),priorFamiliarity:findings.priorFamiliarity,fullRevealBeforeAnswer:s.revealedBeforeAnswer}:{}),fields:s.reflection.reconsideration.anchors.filter(k=>fields.includes(k))}));
 }
 export function createClarification(source,practice,input){
-  const accepted=importDecisionPractice(source,practice),question=clarificationQuestions(source,accepted).find(q=>q.stepId===input?.stepId);
+  const accepted=importClarificationPractice(source,practice),question=clarificationQuestions(source,accepted).find(q=>q.stepId===input?.stepId);
   check(question,'Choose an actual retained learner question');
   check(question.fields.includes(input.field),'Choose an authored account field referenced by this question');
   check(input.authorConfirmed===true,'The supplied clarification must be explicitly adopted as an authored amendment');

@@ -36,3 +36,23 @@ receives actual original authored PNGs, saves three completed Chrome downloads,
 opens the clarified source and retry in Decision Practice, and checks mobile,
 source mismatch and delayed-read controls. Runtime results must be recorded
 separately from these test definitions.
+
+## Questions from selective cue practice
+
+The clarification receiver also accepts an original Cue Request Practice file,
+up to 2 MiB. Its source-bound importer preserves the separate cue-practice format
+and all raw selective requests. The author sees each requested cue, whether it
+was supplied or unavailable, and whether the request came before or after the
+first answer, alongside the original declared familiarity and full-reveal order.
+These facts are recomputed from source and events rather than imported claims.
+
+Amendment lineage keeps that original cue exercise intact; it is never flattened
+into ordinary practice. The clarified retry is still a new, empty ordinary
+Decision Practice exercise with seen-before familiarity because the revised
+account has already been displayed. The original selective-help history belongs
+to the original exercise and remains reopenable with its original source.
+
+`tools/browser-cue-clarification.mjs` receives an actual completed Cue Request
+Practice download, follows its clarification link, retains the original selective
+assistance, saves amendment/source/retry files, and opens the new ordinary retry.
+It also checks narrow replay, source refusal, stale imports and source-save races.
