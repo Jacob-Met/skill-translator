@@ -5,6 +5,12 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/context-order':['web/context-order.html','text/html; charset=utf-8'],
+  '/web/context-order.mjs':['web/context-order.mjs','text/javascript; charset=utf-8'],
+  '/web/context-order-input.mjs':['web/context-order-input.mjs','text/javascript; charset=utf-8'],
+  '/src/context-order.mjs':['src/context-order.mjs','text/javascript; charset=utf-8'],
+  '/web/context-order.css':['web/context-order.css','text/css; charset=utf-8'],
+
   "/annotation-bound":["web/annotation-bound.html","text/html; charset=utf-8"],
   "/web/annotation-bound.css":["web/annotation-bound.css","text/css; charset=utf-8"],
   "/web/annotation-bound.mjs":["web/annotation-bound.mjs","text/javascript; charset=utf-8"],
