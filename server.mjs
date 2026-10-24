@@ -116,6 +116,9 @@ const routes=Object.freeze({
   "/src/contact-footprint.mjs":["src/contact-footprint.mjs","text/javascript; charset=utf-8"],
   "/src/layout-feedback.mjs":["src/layout-feedback.mjs","text/javascript; charset=utf-8"],
   "/web/layout-feedback.mjs":["web/layout-feedback.mjs","text/javascript; charset=utf-8"],
+  "/decision-clarification":["web/decision-clarification.html","text/html; charset=utf-8"],
+  "/web/decision-clarification.mjs":["web/decision-clarification.mjs","text/javascript; charset=utf-8"],
+  "/src/decision-clarification.mjs":["src/decision-clarification.mjs","text/javascript; charset=utf-8"],
   "/decision-practice":["web/decision-practice.html","text/html; charset=utf-8"],
   "/web/decision-practice.mjs":["web/decision-practice.mjs","text/javascript; charset=utf-8"],
   "/web/decision-practice.css":["web/decision-practice.css","text/css; charset=utf-8"],
@@ -225,5 +228,6 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
 
 
