@@ -1,0 +1,24 @@
+PASS actual practice placement, retry and completed export receive with historical/current choice and distinct feature findings
+PASS completed wrapper download reopens full source, declarations and raw session on a fresh page
+PASS mismatched retained source tolerance refuses transactionally
+PASS another declared size replaces session/history without merging; missing pairs stay unresolved
+PASS superseded read cannot replace state or clear a newer pending selection
+PASS v2 raw photo identity/calibration/pixels, history and manual detachments survive completed export
+PASS desktop and 390px receiving layout
+PASS comparison edits invalidate attached review rather than silently reusing assumptions
+{
+  "browser": "Chrome/156.0.8078.47",
+  "groups": [
+    "actual practice placement, retry and completed export receive with historical/current choice and distinct feature findings",
+    "completed wrapper download reopens full source, declarations and raw session on a fresh page",
+    "mismatched retained source tolerance refuses transactionally",
+    "another declared size replaces session/history without merging; missing pairs stay unresolved",
+    "superseded read cannot replace state or clear a newer pending selection",
+    "v2 raw photo identity/calibration/pixels, history and manual detachments survive completed export",
+    "desktop and 390px receiving layout",
+    "comparison edits invalidate attached review rather than silently reusing assumptions"
+  ],
+  "errors": [],
+  "offsite": [],
+  "limits": "Authored coordinate and photo-record controls; no image decoding, physical outcome or learned-skill claim."
+}

@@ -17,9 +17,11 @@
 <section id="results" hidden><h2>Adapted feature relationships</h2><p>Each nominal gap subtracts both radii from the center distance. The minimum tolerance gap allows both centers to move toward each other within their declared tolerances. Negative gaps mean overlap. Meeting this constraint does not establish task success.</p>
 <label>Inspect workpiece<select id="selected"></select></label><p id="summary"></p><div id="diagram"></div>
 <div class="table-wrap"><table><thead><tr><th>Pair</th><th>Center distance · mm</th><th>Nominal gap · mm</th><th>Minimum tolerance gap · mm</th><th>Declared gap result</th></tr></thead><tbody id="pairs"></tbody></table></div>
+<button id="openFeatureRehearsal" type="button">Rehearse these sizes and inspect actual feature gaps</button>
 <button id="save" type="button">Save comparison</button><button id="practice" type="button">Open this unchanged task in fresh practice</button>
 <p>Practice evaluates mark centers using the existing rules. This feature-separation comparison remains a separate declaration, and its results are not practice scores.</p></section>
 <section id="featureWidth"></section>
 <section id="featurePractice"></section>
 </main><script type="module" src="/web/feature-clearance.mjs"></script></body></html>
+
 
