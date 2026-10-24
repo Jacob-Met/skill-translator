@@ -54,6 +54,23 @@ function normalize(demo,input){
 }
 export function createObservation(demo,input){return normalize(demo,input);}
 
+// Shared identity and scoring for explicit alternative-reference investigations.
+// Callers keep original evidence anchors; a hypothetical reading never rewrites them.
+export function observationReference(demo,landmarkId){return reference(demo,landmarkId).anchor;}
+export function scoreInterpretation(mark,source,row,rule){
+  let predicted;
+  try{predicted=predictInterpretation(mark,source,row.widthMm,row.heightMm,rule);}
+  catch(e){
+    if(!(e instanceof GeometryError))throw e;
+    return {observationId:row.id,predicted:null,errorMm:null,excessMm:null,
+      compatible:false,reason:e.message};
+  }
+  const errorMm=Math.hypot(predicted.xMm-row.xMm,predicted.yMm-row.yMm);
+  return {observationId:row.id,predicted,errorMm,
+    excessMm:Math.max(0,errorMm-row.uncertaintyMm),
+    compatible:errorMm<=row.uncertaintyMm+1e-9,reason:null};
+}
+
 // Check the saved anchor before normalizing; never silently rebind old evidence.
 export function validateObservations(demo,observations){
   requireThat(Array.isArray(observations)&&observations.length<=60,
@@ -79,19 +96,7 @@ export function analyzeEvidence(demo,landmarkId,observations){
   const {derived,mark}=reference(demo,landmarkId);
   const rows=validateObservations(demo,observations).filter(o=>o.landmarkId===landmarkId);
   const candidates=RULES.map(rule=>{
-    const residuals=rows.map(row=>{
-      let predicted;
-      try{predicted=predictInterpretation(mark,derived.source,row.widthMm,row.heightMm,rule);}
-      catch(e){
-        if(!(e instanceof GeometryError))throw e;
-        return {observationId:row.id,predicted:null,errorMm:null,excessMm:null,
-          compatible:false,reason:e.message};
-      }
-      const errorMm=Math.hypot(predicted.xMm-row.xMm,predicted.yMm-row.yMm);
-      return {observationId:row.id,predicted,errorMm,
-        excessMm:Math.max(0,errorMm-row.uncertaintyMm),
-        compatible:errorMm<=row.uncertaintyMm+1e-9,reason:null};
-    });
+    const residuals=rows.map(row=>scoreInterpretation(mark,derived.source,row,rule));
     return {rule,status:!rows.length?"untested":residuals.every(r=>r.compatible)?"compatible":"contradicted",
       residuals,contradictions:residuals.filter(r=>!r.compatible).map(r=>r.observationId),
       maxErrorMm:residuals.length&&residuals.every(r=>r.errorMm!==null)

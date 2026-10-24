@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/calibration":["web/calibration.html","text/html; charset=utf-8"],
+  "/web/calibration.html":["web/calibration.html","text/html; charset=utf-8"],
+  "/web/calibration.css":["web/calibration.css","text/css; charset=utf-8"],
+  "/web/calibration.mjs":["web/calibration.mjs","text/javascript; charset=utf-8"],
+  "/src/calibration-evidence.mjs":["src/calibration-evidence.mjs","text/javascript; charset=utf-8"],
   "/calibration-checks":["web/calibration-checks.html","text/html; charset=utf-8"],
   "/web/calibration-checks.html":["web/calibration-checks.html","text/html; charset=utf-8"],
   "/web/calibration-checks.mjs":["web/calibration-checks.mjs","text/javascript; charset=utf-8"],
