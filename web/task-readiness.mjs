@@ -1,3 +1,4 @@
+import {renderReadinessExplanation} from '/web/readiness-explanation.mjs';
 import {createReadiness,importReadiness,readinessFindings,recordReadiness} from '/src/task-readiness.mjs';
 import {importPrerequisiteRehearsal} from '/src/prerequisite-rehearsal.mjs';
 import {openReadinessBundle,saveReadinessBundle} from '/web/task-readiness-source.mjs';
@@ -64,6 +65,7 @@ $('choose').addEventListener('click',guard(()=>{
   study=recordReadiness(evidence.sequence,study,{type:'choose',stepId:$('step').value,prediction:$('prediction').value,reason:$('reason').value});revision++;render();
   const s=readinessFindings(evidence.sequence,study).steps.find(s=>s.stepId===$('step').value),source=evidence.sequence.steps.find(x=>x.id===s.stepId);
   $('finding').append(el('h3',s.ready?'Declared prerequisites are satisfied':'Prerequisites are not established'),el('p',s.blockedBy.length?'Inspect these uncompleted prerequisites: '+s.blockedBy.join(', '):'This concerns the declared prerequisites only. Completion checks still require observations.'),el('p','Author intended result: '+source.intent));
+  $('finding').append(renderReadinessExplanation({sequence:evidence.sequence,study,selectedStepId:s.stepId,urlFor:evidence.urlFor}));
   for(const edge of study.prerequisites.dependencies.filter(e=>e.after===s.stepId))$('finding').append(el('p',`Declared prerequisite ${edge.before}: ${edge.reason}`));
   for(const c of s.checks)$('finding').append(el('p',`${c.prompt} — Expert basis: ${c.basis}`));
   const moments=new Set([source.beforeMomentId,source.afterMomentId]);for(const id of s.blockedBy){const dep=evidence.sequence.steps.find(x=>x.id===id);moments.add(dep.afterMomentId);}
