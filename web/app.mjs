@@ -517,3 +517,5 @@ $("observationFile").addEventListener("change",async e=>{
   e.target.value="";
 });
 recompute();
+
+$("inspectTool").addEventListener("click",()=>{try{sessionStorage.setItem("skill-translator-tool-input/v1",JSON.stringify({demo,widthMm:target.widthMm,heightMm:target.heightMm}));location.assign("/tool-access");}catch(e){error("Could not open tool comparison. "+e.message);}});

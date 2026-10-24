@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/tool-access":["web/tool-access.html","text/html; charset=utf-8"],
+  "/web/tool-access.css":["web/tool-access.css","text/css; charset=utf-8"],
+  "/web/tool-access.mjs":["web/tool-access.mjs","text/javascript; charset=utf-8"],
+  "/src/tool-access.mjs":["src/tool-access.mjs","text/javascript; charset=utf-8"],
   "/mark-inspector":["web/mark-inspector.html","text/html; charset=utf-8"],
   "/web/mark-inspector.mjs":["web/mark-inspector.mjs","text/javascript; charset=utf-8"],
   "/web/mark-inspector.css":["web/mark-inspector.css","text/css; charset=utf-8"],

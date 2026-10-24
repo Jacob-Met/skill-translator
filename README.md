@@ -209,3 +209,51 @@ Run the actual browser course with `PUPPETEER_PATH=/path/to/puppeteer CHROME_BIN
 Open `/relationships` to pair the source JSON and an exported Practice session. Declare a pair of source marks, a directed horizontal/vertical separation or straight-line distance, and its allowed difference in millimetres. The reference is recomputed from the source's transfer rules at the retained target size. Each retained round keeps its original point assessment while the new review reports the pair's reference, actual value, signed difference and missing observations. A common translation can preserve spacing while individual points fail; conversely, two individually acceptable points can violate a tighter relationship. Distance alone cannot detect reversed order. These diagnostics describe supplied geometry and authored criteria, not physical causes or learning.
 
 The authored example demonstrates a 4 mm spacing discrepancy despite all individual points meeting their tolerances. Its second round remains empty. Export/reopen retains the complete source and raw practice rounds, revalidates their binding, and recomputes findings. Rules can be removed without changing the session; malformed or mismatched imports preserve the accepted review. Criteria selected after looking at outcomes are exploratory. Native controls: `node --test test/task-relationships.test.mjs`.
+
+## Adapt a declared edge-fed tool setup
+
+Choose **Adapt this task to a tool** in Task Space to carry the current source and
+workpiece into `/tool-access`. Or open the tool page and import source annotations.
+Declare the tool's minimum insertion depth, maximum throat depth, required supported
+lateral half-width, available physical approach edges, and where those dimensions
+came from. The included dimensions are explicitly authored examples.
+
+The page uses the existing landmark transfer without moving targets, changing
+rules, or enlarging tool reach by a mark's placement tolerance. Compatibility
+concerns nominal target centers; it does not establish clearance over a mark's
+whole tolerance region or an uncertainty range. For every mark and
+edge it computes the insertion depth and four signed margins: minimum depth,
+maximum depth, and support on either side. Negative margins identify the exact
+shortfall. An unavailable edge stays unavailable even if its geometry fits.
+The diagram shows the selected approach strip and the unchanged target marks.
+
+The solver enumerates all 15 nonempty subsets of the four physical edges and retains every
+inclusion-minimal complete cover: each listed set covers every task mark, and
+removing any edge loses coverage. This may reveal that a task requires separate
+approaches from opposite edges. It does not prescribe a movement sequence or rank
+options by physical effort. Uncovered marks prevent a complete-setup claim.
+Changing the workpiece or tool dimensions recomputes the alternatives; pending
+input edits disable saving and practice handoff until compared.
+
+This is a declared planar strip model. It requires the lateral strip from the
+chosen edge to the mark to fit within the workpiece. It does not infer tool-body
+shape, collisions, clamps, thickness, material response, force, or safe operation.
+Boundary comparisons allow 1e-9 mm numerical roundoff; this is not physical
+uncertainty. Boundary contact is accepted mathematically; any desired clearance belongs in
+the supplied dimensions. Reported dimensions remain supplied information, not
+verified equipment specifications. Source unknowns stay visible.
+
+Save a study to retain the source, its maintained practice reference, and declared
+tool inputs. Reopening checks the reference and recomputes findings; saved derived
+verdicts are ignored. Invalid or superseded asynchronous imports preserve the
+accepted study. **Practice unchanged targets** opens the existing practice consumer
+with the exact source and dimensions, initially hiding targets. The practice
+assessment does not acquire a physical tool-compatibility guarantee.
+
+`node test/tool-access.test.mjs` exercises analytic changed-tool/workpiece,
+complete-coverage, boundary, failure and source-binding controls.
+`PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome
+QA_OUTPUT=/path/to/receipts node tools/browser-tool-access.mjs` exercises actual
+browser handoff, import/export, conflict inspection and mobile receiving when the
+optional existing browser dependencies are available. These are authored geometry
+controls, not a physical task or learning study.
