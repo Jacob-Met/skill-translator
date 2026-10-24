@@ -247,3 +247,8 @@ After reviewing an attempt in **Complete Task**, the spacing and orientation pan
 An orientation-preserving least-squares rigid fit describes the rotation and centroid displacement between intended and observed marks, with residual error after hypothetical alignment. It excludes scaling and reflection, retains missing marks and reports configurations with no unique fitted orientation. Two points alone cannot distinguish a reflection from a rotation. No fitted transform changes placements, source rules, saved rounds or the actual pass/fail result. This is geometric description, not a diagnosis of physical cause or demonstrated learning.
 
 Focused controls: `node test/layout-feedback.test.mjs`. Actual browser receiving: `node tools/browser-layout-feedback.mjs` with the repository's existing Puppeteer/Chrome environment variables.
+
+
+## Feature separation
+
+Open `/feature-clearance` to compare declared circular feature footprints across workpiece sizes. The original source and adaptation rules remain unchanged. Inspect every pair's nominal gap and minimum gap over declared placement tolerances, save/reopen the source and declarations, then hand the selected size to existing practice. This is prospective planar geometry, separate from the center-placement score and tool/edge access. See [Feature separation](docs/FEATURE_CLEARANCE.md).
