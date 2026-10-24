@@ -1,0 +1,34 @@
+{
+  "result": "PASS",
+  "evidence": "Authored mathematical image controls; no photograph or physical acquisition.",
+  "fixtures": [
+    {
+      "file": "observation-a.png",
+      "sha256": "e74b296664380bb1e56dc81db0af1350f568e7da66476aa5e449ab6adfb0a1b7"
+    },
+    {
+      "file": "observation-b.png",
+      "sha256": "842c726701c3dcc1e98b195e31cb4a5ab881c2248e851fe44d291ca98c0744fd"
+    },
+    {
+      "file": "observation-c.png",
+      "sha256": "7cfec9cec6910cc1eaf525a52670d3864e62f94c31458cb9ced01f1bbb33f044"
+    }
+  ],
+  "tests": [
+    "actual practice Observe button transfers validated existing session and mirrored hidden-goal preferences",
+    "actual authored PNG and rational pixels yield conditional 6,-4 mm error without correction",
+    "export retains exact raw image identity/calibration/pixels/class and earlier practice round",
+    "invalid notebook replacement preserves paired image and existing review",
+    "reopen recomputes raw coordinates, requires exact image re-pair and rejects alternate authored bytes",
+    "390px and 320px viewports have no horizontal overflow",
+    "apply restores actual practice DOM, raw photo evidence, earlier placements and display preferences",
+    "older observation notebook preserves active later history and actual DOM preferences; new photo archives current round; same-geometry wrong bytes rejected",
+    "actual manual placement UI detaches only edited claim; real practice export retains original photo pixels and earlier history",
+    "actual retry and exported raw round history retain photo identity/pixels and manual overrides",
+    "return without applying restores exact incoming current/history state and actual practice DOM",
+    "no browser exceptions or external requests"
+  ],
+  "errors": [],
+  "offsite": []
+}
