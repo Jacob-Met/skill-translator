@@ -15,6 +15,14 @@
     <section class="studio-image-panel" aria-label="Original source image">
       <div class="panel-head"><h2>Your source</h2><span id="sourceBadge" class="panel-badge">LOCAL FILE</span></div>
       <label class="photo-picker" for="photoFile">Choose PNG or JPEG <span>Up to 12 MB · stays on this device</span><input id="photoFile" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg"></label>
+      <details class="video-source"><summary>Reopen saved annotations with their original image</summary>
+        <form id="reopenCaptureForm">
+          <label for="savedAnnotations">ANNOTATIONS JSON · UP TO 256 KIB<input id="savedAnnotations" type="file" accept=".json,application/json" required></label>
+          <label for="savedPhoto">ORIGINAL PHOTO OR SAVED FRAME PNG<input id="savedPhoto" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg" required></label>
+          <button type="submit">Reopen for editing</button>
+        </form>
+        <p id="reopenStatus" role="status">Both files must match. Rejected files leave your current work intact. Video frame annotations retain the clip reference; reopening its PNG does not verify the original clip.</p>
+      </details>
       <details id="videoSourcePanel" class="video-source">
         <summary>Use a moment from a demonstration clip</summary>
         <label for="videoFile">LOCAL MP4 OR WEBM · UP TO 128 MB<input id="videoFile" type="file" accept="video/mp4,video/webm,.mp4,.webm"></label>
@@ -43,7 +51,9 @@
         <label for="markLabel">MARK NAME<input id="markLabel" type="text" maxlength="100" value="Alignment guide" required></label>
         <label for="markKind">MEANING<select id="markKind"><option value="fraction">Proportional position</option><option value="edge_offset_mm">Fixed distance from an edge</option></select></label>
         <div class="two-fields"><label for="markEdge">PHYSICAL EDGE<select id="markEdge" disabled><option value="left">Left</option><option value="right">Right</option><option value="top">Top</option><option value="bottom">Bottom</option></select></label><label for="markTolerance">TOLERANCE · MM<input id="markTolerance" type="number" min="0.1" max="50" step="any" value="3"></label></div>
+        <p id="markEditStatus" role="status">Adding a new source mark.</p>
         <button id="addCaptureMark" class="primary" type="submit" disabled>Add source mark</button>
+        <button id="cancelMarkEdit" type="button" hidden>Cancel mark edit</button>
       </form></section>
     </aside>
   </div>
@@ -51,3 +61,4 @@
   <footer><span>Human-authored measurements and meaning</span><span>Still images leave pressure, tactile cues, and physical success unmeasured.</span></footer>
 </main>
 </body></html>
+

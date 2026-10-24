@@ -5,6 +5,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/capture-editing.mjs":["src/capture-editing.mjs","text/javascript; charset=utf-8"],
   "/sensitivity":["web/sensitivity.html","text/html; charset=utf-8"],
   "/web/sensitivity.css":["web/sensitivity.css","text/css; charset=utf-8"],
   "/web/sensitivity.mjs":["web/sensitivity.mjs","text/javascript; charset=utf-8"],

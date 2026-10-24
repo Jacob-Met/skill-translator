@@ -39,6 +39,14 @@ Download the annotations and import that JSON into Task Space. Use **Pair the or
 
 The photo remains in browser memory and is not embedded in the annotation JSON or uploaded. Select it again after reopening the workbench. Supported images are bounded at 12 MB, 24 megapixels and 8192 pixels per side. JPEG coordinates use the browser-oriented image, including EXIF rotation. Calibration is a planar model based on the supplied dimensions; a successful import does not establish those measurements, expert intent, contact, or physical task success.
 
+### Reopen and revise source annotations
+
+In Source Studio, expand **Reopen saved annotations with their original image**. Select the annotation JSON and its original photo or saved frame PNG, then choose **Reopen for editing**. The complete image digest, dimensions and orientation must match before either accepted file is replaced. A different or malformed file leaves the current work intact; renaming identical image bytes is allowed. Annotation files are limited to 256 KiB to remain compatible with Task Space's source importer.
+
+Use **Edit** beside an existing mark to change its pixel position, label, relationship or tolerance while retaining its stable identity and source context. **Cancel mark edit** discards the draft. **Remove** deletes that mark; remaining marks keep their IDs. Removing the last mark leaves an editable calibration draft, with source export disabled until another valid mark is added. Calibration revisions preserve author provenance, unknowns and any video-frame metadata, and are refused if existing pixel annotations would fall outside the revised sheet.
+
+Download the revised annotations to save them. This replaces no source file automatically. Reopening a video frame's PNG checks its image identity and preserves the supplied clip/timing record; it does not re-open or verify the original video clip. As elsewhere, metadata is a supplied record, not an authenticated claim of expertise or physical success.
+
 ## Choose a moment from local footage
 
 In Source Studio, expand **Use a moment from a demonstration clip** and select a local MP4 or WebM supported by your browser. Clips are limited to 128 MB, three hours and the same frame-size bounds as photos. Play, pause or enter a time, then choose **Use this frame**. A captured frame starts a new calibration; previous work remains accepted until capture succeeds. A newer photo or clip selection cancels an unfinished frame capture.
@@ -96,6 +104,7 @@ An optional real-browser QA course uses separately installed Puppeteer and Chrom
 
     PUPPETEER_PATH=/path/to/puppeteer node tools/browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-browser-smoke.mjs
+    PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-editing-browser.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/video-browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-evidence.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-practice.mjs
