@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/web/affine-challenge.css":["web/affine-challenge.css","text/css; charset=utf-8"],
+  "/affine-challenge":["web/affine-challenge.html","text/html; charset=utf-8"],
+  "/web/affine-challenge.mjs":["web/affine-challenge.mjs","text/javascript; charset=utf-8"],
+  "/src/affine-challenge.mjs":["src/affine-challenge.mjs","text/javascript; charset=utf-8"],
   "/task-readiness":["web/task-readiness.html","text/html; charset=utf-8"],
   "/web/task-readiness.mjs":["web/task-readiness.mjs","text/javascript; charset=utf-8"],
   "/web/task-readiness-source.mjs":["web/task-readiness-source.mjs","text/javascript; charset=utf-8"],

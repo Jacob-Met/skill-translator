@@ -351,3 +351,7 @@ Open **Rehearse prerequisites** from Demonstration Sequence to retain reasons fo
 ## Inspect a workpiece-response family
 
 Open `/response-family` to condition an affine geometric response on an original demonstrated mark and explicit coordinate bounds from varied workpiece sizes. Inspect the complete compatible coefficient family, unresolved dimension variation and target ranges; raw-study reopening recomputes all conclusions. The source reading and finite coefficient domain remain declared assumptions. [Method, supported workflow and limits](docs/RESPONSE_FAMILIES.md).
+
+## Challenge a frozen workpiece-response family
+
+Open [the separate-workpiece challenge](/affine-challenge) from the response-family investigation. Freeze the original training account and new sizes, save that plan, then receive separate coordinate measurements. The view distinguishes individual agreement from one common model that explains every result, keeps missing outcomes untested, and recomputes raw saved accounts. [Method and actual receiving](docs/AFFINE_CHALLENGE.md). Prospective timing and measurement bounds remain supplied declarations.

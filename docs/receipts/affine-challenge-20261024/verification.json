@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-24",
+  "base": "2f870a12c1ef596141e06f0aafab1f1c382b7e07",
+  "runtime_sha256": {
+    "src/affine-challenge.mjs": "5f065211590f8b07288c82c16feada88963c4a7b1e169f4f8e0ce21153814bdf",
+    "web/affine-challenge.html": "d4cffd9654c4ec0920a45168bda9b158f16707b7385443b627d5829d1f7ff37e",
+    "web/affine-challenge.mjs": "590a130a664eb1053551c040758232177e54b35c351e35390ea4b456895422e2",
+    "test/affine-challenge.test.mjs": "2a65a379ed94c35e77efd2bc312c2e2cfa66208073f56fe48658c2a1cf687ad3",
+    "tools/browser-affine-challenge.mjs": "2e46aeb0825fd939907303000f01644e34b85d733316436bcb649a890e9fd910",
+    "server.mjs": "f76fcf3cd0758050a974ef11eabf209afbfec2e8588c20ffff569d59b1734e1b",
+    "web/response-family.html": "1240ad0e435726dc73acc73d8a4d1cf7c9357944c0436d34453802314368b11e",
+    "test/server.test.mjs": "f3a255052d2987411c3a49231ce66e3ddab97f25d76c899ad5b9bc71fffb9c07",
+    "web/affine-challenge.css": "5ada170636ccc0eda573c1eae8931748c27878ba8180be129faa3bb72079d5c6"
+  },
+  "native": {
+    "command": "npm test",
+    "passed": 294,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "command": "PUPPETEER_PATH=<puppeteer-core> CHROME_BINARY=/opt/google/chrome/chrome QA_OUTPUT=<fresh-directory> node tools/browser-affine-challenge.mjs",
+    "groups": 10,
+    "errors": 0,
+    "sandbox": "Positive namespace/PID/network/seccomp and negative disabled-status checks",
+    "pixels": "Actual desktop,390px frozen-result cards and new-plan views inspected; all result cells have labels and no narrow horizontal overflow",
+    "downloads": "Separate fresh frozen-plan and received-result directories"
+  },
+  "review": {
+    "independent": "Retained MICROVERSE worker reviewed core, source/plan binding, frozen ranges, missing results and UI; no blocker",
+    "parent_changes": [
+      "Clarified that replacements cannot revive models excluded by training; corrected results may restore compatibility.",
+      "Strengthened sandbox assertions.",
+      "Added labeled mobile cards after actual pixels exposed the fourth column outside the narrow viewport; reran actual receiving."
+    ]
+  },
+  "rejected_receiving_attempt": {
+    "stage": "Additional mobile-card assertion",
+    "reason": "Single-element $eval was used for an all-cell assertion; TypeError cells.every is not a function",
+    "resolution": "Use $$eval for the actual cell list; full browser rerun into a fresh directory, no product semantic change"
+  },
+  "limits": [
+    "Authored analytic controls, not physical demonstration or transfer qualification.",
+    "Prospective declaration is user-reported, not an authenticated timestamp.",
+    "Explicit result replacement retains only the current reading; training/source/domain stay frozen.",
+    "Individual/joint compatibility remains conditional on supplied bounds and the affine model."
+  ]
+}
