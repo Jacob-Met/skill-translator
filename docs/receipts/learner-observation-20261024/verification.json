@@ -1,22 +1,22 @@
 {
   "schema": "skill-translator.learner-observation-receiving/v1",
   "result": "PASS",
-  "testedBase": "95eda27c24caf55755c4d6a024cc219aa6bc22d7",
+  "testedBase": "d18370100a295a3c9c421344702721408aa36b1d",
   "sourceFiles": [
     {
       "path": "README.md",
-      "gitBlobSha": "06c97c9bc95c9960f4554bc7265bd2fe58b7c17a",
-      "sha256": "faf680836ad54f9a45102fb1db318a462fad919c6bdc73ade517edf01432ab2a"
+      "gitBlobSha": "181638ab9ed18c9714ea69ceb858ed3af7e98f50",
+      "sha256": "09385dc366e62288ac3ea6065cd71caa194af4e6d6d6bbd7c970fde3e8c67df0"
     },
     {
       "path": "docs/LEARNER_OBSERVATIONS.md",
-      "gitBlobSha": "e9ceb7820cfecac7477fae6813f3be122624383d",
-      "sha256": "be385a889b45a9726f1f14fc90f224898761ff97aa72b93f8f80b9c877724055"
+      "gitBlobSha": "00837f41e6d434e5b25438866d072b8a57ef409e",
+      "sha256": "60314e3d7a8bb85e2eb1d43b7cf145a01452f2c39691a165335fb87ce1085f23"
     },
     {
       "path": "server.mjs",
-      "gitBlobSha": "5568d870aeb49619d7ad5362bc23e77a5c6c3790",
-      "sha256": "a7b0f59f8278600c7599b4bd51be8117aef571ddb28d1238cfd47ed6b90dbffe"
+      "gitBlobSha": "3fc396d63a3e88e509628700cae5741d2f41916c",
+      "sha256": "42f35e0d9a505bd39257d7bad6bf275ad06f9568d1b3223da2170d02052f3eff"
     },
     {
       "path": "src/learner-observation.mjs",
@@ -95,14 +95,14 @@
     },
     {
       "path": "web/practice.mjs",
-      "gitBlobSha": "428a5f9c370bce0f8c2966f1d1eace0e2ba7d6dd",
-      "sha256": "8bfe8f4235eca48f0fdce362d8b50fce28916dd7cf03fe66c8f10a6b0389b56e"
+      "gitBlobSha": "5462e6ea51954508ef82930f37c1932b0c1cc8b4",
+      "sha256": "6bcdaca3f5978714abb3087d202adf776688cd5f83c4c9bb1def3bc8e9842ccd"
     }
   ],
   "native": {
     "command": "npm test",
     "node": "v22.23.4",
-    "passed": 198,
+    "passed": 223,
     "failed": 0,
     "skipped": 0
   },
@@ -123,23 +123,23 @@
     "result": "PASS",
     "accountMeaning": "Separate workers using one contributor account; not separate-account approvals"
   },
-  "integration": "The maintained focused-result receiver preserves full-task photo/manual-override history and separately receives photo-backed drills. Latest demonstration sequence routes and all current relationship/review modules are preserved. Source-mark inspector routes and README additions are preserved; its maintained native cases are included in the 198-case receiving.",
+  "integration": "The maintained focused-result receiver preserves full-task photo/manual-override history and separately receives photo-backed drills. Latest demonstration sequence routes and all current relationship/review modules are preserved. Source-mark inspector routes and README additions are preserved; its maintained native cases are included in the 198-case receiving. Current layout-feedback renderer is composed with photo history; the full223-case suite and12-group actual browser course passed together.",
   "scope": "Authored mathematical image controls only; evidence class remains a declaration. Raw images stay local. No physical acquisition, skill improvement or measurement-accuracy qualification is inferred.",
   "receivingSourceFiles": [
     {
       "path": "README.md",
-      "gitBlobSha": "3abf84074c157c15276551813b1327283678f1f3",
-      "sha256": "bc14ecc38b9f35b0108d63937f06620203d8b7eac3a245e010f4b1ba362c6933"
+      "gitBlobSha": "181638ab9ed18c9714ea69ceb858ed3af7e98f50",
+      "sha256": "09385dc366e62288ac3ea6065cd71caa194af4e6d6d6bbd7c970fde3e8c67df0"
     },
     {
       "path": "docs/LEARNER_OBSERVATIONS.md",
-      "gitBlobSha": "e9ceb7820cfecac7477fae6813f3be122624383d",
-      "sha256": "be385a889b45a9726f1f14fc90f224898761ff97aa72b93f8f80b9c877724055"
+      "gitBlobSha": "00837f41e6d434e5b25438866d072b8a57ef409e",
+      "sha256": "60314e3d7a8bb85e2eb1d43b7cf145a01452f2c39691a165335fb87ce1085f23"
     },
     {
       "path": "server.mjs",
-      "gitBlobSha": "d23a6a1118b859e2d7fdd16809bfadfc869e24e9",
-      "sha256": "86c3e44726c1e331b4d53081a3e57c79b9b2e895f4f6b63566df5f53a2d8e652"
+      "gitBlobSha": "3fc396d63a3e88e509628700cae5741d2f41916c",
+      "sha256": "42f35e0d9a505bd39257d7bad6bf275ad06f9568d1b3223da2170d02052f3eff"
     },
     {
       "path": "src/learner-observation.mjs",
@@ -218,14 +218,9 @@
     },
     {
       "path": "web/practice.mjs",
-      "gitBlobSha": "428a5f9c370bce0f8c2966f1d1eace0e2ba7d6dd",
-      "sha256": "8bfe8f4235eca48f0fdce362d8b50fce28916dd7cf03fe66c8f10a6b0389b56e"
+      "gitBlobSha": "5462e6ea51954508ef82930f37c1932b0c1cc8b4",
+      "sha256": "6bcdaca3f5978714abb3087d202adf776688cd5f83c4c9bb1def3bc8e9842ccd"
     }
   ],
-  "compositionBase": "e6e32c11739b60700dfa30724da8a932b4550128",
-  "finalCompositionCheck": {
-    "passed": 1,
-    "command": "node --test test/server.test.mjs",
-    "scope": "Actual HTTP receiving of composed server. New upstream rehearsal/decision modules and README retained; photo/practice implementation and direct runtime dependencies remain received95 bytes."
-  }
+  "compositionBase": "d18370100a295a3c9c421344702721408aa36b1d"
 }

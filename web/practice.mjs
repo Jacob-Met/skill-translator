@@ -1,4 +1,5 @@
 import {derive,adapt,toDisplay,fromDisplay} from "/src/geometry.mjs";
+import {renderLayoutFeedback} from "/web/layout-feedback.mjs";
 import {demonstration} from "/src/demo.mjs";
 import {createPractice,evaluatePractice,placePractice,retryPractice,importPractice} from "/src/practice.mjs";
 const $=id=>document.getElementById(id),ns="http://www.w3.org/2000/svg";
@@ -74,6 +75,9 @@ function draw(){
 }
 function render(){
   const result=evaluatePractice(demo,widthMm,heightMm,session.attempts);
+  let layout=document.getElementById('layoutDiagnostic');
+  if(!layout){layout=document.createElement('section');layout.id='layoutDiagnostic';layout.className='shift-diagnostic';document.getElementById('shiftDiagnostic').after(layout);}
+  renderLayoutFeedback(layout,demo,widthMm,heightMm,session.attempts,reviewed);
   $("roundLabel").textContent="ROUND "+String(session.round).padStart(2,"0");
   $("placementCount").textContent=result.placed+" of "+result.total+" marks placed";
   $("setupLabel").textContent=(demo.title||"Imported source")+" · "+widthMm+" × "+heightMm+" mm · "+target.landmarks.length+" task marks";
@@ -212,3 +216,4 @@ if(["calibration","observation"].includes(resume)){
       "Your practice placements and rounds were retained while you inspected calibration.";
   }catch(e){error("Retained practice could not be reopened. "+e.message);}
 }
+

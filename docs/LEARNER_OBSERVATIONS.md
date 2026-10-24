@@ -101,6 +101,6 @@ and raster controls, not physical photographs or acquired validation data.
 
 ## Recorded receiving
 
-On maintained base `95eda27c24caf55755c4d6a024cc219aa6bc22d7`, all 198 native tests passed with no skips. Twelve actual Chrome receiving groups passed, including downloads, raw history, manual overrides, notebook reopening and 390/320 pixel layouts. Desktop and mobile screenshots were inspected. These are authored controls; no physical skill or measurement-accuracy qualification is inferred. Exact source identities and receipts are under `docs/receipts/learner-observation-20261024/`.
+On maintained base `d18370100a295a3c9c421344702721408aa36b1d`, all 223 native tests passed with no skips. Twelve actual Chrome receiving groups passed, including downloads, raw history, manual overrides, notebook reopening and 390/320 pixel layouts. Desktop and mobile screenshots were inspected. These are authored controls; no physical skill or measurement-accuracy qualification is inferred. Exact source identities and receipts are under `docs/receipts/learner-observation-20261024/`.
 
 The maintained focused-result receiver also accepts photo-backed v2 drill sessions, preserves the full-task raw photo/manual-override history separately, recomputes the selected-subset score and starts a full-task retest with no inherited attempts. The learner integration test exercises this composed consumer.
