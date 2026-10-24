@@ -1,0 +1,42 @@
+{
+  "baseCommit": "bfc9cffc587afdcd0f7bee13b6d1c38dcbde624e",
+  "scope": "skill-translator issue 4",
+  "execution": {
+    "host": "verified Linux RDC cursor 5717955b-9462-4c8b-9aa9-ee1be62004c9",
+    "node": "22.23.4",
+    "native": {
+      "command": "npm test",
+      "pass": 28,
+      "fail": 0
+    },
+    "existingBrowser": {
+      "command": "node tools/browser-smoke.mjs",
+      "passGroups": 14
+    },
+    "captureBrowser": {
+      "command": "node tools/capture-browser-smoke.mjs",
+      "course": "source photo calibration and maintained workbench receiving",
+      "fixture": "original authored bitmap; not a physical craft demonstration",
+      "browser": "Chrome/156.0.8078.47",
+      "result": "PASS",
+      "tests": [
+        "decoded local PNG shown; malformed replacement preserves accepted pixels",
+        "actual pointer-selected corners calibrate a skewed photo and retain a human-authored edge mark",
+        "invalid marks/calibration preserve prior work and draft edits cannot be exported as accepted calibration",
+        "downloaded annotations match independently hashed image bytes without embedding the photo",
+        "maintained workbench imports captured marks, requires exact original pixels and preserves correct pairing on mismatch",
+        "malformed source metadata is transactional; legacy authored source imports remove stale photo pairing",
+        "a slower prior source import cannot replace a newer source or its image-pairing state",
+        "JPEG decoding and numeric keyboard corner authoring use the same calibrated contract",
+        "390px source studio has no horizontal overflow",
+        "no page exceptions or offsite requests"
+      ],
+      "errors": [],
+      "offsite": []
+    }
+  },
+  "limits": [
+    "Browser fixture is an original authored bitmap, not physical bookbinding evidence.",
+    "No cloud/model inference, deployment, physical-skill validation or competition submission."
+  ]
+}

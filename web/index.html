@@ -25,6 +25,7 @@
       <label for="demoFile">SOURCE ANNOTATIONS <span class="hint">Choose local JSON (optional, ≤256 KB)</span></label>
       <input id="demoFile" type="file" accept=".json,application/json">
       <p class="input-note" id="demoLabel">Synthetic bookbinding demonstration · 3 source marks</p>
+      <a class="capture-link" href="/capture">Annotate your own source photo ↗</a>
     </div>
     <div class="input-column">
       <label for="widthMm">TARGET WIDTH <span class="hint">millimetres</span></label>
@@ -50,6 +51,11 @@
       <svg id="sourceSvg" viewBox="0 0 520 390" tabindex="0" role="application" aria-label="Annotated source page with numbered marks. Click inside page to propose a new source annotation; or use the numeric coordinate fields below."></svg>
       <p class="undergraph">Four source corners establish a planar perspective transform. Each mark remains linked to its original pixel coordinate, not a presumed movement trajectory.</p>
       <p class="source-provenance" id="provenance"></p>
+      <div class="source-photo-tools">
+        <label for="sourcePhoto">PAIR THE ORIGINAL PHOTO <span class="hint">For photo-backed annotations</span></label>
+        <input id="sourcePhoto" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg">
+        <p id="sourcePhotoStatus" role="status">The included source is an authored illustration. Start in Source Studio to annotate a local photo.</p>
+      </div>
       <form id="authorForm" class="author-panel">
         <p class="eyebrow">ANNOTATE / CAPTURE A NEW RELATIONSHIP</p>
         <p class="author-intro">Click inside the source sheet or enter its pixel location, then explicitly describe what the mark means. No geometry can reveal an unmeasured force or expert intention.</p>

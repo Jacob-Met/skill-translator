@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark"><title>Source Studio · SKILL TRANSLATOR</title>
+<link rel="stylesheet" href="/web/styles.css"><link rel="stylesheet" href="/web/capture.css">
+<script type="module" src="/web/capture.mjs"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand studio-home" href="/"><span class="brandmark">ST</span><span>SKILL TRANSLATOR <small>/ SOURCE STUDIO</small></span></a><a class="studio-back" href="/">Open Task Space ↗</a></header>
+<main class="studio-main">
+  <section class="studio-intro"><p class="eyebrow">A DEMONSTRATION / YOUR EVIDENCE</p><h1>Start with what you can see.</h1><p class="lead">Choose a photo of a flat workpiece, mark its corners, and describe the relationships you want to investigate.</p></section>
+  <div id="studioError" class="error" role="alert" hidden></div>
+  <div class="studio-grid">
+    <section class="studio-image-panel" aria-label="Original source image">
+      <div class="panel-head"><h2>Your source</h2><span id="sourceBadge" class="panel-badge">LOCAL FILE</span></div>
+      <label class="photo-picker" for="photoFile">Choose PNG or JPEG <span>Up to 12 MB · stays on this device</span><input id="photoFile" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg"></label>
+      <div class="photo-stage"><svg id="captureSvg" viewBox="0 0 800 550" role="img" aria-label="Source photograph with calibration corners and authored marks"></svg><p id="emptyPhoto">A clear view of the whole sheet works best.</p></div>
+      <p id="captureInstruction" class="studio-instruction" role="status">Choose your photograph to begin.</p>
+      <p id="photoIdentity" class="source-provenance"></p>
+    </section>
+    <aside class="studio-controls">
+      <section class="studio-card"><p class="eyebrow">01 / MEASURE THE WORKPIECE</p>
+        <label for="captureTitle">DEMONSTRATION NAME<input id="captureTitle" type="text" maxlength="160" value="My workpiece demonstration"></label>
+        <div class="two-fields"><label for="captureWidth">WIDTH · MM<input id="captureWidth" type="number" min="1" max="10000" step="any" value="240"></label><label for="captureHeight">HEIGHT · MM<input id="captureHeight" type="number" min="1" max="10000" step="any" value="160"></label></div>
+        <p class="input-note">Enter dimensions you measured. The photo cannot supply scale by itself.</p>
+      </section>
+      <section class="studio-card"><p class="eyebrow">02 / CALIBRATE FOUR CORNERS</p><p class="input-note">Select a corner below, then click its location in the photo. Use the fields for precise keyboard entry.</p>
+        <div class="corner-heading"><span>CORNER</span><span>X · PX</span><span>Y · PX</span></div><div id="cornerRows"></div>
+        <button id="applyCalibration" class="primary" disabled>Apply calibration</button><button id="revertCalibration" type="button" disabled>Revert draft edits</button><p id="calibrationStatus" class="input-note" role="status">Four corners are needed.</p>
+      </section>
+      <section class="studio-card"><p class="eyebrow">03 / NAME A RELATIONSHIP</p><form id="captureMarkForm">
+        <p class="input-note">Once calibrated, click a source mark or enter its pixel coordinates.</p>
+        <div class="two-fields"><label for="markX">X · PX<input id="markX" type="number" step="any"></label><label for="markY">Y · PX<input id="markY" type="number" step="any"></label></div>
+        <label for="markLabel">MARK NAME<input id="markLabel" type="text" maxlength="100" value="Alignment guide" required></label>
+        <label for="markKind">MEANING<select id="markKind"><option value="fraction">Proportional position</option><option value="edge_offset_mm">Fixed distance from an edge</option></select></label>
+        <div class="two-fields"><label for="markEdge">PHYSICAL EDGE<select id="markEdge" disabled><option value="left">Left</option><option value="right">Right</option><option value="top">Top</option><option value="bottom">Bottom</option></select></label><label for="markTolerance">TOLERANCE · MM<input id="markTolerance" type="number" min="0.1" max="50" step="any" value="3"></label></div>
+        <button id="addCaptureMark" class="primary" type="submit" disabled>Add source mark</button>
+      </form></section>
+    </aside>
+  </div>
+  <section class="studio-finish"><div><p class="eyebrow">04 / INVESTIGATE THE ADAPTATION</p><h2 id="markCount">No marks yet</h2><ul id="capturedMarks"></ul><p class="input-note">Download the annotations, open Task Space, import the JSON, and pair the same photo. The photo itself is never included in the JSON.</p></div><div class="finish-actions"><button id="downloadCapture" class="primary" disabled>Download annotations ↓</button><a class="studio-back" href="/">Continue to Task Space ↗</a></div></section>
+  <footer><span>Human-authored measurements and meaning</span><span>Still images leave pressure, tactile cues, and physical success unmeasured.</span></footer>
+</main>
+</body></html>

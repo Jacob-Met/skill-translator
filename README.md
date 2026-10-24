@@ -19,12 +19,20 @@ The **source annotation studio** also lets you click a point directly on the pic
 
 You can load your **own local annotated geometry JSON** (≤256 KB) without uploading it. The tool visualizes annotations, transfers each declared invariant and refuses degenerate calibration or a target too small to maintain fixed physical clearance. It does **not** infer invariant types from video; the author must label each relationship.
 
+## Annotate a source photograph
+
+Open **Annotate your own source photo** or visit `/capture`. Choose a local PNG or JPEG, enter the measured width and height of a flat workpiece, and select its four corners in top-left, top-right, bottom-right, bottom-left order. You can click the photo or use numeric coordinates. Apply the calibration, then click an observed mark and explicitly give it a proportional or physical-edge meaning and a positional tolerance.
+
+Download the annotations and import that JSON into Task Space. Use **Pair the original photo** to display the original pixels under the annotations. The application checks the complete file digest, decoded dimensions and pixel orientation; a different image cannot silently inherit the annotations. Renaming the original file is fine. Existing authored JSON still works without a photo. Invalid replacement files preserve the accepted source and marks.
+
+The photo remains in browser memory and is not embedded in the annotation JSON or uploaded. Select it again after reopening the workbench. Supported images are bounded at 12 MB, 24 megapixels and 8192 pixels per side. JPEG coordinates use the browser-oriented image, including EXIF rotation. Calibration is a planar model based on the supplied dimensions; a successful import does not establish those measurements, expert intent, contact, or physical task success.
+
 ## Source JSON contract
 
 The compact schema is illustrated by [src/demo.mjs](src/demo.mjs). Supply an object with:
 
 - **title, provenance:** the origin of the observations/annotations.
-- **source:** an object containing widthMm, heightMm and corners. Physical dimensions are in millimetres; corners are four pixel coordinate objects with x/y, ordered **top-left, top-right, bottom-right, bottom-left**. The source SVG is calibrated for a 520×390 annotation coordinate frame, not an image importer.
+- **source:** an object containing widthMm, heightMm and corners. Physical dimensions are in millimetres; corners are four pixel coordinate objects with x/y, ordered **top-left, top-right, bottom-right, bottom-left**. Legacy authored sources use a 520×390 illustration frame. Photo-backed sources additionally supply **image** with full sha256, widthPx, heightPx, mimeType (`image/png` or `image/jpeg`), name, and pixelCoordinates (`browser-oriented`). Their source view uses those image dimensions.
 - **landmarks:** 1–30 annotations, each with a unique id, label, sourcePx coordinate object, toleranceMm and optional why. Supply kind of either fraction or edge_offset_mm; the latter also requires edge of left, right, top or bottom. Fractional landmarks preserve normalized u/v positions. Edge-offset landmarks preserve perpendicular physical clearance in **mm** and along-edge fractional position.
 - **unknowns:** optional list of explicitly absent or unresolved measurements. These are displayed as limitations, not inferred properties.
 
@@ -41,5 +49,8 @@ This first capability opens subsequent work on observed video, object states, co
 An optional real-browser QA course uses separately installed Puppeteer and Chrome, neither a production dependency. On a machine that already has them, set PUPPETEER_PATH to the module directory and CHROME_BINARY if needed.
 
     PUPPETEER_PATH=/path/to/puppeteer node tools/browser-smoke.mjs
+    PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-browser-smoke.mjs
 
 It exercises rendered source/target geometry, a failing attempt, target resizing, contrasting physical interpretations and their counterfactual size suggestion, mirrored accurate placement, keyboard correction, hidden goals, valid/invalid local imports, mobile layout, exceptions and offsite requests. Fictional screenshots and the browser receipt are retained under [docs/receipts/task-space-20261024](docs/receipts/task-space-20261024) after running it. Do not treat browser tests as proof of physical skill, video perception or provider inference.
+
+The capture course generates an explicitly authored bitmap locally, then exercises PNG/JPEG admission, clicked and numeric calibration, annotation export, independently checked image hashes, wrong-image refusal, stale-source replacement, legacy imports and 390px layout. `RECEIPT_DIR` can direct its screenshots, input fixtures and JSON receipt outside the checkout. Production needs neither Puppeteer nor a model account.
