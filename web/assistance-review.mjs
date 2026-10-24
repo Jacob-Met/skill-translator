@@ -1,3 +1,4 @@
+import {renderAssistanceTrace} from '/web/assistance-trace-view.mjs';
 import {createAssistanceReview,inspectAssistanceReview} from '/src/assistance-review.mjs';
 const $=id=>document.getElementById(id);
 let accepted=null,loadVersion=0;
@@ -16,6 +17,8 @@ function render(raw){
   element('p',`${trial.requestCount} target request(s) recorded`,article,'meta');
   if(!trial.submitted){element('p',trial.started?'Not committed. Target-based assessment is withheld until the trial is submitted.':'Not started. No result available.',article);continue;}
   element('p',`Committed result: ${resultText(trial.result)}`,article,'tag');
+  const traceDisclosure=element('details',undefined,article,'trace-disclosure');element('summary','Replay every revision for a mark',traceDisclosure);
+  const traceHost=element('div',undefined,traceDisclosure);let traceLoaded=false;traceDisclosure.addEventListener('toggle',()=>{if(traceDisclosure.open&&!traceLoaded){renderAssistanceTrace(traceHost,raw,trial.index);traceLoaded=true;}});
   if(!trial.checkpoints.length){element('p','No targets were requested in this record. There is no pre-request snapshot to compare; this does not establish absence of outside help.',article);continue;}
   const label=element('label','Choose a retained target request ',article);
   const selector=element('select',undefined,label);selector.setAttribute('aria-label',`Target request for trial ${trial.index+1}`);
