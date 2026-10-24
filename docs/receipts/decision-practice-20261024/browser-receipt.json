@@ -31,9 +31,9 @@
     "web/sequence.html": "61526a50b2daf31e31f6105a55da730d569ed2572d18541ec640c7ad1a0f0420",
     "web/sequence.css": "b9c417988a4ea558cfe7572b12da053a17f55cc04471f71814442605be368a3f",
     "web/styles.css": "c0ca32067374c49af6ed11f129e33ca4bb141cccff0c73906a7cb452594524a4",
-    "web/index.html": "9173674e92e0298c9359435449533db5fc88ca0c197c0dd34e886749f5852873",
+    "web/index.html": "6faf729e5f5bedc5692e4659b48f1ee553bc60f31b4ad3139bf858942db10d30",
     "tools/browser-decision-practice.mjs": "8458400ea21616058ab0b4a54449e1ecb75bbc18ef06e0b76296b4a3d7e7bb98",
-    "server.mjs": "2eb59b7ede683fdb265d19d244bcc65d617919922998fcb87706bb2dd239aab8"
+    "server.mjs": "5d583149c93c8481d2156b5dd186b7fe92cc4f4e94356f689dcab7c6447f7851"
   },
   "browser": "Chrome/156.0.8078.47",
   "result": "PASS",

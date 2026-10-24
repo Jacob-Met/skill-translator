@@ -91,6 +91,18 @@ For two or more placements, a descriptive common-translation diagnostic separate
 
 Export the session and source annotations to reopen the same setup. Outcomes are recomputed from placements; saved verdict fields are not trusted. Sessions bind source geometry, image identity where present, transfer rules, tolerances and target dimensions. Mismatched imports are refused transactionally. Open `/practice` directly to use the authored example.
 
+## Rehearse across changing workpieces
+
+Open **Rehearse across changing workpiece sizes**, or visit `/rehearsal`. Use the authored example or open your own source annotations under **Source and planned workpieces**. Declare 2–8 distinct sheet sizes. This separate diagram exercise reuses the maintained placement evaluator; it does not alter complete-task practice or its photo observations.
+
+Every sheet begins with adapted targets hidden. The source author's explanation and tolerance remain available. Place marks by clicking, keyboard or physical coordinates. **Show targets · record help** retains the request and the exact placements that existed before it. Hiding the targets does not erase that history. **Commit placements and review** freezes the sheet, including missing marks, before feedback appears. The next size starts with no placements or target requests.
+
+Export the full source, declared plan and ordered actions. Reopening recomputes assistance records and geometric results; stored verdicts are not trusted. A session contains at most 2048 actions, and exports/imports are bounded at 1 MiB. Invalid replacement files preserve accepted work. Nothing is uploaded or persisted automatically.
+
+The final comparison describes positional results and target requests for each size. It does not estimate a learning effect or establish independent performance: source explanations remain visible, outside help is unknown, and local JSON can be edited. Different workpieces may have different difficulty. Diagram success is not evidence of physical skill, expert equivalence or safe tool use.
+
+Verification: `node test/transfer-rehearsal.test.mjs` and `node tools/rehearsal-browser.mjs` (the latter requires existing Puppeteer and Chrome as described below).
+
 ## Challenge the original calibration
 
 Open **[Calibration Lab](http://127.0.0.1:8787/calibration)** from Task Space to investigate whether a rule conclusion depends on how its original source was read. Load the same source annotation JSON and exported observation JSON, or choose the clearly labeled authored example. The lab reuses the maintained perspective calibration, five rule interpretations and observation scoring.

@@ -1,6 +1,6 @@
 {
   "issue": "https://github.com/Jacob-Met/skill-translator/issues/39",
-  "maintainedBase": "95eda27c24caf55755c4d6a024cc219aa6bc22d7",
+  "maintainedBase": "5d9b6eca01744ca34aa8076ab30abb119a567947",
   "native": {
     "command": "node --test --test-isolation=none test/*.test.mjs",
     "runtime": "Node 24.19.0",
@@ -42,9 +42,9 @@
       "web/sequence.html": "61526a50b2daf31e31f6105a55da730d569ed2572d18541ec640c7ad1a0f0420",
       "web/sequence.css": "b9c417988a4ea558cfe7572b12da053a17f55cc04471f71814442605be368a3f",
       "web/styles.css": "c0ca32067374c49af6ed11f129e33ca4bb141cccff0c73906a7cb452594524a4",
-      "web/index.html": "9173674e92e0298c9359435449533db5fc88ca0c197c0dd34e886749f5852873",
+      "web/index.html": "6faf729e5f5bedc5692e4659b48f1ee553bc60f31b4ad3139bf858942db10d30",
       "tools/browser-decision-practice.mjs": "8458400ea21616058ab0b4a54449e1ecb75bbc18ef06e0b76296b4a3d7e7bb98",
-      "server.mjs": "2eb59b7ede683fdb265d19d244bcc65d617919922998fcb87706bb2dd239aab8"
+      "server.mjs": "5d583149c93c8481d2156b5dd186b7fe92cc4f4e94356f689dcab7c6447f7851"
     },
     "browser": "Chrome/156.0.8078.47",
     "result": "PASS",
@@ -59,14 +59,14 @@
     "web/decision-practice.mjs": "0e604a93f4905c7d53cfc9073ec5e1f266e3b4f78a7d92a5e2bf8195e9f07700",
     "tools/browser-decision-practice.mjs": "8458400ea21616058ab0b4a54449e1ecb75bbc18ef06e0b76296b4a3d7e7bb98",
     "docs/DECISION_PRACTICE.md": "2ee729aa47cfe7df272df818796d15abe39dd776feb5b3a91188150616b409e0",
-    "server.mjs": "2eb59b7ede683fdb265d19d244bcc65d617919922998fcb87706bb2dd239aab8",
-    "web/index.html": "9173674e92e0298c9359435449533db5fc88ca0c197c0dd34e886749f5852873",
-    "README.md": "c4e656f7a812285f2ab21675f8a367898eceefc8c7117fb3dc3d42c121e3b3fd"
+    "server.mjs": "5d583149c93c8481d2156b5dd186b7fe92cc4f4e94356f689dcab7c6447f7851",
+    "web/index.html": "6faf729e5f5bedc5692e4659b48f1ee553bc60f31b4ad3139bf858942db10d30",
+    "README.md": "2163a03b885ade1732fd7473291caae25882a109cbbb768449ef3d230f1ce5a7"
   },
   "fixtureSha256": {
-    "source.json": "f6627370c7f69428d6b5fdd3cc69ca03d703baf77db1a859cfa96791f5a8e55b",
-    "practice.json": "cbadfb3fb66c03537cd147080a784efc7623c324341a52164b3e6d134a8ff906",
-    "authored.webm": "70cdf91647360eb32df2886bb4ddb416be98a1f34c0f86e8c0954ff0b1ffbe54",
+    "source.json": "5352a2ea83942ab9a6c5f71b4145d956c55025cfd4ba9be783b8402a1405214a",
+    "practice.json": "183253f0ed5390bdbe00a995f7fc66acdf591d953d646b51e75f7df95a2d885f",
+    "authored.webm": "fdffbb9152c02336b2a5d3abd7d8cd6be28a6af87f626617a25d163fb1337984",
     "desktop.png": "7f22086e97d3fde2e3aac9f7b5040f0337370528f96a209f997fa7341c44f1a3",
     "mobile.png": "cc9557fe27c6e676d5da9f108448327ec4d9514339990eb6d57d3677be5cc1c2"
   },
@@ -76,5 +76,5 @@
     "Local source/browser receiving, no deployment or provider qualification",
     "Isolated browser course ran in the approved local root execution environment with explicit no-sandbox setting; product behavior unchanged"
   ],
-  "composition": "Preserves all twelve upstream files from e4f1830e, with only the four decision-practice routes added to upstream server. Adds calibrated v2 replay/refusal regression. Actual decision browser course repeated through updated studio and bundle reader; no claim that this course operates the calibration panel. Final main95eda27c adds an unrelated source-mark inspector; exact upstream README/server composed with only owned decision additions. Nine-group decision browser course repeated on composed routes. The 185 native result remains qualified at e4f1830e and is not relabeled as an inspector test."
+  "composition": "Preserves all twelve upstream files from e4f1830e, with only the four decision-practice routes added to upstream server. Adds calibrated v2 replay/refusal regression. Actual decision browser course repeated through updated studio and bundle reader; no claim that this course operates the calibration panel. Final main95eda27c adds an unrelated source-mark inspector; exact upstream README/server composed with only owned decision additions. Nine-group decision browser course repeated on composed routes. The 185 native result remains qualified at e4f1830e and is not relabeled as an inspector test. Final root composition to5d9b6eca preserves transfer-rehearsal README/server/index, applying only decision insertions at unchanged anchors. The nine-group decision course passed again on those exact composed routes. Native185 remains e4f1830e evidence."
 }
