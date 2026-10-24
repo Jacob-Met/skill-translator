@@ -1,8 +1,8 @@
 {
   "schema": "hamon.receiving/v1",
-  "base": "5f7b2df2de4cf0ee5cb78afa1f2adbc63f11eae7",
+  "base": "786dbccc957008dcbd43d7ad0b236636ac301283",
   "testedBase": "f768e3d0356b32a28566fff40ba273c17f141137",
-  "unchangedBaseFilesVerified": 249,
+  "unchangedBaseFilesVerified": 257,
   "sourceFiles": [
     {
       "path": "src/width-allowance.mjs",
@@ -21,8 +21,8 @@
     },
     {
       "path": "server.mjs",
-      "sha256": "0bfcb9ff30bbd885d2f98b6302ab12bc7874633205dffc7720394a8ec2e12df5",
-      "bytes": 14317
+      "sha256": "944bbabaa2bf9c47c886af4ec392fff455a5a757255927f21aa5c56489acc116",
+      "bytes": 14856
     },
     {
       "path": "test/width-allowance.test.mjs",
@@ -73,7 +73,7 @@
     "study.json": "91ecf2d6d48d6317569bed34d1922014600c28dc0fbd0397bf88268e28961eb5",
     "receipt.json": "44f9955d6019a93917e16a8e67ace1c02ad3aba27b32fa4d052d434194fc7ad5"
   },
-  "sourceTree": "6a0a05b09bd227f521ec1763cf247341bec9d61e",
+  "sourceTree": "faa2a8a44ab417824796313a30125158b0d08f2f",
   "commands": [
     "npm test",
     "PUPPETEER_PATH=<installed Puppeteer module> CHROME_BINARY=/usr/local/bin/google-chrome QA_OUTPUT=<receipt directory> node tools/browser-width-allowance.mjs",
@@ -81,8 +81,9 @@
   ],
   "composition": {
     "testedBase": "f768e3d0356b32a28566fff40ba273c17f141137",
-    "currentBase": "5f7b2df2de4cf0ee5cb78afa1f2adbc63f11eae7",
-    "code": "Six nonserver candidate files remain byte-identical to full native/browser receiving. Final server is exact current main plus two allowance module routes; nine live HTTP paths passed, preserving all five raw-affine challenge routes, feature-clearance and practice. Incoming unrelated source retained."
+    "firstIntegrationBase": "5f7b2df2de4cf0ee5cb78afa1f2adbc63f11eae7",
+    "currentBase": "786dbccc957008dcbd43d7ad0b236636ac301283",
+    "code": "Six nonserver candidate files remain byte-identical to full native/browser receiving. Normal merge reported a shared server-table conflict. Resolved by exact current main server plus two allowance routes adjacent to maintained width routes. All153 listed static routes received HTTP200 with nonempty bodies. All257 unchanged current nonreceipt base blobs verified. Incoming raw-affine and affine-outcome-conflict source retained."
   },
   "reviews": [
     {
