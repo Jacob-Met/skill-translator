@@ -212,3 +212,10 @@ $("challengeStudy").addEventListener("click",()=>action(()=>{
  sessionStorage.setItem("skill-translator.challenge-training",JSON.stringify(bundle));
  location.href="/challenge";
 }));
+
+$("jointStudy").addEventListener("click",()=>action(()=>{
+ if(source.landmarks.length<2)throw Error("Shared-source comparison needs at least two original marks.");
+ const bundle=exportCalibrationInvestigation(source,markId,observations,variants());
+ sessionStorage.setItem("skill-translator.joint-calibration-training",JSON.stringify(bundle));
+ location.href="/joint-calibration";
+}));

@@ -1,0 +1,17 @@
+{
+  "evidence": "Authored analytic controls; not a learner study",
+  "tests": [
+    "existing practice raw exports receive with common-mark comparison and explicit missingness",
+    "authored full-to-partial example retains per-mark raw coordinates and worsening/missing evidence",
+    "changed-source bundle refuses transactionally without losing the accepted selection",
+    "actual downloads preserve original source and selected unchanged semantics",
+    "focused source reaches maintained practice as a fresh empty task with targets hidden",
+    "fresh 390px browser reopens raw rounds and selection without page overflow",
+    "late file read cannot overwrite a newer accepted example and selection",
+    "no browser exceptions or offsite requests"
+  ],
+  "browser": "Chrome/156.0.8078.47",
+  "result": "PASS",
+  "errors": [],
+  "offsite": []
+}
