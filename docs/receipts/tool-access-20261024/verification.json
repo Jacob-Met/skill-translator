@@ -1,0 +1,80 @@
+{
+  "feature": "Declared edge-fed tool access",
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/43",
+  "baseCommit": "95eda27c24caf55755c4d6a024cc219aa6bc22d7",
+  "environment": {
+    "node": "22.23.4",
+    "chrome": "156.0.8078.47",
+    "device": "4403f155-1f0d-4f08-adf1-6f284be35909"
+  },
+  "native": {
+    "passed": 198,
+    "failed": 0,
+    "skipped": 0,
+    "includesHttpServer": true,
+    "suite": "test/*.test.mjs"
+  },
+  "browser": {
+    "passedGroups": 12,
+    "exceptions": 0,
+    "offsiteRequests": 0,
+    "desktopWidthCssPx": 1280,
+    "narrowWidthCssPx": 390,
+    "download": {
+      "completed": true,
+      "bytes": 2152,
+      "sha256": "5473b8866af63f5f1c7fa086cda3c92b3a1e11a9ec54169a3149c032f0629878",
+      "reopenedActualDiskBytes": true
+    },
+    "covered": [
+      "Task Space source and dimensions handoff",
+      "all minimal complete edge sets",
+      "changed workpiece dimensions",
+      "unavailable edge withholding",
+      "changed throat reach and signed shortfall",
+      "actual completed download",
+      "source mismatch rollback",
+      "reopen and recompute",
+      "superseded asynchronous source read",
+      "maintained practice receiving",
+      "fresh narrow keyboard and layout flow",
+      "browser exceptions and offsite request checks"
+    ],
+    "course": "tools/browser-tool-access.mjs"
+  },
+  "visualReview": {
+    "reviewer": "root contributor",
+    "desktopAndNarrowInspected": true,
+    "correction": "Replaced fixed 700px diagram raster scaling with responsive logical dimensions and device-pixel-ratio backing. Text retains CSS-pixel sizing on narrow screens.",
+    "narrowLabelHeightCssPx": 13.08,
+    "captures": [
+      "desktop.png",
+      "mobile.png",
+      "desktop-diagram.png",
+      "mobile-diagram.png"
+    ]
+  },
+  "sourceReview": {
+    "reviewers": [
+      "independent CHRONOS contributor",
+      "root contributor"
+    ],
+    "blockingFindingsRemaining": 0,
+    "resolved": [
+      "Replaced intercepted Blob proof with completed browser disk download and exact file reopening",
+      "Qualified nominal-center-only compatibility",
+      "Documented 1e-9 mm comparison allowance as numerical roundoff",
+      "Responsive diagram text sizing"
+    ]
+  },
+  "limitations": [
+    "Authored analytic geometry and browser receiving, not a physical task or learning study",
+    "Compatibility evaluates nominal target centers, not whole tolerance regions or measurement uncertainty",
+    "Straight supported-strip model only; tool-body collisions, clamps, thickness, material response, force and safe operation are not modeled",
+    "1e-9 mm boundary allowance is numerical roundoff, not physical uncertainty",
+    "Declared dimensions and source annotations are not independently verified",
+    "Passing practice scores do not establish skill acquisition or expert equivalence",
+    "No deployment, provider runtime, hardware operation or competition qualification is claimed"
+  ],
+  "localReceivingLimit": "Worker-local HTTP test was blocked by listen EPERM on 127.0.0.1; actual HTTP and Chrome receiving passed on the authorized RDC host."
+}

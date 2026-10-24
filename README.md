@@ -256,6 +256,54 @@ An orientation-preserving least-squares rigid fit describes the rotation and cen
 
 Focused controls: `node test/layout-feedback.test.mjs`. Actual browser receiving: `node tools/browser-layout-feedback.mjs` with the repository's existing Puppeteer/Chrome environment variables.
 
+## Adapt a declared edge-fed tool setup
+
+Choose **Adapt this task to a tool** in Task Space to carry the current source and
+workpiece into `/tool-access`. Or open the tool page and import source annotations.
+Declare the tool's minimum insertion depth, maximum throat depth, required supported
+lateral half-width, available physical approach edges, and where those dimensions
+came from. The included dimensions are explicitly authored examples.
+
+The page uses the existing landmark transfer without moving targets, changing
+rules, or enlarging tool reach by a mark's placement tolerance. Compatibility
+concerns nominal target centers; it does not establish clearance over a mark's
+whole tolerance region or an uncertainty range. For every mark and
+edge it computes the insertion depth and four signed margins: minimum depth,
+maximum depth, and support on either side. Negative margins identify the exact
+shortfall. An unavailable edge stays unavailable even if its geometry fits.
+The diagram shows the selected approach strip and the unchanged target marks.
+
+The solver enumerates all 15 nonempty subsets of the four physical edges and retains every
+inclusion-minimal complete cover: each listed set covers every task mark, and
+removing any edge loses coverage. This may reveal that a task requires separate
+approaches from opposite edges. It does not prescribe a movement sequence or rank
+options by physical effort. Uncovered marks prevent a complete-setup claim.
+Changing the workpiece or tool dimensions recomputes the alternatives; pending
+input edits disable saving and practice handoff until compared.
+
+This is a declared planar strip model. It requires the lateral strip from the
+chosen edge to the mark to fit within the workpiece. It does not infer tool-body
+shape, collisions, clamps, thickness, material response, force, or safe operation.
+Boundary comparisons allow 1e-9 mm numerical roundoff; this is not physical
+uncertainty. Boundary contact is accepted mathematically; any desired clearance belongs in
+the supplied dimensions. Reported dimensions remain supplied information, not
+verified equipment specifications. Source unknowns stay visible.
+
+Save a study to retain the source, its maintained practice reference, and declared
+tool inputs. Reopening checks the reference and recomputes findings; saved derived
+verdicts are ignored. Invalid or superseded asynchronous imports preserve the
+accepted study. **Practice unchanged targets** opens the existing practice consumer
+with the exact source and dimensions, initially hiding targets. The practice
+assessment does not acquire a physical tool-compatibility guarantee.
+
+`node test/tool-access.test.mjs` exercises analytic changed-tool/workpiece,
+complete-coverage, boundary, failure and source-binding controls.
+`PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome
+QA_OUTPUT=/path/to/receipts node tools/browser-tool-access.mjs` exercises actual
+browser handoff, import/export, conflict inspection and mobile receiving when the
+optional existing browser dependencies are available. These are authored geometry
+controls, not a physical task or learning study.
+
 ## Inspect the extent of a declared contact patch
 
 Open **Inspect a declared contact patch at the task point**, or visit `/footprint`. Load your task annotations or use the authored source. Declare a rectangular or circular patch, its dimensions, orientation, and the registration point inside it that must coincide with the adapted task mark. Coordinates for that registration point are measured from the patch center before rotation, with +x right and +y down. Positive rotation is clockwise in physical sheet coordinates; mirroring changes the view only.

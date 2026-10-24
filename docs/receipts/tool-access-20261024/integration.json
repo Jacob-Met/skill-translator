@@ -1,0 +1,24 @@
+{
+  "format": "skill-tool-current-integration/v1",
+  "base": "47759a09ff445da69356b06bdcb27fd2a61db7ac",
+  "node": "v22.23.4",
+  "chrome": "156.0.8078.47",
+  "native": {
+    "command": "npm test",
+    "passed": 267,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "command": "node tools/browser-tool-access.mjs",
+    "groupsPassed": 12,
+    "exceptions": 0,
+    "offsiteRequests": 0,
+    "downloadBytes": 2152,
+    "downloadSha256": "5473b8866af63f5f1c7fa086cda3c92b3a1e11a9ec54169a3149c032f0629878",
+    "narrowLabelCssPixels": 13.078787878787878
+  },
+  "composition": "Latest feature-practice and relationship reuse retained. Removing tool additions from current README/server reproduces exact upstream bytes. Earlier feature/contact/state/practice features remain preserved.",
+  "review": "Independent CHRONOS review; root current-source/native/browser/visual review. No remaining blocker.",
+  "limits": "Declared nominal planar approach geometry, without physical tool-body, tolerance-region, force, safety or learned-skill qualification."
+}
