@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/task-readiness":["web/task-readiness.html","text/html; charset=utf-8"],
+  "/web/task-readiness.mjs":["web/task-readiness.mjs","text/javascript; charset=utf-8"],
+  "/web/task-readiness-source.mjs":["web/task-readiness-source.mjs","text/javascript; charset=utf-8"],
+  "/web/task-readiness.css":["web/task-readiness.css","text/css; charset=utf-8"],
+  "/src/task-readiness.mjs":["src/task-readiness.mjs","text/javascript; charset=utf-8"],
   "/tool-access":["web/tool-access.html","text/html; charset=utf-8"],
   "/web/tool-access.css":["web/tool-access.css","text/css; charset=utf-8"],
   "/web/tool-access.mjs":["web/tool-access.mjs","text/javascript; charset=utf-8"],
