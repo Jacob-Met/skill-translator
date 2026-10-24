@@ -91,3 +91,14 @@ The video course additionally uses an installed FFmpeg to generate an original c
 The evidence course exercises additional demonstrations, contradictory results, uncertainty-sensitive experiment proposals, actual observation downloads, source binding, transactional reimport, source replacement and fresh mobile reopening. Its inputs are analytic authored controls. It writes review screenshots and receipts to `docs/receipts/rule-evidence-20261024` (or `QA_OUTPUT`) when run.
 
 The complete-task course checks retained multi-mark attempts, incomplete/failing/passing results, shared-shift diagnosis without automatic correction, mirrored keyboard placement, archived retries, actual session downloads, source/setup mismatch refusal and fresh mobile reopening. Its authored review evidence is written to `docs/receipts/task-practice-20261024` (or `QA_OUTPUT`).
+
+
+## Independent calibration checks
+
+Open **Check source calibration** in the workbench header (or `/calibration-checks`). Import the same source annotation JSON, then provide interior pixel locations and physical coordinates measured independently of the fitted corner transform. Supply a combined measurement bound in millimetres and label each row as an authored example or a reported measurement. The check page reuses the maintained geometry; it never fits to the checks or alters a learner's targets.
+
+The residual map shows measured positions, predictions and disagreement vectors. Fitted corner locations are excluded from independent evidence. The hull is only the spatial extent of the supplied checks, and task landmarks show distance to their nearest check. A compatible result at a few points does not establish accuracy across that hull, validate an uncertainty distribution or demonstrate physical skill. The page does not infer whether a user's measurements are independent.
+
+The two authored controls illustrate agreement and an interior 4 mm discrepancy while the same four corners continue to fit exactly. Actual use requires separately obtained measurements; copying the page's predictions would be circular. Save both source and checks before leaving. Reopening checks requires matching dimensions, corners and source-media identity, and recomputes findings rather than trusting saved results. Invalid imports preserve the current source/check ledger. No measurements are uploaded.
+
+`node test/calibration-checks.test.mjs` runs independent analytic projective, dimension-error, interior-displacement, bounds, spatial-extent and provenance controls. `node tools/browser-calibration.mjs` exercises the real browser import/check/export loop when an existing Puppeteer installation and Chrome are supplied through `PUPPETEER_PATH` and `CHROME_BINARY`.

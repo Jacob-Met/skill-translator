@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calibration checks · Task Space</title><link rel="stylesheet" href="/web/calibration-checks.css"></head>
+<body><header><a href="/">TASK SPACE / SKILL TRANSLATOR</a><span>Source geometry · independent checks</span></header>
+<main><section class="intro"><div><p class="eyebrow">MEASURE BEFORE YOU TRANSFER</p>
+<h1>Does the picture agree <br>with the workpiece?</h1><p>Check the interior of a source calibration against measurements you made independently. A perfect fit at four corners cannot answer this question.</p></div>
+<aside><strong>Keep the measurement separate.</strong><p>Read physical positions with your reference instrument. Do not copy the coordinates predicted by this page. Checks describe supplied evidence; they do not certify a craft outcome.</p></aside></section>
+<section class="panel source"><div><h2>1. Choose the source</h2><p id="sourceTitle"></p><p id="sourceDetail" class="muted"></p></div>
+<div class="controls"><label class="file">Open source JSON<input id="sourceFile" type="file" accept=".json,application/json"></label>
+<label class="file" id="photoControl" hidden>Pair original photo<input id="photoFile" type="file" accept="image/png,image/jpeg"></label>
+<button id="exampleGood">Load authored consistent example</button><button id="exampleBad">Load authored mismatch</button></div>
+<p id="sourceProvenance" class="muted full"></p><p id="photoStatus" class="muted full"></p></section>
+<div id="notice" role="status" aria-live="polite"></div><div id="error" role="alert"></div>
+<section class="workspace"><div class="panel"><div class="section-heading"><h2>2. Locate a check point</h2><span>Source pixel coordinates</span></div>
+<svg id="sourceMap" role="img" aria-label="Source calibration and supplied check pixels" viewBox="0 0 560 390"></svg>
+<p class="muted">This is the source coordinate map. Click to enter a pixel position, or enter coordinates below from the original image. Fitted corner locations are excluded from independent checks.</p>
+<form id="checkForm"><label class="wide">Independent measurement source<input id="checkLabel" required maxlength="160" placeholder="e.g. ruler, station A, check 1"></label>
+<label>Pixel x<input id="pixelX" type="number" step="any" required></label><label>Pixel y<input id="pixelY" type="number" step="any" required></label>
+<label>Measured x from left (mm)<input id="measuredX" type="number" min="0" step="any" required></label><label>Measured y from top (mm)<input id="measuredY" type="number" min="0" step="any" required></label>
+<label>Combined measurement bound (mm)<input id="bound" type="number" min="0" max="1000" step="any" value="0.5" required></label>
+<label>Evidence class<select id="evidenceClass"><option value="reported-measurement">Reported measurement</option><option value="authored-example">Authored example</option></select></label>
+<label class="wide confirm"><input id="independent" type="checkbox" required>Physical coordinates come from a separate measurement, not the fitted calibration.</label>
+<button class="primary wide" type="submit">Add independent check</button></form></div>
+<div class="panel"><div class="section-heading"><h2>3. Inspect the disagreement</h2><span>Physical millimetres</span></div>
+<div id="resultState" class="result"></div><p id="resultText"></p><div id="metrics" class="metrics"></div>
+<svg id="residualMap" role="img" aria-label="Measured positions, predicted positions, residuals and check extent" viewBox="0 0 560 390"></svg>
+<p class="legend"><span>○ Measured</span><span>× Predicted</span><span>◆ Task landmark</span></p>
+<p id="coverageText" class="muted"></p><h3>Task landmark proximity</h3><div id="landmarkList"></div>
+<p class="caution">The shaded hull shows where checks were placed. It is not a validated area or confidence region. No calibration or task target is changed by a check.</p></div></section>
+<section class="panel"><div class="section-heading"><h2>Check ledger</h2><div class="controls"><label class="file">Open checks<input id="checksFile" type="file" accept=".json,application/json"></label><button id="exportChecks">Save checks</button><button id="exportSource">Save source</button><button id="clearChecks">Clear checks</button></div></div>
+<p class="muted">Checks stay in this tab until you save them. Reopening requires the same source geometry and image identity. Results are recomputed from measurements.</p>
+<div class="table-wrap"><table><thead><tr><th>Measurement</th><th>Evidence</th><th>Error / bound</th><th>Finding</th><th>Action</th></tr></thead><tbody id="checkRows"></tbody></table></div>
+<p id="emptyLedger">No checks yet. Add an independently measured position or explore an authored example.</p></section>
+<footer>Local geometry analysis. Source pixels, material behaviour, successful physical execution and demonstrated learning are separate forms of evidence.</footer>
+</main><script type="module" src="/web/calibration-checks.mjs"></script></body></html>
