@@ -112,3 +112,27 @@ Native course: `node test/readiness-explanation.test.mjs`. Actual browser course
 `PUPPETEER_PATH`, direct `CHROME_BINARY` and separate `QA_OUTPUT` convention.
 The new course retains its own exact input/reopened study, runtime/source hashes
 and screenshots; it does not overwrite the original task-readiness receipt.
+
+## Source-bound placement evidence (#80)
+
+When a demonstrated step's after-moment already has calibrated task annotations, the author can explicitly bind its completion check to **all of that task's placement tolerances** at supplied target width/height. The existing moment-task and practice modules own the source/rule/dimension binding and geometric evaluation. This consumer does not add a scorer, infer correspondence, or establish physical task completion.
+
+The learner opens the actual maintained practice page in another tab, enters placements, and exports its ordinary raw session. Back in readiness, importing that session shows each missing mark or positional error against its tolerance, manual versus retained photo-annotation provenance, and the declared target dimensions. Retaining the evidence is a separate action requiring a note. Known out-of-tolerance placements produce `fail`; no known failures but missing marks produce `unknown`; a complete set within tolerance produces `pass`. Previous rounds do not fill gaps in the current round. Hypothetical practice corrections never replace actual retained attempts.
+
+A bound check cannot accept a manually selected result. Photo annotation classes and source identities remain visible; this receiver retains the annotation record but does not independently reattach its image bytes. Manual detachment remains manual. These distinctions are not authentication or measurements of physical mastery. Other physical conditions still require separately declared reported checks.
+
+Studies containing geometric bindings use `skill-translator.task-readiness/v2`. Existing v1 studies retain their original event/replay behavior. New practice events retain normalized raw sessions, not a trusted verdict; every reopening reimports and recomputes with the exact after-state, rules and target dimensions. Revisions use the same downstream credit invalidation as reported observations. Each session is bounded to 1 MB; combined retained practice event input is bounded to 4 MB.
+
+Focused native controls:
+
+```sh
+node --test --test-isolation=none test/readiness-practice.test.mjs test/task-readiness.test.mjs test/readiness-explanation.test.mjs
+```
+
+Actual receiving course (requires Puppeteer and an admitted Chrome executable):
+
+```sh
+CHROME_BINARY=/opt/google/chrome/chrome PUPPETEER_PATH=/path/to/puppeteer QA_OUTPUT=/path/to/receipt node tools/browser-readiness-practice.mjs
+```
+
+The course authors original PNG/calibration controls, uses actual practice handoff, form placements and downloads, then imports empty/failed/passing sessions into readiness. It exercises upstream revision, source-dimension refusal, delayed file reads, context draft clearing and fresh desktop/mobile reopen. Runtime/browser identity, the complete 31-file module closure (including actual practice), exported raw sessions, the reopened readiness bundle and screenshots are retained separately from earlier receipts. Native checks are executed locally; actual browser receiving must be recorded before claiming the consumer has passed.

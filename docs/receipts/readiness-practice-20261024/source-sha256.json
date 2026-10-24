@@ -1,0 +1,159 @@
+{
+  "files": [
+    {
+      "path": "server.mjs",
+      "sha256": "f24aae40284cd928d955714cfb358e08df7f2b911291d23f92805d7060c873ca",
+      "bytes": 13478
+    },
+    {
+      "path": "src/authoring.mjs",
+      "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "bytes": 1825
+    },
+    {
+      "path": "src/capture-editing.mjs",
+      "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+      "bytes": 3930
+    },
+    {
+      "path": "src/capture.mjs",
+      "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "bytes": 6096
+    },
+    {
+      "path": "src/demo.mjs",
+      "sha256": "dac54e87c24314966e58b73c752e4ee06573057bf49cb5d9f6d934ebcf386657",
+      "bytes": 1390
+    },
+    {
+      "path": "src/demonstration-sequence.mjs",
+      "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "bytes": 10025
+    },
+    {
+      "path": "src/frame-origin.mjs",
+      "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "bytes": 3292
+    },
+    {
+      "path": "src/geometry.mjs",
+      "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "bytes": 7305
+    },
+    {
+      "path": "src/layout-feedback.mjs",
+      "sha256": "bc9ff4fab54557b563f9a5b409cff29c262087f30d9c8aef686f77950fea50d8",
+      "bytes": 3186
+    },
+    {
+      "path": "src/learner-observation.mjs",
+      "sha256": "8e7b0bf128ca22ef79e33e89d3f64a2906b9340911d5b41a8b5cebead5b75431",
+      "bytes": 2466
+    },
+    {
+      "path": "src/practice.mjs",
+      "sha256": "283909901f4d436affc4382373e455fbf3951d221a1d4918d261453e9c6c3bd6",
+      "bytes": 7944
+    },
+    {
+      "path": "src/prerequisite-rehearsal.mjs",
+      "sha256": "45ffa47e98b6d2813ac4db9d86af9fa39a8804c180364e181ffb65ca195493e9",
+      "bytes": 4275
+    },
+    {
+      "path": "src/readiness-explanation.mjs",
+      "sha256": "b06b25f8577a3d98b3ffdd0dcb36b318fd656bfa2cc98bb12aebb3f01ec59dd8",
+      "bytes": 1713
+    },
+    {
+      "path": "src/readiness-practice.mjs",
+      "sha256": "d06461df462bdefbe32184b519392aea72939c34a9837ae8c34db197d410430e",
+      "bytes": 2060
+    },
+    {
+      "path": "src/sequence-capture.mjs",
+      "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "bytes": 1672
+    },
+    {
+      "path": "src/task-readiness.mjs",
+      "sha256": "8d2bddf6fba0605de634c8d8ca7f67dbebb2c5b711da9c5d5f4b8f59526b64fb",
+      "bytes": 7304
+    },
+    {
+      "path": "src/task-relationships.mjs",
+      "sha256": "e1c0a8568f04302e782c50cb17ac85a661c374847ec45d70738d84696259a563",
+      "bytes": 3771
+    },
+    {
+      "path": "tools/browser-readiness-practice.mjs",
+      "sha256": "ad0c9cb131ded14e0d7ac899943d26e3d851ba8a6b41301bb08b8dda192d7166",
+      "bytes": 15157
+    },
+    {
+      "path": "web/image-input.mjs",
+      "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "bytes": 1511
+    },
+    {
+      "path": "web/layout-feedback.mjs",
+      "sha256": "4ab9cb15d9c3a67cfbc0232b5c26a108028d4fe9d2ccaad3189e5b6b95f30ee8",
+      "bytes": 2136
+    },
+    {
+      "path": "web/practice.css",
+      "sha256": "f1774c223187097e381e1b352fba2c8ed22320aa3b98d3ea23a214f65ae51eea",
+      "bytes": 6158
+    },
+    {
+      "path": "web/practice.html",
+      "sha256": "ede4c047ad8d55e3e0647bd582bb3dd2c6ae4c0a78127c846af234f168d8fa3a",
+      "bytes": 4844
+    },
+    {
+      "path": "web/practice.mjs",
+      "sha256": "6bcdaca3f5978714abb3087d202adf776688cd5f83c4c9bb1def3bc8e9842ccd",
+      "bytes": 17111
+    },
+    {
+      "path": "web/readiness-explanation.mjs",
+      "sha256": "d9e380a41ddc640b61c2857dc6c5e371caedb125fd8b2d2e527de0281a1c4572",
+      "bytes": 2433
+    },
+    {
+      "path": "web/readiness-practice.mjs",
+      "sha256": "838b0f63de2ce3afc2d0f96973d34a4155a9e1764f280d5f0af9a7e7a955ce98",
+      "bytes": 1269
+    },
+    {
+      "path": "web/sequence-input.mjs",
+      "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "bytes": 4361
+    },
+    {
+      "path": "web/styles.css",
+      "sha256": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "bytes": 13526
+    },
+    {
+      "path": "web/task-readiness-source.mjs",
+      "sha256": "67447bcf580b13daa7e7dacc55c1124c4eaf80a8a1d0237a97c0a66c23e6a240",
+      "bytes": 706
+    },
+    {
+      "path": "web/task-readiness.css",
+      "sha256": "af6331240b02cc02a5438a86a427c79a3192b522cee2d3bfc68a549438ba85da",
+      "bytes": 1538
+    },
+    {
+      "path": "web/task-readiness.html",
+      "sha256": "be0c6fc349040d26802dee7853b2c5c78b6591bc903eb9d2745f2fff76ac6fa2",
+      "bytes": 4016
+    },
+    {
+      "path": "web/task-readiness.mjs",
+      "sha256": "f53b77b0ce5ccb27fb5ef0ab902f280e2167d750a7131c2f2fff65315c437091",
+      "bytes": 11865
+    }
+  ]
+}

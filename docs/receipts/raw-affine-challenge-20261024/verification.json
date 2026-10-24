@@ -1,11 +1,11 @@
 {
   "format": "skill-translator.raw-affine-challenge-receiving/v1",
   "received_at": "2026-10-24",
-  "base_commit": "e3e70e2827b5bc6e5a78008051c2ed325bbf8b57",
+  "base_commit": "09ae668bf2194d686a0da7c81a15bb37ab124583",
   "scope": "Frozen raw training and separately calibrated prospective outcomes, exact-image inspection and complete raw replay",
   "native": {
-    "tests": 329,
-    "passed": 329,
+    "tests": 336,
+    "passed": 336,
     "failed": 0,
     "skipped": 0,
     "focused_raw_challenge_groups": 9
@@ -29,7 +29,7 @@
     "web/raw-affine-challenge.css": "377e7a0d1697068be8e4337a95850cd098f0851aa55971da4e8b33abc0e226dd",
     "test/raw-affine-challenge.test.mjs": "da2a545d294c0370d08f20ffb8b71c7898daa93a3c9cac6ce59653acb573cd5f",
     "tools/browser-raw-affine-challenge.mjs": "dc21654b29df25f51a1181e3eaf2dcfc274178cc8c2be0fcc2d4b0d09e29b3b8",
-    "server.mjs": "12a1e0dbc8acb7c705b34f94c9286709a19334b72a42e468e7c6ec8005e8247f",
+    "server.mjs": "d387220cc8b3cc20f41d8dc756d1d1bba02721fed6dae40197f414ba1d8ecd35",
     "web/response-demonstrations.html": "5237fcd401cf24e896e8a4f3cb89957563a0520a95f6e5ae30f7d56f1ab8717d"
   },
   "capacity": {
@@ -64,5 +64,6 @@
     "node": "v22.23.4",
     "browser": "Chrome/156.0.8078.47",
     "platform": "Linux x64"
-  }
+  },
+  "composition": "Preserves merged readiness-practice PR86 routes/modules. Full native and13group raw browser courses re-executed on this composed source; no product/assertion changes."
 }

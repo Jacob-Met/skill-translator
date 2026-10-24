@@ -36,7 +36,7 @@ These are authored analytic controls. They do not validate real-world calibratio
 
 ## Received composition
 
-The raw-source prospective consumer was received on #77 merge `e3e70e2827b5bc6e5a78008051c2ed325bbf8b57`. The combined source passed **329 native checks, zero failures and zero skips**; nine focused controls exercise this raw consumer. Its own actual direct-Chrome course passed **13 groups** with namespace and seccomp sandbox assertions enabled. These are the raw-challenge results, separate from the prior #77 delivery's 320 native checks and its two 13-group demonstration/capacity courses.
+The raw-source prospective consumer was received on readiness-practice main `09ae668bf2194d686a0da7c81a15bb37ab124583`, preserving #77 merge `e3e70e2827b5bc6e5a78008051c2ed325bbf8b57`. The combined source passed **336 native checks, zero failures and zero skips**; nine focused controls exercise this raw consumer. Its own actual direct-Chrome course passed **13 groups** with namespace and seccomp sandbox assertions enabled. These are the raw-challenge results, separate from the prior #77 delivery's 320 native checks and its two 13-group demonstration/capacity courses.
 
 The raw course received original authored PNG pixels, froze and downloaded complete raw training before outcomes, required explicit correspondence and bounds, and exposed a joint contradiction despite individual agreement without changing frozen ranges. It also checked exact image mismatch retention, complete raw download/reopen with derived claims ignored, frozen-dimension and image-coordinate refusal, late JSON/image cancellation, a 390px labeled removal action, keyboard new-plan reset and generated-ID collision avoidance.
 
