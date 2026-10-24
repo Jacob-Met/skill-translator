@@ -43,3 +43,6 @@ $('selected').addEventListener('change',()=>{epoch++;render();});
 $('save').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(accepted.bundle,null,2)],{type:'application/json'}));const a=el('a');a.href=url;a.download='feature-clearance.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 $('practice').addEventListener('click',()=>{try{const input=featurePracticeInput(accepted.bundle,Number($('selected').value));sessionStorage.setItem('skill-translator-practice-input/v1',JSON.stringify(input));location.assign('/practice');}catch(e){error('Practice could not open. '+e.message);}});
 
+
+
+$('openFeatureRehearsal').addEventListener('click',()=>{if($('results').hidden||!accepted)return;sessionStorage.setItem('skill-translator-feature-rehearsal-comparison/v1',JSON.stringify(accepted.bundle));sessionStorage.removeItem('skill-translator-feature-rehearsal-return/v1');location.assign('/feature-rehearsal');});
