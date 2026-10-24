@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/response-demonstrations":["web/response-demonstrations.html","text/html; charset=utf-8"],
+  "/web/response-demonstrations.css":["web/response-demonstrations.css","text/css; charset=utf-8"],
+  "/web/response-demonstrations.mjs":["web/response-demonstrations.mjs","text/javascript; charset=utf-8"],
+  "/src/response-demonstrations.mjs":["src/response-demonstrations.mjs","text/javascript; charset=utf-8"],
   "/src/readiness-explanation.mjs":["src/readiness-explanation.mjs","text/javascript; charset=utf-8"],
   "/web/readiness-explanation.mjs":["web/readiness-explanation.mjs","text/javascript; charset=utf-8"],
   "/web/affine-challenge.css":["web/affine-challenge.css","text/css; charset=utf-8"],

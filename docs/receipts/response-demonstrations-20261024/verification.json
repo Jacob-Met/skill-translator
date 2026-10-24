@@ -1,0 +1,60 @@
+{
+  "format": "skill-translator.response-demonstrations-receiving/v1",
+  "received_at": "2026-10-24",
+  "base_commit": "48a50ce68d50215481258c664f97c983c87b6009",
+  "scope": "Raw demonstration source custody and numeric affine challenge whole-account capacity repair",
+  "runtime": {
+    "node": "v22.23.4",
+    "browser": "Chrome/156.0.8078.47",
+    "platform": "Linux x64",
+    "sandbox": "Direct Chrome; namespace, PID, network and seccomp enabled"
+  },
+  "commands": [
+    "npm test",
+    "PUPPETEER_PATH=<installed puppeteer-core> QA_OUTPUT=<fresh receipts directory> node tools/browser-response-demonstrations.mjs",
+    "PUPPETEER_PATH=<installed puppeteer-core> QA_OUTPUT=<fresh receipts directory> node tools/browser-affine-challenge.mjs"
+  ],
+  "native": {
+    "tests": 312,
+    "passed": 312,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "demonstrations_groups": 13,
+    "affine_capacity_groups": 13,
+    "page_errors": 0
+  },
+  "code_sha256": {
+    "src/response-demonstrations.mjs": "c86e0f665c5fb2d924747ee4abe4c477ddceb87484d7341a128ff443046c0cae",
+    "web/response-demonstrations.html": "21b854e1c4cf615160caf7642b3d9089aa2234587dfcf6c1c623fda274892661",
+    "web/response-demonstrations.css": "c1e699dd76d97b4b0b0fb1fed5e66eaf24f7bb501293ebbec8d857ebfa08c738",
+    "web/response-demonstrations.mjs": "a833722725389292926f5197be5ead459691c77dcb800ce6ff433cc789c889b6",
+    "test/response-demonstrations.test.mjs": "ec898220b461f27ffdfc9afdef89c301bff1e25b2e77da7500cf2a3325e4b11c",
+    "tools/browser-response-demonstrations.mjs": "3d6c867d2ac34ac71bec3819379a5fe67b1998f71c4a0dad3b6f74529950c079",
+    "server.mjs": "25f33e519ebd7eea3d99cc4ee1c79f1f614ab8fd8ce935969d3f4c2251c7eaab",
+    "web/response-family.html": "8c98a2a8eb55877150221819ee1a693f24d5effeefacc313c69c0b8f072da8e6",
+    "src/affine-challenge.mjs": "bf4a28ea833b86af0fef27a1b31f510ca0cfd0fadd4421a8a6ab6adebe1b1fb7",
+    "web/affine-challenge.mjs": "9043b6aee061e234eef2f725c020fe6ff4c8af7a11b86489cc7cc73c7ad03b42",
+    "test/affine-challenge-capacity.test.mjs": "0aaa0a45b2e453be7e1632e74edabed1d6fff921db4eccb99135bc82ec7b282c",
+    "tools/browser-affine-challenge.mjs": "b05c2b3df3093a04eceeebe9197f16c699e16cba7676a65b3d6fc96e6fffa99e"
+  },
+  "capacity": {
+    "limit_bytes": 2000000,
+    "encoding": "compact JSON",
+    "exact_boundary_download_reopens": true,
+    "oversized_result_retains_accepted_account": true,
+    "one_byte_oversized_import_refuses": true
+  },
+  "review": "Independent retained MICROVERSE worker source review found no blocker; parent compared every executable delivery byte against the actual received runtime and inspected desktop/390px rendered output.",
+  "receiving_corrections": [
+    "390px source rows became labeled cards with an exposed Remove action; final course checks every cell and removes a source.",
+    "Final affine receiver closes its temporary mobile page and brings desktop to foreground before capacity checks; product code and assertions are unchanged.",
+    "Failed intermediate receiver attempts were not counted as passing evidence; final actual courses each passed thirteen groups."
+  ],
+  "limits": [
+    "Authored original PNG and analytic controls; no physical demonstration, calibration accuracy or skill efficacy.",
+    "Image matching establishes file identity, not correspondence or declared physical bounds.",
+    "Prospective timing is a declaration; this repair does not qualify the separate raw-source challenge consumer in #81."
+  ]
+}
