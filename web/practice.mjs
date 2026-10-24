@@ -133,6 +133,13 @@ $("practiceSource").addEventListener("change",async e=>{const file=e.target.file
 });
 $("savePractice").addEventListener("click",()=>download("skill-practice-session.json",importPractice(demo,widthMm,heightMm,session)));
 $("savePracticeSource").addEventListener("click",()=>download("skill-practice-source.json",demo));
+$("inspectCalibration").addEventListener("click",()=>{
+  try{
+    sessionStorage.setItem("skill-translator-practice-resume/v1",JSON.stringify({demo,widthMm,heightMm,session:importPractice(demo,widthMm,heightMm,session),selected,reviewed,mirrored:mirrored(),showGoals:$("practiceGoals").checked}));
+    sessionStorage.setItem("skill-translator-sensitivity-input/v1",JSON.stringify({demo,widthMm,heightMm,landmarkId:selected}));
+    location.href="/sensitivity";
+  }catch(e){error("Could not preserve the practice session for analysis. "+e.message);}
+});
 $("openPractice").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;
   try{if(file.size>256*1024)throw Error("Practice session must be ≤256 KB");const next=importPractice(demo,widthMm,heightMm,JSON.parse(await file.text()));
     session=next;selected=target.landmarks[0].id;reviewed=false;error("");render();$("practiceStatus").textContent="Session reopened. Review recomputes outcomes from the saved placements.";
@@ -147,3 +154,14 @@ try{
   }
 }catch(e){startupError="Previous setup was unavailable; the authored example is shown. "+e.message;}
 install(demo,widthMm,heightMm);if(startupError)error(startupError);
+if(new URL(location.href).searchParams.get("resume")==="calibration"){
+  try{
+    const saved=JSON.parse(sessionStorage.getItem("skill-translator-practice-resume/v1"));
+    if(!saved)throw Error("No retained practice session was found");
+    const restored=importPractice(saved.demo,saved.widthMm,saved.heightMm,saved.session);
+    install(saved.demo,saved.widthMm,saved.heightMm);session=restored;
+    selected=target.landmarks.some(m=>m.id===saved.selected)?saved.selected:target.landmarks[0].id;
+    reviewed=saved.reviewed===true;$("practiceView").value=saved.mirrored?"mirrored":"standard";$("practiceGoals").checked=saved.showGoals!==false;
+    render();$("practiceStatus").textContent="Your practice placements and rounds were retained while you inspected calibration.";
+  }catch(e){error("Retained practice could not be reopened. "+e.message);}
+}

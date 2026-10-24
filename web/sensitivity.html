@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark"><title>SKILL TRANSLATOR · Calibration Sensitivity</title><link rel="stylesheet" href="/web/styles.css"><link rel="stylesheet" href="/web/sensitivity.css"><script type="module" src="/web/sensitivity.mjs"></script></head>
+<body>
+<header class="topbar"><div class="brand"><span class="brandmark">ST</span><span>SKILL TRANSLATOR <small>/ CALIBRATION</small></span></div><a id="returnPractice" href="/practice">Return to your practice</a></header>
+<main>
+ <section class="sensitivity-hero"><p class="eyebrow">QUESTION THE CALIBRATION</p><h1>How much does the mark move?</h1><p class="lead">Try small changes to the source annotation and sheet measurements. See which assumptions move your transferred mark, before relying on a precise target.</p><p id="sourceIdentity" class="source-identity"></p></section>
+ <p id="sensitivityError" class="error" role="alert" hidden></p>
+ <div class="sensitivity-workspace">
+  <aside class="assumptions"><form id="sensitivityForm"><h2>Your hypothetical changes</h2><p class="input-note">These are amounts you choose to explore, not measured uncertainty. Each coordinate or dimension varies by up to ± the entered amount.</p>
+   <label>Inspect this mark<select id="sensitivityMark"></select></label>
+   <fieldset><legend>Annotation · pixels</legend><label>Each corner coordinate · ± px<input id="cornerPx" type="number" min="0" max="50" step="any" value="1" required></label><label>Selected mark coordinate · ± px<input id="landmarkPx" type="number" min="0" max="50" step="any" value="1" required></label></fieldset>
+   <fieldset><legend>Source sheet · millimetres</legend><label>Width · ± mm<input id="sourceWidthMm" type="number" min="0" max="1000" step="any" value="0" required></label><label>Height · ± mm<input id="sourceHeightMm" type="number" min="0" max="1000" step="any" value="0" required></label></fieldset>
+   <fieldset><legend>Practice sheet · millimetres</legend><label>Width · ± mm<input id="targetWidthMm" type="number" min="0" max="1000" step="any" value="0" required></label><label>Height · ± mm<input id="targetHeightMm" type="number" min="0" max="1000" step="any" value="0" required></label></fieldset>
+   <button id="runSensitivity" class="primary" type="submit">Run these changes</button><p id="assumptionStatus" role="status" class="input-note"></p>
+  </form><div class="annotation-context"><h3>Accepted annotation geometry</h3><svg id="sourceGeometry" viewBox="0 0 320 220" role="img" aria-label="Accepted source corners and selected mark"></svg><p id="geometryCaption" class="input-note"></p></div></aside>
+  <article class="sensitivity-result"><header><p class="eyebrow" id="sensitivityLabel"></p><h2>The predicted mark, displaced</h2><p>Every point shows one valid hypothetical calibration. The center is your accepted target; the dashed circle is its declared placement tolerance.</p></header>
+   <svg id="sensitivityPlot" viewBox="0 0 700 520" role="img" aria-label="Sampled predicted displacement relative to the accepted target"></svg>
+   <div class="plot-legend"><span class="legend-combined">Combined changes</span><span class="legend-individual">One coordinate at a time</span></div>
+   <div class="sample-finding"><div><span>Largest sampled movement</span><strong id="maxShift"></strong></div><div><span>Declared placement tolerance</span><strong id="taskTolerance"></strong></div></div>
+   <p id="toleranceMeaning" class="tolerance-meaning"></p><p id="scenarioCount" class="scenario-count"></p>
+   <div id="refusedScenarios" class="refused-scenarios" hidden><h3>Some scenarios could not be mapped</h3><p>The plotted spread uses valid predictions only. A refused calibration contributes no invented position.</p><ul id="refusalReasons"></ul></div>
+   <p class="method-note">A finite sensitivity experiment: individual changes plus paired combinations. This plot is not a probability distribution or a guaranteed envelope. Lens distortion, nonplanarity and shared calibration bias need separate evidence.</p>
+  </article>
+ </div>
+ <section class="influence-section"><div><p class="eyebrow">WHERE TO LOOK FIRST</p><h2>Which input moves this mark?</h2><p>Compare one-coordinate changes with the complete combination plot above. A large effect points to something to recheck; it does not prove that an annotation is wrong.</p></div><div id="inputInfluences" class="input-influences"></div></section>
+ <section class="sensitivity-files"><button id="saveSensitivity">Save source and assumptions</button><label>Reopen a sensitivity session<input id="openSensitivity" type="file" accept=".json,application/json"></label><p id="sensitivityFileStatus" role="status">Reopening recomputes the experiment. Your practice placements remain separate.</p></section>
+ <footer><span>SKILL TRANSLATOR · CALIBRATION SENSITIVITY</span><span>Accepted annotations and actual placements stay unchanged.</span></footer>
+</main></body></html>

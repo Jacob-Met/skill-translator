@@ -1,0 +1,117 @@
+{
+  "format": "skill-translator.sensitivity-receiving/v1",
+  "result": "PASS",
+  "maintainedBase": "2c8d66b8f1b03d5762820aa9dff7d91e44fe1f98",
+  "sourceFiles": [
+    {
+      "path": "src/sensitivity.mjs",
+      "gitBlobSha": "35d6306cd45a541910aa32fa3b535d431394e03d",
+      "sha256": "9e212e8a88ac91b54a2bc8add677cf0db7cb88b284b3dbffcf95138a49247523"
+    },
+    {
+      "path": "test/sensitivity.test.mjs",
+      "gitBlobSha": "ecae9be4a7261106f9b61a50e9e60d48bc249836",
+      "sha256": "d821906d581a9bbb58a9fcb4b6d26637b1656b8161d365e84110776163c2d013"
+    },
+    {
+      "path": "web/sensitivity.html",
+      "gitBlobSha": "9f1d7e393d7390f223278b7e0adf75fe9bfb8857",
+      "sha256": "4956b5f3737473a958517ecac1886d77a62b03d4863995898b3a9a24e153ff6b"
+    },
+    {
+      "path": "web/sensitivity.css",
+      "gitBlobSha": "a499c1fdf25d988654ac51d4575e76a661f88f11",
+      "sha256": "23214c0dd78bb22cad4e61dbadaf7a856c03a30933595290be1231ed8bcffd19"
+    },
+    {
+      "path": "web/sensitivity.mjs",
+      "gitBlobSha": "3f4a3bb8f44ea21b88277d59f5626f71df612a60",
+      "sha256": "4397ed970703ee993253633673f2aee5891608f6c88247f49a6860ab6a0e71ce"
+    },
+    {
+      "path": "web/practice.html",
+      "gitBlobSha": "74ec92714d46f9a0a91ca43f844ac530280d4e61",
+      "sha256": "fde014fe437c1c8c937bea47c8bb5160f94b98b84b310b2805840213e4c99106"
+    },
+    {
+      "path": "web/practice.mjs",
+      "gitBlobSha": "e83a045894ad1ecf06a01f1323a5885fa9bd76aa",
+      "sha256": "b9c1ecab57adef6358e8f1bad0a856b70a1d98ad2a5408b6a93a4ce648308d5f"
+    },
+    {
+      "path": "server.mjs",
+      "gitBlobSha": "d91a25d158febcd2360e2c61a9df3dc7f2610130",
+      "sha256": "4bf8a2ca01df8496c435fd6473d305a553cdde528c5649fe00f53d40e8d37fc7"
+    },
+    {
+      "path": "tools/browser-sensitivity.mjs",
+      "gitBlobSha": "cf1493c6671c1fe4d7bc3cd69863a46dc59a3414",
+      "sha256": "f035cdd131793634cca97f92ffa8d72872c3c6d04bfc026e3d35b41ffd38d3d3"
+    },
+    {
+      "path": "README.md",
+      "gitBlobSha": "9e494407e64275758ba17330635b7aa1f4a188f7",
+      "sha256": "a4e1fd00f71667d0a5bf228cb7f4bb8612416bbce77a506fbfd50062603138fe"
+    },
+    {
+      "path": "docs/CALIBRATION_SENSITIVITY.md",
+      "gitBlobSha": "12feaf7f3c5d905ab31afeb2a574558cf5cad640",
+      "sha256": "ceec25934e38062259702f4c310c9793dee17d076e5aaba825e8dca7a8eafb28"
+    }
+  ],
+  "native": {
+    "command": "npm test",
+    "runtime": "Node 22.23.4",
+    "passed": 103,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "course": "calibration sensitivity and preserved task practice",
+    "result": "PASS",
+    "tests": [
+      "practice transfers exact source, selected mark and physical target dimensions",
+      "independent 2px perturbation at 2mm per pixel produces sqrt(32)mm sampled movement with honest finite-sampling meaning",
+      "invalid geometry/dimension scenarios remain counted refusals and contribute no invented plotted predictions",
+      "actual source-and-assumptions export/reopen recomputes the result and ignores fabricated cached metrics",
+      "invalid session import refuses atomically while preserving the visible experiment",
+      "390px and 320px layouts retain the experiment without horizontal overflow",
+      "return to practice retains exact raw placements and round history, failed outcome, mirrored view and hidden goals",
+      "no browser exceptions or offsite requests"
+    ],
+    "errors": [],
+    "offsite": [],
+    "browser": "Chrome/156.0.8078.47",
+    "refusalCounts": {
+      "valid": 103,
+      "invalid": 48,
+      "total": 151
+    },
+    "layouts": [
+      {
+        "viewport": 390,
+        "page": 390
+      },
+      {
+        "viewport": 320,
+        "page": 320
+      }
+    ]
+  },
+  "composition": {
+    "ruleAdoptionBrowser": "PASS",
+    "preserved": [
+      "source photo capture",
+      "presented-time video capture",
+      "independent calibration checks",
+      "coherent source-reading rule comparison",
+      "explicit rule adoption",
+      "raw complete-task practice"
+    ]
+  },
+  "review": "Independent worldlaw worker reviewed core and practice return and ran seven direct scientific groups; root composed and received actual browser.",
+  "limits": [
+    "Finite deterministic samples, not probability, confidence intervals or guaranteed error bounds.",
+    "Authored geometry controls only; no physical skill or metrology qualification."
+  ]
+}

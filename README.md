@@ -130,3 +130,11 @@ Compare the original and proposed target positions, explicitly confirm the inter
 Save a decision bundle to retain the complete original source, source-bound observations, explicit selections, and target/display settings. Reopening recomputes the derived interpretation and restores the validated practice setup; saved derived results are not trusted. The original source and the newly interpreted source can also be exported separately. Evidence compatibility is conditional on the supplied calibration and measurement bounds; it does not establish physical skill or exclude relationships outside the tested family.
 
 Verification: `node --test test/*.test.mjs` and `node tools/browser-rule-adoption.mjs` (requires Puppeteer; set `PUPPETEER_PATH` and `CHROME_BINARY` for an existing installation). The browser test exercises the actual workbench → decision → practice path, retained ambiguity, conflicting observations, source anchoring, saved setup restoration, and mobile layout using authored analytic controls.
+
+## Inspect calibration sensitivity
+
+From complete-task practice, choose **Inspect calibration sensitivity** to carry the exact source, selected mark and target dimensions into `/sensitivity`. Vary explicit bounds on corner coordinates, the source landmark, and source/target dimensions. The view compares the resulting transferred positions with the mark's declared tolerance and retains geometries that cannot be calibrated as visible refusals.
+
+The method evaluates a finite deterministic set of individual and combined perturbations. These are sensitivity samples, not confidence intervals, probabilities or guaranteed error bounds. The assumptions must come from measurements or a clearly declared exploration; small sampled movement does not establish physical accuracy, lens calibration, planarity or expert intent. Use the independent calibration checks for separately measured evidence.
+
+Save the source-and-assumptions experiment to reopen it with results recomputed. Dirty assumption edits disable export until recomputed. **Return to practice** restores the original raw placements, archived rounds, view and goal visibility; the sensitivity experiment never corrects a learner's attempt. Details and receiving evidence are in [docs/CALIBRATION_SENSITIVITY.md](docs/CALIBRATION_SENSITIVITY.md).
