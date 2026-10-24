@@ -130,6 +130,9 @@ The two authored controls illustrate agreement and an interior 4 mm discrepancy 
 
 `node test/calibration-checks.test.mjs` runs independent analytic projective, dimension-error, interior-displacement, bounds, spatial-extent and provenance controls. `node tools/browser-calibration.mjs` exercises the real browser import/check/export loop when an existing Puppeteer installation and Chrome are supplied through `PUPPETEER_PATH` and `CHROME_BINARY`.
 
+## Timed demonstration account
+
+Open `/sequence` to retain actual local video frames and explain a change through an intended result, visible evidence, supplied sensory cue and recovery note. Saved accounts embed the exact retained PNGs, validate their hashes on reopen and keep actual presented times distinct from requested seeks. The original video remains separate. [Demonstration sequence details](docs/DEMONSTRATION_SEQUENCE.md) describe the source contract, editing, limits and receiving. These authored accounts do not establish physical task success or learning.
 ## From observation evidence to deliberate practice
 
 Open **Review supported rule choices** in the workbench after retaining observations, or visit `/rule-adoption` and open the source and observation JSON files. The page reuses the maintained five-rule evidence analysis. Only rules compatible with observations for that mark can be selected; untested and contradicted rules remain unavailable. No rule is selected automatically. A choice among several survivors keeps those alternatives visible.

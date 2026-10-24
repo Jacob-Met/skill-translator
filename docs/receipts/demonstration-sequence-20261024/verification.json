@@ -1,0 +1,81 @@
+{
+  "baseMain": "18af31e7c33abca6135a0a75bda89db252af9c7e",
+  "changedSourceSha256": {
+    "README.md": "c9de175919bbc35c392f521f96db77bbf5584cb61d94a3ce4261470852a1e62b",
+    "docs/DEMONSTRATION_SEQUENCE.md": "5e5f0a0d2e59d3e362414a93b5698c9b053bd1d113a7cb5db239fe2cb471dfc7",
+    "server.mjs": "959b97ceba2de30074e08fbfc4882779b7006b71fcf9f0a785a47ee86dc36c5d",
+    "src/demonstration-sequence.mjs": "29a6fccece06eed2eb80961ddfe5284f0cd36170a6286752e03250f5734d507b",
+    "test/demonstration-sequence.test.mjs": "98e12c5bab7f2556fdfd090f604731e88ff4a1a475f0f2bf75d1f609ff3990e1",
+    "tools/browser-sequence.mjs": "527ac5e2cc5ae1ba1af9727b62c1f55266bb3a3eb494cdfa739771a9b713f2d4",
+    "web/index.html": "f2004efd12e66d970b2c75bf4992f5d5aeacea266f120063fe87b485934cd2e2",
+    "web/sequence-input.mjs": "f4bb799ee1b250f49ac2199ca05e7673ba383d19ebf8f1ca6b8b87da1bfd24b3",
+    "web/sequence.css": "c9eda7ac1503474dea1f9c0364f393c75898062eaa49ec61dcb1b2e4a46d3c86",
+    "web/sequence.html": "f893e639e7410f7acecef7485bb2228ea1b5b49d1f2db31aff58bb544fd4205c",
+    "web/sequence.mjs": "a1f88588fa846c995e5b385a2a45729a536c0f6f5ce2bf5e856258d82f018474"
+  },
+  "native": {
+    "command": "npm test",
+    "node": "24.19.0",
+    "passed": 120,
+    "failed": 0
+  },
+  "browser": {
+    "fixture": "original authored four-frame video; no physical demonstration or learner claim",
+    "result": "PASS",
+    "sourceHashes": {
+      "src/demonstration-sequence.mjs": "29a6fccece06eed2eb80961ddfe5284f0cd36170a6286752e03250f5734d507b",
+      "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "tools/browser-sequence.mjs": "527ac5e2cc5ae1ba1af9727b62c1f55266bb3a3eb494cdfa739771a9b713f2d4",
+      "web/sequence.mjs": "a1f88588fa846c995e5b385a2a45729a536c0f6f5ce2bf5e856258d82f018474",
+      "web/sequence-input.mjs": "f4bb799ee1b250f49ac2199ca05e7673ba383d19ebf8f1ca6b8b87da1bfd24b3",
+      "web/sequence.html": "f893e639e7410f7acecef7485bb2228ea1b5b49d1f2db31aff58bb544fd4205c",
+      "web/sequence.css": "c9eda7ac1503474dea1f9c0364f393c75898062eaa49ec61dcb1b2e4a46d3c86",
+      "web/video-input.mjs": "44fc317f1af10c6285c9cd6878d9c0d86d3d8c6ce3ca35a3b7ad5b39488f8ffb",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "server.mjs": "959b97ceba2de30074e08fbfc4882779b7006b71fcf9f0a785a47ee86dc36c5d"
+    },
+    "browser": "156.0.8078.47",
+    "presentedTimes": [
+      0.5,
+      1
+    ],
+    "tests": [
+      "two actual selected video frames retain distinct requested/presented times and known red/blue pixels",
+      "actual before/after step separates supplied intent from unsupplied sensory and recovery cues",
+      "download includes exact independently hashed PNG bytes and source/frame/clip records",
+      "referenced moment deletion refuses and revisions preserve step/moment/source identities",
+      "fresh-page reopen verifies actual before/after pixels and recomputes forged findings",
+      "wrong original clip and swapped PNG replacement refuse without discarding current account",
+      "export rejects swapped File bytes even when cached media metadata still matches",
+      "revision fence preserves a newer text edit against a delayed saved sequence",
+      "newer sequence import supersedes delayed older JSON without stale adoption",
+      "overlapping authored steps remain explicit instead of being presented as a causal chain",
+      "clear/new clip supersedes delayed PNG capture and the new decoder remains usable",
+      "desktop evidence layout and 390px controls receive without horizontal overflow",
+      "strict application CSP, zero offsite requests and no page exceptions",
+      "producer, dependencies, server and course source hashes stayed unchanged during receiving"
+    ],
+    "errors": [],
+    "offsite": [],
+    "csp": []
+  },
+  "independentReview": {
+    "worker": "hamon-dcda535a8765-20261023/microverse",
+    "core": "Seven native cases independently reproduced; source/time binding, chronology, stable revisions, overlap and resource bounds reviewed.",
+    "bundle": "Actual browser PNG round trip, ignored forged findings, wrong-frame refusal, rejection URL cleanup and cancelled admission reproduced.",
+    "finding": "Export originally trusted cached image metadata while serializing File bytes. A swapped File counterexample was fixed by hashing the actual bytes before export; the final browser course requires refusal.",
+    "consumer": "Worker authored and ran the full actual HTTP/MP4/WebM UI course. Root reran after minor busy-control/layout corrections and again after composing current main. Root final course uses numeric entry for the first frame and the video-playhead control for the second."
+  },
+  "composition": "Preserves current capture reopening, calibration sensitivity, rule adoption and practice. Additive route and README conflicts retained both sides. Maintained source media modules match exact current main.",
+  "screenshots": "Root inspected final desktop and 390px screenshots generated by the maintained course.",
+  "limits": [
+    "Original authored timing fixture, not an expert demonstration or learning study.",
+    "Requested seek time may differ from actual presented frame; actual timestamp and matching unique pixel marker remain authoritative.",
+    "Hashes prove consistency with the saved record, not capture authenticity.",
+    "No physical contact/force, successful skill transfer, provider runtime, deployment or contest qualification.",
+    "No full-limit peak-memory or low-end mobile performance qualification."
+  ],
+  "compositionParent": "92eea4b8254829584cddecb84c8bdda1407b0570",
+  "finalSource": "Recorded source hashes identify the final tested production bytes, including playhead selection. Documentation was then updated without changing runtime code."
+}
