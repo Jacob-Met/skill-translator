@@ -1,0 +1,19 @@
+{
+  "course": "actual Chrome task-space interaction",
+  "tests": [
+    "authored source and three computed target marks render in Chrome",
+    "incorrect initial learner mark produces tolerance refusal",
+    "mirrored 420x90 target accepts accurate physical placement",
+    "keyboard nudge in mirrored view produces measured error",
+    "practice toggle hides and restores source-backed targets",
+    "invalid imported calibration rejected without losing the previous sample",
+    "custom locally imported demonstration accepted",
+    "390px mobile view renders without horizontal overflow",
+    "no page exceptions or offsite requests"
+  ],
+  "source": "authored synthetic 2D geometry",
+  "browser": "Chrome/155.0.8059.85",
+  "result": "PASS",
+  "errors": [],
+  "offsite": []
+}
