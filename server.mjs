@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/affine-candidates":["web/affine-candidates.html","text/html; charset=utf-8"],
+  "/src/affine-candidates.mjs":["src/affine-candidates.mjs","text/javascript; charset=utf-8"],
+  "/web/affine-candidates-worker.mjs":["web/affine-candidates-worker.mjs","text/javascript; charset=utf-8"],
+  "/web/affine-candidates.css":["web/affine-candidates.css","text/css; charset=utf-8"],
+  "/web/affine-candidates.mjs":["web/affine-candidates.mjs","text/javascript; charset=utf-8"],
   "/transition-practice":["web/transition-practice.html","text/html; charset=utf-8"],
   "/src/transition-practice.mjs":["src/transition-practice.mjs","text/javascript; charset=utf-8"],
   "/web/transition-practice.mjs":["web/transition-practice.mjs","text/javascript; charset=utf-8"],

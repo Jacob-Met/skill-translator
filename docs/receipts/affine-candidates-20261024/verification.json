@@ -1,0 +1,59 @@
+{
+  "issue": 95,
+  "status": "received",
+  "candidateSha256": {
+    "docs/AFFINE_CANDIDATES.md": "cf61a88930a37a790f3997ad1f9e4fcc7023acd471a37998bf330595d1727fd4",
+    "src/affine-candidates.mjs": "8de6aaa8acd3f308d3ebee6e9a5c12fa9a9a138eb033d7df383580bd2895c3be",
+    "test/affine-candidates.test.mjs": "7a8fcf03d190ea3c72eca2b9049a4e8318697e8cb26f122efd3394678d2e2d57",
+    "tools/browser-affine-candidates.mjs": "75913e16dbe1980e9e70963c5dd6d4201d67a05e775b0a568af277ec6d5f7089",
+    "web/affine-candidates-worker.mjs": "26d1fab6ff53964211c0e54319e5fa3dec99882d13f082c4b6f0f45d417712e1",
+    "web/affine-candidates.css": "6777b71477c7c5bb488bc0451b094d182acf0be99d6799d9631f3703cc2c200c",
+    "web/affine-candidates.html": "664cc10748419cb26c9d3ebd11099abafd50494f79821fee41909f5f80eca9ba",
+    "web/affine-candidates.mjs": "ef371961ba1c80134d626928e7c94349d3129626372dfb49c52cf0c5c79ed742"
+  },
+  "nativeFocused": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0
+  },
+  "independentReview": {
+    "reviewer": "microverse",
+    "nativePassed": 11,
+    "remainingBlockers": 0,
+    "closedFinding": "Late frozen-plan result after changed candidate or withdrawn declaration; revision cancellation and actual-worker delayed-delivery course added."
+  },
+  "nativeComposed": {
+    "passed": 388,
+    "failed": 0,
+    "skipped": 0,
+    "status": "passed",
+    "command": "node --test",
+    "host": "a3bc4a35-65d3-4f5b-9578-e136049e0095"
+  },
+  "browser": {
+    "status": "passed",
+    "passed": 10,
+    "browser": "Chrome 156.0.8078.47",
+    "namespaceSandbox": true,
+    "seccompSandbox": true,
+    "desktopReview": "parent visually inspected complete page",
+    "mobile390Review": "parent visually inspected complete page",
+    "source": "browser-receipt.json"
+  },
+  "limits": [
+    "Unchanged supplied affine family, finite candidate list and explicit prospective bounds.",
+    "Raw comparison retains planning bounds; existing raw-plan schema does not enforce them on actual outcomes.",
+    "No automatic candidate selection, expected information gain, physical acquisition or validated skill transfer."
+  ],
+  "receivingBase": "434833a477f3c8d8f01e39c6f12d5ed406d34f44",
+  "publicationBase": "170be69c68c0807c83753f2e072f035680670940",
+  "receivedSha256": {
+    "src/affine-candidates.mjs": "8de6aaa8acd3f308d3ebee6e9a5c12fa9a9a138eb033d7df383580bd2895c3be",
+    "web/affine-candidates.mjs": "ef371961ba1c80134d626928e7c94349d3129626372dfb49c52cf0c5c79ed742",
+    "tools/browser-affine-candidates.mjs": "75913e16dbe1980e9e70963c5dd6d4201d67a05e775b0a568af277ec6d5f7089",
+    "server.mjs": "75d180662fa73ce8eeb4d43ac9b7473b39765cfbc1440d6b999b0fde0b5ebee9",
+    "web/response-demonstrations.html": "7449eada0ecf323652aa26a11a5e2a81e2afcf35653416b7d8d0c2428c18b737",
+    "web/raw-affine-challenge.html": "832824ac98072b881c5d055157b47f2c873793841eb6bcd3100582e194a2ab00"
+  },
+  "publicationComposition": "Concurrent transition-practice feature preserved. The 388-test and10-group browser receiving belongs to434833a plus this candidate. Only five additive candidate routes are composed into170be69 server; transition runtime is qualified by its separate owner."
+}

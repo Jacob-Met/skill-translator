@@ -1,0 +1,2 @@
+import {compareAffineCandidates,freezeComparedCandidate} from '../src/affine-candidates.mjs';
+self.onmessage=({data})=>{try{const value=data.kind==='freeze'?{challenge:freezeComparedCandidate(data.account,data.candidateId,data.outcomesNotUsed)}:{report:compareAffineCandidates(data.account)};self.postMessage({revision:data.revision,...value});}catch(error){self.postMessage({revision:data.revision,error:error.message});}};
