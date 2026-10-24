@@ -1,5 +1,6 @@
 import {derive,adapt,GeometryError} from './geometry.mjs';
 import {createPractice} from './practice.mjs';
+export const FEATURE_GAP_EPSILON=1e-9;
 export const FEATURE_SCHEMA='skill-translator-feature-clearance/v1';
 export const FEATURE_ASSUMPTION='circular-features-with-independent-euclidean-placement-tolerances';
 const fail=(ok,message)=>{if(!ok)throw new GeometryError(message);};
@@ -24,7 +25,7 @@ export function inspectFeatureClearance(source,widthMm,heightMm,features,require
   const minimumToleranceGapMm=Math.max(0,distanceMm-a.toleranceMm-b.toleranceMm)-radiusSum;
   pairs.push({from:a.id,to:b.id,distanceMm,nominalGapMm,minimumToleranceGapMm,
    nominalMarginMm:nominalGapMm-requiredGapMm,toleranceMarginMm:minimumToleranceGapMm-requiredGapMm,
-   nominalMeets:nominalGapMm+1e-9>=requiredGapMm,toleranceEnvelopeMeets:minimumToleranceGapMm+1e-9>=requiredGapMm});
+   nominalMeets:nominalGapMm+FEATURE_GAP_EPSILON>=requiredGapMm,toleranceEnvelopeMeets:minimumToleranceGapMm+FEATURE_GAP_EPSILON>=requiredGapMm});
  }
  return {widthMm,heightMm,requiredGapMm,marks,pairs,nominalMeets:pairs.every(p=>p.nominalMeets),
   toleranceEnvelopeMeets:pairs.every(p=>p.toleranceEnvelopeMeets)};
@@ -46,4 +47,5 @@ export function featurePracticeInput(raw,index){
  const {widthMm,heightMm}=bundle.workpieces[index];
  return {demo:bundle.source,widthMm,heightMm,showGoals:false,mirrored:false,session:createPractice(bundle.source,widthMm,heightMm)};
 }
+
 
