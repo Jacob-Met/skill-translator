@@ -5,9 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
-  "/src/photo-round-feedback.mjs": ["src/photo-round-feedback.mjs", "text/javascript; charset=utf-8"],
-  "/web/photo-round-feedback.mjs": ["web/photo-round-feedback.mjs", "text/javascript; charset=utf-8"],
-  "/web/photo-round-feedback.css": ["web/photo-round-feedback.css", "text/css; charset=utf-8"],
+  "/condition-set":["web/condition-set.html","text/html; charset=utf-8"],
+  "/src/condition-set.mjs":["src/condition-set.mjs","text/javascript; charset=utf-8"],
+  "/web/condition-set.mjs":["web/condition-set.mjs","text/javascript; charset=utf-8"],
+  "/web/condition-set.css":["web/condition-set.css","text/css; charset=utf-8"],
   "/corner-angle":["web/corner-angle.html","text/html; charset=utf-8"],
   "/src/corner-angle.mjs":["src/corner-angle.mjs","text/javascript; charset=utf-8"],
   "/web/corner-angle.mjs":["web/corner-angle.mjs","text/javascript; charset=utf-8"],
@@ -182,6 +183,9 @@ const routes=Object.freeze({
   "/web/practice-review.mjs":["web/practice-review.mjs","text/javascript; charset=utf-8"],
   "/web/practice-review.css":["web/practice-review.css","text/css; charset=utf-8"],
   "/src/practice-review.mjs":["src/practice-review.mjs","text/javascript; charset=utf-8"],
+  "/src/photo-round-feedback.mjs": ["src/photo-round-feedback.mjs", "text/javascript; charset=utf-8"],
+  "/web/photo-round-feedback.mjs": ["web/photo-round-feedback.mjs", "text/javascript; charset=utf-8"],
+  "/web/photo-round-feedback.css": ["web/photo-round-feedback.css", "text/css; charset=utf-8"],
   "/joint-calibration":["web/joint-calibration.html","text/html; charset=utf-8"],
   "/web/joint-calibration.html":["web/joint-calibration.html","text/html; charset=utf-8"],
   "/web/joint-calibration.css":["web/joint-calibration.css","text/css; charset=utf-8"],
