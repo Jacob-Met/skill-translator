@@ -1,0 +1,29 @@
+✔ equal passing totals expose a recovered length and newly failed offset (14.529967ms)
+✔ missing observations never appear as tolerance improvement (4.101731ms)
+✔ collapsed arms, missing arms and reverse comparison retain actual statuses (10.119461ms)
+✔ invalid or same rounds and changed source refuse; imported claims do not control results (4.783006ms)
+✔ all 21 rounds and 12 conditions remain inspectable; empty criteria remain undeclared (152.686061ms)
+✔ unchanged status retains changed values instead of claiming unchanged performance (2.476814ms)
+✔ shortened-arm outcome distinguishes length; translated unacceptable outcome exposes missing positional requirement (2.766381ms)
+✔ additional requirement can invalidate a consistent conjunction and cannot use categorical-cover pruning (0.883884ms)
+✔ missing endpoint is unresolved; unknown outcome never contributes a vote (2.58239ms)
+✔ source-only replay discards supplied findings and preserves exact raw history and bases (2.473779ms)
+✔ independent direct conjunction oracle checks all unknown/within/outside row combinations (84.797584ms)
+✔ maximum13 criteria enumerate8191 conjunctions without dropping originals (18.552661ms)
+✔ mixed angular and linear criteria retain their own units and failures (0.898025ms)
+✔ all selected conditions can pass while absolute point placement fails (1.140933ms)
+✔ no condition is undeclared, missing conditions unavailable, and known failure is preserved beside missing (1.01741ms)
+✔ collapsed arms remain unresolved in the mixed profile (0.520818ms)
+✔ every raw round survives and selected round controls only the view (0.698791ms)
+✔ source mismatch, unknown kinds, duplicate identities, missing basis and excessive sets refuse (1.712497ms)
+✔ typed criteria reject silent angular and linear unit substitution (1.059143ms)
+✔ the maximum declared set retains every named condition without result truncation (2.596481ms)
+✔ sparse condition declarations refuse rather than becoming vacuous success (0.597772ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 397.448952

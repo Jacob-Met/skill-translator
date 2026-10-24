@@ -1,0 +1,8 @@
+{
+  "actual_remote_artifact_sha256": {
+    "input.json": "398f466f6b48f5f194d299da97426a5dd93c56b16b95e8b4f6548606b1e05dc7",
+    "skill-condition-outcomes.json": "a88db68fa8bfcc040e57f1de60a60058bc0cfe0bbd9aa55d00575a9fbf39fedc"
+  },
+  "download_conditions_equal_actual_input": true,
+  "reconstruction": false
+}

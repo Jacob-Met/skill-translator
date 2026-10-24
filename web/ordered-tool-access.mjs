@@ -39,3 +39,6 @@ function drawApproach(){
  $('approachDetail').textContent=approach?`Step ${i+1}: ${row.label}, coherent witness from ${edge}. ${i===0?'Initial approach has no change charge.':result.witness[i-1]===edge?'Same edge as the preceding step.':'Changed from '+result.witness[i-1]+' at the preceding step.'} Insertion depth ${approach.depthMm.toFixed(2)} mm; minimum-depth margin ${approach.margins.minimumDepthMm.toFixed(2)}, throat margin ${approach.margins.maximumDepthMm.toFixed(2)}, side-support margins ${approach.margins.firstSideMm.toFixed(2)} / ${approach.margins.secondSideMm.toFixed(2)} mm. Selected target is orange. Positive margins indicate remaining nominal allowance.`:`Step ${i+1}: ${row.label}. No coherent complete assignment exists; unchanged targets are shown without an approach strip.`;
 }
 $('inspectStep').onchange=drawApproach;window.addEventListener('resize',drawApproach);
+
+// Admit file events only after the module handlers and initial view are ready.
+$('file').disabled=false;
