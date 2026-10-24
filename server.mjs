@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/footprint":["web/footprint.html","text/html; charset=utf-8"],
+  "/web/footprint.mjs":["web/footprint.mjs","text/javascript; charset=utf-8"],
+  "/web/footprint.css":["web/footprint.css","text/css; charset=utf-8"],
+  "/src/contact-footprint.mjs":["src/contact-footprint.mjs","text/javascript; charset=utf-8"],
   "/src/layout-feedback.mjs":["src/layout-feedback.mjs","text/javascript; charset=utf-8"],
   "/web/layout-feedback.mjs":["web/layout-feedback.mjs","text/javascript; charset=utf-8"],
   "/decision-practice":["web/decision-practice.html","text/html; charset=utf-8"],
