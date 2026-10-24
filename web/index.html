@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>SKILL TRANSLATOR · Task Space</title>
+<link rel="stylesheet" href="/web/styles.css">
+<script type="module" src="/web/app.mjs"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brandmark">ST</span><span>SKILL TRANSLATOR <small>/ TASK SPACE LAB</small></span></div>
+  <span class="status-chip">LOCAL · NO NETWORK INFERENCE</span>
+</header>
+<main>
+  <section class="hero">
+    <p class="eyebrow">01 / RELATIONSHIPS, NOT POSES</p>
+    <h1>What stays true when the workpiece changes?</h1>
+    <p class="lead">Inspect marked evidence from an annotated demonstration. Transfer physical clearances and proportional alignments to a different sheet, then test your own placement in millimetres.</p>
+    <p class="truth">ILLUSTRATIVE GEOMETRY ONLY · No contact, pressure or skill outcome is inferred from this 2D exercise.</p>
+  </section>
+  <section class="toolbar" aria-label="Source and target">
+    <div class="input-column">
+      <label for="demoFile">SOURCE ANNOTATIONS <span class="hint">Choose local JSON (optional, ≤256 KB)</span></label>
+      <input id="demoFile" type="file" accept=".json,application/json">
+      <p class="input-note" id="demoLabel">Synthetic bookbinding demonstration · 3 source marks</p>
+    </div>
+    <div class="input-column">
+      <label for="widthMm">TARGET WIDTH <span class="hint">millimetres</span></label>
+      <input id="widthMm" type="number" min="1" max="10000" value="320" step="1">
+    </div>
+    <div class="input-column">
+      <label for="heightMm">TARGET HEIGHT <span class="hint">millimetres</span></label>
+      <input id="heightMm" type="number" min="1" max="10000" value="190" step="1">
+    </div>
+    <div class="input-column">
+      <label for="handed">VIEW ORIENTATION</label>
+      <select id="handed">
+        <option value="standard">Standard</option>
+        <option value="mirrored">Mirrored workspace (left-handed view)</option>
+      </select>
+      <p class="input-note">View changes; physical rules don't.</p>
+    </div>
+  </section>
+  <p id="error" role="alert" class="error" hidden></p>
+  <section class="workspace" aria-label="Comparison workbench">
+    <article class="work-panel">
+      <div class="panel-head"><span class="step">A / 01</span><h2>Annotated source</h2><span class="panel-badge">AUTHORED</span></div>
+      <svg id="sourceSvg" viewBox="0 0 520 390" tabindex="0" role="application" aria-label="Annotated source page with numbered marks. Click inside page to propose a new source annotation; or use the numeric coordinate fields below."></svg>
+      <p class="undergraph">Four source corners establish a planar perspective transform. Each mark remains linked to its original pixel coordinate, not a presumed movement trajectory.</p>
+      <p class="source-provenance" id="provenance"></p>
+      <form id="authorForm" class="author-panel">
+        <p class="eyebrow">ANNOTATE / CAPTURE A NEW RELATIONSHIP</p>
+        <p class="author-intro">Click inside the source sheet or enter its pixel location, then explicitly describe what the mark means. No geometry can reveal an unmeasured force or expert intention.</p>
+        <div class="author-grid">
+          <label for="sourceX">SOURCE X · PX<input id="sourceX" type="number" step="any" placeholder="Click source or enter x"></label>
+          <label for="sourceY">SOURCE Y · PX<input id="sourceY" type="number" step="any" placeholder="Click source or enter y"></label>
+          <label class="author-wide" for="annotationLabel">MARK NAME<input id="annotationLabel" type="text" maxlength="100" value="New alignment mark" required></label>
+          <label for="annotationKind">RULE INTERPRETATION<select id="annotationKind"><option value="fraction">Proportional position</option><option value="edge_offset_mm">Fixed physical edge clearance</option></select></label>
+          <label for="annotationEdge">PHYSICAL REFERENCE EDGE<select id="annotationEdge" disabled><option value="left">Left</option><option value="right">Right</option><option value="top">Top</option><option value="bottom">Bottom</option></select></label>
+          <label for="annotationTolerance">TOLERANCE · MM<input id="annotationTolerance" type="number" value="4" min="0.1" max="50" step="0.1"></label>
+        </div>
+        <div class="author-actions"><button class="primary" type="submit">Add authored mark</button><button id="downloadSource" type="button">Download source JSON</button></div>
+        <p id="annotationStatus" role="status" class="author-status">No new annotation placed.</p>
+      </form>
+    </article>
+    <article class="work-panel work-panel-target">
+      <div class="panel-head"><span class="step">B / 02</span><h2>Adapted workpiece</h2><span class="panel-badge">EDITABLE</span></div>
+      <svg id="targetSvg" viewBox="0 0 720 420" tabindex="0" role="application" aria-label="Target sheet; click to place your trial mark, arrow keys to adjust by one millimetre, Shift and arrow by five."></svg>
+      <div class="practice-row">
+        <label class="switch"><input id="showGoal" type="checkbox" checked> Show target marks</label>
+        <span>CLICK / DRAG TO TRY · ARROWS ±1 MM · SHIFT ±5 MM</span>
+      </div>
+      <div class="actions"><button id="check" class="primary">Evaluate placement ↗</button><button id="reset">Reset attempt</button><button id="export">Export evidence JSON</button></div>
+      <p id="evaluation" class="evaluation" aria-live="polite">Select a relationship, place the ring on the page, and evaluate your attempt.</p>
+    </article>
+  </section>
+  <section class="inspector" aria-label="Selected physical relationship">
+    <div class="inspector-heading"><p class="eyebrow">02 / THE INVARIANT</p><h2>Inspect the rule behind the mark</h2></div>
+    <div id="markChoices" class="mark-choices" aria-label="Source mark selection"></div>
+    <div class="detail-grid">
+      <div><span class="detail-label">PRESERVED RELATIONSHIP</span><p id="rule" class="main-detail"></p><p id="why"></p></div>
+      <div><span class="detail-label">ORIGINAL ANNOTATION</span><p id="sourcePosition" class="main-detail"></p><p id="sourceFraction"></p></div>
+      <div><span class="detail-label">ADAPTED TARGET</span><p id="targetPosition" class="main-detail"></p><p id="targetTolerance"></p></div>
+    </div>
+    <div class="hypothesis-box">
+      <div><p class="eyebrow">COUNTERFACTUAL / SAME SOURCE EVIDENCE</p><h3>What if the mark meant a different rule?</h3><p>The original pixels do not tell us which interpretation the expert intended. Compare the predictions, then ask for a discriminating demonstration.</p></div>
+      <div class="hypothesis-results"><label for="alternateRule">COMPARE AGAINST AN ALTERNATIVE</label><select id="alternateRule"></select><p id="alternativeOutcome" aria-live="polite"></p><p id="variationIdea"></p></div>
+    </div>
+  </section>
+  <section class="limits"><div><p class="eyebrow">03 / WHAT THE EVIDENCE CANNOT SAY</p><h2>Unmeasured stays unmeasured.</h2></div><ul id="unknowns"></ul></section>
+  <footer><span>SKILL TRANSLATOR · TASK SPACE / LOCAL GEOMETRY</span><span>Prototype · Adapted marks are proposed, not instructions for physical safety or expert certification.</span></footer>
+</main>
+</body>
+</html>
