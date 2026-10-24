@@ -5,6 +5,12 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/sequence":["web/sequence.html","text/html; charset=utf-8"],
+  "/web/sequence.html":["web/sequence.html","text/html; charset=utf-8"],
+  "/web/sequence.css":["web/sequence.css","text/css; charset=utf-8"],
+  "/web/sequence.mjs":["web/sequence.mjs","text/javascript; charset=utf-8"],
+  "/web/sequence-input.mjs":["web/sequence-input.mjs","text/javascript; charset=utf-8"],
+  "/src/demonstration-sequence.mjs":["src/demonstration-sequence.mjs","text/javascript; charset=utf-8"],
   "/practice-review":["web/practice-review.html","text/html; charset=utf-8"],
   "/web/practice-review.mjs":["web/practice-review.mjs","text/javascript; charset=utf-8"],
   "/web/practice-review.css":["web/practice-review.css","text/css; charset=utf-8"],

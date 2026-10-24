@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Demonstration sequence · Skill Translator</title>
+  <link rel="stylesheet" href="/web/sequence.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/">SKILL TRANSLATOR</a><nav aria-label="Workbenches"><a href="/capture">Source capture</a><a href="/practice">Practice</a></nav></header>
+  <main>
+    <section class="intro"><p class="eyebrow">THE EXPERT'S ACCOUNT</p><h1>The moments that<br>change a task.</h1><p class="lead">Keep the evidence before and after an action. Explain the intended result, the cue you notice, and what you would do if it goes wrong.</p></section>
+    <section class="document-card" aria-label="Demonstration details">
+      <div><label for="sequence-title">Demonstration title</label><input id="sequence-title" type="text" maxlength="160" value="A task explained through its changes"><label for="sequence-context">Expert and task context</label><textarea id="sequence-context" rows="2" maxlength="2400" placeholder="Who is demonstrating, what material or tool is involved, and what should the learner know?"></textarea></div>
+      <div class="document-actions"><label for="sequence-file">Reopen a saved sequence</label><input id="sequence-file" type="file" accept=".json,application/json"><button id="export-sequence" class="primary" disabled>Save sequence with frames</button><button id="clear-sequence" class="quiet">Start a new demonstration</button><p class="note">Saved files include retained PNG frames and your notes. The original video stays separate.</p></div>
+    </section>
+    <p id="status" role="status" aria-live="polite">Choose a local clip, or reopen a saved demonstration.</p>
+    <div class="workspace">
+      <section class="card source-card"><p class="eyebrow">01 / RETAIN THE EVIDENCE</p><h2>Choose useful moments</h2>
+        <label for="clip-file">Original MP4 or WebM clip</label><input id="clip-file" type="file" accept=".mp4,.webm,video/mp4,video/webm">
+        <div id="video-host" class="video-host"><p>Local video preview</p></div>
+        <p id="clip-summary" class="note">The video and retained images stay in your browser.</p>
+        <div class="two-fields"><div><label for="moment-time">Requested time · seconds</label><input id="moment-time" type="number" min="0" step="0.001" value="0"><button id="use-playhead" class="quiet" disabled>Use video playhead</button></div><div><label for="moment-label">Moment title</label><input id="moment-label" type="text" maxlength="120" placeholder="Before the fold"></div></div>
+        <label for="moment-state">What is visibly present?</label><textarea id="moment-state" rows="2" maxlength="1600" placeholder="Describe the material, tool, support or alignment you can see."></textarea>
+        <div class="actions"><button id="capture-moment" class="primary" disabled>Retain this moment</button><button id="cancel-moment" class="quiet" hidden>Cancel note edit</button></div>
+        <p class="note">Enter a time or use the video playhead, then retain the moment. The saved frame shows its actual presented time. An unchanged paused seek may briefly play muted to obtain a new frame.</p>
+      </section>
+      <section class="card account-card"><p class="eyebrow">02 / EXPLAIN THE CHANGE</p><h2 id="step-editor-heading">Author a step</h2>
+        <div class="two-fields"><div><label for="step-before">Before</label><select id="step-before"></select></div><div><label for="step-after">After</label><select id="step-after"></select></div></div>
+        <label for="step-title">Step title</label><input id="step-title" type="text" maxlength="160" placeholder="Set the fold">
+        <label for="step-intent">What result are you trying to achieve?</label><textarea id="step-intent" rows="2" maxlength="1800" placeholder="Name the relationship or condition that matters."></textarea>
+        <label for="step-change">What visibly changed?</label><textarea id="step-change" rows="2" maxlength="1800" placeholder="Separate what you see from what you infer."></textarea>
+        <label for="step-sensory">What sensory cue guides you?</label><textarea id="step-sensory" rows="2" maxlength="1800" placeholder="For example, a change in resistance you report feeling. Leave blank if not supplied."></textarea>
+        <label for="step-recovery">When would you stop or recover?</label><textarea id="step-recovery" rows="2" maxlength="1800" placeholder="A sign of trouble and the next sensible action."></textarea>
+        <div class="actions"><button id="save-step" class="primary" disabled>Save authored step</button><button id="cancel-step" class="quiet">Clear step draft</button></div><p id="draft-status" class="note">Retain two moments to explain a change.</p>
+      </section>
+    </div>
+    <section class="moments-section"><div class="section-heading"><div><p class="eyebrow">SOURCE MOMENTS</p><h2>Retained evidence</h2></div><span id="moment-count" class="count">0 / 12</span></div><div id="moments" class="moment-grid"><p class="empty">Retained frames will appear here in presented-time order.</p></div></section>
+    <section class="explanation-section"><p class="eyebrow">03 / INSPECT THE ACCOUNT</p><h2>What changes, and why it matters</h2><div id="steps" class="step-tabs" aria-label="Authored steps"></div><div id="step-detail" class="step-detail"><p class="empty">Save an authored step to compare its before and after evidence.</p></div><p id="account-gaps" class="note"></p></section>
+    <details class="source-details"><summary>Source identity and evidence limits</summary><pre id="source-identity">No source retained.</pre><p class="note">Frame pixels and timestamps are retained evidence. Intent, sensory cues and recovery notes are the author's account. A matching file hash checks consistency with the saved record; it does not authenticate capture or establish contact, force, physical success or learning.</p></details>
+  </main>
+  <footer>Inspect the evidence. Preserve what the expert knows. Keep unanswered questions visible.</footer>
+  <script type="module" src="/web/sequence.mjs"></script>
+</body>
+</html>
