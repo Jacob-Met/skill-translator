@@ -1,0 +1,23 @@
+{
+  "format": "hamon.independent-review/v1",
+  "reviewer": "hamon-a9a3aa15-20261024/microverse; independent direct worker, same connected account",
+  "scope": "Skill Translator #161 source and local native review",
+  "source_sha256": {
+    "src/condition-outcomes.mjs": "3b8419e7a3cce19a57b012b6fae266f0b6c23bba9d920af2785a4797a766fd38",
+    "web/condition-outcomes.mjs": "fdc25a444c57b2523079792f634970b145b0492253d8fc8ac7423ffe2b78e145"
+  },
+  "command": "node test/condition-outcomes.test.mjs",
+  "result": {
+    "passed": 6,
+    "failed": 0
+  },
+  "findings": [
+    "Three-valued conjunction: any outside is false, all within is true, otherwise unresolved. Unknown judgments contribute no supporting vote.",
+    "Original point score requires completeness before within/outside interpretation.",
+    "All bounded conjunctions are enumerated before inclusion minima, preserving nonmonotonic acceptable-outcome contradictions.",
+    "Maintained source/session import binds retained original rounds; saved derived findings are recomputed.",
+    "Dirty UI hides findings and disables save; displayed witness distinguishes unknown and unresolved outcomes."
+  ],
+  "blockers": [],
+  "limitations": "Source/local authored tests only; separate actual browser receiving not claimed by this review."
+}
