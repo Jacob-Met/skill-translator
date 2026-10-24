@@ -39,6 +39,14 @@ Download the annotations and import that JSON into Task Space. Use **Pair the or
 
 The photo remains in browser memory and is not embedded in the annotation JSON or uploaded. Select it again after reopening the workbench. Supported images are bounded at 12 MB, 24 megapixels and 8192 pixels per side. JPEG coordinates use the browser-oriented image, including EXIF rotation. Calibration is a planar model based on the supplied dimensions; a successful import does not establish those measurements, expert intent, contact, or physical task success.
 
+## Choose a moment from local footage
+
+In Source Studio, expand **Use a moment from a demonstration clip** and select a local MP4 or WebM supported by your browser. Clips are limited to 128 MB, three hours and the same frame-size bounds as photos. Play, pause or enter a time, then choose **Use this frame**. A captured frame starts a new calibration; previous work remains accepted until capture succeeds. A newer photo or clip selection cancels an unfinished frame capture.
+
+The studio copies pixels inside the browser's presented-frame callback. It keeps the requested seek time separate from the reported presentation timestamp: asking for 1.25 seconds in a two-frame-per-second clip can select the frame presented at 1.00 seconds. If a decoder does not present an unchanged paused frame, the clip advances briefly while muted and pauses on the received frame; its reported time identifies the actual extracted pixels. The source record binds the complete original clip digest, reported time, decoded dimensions and the extracted PNG digest. These describe a local decoded source, not physical contact or skill inferred from motion. A browser without presented-frame timing can still use the photo workflow.
+
+Choose **Save frame PNG**, calibrate and annotate it, then download the annotations. Reopen the JSON in Task Space and pair that saved PNG. Video bytes remain on the device and are neither embedded in exports nor uploaded. Frame metadata checks consistency with its image; it is not a cryptographic attestation of a manually edited JSON file. The complete source record remains inspectable in exports.
+
 ## Practice the complete task
 
 Choose **Practice the complete task** to carry the current source, dimensions and view into a separate practice surface. Each mark retains its placement while you select another. Place by click, keyboard or physical coordinate entry; hide target marks for an unassisted geometric attempt. **Review complete attempt** checks every actual placement against its own tolerance and keeps missing marks explicitly incomplete.
@@ -62,7 +70,7 @@ No source file or practice attempt leaves the browser through an API. Export is 
 
 Four page corners define a 2D projective homography. Source pixel annotations are mapped to normalized page coordinates and transferred into a differently sized physical sheet. Mirroring is **display-only**, not an assessment of left- versus right-handed mechanics. Coordinates and distances are informational landmarks, not safe force, adhesive, grain direction, tool contact, body motion or validated physical task outcomes. A planar view does not measure depth or pressure. Passing a positional tolerance does not establish skill acquisition or expert equivalence.
 
-This first capability opens subsequent work on observed video, object states, contact measurement, expert correction, independent learner trials, and genuine NVIDIA model/Nebius runtime integration. Those remain **unimplemented and unqualified**. The [product seed](docs/PRODUCT_SEED.md) remains an open-ended vision rather than a completion checklist.
+Local photos and selected video frames now supply inspectable pixels. Automatic object-state interpretation, contact measurement, expert correction, independent learner trials, and genuine NVIDIA model/Nebius runtime integration remain **unimplemented and unqualified**. The [product seed](docs/PRODUCT_SEED.md) remains an open-ended vision rather than a completion checklist.
 
 ## Actual Chrome course
 
@@ -70,12 +78,15 @@ An optional real-browser QA course uses separately installed Puppeteer and Chrom
 
     PUPPETEER_PATH=/path/to/puppeteer node tools/browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-browser-smoke.mjs
+    PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/video-browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-evidence.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-practice.mjs
 
 The original course exercises rendered source/target geometry, a failing attempt, target resizing, contrasting physical interpretations and their counterfactual size suggestion, mirrored accurate placement, keyboard correction, hidden goals, valid/invalid local imports, mobile layout, exceptions and offsite requests. Fictional screenshots and the browser receipt are retained under [docs/receipts/task-space-20261024](docs/receipts/task-space-20261024) after running it. Do not treat browser tests as proof of physical skill, video perception or provider inference.
 
 The capture course generates an explicitly authored bitmap locally, then exercises PNG/JPEG admission, clicked and numeric calibration, annotation export, independently checked image hashes, wrong-image refusal, stale-source replacement, legacy imports and 390px layout. `RECEIPT_DIR` can direct its screenshots, input fixtures and JSON receipt outside the checkout. Production needs neither Puppeteer nor a model account.
+
+The video course additionally uses an installed FFmpeg to generate an original changing-frame clip, then checks selected pixels against the known frames, independent clip/PNG hashes, requested versus presented times, invalid replacement rollback, cancelled delayed encoding and the exported-frame handoff. FFmpeg is a QA dependency only; source capture uses the browser's decoder.
 
 The evidence course exercises additional demonstrations, contradictory results, uncertainty-sensitive experiment proposals, actual observation downloads, source binding, transactional reimport, source replacement and fresh mobile reopening. Its inputs are analytic authored controls. It writes review screenshots and receipts to `docs/receipts/rule-evidence-20261024` (or `QA_OUTPUT`) when run.
 

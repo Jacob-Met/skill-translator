@@ -23,6 +23,8 @@ const routes=Object.freeze({
   "/web/capture.css":["web/capture.css","text/css; charset=utf-8"],
   "/web/image-input.mjs":["web/image-input.mjs","text/javascript; charset=utf-8"],
   "/src/capture.mjs":["src/capture.mjs","text/javascript; charset=utf-8"],
+  "/src/frame-origin.mjs":["src/frame-origin.mjs","text/javascript; charset=utf-8"],
+  "/web/video-input.mjs":["web/video-input.mjs","text/javascript; charset=utf-8"],
   "/src/geometry.mjs":["src/geometry.mjs","text/javascript; charset=utf-8"],
   "/src/demo.mjs":["src/demo.mjs","text/javascript; charset=utf-8"],
   "/src/hypotheses.mjs":["src/hypotheses.mjs","text/javascript; charset=utf-8"],
@@ -34,7 +36,7 @@ export function createAppServer(){
     res.setHeader("X-Content-Type-Options","nosniff");
     res.setHeader("Cache-Control","no-store");
     res.setHeader("Content-Security-Policy",
-      "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
+      "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     const path=req.url?.split("?")[0];
     const route=Object.prototype.hasOwnProperty.call(routes,path)?routes[path]:null;
     if(req.method!=="GET"&&req.method!=="HEAD"){
