@@ -39,6 +39,14 @@ Download the annotations and import that JSON into Task Space. Use **Pair the or
 
 The photo remains in browser memory and is not embedded in the annotation JSON or uploaded. Select it again after reopening the workbench. Supported images are bounded at 12 MB, 24 megapixels and 8192 pixels per side. JPEG coordinates use the browser-oriented image, including EXIF rotation. Calibration is a planar model based on the supplied dimensions; a successful import does not establish those measurements, expert intent, contact, or physical task success.
 
+## Practice the complete task
+
+Choose **Practice the complete task** to carry the current source, dimensions and view into a separate practice surface. Each mark retains its placement while you select another. Place by click, keyboard or physical coordinate entry; hide target marks for an unassisted geometric attempt. **Review complete attempt** checks every actual placement against its own tolerance and keeps missing marks explicitly incomplete.
+
+For two or more placements, a descriptive common-translation diagnostic separates mean displacement from remaining local errors. It shows a hypothetical shared shift while leaving actual coordinates and the pass/fail result untouched. It does not identify a physical cause, prove learning or move marks for the user. **Try a fresh round** archives the previous complete or partial attempt and clears the new round; up to 21 rounds can be retained before beginning a new exported session.
+
+Export the session and source annotations to reopen the same setup. Outcomes are recomputed from placements; saved verdict fields are not trusted. Sessions bind source geometry, image identity where present, transfer rules, tolerances and target dimensions. Mismatched imports are refused transactionally. Open `/practice` directly to use the authored example.
+
 ## Source JSON contract
 
 The compact schema is illustrated by [src/demo.mjs](src/demo.mjs). Supply an object with:
@@ -63,9 +71,12 @@ An optional real-browser QA course uses separately installed Puppeteer and Chrom
     PUPPETEER_PATH=/path/to/puppeteer node tools/browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-evidence.mjs
+    PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-practice.mjs
 
 The original course exercises rendered source/target geometry, a failing attempt, target resizing, contrasting physical interpretations and their counterfactual size suggestion, mirrored accurate placement, keyboard correction, hidden goals, valid/invalid local imports, mobile layout, exceptions and offsite requests. Fictional screenshots and the browser receipt are retained under [docs/receipts/task-space-20261024](docs/receipts/task-space-20261024) after running it. Do not treat browser tests as proof of physical skill, video perception or provider inference.
 
 The capture course generates an explicitly authored bitmap locally, then exercises PNG/JPEG admission, clicked and numeric calibration, annotation export, independently checked image hashes, wrong-image refusal, stale-source replacement, legacy imports and 390px layout. `RECEIPT_DIR` can direct its screenshots, input fixtures and JSON receipt outside the checkout. Production needs neither Puppeteer nor a model account.
 
 The evidence course exercises additional demonstrations, contradictory results, uncertainty-sensitive experiment proposals, actual observation downloads, source binding, transactional reimport, source replacement and fresh mobile reopening. Its inputs are analytic authored controls. It writes review screenshots and receipts to `docs/receipts/rule-evidence-20261024` (or `QA_OUTPUT`) when run.
+
+The complete-task course checks retained multi-mark attempts, incomplete/failing/passing results, shared-shift diagnosis without automatic correction, mirrored keyboard placement, archived retries, actual session downloads, source/setup mismatch refusal and fresh mobile reopening. Its authored review evidence is written to `docs/receipts/task-practice-20261024` (or `QA_OUTPUT`).

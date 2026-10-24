@@ -6,6 +6,10 @@ import {fileURLToPath} from "node:url";
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
   "/":["web/index.html","text/html; charset=utf-8"],
+  "/practice":["web/practice.html","text/html; charset=utf-8"],
+  "/web/practice.css":["web/practice.css","text/css; charset=utf-8"],
+  "/web/practice.mjs":["web/practice.mjs","text/javascript; charset=utf-8"],
+  "/src/practice.mjs":["src/practice.mjs","text/javascript; charset=utf-8"],
   "/web/index.html":["web/index.html","text/html; charset=utf-8"],
   "/web/styles.css":["web/styles.css","text/css; charset=utf-8"],
   "/web/app.mjs":["web/app.mjs","text/javascript; charset=utf-8"],
