@@ -11,7 +11,9 @@ test("actual HTTP serves interactive app assets without internet dependencies or
       ["/web/app.mjs","text/javascript"],["/src/geometry.mjs","text/javascript"],
       ["/src/demo.mjs","text/javascript"],
       ["/src/hypotheses.mjs","text/javascript"],
-      ["/src/authoring.mjs","text/javascript"]
+      ["/src/authoring.mjs","text/javascript"],
+      ["/calibration-checks","text/html"],["/web/calibration-checks.mjs","text/javascript"],
+      ["/web/calibration-checks.css","text/css"],["/src/calibration-checks.mjs","text/javascript"]
     ]){
       const r=await fetch(base+url);
       assert.equal(r.status,200,url);
@@ -26,3 +28,4 @@ test("actual HTTP serves interactive app assets without internet dependencies or
     assert.equal((await fetch(base+"/",{method:"POST"})).status,405);
   }finally{await new Promise((resolve,reject)=>server.close(e=>e?reject(e):resolve()));}
 });
+
