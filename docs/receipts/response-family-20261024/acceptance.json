@@ -1,0 +1,43 @@
+{
+  "base_commit": "05525d4badf6aaeeab1c9647b10f479106d773ca",
+  "environment": "Linux Node22.23.4, direct Chrome156.0.8078.47 namespace/seccomp sandbox",
+  "native": {
+    "command": "npm test",
+    "pass": 284,
+    "fail": 0,
+    "skip": 0
+  },
+  "browser": {
+    "checks": [
+      "Chrome namespace and seccomp sandbox verified",
+      "authored mixed and cross-axis response reaches served consumer",
+      "dirty settings suppress stale ranges and recompute exact target",
+      "actual completed download retains original source and coordinate bounds",
+      "reopen ignores forged derived conclusions",
+      "mismatched source replacement preserves accepted study",
+      "contradictory supplied result retains empty family",
+      "explicit observation removal recomputes surviving family",
+      "late file read cannot overwrite newer accepted source",
+      "fresh390px keyboard and layout receiving"
+    ],
+    "errors": [],
+    "offsite": [],
+    "download": {
+      "bytes": 2676,
+      "sha256": "dd9d1a249a490306d4ca2516d60863718342aac1b4bb45ed184c8425d90f5f9e"
+    },
+    "limits": "Authored analytic controls only; no measured physical demonstrations, skill study, provider runtime or deployment."
+  },
+  "dependency": {
+    "owner": "Jacob-Met/chronos-vision",
+    "commit": "4cd60f5d9bca75065cbc4c47c3562156b1c69364",
+    "path": "app/exact-halfplanes.mjs",
+    "git_blob": "eb6552489373b2890b1b99fc829badf204218be7"
+  },
+  "review": "Parent and independent MICROVERSE worker source review found no blocker. Parent used valueAsNumber for explicit numeric inputs, strengthened actual sandbox verification and enlarged SVG labels after narrow-layout inspection. Browser course rerun passed all10 groups.",
+  "limits": [
+    "Source annotation and calibration are conditioned on; no original image perception is claimed.",
+    "Authored independent geometry demonstrates a mixed response rejected by all maintained five fixed rules.",
+    "No physical demonstration cohort, learning-efficacy or provider/deployment qualification."
+  ]
+}

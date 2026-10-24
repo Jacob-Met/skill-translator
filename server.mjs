@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/response-family":["web/response-family.html","text/html; charset=utf-8"],
+  "/web/response-family.css":["web/response-family.css","text/css; charset=utf-8"],
+  "/web/response-family.mjs":["web/response-family.mjs","text/javascript; charset=utf-8"],
+  "/src/response-family.mjs":["src/response-family.mjs","text/javascript; charset=utf-8"],
+  "/vendor/chronos/exact-halfplanes.mjs":["vendor/chronos/exact-halfplanes.mjs","text/javascript; charset=utf-8"],
   "/prerequisite-rehearsal":["web/prerequisite-rehearsal.html","text/html; charset=utf-8"],
   "/web/prerequisite-rehearsal.mjs":["web/prerequisite-rehearsal.mjs","text/javascript; charset=utf-8"],
   "/src/prerequisite-rehearsal.mjs":["src/prerequisite-rehearsal.mjs","text/javascript; charset=utf-8"],
