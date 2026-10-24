@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/transition-practice":["web/transition-practice.html","text/html; charset=utf-8"],
+  "/src/transition-practice.mjs":["src/transition-practice.mjs","text/javascript; charset=utf-8"],
+  "/web/transition-practice.mjs":["web/transition-practice.mjs","text/javascript; charset=utf-8"],
+  "/web/transition-practice-view.mjs":["web/transition-practice-view.mjs","text/javascript; charset=utf-8"],
+  "/web/transition-practice.css":["web/transition-practice.css","text/css; charset=utf-8"],
   '/context-order':['web/context-order.html','text/html; charset=utf-8'],
   '/web/context-order.mjs':['web/context-order.mjs','text/javascript; charset=utf-8'],
   '/web/context-order-input.mjs':['web/context-order-input.mjs','text/javascript; charset=utf-8'],
