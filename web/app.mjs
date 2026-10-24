@@ -1,5 +1,6 @@
 import {derive,adapt,toDisplay,fromDisplay,evaluate} from "/src/geometry.mjs";
 import {demonstration} from "/src/demo.mjs";
+import {compareInterpretations,proposeVariation} from "/src/hypotheses.mjs";
 
 const $=id=>document.getElementById(id);
 const ns="http://www.w3.org/2000/svg";
@@ -12,11 +13,36 @@ function svgEl(parent,tag,attrs={},content=""){
 const mm=x=>Number(x).toFixed(1)+" mm";
 const rounded=x=>Number(x).toFixed(3);
 let demo=demonstration,derived=derive(demo),target,selected=0,attempt=null,verdict=null;
+let alternateChoice="fraction";
 let box={x:80,y:50,width:560,height:320},dragging=false;
 
 function error(message){$("error").textContent=message;$("error").hidden=!message;}
 function mirrored(){return $("handed").value==="mirrored";}
 function chosen(){return target.landmarks[selected];}
+function ownRule(mark){return mark.kind==="fraction"?"fraction":mark.edge;}
+function resetAlternativeChoice(){alternateChoice=ownRule(chosen())==="fraction"?"left":"fraction";}
+function hypothesis(){try{return compareInterpretations(chosen(),derived.source,target.widthMm,target.heightMm,alternateChoice);}catch{return null;}}
+function updateAlternatives(){
+  const menu=$("alternateRule"),current=ownRule(chosen());
+  const choices=["fraction","left","right","top","bottom"].filter(rule=>rule!==current);
+  if(!choices.includes(alternateChoice))alternateChoice=choices[0];
+  menu.replaceChildren();
+  for(const rule of choices){
+    const option=document.createElement("option");option.value=rule;
+    option.textContent=rule==="fraction"?"Proportional position":"Fixed distance from "+rule+" edge";
+    menu.append(option);
+  }
+  menu.value=alternateChoice;
+  try{
+    const c=compareInterpretations(chosen(),derived.source,target.widthMm,target.heightMm,alternateChoice);
+    $("alternativeOutcome").textContent="Authored rule: "+mm(c.primary.xMm)+" right / "+mm(c.primary.yMm)+" down. Alternative: "+mm(c.rival.xMm)+" right / "+mm(c.rival.yMm)+" down. Predicted separation: "+mm(c.separationMm)+(c.distinguishableByMark?" — beyond twice the positional tolerance.":" — not beyond twice the positional tolerance.");
+    const proposal=proposeVariation(chosen(),derived.source,alternateChoice);
+    $("variationIdea").textContent="Hypothetical distinguishing demonstration: use a "+mm(proposal.widthMm)+" × "+mm(proposal.heightMm)+" sheet. Predicted separation: "+mm(proposal.separationMm)+". This suggests an informative observation; it does not determine the correct interpretation.";
+  }catch(e){
+    $("alternativeOutcome").textContent="This alternative cannot be placed on the selected sheet: "+e.message;
+    $("variationIdea").textContent="Try a different alternative or workpiece size. Never replace a physical invariant silently.";
+  }
+}
 function bounds(){
   const scale=Math.min(610/target.widthMm,300/target.heightMm);
   const width=target.widthMm*scale,height=target.heightMm*scale;
@@ -64,7 +90,7 @@ function markButtons(){
     b.textContent=String(i+1).padStart(2,"0")+" / "+mark.label;
     if(i===selected)b.classList.add("is-selected");
     b.setAttribute("aria-pressed",String(i===selected));
-    b.addEventListener("click",()=>{selected=i;resetAttempt();paint();});
+    b.addEventListener("click",()=>{selected=i;resetAlternativeChoice();resetAttempt();paint();});
     div.append(b);
   });
 }
@@ -121,6 +147,14 @@ function targetDrawing(){
     if(i===selected)svgEl(s,"text",{x:p.x+14,y:p.y-14,
       class:"svg-target-label"},"TARGET "+(i+1));
   }
+  if($("showGoal").checked){
+    const c=hypothesis();
+    if(c){
+      const other=toDisplay(c.rival,target,box,mirrored());
+      svgEl(s,"circle",{cx:other.x,cy:other.y,r:10,class:"alternative-goal"});
+      svgEl(s,"text",{x:other.x+14,y:other.y+27,class:"alternative-text"},"OTHER RULE");
+    }
+  }
   if(attempt){
     const p=toDisplay(attempt,target,box,mirrored());
     svgEl(s,"line",{x1:p.x-17,y1:p.y,x2:p.x+17,y2:p.y,class:"attempt-cross"});
@@ -141,7 +175,7 @@ function feedback(){
     ". Physical displacement: "+mm(verdict.dxMm)+" across / "+
     mm(verdict.dyMm)+" down.";
 }
-function paint(){markButtons();sourceDrawing();targetDrawing();updateInfo();feedback();}
+function paint(){markButtons();sourceDrawing();updateAlternatives();targetDrawing();updateInfo();feedback();}
 function recompute(){
   try{
     const next=adapt(derived,Number($("widthMm").value),Number($("heightMm").value));
@@ -187,6 +221,9 @@ $("check").addEventListener("click",()=>{
 });
 $("reset").addEventListener("click",()=>{if(target){resetAttempt();targetDrawing();feedback();}});
 $("showGoal").addEventListener("change",targetDrawing);
+$("alternateRule").addEventListener("change",e=>{
+  alternateChoice=e.target.value;updateAlternatives();targetDrawing();
+});
 $("widthMm").addEventListener("change",recompute);
 $("heightMm").addEventListener("change",recompute);
 $("handed").addEventListener("change",()=>{if(target){targetDrawing();feedback();}});
@@ -198,7 +235,7 @@ $("demoFile").addEventListener("change",async e=>{
     const next=derive(parsed);
     const nextTarget=adapt(next,Number($("widthMm").value),Number($("heightMm").value));
     demo=parsed;derived=next;target=nextTarget;selected=0;
-    resetAttempt();error("");paint();
+    resetAlternativeChoice();resetAttempt();error("");paint();
   }catch(err){error("Source rejected; previous demonstration preserved. "+err.message);}
 });
 $("export").addEventListener("click",()=>{
@@ -217,6 +254,7 @@ $("export").addEventListener("click",()=>{
       targetMm:{x:m.xMm,y:m.yMm},toleranceMm:m.toleranceMm})),
     learnerAttempt:attempt,
     evaluation:verdict,
+    competingInterpretation:hypothesis(),
     limits:Array.isArray(demo.unknowns)?demo.unknowns:[]
   };
   const url=URL.createObjectURL(new Blob([JSON.stringify(receipt,null,2)],

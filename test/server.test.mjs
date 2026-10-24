@@ -9,7 +9,8 @@ test("actual HTTP serves interactive app assets without internet dependencies or
     for(const [url,type] of [
       ["/","text/html"],["/web/styles.css","text/css"],
       ["/web/app.mjs","text/javascript"],["/src/geometry.mjs","text/javascript"],
-      ["/src/demo.mjs","text/javascript"]
+      ["/src/demo.mjs","text/javascript"],
+      ["/src/hypotheses.mjs","text/javascript"]
     ]){
       const r=await fetch(base+url);
       assert.equal(r.status,200,url);

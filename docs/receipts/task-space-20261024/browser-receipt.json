@@ -3,6 +3,7 @@
   "tests": [
     "authored source and three computed target marks render in Chrome",
     "incorrect initial learner mark produces tolerance refusal",
+    "competing authored task interpretations produce distinct, inspectable geometric predictions",
     "mirrored 420x90 target accepts accurate physical placement",
     "keyboard nudge in mirrored view produces measured error",
     "practice toggle hides and restores source-backed targets",

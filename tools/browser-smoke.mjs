@@ -41,6 +41,17 @@ try{
   await page.$eval("#heightMm",el=>{el.value="90";el.dispatchEvent(new Event("change",{bubbles:true}));});
   await page.select("#handed","mirrored");
   await page.click("#markChoices button:nth-child(2)");
+  const altBefore=await page.$eval("#alternativeOutcome",el=>el.textContent);
+  assert.match(altBefore,/Predicted separation:/);
+  assert.equal(await page.$$eval("#targetSvg .alternative-goal",els=>els.length),1);
+  const firstAlt=await page.$eval("#alternateRule",el=>el.value);
+  assert.equal(firstAlt,"left");
+  await page.select("#alternateRule","right");
+  const altAfter=await page.$eval("#alternativeOutcome",el=>el.textContent);
+  assert.notEqual(altAfter,altBefore);
+  assert.match(await page.$eval("#variationIdea",el=>el.textContent),
+    /Hypothetical distinguishing demonstration/);
+  record("competing authored task interpretations produce distinct, inspectable geometric predictions");
   const loc=await page.$eval("#targetSvg .goal.selected",el=>{
     const svg=el.ownerSVGElement,p=svg.createSVGPoint();
     p.x=Number(el.getAttribute("cx"));p.y=Number(el.getAttribute("cy"));
