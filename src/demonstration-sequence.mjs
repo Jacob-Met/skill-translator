@@ -3,8 +3,11 @@
 import {clipIdentity,validateFrameOrigin} from './frame-origin.mjs';
 import {imageMetadata} from './capture.mjs';
 import {GeometryError} from './geometry.mjs';
+import {bindMomentCapture} from './sequence-capture.mjs';
+import {exportCapture} from './capture-editing.mjs';
 
 export const SEQUENCE_FORMAT='skill-translator.demonstration-sequence/v1';
+export const CALIBRATED_SEQUENCE_FORMAT='skill-translator.demonstration-sequence/v2';
 export const MAX_MOMENTS=12;
 export const MAX_STEPS=24;
 export const MAX_SEQUENCE_PIXELS=32_000_000;
@@ -26,8 +29,10 @@ function moment(value,clip){
   if(image.mimeType!=='image/png')fail('Retained demonstration frames must be original extracted PNG files.');
   const origin=validateFrameOrigin(value.origin,image);
   if(!sameClip(clip,origin.clip))fail('Every retained moment must come from the same source clip.');
-  return {id:id(value.id,'Moment'),label:text(value.label,'Moment label',120,true),
+  const accepted={id:id(value.id,'Moment'),label:text(value.label,'Moment label',120,true),
     visibleState:text(value.visibleState??'','Visible state',1600),image,origin};
+  if(Object.hasOwn(value,'calibratedTask'))accepted.calibratedTask=bindMomentCapture(accepted,value.calibratedTask);
+  return accepted;
 }
 function step(value,moments){
   record(value,'Step');const beforeMomentId=id(value.beforeMomentId,'Before moment'),afterMomentId=id(value.afterMomentId,'After moment');
@@ -39,11 +44,12 @@ function step(value,moments){
     sensoryCue:text(value.sensoryCue??'','Supplied sensory cue',1800),recoveryCue:text(value.recoveryCue??'','Recovery cue',1800)};
 }
 export function validateSequence(value){
-  record(value,'Demonstration sequence');if(value.format!==SEQUENCE_FORMAT)fail('Unsupported demonstration sequence format.');
+  record(value,'Demonstration sequence');if(![SEQUENCE_FORMAT,CALIBRATED_SEQUENCE_FORMAT].includes(value.format))fail('Unsupported demonstration sequence format.');
   const clip=clipIdentity(value.clip);
   if(!Array.isArray(value.moments)||value.moments.length>MAX_MOMENTS)fail(`Keep at most ${MAX_MOMENTS} source moments.`);
   if(!Array.isArray(value.steps)||value.steps.length>MAX_STEPS)fail(`Keep at most ${MAX_STEPS} authored steps.`);
   const moments=value.moments.map(v=>moment(v,clip));const byId=new Map();let previous=-1,pixels=0;
+  if(value.format===SEQUENCE_FORMAT&&moments.some(m=>m.calibratedTask))fail('Calibrated moments require the v2 sequence format so older readers cannot silently discard their tasks.');
   for(const m of moments){
     if(byId.has(m.id))fail('Moment identifiers must be unique.');
     if(m.origin.mediaTimeSeconds<=previous)fail('Retained moments must have distinct, increasing presented times.');
@@ -56,7 +62,7 @@ export function validateSequence(value){
     const start=byId.get(s.beforeMomentId).origin.mediaTimeSeconds;
     if(start<previousStart)fail('Authored steps must be ordered by their before-frame times.');previousStart=start;
   }
-  return {format:SEQUENCE_FORMAT,title:text(value.title,'Demonstration title',160,true),
+  return {format:value.format,title:text(value.title,'Demonstration title',160,true),
     context:text(value.context??'','Expert context',2400),clip,moments,steps};
 }
 export function createSequence(clip,details={}){
@@ -72,6 +78,31 @@ export function editMoment(sequence,momentId,patch){
   if(!target)fail('That retained moment is unavailable.');
   for(const key of ['label','visibleState'])if(Object.hasOwn(patch,key))target[key]=patch[key];
   return validateSequence(next);
+}
+export function attachMomentCalibration(sequence,momentId,input){
+  const next=validateSequence(sequence),target=next.moments.find(m=>m.id===momentId);
+  if(!target)fail('That retained moment is unavailable.');
+  target.calibratedTask=bindMomentCapture(target,input);next.format=CALIBRATED_SEQUENCE_FORMAT;
+  return validateSequence(next);
+}
+export function removeMomentCalibration(sequence,momentId){
+  const next=validateSequence(sequence),target=next.moments.find(m=>m.id===momentId);
+  if(!target?.calibratedTask)fail('Choose a moment with attached calibrated annotations.');
+  delete target.calibratedTask;return validateSequence(next);
+}
+export function momentTask(sequence,momentId){
+  const accepted=validateSequence(sequence),target=accepted.moments.find(m=>m.id===momentId);
+  if(!target?.calibratedTask)fail('Attach calibrated annotations for this moment first.');
+  const task=structuredClone(target.calibratedTask);
+  task.sequenceContext={format:'skill-translator.moment-task-context/v1',title:accepted.title,context:accepted.context,
+    moment:{id:target.id,label:target.label,visibleState:target.visibleState,origin:target.origin},
+    steps:accepted.steps.filter(s=>s.beforeMomentId===target.id||s.afterMomentId===target.id).map(s=>({...s,
+      role:s.beforeMomentId===target.id?'before':'after',
+      beforePresentedSeconds:accepted.moments.find(m=>m.id===s.beforeMomentId).origin.mediaTimeSeconds,
+      afterPresentedSeconds:accepted.moments.find(m=>m.id===s.afterMomentId).origin.mediaTimeSeconds})),
+    boundary:'This task practices the supplied geometric relationships of one retained state. It does not assess the full action, force, sensory judgment, recovery or mastery of the demonstration.'};
+  // Context is retained completely or refused, never truncated to fit a handoff.
+  exportCapture(task);return task;
 }
 export function removeMoment(sequence,momentId){
   const next=validateSequence(sequence);

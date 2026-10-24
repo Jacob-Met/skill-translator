@@ -1,5 +1,9 @@
 # Demonstration sequences
 
+Retained moments can also carry calibrated annotations and open the maintained
+practice workbench. See [calibrating a retained moment](MOMENT_CALIBRATION.md) for
+the exact-source workflow, saved format and its separate verification receipt.
+
 Open `/sequence` in the maintained local server to preserve an expert's account of
 how a task changes over time. Choose a local MP4 or WebM, enter a time or use its playhead, retain meaningful source
 moments, then connect a before and after frame with an intended result, visible
@@ -74,7 +78,7 @@ appropriate for their actual rights, consent and privacy.
 canonical insertion and malformed order, stable transactional editing, invalid
 references, explicit overlaps/unknown cues and bounded saved-state admission.
 
-The current-main composition passes 155 native/HTTP cases. The maintained
+The original sequence integration passed 155 native/HTTP cases. The maintained
 `tools/browser-sequence.mjs` course passes 13 behavioral groups plus a source-hash
 stability guard on actual Chrome 156.0.8078.47: real MP4/WebM decoding, PNG pixel
 and digest binding, authored steps, downloads, fresh reopening, wrong-source

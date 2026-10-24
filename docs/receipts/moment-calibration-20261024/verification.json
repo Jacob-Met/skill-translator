@@ -1,0 +1,130 @@
+{
+  "baseMain": "af64ddc4c84affaf72b7a84c8805118b0f532149",
+  "native": {
+    "command": "npm test",
+    "node": "24.19.0",
+    "passed": 177,
+    "failed": 0,
+    "skipped": 0,
+    "log": "/tmp/skill-sequence-calibration-af64-native.log"
+  },
+  "browser": {
+    "fixture": "Original authored PNGs and declared timeline; actual capture/practice consumers, no physical or video-decoder claim for this course",
+    "result": "PASS",
+    "sourceHashes": {
+      "src/sequence-capture.mjs": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "src/capture-editing.mjs": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+      "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "src/practice.mjs": "dfb0277538c569647494e108fdb1db7bd7b89d62063b2998b00d1b4045087ac1",
+      "web/sequence.mjs": "1b2cbcdb07ce440b29c69c626aec19dc08a99de1ee7b6d0f1d3323e1821f2dd4",
+      "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "web/sequence.html": "61526a50b2daf31e31f6105a55da730d569ed2572d18541ec640c7ad1a0f0420",
+      "web/sequence.css": "b9c417988a4ea558cfe7572b12da053a17f55cc04471f71814442605be368a3f",
+      "web/capture.mjs": "819d5dbcba57d1e9fec85817a5ccacb4485375e20250ec9811cef71ceba2fb8b",
+      "web/capture.html": "4e09379ed3e31e0ee0dd3903b68419979da80c257702b5dfa9ae73169209cafb",
+      "web/capture.css": "0b1e4e741265cdda101bf1b4b8794de79d1922bbda8b8a1028984235eed48849",
+      "web/practice.mjs": "b9c1ecab57adef6358e8f1bad0a856b70a1d98ad2a5408b6a93a4ce648308d5f",
+      "web/practice.html": "78c9f1350fc7d04046ee7769512ee3d60170418568d1ec3a7b7b280c7b93760f",
+      "web/practice.css": "dd1a71f8911f68fc70ff05f60fe64dca1d514a62a08245c56398fb2e4e014f0c",
+      "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "server.mjs": "49b3075d46a738c8606993229416e40c84744b7d7caaeeade062efe0679e1fc6",
+      "tools/browser-sequence-calibration.mjs": "46870b796f6804d41239b79996ebac0ff061b8a08a9a6e68bbd5c3721dd85193"
+    },
+    "tests": [
+      "exact retained PNG download preserves the independently hashed source bytes",
+      "actual maintained capture editor calibrates and annotates the exact exported moment",
+      "attached annotations retain exact frame timing, authored context and supplied evidence class",
+      "sequence export/reopen retains calibrated tasks and refuses changed task/image pairing without replacement",
+      "another frame or conflicting existing timeline cannot replace the accepted calibrated task",
+      "actual new-tab practice receives the task, adapts a declared relationship and exports its temporal source while the sequence stays open",
+      "delayed annotation reads cannot overwrite newer author edits or a newer accepted attachment",
+      "explicit removal preserves the temporal account and desktop/390px calibration controls remain usable",
+      "strict application CSP, no offsite requests or page exceptions, and exact source stability"
+    ],
+    "errors": [],
+    "offsite": [],
+    "csp": [],
+    "browser": "156.0.8078.47"
+  },
+  "browserExecution": {
+    "command": "CHROME_BINARY=/usr/local/bin/google-chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=/tmp/hamon-dcda-issue35-calibration/final-receipts node tools/browser-sequence-calibration.mjs",
+    "node": "22.23.4",
+    "host": "Authorized existing Linux receiving host; isolated temporary checkout",
+    "screenshots": "Root visually inspected final desktop and 390px screenshots; accepted task overlay, human-readable relationship, full sequence and controls remain visible.",
+    "note": "The receiving course uses explicit Node-side polling to avoid older Playwright's in-page eval under the unchanged strict CSP. The sequence page is brought to the foreground before full-page screenshots."
+  },
+  "independentReview": {
+    "worker": "hamon-dcda535a8765-20261023/microverse",
+    "source": "b9e0579; runtime/core/UI unchanged by the final additive focused-result routes",
+    "native": "Reproduced all six source-binding cases; independently exercised 140,000-character task notes plus 24 maximum-length steps. Attachment succeeds, but combined task/context export correctly refuses above 256 KiB without mutation.",
+    "review": "Inspected exact image/timeline binding, supplied evidence class, v2 no-silent-loss boundary, current context, async generation/revision fences, actual-byte hashing, current practice startup and new-tab handoff including blocked-popup restoration. No blocking finding. Worker did not claim an independent browser rerun."
+  },
+  "composition": "Preserves current task-relationship and focused-result receiving, source editing, video/photo admission and practice. Only the sequence-capture module route is added to the maintained server; all current owner routes remain. Capture and practice controllers/geometry are unchanged.",
+  "limits": [
+    "Authored PNGs and declared timeline for the nine-group course; no actual video-decoder claim from that course.",
+    "Separate real MP4/WebM regression is retained with its exact earlier source identities and scope.",
+    "Matching image and clip records establish consistency, not authenticity or physical capture.",
+    "Human calibration/annotations remain supplied evidence; one-state geometric practice does not establish physical skill, action order or full demonstration mastery.",
+    "No cloud/provider workload, installed deployment, learner study, physical success or maximum-bound memory/low-end-device performance claim."
+  ],
+  "changedSourceSha256": {
+    "src/sequence-capture.mjs": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+    "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+    "test/sequence-capture.test.mjs": "d48e8139466866cd8e0a064f0c9eeb2bf4726fef3db16904cf8b1caa0550d147",
+    "server.mjs": "49b3075d46a738c8606993229416e40c84744b7d7caaeeade062efe0679e1fc6",
+    "web/sequence.mjs": "1b2cbcdb07ce440b29c69c626aec19dc08a99de1ee7b6d0f1d3323e1821f2dd4",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+    "web/sequence.html": "61526a50b2daf31e31f6105a55da730d569ed2572d18541ec640c7ad1a0f0420",
+    "web/sequence.css": "b9c417988a4ea558cfe7572b12da053a17f55cc04471f71814442605be368a3f",
+    "tools/browser-sequence-calibration.mjs": "46870b796f6804d41239b79996ebac0ff061b8a08a9a6e68bbd5c3721dd85193"
+  },
+  "earlierVideoRegression": {
+    "scope": "Fourteen real MP4/WebM demonstration-sequence groups on initial bridge implementation. Later changes are readable calibration labels, expanded receiving-source identities and additive main routes/navigation; this receipt is not relabeled as the final browser run.",
+    "receipt": {
+      "fixture": "original authored four-frame video; no physical demonstration or learner claim",
+      "result": "PASS",
+      "sourceHashes": {
+        "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+        "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+        "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+        "tools/browser-sequence.mjs": "527ac5e2cc5ae1ba1af9727b62c1f55266bb3a3eb494cdfa739771a9b713f2d4",
+        "web/sequence.mjs": "c10c7bbf8f7d34d5c5af5f67bbe1b76d374596a77170991e90eaed0929abab39",
+        "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+        "web/sequence.html": "af2804029eea969f2a0dbe09c7bb81ec1aa95cac4211f571eddab3cdade03f4f",
+        "web/sequence.css": "b9c417988a4ea558cfe7572b12da053a17f55cc04471f71814442605be368a3f",
+        "web/video-input.mjs": "44fc317f1af10c6285c9cd6878d9c0d86d3d8c6ce3ca35a3b7ad5b39488f8ffb",
+        "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+        "server.mjs": "2f4e98764b9f368516f9d9b48ca64e5edd71202f24850fe947eb9e101d2bfa19"
+      },
+      "browser": "156.0.8078.47",
+      "presentedTimes": [
+        0.5,
+        1
+      ],
+      "tests": [
+        "two actual selected video frames retain distinct requested/presented times and known red/blue pixels",
+        "actual before/after step separates supplied intent from unsupplied sensory and recovery cues",
+        "download includes exact independently hashed PNG bytes and source/frame/clip records",
+        "referenced moment deletion refuses and revisions preserve step/moment/source identities",
+        "fresh-page reopen verifies actual before/after pixels and recomputes forged findings",
+        "wrong original clip and swapped PNG replacement refuse without discarding current account",
+        "export rejects swapped File bytes even when cached media metadata still matches",
+        "revision fence preserves a newer text edit against a delayed saved sequence",
+        "newer sequence import supersedes delayed older JSON without stale adoption",
+        "overlapping authored steps remain explicit instead of being presented as a causal chain",
+        "clear/new clip supersedes delayed PNG capture and the new decoder remains usable",
+        "desktop evidence layout and 390px controls receive without horizontal overflow",
+        "strict application CSP, zero offsite requests and no page exceptions",
+        "producer, dependencies, server and course source hashes stayed unchanged during receiving"
+      ],
+      "errors": [],
+      "offsite": [],
+      "csp": []
+    }
+  }
+}

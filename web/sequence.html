@@ -37,6 +37,20 @@
     </div>
     <section class="moments-section"><div class="section-heading"><div><p class="eyebrow">SOURCE MOMENTS</p><h2>Retained evidence</h2></div><span id="moment-count" class="count">0 / 12</span></div><div id="moments" class="moment-grid"><p class="empty">Retained frames will appear here in presented-time order.</p></div></section>
     <section class="explanation-section"><p class="eyebrow">03 / INSPECT THE ACCOUNT</p><h2>What changes, and why it matters</h2><div id="steps" class="step-tabs" aria-label="Authored steps"></div><div id="step-detail" class="step-detail"><p class="empty">Save an authored step to compare its before and after evidence.</p></div><p id="account-gaps" class="note"></p></section>
+    <section id="calibration-panel" class="calibration-section card" aria-labelledby="calibration-heading">
+      <p class="eyebrow">04 / PRACTICE A RETAINED STATE</p><h2 id="calibration-heading">Calibrate a retained moment</h2>
+      <p class="lead">Keep a geometric task beside the moment it came from. Save its exact PNG, annotate it in <a href="/capture" target="_blank" rel="noopener">Source capture in a new tab</a>, then attach the exported annotations here.</p>
+      <div class="calibration-grid"><div>
+        <label for="calibration-moment">Source moment</label><select id="calibration-moment"></select>
+        <p id="calibration-source" class="note">Retain a source moment to begin.</p>
+        <div class="calibration-actions actions"><button id="save-moment-png" class="quiet" disabled>Save this moment's PNG</button></div>
+        <label for="moment-annotations">Attach or replace calibrated annotations</label><input id="moment-annotations" type="file" accept=".json,application/json" disabled>
+        <p class="note">Use the JSON exported by Source capture. Its image identity must match this exact frame. The editor's dimensions, corners and mark relationships remain your declarations.</p>
+        <p id="calibration-summary" role="status" aria-live="polite" class="note">No calibrated task attached.</p>
+        <div class="calibration-actions actions"><button id="practice-moment" class="primary" disabled>Open practice in a new tab</button><button id="save-moment-task" class="quiet" disabled>Save task source</button><button id="remove-moment-task" class="quiet" disabled>Remove annotations</button></div>
+        <p class="note">Practice uses the selected state's geometric relationships. It does not assess action timing, force, sensory judgment or mastery of the whole demonstration. Save any step or moment draft before opening the task.</p>
+      </div><div><div id="calibration-preview" class="calibration-preview" hidden></div><ol id="calibration-marks" class="calibration-marks"></ol></div></div>
+    </section>
     <details class="source-details"><summary>Source identity and evidence limits</summary><pre id="source-identity">No source retained.</pre><p class="note">Frame pixels and timestamps are retained evidence. Intent, sensory cues and recovery notes are the author's account. A matching file hash checks consistency with the saved record; it does not authenticate capture or establish contact, force, physical success or learning.</p></details>
   </main>
   <footer>Inspect the evidence. Preserve what the expert knows. Keep unanswered questions visible.</footer>
