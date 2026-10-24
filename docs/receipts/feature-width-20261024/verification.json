@@ -1,0 +1,92 @@
+{
+  "format": "skill-translator-feature-width-receiving/v1",
+  "baseCommit": "48a50ce68d50215481258c664f97c983c87b6009",
+  "unchangedBaseBlobsVerified": 213,
+  "mismatches": [],
+  "candidateSha256": {
+    "src/feature-width.mjs": "3ea27c68f43db7f640ac4b1beb7423098352af4aaa52e8b17301b2cc8f6173c7",
+    "src/feature-clearance.mjs": "fee2c6c96a85561137aeca3da5488f56e76c54760972eb2aeb115201874b46ae",
+    "web/feature-width.mjs": "60bea4bcafe786aa49eac03d5d01c9062ff328f85a0bf124326cf85c07c403d2",
+    "web/feature-clearance.mjs": "32524716a5d6096fa06402f480fde5921f76e0d3eca06772a30d5f90a2550c02",
+    "web/feature-clearance.html": "d4726ce46dedc13f423b01249b81bcd0fe989c829f403848835ccdd2a4e09538",
+    "server.mjs": "c588f75dae65641f3e1107c44efcbd1ff62c77cd08b7b1049e0237b472606c44",
+    "test/feature-width.test.mjs": "16ac28b5d9f82570c858b5b6b5949bda6dbe60723677064374376499a0ddbbb0",
+    "tools/browser-feature-width.mjs": "44c9bd314e1ee5ebcbfa557e8bbb301b0720bee51b1f4a078820be2dd9b6f47d",
+    "FEATURE_WIDTH_INTEGRATION.md": "787217bf854ce5aa52131e774720cab34d8c6f2ede1ab9a897c29901458a0e11"
+  },
+  "nativeSummary": [
+    "# tests 309",
+    "# pass 309",
+    "# fail 0",
+    "# skipped 0",
+    "# duration_ms 1112.887094"
+  ],
+  "browser": {
+    "groups": [
+      "disconnected bands and boundary/failing/interior choices received through actual consumer",
+      "full envelope range and checked comparison adoption preserve source",
+      "completed download and fresh reopen retain inputs only and require a fresh chosen-width check",
+      "maintained endpoint-domain refusal preserves prior accepted study",
+      "older read cannot replace or clear a newer selected input",
+      "isolated model solution remains visible without uncertain adoption",
+      "zero-sum envelope admits coincident centers through maintained saturation semantics",
+      "desktop and narrow layouts have no page overflow",
+      "checked source enters actual fresh practice without rescoring or invented placement"
+    ],
+    "layouts": [
+      {
+        "width": 1280,
+        "scroll": 1280
+      },
+      {
+        "width": 390,
+        "scroll": 390
+      }
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "scope": "Authored numeric controls; guarded affine model, no physical qualification"
+  },
+  "regressionBrowser": {
+    "browser": "Chrome/156.0.8078.47",
+    "groups": [
+      "actual practice placement, retry and completed export receive with historical/current choice and distinct feature findings",
+      "completed wrapper download reopens full source, declarations and raw session on a fresh page",
+      "mismatched retained source tolerance refuses transactionally",
+      "another declared size replaces session/history without merging; missing pairs stay unresolved",
+      "superseded read cannot replace state or clear a newer pending selection",
+      "v2 raw photo identity/calibration/pixels, history and manual detachments survive completed export",
+      "desktop and 390px receiving layout",
+      "comparison edits invalidate attached review rather than silently reusing assumptions"
+    ],
+    "errors": [],
+    "offsite": [],
+    "limits": "Authored coordinate and photo-record controls; no image decoding, physical outcome or learned-skill claim."
+  },
+  "receivedAt": "2026-10-24T15:41:24.629842+00:00",
+  "implementationHead": "e9e394ebbb113447cbbfd0d049e95485bd187836",
+  "commands": [
+    "npm test",
+    "PUPPETEER_PATH=/home/ubuntu/.npm/_npx/4b4c857f6efdfb61/node_modules/puppeteer/lib/puppeteer/puppeteer.js CHROME_BINARY=/usr/local/bin/google-chrome QA_OUTPUT=/tmp/hamon-583a-skill/width-final-receiving node tools/browser-feature-width.mjs",
+    "PUPPETEER_PATH=/home/ubuntu/.npm/_npx/4b4c857f6efdfb61/node_modules/puppeteer/lib/puppeteer/puppeteer.js CHROME_BINARY=/usr/local/bin/google-chrome QA_OUTPUT=/tmp/hamon-583a-skill/width-regression-receiving node tools/browser-feature-practice.mjs"
+  ],
+  "runtime": {
+    "node": "22.23.4",
+    "browser": "Chrome/156.0.8078.47",
+    "sandbox": "enabled"
+  },
+  "independentReview": {
+    "reviewer": "worldlaw worker in the same four-person team",
+    "coreSha256": "3ea27c68f43db7f640ac4b1beb7423098352af4aaa52e8b17301b2cc8f6173c7",
+    "panelSha256": "60bea4bcafe786aa49eac03d5d01c9062ff328f85a0bf124326cf85c07c403d2",
+    "controllerSha256": "32524716a5d6096fa06402f480fde5921f76e0d3eca06772a30d5f90a2550c02",
+    "result": "No blocker. New focused ten-test suite plus independent disconnected/isolated/envelope/zero-sum/tiny/cancellation controls, 80 band-to-maintained-consumer samples, raw immutability, practice handoff, saved-result discard and invalid selected-width checks. Reviewed UI invalidation and async owner/revision custody. Browser execution separately received by root."
+  },
+  "reconstruction": "The initial uncheckpointed candidate was lost with transient scratch storage. This receipt qualifies the deliberately reconstructed, checkpointed candidate and its fresh tests only. No earlier source hash or lost-candidate result is substituted. The final harness adds two disconnected-band screenshots without altering production or the nine test groups.",
+  "limits": [
+    "Analytic candidates come from the current supported affine anchoring profile through maintained adaptation; no anchoring formulas are copied.",
+    "Guarded bands use an explicit engineering numerical allowance, not certified outward-rounded interval arithmetic.",
+    "A chosen width must pass the maintained consumer and avoid unresolved boundaries before comparison/practice adoption.",
+    "Reopen retains raw source and declarations, discards derived verdicts, and requires a fresh selected-width check.",
+    "No physical task success, material/tool clearance beyond declared circles, measured production dimensions or provider qualification is inferred."
+  ]
+}
