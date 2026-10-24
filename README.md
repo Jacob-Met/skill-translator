@@ -63,6 +63,14 @@ For two or more placements, a descriptive common-translation diagnostic separate
 
 Export the session and source annotations to reopen the same setup. Outcomes are recomputed from placements; saved verdict fields are not trusted. Sessions bind source geometry, image identity where present, transfer rules, tolerances and target dimensions. Mismatched imports are refused transactionally. Open `/practice` directly to use the authored example.
 
+### Observe a learner's photographed attempt
+
+Choose **Observe a learner photo** in complete-task practice. Pair a separate local PNG or JPEG, identify the four corners of the practice workpiece and annotate the existing task marks. The practice dimensions stay fixed. The page maps these raw pixels through the supplied planar calibration and evaluates them using the same target geometry and tolerances as manual practice. Missing marks remain incomplete.
+
+The image is kept locally. Its complete file digest, decoded dimensions, supplied corners, original mark pixels, evidence class and note are retained in an observation notebook and in the resulting practice round. Reopening a notebook checks that its source and workpiece match, recomputes placements from raw pixels, and requires pairing the exact image before applying. It preserves the current practice history; importing an older observation cannot replace later rounds.
+
+Applying an observation archives any existing placements and begins the next round. A subsequent manual edit is explicitly marked as a manual override while the original photo annotation remains inspectable. Practice exports preserve both current and historical raw evidence. The mapping depends on supplied measurements and annotations; it does not verify a physical mark, planarity, expertise or learned skill. See [the learner-observation guide](docs/LEARNER_OBSERVATIONS.md) for the full local workflow and authored verification controls.
+
 ## Challenge the original calibration
 
 Open **[Calibration Lab](http://127.0.0.1:8787/calibration)** from Task Space to investigate whether a rule conclusion depends on how its original source was read. Load the same source annotation JSON and exported observation JSON, or choose the clearly labeled authored example. The lab reuses the maintained perspective calibration, five rule interpretations and observation scoring.
