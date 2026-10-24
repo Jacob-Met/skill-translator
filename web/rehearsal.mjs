@@ -67,3 +67,5 @@ $('rehearsalSheet').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'
 $('reviewFeatureRehearsal').addEventListener('click',()=>{try{sessionStorage.setItem('skill-translator-feature-rehearsal-return/v1',JSON.stringify(importRehearsal(session)));location.assign('/feature-rehearsal');}catch(e){error(e.message);}});
 try{const raw=sessionStorage.getItem('skill-translator-rehearsal-input/v1');if(raw){install(JSON.parse(raw));sessionStorage.removeItem('skill-translator-rehearsal-input/v1');}}catch(e){error('Incoming rehearsal refused; accepted work retained. '+e.message);}
 render();
+
+$('reviewRehearsalInterpretation').addEventListener('click',()=>{try{sessionStorage.setItem('skill-translator-rehearsal-interpretation-input/v1',JSON.stringify(importRehearsal(session)));location.assign('/rehearsal-interpretations');}catch(e){error(e.message);}});
