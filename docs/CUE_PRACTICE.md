@@ -34,3 +34,10 @@ receives actual authored PNGs, requests a cue by keyboard while retaining a draf
 checks undisplayed outcome and truthful assistance, reads a completed Chrome
 download, reopens at 390px, and challenges forged/source-changed/stale imports.
 Actual receiving results are recorded separately from these definitions.
+
+A retained remaining question can continue through **Clarify a retained question**.
+Save this cue-practice file and the original demonstration, then load both in the
+clarification receiver. The author sees the exact selective assistance before and
+after your first answer. Amendment lineage preserves the original cue-practice
+format and requests. A clarified retry is a separate empty familiar exercise; it
+never replaces or rewrites your original history.
