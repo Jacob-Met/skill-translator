@@ -5,6 +5,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/layout-feedback.mjs":["src/layout-feedback.mjs","text/javascript; charset=utf-8"],
+  "/web/layout-feedback.mjs":["web/layout-feedback.mjs","text/javascript; charset=utf-8"],
   "/rehearsal":["web/rehearsal.html","text/html; charset=utf-8"],
   "/web/rehearsal.mjs":["web/rehearsal.mjs","text/javascript; charset=utf-8"],
   "/web/rehearsal.css":["web/rehearsal.css","text/css; charset=utf-8"],

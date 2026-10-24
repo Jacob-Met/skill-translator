@@ -1,0 +1,130 @@
+{
+  "sourceBase": "5d9b6eca01744ca34aa8076ab30abb119a567947",
+  "sourceFiles": {
+    "src/layout-feedback.mjs": {
+      "bytes": 3186,
+      "sha256": "bc9ff4fab54557b563f9a5b409cff29c262087f30d9c8aef686f77950fea50d8",
+      "git_blob": "fe6c6d89ff49041e9332c93670944a3902a65294"
+    },
+    "web/layout-feedback.mjs": {
+      "bytes": 2136,
+      "sha256": "4ab9cb15d9c3a67cfbc0232b5c26a108028d4fe9d2ccaad3189e5b6b95f30ee8",
+      "git_blob": "2993e668732fbe306a0a3160aa8dcd95baad9708"
+    },
+    "web/practice.mjs": {
+      "bytes": 13716,
+      "sha256": "315b420c27894eb3a42dbc179ecc92465e0290bb3ed4f5cebe660bfda322a6ac",
+      "git_blob": "e2e6df8e5e69cb3aaa779c73a0d5b31b91a687f8"
+    },
+    "test/layout-feedback.test.mjs": {
+      "bytes": 4288,
+      "sha256": "9a5e1801f29215cc51565927bdc6a60aedfe5ee2cfb7d6cd008c892ce8de34ae",
+      "git_blob": "e18aadd16c5019e3da8d819cab7ff1c7987fbc9e"
+    },
+    "tools/browser-layout-feedback.mjs": {
+      "bytes": 4322,
+      "sha256": "d01ae692766c123caa9b6da383cf83a291fafbc818138bb545869840c9a52ba2",
+      "git_blob": "3ed77de1f298cd4c3c7b0e0e2f52d4363ec12a5a"
+    },
+    "server.mjs": {
+      "bytes": 8076,
+      "sha256": "3a73e4608a0f4229a894d8b089422ae3355c49cf851ef4ffb91633a3ffc3c35c",
+      "git_blob": "5339887b1ce92a9a4ac4a9fa7aa6c63cbe4866fd"
+    },
+    "README.md": {
+      "bytes": 36219,
+      "sha256": "f60b446a852cd6ebe6762c9fb940c3c0b8436e55c70d9126767bf48be14b1946",
+      "git_blob": "1a0256f516b05bc5abc8ca038a7c5493b32c2c84"
+    }
+  },
+  "node": "v22.23.4",
+  "native": {
+    "command": "npm test",
+    "tests": 205,
+    "passed": 205,
+    "failed": 0,
+    "skipped": 0
+  },
+  "execution": [
+    {
+      "step": "native",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exit": 0,
+      "seconds": 0.775,
+      "log": "/tmp/hamon-60b5bf3bc778-skill/layout-5d-receiving/native.log"
+    },
+    {
+      "step": "layout-browser",
+      "command": [
+        "node",
+        "tools/browser-layout-feedback.mjs"
+      ],
+      "exit": 0,
+      "seconds": 1.961,
+      "log": "/tmp/hamon-60b5bf3bc778-skill/layout-5d-receiving/layout-browser.log"
+    },
+    {
+      "step": "focused-browser",
+      "command": [
+        "node",
+        "tools/browser-focused-results.mjs"
+      ],
+      "exit": 0,
+      "seconds": 6.677,
+      "log": "/tmp/hamon-60b5bf3bc778-skill/layout-5d-receiving/focused-browser.log"
+    }
+  ],
+  "browser": {
+    "evidence": "Authored geometry in actual practice consumer; no learning study",
+    "tests": [
+      "rotated actual placements retain failed verdict alongside zero fitted residual",
+      "mirrored view leaves physical diagnostic unchanged",
+      "raw session reopen recomputes identical diagnosis",
+      "390px no horizontal page overflow",
+      "placement edits hide stale diagnosis until review"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "result": "PASS",
+    "errors": []
+  },
+  "normalBrowserSandbox": true,
+  "screenshots": {
+    "desktop.png": {
+      "bytes": 420797,
+      "sha256": "b5ba4669d2927b53574614df5f16f5a86a74137603f2172e2fb71849b4313545",
+      "git_blob": "e48fdc9177371ddebe52898f74370eebcf8eee01"
+    },
+    "mobile.png": {
+      "bytes": 303181,
+      "sha256": "22ed5f637f17257557f00f79ab34b841333de17156dad47ffd9deb311bee278d",
+      "git_blob": "f712a536af48009dc617152a67b901efda08f4ba"
+    }
+  },
+  "composition": "All 22 native changes through 5d preserved, including mark-inspector/rehearsal routes and docs. Native source blobs verified. Own runtime/source behavior unchanged apart from additive routes/docs.",
+  "review": "Independent SYNAPSE source review accepted. Root actual native/browser receiving and screenshot review.",
+  "limits": [
+    "Authored geometry; no physical performance or learner study.",
+    "Hypothetical fit/preview never changes actual placements, source, saved session or verdict.",
+    "No installed deployment or provider qualification."
+  ],
+  "focusedBrowser": {
+    "evidence": "Authored analytic receiving, no measured learning claim",
+    "tests": [
+      "actual focused practice preserves a passing first round and a failing second round in exported raw placements",
+      "focused results attach separately without completing the unpracticed original mark",
+      "explicit round choice and new wrapper download retain both original and focused raw sessions",
+      "changed focused rules refuse transactionally without losing accepted drill evidence",
+      "fresh 390px reopen recomputes subset scope and selected-round findings",
+      "fresh full-task receiver restores all original marks and no inherited performance",
+      "late drill-source read cannot attach into a newly accepted original review",
+      "no browser exceptions or offsite requests"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "result": "PASS",
+    "errors": [],
+    "offsite": []
+  }
+}
