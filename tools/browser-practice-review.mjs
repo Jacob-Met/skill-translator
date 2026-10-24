@@ -1,0 +1,36 @@
+// Real browser consumer with authored controls; no physical learning claim.
+import {createRequire} from 'node:module';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import assert from 'node:assert/strict';
+import {createAppServer} from '../server.mjs';
+const require=createRequire(import.meta.url),puppeteer=require(process.env.PUPPETEER_PATH||'puppeteer');
+const out=resolve(process.env.QA_OUTPUT||'docs/receipts/practice-review-20261024');await mkdir(out,{recursive:true});
+const server=createAppServer();await new Promise(ok=>server.listen(0,'127.0.0.1',ok));const url=`http://127.0.0.1:${server.address().port}`;
+const errors=[],offsite=[],report={evidence:'Authored analytic controls; not a learner study',tests:[]};let browser;
+const record=name=>report.tests.push(name);
+const watch=p=>{p.on('pageerror',e=>errors.push(String(e)));p.on('request',r=>{if(!r.url().startsWith(url)&&!r.url().startsWith('blob:'))offsite.push(r.url());});};
+const captureDownloads=p=>p.evaluate(()=>{const original=URL.createObjectURL.bind(URL);URL.createObjectURL=blob=>{window.downloadBlob=blob;return original(blob);};});
+const download=async(p,id)=>{await p.click(id);return p.evaluate(async()=>JSON.parse(await window.downloadBlob.text()));};
+try{
+  browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY,headless:true,args:['--no-first-run',...(process.env.CHROME_TEST_NO_SANDBOX==='1'?['--no-sandbox']:[])]});report.browser=await browser.version();
+  const page=await browser.newPage();watch(page);await page.setViewport({width:1280,height:960});
+  await page.goto(url+'/practice',{waitUntil:'networkidle0'});await captureDownloads(page);
+  const source=await download(page,'#savePracticeSource');await writeFile(out+'/source.json',JSON.stringify(source));
+  // Place the actual existing consumer's selected mark, then archive and retry.
+  await page.evaluate(()=>{document.getElementById('placementX').value='30';document.getElementById('placementY').value='80';document.getElementById('placementForm').requestSubmit();});await page.click('#retryTask');
+  await page.evaluate(()=>{document.getElementById('placementX').value='25';document.getElementById('placementY').value='80';document.getElementById('placementForm').requestSubmit();});
+  const session=await download(page,'#savePractice');assert.equal(session.round,2);await writeFile(out+'/session.json',JSON.stringify(session));
+  await page.goto(url+'/practice-review',{waitUntil:'networkidle0'});await(await page.$('#sourceFile')).uploadFile(out+'/source.json');await(await page.$('#sessionFile')).uploadFile(out+'/session.json');await page.click('#openPair button');await page.waitForFunction(()=>!document.getElementById('review').hidden);
+  assert.match(await page.$eval('#comparisonSummary',e=>e.textContent),/1 common marks/);assert.match(await page.$eval('#comparisonSummary',e=>e.textContent),/2 marks absent/);record('existing practice raw exports receive with common-mark comparison and explicit missingness');
+  await page.click('#example');assert.match(await page.$eval('#status',e=>e.textContent),/Authored/);assert.match(await page.$eval('#comparisonSummary',e=>e.textContent),/2 common marks/);assert.equal(await page.$$eval('.mark-card table',els=>els.length),3);record('authored full-to-partial example retains per-mark raw coordinates and worsening/missing evidence');
+  await page.click('.mark-card input');await captureDownloads(page);const saved=await download(page,'#saveReview');assert.equal(saved.selectedIds.length,1);assert.equal(saved.session.history[0].attempts.length,3);await writeFile(out+'/review.json',JSON.stringify(saved));
+  const sourceBefore=await page.$eval('#taskTitle',e=>e.textContent);const bad=structuredClone(saved);bad.demo.landmarks[0].toleranceMm+=1;await writeFile(out+'/bad-review.json',JSON.stringify(bad));await(await page.$('#reviewFile')).uploadFile(out+'/bad-review.json');await page.waitForFunction(()=>!document.getElementById('error').hidden);assert.equal(await page.$eval('#taskTitle',e=>e.textContent),sourceBefore);assert.equal(await page.$$eval('.mark-card input:checked',els=>els.length),1);record('changed-source bundle refuses transactionally without losing the accepted selection');
+  await(await page.$('#reviewFile')).uploadFile(out+'/review.json');await page.waitForFunction(()=>document.getElementById('status').textContent.includes('reopened'));const focused=await download(page,'#exportSource');assert.equal(focused.landmarks.length,1);assert.deepEqual(focused.source,saved.demo.source);assert.equal(focused.landmarks[0].toleranceMm,saved.demo.landmarks[0].toleranceMm);record('actual downloads preserve original source and selected unchanged semantics');
+  await page.screenshot({path:out+'/desktop.png',fullPage:true});
+  await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),page.click('#startDrill')]);assert.equal(new URL(page.url()).pathname,'/practice');assert.equal(await page.$$eval('#practiceMarks button',els=>els.length),1);assert.equal(await page.$$eval('.placed-point',els=>els.length),0);assert.equal(await page.$eval('#practiceGoals',e=>e.checked),false);await page.click('#reviewTask');assert.equal(await page.$eval('#taskOutcome',e=>e.dataset.state),'incomplete');record('focused source reaches maintained practice as a fresh empty task with targets hidden');
+  const mobile=await browser.newPage();watch(mobile);await mobile.setViewport({width:390,height:844});await mobile.goto(url+'/practice-review',{waitUntil:'networkidle0'});await(await mobile.$('#reviewFile')).uploadFile(out+'/review.json');await mobile.waitForFunction(()=>!document.getElementById('review').hidden);assert.equal(await mobile.$$eval('.mark-card input:checked',els=>els.length),1);assert.ok(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));await mobile.screenshot({path:out+'/mobile.png',fullPage:true});record('fresh 390px browser reopens raw rounds and selection without page overflow');
+  // Delay an input read, then change accepted state: the late read must not win.
+  await mobile.evaluate(()=>{document.getElementById('reviewFile').value='';const original=File.prototype.text;File.prototype.text=function(){if(this.name==='review.json')return new Promise(resolve=>{window.releaseRead=async()=>resolve(await original.call(this));});return original.call(this);};});await(await mobile.$('#reviewFile')).uploadFile(out+'/review.json');await mobile.waitForFunction(()=>!!window.releaseRead);await mobile.click('#example');await mobile.evaluate(()=>window.releaseRead());await new Promise(ok=>setTimeout(ok,100));assert.equal(await mobile.$$eval('.mark-card input:checked',els=>els.length),0);assert.match(await mobile.$eval('#status',e=>e.textContent),/Authored analytic/);record('late file read cannot overwrite a newer accepted example and selection');
+  assert.deepEqual(errors,[]);assert.deepEqual(offsite,[]);record('no browser exceptions or offsite requests');report.result='PASS';console.log(JSON.stringify(report,null,2));
+}finally{report.errors=errors;report.offsite=offsite;await writeFile(out+'/browser-receipt.json',JSON.stringify(report,null,2));if(browser)await browser.close();await new Promise(ok=>server.close(ok));}

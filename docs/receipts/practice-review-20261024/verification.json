@@ -1,0 +1,46 @@
+{
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/30",
+  "maintainedBase": "634ab1f714afed43b7ea3af7591eca46a3fbf236",
+  "scope": "Descriptive retained-round review and fresh focused-task receiving",
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "runtime": "Node 24.19.0",
+    "passed": 148,
+    "failed": 0,
+    "newTests": 7
+  },
+  "browser": {
+    "evidence": "Authored analytic controls; not a learner study",
+    "tests": [
+      "existing practice raw exports receive with common-mark comparison and explicit missingness",
+      "authored full-to-partial example retains per-mark raw coordinates and worsening/missing evidence",
+      "changed-source bundle refuses transactionally without losing the accepted selection",
+      "actual downloads preserve original source and selected unchanged semantics",
+      "focused source reaches maintained practice as a fresh empty task with targets hidden",
+      "fresh 390px browser reopens raw rounds and selection without page overflow",
+      "late file read cannot overwrite a newer accepted example and selection",
+      "no browser exceptions or offsite requests"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "result": "PASS",
+    "errors": [],
+    "offsite": []
+  },
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "sourceSha256": {
+    "src/practice-review.mjs": "b3b4d51b9b0bc831d3641fec421d269b33c2921c6a259e51043dd58f34e19b86",
+    "web/practice-review.html": "f741508495122bff133b2cccaffcfec3e252c5b722e68de3450f590e1412ea7c",
+    "web/practice-review.css": "dbaaf522c861c1ee67a78c8f443f5de9e724224f2f61ac3d9120b2ae0cd30c58",
+    "web/practice-review.mjs": "549b71f1155a13d9410591668597de460c3bd1fcfa4a00d9b7065cfa64d9d3c7",
+    "test/practice-review.test.mjs": "0857bab2314a117438187ea6bc63eaeb9ef143e35783e45a4d37396d2f303136",
+    "tools/browser-practice-review.mjs": "79110edcd5623abd0ce2e6b8d8945120181dde623736659b03d8a92a89a7b9b9",
+    "docs/PRACTICE_REVIEW.md": "890220a2cc2a6b88f605867b73421381238fcfc17f0a587b5c66ab6772e0f633",
+    "server.mjs": "a171a9b020e2dd810dfe8ef6feb4327602087eb354ebfc5bf6361e032a65d1d7",
+    "web/practice.html": "aaf44209290998ff2facfd24148486f13f137aea0598ad198bba8eced0c539cb"
+  },
+  "limits": [
+    "Authored controls, no measured skill or learning result",
+    "Local source/browser receiving, no deployment or cloud-provider qualification",
+    "Browser test ran in explicitly approved local loopback environment with no-sandbox flag required for root execution; production behavior unchanged"
+  ]
+}
