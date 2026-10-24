@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Choose a task relationship · Skill Translator</title><link rel="stylesheet" href="/web/rule-adoption.css"></head>
+<body><header><a href="/">SKILL TRANSLATOR / TASK SPACE</a><span>Evidence → decision → practice</span></header><main>
+<section class="intro"><p class="eyebrow">A DELIBERATE INTERPRETATION</p><h1>Practice the relationship <br>your observations support.</h1>
+<p>Compare a proposed rule with the original annotation before opening a fresh practice round. Keep the source, observations, and your decision together.</p></section>
+<section class="panel"><div class="heading"><h2>1. Source and retained observations</h2><div class="controls">
+<label class="file">Open source<input id="sourceFile" type="file" accept=".json,application/json"></label>
+<label class="file">Open observations<input id="evidenceFile" type="file" accept=".json,application/json"></label>
+<label class="file">Reopen decision<input id="decisionFile" type="file" accept=".json,application/json"></label></div></div>
+<h3 id="sourceTitle"></h3><p id="sourceProvenance" class="muted"></p><p id="evidenceMeta"></p>
+<div class="controls"><button id="exampleUnique">Authored rule-change example</button><button id="exampleAmbiguous">Authored unresolved example</button></div></section>
+<div id="error" role="alert"></div><div id="status" role="status" aria-live="polite"></div>
+<section class="panel"><h2>2. Choose explicitly</h2><p class="muted">Only rules compatible with retained observations can be chosen. A choice among multiple survivors remains your decision; the ambiguity is retained. Unselected marks keep their original rule.</p>
+<div id="ruleChoices"></div><p class="caution">These five geometric rules are tested under the supplied source calibration and measurement bounds. Compatibility does not establish physical skill or exclude relationships outside this family.</p></section>
+<section class="comparison"><div class="panel"><h2>3. Inspect the target change</h2><div class="dimensions"><label>Target width (mm)<input id="widthMm" type="number" min="1" max="10000" step="any" value="400"></label><label>Target height (mm)<input id="heightMm" type="number" min="1" max="10000" step="any" value="150"></label></div>
+<svg id="targetMap" viewBox="0 0 640 410" role="img" aria-label="Original and proposed task positions"></svg>
+<p class="legend">○ Original target &nbsp; ◆ Chosen-rule target &nbsp; → Change in position</p><p id="originalFailure" class="caution"></p><div id="targetChanges"></div></div>
+<div class="panel"><h2>4. Keep the decision and try it</h2><p id="decisionSummary">Choose at least one tested rule to preview a new practice source.</p>
+<p class="muted">Opening practice starts an empty round. Earlier placements stay attached to their earlier rules. Save the decision bundle to keep the complete original source and its observations.</p>
+<div class="actions"><button id="saveDecision" disabled>Save decision bundle</button><button id="saveNewSource" disabled>Save new source</button><button id="saveOriginal">Save original source</button>
+<label class="check"><input id="acknowledge" type="checkbox">I choose these rules under the shown evidence, including any unresolved alternatives.</label>
+<label class="check"><input id="mirror" type="checkbox">Mirror the practice display</label><label class="check"><input id="showGoals" type="checkbox" checked>Show targets during practice</label>
+<button id="practiceChosen" class="primary" disabled>Open a fresh practice round →</button></div><p id="decisionLimits" class="caution"></p></div></section>
+<footer>Original and proposed sources remain separate. Choosing a different rule does not change the source photograph or turn authored examples into measured outcomes.</footer>
+</main><script type="module" src="/web/rule-adoption.mjs"></script></body></html>

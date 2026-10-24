@@ -1,0 +1,23 @@
+{
+  "course": "evidence-conditioned rule choice into actual practice",
+  "evidence": "authored analytic observations",
+  "tests": [
+    "maintained workbench hands off its actual source, observation anchors and target dimensions",
+    "contradicted and untested choices are unavailable; explicit surviving choice changes the target by 20 mm",
+    "changing the proposed target invalidates prior confirmation and recomputes positions",
+    "decision export preserves original source and evidence alongside the deliberately changed rule",
+    "reopening recomputes the derived source instead of trusting a forged saved result",
+    "a delayed decision read cannot overwrite newer explicit rule, target or display edits",
+    "stale source anchors are refused without replacing the accepted decision",
+    "choosing among five compatible rules retains and displays the ambiguity",
+    "a conflicting observation removes every viable rule and disables adoption",
+    "actual complete-task practice receives the 20 mm chosen-rule target and starts with no prior placements",
+    "original-rule practice placements cannot be reinterpreted as attempts against the new rule",
+    "390px mobile view supports deliberate choice without document overflow",
+    "no browser exceptions or offsite requests"
+  ],
+  "result": "PASS",
+  "browser": "Chrome/156.0.8078.47",
+  "errors": [],
+  "offsite": []
+}

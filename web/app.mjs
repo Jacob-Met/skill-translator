@@ -495,6 +495,12 @@ $("practiceTask").addEventListener("click",()=>{
     location.assign("/practice");
   }catch(err){error("Practice setup could not be opened. Export the source annotations to retain them. "+err.message);}
 });
+$("reviewRuleChoices").addEventListener("click",()=>{
+  try{sessionStorage.setItem("skill-translator-rule-input/v1",JSON.stringify({demo,
+    observationEvidence:exportEvidence(demo,observations),widthMm:target.widthMm,heightMm:target.heightMm,
+    mirrored:mirrored(),showGoals:$("showGoal").checked}));location.assign("/rule-adoption");
+  }catch(err){error("Rule-choice setup could not be opened. Export source and observations to retain them. "+err.message);}
+});
 $("exportObservations").addEventListener("click",()=>{
   const url=URL.createObjectURL(new Blob([JSON.stringify(exportEvidence(demo,observations),null,2)],{type:"application/json"}));
   const link=document.createElement("a");link.href=url;link.download="skill-observations.json";
