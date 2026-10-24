@@ -1,0 +1,62 @@
+{
+  "schema": "skill-translator-condition-set-receipt/v1",
+  "base_commit": "2dfb8c3eca163fdf06053520ec6b1fb23240155b",
+  "base_tree": "5635b7efc8d362952750c3d3f9e8694770a2de8b",
+  "source_files": {
+    "src/condition-set.mjs": "20e00c6cf3603ba8c534a6d717f21b027ea39750",
+    "test/condition-set.test.mjs": "fc5dd75e22cb5562e9569b2a5498f7b002e1b12a",
+    "web/condition-set.html": "095da051e931b285a65b2e7e15109db6b3661e1c",
+    "web/condition-set.css": "cb160dac591d32adcb843e89f5f8556c96afc788",
+    "web/condition-set.mjs": "aa9032f37200bff51b7bd129384d6baa7386224f",
+    "server.mjs": "ec604538baa68ee07b18e40d8eded352ae396652",
+    "web/practice.html": "ccd156ce83045788ecc157128bdb6dd477eab6ad",
+    "tools/browser-condition-set.mjs": "83674ba2b360ff282073deab6342a6bc8796802f",
+    "docs/CONDITION_SET.md": "8c4eda447d33a0f7717e693b5431e915ee209a93"
+  },
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "node": "24.19.0",
+    "tests": 488,
+    "passed": 488,
+    "failed": 0,
+    "skipped": 0,
+    "focused_cases": 9,
+    "tested_base_commit": "e80e5ee053782ab0306ec61bb37cc77cf9823b71"
+  },
+  "browser": {
+    "groups": [
+      "actual maintained practice records bent, rotated/scaled, reflected, collapsed-arm, translated and empty rounds with original criteria",
+      "three typed task conditions are authored in the real receiver; empty and missing sets cannot pass",
+      "scaled geometry retains angle but fails linear criteria; translation passes all relative conditions without replacing original point failure; collapsed conditions remain unresolved beside a known failure",
+      "source-only save and independent reopen retain all original rounds and every typed declaration",
+      "invalid source preserves accepted set; newer unadded condition cancels delayed import and must be added or discarded before findings",
+      "desktop and390px complete findings retain keyboard condition selection and coordinate inspection",
+      "maximum12-condition set preserves every raw declaration and result without truncation"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "scope": "Authored conjunction of retained planar criteria; no causal learning, physical accuracy, contact or skill qualification",
+    "tested_base_commit": "e80e5ee053782ab0306ec61bb37cc77cf9823b71"
+  },
+  "runtime": {
+    "user": "nobody",
+    "puppeteer": "25.16.0",
+    "sandbox": "Chrome namespace, PID, network, Seccomp and TSYNC independently verified enabled; no sandbox bypass",
+    "temporary_storage": "Memory-backed temporary profile and downloads; artifacts copied before namespace exit"
+  },
+  "visual_review": "Worker inspected actual390px focused results. Explicit horizontal-table guidance and complete selected-condition findings wrap visibly beside reference/retained geometry; coordinate inspection and condition choice retain keyboard access. No document overflow. Desktop1280 retained.",
+  "refinement": "Initial7group browser course passed; pixel review prompted explicit table-scroll guidance and complete selected-result prose. Final7group course passed with that usability refinement; geometry/core unchanged.",
+  "reuse": "Existing evaluateRelationships, evaluateGuideAlignment and inspectCornerAngle retain typed geometry and numerical conventions; original practice producer and individual criterion modules unchanged.",
+  "limits": [
+    "Authored conjunction of declared planar criteria only.",
+    "Known failure remains visible beside missing/unresolved conditions; an empty set is undeclared.",
+    "No contact, fit, suggested correction movement, physical accuracy, physical skill or causal learning qualification."
+  ],
+  "admission_repair": "Sparse native JavaScript arrays previously skipped Array.map admission and could yield a vacuous within status. Worker and independent SECOND GROUND reviewer reproduced this. Validation now uses Array.from to visit and reject absent slots. One-hole and partially sparse regressions pass. Final488native and7browser groups passed after repair.",
+  "independent_review": {
+    "reviewer": "SECOND GROUND contributor, same retained team",
+    "focused_native_cases": 9,
+    "passed": 9,
+    "finding": "Accepted after sparse-array repair; typed units, original-round custody and individual unavailable/known-failure preservation sound; no remaining core blocker."
+  },
+  "final_composition": "Incoming eight-file selective-cue clarification integration changes no shared server/practice footer or any of the15modules in the practice/condition-set imported runtime closure. Tested source and receiving code are unchanged; no redundant full native/browser rerun needed."
+}

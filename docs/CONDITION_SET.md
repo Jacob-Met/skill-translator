@@ -1,0 +1,19 @@
+# Inspect a complete declared task-condition set
+
+The placement page links to **Inspect task conditions together**. Export the original source and practice session, open both, and declare up to twelve named conditions. Choose a pair distance or directed separation, a three-mark guide offset, or a directed corner angle. Every condition requires its own tolerance and basis. Linear criteria retain millimetres; angular criteria retain degrees. Existing pair, guide and corner evaluators own their calculations and admission rules.
+
+The receiver evaluates every declared condition on the same selected original practice round. It preserves the original complete-task point score, every condition's result, and counts of within, outside, incomplete and unresolved conditions. A definite failed condition makes the set outside even when another cannot be evaluated; the incomplete or unresolved finding remains visible. A nonempty set is within only when every declared condition is within. An empty set is undeclared, never a passing task.
+
+This reveals why an individual criterion cannot establish a complete task outcome. For example, shrinking a right-angle layout by a factor of 0.7 preserves the corner angle but changes a 30 mm arm to 21 mm. A 1° angle criterion passes while a separately declared 1 mm arm-length criterion fails. Translating the whole layout can preserve every relative condition while failing its original point-location tolerances. The receiver retains both conclusions without changing their meaning.
+
+Choose a condition to read its complete reference, retained value, difference and tolerance without horizontal scrolling. Its supplied basis, selected original coordinates, and reference/retained geometry remain inspectable. Guide projection and numerical guards retain their original meanings; the directed corner uses the shorter circular difference. Connecting lines identify selected marks rather than measured motion or a suggested correction.
+
+Adding or removing a condition or changing the selected round hides stale findings. An unadded condition draft must be added or discarded before inspecting the set, so a partly entered requirement cannot silently be omitted from a displayed result. Invalid source replacements preserve the accepted work, and a newer draft fences delayed imports.
+
+Save the complete raw set to preserve the original source, every retained practice round, selected round and all typed declarations. Reopening revalidates source identity and recomputes every finding; imported verdicts are not authoritative. The receiver refuses duplicate identities, unsupported condition kinds, invalid units, missing bases, more than twelve conditions, or a compact raw bundle exceeding 2 MiB. It does not replace or alter the maintained practice, pair, guide or corner producers.
+
+Criteria can be declared after seeing outcomes. Their supplied bases remain authored assertions. A within set is limited to those declared planar conditions; it does not establish physical accuracy, contact, fit, acquired skill, or a causal learning effect. Original missing information stays missing.
+
+## Verification
+
+Run `node --test --test-isolation=none test/*.test.mjs` for native checks and `node tools/browser-condition-set.mjs` for the receiving course. The browser script uses the established `PUPPETEER_PATH`, `CHROME_BINARY` and `QA_OUTPUT` variables. It creates six actual practice rounds, follows the maintained producer link, authors all three criterion families, checks mixed and unavailable outcomes, saves/reopens raw originals, exercises invalid and delayed imports, checks narrow keyboard inspection and receives all twelve conditions without truncation. Exact qualification is recorded in `docs/receipts/condition-set-677009-20261024/verification.json`.
