@@ -5,6 +5,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/photo-round-feedback.mjs": ["src/photo-round-feedback.mjs", "text/javascript; charset=utf-8"],
+  "/web/photo-round-feedback.mjs": ["web/photo-round-feedback.mjs", "text/javascript; charset=utf-8"],
+  "/web/photo-round-feedback.css": ["web/photo-round-feedback.css", "text/css; charset=utf-8"],
   "/corner-angle":["web/corner-angle.html","text/html; charset=utf-8"],
   "/src/corner-angle.mjs":["src/corner-angle.mjs","text/javascript; charset=utf-8"],
   "/web/corner-angle.mjs":["web/corner-angle.mjs","text/javascript; charset=utf-8"],
