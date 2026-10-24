@@ -2,10 +2,12 @@ import {createCapture,appendCaptureMark,validateCapturedDemo} from "/src/capture
 import {loadLocalImage,releaseImage} from "/web/image-input.mjs";
 import {loadLocalVideo,releaseVideo,capturePresentedFrame} from "/web/video-input.mjs";
 import {frameOrigin,requestedFrameTime} from "/src/frame-origin.mjs";
+import {reopenCapture,exportCapture,reviseCaptureMark,removeCaptureMark,reviseCaptureCalibration,MAX_ANNOTATION_BYTES} from "/src/capture-editing.mjs";
 const $ = id => document.getElementById(id), ns = "http://www.w3.org/2000/svg";
 const labels = ["TOP LEFT","TOP RIGHT","BOTTOM RIGHT","BOTTOM LEFT"];
 let media = null, corners = [null,null,null,null], activeCorner = 0, demo = null, loadVersion = 0, calibrationDirty = false;
 let clip=null,sourceOrigin=null,sourceFrameFile=null,frameController=null,frameBusy=false;
+let editingMarkId=null;
 function problem(message="") { $("studioError").textContent=message; $("studioError").hidden=!message; }
 function el(parent,tag,attrs={},text="") {
   const node=document.createElementNS(ns,tag);
@@ -14,7 +16,7 @@ function el(parent,tag,attrs={},text="") {
 }
 function number(id) { const value=$(id).value.trim(); return value ? Number(value) : NaN; }
 function capturePoint() { return {x:number("markX"),y:number("markY")}; }
-function clearDraft() { $("markX").value=""; $("markY").value=""; }
+function clearDraft() { $("markX").value=""; $("markY").value=""; editingMarkId=null; }
 function syncCorners() {
   corners.forEach((p,i)=>{ $("cornerX"+i).value=p ? p.x.toFixed(2) : ""; $("cornerY"+i).value=p ? p.y.toFixed(2) : ""; });
 }
@@ -25,9 +27,19 @@ function render() {
   $("addCaptureMark").disabled=!demo||calibrationDirty;
   $("downloadCapture").disabled=!demo?.landmarks.length||calibrationDirty;
   $("revertCalibration").disabled=!demo||!calibrationDirty;
+  $("addCaptureMark").textContent=editingMarkId?"Save mark changes":"Add source mark";
+  $("cancelMarkEdit").hidden=!editingMarkId;
+  $("markEditStatus").textContent=editingMarkId?"Editing "+editingMarkId+". Existing source identity is retained.":"Adding a new source mark.";
   $("markCount").textContent=demo?.landmarks.length ? demo.landmarks.length+" source mark"+(demo.landmarks.length===1?"":"s")+" ready" : "No marks yet";
   $("capturedMarks").replaceChildren();
-  for(const mark of demo?.landmarks||[]){const li=document.createElement("li");li.textContent=mark.label+" · "+(mark.kind==="fraction"?"proportional":mark.edge+" edge")+" · ±"+mark.toleranceMm+" mm";$("capturedMarks").append(li);}
+  for(const mark of demo?.landmarks||[]){
+    const li=document.createElement("li");li.textContent=mark.label+" · "+(mark.kind==="fraction"?"proportional":mark.edge+" edge")+" · ±"+mark.toleranceMm+" mm ";
+    const edit=document.createElement("button");edit.type="button";edit.textContent="Edit";edit.setAttribute("aria-label","Edit "+mark.label);edit.disabled=calibrationDirty;
+    edit.onclick=()=>{editingMarkId=mark.id;activeCorner=null;$("markX").value=mark.sourcePx.x;$("markY").value=mark.sourcePx.y;$("markLabel").value=mark.label;$("markKind").value=mark.kind;$("markEdge").value=mark.edge||"left";$("markEdge").disabled=mark.kind!=="edge_offset_mm";$("markTolerance").value=mark.toleranceMm;problem();render();$("markLabel").focus();};
+    const remove=document.createElement("button");remove.type="button";remove.textContent="Remove";remove.setAttribute("aria-label","Remove "+mark.label);remove.disabled=calibrationDirty;
+    remove.onclick=()=>{try{demo=removeCaptureMark(demo,mark.id);if(editingMarkId===mark.id)clearDraft();problem();render();}catch(error){problem(error.message);}};
+    li.append(edit,remove);$("capturedMarks").append(li);
+  }
   labels.forEach((_,i)=>$("cornerButton"+i).setAttribute("aria-pressed",String(activeCorner===i)));
   if(!media)return;
   const {widthPx:w,heightPx:h}=media.image, scale=Math.max(w,h)/800;
@@ -52,6 +64,29 @@ $("photoFile").addEventListener("change",async event=>{
   catch(error){if(version===loadVersion)problem("Photo refused; previous work preserved. "+error.message);}
   finally{event.target.value="";}
 });
+$("cancelMarkEdit").addEventListener("click",()=>{clearDraft();problem();render();});
+$("reopenCaptureForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const annotations=$("savedAnnotations").files[0],photo=$("savedPhoto").files[0];
+  if(!annotations||!photo){problem("Choose saved annotations and their original image.");return;}
+  const version=++loadVersion;cancelFrame();let candidate=null;
+  try{
+    if(annotations.size>MAX_ANNOTATION_BYTES)throw Error("Annotations must be JSON up to 256 KiB.");
+    const text=await annotations.text();
+    if(version!==loadVersion)return;
+    candidate=await loadLocalImage(photo);
+    if(version!==loadVersion){releaseImage(candidate);candidate=null;return;}
+    const restored=reopenCapture(text,candidate.image);
+    acceptSource(candidate,restored.source.origin||null,restored.source.origin?photo:null);candidate=null;
+    demo=restored;corners=structuredClone(demo.source.corners);activeCorner=null;calibrationDirty=false;
+    $("captureTitle").value=typeof demo.title==="string"?demo.title:"Reopened demonstration";
+    $("captureWidth").value=demo.source.widthMm;$("captureHeight").value=demo.source.heightMm;
+    clearDraft();syncCorners();render();
+    $("calibrationStatus").textContent="Saved calibration reopened. Existing source pixels and mark identities are retained.";
+    $("reopenStatus").textContent="Annotations reopened with matching image bytes. Edit a mark below or revise the calibration. Original clip bytes were not checked.";
+    problem();
+  }catch(error){releaseImage(candidate);if(version===loadVersion)problem("Reopen refused; previous work preserved. "+error.message);}
+});
 $("captureSvg").addEventListener("click",event=>{
   if(!media)return;const svg=$("captureSvg"),p=svg.createSVGPoint();p.x=event.clientX;p.y=event.clientY;const q=p.matrixTransform(svg.getScreenCTM().inverse());
   if(q.x<0||q.y<0||q.x>media.image.widthPx||q.y>media.image.heightPx)return;
@@ -60,7 +95,7 @@ $("captureSvg").addEventListener("click",event=>{
   problem();render();
 });
 $("applyCalibration").addEventListener("click",()=>{
-  try{if(!media)throw Error("Choose a source photo first.");const next=createCapture(media.image,corners,number("captureWidth"),number("captureHeight"),{title:$("captureTitle").value,origin:sourceOrigin,provenance:sourceOrigin?"Local clip "+sourceOrigin.clip.name+" · presented frame at "+sourceOrigin.mediaTimeSeconds.toFixed(3)+" s; human-authored calibration and relationships.":undefined});next.landmarks=structuredClone(demo?.landmarks||[]);if(next.landmarks.length)validateCapturedDemo(next);demo=next;activeCorner=null;calibrationDirty=false;clearDraft();$("calibrationStatus").textContent="Calibration applied · "+demo.source.widthMm+" × "+demo.source.heightMm+" mm. Source points keep their pixel coordinates.";problem();render();}
+  try{if(!media)throw Error("Choose a source photo first.");const next=demo?reviseCaptureCalibration(demo,corners,number("captureWidth"),number("captureHeight"),$("captureTitle").value):createCapture(media.image,corners,number("captureWidth"),number("captureHeight"),{title:$("captureTitle").value,origin:sourceOrigin,provenance:sourceOrigin?"Local clip "+sourceOrigin.clip.name+" · presented frame at "+sourceOrigin.mediaTimeSeconds.toFixed(3)+" s; human-authored calibration and relationships.":undefined});demo=next;activeCorner=null;calibrationDirty=false;clearDraft();$("calibrationStatus").textContent="Calibration applied · "+demo.source.widthMm+" × "+demo.source.heightMm+" mm. Source points keep their pixel coordinates.";problem();render();}
   catch(error){problem("Calibration refused; previous annotations preserved. "+error.message);}
 });
 for(const id of ["captureWidth","captureHeight","captureTitle"])$(id).addEventListener("input",()=>{if(demo){calibrationDirty=true;$("calibrationStatus").textContent="Measurements changed. Apply or revert these edits before adding marks or exporting.";render();}});
@@ -69,11 +104,11 @@ $("markKind").addEventListener("change",()=>{$("markEdge").disabled=$("markKind"
 for(const id of ["markX","markY"])$(id).addEventListener("input",render);
 $("captureMarkForm").addEventListener("submit",event=>{
   event.preventDefault();
-  try{if(!demo||calibrationDirty)throw Error("Apply or revert the calibration edits first.");demo=appendCaptureMark(demo,{sourcePx:capturePoint(),label:$("markLabel").value,kind:$("markKind").value,edge:$("markEdge").value,toleranceMm:number("markTolerance"),why:"Human interpretation of the linked source photo; test it against further demonstrations."});clearDraft();problem();render();}
+  try{if(!demo||calibrationDirty)throw Error("Apply or revert the calibration edits first.");const input={sourcePx:capturePoint(),label:$("markLabel").value,kind:$("markKind").value,edge:$("markEdge").value,toleranceMm:number("markTolerance"),why:editingMarkId?demo.landmarks.find(mark=>mark.id===editingMarkId).why:"Human interpretation of the linked source photo; test it against further demonstrations."};demo=editingMarkId?reviseCaptureMark(demo,editingMarkId,input):appendCaptureMark(demo,input);clearDraft();problem();render();}
   catch(error){problem("Mark refused; prior annotations preserved. "+error.message);}
 });
 $("downloadCapture").addEventListener("click",()=>{
-  try{if(calibrationDirty)throw Error("Apply or revert calibration edits before exporting.");validateCapturedDemo(demo);const url=URL.createObjectURL(new Blob([JSON.stringify(demo,null,2)],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download="skill-photo-annotations.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+  try{if(calibrationDirty)throw Error("Apply or revert calibration edits before exporting.");const encoded=exportCapture(demo);const url=URL.createObjectURL(new Blob([encoded],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download="skill-photo-annotations.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
   catch(error){problem(error.message);}
 });
 function videoControls(){
@@ -129,3 +164,4 @@ $("downloadFrame").addEventListener("click",()=>{
 });
 window.addEventListener("pagehide",event=>{cancelFrame();clip?.video.pause();if(!event.persisted){releaseImage(media);releaseVideo(clip);}});
 render();
+
