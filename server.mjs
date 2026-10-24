@@ -5,7 +5,12 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/directed-pair-region":["web/directed-pair-region.html","text/html; charset=utf-8"],
+  "/web/directed-pair-region.css":["web/directed-pair-region.css","text/css; charset=utf-8"],
+  "/web/directed-pair-region.mjs":["web/directed-pair-region.mjs","text/javascript; charset=utf-8"],
+  "/src/directed-pair-region.mjs":["src/directed-pair-region.mjs","text/javascript; charset=utf-8"],
   "/relationship-rehearsal":["web/relationship-rehearsal.html","text/html; charset=utf-8"],
+  "/web/relationship-rehearsal.css":["web/relationship-rehearsal.css","text/css; charset=utf-8"],
   "/web/relationship-rehearsal.mjs":["web/relationship-rehearsal.mjs","text/javascript; charset=utf-8"],
   "/src/relationship-rehearsal.mjs":["src/relationship-rehearsal.mjs","text/javascript; charset=utf-8"],
 "/decision-transfer":["web/decision-transfer.html", "text/html; charset=utf-8"],
