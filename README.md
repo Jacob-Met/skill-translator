@@ -355,3 +355,7 @@ Open `/response-family` to condition an affine geometric response on an original
 ## Challenge a frozen workpiece-response family
 
 Open [the separate-workpiece challenge](/affine-challenge) from the response-family investigation. Freeze the original training account and new sizes, save that plan, then receive separate coordinate measurements. The view distinguishes individual agreement from one common model that explains every result, keeps missing outcomes untested, and recomputes raw saved accounts. [Method and actual receiving](docs/AFFINE_CHALLENGE.md). Prospective timing and measurement bounds remain supplied declarations.
+
+## Compare observed order across demonstrations
+
+The [order-evidence workspace](docs/ORDER_EVIDENCE.md) compares retained before/after intervals only after explicit step matching. Inspect repeated, opposing, overlapping or unavailable ordering evidence with original frames; then separately declare any prerequisite reason and export it into the maintained rehearsal. Complete comparison studies retain all examples and source relationships for checked reopening.
