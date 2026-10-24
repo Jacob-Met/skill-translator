@@ -1,0 +1,68 @@
+{
+  "format": "skill-translator.raw-affine-challenge-receiving/v1",
+  "received_at": "2026-10-24",
+  "base_commit": "e3e70e2827b5bc6e5a78008051c2ed325bbf8b57",
+  "scope": "Frozen raw training and separately calibrated prospective outcomes, exact-image inspection and complete raw replay",
+  "native": {
+    "tests": 329,
+    "passed": 329,
+    "failed": 0,
+    "skipped": 0,
+    "focused_raw_challenge_groups": 9
+  },
+  "browser": {
+    "raw_challenge_groups": 13,
+    "page_errors": 0,
+    "offsite_requests": 0,
+    "sandbox": "Direct Chrome with namespace, PID, network and seccomp assertions",
+    "receipt": "browser.json"
+  },
+  "commands": [
+    "npm test",
+    "PUPPETEER_PATH=<installed puppeteer-core> CHROME_BINARY=/opt/google/chrome/chrome QA_OUTPUT=<fresh receipt directory> node tools/browser-raw-affine-challenge.mjs"
+  ],
+  "received_candidate_sha256": {
+    "src/raw-affine-challenge.mjs": "4c568feb850c5fefadcacc1f72d1f55b0342ad8681d2ce9175ac28ea78c0a6bd",
+    "web/raw-affine-challenge.mjs": "9d64c606accb7d695e3c0be4c0e0998f0138a1d744fb157b14e5de8437b07b68",
+    "web/raw-challenge-image.mjs": "e42c3816687b65b22b60063f076b09dfb35dfa4d817d7cd3f78d87e3bd219444",
+    "web/raw-affine-challenge.html": "3f0ba181bbad3088b947f49e4c9dc383e06d58aadd0d0edb38d40f4a2e472b36",
+    "web/raw-affine-challenge.css": "377e7a0d1697068be8e4337a95850cd098f0851aa55971da4e8b33abc0e226dd",
+    "test/raw-affine-challenge.test.mjs": "da2a545d294c0370d08f20ffb8b71c7898daa93a3c9cac6ce59653acb573cd5f",
+    "tools/browser-raw-affine-challenge.mjs": "dc21654b29df25f51a1181e3eaf2dcfc274178cc8c2be0fcc2d4b0d09e29b3b8",
+    "server.mjs": "12a1e0dbc8acb7c705b34f94c9286709a19334b72a42e468e7c6ec8005e8247f",
+    "web/response-demonstrations.html": "5237fcd401cf24e896e8a4f3cb89957563a0520a95f6e5ae30f7d56f1ab8717d"
+  },
+  "capacity": {
+    "raw_account_bytes": 2000000,
+    "expanded_numeric_challenge_bytes": 2000000,
+    "encoding": "compact JSON",
+    "exact_raw_boundary_reopens": true,
+    "oversized_raw_or_numeric_expansion_preserves_accepted_account": true
+  },
+  "review": {
+    "independent_source": "Retained MICROVERSE worker reviewed frozen core, UI and image receiver; no blocker; nine direct native controls passed.",
+    "parent_visual_review": "Parent inspected actual desktop and390px screenshots: original pixels/declared marks, complete source identity, individual and joint statuses, labeled narrow cards and visible source-removal controls. No blocking visual issue."
+  },
+  "receiving_correction": "Close the temporary mobile page and bring desktop to foreground before the final desktop ID-collision control; no product algorithm or assertion changed.",
+  "previous_delivery": {
+    "merge_commit": "e3e70e2827b5bc6e5a78008051c2ed325bbf8b57",
+    "scope": "#77 source demonstrations and numeric affine-capacity repair with ordering-evidence composition",
+    "native_passed": 320,
+    "demonstrations_browser_groups": 13,
+    "affine_capacity_browser_groups": 13,
+    "earlier_pre_ordering_native_passed": 312,
+    "verification": "../response-demonstrations-20261024/verification.json"
+  },
+  "limits": [
+    "Authored analytic source annotations and original PNG controls only; no physical calibration or skill-efficacy qualification.",
+    "Exact image identity does not prove correspondence, calibration, dimensions or discrepancy bounds.",
+    "Prospective timing is user-reported, not trusted acquisition chronology.",
+    "Replacement/removal revises current evidence; previous outcome versions are not retained automatically.",
+    "Every surviving model remains conditional on the original source reading, supplied bounds and finite affine coefficient domain."
+  ],
+  "runtime": {
+    "node": "v22.23.4",
+    "browser": "Chrome/156.0.8078.47",
+    "platform": "Linux x64"
+  }
+}
