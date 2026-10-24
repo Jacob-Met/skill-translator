@@ -1,0 +1,73 @@
+import {createRequire} from "node:module";
+import {mkdir,writeFile} from "node:fs/promises";
+import {resolve} from "node:path";
+import assert from "node:assert/strict";
+import {createAppServer} from "../server.mjs";
+import {createObservation,exportEvidence} from "../src/evidence.mjs";
+import {createPractice,placePractice} from "../src/practice.mjs";
+const require=createRequire(import.meta.url),puppeteer=require(process.env.PUPPETEER_PATH||"puppeteer");
+const out=resolve(process.env.QA_OUTPUT||"docs/receipts/rule-adoption-20261024");await mkdir(out,{recursive:true});
+const source={title:"Authored rule receiving",provenance:"Independently specified analytic control",source:{widthMm:200,heightMm:100,
+  corners:[{x:0,y:0},{x:400,y:0},{x:400,y:200},{x:0,y:200}]},landmarks:[
+  {id:"guide",label:"Guide",kind:"fraction",sourcePx:{x:40,y:100},toleranceMm:2},
+  {id:"center",label:"Center",kind:"fraction",sourcePx:{x:200,y:100},toleranceMm:2}]};
+const observation=createObservation(source,{id:"check",landmarkId:"guide",label:"Analytic fixed-left reference",evidenceClass:"authored-example",widthMm:400,heightMm:150,xMm:20,yMm:75,uncertaintyMm:.01});
+await writeFile(out+"/source.json",JSON.stringify(source));await writeFile(out+"/observations.json",JSON.stringify(exportEvidence(source,[observation])));
+const oldPractice=placePractice(source,400,150,createPractice(source,400,150),"guide",{xMm:40,yMm:75});await writeFile(out+"/old-practice.json",JSON.stringify(oldPractice));
+const server=createAppServer();await new Promise(ok=>server.listen(0,"127.0.0.1",ok));const base="http://127.0.0.1:"+server.address().port;
+const report={course:"evidence-conditioned rule choice into actual practice",evidence:"authored analytic observations",tests:[],result:"FAIL"},errors=[],offsite=[];let browser;
+const record=name=>report.tests.push(name);
+try{
+  browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY||"/usr/local/bin/google-chrome",headless:true,args:["--no-sandbox","--disable-dev-shm-usage","--disable-extensions"]});report.browser=await browser.version();
+  const page=await browser.newPage();function watch(p){p.on("pageerror",e=>errors.push(String(e)));p.on("request",r=>{if(!r.url().startsWith(base+"/")&&!r.url().startsWith("blob:"))offsite.push(r.url());});}watch(page);
+  await page.setViewport({width:1440,height:1000,deviceScaleFactor:1});await page.goto(base+"/",{waitUntil:"networkidle0"});
+  await (await page.$("#demoFile")).uploadFile(out+"/source.json");await page.waitForFunction(()=>document.querySelector("#demoLabel").textContent.includes("Authored rule receiving"));
+  await (await page.$("#observationFile")).uploadFile(out+"/observations.json");await page.waitForFunction(()=>document.querySelector("#evidenceStatus").textContent.includes("Imported 1"));
+  await page.$eval("#widthMm",e=>{e.value="400";e.dispatchEvent(new Event("change",{bubbles:true}));});await page.$eval("#heightMm",e=>{e.value="150";e.dispatchEvent(new Event("change",{bubbles:true}));});
+  await page.click("#reviewRuleChoices");await page.waitForSelector('#ruleChoices select[data-mark="guide"]');
+  assert.match(await page.$eval("#evidenceMeta",e=>e.textContent),/1 retained observation/);record("maintained workbench hands off its actual source, observation anchors and target dimensions");
+  assert.equal(await page.$eval("#practiceChosen",e=>e.disabled),true);
+  assert.equal(await page.$eval('[data-mark="center"] option[value="left"]',e=>e.disabled),true);
+  assert.equal(await page.$eval('[data-mark="guide"] option[value="fraction"]',e=>e.disabled),true);
+  await page.select('[data-mark="guide"]',"left");assert.match(await page.$eval("#targetChanges",e=>e.textContent),/20.0 mm change/);
+  assert.equal(await page.$eval("#practiceChosen",e=>e.disabled),true);record("contradicted and untested choices are unavailable; explicit surviving choice changes the target by 20 mm");
+  await page.click("#acknowledge");assert.equal(await page.$eval("#practiceChosen",e=>e.disabled),false);
+  await page.$eval("#widthMm",e=>{e.value="420";e.dispatchEvent(new Event("input",{bubbles:true}));});assert.equal(await page.$eval("#acknowledge",e=>e.checked),false);
+  assert.match(await page.$eval("#targetChanges",e=>e.textContent),/22.0 mm change/);record("changing the proposed target invalidates prior confirmation and recomputes positions");
+  await page.$eval("#widthMm",e=>{e.value="400";e.dispatchEvent(new Event("input",{bubbles:true}));});
+  await page.evaluate(()=>{const original=URL.createObjectURL.bind(URL);URL.createObjectURL=blob=>{if(blob.type==="application/json")window.__download=blob;return original(blob);};});
+  await page.click("#saveDecision");const bundle=await page.evaluate(async()=>JSON.parse(await window.__download.text()));
+  assert.equal(bundle.originalDemo.landmarks[0].kind,"fraction");assert.equal(bundle.adoptedDemo.landmarks[0].edge,"left");assert.equal(bundle.observationEvidence.observations.length,1);
+  assert.equal(bundle.practiceSetup.widthMm,400);assert.equal(bundle.practiceSetup.heightMm,150);
+  await writeFile(out+"/decision.json",JSON.stringify(bundle));record("decision export preserves original source and evidence alongside the deliberately changed rule");
+  await page.screenshot({path:out+"/desktop-decision.png",fullPage:true});
+  const forged=structuredClone(bundle);forged.adoptedDemo.landmarks[0].edge="right";await writeFile(out+"/forged-derived.json",JSON.stringify(forged));
+  await page.$eval("#widthMm",e=>{e.value="530";e.dispatchEvent(new Event("input",{bubbles:true}));});
+  await (await page.$("#decisionFile")).uploadFile(out+"/forged-derived.json");await page.waitForFunction(()=>document.querySelector("#status").textContent.includes("recomputed"));
+  assert.equal(await page.$eval('[data-mark="guide"]',e=>e.value),"left");assert.match(await page.$eval("#targetChanges",e=>e.textContent),/Proposed \(20.0, 75.0\)/);
+  assert.equal(await page.$eval("#widthMm",e=>Number(e.value)),400);
+  record("reopening recomputes the derived source instead of trusting a forged saved result");
+  const stale=structuredClone(bundle);stale.originalDemo.source.widthMm=201;await writeFile(out+"/stale.json",JSON.stringify(stale));
+  await (await page.$("#decisionFile")).uploadFile(out+"/stale.json");await page.waitForFunction(()=>document.querySelector("#error").textContent.includes("refused"));
+  assert.equal(await page.$eval('[data-mark="guide"]',e=>e.value),"left");record("stale source anchors are refused without replacing the accepted decision");
+  await page.click("#exampleAmbiguous");await page.select('[data-mark="guide"]',"left");
+  assert.match(await page.$eval("#decisionSummary",e=>e.textContent),/retain unresolved alternatives/);
+  await page.click("#saveDecision");const ambiguous=await page.evaluate(async()=>JSON.parse(await window.__download.text()));
+  assert.equal(ambiguous.adoptedDemo.interpretationDecision.decisions[0].compatibleRules.length,5);record("choosing among five compatible rules retains and displays the ambiguity");
+  await (await page.$("#decisionFile")).uploadFile(out+"/decision.json");await page.waitForFunction(()=>document.querySelector("#sourceTitle").textContent==="Authored rule receiving");
+  const contradiction=createObservation(source,{...observation,id:"conflict",xMm:90});await writeFile(out+"/contradiction.json",JSON.stringify(exportEvidence(source,[observation,contradiction])));
+  await (await page.$("#evidenceFile")).uploadFile(out+"/contradiction.json");await page.waitForFunction(()=>document.querySelector("#ruleChoices").textContent.includes("Every tested rule is contradicted"));
+  assert.equal(await page.$eval("#practiceChosen",e=>e.disabled),true);record("a conflicting observation removes every viable rule and disables adoption");
+  await (await page.$("#decisionFile")).uploadFile(out+"/decision.json");await page.waitForFunction(()=>document.querySelector('[data-mark="guide"]').value==="left");
+  await page.click("#acknowledge");await page.click("#practiceChosen");await page.waitForSelector('.practice-goal[data-mark="guide"]');
+  const target=await page.$eval('.practice-goal[data-mark="guide"]',e=>{const sheet=document.querySelector("#practiceSvg .sheet-target");return (Number(e.getAttribute("cx"))-Number(sheet.getAttribute("x")))/Number(sheet.getAttribute("width"))*400;});
+  assert.ok(Math.abs(target-20)<1e-8);assert.equal(await page.$$eval(".placed-point",e=>e.length),0);
+  record("actual complete-task practice receives the 20 mm chosen-rule target and starts with no prior placements");
+  await (await page.$("#openPractice")).uploadFile(out+"/old-practice.json");await page.waitForFunction(()=>document.querySelector("#practiceError").textContent.includes("rules"));
+  assert.equal(await page.$$eval(".placed-point",e=>e.length),0);record("original-rule practice placements cannot be reinterpreted as attempts against the new rule");
+  const mobile=await browser.newPage();watch(mobile);await mobile.setViewport({width:390,height:844,deviceScaleFactor:1});await mobile.goto(base+"/rule-adoption",{waitUntil:"networkidle0"});
+  await mobile.click("#exampleUnique");await mobile.select('[data-mark="guide"]',"left");assert.ok(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+  await mobile.screenshot({path:out+"/mobile-decision.png",fullPage:true});record("390px mobile view supports deliberate choice without document overflow");
+  assert.deepEqual(errors,[]);assert.deepEqual(offsite,[]);record("no browser exceptions or offsite requests");report.result="PASS";
+}catch(error){report.failure=String(error.stack||error);throw error;}
+finally{report.errors=errors;report.offsite=offsite;await writeFile(out+"/browser-receipt.json",JSON.stringify(report,null,2)+"\n");console.log(JSON.stringify(report,null,2));if(browser)await browser.close();await new Promise(ok=>server.close(ok));}

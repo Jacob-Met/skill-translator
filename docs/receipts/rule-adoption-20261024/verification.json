@@ -1,0 +1,48 @@
+{
+  "baseCommit": "511e0936b470e83ec34b7dd4964e5c7ffedd7b45",
+  "dateUtc": "2026-10-24",
+  "scope": "Explicit evidence-conditioned rule choice into maintained practice",
+  "environment": {
+    "node": "22.23.4",
+    "browser": "Chrome/156.0.8078.47",
+    "execution": "Isolated temporary candidate directory on authorized Linux QA host"
+  },
+  "checks": [
+    {
+      "command": "node --test test/*.test.mjs",
+      "passed": 84,
+      "failed": 0
+    },
+    {
+      "command": "node tools/browser-rule-adoption.mjs",
+      "passedGroups": 12,
+      "failed": 0,
+      "receipt": "browser-receipt.json"
+    },
+    {
+      "command": "node tools/browser-smoke.mjs",
+      "passedGroups": 14,
+      "failed": 0
+    }
+  ],
+  "sourceSha256": {
+    "src/rule-adoption.mjs": "2aa95a0195623c99cb5152b87ec6ed2a634e5ab44a24c829f9b0d460d149dd9e",
+    "test/rule-adoption.test.mjs": "3ad073dc935b17c8ab081a9799810be863dae8afc6331dc43b799a3ebf86f9be",
+    "web/rule-adoption.html": "eb31fb06ed893e07e2a3c7d9c8ce05ac265327226f87123f950ae355b6235924",
+    "web/rule-adoption.mjs": "7ca3c783c32d8c864d31180992c3ebba5e659d53bd80f7505957802931a58211",
+    "web/rule-adoption.css": "476301722de224c981077aec63fb8166521c2439d0e7ab4fe8a805c4dcbe4502",
+    "tools/browser-rule-adoption.mjs": "fe2e31cf302517916df69d1d85ba1df0fb177e04cc5a5491665aa7ffc027fee7",
+    "server.mjs": "7acb5fc97a57e6e9e8f902addee45d62567650561883e4f21f10e615d00299fa",
+    "test/server.test.mjs": "4300c4a7a9114e027d50934532fd0e9ed8a77927dbc353f2ae1361a387836ae6",
+    "web/index.html": "e7ed8df9848aac8a1d08cc7102def30a666311f4f13119ace302f44c5e5cc442",
+    "web/app.mjs": "b0a7105923cbad8a24b61a1d85cf19877346e23fe4752ae740f9bd42378bf24e"
+  },
+  "visualInspection": "Desktop and 390px mobile screenshots inspected; controls and comparisons are legible, with no document overflow.",
+  "evidence": "Authored analytic observations; no physical learner or expert performance evidence.",
+  "limitations": [
+    "Compatibility is conditional on original calibration and supplied measurement bounds.",
+    "Only the maintained five-rule family is compared; unobserved marks retain their original annotation.",
+    "Ambiguous survivors remain unresolved even after a user chooses one.",
+    "No cloud deployment, physical execution, contest qualification or learning transfer is established."
+  ]
+}

@@ -102,3 +102,13 @@ The residual map shows measured positions, predictions and disagreement vectors.
 The two authored controls illustrate agreement and an interior 4 mm discrepancy while the same four corners continue to fit exactly. Actual use requires separately obtained measurements; copying the page's predictions would be circular. Save both source and checks before leaving. Reopening checks requires matching dimensions, corners and source-media identity, and recomputes findings rather than trusting saved results. Invalid imports preserve the current source/check ledger. No measurements are uploaded.
 
 `node test/calibration-checks.test.mjs` runs independent analytic projective, dimension-error, interior-displacement, bounds, spatial-extent and provenance controls. `node tools/browser-calibration.mjs` exercises the real browser import/check/export loop when an existing Puppeteer installation and Chrome are supplied through `PUPPETEER_PATH` and `CHROME_BINARY`.
+
+## From observation evidence to deliberate practice
+
+Open **Review supported rule choices** in the workbench after retaining observations, or visit `/rule-adoption` and open the source and observation JSON files. The page reuses the maintained five-rule evidence analysis. Only rules compatible with observations for that mark can be selected; untested and contradicted rules remain unavailable. No rule is selected automatically. A choice among several survivors keeps those alternatives visible.
+
+Compare the original and proposed target positions, explicitly confirm the interpretation, and open a fresh round in the existing complete-task practice page. Earlier attempts stay attached to their original rules and cannot be reopened as attempts against the changed interpretation. Marks without a new selection keep their original annotation.
+
+Save a decision bundle to retain the complete original source, source-bound observations, explicit selections, and target/display settings. Reopening recomputes the derived interpretation and restores the validated practice setup; saved derived results are not trusted. The original source and the newly interpreted source can also be exported separately. Evidence compatibility is conditional on the supplied calibration and measurement bounds; it does not establish physical skill or exclude relationships outside the tested family.
+
+Verification: `node --test test/*.test.mjs` and `node tools/browser-rule-adoption.mjs` (requires Puppeteer; set `PUPPETEER_PATH` and `CHROME_BINARY` for an existing installation). The browser test exercises the actual workbench → decision → practice path, retained ambiguity, conflicting observations, source anchoring, saved setup restoration, and mobile layout using authored analytic controls.

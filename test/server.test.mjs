@@ -13,7 +13,9 @@ test("actual HTTP serves interactive app assets without internet dependencies or
       ["/src/hypotheses.mjs","text/javascript"],
       ["/src/authoring.mjs","text/javascript"],
       ["/calibration-checks","text/html"],["/web/calibration-checks.mjs","text/javascript"],
-      ["/web/calibration-checks.css","text/css"],["/src/calibration-checks.mjs","text/javascript"]
+      ["/web/calibration-checks.css","text/css"],["/src/calibration-checks.mjs","text/javascript"],
+      ["/rule-adoption","text/html"],["/web/rule-adoption.mjs","text/javascript"],
+      ["/web/rule-adoption.css","text/css"],["/src/rule-adoption.mjs","text/javascript"]
     ]){
       const r=await fetch(base+url);
       assert.equal(r.status,200,url);
