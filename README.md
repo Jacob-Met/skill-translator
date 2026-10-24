@@ -269,3 +269,8 @@ Retain up to eight alternatives with explicit authored/reported labels and dimen
 Only the declared planar patch is modeled. Tool body, handle, reach, force, friction, support stiffness, other obstacles and out-of-plane geometry remain unknown. A workpiece boundary is not automatically a forbidden zone, and containment does not establish safe use or physical task success. Decide whether full containment is relevant from actual task knowledge.
 
 Verification: `node test/contact-footprint.test.mjs` and `node tools/footprint-browser.mjs` (actual browser receiving needs the existing Puppeteer/Chrome setup).
+
+
+## Feature separation
+
+Open `/feature-clearance` to compare declared circular feature footprints across workpiece sizes. The original source and adaptation rules remain unchanged. Inspect every pair's nominal gap and minimum gap over declared placement tolerances, save/reopen the source and declarations, then hand the selected size to existing practice. This is prospective planar geometry, separate from the center-placement score and tool/edge access. See [Feature separation](docs/FEATURE_CLEARANCE.md).
