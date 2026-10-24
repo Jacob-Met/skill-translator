@@ -391,3 +391,11 @@ From the photo observation page, open **Inspect annotation bounds in a new tab**
 ## Compare declared context changes
 
 Open `/context-order` from Prerequisite rehearsal to compare complete sequential orders under imported prerequisites and explicitly authored context labels. The bounded exact solver reports one representative and the count of optimal orders, while retaining original frames and the learner’s first proposal unchanged. Save partial declarations, reopen and recompute, or export the original rehearsal. Fewer declared context changes does not establish physical efficiency, readiness, completion or learning. See [the context-order model](docs/CONTEXT_ORDER_MODEL.md) for assumptions and receiving.
+
+## Compare declared future workpiece sizes
+
+At `/affine-candidates`, open retained raw demonstration training, declare a target and up to six candidate sizes with prospective coordinate bounds, then compare their worst remaining target ambiguity under a shared on-sheet reading. Exact coefficient geometry preserves the original training and reports x/y values separately, including finite-list Pareto tradeoffs. Impossible on-sheet candidates and unavailable calculations are distinct from zero ambiguity.
+
+Choose a candidate explicitly and declare that future readings were not used to choose it before saving a raw prospective plan. Save the comparison account separately to retain every candidate and its planning bounds; actual bounds remain independently declared in the maintained raw challenge receiver. Editing inputs, changing selection or withdrawing the declaration invalidates a pending handoff.
+
+See [candidate comparison semantics and receiving](docs/AFFINE_CANDIDATES.md). These are conditional geometric comparisons, not expected information, globally optimal acquisition, physical credibility or skill-transfer qualification.
