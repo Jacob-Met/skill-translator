@@ -47,6 +47,24 @@ For two or more placements, a descriptive common-translation diagnostic separate
 
 Export the session and source annotations to reopen the same setup. Outcomes are recomputed from placements; saved verdict fields are not trusted. Sessions bind source geometry, image identity where present, transfer rules, tolerances and target dimensions. Mismatched imports are refused transactionally. Open `/practice` directly to use the authored example.
 
+## Challenge the original calibration
+
+Open **[Calibration Lab](http://127.0.0.1:8787/calibration)** from Task Space to investigate whether a rule conclusion depends on how its original source was read. Load the same source annotation JSON and exported observation JSON, or choose the clearly labeled authored example. The lab reuses the maintained perspective calibration, five rule interpretations and observation scoring.
+
+A named alternative reading can change the original sheet dimensions, its four pixel corners, and the selected landmark's pixel location. It keeps the original image identity and observation anchors unchanged. Declare whether the entry is a proposed reading or a repeated annotation; the software does not independently verify either label. The original calibration always remains in the comparison. Up to 24 alternatives can be entered for a selected source mark.
+
+Each complete `(rule, source reading)` explanation must fit **every** observation within that observation's declared measurement radius. The lab never chooses one reference dimension for one trial and another reference dimension for the next. The matrix shows which complete readings survive, which trials contradict them, and whether a tempting apparent fit would require switching the original source per trial. A rule can remain compatible under every entered reading, depend on a particular reading, or have no coherent reading. These are finite compatibility statements, not probability, votes, exhaustive uncertainty bounds or proof of expert intent.
+
+For an analytic example, an original 100 × 80 mm source has a mark at (20,30) mm. An observed mark at (20,60) mm on a 200 × 160 mm sheet agrees with fixed-left clearance under that original reading. If an explicit alternative reads the original mark at (10,30) mm, proportional position also explains the same result. Both explanations remain visible. A new result at (30,90) mm on a 300 × 240 mm sheet distinguishes them. These are authored controls; the alternative's plausibility must come from actual source evidence, not from its ability to fit the result.
+
+The next-observation search compares the **sets of predictions** from all surviving complete explanations at 16 bounded sheet-size combinations. A rule pair separates only if its closest cross-rule predictions are farther apart than twice the proposed observation radius. It does not average away alternative calibrations. If all tested sizes remain ambiguous, the lab says so. If any surviving explanation cannot fit a proposed sheet, that dimension combination is excluded. The proposal is a geometric comparison, not a physical action instruction.
+
+The original/alternative geometry and observed-placement plots follow the selected reading and trial. The lab displays annotation geometry rather than original photo pixels; use Source Studio or Task Space to inspect paired image pixels. Source annotation and observation imports are validated before replacing accepted data. Reopening a saved investigation includes its source, explicit assumptions and source-bound observations; results are recalculated rather than trusted from a saved verdict. Export the selected investigation to retain it. Switching marks retains their alternative readings during the session; a new source clears prior comparisons. No data is uploaded or persisted by the server.
+
+This investigates finite source alternatives, not a distribution over all possible calibrations. Observation dimensions, physical variability and unentered source readings may still change the outcome. Alternatives chosen after seeing the observations are exploratory; agreement is not an independent held-out validation. A single surviving rule remains a survivor within these five modeled relationships, not a demonstrated physical skill or learning benefit.
+
+The focused native course is `node --test test/calibration-evidence.test.mjs`. The actual browser course, using the same optional Puppeteer/Chrome setup as the original workbench, is `node tools/browser-calibration-evidence.mjs`. It exercises changed-source ambiguity, contradiction, rejected imports, coherent-reference enforcement, source-bound export/reopen and a fresh 390px browser.
+
 ## Source JSON contract
 
 The compact schema is illustrated by [src/demo.mjs](src/demo.mjs). Supply an object with:

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>SKILL TRANSLATOR · Calibration Lab</title>
+<link rel="stylesheet" href="/web/calibration.css">
+<script type="module" src="/web/calibration.mjs"></script>
+</head>
+<body>
+<header><a class="brand" href="/">ST <span>SKILL TRANSLATOR</span></a><a href="/">← Task Space</a></header>
+<main>
+  <section class="hero">
+    <p class="eyebrow">CALIBRATION LAB / SOURCE ASSUMPTIONS</p>
+    <h1>Does the rule survive<br>a different reading?</h1>
+    <p class="intro">A corner, a measured dimension, or the position of a mark can change an explanation. Keep those alternative readings visible, and ask each one to explain <em>every</em> observation.</p>
+    <div class="hero-actions"><button id="example" class="primary">Explore an authored example</button><span>Finite hypotheses · no probability or physical skill claim</span></div>
+  </section>
+  <section class="imports panel" aria-label="Local sources and saved investigations">
+    <label for="sourceFile">Source annotation JSON<input type="file" id="sourceFile" accept=".json,application/json"><small>Replaces source and clears this session's comparisons.</small></label>
+    <label for="observationFile">Observation JSON for this source<input type="file" id="observationFile" accept=".json,application/json"><small>Export it from Task Space, or enter observations below.</small></label>
+    <label for="investigationFile">Open a saved investigation<input type="file" id="investigationFile" accept=".json,application/json"><small>Reopens its included source, readings and observations.</small></label>
+  </section>
+  <p id="error" role="alert" hidden></p>
+  <section class="study-header">
+    <div><p class="eyebrow">YOUR EVIDENCE</p><h2 id="sourceTitle"></h2><p id="sourceSummary"></p></div>
+    <div class="study-controls"><label for="landmark">Investigate a source mark<select id="landmark"></select></label><button id="exportStudy">Export selected investigation</button></div>
+  </section>
+  <section class="columns">
+    <article class="panel">
+      <div class="panel-head"><span class="number">01</span><div><h2>Read the source again</h2><p>Alternatives leave the original annotation intact.</p></div></div>
+      <label for="readingChoice">Inspect an accepted reading<select id="readingChoice"></select></label>
+      <svg id="sourceDrawing" viewBox="0 0 520 300" role="img" aria-label="Original and selected alternative source geometry"></svg>
+      <p class="legend"><span class="key original"></span>Original geometry <span class="key alternative"></span>Selected reading</p>
+      <p id="readingCaption" class="small"></p>
+      <form id="hypothesisForm">
+        <h3>Draft an alternative reading</h3>
+        <p class="small">These values become an explicit assumption only when added. Repeated annotation is a source label, not independent verification.</p>
+        <label for="readingLabel">Name or explain this reading<input id="readingLabel" maxlength="160" required value="Alternative source reading"></label>
+        <label for="readingBasis">Origin<select id="readingBasis"><option value="proposed-reading">Proposed reading</option><option value="repeat-annotation">Repeated annotation</option></select></label>
+        <div class="field-grid">
+          <label for="sourceWidth">Source width · mm<input id="sourceWidth" type="number" min="1" max="10000" step="any" required></label>
+          <label for="sourceHeight">Source height · mm<input id="sourceHeight" type="number" min="1" max="10000" step="any" required></label>
+          <label for="sourceX">Mark x · pixels<input id="sourceX" type="number" step="any" required></label>
+          <label for="sourceY">Mark y · pixels<input id="sourceY" type="number" step="any" required></label>
+        </div>
+        <details><summary>Four source corners · pixels</summary>
+          <div class="corner-grid">
+            <label for="corner0x">Top left x<input id="corner0x" type="number" step="any" required></label><label for="corner0y">Top left y<input id="corner0y" type="number" step="any" required></label>
+            <label for="corner1x">Top right x<input id="corner1x" type="number" step="any" required></label><label for="corner1y">Top right y<input id="corner1y" type="number" step="any" required></label>
+            <label for="corner2x">Bottom right x<input id="corner2x" type="number" step="any" required></label><label for="corner2y">Bottom right y<input id="corner2y" type="number" step="any" required></label>
+            <label for="corner3x">Bottom left x<input id="corner3x" type="number" step="any" required></label><label for="corner3y">Bottom left y<input id="corner3y" type="number" step="any" required></label>
+          </div>
+        </details>
+        <div class="actions"><button class="primary" type="submit">Add source reading</button><button type="button" id="restoreDraft">Use original values</button></div>
+      </form>
+      <div id="readingList" class="records" aria-label="Accepted alternative source readings"></div>
+    </article>
+    <article class="panel">
+      <div class="panel-head"><span class="number">02</span><div><h2>Challenge it with an observation</h2><p>Every reading faces the same measured or authored results.</p></div></div>
+      <label for="trialChoice">Inspect a trial<select id="trialChoice"></select></label>
+      <svg id="trialDrawing" viewBox="0 0 520 300" role="img" aria-label="Observed placement and rule predictions for the selected source reading"></svg>
+      <p id="trialCaption" class="small"></p>
+      <form id="observationForm">
+        <h3>Add an observed result</h3>
+        <label for="obsLabel">Source or trial name<input id="obsLabel" maxlength="160" value="Authored comparison" required></label>
+        <label for="obsClass">Evidence origin<select id="obsClass"><option value="authored-example">Authored example</option><option value="reported-measurement">Reported measurement</option></select></label>
+        <div class="field-grid">
+          <label for="obsWidth">Sheet width · mm<input id="obsWidth" type="number" min="1" max="10000" step="any" required></label>
+          <label for="obsHeight">Sheet height · mm<input id="obsHeight" type="number" min="1" max="10000" step="any" required></label>
+          <label for="obsX">Observed x · mm<input id="obsX" type="number" min="0" step="any" required></label>
+          <label for="obsY">Observed y · mm<input id="obsY" type="number" min="0" step="any" required></label>
+        </div>
+        <label for="obsRadius">Measurement uncertainty radius · mm<input id="obsRadius" type="number" min="0" max="1000" step="any" value="0.5" required></label>
+        <p class="small">This circle describes the entered result. It does not cover every possible calibration or physical variability.</p>
+        <button class="primary" type="submit">Add observation</button>
+      </form>
+      <div id="observationList" class="records" aria-label="Original source-bound observations"></div>
+    </article>
+  </section>
+  <section class="panel results">
+    <div class="panel-head"><span class="number">03</span><div><h2>Which explanations still work?</h2><p>A rule needs one complete source reading that fits all observations. Passing counts are not votes or confidence.</p></div></div>
+    <p id="summary" role="status" aria-live="polite"></p>
+    <div id="ruleCards" class="rule-cards"></div>
+    <div class="table-scroll"><table><caption>Each source reading tested against every observation for the selected mark</caption><thead><tr><th scope="col">Source reading</th><th scope="col">Proportional</th><th scope="col">Left clearance</th><th scope="col">Right clearance</th><th scope="col">Top clearance</th><th scope="col">Bottom clearance</th></tr></thead><tbody id="matrix"></tbody></table></div>
+    <div class="next-observation"><div><p class="eyebrow">NEXT COMPARISON</p><h3>Find a variation that separates the remaining explanations</h3><p id="proposal" aria-live="polite"></p></div><label for="planRadius">Expected observation radius · mm<input id="planRadius" type="number" min="0" max="1000" step="any" value="0.5"></label></div>
+    <p class="small boundary">Results cover only the entered finite readings and five rule types. A rule may survive all entered readings yet fail under an untested calibration. The proposed dimensions compare geometry; they do not establish expert intent, physical feasibility, safe action or skill learning.</p>
+  </section>
+</main>
+<footer>All input stays in this browser session. Explicitly export to keep it. Source hypotheses preserve the original evidence; no model or cloud service is called.</footer>
+</body>
+</html>
