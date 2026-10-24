@@ -129,6 +129,11 @@ const routes=Object.freeze({
   "/decision-clarification":["web/decision-clarification.html","text/html; charset=utf-8"],
   "/web/decision-clarification.mjs":["web/decision-clarification.mjs","text/javascript; charset=utf-8"],
   "/src/decision-clarification.mjs":["src/decision-clarification.mjs","text/javascript; charset=utf-8"],
+  "/cue-practice":["web/cue-practice.html","text/html; charset=utf-8"],
+  "/web/cue-practice.mjs":["web/cue-practice.mjs","text/javascript; charset=utf-8"],
+  "/web/cue-practice.css":["web/cue-practice.css","text/css; charset=utf-8"],
+  "/src/cue-practice.mjs":["src/cue-practice.mjs","text/javascript; charset=utf-8"],
+  "/web/decision-clarification.css":["web/decision-clarification.css","text/css; charset=utf-8"],
   "/decision-practice":["web/decision-practice.html","text/html; charset=utf-8"],
   "/web/decision-practice.mjs":["web/decision-practice.mjs","text/javascript; charset=utf-8"],
   "/web/decision-practice.css":["web/decision-practice.css","text/css; charset=utf-8"],
@@ -238,6 +243,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
 
 
 
