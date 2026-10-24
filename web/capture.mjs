@@ -1,8 +1,11 @@
 import {createCapture,appendCaptureMark,validateCapturedDemo} from "/src/capture.mjs";
 import {loadLocalImage,releaseImage} from "/web/image-input.mjs";
+import {loadLocalVideo,releaseVideo,capturePresentedFrame} from "/web/video-input.mjs";
+import {frameOrigin,requestedFrameTime} from "/src/frame-origin.mjs";
 const $ = id => document.getElementById(id), ns = "http://www.w3.org/2000/svg";
 const labels = ["TOP LEFT","TOP RIGHT","BOTTOM RIGHT","BOTTOM LEFT"];
 let media = null, corners = [null,null,null,null], activeCorner = 0, demo = null, loadVersion = 0, calibrationDirty = false;
+let clip=null,sourceOrigin=null,sourceFrameFile=null,frameController=null,frameBusy=false;
 function problem(message="") { $("studioError").textContent=message; $("studioError").hidden=!message; }
 function el(parent,tag,attrs={},text="") {
   const node=document.createElementNS(ns,tag);
@@ -44,8 +47,8 @@ labels.forEach((label,i)=>{
   $("cornerRows").append(row);
 });
 $("photoFile").addEventListener("change",async event=>{
-  const file=event.target.files[0];if(!file)return;const version=++loadVersion;
-  try{const loaded=await loadLocalImage(file);if(version!==loadVersion){releaseImage(loaded);return;}releaseImage(media);media=loaded;corners=[null,null,null,null];activeCorner=0;demo=null;calibrationDirty=false;clearDraft();syncCorners();$("photoIdentity").textContent=media.image.name+" · "+media.image.widthPx+" × "+media.image.heightPx+" px · SHA-256 "+media.image.sha256.slice(0,16)+"…";$("calibrationStatus").textContent="Select the four corners of the flat workpiece.";problem();render();}
+  const file=event.target.files[0];if(!file)return;const version=++loadVersion;cancelFrame();
+  try{const loaded=await loadLocalImage(file);if(version!==loadVersion){releaseImage(loaded);return;}acceptSource(loaded);}
   catch(error){if(version===loadVersion)problem("Photo refused; previous work preserved. "+error.message);}
   finally{event.target.value="";}
 });
@@ -57,7 +60,7 @@ $("captureSvg").addEventListener("click",event=>{
   problem();render();
 });
 $("applyCalibration").addEventListener("click",()=>{
-  try{if(!media)throw Error("Choose a source photo first.");const next=createCapture(media.image,corners,number("captureWidth"),number("captureHeight"),{title:$("captureTitle").value});next.landmarks=structuredClone(demo?.landmarks||[]);if(next.landmarks.length)validateCapturedDemo(next);demo=next;activeCorner=null;calibrationDirty=false;clearDraft();$("calibrationStatus").textContent="Calibration applied · "+demo.source.widthMm+" × "+demo.source.heightMm+" mm. Source points keep their pixel coordinates.";problem();render();}
+  try{if(!media)throw Error("Choose a source photo first.");const next=createCapture(media.image,corners,number("captureWidth"),number("captureHeight"),{title:$("captureTitle").value,origin:sourceOrigin,provenance:sourceOrigin?"Local clip "+sourceOrigin.clip.name+" · presented frame at "+sourceOrigin.mediaTimeSeconds.toFixed(3)+" s; human-authored calibration and relationships.":undefined});next.landmarks=structuredClone(demo?.landmarks||[]);if(next.landmarks.length)validateCapturedDemo(next);demo=next;activeCorner=null;calibrationDirty=false;clearDraft();$("calibrationStatus").textContent="Calibration applied · "+demo.source.widthMm+" × "+demo.source.heightMm+" mm. Source points keep their pixel coordinates.";problem();render();}
   catch(error){problem("Calibration refused; previous annotations preserved. "+error.message);}
 });
 for(const id of ["captureWidth","captureHeight","captureTitle"])$(id).addEventListener("input",()=>{if(demo){calibrationDirty=true;$("calibrationStatus").textContent="Measurements changed. Apply or revert these edits before adding marks or exporting.";render();}});
@@ -73,5 +76,56 @@ $("downloadCapture").addEventListener("click",()=>{
   try{if(calibrationDirty)throw Error("Apply or revert calibration edits before exporting.");validateCapturedDemo(demo);const url=URL.createObjectURL(new Blob([JSON.stringify(demo,null,2)],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download="skill-photo-annotations.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
   catch(error){problem(error.message);}
 });
-window.addEventListener("pagehide",event=>{if(!event.persisted)releaseImage(media);});
+function videoControls(){
+  $("captureFrame").disabled=!clip||frameBusy||clip.video.seeking||clip.video.readyState<2;
+  $("videoTime").disabled=!clip||frameBusy;
+  $("downloadFrame").disabled=!sourceFrameFile;
+}
+function cancelFrame(){frameController?.abort();frameController=null;frameBusy=false;videoControls();}
+function acceptSource(loaded,origin=null,frameFile=null){
+  releaseImage(media);media=loaded;sourceOrigin=origin;sourceFrameFile=frameFile;
+  corners=[null,null,null,null];activeCorner=0;demo=null;calibrationDirty=false;clearDraft();syncCorners();
+  $("photoIdentity").textContent=media.image.name+" · "+media.image.widthPx+" × "+media.image.heightPx+" px · SHA-256 "+media.image.sha256.slice(0,16)+"…"+(origin?" · source clip "+origin.clip.name+" at "+origin.mediaTimeSeconds.toFixed(3)+" s":"");
+  $("sourceBadge").textContent=origin?"VIDEO FRAME":"LOCAL FILE";
+  $("calibrationStatus").textContent="Select the four corners of the flat workpiece.";problem();render();videoControls();
+}
+$("videoSourcePanel").addEventListener("toggle",event=>document.querySelector(".studio-image-panel").classList.toggle("video-open",event.target.open));
+$("videoFile").addEventListener("change",async event=>{
+  const file=event.target.files[0];if(!file)return;const version=++loadVersion;cancelFrame();
+  try{
+    const candidate=await loadLocalVideo(file);
+    if(version!==loadVersion){releaseVideo(candidate);return;}
+    releaseVideo(clip);clip=candidate;$("clipPlayer").replaceChildren(clip.video);$("videoTime").value="0";
+    const current=clip;
+    for(const name of ["loadeddata","seeking","seeked","timeupdate","error"])clip.video.addEventListener(name,()=>{
+      if(clip!==current)return;
+      if(name==="timeupdate"||name==="seeked")if(document.activeElement!==$("videoTime")&&!frameBusy)$("videoTime").value=clip.video.currentTime.toFixed(3);
+      videoControls();
+    });
+    $("videoStatus").textContent=clip.identity.name+" · "+clip.identity.durationSeconds.toFixed(3)+" s · original clip identified locally. Seek or play to choose a moment.";
+    problem();videoControls();
+  }catch(error){if(version===loadVersion)problem("Clip refused; previous source preserved. "+error.message);}
+  finally{event.target.value="";}
+});
+$("videoTime").addEventListener("change",()=>{
+  try{if(!clip)return;if(clip.video.seeking)throw Error("Wait for the current seek to finish.");const seconds=requestedFrameTime(number("videoTime"),clip.identity.durationSeconds);clip.video.pause();clip.video.currentTime=seconds;problem();videoControls();}
+  catch(error){problem(error.message);}
+});
+$("captureFrame").addEventListener("click",async()=>{
+  if(!clip||frameBusy)return;const current=clip,version=++loadVersion,controller=new AbortController();frameController=controller;frameBusy=true;videoControls();
+  let candidate=null;
+  try{
+    const result=await capturePresentedFrame(current,number("videoTime"),{signal:controller.signal});
+    candidate=await loadLocalImage(result.file);
+    if(version!==loadVersion||clip!==current||controller.signal.aborted){releaseImage(candidate);candidate=null;return;}
+    const origin=frameOrigin(current.identity,result.requestedTimeSeconds,result.metadata,candidate.image);
+    acceptSource(candidate,origin,result.file);candidate=null;
+    $("videoStatus").textContent="Frame captured · requested "+origin.requestedTimeSeconds.toFixed(3)+" s · presented "+origin.mediaTimeSeconds.toFixed(3)+" s. Calibrate the frame below; save its PNG to pair later.";
+  }catch(error){releaseImage(candidate);if(version===loadVersion)problem("Frame refused; previous source preserved. "+error.message);}
+  finally{if(frameController===controller){frameController=null;frameBusy=false;}videoControls();}
+});
+$("downloadFrame").addEventListener("click",()=>{
+  if(!sourceFrameFile)return;const url=URL.createObjectURL(sourceFrameFile),a=document.createElement("a");a.href=url;a.download=sourceFrameFile.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+});
+window.addEventListener("pagehide",event=>{cancelFrame();clip?.video.pause();if(!event.persisted){releaseImage(media);releaseVideo(clip);}});
 render();

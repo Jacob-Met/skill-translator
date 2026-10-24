@@ -9,12 +9,20 @@
 <body>
 <header class="topbar"><a class="brand studio-home" href="/"><span class="brandmark">ST</span><span>SKILL TRANSLATOR <small>/ SOURCE STUDIO</small></span></a><a class="studio-back" href="/">Open Task Space ↗</a></header>
 <main class="studio-main">
-  <section class="studio-intro"><p class="eyebrow">A DEMONSTRATION / YOUR EVIDENCE</p><h1>Start with what you can see.</h1><p class="lead">Choose a photo of a flat workpiece, mark its corners, and describe the relationships you want to investigate.</p></section>
+  <section class="studio-intro"><p class="eyebrow">A DEMONSTRATION / YOUR EVIDENCE</p><h1>Start with what you can see.</h1><p class="lead">Choose a photo or a moment from a demonstration clip, mark the workpiece corners, and describe the relationships you want to investigate.</p></section>
   <div id="studioError" class="error" role="alert" hidden></div>
   <div class="studio-grid">
     <section class="studio-image-panel" aria-label="Original source image">
       <div class="panel-head"><h2>Your source</h2><span id="sourceBadge" class="panel-badge">LOCAL FILE</span></div>
       <label class="photo-picker" for="photoFile">Choose PNG or JPEG <span>Up to 12 MB · stays on this device</span><input id="photoFile" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg"></label>
+      <details id="videoSourcePanel" class="video-source">
+        <summary>Use a moment from a demonstration clip</summary>
+        <label for="videoFile">LOCAL MP4 OR WEBM · UP TO 128 MB<input id="videoFile" type="file" accept="video/mp4,video/webm,.mp4,.webm"></label>
+        <div id="clipPlayer"></div>
+        <div class="video-actions"><label for="videoTime">SEEK TO · SECONDS<input id="videoTime" type="number" step="0.001" min="0" value="0" disabled></label><button id="captureFrame" type="button" disabled>Use this frame</button><button id="downloadFrame" type="button" disabled>Save frame PNG ↓</button></div>
+        <p id="videoStatus" role="status">Choose a clip, then pause at a moment you want to investigate.</p>
+        <p class="input-note">The selected frame's reported time can differ from your requested time. A paused clip may advance briefly to present it. Each frame starts a new calibration; save its PNG with your annotations.</p>
+      </details>
       <div class="photo-stage"><svg id="captureSvg" viewBox="0 0 800 550" role="img" aria-label="Source photograph with calibration corners and authored marks"></svg><p id="emptyPhoto">A clear view of the whole sheet works best.</p></div>
       <p id="captureInstruction" class="studio-instruction" role="status">Choose your photograph to begin.</p>
       <p id="photoIdentity" class="source-provenance"></p>

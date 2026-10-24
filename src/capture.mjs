@@ -2,6 +2,7 @@
 // by the maintained calibration/authoring modules; interpretation stays authored.
 import {calibrate, derive, GeometryError} from "./geometry.mjs";
 import {appendAnnotation} from "./authoring.mjs";
+import {validateFrameOrigin} from "./frame-origin.mjs";
 
 export const MAX_IMAGE_BYTES = 12 * 1024 * 1024;
 export const MAX_IMAGE_PIXELS = 24_000_000;
@@ -74,14 +75,17 @@ export function createCapture(image, corners, widthMm, heightMm, details = {}) {
   calibrate(corners);
   const title = String(details.title || "Locally annotated demonstration").trim().slice(0,160);
   const provenance = String(details.provenance || "User-selected local image; human-authored calibration and relationships.").trim().slice(0,800);
-  return {title, provenance, evidenceClass:"human-annotated-local-image",
-    source:{widthMm, heightMm, corners:corners.map(p=>({x:p.x,y:p.y})), image:meta},
+  const source={widthMm, heightMm, corners:corners.map(p=>({x:p.x,y:p.y})), image:meta};
+  if(details.origin)source.origin=validateFrameOrigin(details.origin,meta);
+  return {title, provenance, evidenceClass:source.origin?"human-annotated-local-video-frame":"human-annotated-local-image",
+    source,
     landmarks:[], unknowns:["Source dimensions and relationship meanings were supplied by the annotator.",
       "A still image does not establish contact pressure, material resistance, or physical task success."]};
 }
 export function validateCapturedDemo(demo) {
   if (!demo?.source) fail("No source demonstration was supplied.");
   const meta = imageMetadata(demo.source.image);
+  if(demo.source.origin!=null)validateFrameOrigin(demo.source.origin,meta);
   if (!Array.isArray(demo.source.corners)) fail("The source calibration is missing.");
   demo.source.corners.forEach(p => inImage(p, meta));
   if (!Array.isArray(demo.landmarks)) fail("The source marks are missing.");
