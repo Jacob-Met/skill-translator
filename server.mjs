@@ -5,6 +5,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/cue-sufficiency':['web/cue-sufficiency.html','text/html; charset=utf-8'],
+  '/src/cue-sufficiency.mjs':['src/cue-sufficiency.mjs','text/javascript; charset=utf-8'],
+  '/web/cue-sufficiency.mjs':['web/cue-sufficiency.mjs','text/javascript; charset=utf-8'],
   "/relationship-rehearsal":["web/relationship-rehearsal.html","text/html; charset=utf-8"],
   "/web/relationship-rehearsal.mjs":["web/relationship-rehearsal.mjs","text/javascript; charset=utf-8"],
   "/src/relationship-rehearsal.mjs":["src/relationship-rehearsal.mjs","text/javascript; charset=utf-8"],
