@@ -11,7 +11,8 @@ const routes=Object.freeze({
   "/web/app.mjs":["web/app.mjs","text/javascript; charset=utf-8"],
   "/src/geometry.mjs":["src/geometry.mjs","text/javascript; charset=utf-8"],
   "/src/demo.mjs":["src/demo.mjs","text/javascript; charset=utf-8"],
-  "/src/hypotheses.mjs":["src/hypotheses.mjs","text/javascript; charset=utf-8"]
+  "/src/hypotheses.mjs":["src/hypotheses.mjs","text/javascript; charset=utf-8"],
+  "/src/authoring.mjs":["src/authoring.mjs","text/javascript; charset=utf-8"]
 });
 export function createAppServer(){
   return http.createServer(async(req,res)=>{

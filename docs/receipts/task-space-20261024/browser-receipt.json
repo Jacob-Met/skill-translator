@@ -9,6 +9,10 @@
     "practice toggle hides and restores source-backed targets",
     "invalid imported calibration rejected without losing the previous sample",
     "custom locally imported demonstration accepted",
+    "source click captures a provisional pixel annotation inside the page",
+    "authored physical-edge mark joins source, target and rule inspector",
+    "out-of-frame authoring attempt is refused without mutating annotations",
+    "downloaded local source JSON retains authored landmark, edge and tolerance",
     "390px mobile view renders without horizontal overflow",
     "no page exceptions or offsite requests"
   ],

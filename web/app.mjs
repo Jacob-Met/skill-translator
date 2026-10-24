@@ -1,4 +1,5 @@
-import {derive,adapt,toDisplay,fromDisplay,evaluate} from "/src/geometry.mjs";
+import {derive,adapt,toDisplay,fromDisplay,fromImage,evaluate} from "/src/geometry.mjs";
+import {appendAnnotation} from "/src/authoring.mjs";
 import {demonstration} from "/src/demo.mjs";
 import {compareInterpretations,proposeVariation} from "/src/hypotheses.mjs";
 
@@ -94,6 +95,17 @@ function markButtons(){
     div.append(b);
   });
 }
+function draftSourcePoint(){
+  const xs=$("sourceX").value.trim(),ys=$("sourceY").value.trim();
+  if(!xs||!ys)return null;
+  const p={x:Number(xs),y:Number(ys)};
+  if(!Number.isFinite(p.x)||!Number.isFinite(p.y))return null;
+  try{
+    const uv=fromImage(derived.h,p);
+    if(uv.u<0||uv.u>1||uv.v<0||uv.v>1)return null;
+    return p;
+  }catch{return null;}
+}
 function sourceDrawing(){
   const s=$("sourceSvg");s.replaceChildren();
   svgEl(s,"text",{x:24,y:32,class:"svg-label"},"OBSERVED PIXEL COORDINATES / AUTHORED");
@@ -115,6 +127,11 @@ function sourceDrawing(){
     svgEl(s,"text",{x:mark.sourcePx.x,y:mark.sourcePx.y,
       class:"mark-num"},String(i+1));
   });
+  const draft=draftSourcePoint();
+  if(draft){
+    svgEl(s,"circle",{cx:draft.x,cy:draft.y,r:16,class:"source-draft"});
+    svgEl(s,"text",{x:draft.x+17,y:draft.y-16,class:"svg-label"},"NEW MARK");
+  }
   svgEl(s,"text",{x:24,y:373,class:"svg-label"},
     "TL · TR · BR · BL  →  NORMALIZED PLANAR COORDINATES");
 }
@@ -195,6 +212,50 @@ function pointAttempt(ev){
            yMm:Math.max(0,Math.min(target.heightMm,mmPoint.yMm))};
   verdict=null;targetDrawing();feedback();
 }
+$("sourceSvg").addEventListener("click",e=>{
+  const svg=$("sourceSvg"),p=svg.createSVGPoint();
+  p.x=e.clientX;p.y=e.clientY;
+  const point=p.matrixTransform(svg.getScreenCTM().inverse());
+  const uv=fromImage(derived.h,point);
+  if(uv.u<0||uv.u>1||uv.v<0||uv.v>1){
+    error("Place a source annotation inside the pictured sheet.");
+    return;
+  }
+  $("sourceX").value=point.x.toFixed(2);
+  $("sourceY").value=point.y.toFixed(2);
+  $("annotationStatus").textContent="Source point selected: "+point.x.toFixed(1)+
+    " px right, "+point.y.toFixed(1)+" px down. Choose its explicitly authored rule.";
+  error("");sourceDrawing();
+});
+for(const id of ["sourceX","sourceY"]){
+  $(id).addEventListener("input",()=>{sourceDrawing();});
+}
+$("annotationKind").addEventListener("change",()=>{
+  $("annotationEdge").disabled=$("annotationKind").value!=="edge_offset_mm";
+});
+$("authorForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const sourcePx=draftSourcePoint();
+  if(!sourcePx){error("Supply valid source pixel coordinates inside the annotated sheet.");return;}
+  try{
+    const input={sourcePx,label:$("annotationLabel").value,
+      kind:$("annotationKind").value,edge:$("annotationEdge").value,
+      toleranceMm:Number($("annotationTolerance").value),
+      why:"Human-authored provisional task-space relationship; verify with an expert or a changed-condition demonstration."};
+    const saved=appendAnnotation(demo,input,target.widthMm,target.heightMm);
+    demo=saved.demo;derived=saved.derived;target=saved.target;selected=saved.selected;
+    resetAlternativeChoice();resetAttempt();
+    $("sourceX").value="";$("sourceY").value="";
+    $("annotationStatus").textContent="Authored annotation saved locally. Download the annotated source JSON to retain it.";
+    error("");paint();
+  }catch(err){error("New annotation refused; prior marks retained. "+err.message);}
+});
+$("downloadSource").addEventListener("click",()=>{
+  const url=URL.createObjectURL(new Blob([JSON.stringify(demo,null,2)],
+    {type:"application/json"}));
+  const link=document.createElement("a");link.href=url;link.download="skill-source-annotations.json";
+  link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+});
 $("targetSvg").addEventListener("pointerdown",e=>{
   if(!target)return;dragging=true;
   $("targetSvg").setPointerCapture(e.pointerId);
@@ -235,6 +296,8 @@ $("demoFile").addEventListener("change",async e=>{
     const next=derive(parsed);
     const nextTarget=adapt(next,Number($("widthMm").value),Number($("heightMm").value));
     demo=parsed;derived=next;target=nextTarget;selected=0;
+    $("sourceX").value="";$("sourceY").value="";
+    $("annotationStatus").textContent="Imported annotations. Click inside the source page to author another mark.";
     resetAlternativeChoice();resetAttempt();error("");paint();
   }catch(err){error("Source rejected; previous demonstration preserved. "+err.message);}
 });

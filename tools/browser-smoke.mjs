@@ -52,6 +52,7 @@ try{
   assert.match(await page.$eval("#variationIdea",el=>el.textContent),
     /Hypothetical distinguishing demonstration/);
   record("competing authored task interpretations produce distinct, inspectable geometric predictions");
+  await page.$eval("#targetSvg",el=>el.scrollIntoView({block:"center"}));
   const loc=await page.$eval("#targetSvg .goal.selected",el=>{
     const svg=el.ownerSVGElement,p=svg.createSVGPoint();
     p.x=Number(el.getAttribute("cx"));p.y=Number(el.getAttribute("cy"));
@@ -88,6 +89,43 @@ try{
   await input.uploadFile(out+"/valid-input.json");
   assert.match(await page.$eval("#demoLabel",el=>el.textContent),/Custom imported/);
   record("custom locally imported demonstration accepted");
+  await page.$eval("#sourceSvg",el=>el.scrollIntoView({block:"center"}));
+  const sourceClick=await page.$eval("#sourceSvg",el=>{
+    const p=el.createSVGPoint();p.x=330;p.y=240;
+    const q=p.matrixTransform(el.getScreenCTM());return{x:q.x,y:q.y};
+  });
+  await page.mouse.click(sourceClick.x,sourceClick.y);
+  assert.ok(Number(await page.$eval("#sourceX",el=>el.value))>0);
+  assert.equal(await page.$$eval("#sourceSvg .source-draft",els=>els.length),1);
+  record("source click captures a provisional pixel annotation inside the page");
+  await page.select("#annotationKind","edge_offset_mm");
+  await page.select("#annotationEdge","right");
+  await page.$eval("#annotationLabel",el=>{el.value="Authored right-edge guide";});
+  await page.$eval("#annotationTolerance",el=>{el.value="2.5";});
+  await page.click('#authorForm button[type="submit"]');
+  assert.equal(await page.$$eval("#markChoices button",els=>els.length),4);
+  assert.match(await page.$eval("#rule",el=>el.textContent),/FIXED CLEARANCE/);
+  assert.match(await page.$eval("#annotationStatus",el=>el.textContent),/saved locally/);
+  record("authored physical-edge mark joins source, target and rule inspector");
+  await page.screenshot({path:out+"/authored-mark.png",fullPage:true});
+  await page.$eval("#sourceX",el=>{el.value="9000";el.dispatchEvent(new Event("input",{bubbles:true}));});
+  await page.$eval("#sourceY",el=>{el.value="9000";el.dispatchEvent(new Event("input",{bubbles:true}));});
+  await page.click('#authorForm button[type="submit"]');
+  assert.match(await page.$eval("#error",el=>el.textContent),/valid source pixel coordinates/);
+  assert.equal(await page.$$eval("#markChoices button",els=>els.length),4);
+  record("out-of-frame authoring attempt is refused without mutating annotations");
+  await page.evaluate(()=>{
+    const original=URL.createObjectURL.bind(URL);
+    URL.createObjectURL=(blob)=>{window.__sourceDownloadBlob=blob;return original(blob);};
+  });
+  await page.click("#downloadSource");
+  const authored=await page.evaluate(async()=>JSON.parse(await window.__sourceDownloadBlob.text()));
+  assert.equal(authored.landmarks.length,4);
+  assert.equal(authored.landmarks.at(-1).kind,"edge_offset_mm");
+  assert.equal(authored.landmarks.at(-1).edge,"right");
+  assert.equal(authored.landmarks.at(-1).toleranceMm,2.5);
+  await writeFile(out+"/authored-source.json",JSON.stringify(authored,null,2));
+  record("downloaded local source JSON retains authored landmark, edge and tolerance");
   const mobile=await browser.newPage();watch(mobile);
   await mobile.setViewport({width:390,height:844,deviceScaleFactor:1});
   await mobile.goto(url+"/",{waitUntil:"networkidle0"});

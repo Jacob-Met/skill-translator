@@ -47,9 +47,23 @@
   <section class="workspace" aria-label="Comparison workbench">
     <article class="work-panel">
       <div class="panel-head"><span class="step">A / 01</span><h2>Annotated source</h2><span class="panel-badge">AUTHORED</span></div>
-      <svg id="sourceSvg" viewBox="0 0 520 390" aria-label="Annotated source page with numbered marks" role="img"></svg>
+      <svg id="sourceSvg" viewBox="0 0 520 390" tabindex="0" role="application" aria-label="Annotated source page with numbered marks. Click inside page to propose a new source annotation; or use the numeric coordinate fields below."></svg>
       <p class="undergraph">Four source corners establish a planar perspective transform. Each mark remains linked to its original pixel coordinate, not a presumed movement trajectory.</p>
       <p class="source-provenance" id="provenance"></p>
+      <form id="authorForm" class="author-panel">
+        <p class="eyebrow">ANNOTATE / CAPTURE A NEW RELATIONSHIP</p>
+        <p class="author-intro">Click inside the source sheet or enter its pixel location, then explicitly describe what the mark means. No geometry can reveal an unmeasured force or expert intention.</p>
+        <div class="author-grid">
+          <label for="sourceX">SOURCE X · PX<input id="sourceX" type="number" step="any" placeholder="Click source or enter x"></label>
+          <label for="sourceY">SOURCE Y · PX<input id="sourceY" type="number" step="any" placeholder="Click source or enter y"></label>
+          <label class="author-wide" for="annotationLabel">MARK NAME<input id="annotationLabel" type="text" maxlength="100" value="New alignment mark" required></label>
+          <label for="annotationKind">RULE INTERPRETATION<select id="annotationKind"><option value="fraction">Proportional position</option><option value="edge_offset_mm">Fixed physical edge clearance</option></select></label>
+          <label for="annotationEdge">PHYSICAL REFERENCE EDGE<select id="annotationEdge" disabled><option value="left">Left</option><option value="right">Right</option><option value="top">Top</option><option value="bottom">Bottom</option></select></label>
+          <label for="annotationTolerance">TOLERANCE · MM<input id="annotationTolerance" type="number" value="4" min="0.1" max="50" step="0.1"></label>
+        </div>
+        <div class="author-actions"><button class="primary" type="submit">Add authored mark</button><button id="downloadSource" type="button">Download source JSON</button></div>
+        <p id="annotationStatus" role="status" class="author-status">No new annotation placed.</p>
+      </form>
     </article>
     <article class="work-panel work-panel-target">
       <div class="panel-head"><span class="step">B / 02</span><h2>Adapted workpiece</h2><span class="panel-badge">EDITABLE</span></div>
