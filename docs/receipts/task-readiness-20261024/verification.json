@@ -1,9 +1,10 @@
 {
-  "source_base_commit": "05525d4badf6aaeeab1c9647b10f479106d773ca",
+  "source_base_commit": "1e92fba17a8b01da4c281019eadad5d6ae8e31d4",
   "native": {
     "readiness_tests": 5,
     "maintained_prerequisite_tests": 7,
-    "failures": 0
+    "failures": 0,
+    "http_environment": "Local HTTP test cannot bind 127.0.0.1 (EPERM); actual served consumer received successfully on authorized Linux browser host."
   },
   "independent_review": {
     "reviewer": "direct worker /root/experimental_earth",
@@ -23,7 +24,8 @@
   "integration": {
     "upstream_issue": 66,
     "upstream_validator": "src/prerequisite-rehearsal.mjs",
-    "requires_authorship": "upstream only"
+    "requires_authorship": "upstream only",
+    "composed_change": "Preserved PR75 response-family routes and task-readiness routes together; actual browser course rerun passed and artifact hashes unchanged."
   },
   "limitations": "Authored PNG software controls and reported observations; no physical readiness, safe operation, learned skill or physical demonstration validated."
 }

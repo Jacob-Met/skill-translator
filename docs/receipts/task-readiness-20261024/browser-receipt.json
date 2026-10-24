@@ -13,8 +13,8 @@
   "sources": [
     {
       "path": "server.mjs",
-      "sha256": "5b249821a1df1e3ff6ba0efd05839d2f3c09c6def88806d22b898e136a220108",
-      "bytes": 11422
+      "sha256": "4ec971d27b34e36f70953654134960fbb7bc91c58ce419fe763a7b99fbff9010",
+      "bytes": 11881
     },
     {
       "path": "src/authoring.mjs",

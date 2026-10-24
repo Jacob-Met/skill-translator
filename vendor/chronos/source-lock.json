@@ -1,0 +1,9 @@
+{
+  "repository": "Jacob-Met/chronos-vision",
+  "commit": "4cd60f5d9bca75065cbc4c47c3562156b1c69364",
+  "path": "app/exact-halfplanes.mjs",
+  "sha256": "3f2020d8adac92ac1b82331dd5b30964a889a85d249e81cd16bb9dbba99b1150",
+  "consumer": "src/response-family.mjs",
+  "localPath": "vendor/chronos/exact-halfplanes.mjs",
+  "modifications": "None. Exact maintained source bytes."
+}
