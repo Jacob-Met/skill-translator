@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/prerequisite-rehearsal":["web/prerequisite-rehearsal.html","text/html; charset=utf-8"],
+  "/web/prerequisite-rehearsal.mjs":["web/prerequisite-rehearsal.mjs","text/javascript; charset=utf-8"],
+  "/src/prerequisite-rehearsal.mjs":["src/prerequisite-rehearsal.mjs","text/javascript; charset=utf-8"],
+  "/web/prerequisite-rehearsal.css":["web/prerequisite-rehearsal.css","text/css; charset=utf-8"],
   "/tool-access":["web/tool-access.html","text/html; charset=utf-8"],
   "/web/tool-access.css":["web/tool-access.css","text/css; charset=utf-8"],
   "/web/tool-access.mjs":["web/tool-access.mjs","text/javascript; charset=utf-8"],
