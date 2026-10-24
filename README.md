@@ -147,3 +147,33 @@ From complete-task practice, choose **Inspect calibration sensitivity** to carry
 The method evaluates a finite deterministic set of individual and combined perturbations. These are sensitivity samples, not confidence intervals, probabilities or guaranteed error bounds. The assumptions must come from measurements or a clearly declared exploration; small sampled movement does not establish physical accuracy, lens calibration, planarity or expert intent. Use the independent calibration checks for separately measured evidence.
 
 Save the source-and-assumptions experiment to reopen it with results recomputed. Dirty assumption edits disable export until recomputed. **Return to practice** restores the original raw placements, archived rounds, view and goal visibility; the sensitivity experiment never corrects a learner's attempt. Details and receiving evidence are in [docs/CALIBRATION_SENSITIVITY.md](docs/CALIBRATION_SENSITIVITY.md).
+
+## Freeze a prospective new-workpiece challenge
+
+From Calibration Lab, choose **Plan a separate challenge** to carry the selected
+training investigation into `/challenge`. The local sessionStorage handoff is
+consumed after validation. Alternatively open an exported investigation or start
+the explicitly authored example, which offers two draft workpieces at 300×240
+and 400×320 mm. No challenge outcomes are prefilled.
+
+Add up to six new workpieces, declare expected measurement radii and explicitly
+confirm that outcomes have not been used to choose the plan. **Freeze source,
+predictions and plan** retains every complete surviving training explanation.
+Only then can separate results be entered. Challenge results never refit the
+source readings or revive a hypothesis rejected in training. One coherent source
+reading must satisfy all qualified challenges; changing readings per result is
+not allowed. Missing or imprecise results remain visible, and cannot hide a known
+contradiction established by a qualified result.
+
+Save the frozen plan before collecting results, then save plan + results to
+reopen the complete study. Imports validate before replacing accepted state and
+late file reads cannot overwrite newer edits. A worse achieved measurement radius
+is retained as insufficient precision. Source identity and collection timing are
+user-declared: files are not signed acquisition records or trusted timestamps.
+Compatibility concerns the finite offered geometric explanations, not expert
+intent, learned skill or physical safety. This page adds no cloud call or actuator.
+
+Browser receiving is provided by `tools/browser-challenge.mjs` (requires the same
+optional Puppeteer/Chrome environment as other browser courses). Its presence is
+not a passing receipt; see integration evidence for executed results.
+

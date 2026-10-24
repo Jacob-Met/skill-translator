@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-24",
+  "team": "hamon-de5a050960c6-20261023",
+  "runtime": {
+    "node": "22.23.4",
+    "chrome": "156.0.8078.47",
+    "environment": "authorized Linux RDC receiving host"
+  },
+  "githubActions": "Unavailable; no required gate bypassed",
+  "qualifiedBase": "18af31e7c33abca6135a0a75bda89db252af9c7e",
+  "sources": [
+    {
+      "path": "README.md",
+      "sha256": "4b9b626d9c3dc17df3486224cd6ac7bd2d5b1331e407406151f0016dfc58d878",
+      "baseBlob": "e1d424a8422b5dfe52487bf6f73019f7636ab6ec"
+    },
+    {
+      "path": "server.mjs",
+      "sha256": "2c359aa7e3042a8a245b7d45557777c3de02a6696f461dc98cd837d852a8d2d3",
+      "baseBlob": "8b8cd243a33f480a522c443ee45a06720d8e5e7d"
+    },
+    {
+      "path": "src/calibration-evidence.mjs",
+      "sha256": "07fbfdc81ecb8a5cc6ee9742ce3047e8055c113d280920c1e969e18483cffbf0",
+      "baseBlob": "cd97514ad7ecf1ea3d53d6cd6b48b3f2f3573bbd"
+    },
+    {
+      "path": "web/calibration.html",
+      "sha256": "ab68539c0b28458f2f3f1ee251e753d5ef1f93385324a088273a8ca93a28412f",
+      "baseBlob": "aa59af349c98daa6de7eb477ee82124757e18f2f"
+    },
+    {
+      "path": "web/calibration.mjs",
+      "sha256": "46c8b3f1049d1094c716367a2565c4c05fa69cca22284844950aa25dc005d454",
+      "baseBlob": "991ca4181015f6fb23325353b19e58617785434e"
+    },
+    {
+      "path": "src/calibration-challenge.mjs",
+      "sha256": "ab4ab980486936a8f65e4535204e30c16d12475c5c83f7edad16776dc08b21b7",
+      "baseBlob": null
+    },
+    {
+      "path": "test/calibration-challenge.test.mjs",
+      "sha256": "2a197600a6592b9deab93824737435edde7f56627a247a2651b372721f405b8a",
+      "baseBlob": null
+    },
+    {
+      "path": "tools/browser-challenge.mjs",
+      "sha256": "f90a3c69a3190a8d9bf50755046610dffb010689fd81f8e83d5e26a6939aa638",
+      "baseBlob": null
+    },
+    {
+      "path": "web/challenge.css",
+      "sha256": "ed3053354fbdf9cc7029b56baeec4dd7be0f5d0ad76414c6af01829baea289c4",
+      "baseBlob": null
+    },
+    {
+      "path": "web/challenge.html",
+      "sha256": "36c0a6bb68102a857aecb60535c6c7bf138c28447ddfb284374b5671f70baf54",
+      "baseBlob": null
+    },
+    {
+      "path": "web/challenge.mjs",
+      "sha256": "f83168b7f5b9df81b8ce6fb06ddb3f639db1974a87219452ec5963845ab03221",
+      "baseBlob": null
+    }
+  ],
+  "native": {
+    "passed": 127,
+    "failed": 0,
+    "skipped": 0,
+    "log": "/tmp/de5a-skill-challenge-native.log"
+  },
+  "browser": {
+    "course": "prospective new-workpiece challenge",
+    "tests": [
+      "actual calibration handoff retains training and admits no outcome before freeze",
+      "authored two-workpiece plan requires explicit declaration and freezes exact explanations",
+      "tampered prediction import refuses atomically without replacing the frozen plan",
+      "separate result discriminates without refit; worse precision stays retained and unqualified",
+      "saved plan+results reopen from inputs and recompute precision status",
+      "both qualified separate outcomes retain one coherent rule without changing the frozen plan",
+      "known qualified contradiction remains decisive beside missing and imprecise results",
+      "late file completion cannot overwrite a newer user action",
+      "fresh390px page freezes authored plan with no horizontal overflow and keyboard focus"
+    ],
+    "errors": [],
+    "offsite": [],
+    "browser": "Chrome/156.0.8078.47"
+  },
+  "regressions": {
+    "calibrationHypotheses": {
+      "passed": 13
+    },
+    "ruleAdoption": {
+      "passed": 13
+    },
+    "calibrationSensitivity": {
+      "passed": 8
+    },
+    "exceptions": [],
+    "externalRequests": []
+  },
+  "mobileScreenshot": {
+    "path": "challenge-390.png",
+    "sha256": "1cc1161491c3cb93839b1e3c0dcb08470ce7aba4653f36b41935be166df4fabd"
+  },
+  "review": {
+    "core": "WORLDLAW independent review",
+    "controller": "MATERIALTRUTH independent review; positive two-workpiece journey added and actually exercised",
+    "lead": "Composed README and server additively with maintained capture-editing/rule-adoption/sensitivity routes; exact base leases verified"
+  },
+  "limits": [
+    "Training and source hypotheses frozen before challenge entry",
+    "A user declaration does not attest independent acquisition or chronology",
+    "Worse achieved precision stays retained but unqualified",
+    "One retained explanation must satisfy every qualified challenge; no per-trial source switching",
+    "Finite geometry hypotheses only; no probability, physical skill or safety claim"
+  ]
+}

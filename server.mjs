@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/challenge":["web/challenge.html","text/html; charset=utf-8"],
+  "/web/challenge.html":["web/challenge.html","text/html; charset=utf-8"],
+  "/web/challenge.css":["web/challenge.css","text/css; charset=utf-8"],
+  "/web/challenge.mjs":["web/challenge.mjs","text/javascript; charset=utf-8"],
+  "/src/calibration-challenge.mjs":["src/calibration-challenge.mjs","text/javascript; charset=utf-8"],
   "/src/capture-editing.mjs":["src/capture-editing.mjs","text/javascript; charset=utf-8"],
   "/sensitivity":["web/sensitivity.html","text/html; charset=utf-8"],
   "/web/sensitivity.css":["web/sensitivity.css","text/css; charset=utf-8"],
