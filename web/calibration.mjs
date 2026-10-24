@@ -204,3 +204,11 @@ $("example").addEventListener("click",()=>action(()=>{
   readingId="example-reading";$("planRadius").value=.5;render();
 }));
 resetDraft();resetObservationDraft();render();
+
+$("challengeStudy").addEventListener("click",()=>action(()=>{
+ const bundle=exportCalibrationInvestigation(source,markId,observations,variants());
+ const analysis=analyzeCalibrationEvidence(source,markId,observations,variants());
+ if(!analysis.observations.length||!analysis.survivingRules.length)throw Error("Retain at least one training observation and surviving explanation before planning a challenge.");
+ sessionStorage.setItem("skill-translator.challenge-training",JSON.stringify(bundle));
+ location.href="/challenge";
+}));

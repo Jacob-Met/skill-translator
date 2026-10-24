@@ -74,7 +74,7 @@ appropriate for their actual rights, consent and privacy.
 canonical insertion and malformed order, stable transactional editing, invalid
 references, explicit overlaps/unknown cues and bounded saved-state admission.
 
-The current-main composition passes 120 native/HTTP cases. The maintained
+The current-main composition passes 134 native/HTTP cases. The maintained
 `tools/browser-sequence.mjs` course passes 13 behavioral groups plus a source-hash
 stability guard on actual Chrome 156.0.8078.47: real MP4/WebM decoding, PNG pixel
 and digest binding, authored steps, downloads, fresh reopening, wrong-source

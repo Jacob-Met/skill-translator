@@ -97,6 +97,21 @@ export function analyzeCalibrationEvidence(demo,landmarkId,observations,hypothes
     sensitive:rows.length>0&&rules.some(r=>r.status==="reading-sensitive")};
 }
 
+// The same complete explanations used by the investigation, projected onto one
+// new sheet. Consumers can retain these predictions before entering new results.
+export function predictCalibrationExplanations(demo,landmarkId,observations,hypotheses,widthMm,heightMm){
+  const analysis=analyzeCalibrationEvidence(demo,landmarkId,observations,hypotheses);
+  const {mark}=selected(demo,landmarkId),predictions=[];
+  for(const h of analysis.hypotheses){
+    const derived=conditioned(demo,mark,h.reading);
+    for(const candidate of h.candidates)if(candidate.status!=="contradicted"){
+      predictions.push({id:`${candidate.rule}:${h.id}`,rule:candidate.rule,hypothesisId:h.id,
+        ...predictInterpretation(derived.landmarks[0],derived.source,widthMm,heightMm,candidate.rule)});
+    }
+  }
+  return predictions;
+}
+
 // Compare complete surviving (rule, reference) explanations. The closest pair
 // between two finite prediction sets determines whether either rule can mimic
 // the other within two measurement radii. No averaging of source hypotheses.
