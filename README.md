@@ -346,3 +346,8 @@ attempt, combine different learners, or establish learning benefit.
 ## Rehearse declared prerequisites
 
 Open **Rehearse prerequisites** from Demonstration Sequence to retain reasons for step dependencies, try valid alternate orders, and inspect full or partial first attempts against the same checked source frames. [The rehearsal guide](docs/PREREQUISITE_REHEARSAL.md) explains source-bound reopening, actual browser receiving and the limits of this declared-order comparison.
+
+
+## Inspect a workpiece-response family
+
+Open `/response-family` to condition an affine geometric response on an original demonstrated mark and explicit coordinate bounds from varied workpiece sizes. Inspect the complete compatible coefficient family, unresolved dimension variation and target ranges; raw-study reopening recomputes all conclusions. The source reading and finite coefficient domain remain declared assumptions. [Method, supported workflow and limits](docs/RESPONSE_FAMILIES.md).

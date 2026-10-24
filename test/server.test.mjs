@@ -7,7 +7,7 @@ test("actual HTTP serves interactive app assets without internet dependencies or
   const base="http://127.0.0.1:"+server.address().port;
   try{
     for(const [url,type] of [
-      ["/","text/html"],["/web/styles.css","text/css"],
+      ["/","text/html"],["/response-family","text/html"],["/web/response-family.css","text/css"],["/web/response-family.mjs","text/javascript"],["/src/response-family.mjs","text/javascript"],["/vendor/chronos/exact-halfplanes.mjs","text/javascript"],["/web/styles.css","text/css"],
       ["/observe-attempt","text/html"],["/web/observe-attempt.css","text/css"],
       ["/web/observe-attempt.mjs","text/javascript"],["/src/learner-observation.mjs","text/javascript"],
       ["/rule-adoption","text/html"],["/web/rule-adoption.mjs","text/javascript"],
