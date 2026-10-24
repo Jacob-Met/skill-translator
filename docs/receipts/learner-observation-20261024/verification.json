@@ -1,22 +1,22 @@
 {
   "schema": "skill-translator.learner-observation-receiving/v1",
   "result": "PASS",
-  "testedBase": "e4f1830e600e80d17adf3f10e1f22a48cb64a30e",
+  "testedBase": "95eda27c24caf55755c4d6a024cc219aa6bc22d7",
   "sourceFiles": [
     {
       "path": "README.md",
-      "gitBlobSha": "0007e613d90f852747ef03e8e2b17a4a3b319ea6",
-      "sha256": "76b1e197cf364ab9ae37e0d35f50f0c9407a9b0af3d8d261670c48fe54dfa7ee"
+      "gitBlobSha": "3abf84074c157c15276551813b1327283678f1f3",
+      "sha256": "bc14ecc38b9f35b0108d63937f06620203d8b7eac3a245e010f4b1ba362c6933"
     },
     {
       "path": "docs/LEARNER_OBSERVATIONS.md",
-      "gitBlobSha": "8a4a2cc57753f1c15febb75efc2fcdd35dd6a35d",
-      "sha256": "bb8526a1683726b172f14882f973a37c5b3aa4a880e16d4b2e6f4ab9891cc241"
+      "gitBlobSha": "e9ceb7820cfecac7477fae6813f3be122624383d",
+      "sha256": "be385a889b45a9726f1f14fc90f224898761ff97aa72b93f8f80b9c877724055"
     },
     {
       "path": "server.mjs",
-      "gitBlobSha": "231d83b2f8ded18a4fe6626f30e736612bfe7185",
-      "sha256": "695b64bb27f1603d78cd3e11f8495d7705118f4c7f776c056f688fac4fc3a65b"
+      "gitBlobSha": "d23a6a1118b859e2d7fdd16809bfadfc869e24e9",
+      "sha256": "86c3e44726c1e331b4d53081a3e57c79b9b2e895f4f6b63566df5f53a2d8e652"
     },
     {
       "path": "src/learner-observation.mjs",
@@ -102,7 +102,7 @@
   "native": {
     "command": "npm test",
     "node": "v22.23.4",
-    "passed": 187,
+    "passed": 198,
     "failed": 0,
     "skipped": 0
   },
@@ -123,6 +123,6 @@
     "result": "PASS",
     "accountMeaning": "Separate workers using one contributor account; not separate-account approvals"
   },
-  "integration": "The maintained focused-result receiver preserves full-task photo/manual-override history and separately receives photo-backed drills. Latest demonstration sequence routes and all current relationship/review modules are preserved.",
+  "integration": "The maintained focused-result receiver preserves full-task photo/manual-override history and separately receives photo-backed drills. Latest demonstration sequence routes and all current relationship/review modules are preserved. Source-mark inspector routes and README additions are preserved; its maintained native cases are included in the 198-case receiving.",
   "scope": "Authored mathematical image controls only; evidence class remains a declaration. Raw images stay local. No physical acquisition, skill improvement or measurement-accuracy qualification is inferred."
 }

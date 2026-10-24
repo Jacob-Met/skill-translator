@@ -47,6 +47,16 @@ Use **Edit** beside an existing mark to change its pixel position, label, relati
 
 Download the revised annotations to save them. This replaces no source file automatically. Reopening a video frame's PNG checks its image identity and preserves the supplied clip/timing record; it does not re-open or verify the original video clip. As elsewhere, metadata is a supplied record, not an authenticated claim of expertise or physical success.
 
+### Inspect the pixels supporting a source mark
+
+Open `/mark-inspector` from Source Studio and pair saved annotations with their original photo or frame PNG. Select an existing mark, position a 16–512 pixel crop, and explicitly choose contrast method, polarity, threshold and area limits. The original crop is analyzed without resizing. Inspect the highlighted connected regions and choose one yourself; no component is selected automatically. Boundary-truncated and out-of-workpiece regions cannot be adopted.
+
+**Use selected region center** revises only the mark's source position, retaining its stable identity, authored relationship, tolerance, prior point and extraction decision. Download the revised source and recompute downstream investigations. A saved region can be reproduced from the paired original image. If Source Studio later changes the coordinates manually, the old inspection remains history and is not presented as verification of the new point. Up to eight decisions per mark are retained; exports share the 256 KiB source-reader limit.
+
+The detector is the exact pinned MICROVERSE `analyzePixels` implementation recorded in `vendor/microverse/source-pin.mjs`. Verify its bytes with `node tools/verify-pixel-core.mjs`; update instructions are in `vendor/microverse/README.md`. MICROVERSE retains algorithm ownership. The browser makes no external model or repository request and uploads no image bytes.
+
+This is pixel-region inspection, not automatic craft landmark recognition. Touching features can merge, local contrast can fragment broad marks, and low contrast can yield no region. A centroid is not necessarily the expert's intended point and supplies no accuracy bound or physical-success evidence.
+
 ## Choose a moment from local footage
 
 In Source Studio, expand **Use a moment from a demonstration clip** and select a local MP4 or WebM supported by your browser. Clips are limited to 128 MB, three hours and the same frame-size bounds as photos. Play, pause or enter a time, then choose **Use this frame**. A captured frame starts a new calibration; previous work remains accepted until capture succeeds. A newer photo or clip selection cancels an unfinished frame capture.
@@ -113,6 +123,7 @@ An optional real-browser QA course uses separately installed Puppeteer and Chrom
     PUPPETEER_PATH=/path/to/puppeteer node tools/browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-editing-browser.mjs
+    PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/mark-inspector-browser.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/video-browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-evidence.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-practice.mjs
