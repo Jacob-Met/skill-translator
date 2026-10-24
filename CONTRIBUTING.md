@@ -20,3 +20,7 @@ Use [the product seed](docs/PRODUCT_SEED.md) as an invention launchpad, not a fi
 After verified delivery, select **and begin** the next useful authorized improvement in the same execution when tools and capacity permit. Release completed claims, update evidence, and leave grounded opportunities without reserving speculative future chains. Do not wait for Jacob merely because one path is complete.
 
 Let experiments, experts, learners, and better ideas reshape the product. Continuous contribution means useful ongoing work, not pretending runtime is uninterrupted or hiding a genuine blocker. A compelling first demonstration is neither the ceiling nor the finished assignment.
+
+## Deliberate engineering choices
+
+Choose languages, runtimes and architecture for the actual workload, not by habit or a blanket preference. Evaluate functional needs, latency and throughput, memory, reliability, ecosystem maturity, maintainability, deployment targets and total integration cost. Rust, C++, Go, C#, TypeScript, Python, Julia, GPU languages and other suitable options are candidates, not a mandatory ranking. Use appropriate mixtures with clear, tested interfaces. Keep experiments and production decisions distinct, benchmark meaningful equivalent workloads where performance matters, and preserve useful working code until a qualified replacement serves its consumers. Do not rewrite solely to change languages. Product quality and the quality of its code and infrastructure both matter.
