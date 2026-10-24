@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/sensitivity":["web/sensitivity.html","text/html; charset=utf-8"],
+  "/web/sensitivity.css":["web/sensitivity.css","text/css; charset=utf-8"],
+  "/web/sensitivity.mjs":["web/sensitivity.mjs","text/javascript; charset=utf-8"],
+  "/src/sensitivity.mjs":["src/sensitivity.mjs","text/javascript; charset=utf-8"],
   "/rule-adoption":["web/rule-adoption.html","text/html; charset=utf-8"],
   "/web/rule-adoption.mjs":["web/rule-adoption.mjs","text/javascript; charset=utf-8"],
   "/web/rule-adoption.css":["web/rule-adoption.css","text/css; charset=utf-8"],
