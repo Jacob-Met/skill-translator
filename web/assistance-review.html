@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Before and after target help · Skill Translator</title><link rel="stylesheet" href="/web/assistance-review.css"></head>
+<body><main>
+<nav><a href="/">Skill Translator</a> / <a href="/rehearsal">Workpiece rehearsal</a></nav>
+<header><p class="eyebrow">RETAINED PRACTICE · TARGET HELP</p><h1>What had you placed before asking for help?</h1>
+<p>Compare the placements retained when targets were requested with the committed result on each workpiece. First requests and later requests remain separate.</p></header>
+<section class="input"><h2>Open a rehearsal</h2><p>Save a session from <a href="/rehearsal">workpiece rehearsal</a>, then open it here. This review uses the original action history.</p>
+<label for="openRehearsal">Rehearsal JSON (up to 1 MiB)</label> <input type="file" id="openRehearsal" accept=".json,application/json">
+<button id="saveRehearsal" type="button" disabled>Save original rehearsal</button>
+<p id="status" role="status">No rehearsal loaded.</p><p id="error" role="alert"></p></section>
+<section id="review" hidden><h2 id="summary"></h2><div id="trials"></div><section class="limits"><h2>What this record establishes</h2><ul id="limitations"></ul></section></section>
+</main><script type="module" src="/web/assistance-review.mjs"></script></body></html>

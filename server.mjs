@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/assistance-review":["web/assistance-review.html","text/html; charset=utf-8"],
+  "/src/assistance-review.mjs":["src/assistance-review.mjs","text/javascript; charset=utf-8"],
+  "/web/assistance-review.mjs":["web/assistance-review.mjs","text/javascript; charset=utf-8"],
+  "/web/assistance-review.css":["web/assistance-review.css","text/css; charset=utf-8"],
+
   "/directed-pair-region":["web/directed-pair-region.html","text/html; charset=utf-8"],
   "/web/directed-pair-region.css":["web/directed-pair-region.css","text/css; charset=utf-8"],
   "/web/directed-pair-region.mjs":["web/directed-pair-region.mjs","text/javascript; charset=utf-8"],

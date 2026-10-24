@@ -1,0 +1,66 @@
+{
+  "schema": "skill-translator-assistance-review-receipt/v1",
+  "base_commit": "32bd1af6977a7ef0cb14fec2594b6288989b0997",
+  "base_tree": "7035e2b068bcda3cb2547b002122f77b88ef54a0",
+  "source_files": {
+    "README.md": "aef0b9bdf26356bd6699bd016203d5932366340d",
+    "server.mjs": "6cb2ecb16fed2e0c1f72432248be977e08556a79",
+    "web/rehearsal.html": "bad158c01cc36cad622af568383eb96a9375c66e",
+    "src/assistance-review.mjs": "00fd9c952158f7de3c2a2e481f9ff61cd9998b5e",
+    "test/assistance-review.test.mjs": "4e8e54ea0a4cb009174240989f1140b7655a3c12",
+    "web/assistance-review.html": "e466cf0e714e7eb91574ce3bec00811f43d0f19c",
+    "web/assistance-review.css": "cf1124bb4114f9efaaf0eeefc4ac80d6a1875685",
+    "web/assistance-review.mjs": "ac9fa133867c6a5d2f5f529b5daf63c4652b9fd4",
+    "tools/browser-assistance-review.mjs": "6f8e7895fce8d7297182a866c0dadf32e04761e8",
+    "docs/ASSISTANCE_REVIEW.md": "ddcea5f5b4e83e2ee62cbb0b48748d943bde561e"
+  },
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "node": "24.19.0",
+    "tests": 437,
+    "pass": 437,
+    "fail": 0,
+    "skipped": 0,
+    "environment": "Local authorized execution including HTTP server test",
+    "receipt": "/tmp/skill-final-native.log"
+  },
+  "review": {
+    "reviewer": "Root contributor in team hamon-6770099628af-20261024",
+    "independent_native_tests": 8,
+    "passed": 8,
+    "finding": "Maximum admitted reveal history could create about60000 rows; resolved with a checkpoint selector that preserves all options and renders one table per trial.",
+    "visual": "Root inspected actual1280px and390px full-page screenshots. Tables intentionally scroll within their cards; no document overflow."
+  },
+  "browser": {
+    "device": "1ce57a80-331d-495e-8d13-fefb4dfb10ad",
+    "node": "22.23.4",
+    "chrome_binary": "/opt/google/chrome/chrome",
+    "launch": "Chrome sandbox retained; no no-sandbox environment flag",
+    "assistance": {
+      "command": "PUPPETEER_PATH=<qualified installed Puppeteer> CHROME_BINARY=/opt/google/chrome/chrome QA_OUTPUT=<isolated current receipt directory> node tools/browser-assistance-review.mjs",
+      "pass": 8,
+      "groups": [
+        "Actual rehearsal producer retained repeated first-trial requests, partial no-help commitment and uncommitted helped trial",
+        "Computed first/later snapshots with paired same-mark errors and separate newly added marks",
+        "No invented no-help snapshots and withheld uncommitted assessment",
+        "Completed original-input download and fresh reopen",
+        "Invalid action history preserved accepted review",
+        "Delayed older invalid read could not replace newer accepted review or error state",
+        "Desktop and390px table inspection and keyboard focus",
+        "Maximum2048actions/30marks/2017requests received;30rows rendered at a time"
+      ],
+      "capacity_load_and_selection_ms": 254,
+      "page_errors": 0
+    },
+    "maintained_rehearsal": {
+      "command": "PUPPETEER_PATH=<qualified installed Puppeteer> CHROME_BINARY=/opt/google/chrome/chrome RECEIPT_DIR=<isolated receipt directory> node tools/rehearsal-browser.mjs",
+      "pass": 13,
+      "page_errors": 0,
+      "offsite_requests": 0,
+      "tested_base_commit": "d069a75347592fbb8a2a7cc5de9a9f3b9d25d123"
+    },
+    "tested_base_commit": "32bd1af6977a7ef0cb14fec2594b6288989b0997",
+    "later_composition": "Final composed32bd server received through all8 actual assistance groups; all loaded client/scoring files unchanged. Maintained13-group rehearsal course passed on d069 with identical producer/client dependencies."
+  },
+  "scope": "Authored diagram controls and editable local source records. Descriptive geometric changes only; no causal teaching benefit, outside-help absence, authenticated chronology, physical skill, provider qualification or deployment claim."
+}
