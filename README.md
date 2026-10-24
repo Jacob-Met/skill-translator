@@ -177,3 +177,14 @@ Browser receiving is provided by `tools/browser-challenge.mjs` (requires the sam
 optional Puppeteer/Chrome environment as other browser courses). Its presence is
 not a passing receipt; see integration evidence for executed results.
 
+
+
+## Shared-source consistency across task marks
+
+Open `/joint-calibration`, or use **Compare marks under one source** in the Calibration Lab. Select 2–12 original marks and compare one global dimensions/corners reading at a time. Every alternative explicitly retains coordinates for every original mark, including marks outside the selected scope. Numeric controls add complete alternatives and source-bound observations; removing a row recomputes conclusions. The original annotation is never edited.
+
+The authored source-switch example demonstrates why independently supported marks can still have no coherent global reading. Its coherent control shares a 150 mm source width across both marks. The matrix exposes each reading’s per-mark surviving rules and complete-source viability. A mark keeps the same rule across all its observations. Unobserved marks remain untested; counts enumerate finite offered combinations and are not probabilities, physical validation or expert intent. The drawing shows annotation coordinates only, not original photo pixels.
+
+Open a full joint study, an existing single-mark investigation, or a source annotation followed by its observation file. Single-mark alternatives are promoted with explicit original points for the other marks and refused entirely if any other mark becomes invalid. Source and observation anchors are validated before replacement. Exported input-only studies reopen and recompute results; asynchronous imports cannot overwrite newer edits. Scope changes retain out-of-scope observations.
+
+Run the actual browser course with `PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome QA_OUTPUT=/path/to/receipts node tools/browser-joint-calibration.mjs`. It exercises the real calibration handoff, source-switch and coherent controls, numeric controls, source-bound imports, transactional refusal, delayed reads, exact reopening and a fresh 390 px keyboard flow. These are authored browser controls, not claims of physical measurement.
