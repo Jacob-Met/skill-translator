@@ -5,6 +5,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/relationships":["web/relationships.html","text/html; charset=utf-8"],
+  "/web/relationships.html":["web/relationships.html","text/html; charset=utf-8"],
+  "/web/relationships.css":["web/relationships.css","text/css; charset=utf-8"],
+  "/web/relationships.mjs":["web/relationships.mjs","text/javascript; charset=utf-8"],
+  "/src/task-relationships.mjs":["src/task-relationships.mjs","text/javascript; charset=utf-8"],
   "/sequence":["web/sequence.html","text/html; charset=utf-8"],
   "/web/sequence.html":["web/sequence.html","text/html; charset=utf-8"],
   "/web/sequence.css":["web/sequence.css","text/css; charset=utf-8"],
