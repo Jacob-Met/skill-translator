@@ -1,3 +1,4 @@
+import {requireChromiumSandbox} from './support/chromium-sandbox.mjs';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -12,7 +13,15 @@ let session=createPractice(sources[0],463,271);session=placePractice(sources[0],
 const changed=structuredClone(study);changed.demonstrations.push({id:'contradiction',annotation:annotation(421,281,88.2),evidenceClass:'authored-example',correspondenceConfirmed:true});await writeFile(out+'/contradicted.json',JSON.stringify(changed));await writeFile(out+'/bad.json','{}');
 const server=createAppServer();await new Promise(ok=>server.listen(0,'127.0.0.1',ok));const base='http://127.0.0.1:'+server.address().port;let browser;const report={tests:[],result:'FAIL'},errors=[];
 try{
- browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY||'/usr/local/bin/google-chrome',headless:true});const page=await browser.newPage();page.on('pageerror',e=>errors.push(String(e)));await page.setViewport({width:1400,height:1000});await page.goto(base+'/relationship-discovery',{waitUntil:'networkidle0'});
+ browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY||'/usr/bin/google-chrome-stable',headless:true});
+ const admissionPage=await browser.newPage();
+ try{
+  const cdp=await admissionPage.createCDPSession();
+  const sandbox=await requireChromiumSandbox({send:(method,params)=>cdp.send(method,params)});
+  await writeFile(out+'/sandbox.json',JSON.stringify(sandbox,null,2));
+ }catch(error){await writeFile(out+'/sandbox.json',JSON.stringify(error.receipt??{admitted:false,failure:String(error)},null,2));throw error;}
+ finally{await admissionPage.close();}
+ const page=await browser.newPage();page.on('pageerror',e=>errors.push(String(e)));await page.setViewport({width:1400,height:1000});await page.goto(base+'/relationship-discovery',{waitUntil:'networkidle0'});
  await (await page.$('#sources')).uploadFile(...sources.map((_,i)=>out+`/source-${i}.json`));await page.select('#evidence','authored-example');await page.click('#identities');await page.click('#analyze');await page.waitForFunction(()=>document.querySelector('#summary').textContent.includes('3 sources'));await page.click('#openFamilies');await page.waitForSelector('#familySources article');assert.match(await page.$eval('#status',e=>e.textContent),/received/);await page.select('#pair','a:b:horizontal');assert.match(await page.$eval('#inference',e=>e.textContent),/single-compatible/);assert.match(await page.$eval('#predictions',e=>e.textContent),/Proportional to width/);report.tests.push('Actual original annotation intake flows through maintained discovery to automatic fixed/proportional inference without authored pair or model entries');
  await page.$eval('#width',e=>{e.value='463';e.dispatchEvent(new Event('input'));});await page.$eval('#height',e=>{e.value='271';e.dispatchEvent(new Event('input'));});await page.click('#predict');assert.match(await page.$eval('#predictions',e=>e.textContent),/92.600/);assert.match(await page.$eval('#actualSummary',e=>e.textContent),/No actual practice/);report.tests.push('Unfamiliar target predicts92.6mm from source-conditioned width response without inventing actual practice');
  await (await page.$('#practice')).uploadFile(out+'/practice.json');await page.waitForFunction(()=>document.querySelector('#round').options.length===2);assert.match(await page.$eval('#actualSummary',e=>e.textContent),/incomplete/);await page.select('#round','1');assert.match(await page.$eval('#residuals',e=>e.textContent),/-2.000/);assert.match(await page.$eval('#actualSummary',e=>e.textContent),/outside one or more/);assert.equal(await page.$eval('#width',e=>e.disabled),true);report.tests.push('Native practice history preserves original failed point scores; prior actual90.6mm yields-2mm hypothesis residual while current round stays missing');
