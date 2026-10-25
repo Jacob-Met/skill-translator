@@ -1,9 +1,10 @@
+import {proposePathCorrespondences} from '/src/path-correspondence.mjs';
 import {mountPathTimingPlayback} from '/web/path-timing-playback.mjs';
 import {createPathTiming,inspectPathTiming} from '/src/path-timing.mjs';
 import {readTimingPath,readPathTimingBundle,makePathTimingBundle} from '/web/path-timing-input.mjs';
 import {releaseSequenceAssets} from '/web/sequence-input.mjs';
 const $=id=>document.getElementById(id);
-const state={left:null,right:null,study:null,leftAssets:new Map(),rightAssets:new Map()};let generation=0;
+const state={left:null,right:null,study:null,leftAssets:new Map(),rightAssets:new Map()};let generation=0,proposalBasis=null;
 const pending={left:null,right:null,study:null};
 const playback=mountPathTimingPlayback($('clip-playback'));
 function invalidate(){generation++;for(const kind of ['left','right','study']){pending[kind]?.abort();pending[kind]=null;}}
@@ -12,9 +13,12 @@ const fmt=value=>Number(value.toPrecision(6)).toString();
 function node(tag,text,parent){const element=document.createElement(tag);if(text!==undefined)element.textContent=text;if(parent)parent.append(element);return element;}
 function pair(list,key,value){node('dt',key,list);node('dd',value,list);}
 function render(){
+ retireProposalBasis();
  playback.update(state.study);
  $('sources').textContent=['left','right'].map((side,index)=>`${index===0?'First':'Second'}: ${state[side]?.sequence.title??'not loaded'}`).join(' · ');
  $('match-fields').disabled=!(state.left&&state.right);
+ $('proposal-fields').disabled=!(state.left&&state.right);
+ $('proposals').replaceChildren();
  $('remove').disabled=!state.study?.correspondences.length;$('save').disabled=!state.study;
  for(const side of ['left','right'])for(const end of ['from','to']){
   const select=$(side+'-'+end),prior=select.value;select.replaceChildren();
@@ -58,17 +62,54 @@ async function readFile(input,kind){
   }else{
    releaseSequenceAssets(state[kind+'Assets']);state[kind]=received.study;state[kind+'Assets']=received.assets;state.study=null;
   }
-  received=null;generation++;pending[kind]=null;render();say(kind==='study'?'Comparison reopened with both verified original frame bundles.':'Original path and frames accepted. Declare interval matches for the currently paired sources.');
+  received=null;generation++;pending[kind]=null;$('proposal-confirm').checked=false;render();say(kind==='study'?'Comparison reopened with both verified original frame bundles.':'Original path and frames accepted. Declare interval matches for the currently paired sources.');
  }catch(error){releaseReceived();if(isCurrent())say('Not accepted: '+error.message+'. Existing accepted work is unchanged.');}
  finally{if(pending[kind]===operation)pending[kind]=null;}
 }
 for(const side of ['left','right'])$(side+'-file').addEventListener('change',event=>readFile(event.target,side));
 $('study-file').addEventListener('change',event=>readFile(event.target,'study'));
+// Proposals are recomputed from the currently admitted original paths and never
+// become saved correspondences until the ordinary authored form is submitted.
+function retireProposalBasis(){if(proposalBasis!==null&&$('basis').value===proposalBasis)$('basis').value='';proposalBasis=null;}
+function clearProposals(){ retireProposalBasis();$('proposals').replaceChildren(); }
+for(const id of ['proposal-confirm','proposal-distance'])$(id).addEventListener('input',clearProposals);
+for(const side of ['left','right'])for(const end of ['from','to'])$(side+'-'+end).addEventListener('change',()=>{
+ retireProposalBasis();
+});
+$('propose').addEventListener('click',()=>{
+ clearProposals();
+ try{
+  if(!state.left||!state.right)throw Error('Open both original paths first.');
+  const raw=$('proposal-distance').value;
+  if(!raw.trim())throw Error('Supply a geometric discrepancy bound.');
+  const report=proposePathCorrespondences(state.left,state.right,{sameCoordinateFrame:$('proposal-confirm').checked,maxDistanceMm:Number(raw)}),target=$('proposals');
+  const descriptions={
+   'missing-observations':'A selected position is missing. No alignment is proposed; missing samples are not bridged.',
+   'no-alignment':'No full monotone alignment fits this bound. No interval endpoints are proposed.',
+   'endpoints-only':'No internal correspondence is forced across all admitted alignments. Endpoint intervals do not resolve the internal ambiguity.',
+   'internal-correspondences':'Internal sample correspondences shared by every admitted alignment were found.'
+  };
+  node('p',descriptions[report.status],target);
+  node('p',`${report.alignmentCount} admissible full alignments; ${report.forcedPairs.length} forced sample pairs; ${report.ambiguousPairs.length} optional pairs.`,target);
+  node('p',report.boundary,target);
+  const last=state.study?.correspondences.at(-1);
+  for(const [index,row] of report.proposals.entries()){
+   const afterLast=['left','right'].every(side=>!last||state[side].samples.findIndex(s=>s.momentId===row[side].fromMomentId)>=state[side].samples.findIndex(s=>s.momentId===last[side].toMomentId));
+   const button=node('button',`Fill proposed interval ${index+1}: ${row.left.fromMomentId} → ${row.left.toMomentId} / ${row.right.fromMomentId} → ${row.right.toMomentId}`,target);button.type='button';button.disabled=!afterLast;
+   button.addEventListener('click',()=>{
+    for(const side of ['left','right'])for(const end of ['from','to'])$(side+'-'+end).value=row[side][end+'MomentId'];
+    $('basis').value=row.basis;$('label').value='';proposalBasis=row.basis;$('label').focus();
+    say('Proposed endpoints filled. Review or change them, name the action and confirm its correspondence before adding the interval.');
+   });
+  }
+ }catch(error){say(error.message);}
+});
 $('match-form').addEventListener('submit',event=>{event.preventDefault();try{
  const row={label:$('label').value,basis:$('basis').value,left:{fromMomentId:$('left-from').value,toMomentId:$('left-to').value},right:{fromMomentId:$('right-from').value,toMomentId:$('right-to').value}};
- const accepted=createPathTiming(state.left,state.right,[...(state.study?.correspondences??[]),row]);inspectPathTiming(accepted);invalidate();state.study=accepted;render();$('label').value='';$('basis').value='';say('Corresponding interval retained.');
+ const accepted=createPathTiming(state.left,state.right,[...(state.study?.correspondences??[]),row]);inspectPathTiming(accepted);invalidate();state.study=accepted;proposalBasis=null;render();$('label').value='';$('basis').value='';say('Corresponding interval retained.');
  }catch(error){say(error.message);}});
 $('remove').addEventListener('click',()=>{if(!state.study)return;invalidate();const rows=state.study.correspondences.slice(0,-1);state.study=rows.length?createPathTiming(state.left,state.right,rows):null;render();say('Last interval removed. Original paths are retained.');});
 $('save').addEventListener('click',async()=>{if(!state.study)return;const token=generation,study=state.study;try{const blob=await makePathTimingBundle(study,state.leftAssets,state.rightAssets);if(token!==generation||study!==state.study)return;const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='demonstration-path-timing.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);say('Complete comparison and both original frame bundles downloaded.');}catch(error){if(token===generation)say(`Cannot save: ${error.message}`);}});
 addEventListener('pagehide',event=>{if(!event.persisted){invalidate();releaseSequenceAssets(state.leftAssets);releaseSequenceAssets(state.rightAssets);state.leftAssets=new Map();state.rightAssets=new Map();}});
 render();
+
