@@ -12,6 +12,8 @@ const routes=Object.freeze({
   "/web/spatial-correspondence.mjs":["web/spatial-correspondence.mjs","text/javascript; charset=utf-8"],
   '/src/path-axis.mjs':['src/path-axis.mjs','text/javascript; charset=utf-8'],
   '/web/path-axis-view.mjs':['web/path-axis-view.mjs','text/javascript; charset=utf-8'],
+  "/src/sequence-discovery.mjs":["src/sequence-discovery.mjs","text/javascript; charset=utf-8"],
+  "/web/sequence-discovery-input.mjs":["web/sequence-discovery-input.mjs","text/javascript; charset=utf-8"],
   "/relationship-families":["web/relationship-families.html","text/html; charset=utf-8"],
   "/web/relationship-families.mjs":["web/relationship-families.mjs","text/javascript; charset=utf-8"],
   "/src/relationship-families.mjs":["src/relationship-families.mjs","text/javascript; charset=utf-8"],
@@ -431,7 +433,6 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
-
 
 
 
