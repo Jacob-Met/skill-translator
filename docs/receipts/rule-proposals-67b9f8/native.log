@@ -1,0 +1,37 @@
+✔ a differently sized sheet distinguishes fixed-left clearance from four rival rules (4.542346ms)
+✔ same-size observations preserve all interpretations; repetitions do not create confidence (1.417603ms)
+✔ fractional relationship predicts a held-out size without refitting (0.717928ms)
+✔ all physical edges can be distinguished using independent analytic observations (3.387447ms)
+✔ uncertainty is a circular bound, not task tolerance or probability (1.672092ms)
+✔ mutually contradictory observations retain no candidate instead of averaging the failure away (1.228494ms)
+✔ a rule that cannot fit an observed workpiece is explicitly contradicted (3.840448ms)
+✔ next-size proposal separates surviving candidates and explicitly reports unresolved pairs (1.998733ms)
+✔ edge coincidences remain unresolved even after every bounded variation (1.122094ms)
+✔ saved observations are bound to their source geometry and mark, not just reused ids (2.848274ms)
+✔ adding another source mark does not silently erase existing evidence (0.603788ms)
+✔ photographic source anchors distinguish different images with identical geometry (1.290756ms)
+✔ malformed, duplicate, mislabeled and out-of-sheet observations fail transactionally (1.369577ms)
+✔ an observed fixed-left relationship changes the actual target while retaining unselected marks (5.045405ms)
+✔ the original source, evidence, reasons and pixel geometry remain recoverable and unchanged (1.468815ms)
+✔ a user choice among indistinguishable surviving rules preserves the unresolved alternatives (3.701483ms)
+✔ untested and contradicted rules cannot be promoted by a choice (1.26298ms)
+✔ inconsistent observations retain no usable choice rather than discarding a failure (1.713702ms)
+✔ saved decisions recompute support and derived source instead of trusting claimed output (2.926327ms)
+✔ a forged choice or stale source anchor is refused on reopening (2.817103ms)
+✔ previous practice placements cannot silently acquire the new rule targets (14.050638ms)
+✔ invalid, duplicate or unsupported choices are refused (1.299267ms)
+✔ reported evidence stays distinct and target comparison recomputes a forged derived source (1.747543ms)
+✔ a valid new interpretation remains usable when the original physical clearance cannot fit (2.063951ms)
+✔ unique proposal changes the maintained adaptation at an unfamiliar held-back size (5.875873ms)
+✔ changed observations change the proposal rather than retaining a hardcoded left rule (1.135946ms)
+✔ same-size ambiguity, contradiction and untested marks cannot become inferred choices (1.056208ms)
+✔ renamed exact numeric copies are withheld together and cannot manufacture omission stability (0.447233ms)
+✔ multi-mark proposals and omission records retain source identity and reject stale anchors (1.131244ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 106.200799

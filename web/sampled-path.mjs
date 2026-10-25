@@ -1,3 +1,4 @@
+import {showPathAxis} from '/web/path-axis-view.mjs';
 import {proposePathSummary} from '/src/path-summary.mjs';
 import {createSequencePath,importSequencePath,inspectSequencePath} from '/src/sequence-path.mjs';
 import {readSampledPathBundle,makeSampledPathBundle} from '/web/sampled-path-input.mjs';
@@ -28,7 +29,7 @@ function sourceForm(sequence,study=null){
 function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const mm=x=>x===null?'Unavailable':`${x!==0&&Math.abs(x)<.0005?x.toExponential(6):x.toFixed(3)} mm`;
 function show(study){
- const findings=inspectSequencePath(study);accepted=study;$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
+ const findings=inspectSequencePath(study);accepted=study;$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
  $('summary').textContent=`Endpoint distance: ${mm(findings.endpointDistanceMm)}. Complete sampled-path sum: ${mm(findings.sampledPathDistanceMm)}. Observed adjacent chords: ${findings.observedSegmentCount} of ${findings.segments.length}; their covered sum is ${mm(findings.coveredChordDistanceMm)}.`;
  $('segments').replaceChildren();
  for(const s of findings.segments){const row=el('tr');for(const value of [`${s.fromMomentId} → ${s.toMomentId}`,`${s.elapsedSeconds} s`,s.distanceMm===null?'Missing observation':mm(s.distanceMm),s.delta?`${mm(s.delta.xMm)}, ${mm(s.delta.yMm)}`:'Unavailable'])row.append(el('td',value));$('segments').append(row);}
@@ -79,3 +80,6 @@ $('compact-propose').addEventListener('click',()=>{
   $('compact-result').append(list,el('p',proposal.boundary));
  }catch(error){$('compact-status').textContent=`Proposal unavailable: ${error.message}`;}
 });
+
+$('infer-axis').addEventListener('click',()=>{if(!accepted)return;try{showPathAxis($('axis-result'),accepted,assets);status('Straight-axis hypothesis recomputed from original selected points; no source or criterion changed.');}catch(error){$('axis-result').replaceChildren();status(error.message);}});
+

@@ -2,6 +2,7 @@ import {demonstration} from "/src/demo.mjs";
 import {createObservation,importEvidence} from "/src/evidence.mjs";
 import {createPractice} from "/src/practice.mjs";
 import {reviewRuleChoices,createRuleAdoption,compareAdoptionTargets,exportRuleAdoption,importRuleAdoption} from "/src/rule-adoption.mjs";
+import {proposeSupportedRules} from "/src/rule-proposals.mjs";
 const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg";
 let demo=structuredClone(demonstration),observations=[],selected=new Map(),adoption=null,comparison=null,readVersion=0;
 const ruleName={fraction:"Proportional position",left:"Fixed distance from left",right:"Fixed distance from right",top:"Fixed distance from top",bottom:"Fixed distance from bottom"};
@@ -39,7 +40,11 @@ function updateDecision(){
   draw();
 }
 function render(){
-  const reviews=reviewRuleChoices(demo,observations);$("sourceTitle").textContent=demo.title||"Imported source";
+  const proposals=proposeSupportedRules(demo,observations), reviews=proposals.marks;
+  const available=proposals.proposals.filter(p=>!selected.has(p.landmarkId));
+  $("proposeRules").disabled=!available.length;
+  $("proposalSummary").textContent=`${available.length} undecided mark(s) have one supported rule. ${reviews.filter(r=>!r.proposal).length} mark(s) have no unique proposal; their original annotations remain unchanged unless you choose otherwise.`;
+  $("proposalLimits").textContent=proposals.boundary;$("sourceTitle").textContent=demo.title||"Imported source";
   $("sourceProvenance").textContent=demo.provenance||"Original source attribution not supplied";
   $("evidenceMeta").textContent=`${observations.length} retained observation(s): ${observations.filter(o=>o.evidenceClass==="reported-measurement").length} reported measurement(s), ${observations.filter(o=>o.evidenceClass==="authored-example").length} authored example(s).`;
   $("ruleChoices").replaceChildren();
@@ -48,15 +53,29 @@ function render(){
     const summary=document.createElement("p");summary.textContent=`Original: ${ruleName[review.originalRule]}. `+
       (review.status==="no-evidence"?"No observations for this mark.":review.status==="none-compatible"?"Every tested rule is contradicted.":`${review.compatibleRules.length} compatible rule(s).`);
     summary.className=review.status==="none-compatible"?"conflict":review.compatibleRules.length>1?"uncertain":"";description.append(summary);
+    if(review.proposal){
+      const explanation=document.createElement("p");explanation.className="proposal-evidence";
+      explanation.textContent=`Inferred proposal: ${ruleName[review.proposal.rule]}. `+(review.sensitivity==='retained-after-each-group-omission'?'The same unique rule remains after omitting each group of identical numeric readings.':'Unique support depends on retained readings; at least one group omission restores ambiguity or leaves no evidence.');
+      const details=document.createElement("details"),heading=document.createElement("summary");heading.textContent="Inspect omitted-reading sensitivity";details.append(heading);
+      for(const omission of review.omissions){const line=document.createElement("p");line.textContent=`Omit ${omission.omittedIds.join(', ')}: ${omission.status}; remaining rules ${omission.compatibleRules.map(r=>ruleName[r]).join(', ')} (${omission.remainingCount} reading(s)).`;details.append(line);}
+      description.append(explanation,details);
+    }
     const counts=document.createElement("p");counts.className="counts";counts.textContent=`${review.reportedCount} reported · ${review.authoredCount} authored. ${review.compatibleRules.length>1&&review.observedCount?"A choice will not resolve these alternatives.":""}`;description.append(counts);
     const select=document.createElement("select");select.dataset.mark=review.landmarkId;select.setAttribute("aria-label","Rule choice for "+review.label);
     const keep=document.createElement("option");keep.value="";keep.textContent="Keep original annotation (no new decision)";select.append(keep);
     for(const candidate of review.candidates){const option=document.createElement("option");option.value=candidate.rule;option.textContent=ruleName[candidate.rule]+" · "+candidate.status;option.disabled=candidate.status!=="compatible";select.append(option);}
-    select.value=selected.get(review.landmarkId)||"";select.addEventListener("change",()=>{readVersion++;clear();if(select.value)selected.set(review.landmarkId,select.value);else selected.delete(review.landmarkId);invalidate();updateDecision();});
+    select.value=selected.get(review.landmarkId)||"";select.addEventListener("change",()=>{readVersion++;clear();if(select.value)selected.set(review.landmarkId,select.value);else selected.delete(review.landmarkId);invalidate();render();[...$("ruleChoices").querySelectorAll("select")].find(e=>e.dataset.mark===review.landmarkId)?.focus();});
     row.append(description,select);$("ruleChoices").append(row);
   }
   updateDecision();
 }
+$("proposeRules").addEventListener("click",()=>{
+  readVersion++;clear();
+  const proposals=proposeSupportedRules(demo,observations).proposals.filter(p=>!selected.has(p.landmarkId));
+  for(const proposal of proposals)selected.set(proposal.landmarkId,proposal.rule);
+  invalidate();render();
+  $("status").textContent=`Filled ${proposals.length} editable evidence-conditioned proposal(s). Existing choices were preserved. Inspect the targets and accept the complete setup before practice.`;
+});
 function install(source,rows,choices=[]){reviewRuleChoices(source,rows);demo=structuredClone(source);observations=structuredClone(rows);selected=new Map(choices.map(c=>[c.landmarkId,c.rule]));readVersion++;invalidate();render();}
 async function openFile(event,receive){
   clear();const file=event.target.files?.[0],version=++readVersion;event.target.value="";if(!file)return;
