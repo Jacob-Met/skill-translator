@@ -1,5 +1,7 @@
 import {readFile} from 'node:fs/promises';
-import {createCueBudgetPlan,importCueBudgetPlan,recordCueBudgetReading,inspectCueBudget,CUE_BUDGET_FORMAT} from '../src/cue-budget.mjs';
+import {CUE_FORMAT} from '../src/cue-sufficiency.mjs';
+import {importCueQuestionPlan} from '../src/cue-questions.mjs';
+import {createCueBudgetPlan,importCueBudgetPlan,recordCueBudgetReading,inspectCueBudget,inspectCueEffortBudget,CUE_BUDGET_FORMAT,CUE_EFFORT_BUDGET_FORMAT} from '../src/cue-budget.mjs';
 
 // JSON goes to stdout so callers choose their own destination. No source file
 // is modified and no remote service or physical operation is invoked.
@@ -20,16 +22,24 @@ try {
   const raw=await read(path), input=raw.input??raw;
   const matching=matchingPath?await read(matchingPath):null;
   let plan;
-  if(input.format===CUE_BUDGET_FORMAT){
+  if([CUE_BUDGET_FORMAT,CUE_EFFORT_BUDGET_FORMAT].includes(input.format)){
     plan=importCueBudgetPlan(input,matching?.study??matching);
-    if(budgetText!==undefined)plan=createCueBudgetPlan(plan.study,plan.readings,Number(budgetText));
+    if(budgetText!==undefined)plan=createCueBudgetPlan(plan.study,plan.readings,Number(budgetText),plan.questionPlan??null);
   }else{
+    if(![CUE_FORMAT,'skill-translator.cue-bundle/v1','skill-translator.cue-bundle/v2'].includes(input.format))throw Error('Unsupported cue study or source-bundle version');
     if(budgetText===undefined)throw Error('Supply a remaining question budget for a new cue study');
-    plan=createCueBudgetPlan(input.study??input,input.questionReadings??[],Number(budgetText));
+    if(input.format==='skill-translator.cue-bundle/v1'&&Object.hasOwn(input,'questionPlan'))throw Error('Cue effort assumptions require the v2 source bundle');
+    const weighted=input.format==='skill-translator.cue-bundle/v2';
+    if(weighted&&!input.questionPlan)throw Error('The v2 source bundle requires its declared question plan');
+    plan=createCueBudgetPlan(input.study??input,input.questionReadings??[],Number(budgetText),weighted?input.questionPlan:null);
     if(matching!==null)plan=importCueBudgetPlan(plan,matching.study??matching);
   }
+  if(matching?.format==='skill-translator.cue-bundle/v2'){
+    const expected=importCueQuestionPlan(plan.study,matching.questionPlan);
+    if(JSON.stringify(plan.questionPlan)!==JSON.stringify(expected))throw Error('Matching source bundle has different declared effort or availability');
+  }
   if(reading)plan=recordCueBudgetReading(plan,reading);
-  const report=inspectCueBudget(plan.study,plan.readings,plan.budget);
+  const report=plan.questionPlan?inspectCueEffortBudget(plan.study,plan.readings,plan.budget,plan.questionPlan):inspectCueBudget(plan.study,plan.readings,plan.budget);
   process.stdout.write(JSON.stringify({input:plan,report},null,2)+'\n');
 } catch(error) {
   process.stderr.write('Cue-budget inspection refused: '+error.message+'\n');process.exitCode=1;

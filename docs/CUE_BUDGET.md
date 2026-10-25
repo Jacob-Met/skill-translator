@@ -72,3 +72,40 @@ reconstruction fixes it, and the explicit counterexample remains tested.
 These are authored software
 controls, not a learner study. CLI tests exercise actual file output/reopen,
 forged derived results and mismatched-source refusal.
+
+## Declared effort and unavailable cues
+
+The CLI also receives the maintained `skill-translator.cue-bundle/v2` download
+from the cue-combination workspace, including its
+`skill-translator.cue-question-plan/v1` declaration. It delegates all availability,
+integer effort (1–1000), identity and basis admission to the maintained question
+planner. No parallel declaration schema or inferred ability model is introduced.
+
+For this input, the budget is remaining declared effort (0–8000). The saved
+source-only partial plan uses `skill-translator.cue-budget/v2`, retaining the exact
+normalized question plan. The output distinguishes `worstEffort` for the partial
+policy from `completePlanEffort` for complete discrimination. An unavailable cue
+is never a new question; previously retained readings remain evidence. `--read`
+charges that cue's declared effort and refuses unavailable or unaffordable new
+readings. A source v1 bundle carrying cost assumptions, an unsupported future
+version, or a v2 plan missing its conditions is refused instead of silently
+becoming unit cost. Passing a matching v2 source bundle also checks its exact
+normalized effort/availability declarations.
+
+For two binary cues costing2 and3, budget4 can guarantee at most two labels
+using effort2 even though the complete plan requires5. After the first supplied
+reading costs2, the remaining budget2 cannot afford the other cue; the report
+preserves two possible labels and proposes no unaffordable question. Explicitly
+raising the budget can allow further investigation without rewriting readings.
+
+Reconstruction examines attainable sums of the remaining cue efforts, at most
+256 values for eight cues. It does not loop over every numeric budget value.
+Threshold-conditioned reconstruction preserves the parent's ambiguity guarantee
+when choosing a branch continuation, including weighted plateau cases.
+
+`node test/cue-budget-effort.test.mjs` adds350 independent weighted policy-frontier
+comparisons, unavailable/changed-cost controls, unit-cost parity, maximum-cost
+sparse-threshold checks, portable v2 replay and actual CLI continuation/refusals.
+These remain authored software evidence, not measurements of human effort or
+physical skill. The CLI continues to analyze source metadata; original PNG
+admission belongs to the browser's existing complete-bundle reader.
