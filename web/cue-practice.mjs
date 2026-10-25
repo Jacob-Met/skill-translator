@@ -1,10 +1,13 @@
+import {mountRevealedStepPlayback} from '/web/revealed-step-playback.mjs';
 import {createCuePractice as createDecisionPractice,importCuePractice as importDecisionPractice,recordCueAction as recordDecisionAction,inspectCuePractice as decisionPracticeFindings} from '/src/cue-practice.mjs';
 import {decisionEvidence} from '/src/decision-practice.mjs';
 import {readSequenceBundle,releaseSequenceAssets} from '/web/sequence-input.mjs';
 const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+const originalPlayback=mountRevealedStepPlayback($('revealed-step-playback'));
 let source=null,assets=new Map(),session=null,revision=0,generation=0,controller=null,busy=false,predictionDirty=false,reflectionDirty=false;
 const error=message=>{$('error').hidden=!message;$('error').textContent=message;};
 function sync(){
+  originalPlayback.update(source,session,{busy});
   $('restart').disabled=!source||busy;$('sessionFile').disabled=!source||busy;
   if(!session)return;
   const findings=decisionPracticeFindings(source,session),step=findings.steps[findings.currentIndex];

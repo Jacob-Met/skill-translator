@@ -445,3 +445,7 @@ Open **Inspect supplied narration** from the demonstration studio to pair an aut
 [Find original moments from narration](docs/narration-moment-discovery.md) explains literal cue search and explicit preview in the existing sequence studio before retaining a source frame.
 
 The Demonstration studio can inspect [original audio activity](docs/audio-activity.md), explicitly pair its container clock to the original clip, and carry selected candidates through original playback and ordinary frame capture. Fixed energy candidates retain gaps and quiet/short misses; physical meaning remains authored.
+
+## Original context after a cue-practice reveal
+
+After an explicit full reveal in single-sequence Cue request practice, pair the exact original clip and play the interval between the retained frame presentation times. Original audio starts muted. The existing first prediction, assistance chronology and saved session stay unchanged. See [Original context after a practice reveal](docs/revealed-step-playback.md).

@@ -1,1 +1,7 @@
 #cueAccount{overflow-wrap:anywhere}#cueAccount p{white-space:pre-wrap}
+
+#revealed-step-playback{margin:1rem 0;padding:1rem;border:1px solid #c9c5bb;border-radius:6px;min-width:0}
+#revealed-video-audio{width:auto;margin-right:.5rem}
+.revealed-original-video video{display:block;width:100%;max-width:100%;max-height:420px}
+#revealed-video-status{overflow-wrap:anywhere}
+#revealed-step-playback[hidden],.revealed-original-video video[hidden]{display:none}
