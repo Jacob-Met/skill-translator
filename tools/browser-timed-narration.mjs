@@ -1,0 +1,52 @@
+import {createRequire} from 'node:module';
+import {mkdir,writeFile,readFile,stat} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import assert from 'node:assert/strict';
+import {createAppServer} from '../server.mjs';
+const require=createRequire(import.meta.url),puppeteer=require(process.env.PUPPETEER_PATH||'puppeteer');
+const out=resolve(process.env.QA_OUTPUT||'/tmp/timed-narration-qa');await mkdir(out,{recursive:true});
+const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;let browser;const checks=[],errors=[];
+async function downloaded(name){const path=out+'/'+name;for(let i=0;i<100;i++){try{await stat(path);return JSON.parse(await readFile(path,'utf8'));}catch{await new Promise(r=>setTimeout(r,100));}}throw Error('Download missing: '+name);}
+async function upload(p,id,path){await(await p.$('#'+id)).uploadFile(path);}
+try{
+ browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY,headless:true,args:['--no-first-run']});const sandbox=await browser.newPage();await sandbox.goto('chrome://sandbox');const sandboxText=await sandbox.evaluate(()=>document.body.innerText);assert.match(sandboxText,/You are adequately sandboxed/i);await writeFile(out+'/sandbox.txt',sandboxText);await sandbox.close();
+ const cdp=await browser.target().createCDPSession();await cdp.send('Browser.setDownloadBehavior',{behavior:'allow',downloadPath:out});let p=await browser.newPage();p.on('pageerror',e=>errors.push(String(e)));await p.goto(url+'/timed-narration');
+ const source=await p.evaluate(async()=>{
+  const {createSequence,appendMoment,upsertStep}=await import('/src/demonstration-sequence.mjs');const {frameOrigin}=await import('/src/frame-origin.mjs');
+  const clip={name:'authored-binding.webm',mimeType:'video/webm',sizeBytes:1234,sha256:'a'.repeat(64),durationSeconds:20};let sequence=createSequence(clip,{title:'Authored narration: fold and tension'});const frames=[];
+  for(const [i,time] of [0,2,4,8].entries()){
+   const c=document.createElement('canvas');c.width=180;c.height=120;const ctx=c.getContext('2d');ctx.fillStyle='#ece4cf';ctx.fillRect(0,0,180,120);ctx.strokeStyle='#364c46';ctx.lineWidth=4;ctx.strokeRect(25+i*3,25,110,70);ctx.beginPath();ctx.moveTo(60+i*6,25);ctx.lineTo(60+i*6,95);ctx.stroke();
+   const blob=await new Promise(r=>c.toBlob(r,'image/png')),bytes=await blob.arrayBuffer(),sha256=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');
+   const image={name:'frame-'+i+'.png',mimeType:'image/png',sha256,widthPx:180,heightPx:120,pixelCoordinates:'browser-oriented'};
+   sequence=appendMoment(sequence,{id:'m'+i,label:'Authored state '+i,visibleState:'An authored geometric control, not observed physical work',image,origin:frameOrigin(clip,time,{mediaTime:time,width:180,height:120},image)});frames.push({momentId:'m'+i,pngBase64:c.toDataURL('image/png').split(',')[1]});
+  }
+  for(let i=0;i<3;i++)sequence=upsertStep(sequence,{id:'s'+i,beforeMomentId:'m'+i,afterMomentId:'m'+(i+1),title:'Stage '+i,intent:'Align the fold',sensoryCue:'Original author note',recoveryCue:'',visibleChange:''});return {format:'skill-translator.sequence-bundle/v1',sequence,frames};
+ });
+ const transcript='WEBVTT\n\nexpert\n00:00.500 --> 00:02.500\n<v Expert>Keep the fold against the guide.\nNotice the resistance.\n\nlearner\n00:01.500 --> 00:02.000\n<v Learner>Is the tension even?\n\n00:02.000 --> 00:03.000\n<v Expert>Stop if the paper begins to buckle.\n\n00:10.000 --> 00:12.000\nLater unrelated explanation.';
+ await writeFile(out+'/source.json',JSON.stringify(source));await writeFile(out+'/narration.vtt',transcript);
+ await upload(p,'source',out+'/source.json');await p.waitForFunction(()=>document.getElementById('status').textContent.includes('frames verified'));
+ await upload(p,'transcript',out+'/narration.vtt');await p.waitForFunction(()=>document.getElementById('status').textContent.includes('Transcript read'));
+ await p.type('#attribution','Authored narration control; no physical recording');await p.click('#pair');await p.waitForFunction(()=>!document.getElementById('work').hidden);
+ assert.equal(await p.$$eval('#cues input',e=>e.length),2);assert.match(await p.$eval('#cues',e=>e.textContent),/<v Expert>/);assert.equal(await p.$$eval('#cues v',e=>e.length),0);assert.equal(await p.$$eval('#frames img',e=>e.filter(i=>i.complete&&i.naturalWidth===180).length),2);checks.push('paired exact original frames and literal multi-speaker narration; half-open overlap');
+ await p.focus('#cues input');await p.keyboard.press('Space');assert.equal(await p.$eval('#export',e=>e.disabled),true);await p.click('#select');assert.match(await p.$eval('#preview',e=>e.textContent),/Original author note[\s\S]*Notice the resistance/);
+ await p.click('#save');const saved=await downloaded('timed-narration.json');assert.equal(saved.transcript,transcript);assert.deepEqual(saved.selections,[{stepId:'s0',field:'sensoryCue',cueIndices:[0]}]);
+ await p.click('#export');const narrated=await downloaded('narrated-sequence.json');assert.deepEqual(narrated.frames,source.frames);assert.deepEqual(narrated.sequence.moments,source.sequence.moments);assert.equal(source.sequence.steps[0].sensoryCue,'Original author note');checks.push('keyboard-selected quoted account and actual raw/derived downloads preserve originals');
+ await p.setViewport({width:1440,height:1000});await p.screenshot({path:out+'/desktop.png',fullPage:true});
+ const receiver=await browser.newPage();receiver.on('pageerror',e=>errors.push(String(e)));await receiver.goto(url+'/sequence');await upload(receiver,'sequence-file',out+'/narrated-sequence.json');await receiver.waitForFunction(()=>document.getElementById('status').textContent.includes('Reopened 4 verified source frames'));assert.match(await receiver.$eval('#step-detail',e=>e.textContent),/Supplied narration/);await receiver.screenshot({path:out+'/studio-received.png',fullPage:true});await receiver.close();checks.push('maintained demonstration studio receives actual narrated download with verified PNGs');
+ await p.select('#step','s2');assert.match(await p.$eval('#cues',e=>e.textContent),/No supplied narration/);await p.select('#step','s1');assert.equal(await p.$$eval('#cues input',e=>e.length),2);checks.push('spanning cue appears in both steps; silent interval stays empty');
+ await p.$eval('#offset',e=>{e.value='-1';e.dispatchEvent(new Event('input',{bubbles:true}));});assert.equal(await p.$eval('#export',e=>e.disabled),true);await p.click('#pair');await p.select('#step','s0');assert.equal(await p.$$eval('#cues input',e=>e.length),3);assert.match(await p.$eval('#alignment',e=>e.textContent),/1 cue\(s\) extend outside/);checks.push('offset changes require explicit re-pair and preserve outside-clip evidence');
+ await p.close();p=await browser.newPage();p.on('pageerror',e=>errors.push(String(e)));await p.setViewport({width:390,height:844});await p.goto(url+'/timed-narration');await upload(p,'source',out+'/source.json');await p.waitForFunction(()=>document.getElementById('status').textContent.includes('frames verified'));await upload(p,'open',out+'/timed-narration.json');await p.waitForFunction(()=>document.getElementById('status').textContent.includes('Narration reopened'));
+ assert.match(await p.$eval('#preview',e=>e.textContent),/Notice the resistance/);assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));await p.screenshot({path:out+'/narrow.png',fullPage:true});checks.push('fresh narrow reopening recomputes selected narration');
+ const bad=structuredClone(saved);bad.source.steps[0].intent='Changed';await writeFile(out+'/bad.json',JSON.stringify(bad));await upload(p,'open',out+'/bad.json');await p.waitForFunction(()=>document.getElementById('status').textContent.includes('source demonstration changed'));assert.match(await p.$eval('#preview',e=>e.textContent),/Notice the resistance/);
+ await writeFile(out+'/bad.vtt','WEBVTT\n\n00:02.000 --> 00:01.000\nInvalid');await upload(p,'transcript',out+'/bad.vtt');await p.waitForFunction(()=>document.getElementById('status').textContent.includes('must end after'));assert.match(await p.$eval('#preview',e=>e.textContent),/Notice the resistance/);checks.push('changed-source and invalid transcript refuse without replacing accepted account');
+ await writeFile(out+'/malformed-utf8.vtt',Buffer.from([0xff,0xfe]));await upload(p,'transcript',out+'/malformed-utf8.vtt');await p.waitForFunction(()=>document.getElementById('status').textContent.includes('Import refused'));assert.match(await p.$eval('#preview',e=>e.textContent),/Notice the resistance/);checks.push('malformed UTF-8 is refused without replacement');
+ await writeFile(out+'/wrong-source.vtt',transcript.replace('WEBVTT\n\n','WEBVTT\n\nNOTE CAPTIONVERSE reviewed WebVTT export\nSource SHA-256: '+'b'.repeat(64)+'\n\n'));
+ await upload(p,'transcript',out+'/wrong-source.vtt');
+ await p.waitForFunction(()=>document.getElementById('status').textContent.includes('Transcript read'));
+ await p.click('#pair');
+ await p.waitForFunction(()=>document.getElementById('status').textContent.includes('declared source digest'));
+ assert.match(await p.$eval('#preview',e=>e.textContent),/Notice the resistance/);
+ checks.push('declared CAPTIONVERSE source mismatch refuses pairing without replacing accepted account');
+ await p.evaluate(()=>{document.getElementById('open').value='';const old=File.prototype.text;File.prototype.text=function(){if(this.name==='timed-narration.json')return new Promise(resolve=>{window.releaseRead=async()=>resolve(await old.call(this));});return old.call(this);};});await upload(p,'open',out+'/timed-narration.json');await p.waitForFunction(()=>!!window.releaseRead);await p.$eval('#attribution',e=>{e.value='Newer draft';e.dispatchEvent(new Event('input',{bubbles:true}));});await p.evaluate(()=>window.releaseRead());await new Promise(r=>setTimeout(r,150));assert.equal(await p.$eval('#attribution',e=>e.value),'Newer draft');assert.equal(await p.$eval('#export',e=>e.disabled),true);checks.push('late file read cannot overwrite a newer author draft');
+ assert.deepEqual(errors,[]);await writeFile(out+'/receipt.json',JSON.stringify({checks,errors,kind:'authored browser controls; no physical recording or learning result'},null,2));console.log(checks);
+}finally{await browser?.close();await new Promise(r=>server.close(r));}

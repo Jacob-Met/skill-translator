@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Timed narration · Skill Translator</title><link rel="stylesheet" href="/web/sequence.css"><link rel="stylesheet" href="/web/timed-narration.css"></head>
+<body><header class="topbar"><a class="brand" href="/">SKILL TRANSLATOR</a><nav><a href="/sequence">Demonstration studio</a></nav></header><main>
+<section class="intro"><p class="eyebrow">THE SPOKEN ACCOUNT</p><h1>Read the explanation<br>beside the change.</h1><p class="lead">Bring a supplied WebVTT transcript beside retained demonstration frames. Choose the words that belong in the explanation; keep the original account.</p></section>
+<section class="card"><h2>Pair the source and narration</h2><label for="source">Saved demonstration with original frames</label><input id="source" type="file" accept=".json">
+<label for="transcript">Plain WebVTT transcript · up to 256 KiB</label><input id="transcript" type="file" accept=".vtt,text/vtt">
+<label for="attribution">Who supplied this transcript, and how was it obtained?</label><textarea id="attribution" maxlength="1200" rows="2" placeholder="For example: demonstrator's reviewed captions; permission to use this account"></textarea>
+<label for="offset">Timeline offset · seconds added to transcript times</label><input id="offset" type="number" step="any" min="-10800" max="10800" value="0">
+<button id="pair" disabled>Pair this supplied narration</button>
+<p class="note">Pairing is your declaration that the words belong to this clip. It does not verify a speaker, transcription accuracy or timing. Voice tags and other cue markup remain visible as literal text. Unsupported styles, regions and timestamp maps are refused.</p>
+<label for="open">Reopen saved narration record after pairing its original sequence</label><input id="open" type="file" accept=".json"></section>
+<p id="status" role="status" aria-live="polite">Open a saved demonstration to begin.</p>
+<section id="work" class="card" hidden><h2 id="title"></h2><label for="step">Authored step</label><select id="step"></select>
+<p id="range"></p><div id="frames" class="narration-frames"></div><h3>Original authored account</h3><pre id="account"></pre>
+<h3>Overlapping supplied narration</h3><p id="alignment" class="note"></p><div id="cues"></div>
+<label for="field">Append selected quotes to</label><select id="field"><option value="sensoryCue">Supplied sensory cue</option><option value="recoveryCue">Recovery account</option><option value="visibleChange">Visible-change account</option><option value="intent">Intended-result account</option></select>
+<button id="select">Retain this explicit selection</button><p class="note">Selection appends a clearly attributed quote. It never replaces the original notes. A spoken claim about feeling or force remains supplied testimony. No cue category is inferred.</p>
+<h3>Proposed account</h3><pre id="preview"></pre><p id="selections"></p><div class="actions"><button id="save">Save narration record</button><button id="export">Save separately narrated sequence</button></div>
+<p class="note">Keep both downloads. The narration record preserves exact input text, offset and selections; the separate sequence can reopen in the existing studio and decision practice. Neither file authenticates capture, expertise or physical learning.</p></section></main><script type="module" src="/web/timed-narration.mjs"></script></body></html>
