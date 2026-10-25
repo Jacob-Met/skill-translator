@@ -1,0 +1,16 @@
+{
+  "environmentalFailure": {
+    "observed": "Initial actual author-download canceled; diagnostic rerun explicitly ENOSPC while copying Chromium download. No page errors.",
+    "originalReceipts": [
+      "/tmp/skill-edge-question/browser-receipt.json",
+      "/tmp/skill-edge-question-recheck/browser-receipt.json"
+    ],
+    "resolution": "Only owned byte-identical duplicate downloads removed with SHA256 recovery map. Final bounded actual course used supported escalated dedicated /dev/shm temporary browser/output. Original code/source remained in workspace."
+  },
+  "sourceDefect": {
+    "observed": "First memory-backed run passed6groups then390px overflow assertion failed on unbroken source hashes/text.",
+    "receipt": "/tmp/skill-edge-question-memory-failure/browser-receipt.json",
+    "repair": "Scoped evidence-review overflow-wrap:anywhere on only edge lesson/author pages; final narrow receiving and screenshot reviewed."
+  },
+  "noProviderOrDeploymentClaim": true
+}

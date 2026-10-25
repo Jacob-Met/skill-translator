@@ -40,3 +40,6 @@ function replay(raw){
 export const importEdgeDecisionPractice=raw=>replay(raw).session;
 export const inspectEdgeDecisionPractice=raw=>replay(raw).findings;
 export function recordEdgeDecisionAction(raw,action){const accepted=importEdgeDecisionPractice(raw);return importEdgeDecisionPractice({...accepted,events:[...accepted.events,structuredClone(action)]});}
+
+// Transient maintained-reducer projection for composed reviewers; never export this without the complete edge exercise.
+export const edgeDecisionBasePractice=raw=>replay(raw).practice;

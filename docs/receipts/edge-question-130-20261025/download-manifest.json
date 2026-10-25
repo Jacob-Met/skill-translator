@@ -1,0 +1,35 @@
+{
+  "downloads": [
+    {
+      "path": "question-narrow.png",
+      "sha256": "ab816016e62a453371bbf8c1214620fad2ad64c32924ac15a37141041baa2b26",
+      "size": 728850
+    },
+    {
+      "path": "browser-receipt.json",
+      "sha256": "35ecec2532ce400dd283cc7b3c4de62ac79d0a005ed575177c90631cf3e71839",
+      "size": 1091
+    },
+    {
+      "path": "question-desktop.png",
+      "sha256": "9ad8c936dce39155097b5c266e27bfbfbad4db68cbee6a85622b88d7d761be63",
+      "size": 764426
+    },
+    {
+      "path": "familiar-retry.json",
+      "sha256": "005fa451b781a4d5bc26519b619b0860b06faa5ced37b2da78c009076d5abf89",
+      "size": 12624375
+    },
+    {
+      "path": "clarification.json",
+      "sha256": "aca8e467250a3f057fd410c871f4e4aae60064c8a614c03cf404e4e72bae2e33",
+      "size": 12631512
+    },
+    {
+      "path": "account-question.json",
+      "sha256": "96d0c2a217f67564c2942afe25c84ddefd6c4fb4931453556ab515f6e04178e2",
+      "size": 12625299
+    }
+  ],
+  "originalPNGs": "Complete downloaded artifacts remain in dedicated memory-backed directory; original source inputs preserved in private experiment. Metadata receipts intentionally omit duplicate PNG bytes."
+}
