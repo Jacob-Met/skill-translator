@@ -4,7 +4,7 @@ import {resolve} from 'node:path';
 import assert from 'node:assert/strict';
 import {createAppServer} from '../server.mjs';
 const require=createRequire(import.meta.url),puppeteer=require(process.env.PUPPETEER_PATH||'puppeteer');
-const out=resolve(process.env.QA_OUTPUT||'/tmp/timed-narration-qa');await mkdir(out,{recursive:true});
+const out=resolve(process.env.QA_OUTPUT||'/tmp/timed-narration-qa');await mkdir(out,{mode:0o700});
 const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;let browser;const checks=[],errors=[];
 async function downloaded(name){const path=out+'/'+name;for(let i=0;i<100;i++){try{await stat(path);return JSON.parse(await readFile(path,'utf8'));}catch{await new Promise(r=>setTimeout(r,100));}}throw Error('Download missing: '+name);}
 async function upload(p,id,path){await(await p.$('#'+id)).uploadFile(path);}

@@ -40,3 +40,5 @@ The browser course exercises original PNG validation, literal speaker text, keyb
 Subtitle admission reuses pinned CAPTIONVERSE. Recognized local-ASR and reviewed-WebVTT source declarations must match the demonstration clip digest; malformed or duplicate declarations are refused. An ordinary third-party transcript still requires explicit user association. A matching declaration is not authenticated model execution or transcript accuracy.
 
 Displayed and quoted cue wording and markup are retained as text. Line endings are normalized and outer whitespace may be trimmed by the maintained admission and authored-field validation. The complete supplied transcript remains unchanged in the narration record.
+
+Each browser receiving run requires a new output directory and refuses an existing one, preventing a stale download from satisfying a later run.

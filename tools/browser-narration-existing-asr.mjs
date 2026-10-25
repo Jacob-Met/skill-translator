@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import {createAppServer} from '../server.mjs';
 const require=createRequire(import.meta.url),puppeteer=require(process.env.PUPPETEER_PATH||'puppeteer');
 if(!process.env.CAPTIONVERSE_MEDIA_DIR)throw Error('Supply the separately fetched pinned CAPTIONVERSE_MEDIA_DIR.');
-const input=resolve(process.env.CAPTIONVERSE_MEDIA_DIR),out=resolve(process.env.QA_OUTPUT||'/tmp/narration-existing-asr');await mkdir(out,{recursive:true});
+const input=resolve(process.env.CAPTIONVERSE_MEDIA_DIR),out=resolve(process.env.QA_OUTPUT||'/tmp/narration-existing-asr');await mkdir(out,{mode:0o700});
 const mediaPath=join(input,'asr-synthetic-speech.webm'),vttPath=join(input,'asr-synthetic-speech.vtt');
 const hash=b=>createHash('sha256').update(b).digest('hex');const mediaHash=hash(await readFile(mediaPath)),vtt=await readFile(vttPath,'utf8'),vttHash=hash(await readFile(vttPath));
 assert.equal(mediaHash,'48a48f20d264b5bd55f3f939979248409b3dbc72214675da295098758cb104f0');assert.equal(vttHash,'44c4faa4da02bb5e7b355dc010d36a5dfa48e64c6ccc0a1bc4e5e457d7c6bb07');
