@@ -1,0 +1,52 @@
+{
+  "state": "Review-ready composed continuation on independently received merged sampled-path source",
+  "native": {
+    "command": "node --test --test-isolation=none test/path-guide.test.mjs test/guide-alignment.test.mjs test/sequence-path.test.mjs test/server.test.mjs",
+    "passed": 29,
+    "failed": 0,
+    "skipped": 0,
+    "new_groups": 8,
+    "base_commit": "a5a718f9ff9ab74dc0609a6a3a1fb438af6c9749"
+  },
+  "browser": {
+    "command": "node tools/browser-path-guide.mjs",
+    "passed_groups": 6,
+    "browser": "156.0.8078.47",
+    "errors": [],
+    "scope": "Actual original sampled-path producer navigation, exactPNG receiving,4mm middle excursion, source-preserving actual download/native reopen, missing/refusal/stale handling,390px keyboard"
+  },
+  "limits": "Authored analytic PNG fixtures and explicitly fixed reference line only. No physical motion, contact, technique effectiveness, learning effect, deployment or cloud qualification. Existing guide evaluator numerical guard is disclosed separately.",
+  "sha256": {
+    "src/path-guide.mjs": "59178205a75240a9b8ccedeafde6286f53edd3f044c94f9ab35ecc535036d64d",
+    "web/path-guide.html": "a34e55d583c9f2341679045cefe6aa57678933352b0e3c4060b8dffc9eaa4f01",
+    "web/path-guide.mjs": "b8f19d35ebb07d578d356c14c0578127de2da05f8869e65a257fff7f06572e7f",
+    "web/path-guide-input.mjs": "7daa7f8daa380f7430ba4945abac8fec5b19b268dbecae1f041aea3f91d553eb",
+    "web/sampled-path.html": "a6f9ad0438164b0deb46786a803b25770184e70fd4974eae15517e2fb5cf6a74",
+    "server.mjs": "462a290652a372f86dca460bb9c53bc389c24a5e585d3942b7ecb58d7c2af994",
+    "test/path-guide.test.mjs": "76c65ae7b8c6bae648d43a1cbce1362e24979ebf1e782bb02649b7f8d0942951",
+    "test/helpers/path-guide-fixture.mjs": "5f196376f7c6c96faf470ea106ee6d3ac9b0fdcb21c5bd0a36820bcf25fa0620",
+    "tools/browser-path-guide.mjs": "9a82025f67859a2c076e0140dfca40457a1decd17372b20b490ad2f13eb1a7a3",
+    "docs/PATH_GUIDE.md": "ecccddcd1e0e33876fab1b6dd09786e9b64bc2e3b97a1df75df08e3069559ca6"
+  },
+  "base_commit": "d72c31d3ebbb6be9311acd5f75bf89edfee2a0c5",
+  "base_tree": "17263feb6f8818d15ed246ad3df96a03827fe2bf",
+  "issue": 170,
+  "dependency_receiving": {
+    "unchanged_code_blobs_verified": 418,
+    "missing": 0,
+    "mismatch": 0,
+    "shared_edits": [
+      "server.mjs:4 additive routes",
+      "web/sampled-path.html:one navigation link"
+    ]
+  },
+  "independent_review": "Retained microverse worker independently ran8/8 native groups and reviewed source/reference identity, transient evaluator reuse, missing/degenerate states, direction sign, wrapper original-frame custody and abort/release semantics; no blocking finding.",
+  "fresh_composition": {
+    "upstream": "Preserved merged#162 pattern-change source, native controls and existing source consumer; guide/path dependencies and sampled-path HTML unchanged. Current server received and4 routes appended.",
+    "command": "node --test --test-isolation=none test/pattern-change.test.mjs test/server.test.mjs",
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "actual_guide_browser_groups": 6
+  }
+}
