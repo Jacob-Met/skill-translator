@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "six original demonstrations and two explicit readings retain one reference label",
+    "blank additional category refuses without changing accepted evidence",
+    "third already-inspected reading challenges support and retires a stale export",
+    "actual raw download retains every original PNG and supplied reading without derived diagnosis",
+    "fresh narrow keyboard reopen recomputes original-row and removal witnesses",
+    "unknown categories retain a row and prevent a false unsupported-group finding",
+    "all inclusion-minimal groups remain navigable, including a pair beside a singleton",
+    "malformed replacement preserves accepted original evidence and all readings"
+  ],
+  "errors": []
+}
