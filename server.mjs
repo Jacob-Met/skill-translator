@@ -6,11 +6,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
-  "/path-comparison":["web/path-comparison.html","text/html; charset=utf-8"],
-  "/src/path-comparison.mjs":["src/path-comparison.mjs","text/javascript; charset=utf-8"],
-  "/web/path-comparison.mjs":["web/path-comparison.mjs","text/javascript; charset=utf-8"],
-  "/web/path-comparison-input.mjs":["web/path-comparison-input.mjs","text/javascript; charset=utf-8"],
-  "/web/path-comparison.css":["web/path-comparison.css","text/css; charset=utf-8"],
+  '/src/account-reply.mjs':['src/account-reply.mjs','text/javascript; charset=utf-8'],
+  '/web/account-reply.mjs':['web/account-reply.mjs','text/javascript; charset=utf-8'],
   '/src/account-question.mjs':['src/account-question.mjs','text/javascript; charset=utf-8'],
   '/web/account-question.mjs':['web/account-question.mjs','text/javascript; charset=utf-8'],
   "/src/narration-moments.mjs":["src/narration-moments.mjs","text/javascript; charset=utf-8"],
@@ -67,6 +64,11 @@ const routes=Object.freeze({
   "/web/path-guide-input.mjs":["web/path-guide-input.mjs","text/javascript; charset=utf-8"],
   "/src/path-guide.mjs":["src/path-guide.mjs","text/javascript; charset=utf-8"],
   "/src/pattern-change.mjs":["src/pattern-change.mjs","text/javascript; charset=utf-8"],
+  "/path-comparison":["web/path-comparison.html","text/html; charset=utf-8"],
+  "/src/path-comparison.mjs":["src/path-comparison.mjs","text/javascript; charset=utf-8"],
+  "/web/path-comparison.mjs":["web/path-comparison.mjs","text/javascript; charset=utf-8"],
+  "/web/path-comparison-input.mjs":["web/path-comparison-input.mjs","text/javascript; charset=utf-8"],
+  "/web/path-comparison.css":["web/path-comparison.css","text/css; charset=utf-8"],
   "/sampled-path":["web/sampled-path.html","text/html; charset=utf-8"],
   "/web/sampled-path.mjs":["web/sampled-path.mjs","text/javascript; charset=utf-8"],
   "/web/sampled-path-input.mjs":["web/sampled-path-input.mjs","text/javascript; charset=utf-8"],
