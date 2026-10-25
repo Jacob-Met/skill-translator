@@ -6,6 +6,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/context-allowance.mjs":["src/context-allowance.mjs","text/javascript; charset=utf-8"],
+  "/web/context-allowance-worker.mjs":["web/context-allowance-worker.mjs","text/javascript; charset=utf-8"],
+  "/web/context-allowance-view.mjs":["web/context-allowance-view.mjs","text/javascript; charset=utf-8"],
   "/sequence-edge":["web/sequence-edge.html","text/html; charset=utf-8"],
   "/web/sequence-edge.mjs":["web/sequence-edge.mjs","text/javascript; charset=utf-8"],
   "/src/sequence-edge.mjs":["src/sequence-edge.mjs","text/javascript; charset=utf-8"],
