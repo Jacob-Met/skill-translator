@@ -1,0 +1,18 @@
+import {inspectNarrationClock} from '/src/narration-clock.mjs';
+export function createClockControls({host,onDirty}){
+ const panel=document.createElement('fieldset'),legend=document.createElement('legend');legend.textContent='Optional external-clock alignment';panel.append(legend);
+ const mode=document.createElement('input');mode.type='checkbox';mode.id='narration-clock-enabled';const modeLabel=document.createElement('label');modeLabel.htmlFor=mode.id;modeLabel.textContent='Use two declared landmarks and a separate check';panel.append(modeLabel,mode);
+ const fields={};
+ for(const [id,label] of [['aT','First landmark · transcript seconds'],['aC','First landmark · original clip seconds'],['bT','Second landmark · transcript seconds'],['bC','Second landmark · original clip seconds'],['vT','Separate check · transcript seconds'],['vC','Separate check · original clip seconds'],['tolerance','Allowed check discrepancy · seconds'],['basis','Basis for landmark correspondence and tolerance']]){
+  const input=document.createElement(id==='basis'?'textarea':'input'),l=document.createElement('label');input.id='narration-clock-'+id;l.htmlFor=input.id;l.textContent=label;
+  if(id!=='basis'){input.type='number';input.step='any';input.min='0';}else input.maxLength=1600;
+  fields[id]=input;panel.append(l,input);input.addEventListener('input',onDirty);
+ }
+ const summary=document.createElement('p');summary.className='note';summary.id='narration-clock-report';summary.textContent='Landmarks are supplied correspondences, not inferred action onsets. The separate check is not used to fit the clock. You may have used it to choose the anchors; this does not establish an independent held-out validation. Times outside the two fitting anchors are extrapolated.';panel.append(summary);host.append(panel);
+ let busy=true;function sync(disabled){busy=disabled;mode.disabled=disabled;for(const f of Object.values(fields))f.disabled=disabled||!mode.checked;}
+ mode.addEventListener('change',()=>{sync(busy);onDirty();});
+ function read(){if(!mode.checked)return null;const number=id=>{if(!fields[id].value.trim())throw Error('Complete every clock landmark and tolerance.');return Number(fields[id].value);};return {anchors:[{transcriptSeconds:number('aT'),clipSeconds:number('aC')},{transcriptSeconds:number('bT'),clipSeconds:number('bC')}],verification:{transcriptSeconds:number('vT'),clipSeconds:number('vC')},toleranceSeconds:number('tolerance'),basis:fields.basis.value};}
+ function restore(clock){mode.checked=!!clock;for(const f of Object.values(fields))f.value='';if(clock){for(const [id,v] of Object.entries({aT:clock.anchors[0].transcriptSeconds,aC:clock.anchors[0].clipSeconds,bT:clock.anchors[1].transcriptSeconds,bC:clock.anchors[1].clipSeconds,vT:clock.verification.transcriptSeconds,vC:clock.verification.clipSeconds,tolerance:clock.toleranceSeconds,basis:clock.basis}))fields[id].value=v;}sync(busy);summary.textContent='Landmarks are supplied correspondences. The separate check is excluded from the fit; independent validation is not established.';}
+ function report(clock,duration){if(!clock){summary.textContent='Using the declared constant offset.';return;}const r=inspectNarrationClock(clock,duration);summary.textContent='Clip seconds per transcript second: '+r.slope+'. Separate check residual: '+r.residualSeconds+' s; allowed '+clock.toleranceSeconds+' s. '+(r.checkPassed?'Check within declared tolerance.':'Check failed; navigation refused.')+' Cue times beyond the fitting landmarks are extrapolated. This check does not authenticate correspondence, action onset or independence from anchor choice.';}
+ return {read,restore,sync,report};
+}

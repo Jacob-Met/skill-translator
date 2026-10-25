@@ -1,0 +1,227 @@
+{
+  "schema": "hamon.actual-consumer-receiving/v1",
+  "repository": "Jacob-Met/skill-translator",
+  "issue": 239,
+  "integratedBaseMain": "fb5611ae84ff05cee95db4148a1748fcdbc1b78b",
+  "executedSources": [
+    {
+      "path": "src/narration-clock.mjs",
+      "bytes": 2624,
+      "gitBlobSha": "4f7a26a7c091881225d3d852b00da7c4e79a091c",
+      "sha256": "c8cf2b297db7a3e342b1d7a21dd3fc2786d8858cd753792e6ad96b0f8856af35"
+    },
+    {
+      "path": "src/narration-moments.mjs",
+      "bytes": 4519,
+      "gitBlobSha": "ba4a2ba01cedf8379dab2085d40e5e718244bc2f",
+      "sha256": "522f2424e6b3a08e90ee5996cbc4ad1dd7cfc64bf1e9e2217bf95685beff7e26"
+    },
+    {
+      "path": "web/narration-clock.mjs",
+      "bytes": 3666,
+      "gitBlobSha": "05399f56e2431d3b787ea819433c334bbf484624",
+      "sha256": "aec49a4ce0d62e67b79d038f699f609315d0fb23f3bff8fcea6f89279bb4e7a8"
+    },
+    {
+      "path": "web/narration-moments.mjs",
+      "bytes": 8982,
+      "gitBlobSha": "3db66c7d9af012c1148f2cc29436a573c08038cb",
+      "sha256": "0b1c6dfb7bfbc7dbeb1ccac2dcf5f09180aae5ca4282c44008ebe3b12a46a854"
+    },
+    {
+      "path": "test/narration-clock.test.mjs",
+      "bytes": 5443,
+      "gitBlobSha": "bbf61c6a2e98c32e22fef2069abaef09a239fcb1",
+      "sha256": "431e6c24d1a52db377c7a87b5bf39c0abe7a75441ae8f01c648ae553c79e32a6"
+    },
+    {
+      "path": "docs/narration-moment-discovery.md",
+      "bytes": 7303,
+      "gitBlobSha": "6bd759b0a9ee791a3093b04316d6606d5204b5fc",
+      "sha256": "bb5069522593b25c8c3c3d7840ea0c2afa2b14aeccc342e84a9f52aec4f0ffc5"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 33670,
+      "gitBlobSha": "814969ce73285846fdb0a87f661db776d97abfd4",
+      "sha256": "01107f3a6417cd8f19119136ed99750b1b45ef1141498c196a73d7c2bed84898"
+    }
+  ],
+  "native": {
+    "command": "node --test test/narration-clock.test.mjs test/narration-moments.test.mjs test/timed-narration.test.mjs test/demonstration-sequence.test.mjs test/sequence-capture.test.mjs",
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 130.990452
+  },
+  "browser": {
+    "passed": 7,
+    "checks": [
+      "Maintained constant-offset baseline requests2.2seconds for original transcript cue2seconds.",
+      "Declared affine clock changes ordinary preview request to2.4seconds and labels cue extrapolation.",
+      "Actual studio captures original pixels and separately retains requested/presented frame time and verified PNG hash.",
+      "Failed separate check refuses all previews and stays refused even for an empty search result.",
+      "Saved original navigation reopens; wrong source and malformed UTF8 replacements refuse without erasing accepted choices.",
+      "Fresh390px session reopens source declarations and uses keyboard preview with contained layout.",
+      "A delayed saved-record read cannot regain authority after a new clip session, even with identical clip bytes."
+    ],
+    "errors": [],
+    "browser": "156.0.8078.47",
+    "node": "v22.23.4",
+    "sandbox": {
+      "schema": "hamon-chromium-sandbox/v1",
+      "qualification": "Linux Chromium status in the supplied isolated CDP page",
+      "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "startedAt": "2026-10-25T07:44:01.239Z",
+      "completedAt": "2026-10-25T07:44:01.328Z",
+      "durationMs": 89.45053099999996,
+      "admitted": true,
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "target": {
+        "targetId": "42BD1209F16C6EFF125BE0CDE510D4B0",
+        "type": "page",
+        "title": "about:blank",
+        "url": "about:blank",
+        "attached": true,
+        "canAccessOpener": false,
+        "browserContextId": "A1EAA9CF406F1440EEA151312BC46C15"
+      },
+      "url": "chrome://sandbox/",
+      "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+      "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+      "observation": {
+        "rows": {
+          "layer1": "Namespace",
+          "pid": "Yes",
+          "network": "Yes",
+          "seccomp": "Yes",
+          "tsync": "Yes"
+        },
+        "checks": {
+          "adequate": true,
+          "layer1": true,
+          "pid": true,
+          "network": true,
+          "seccomp": true,
+          "tsync": true
+        },
+        "populated": true,
+        "duplicates": [],
+        "active": true
+      },
+      "failure": null
+    },
+    "receiverSha256": "f7bde3779af96156529b0865bcf5e4920c1c7249b5061d831c0e744084a23687"
+  },
+  "originalReceiving": {
+    "clipSha256": "e156eeed51e2b5fcc2b925930ef03e3e322e6094f26fbe06ecc692bb875115b0",
+    "transcriptSha256": "dd8649df4ad52e814fbdd4a4d0957953326b025bd55500c06c6ae280e0164d0f",
+    "navigationSha256": "56402617b3308eff3a1e4c5148597e6aab0e00f1dfe6c5fc6f5a27aa9f77835f",
+    "sequenceSha256": "d2f237ea507f3626e830a876af140ddfa6c60a5fb542e708715516b71bcda7b5",
+    "firstOrigin": {
+      "kind": "local-video-frame",
+      "timing": "requestVideoFrameCallback",
+      "clip": {
+        "name": "authored-clock.webm",
+        "mimeType": "video/webm",
+        "sizeBytes": 129495,
+        "sha256": "e156eeed51e2b5fcc2b925930ef03e3e322e6094f26fbe06ecc692bb875115b0",
+        "durationSeconds": 5
+      },
+      "requestedTimeSeconds": 2.4,
+      "mediaTimeSeconds": 2.4,
+      "frameSha256": "9cb9fc965afc8784c8a4c27e7881f1a7b2f228067dac889094291382ec7efaa7",
+      "widthPx": 160,
+      "heightPx": 120,
+      "decodedWidthPx": 160,
+      "decodedHeightPx": 120
+    },
+    "firstImageSha256": "9cb9fc965afc8784c8a4c27e7881f1a7b2f228067dac889094291382ec7efaa7"
+  },
+  "archive": {
+    "path": "docs/receipts/narration-clock-767440/original-receiving.tar.gz",
+    "bytes": 1622110,
+    "sha256": "b5ca044658a6b0f14e193f311494afef1ab99276b9c2dbf11c332ef16855d4e1",
+    "gitBlobSha": "928359c1e164a24ea93112e2477b93bfb0687a49",
+    "files": [
+      {
+        "path": "accepted-desktop.png",
+        "bytes": 962095,
+        "sha256": "0ef9aea0c02870f5c69cb49d7fc1064362a262ee773f44aa8bd2528bebd45e57"
+      },
+      {
+        "path": "accepted-narrow.png",
+        "bytes": 549755,
+        "sha256": "1f80957a89142d35a57303de86cf442a973a14fb62663251ba2f7e78de551b77"
+      },
+      {
+        "path": "actual-sequence.json",
+        "bytes": 56669,
+        "sha256": "d2f237ea507f3626e830a876af140ddfa6c60a5fb542e708715516b71bcda7b5"
+      },
+      {
+        "path": "browser-receiver.mjs",
+        "bytes": 13134,
+        "sha256": "f7bde3779af96156529b0865bcf5e4920c1c7249b5061d831c0e744084a23687"
+      },
+      {
+        "path": "clock-control.webm",
+        "bytes": 129495,
+        "sha256": "e156eeed51e2b5fcc2b925930ef03e3e322e6094f26fbe06ecc692bb875115b0"
+      },
+      {
+        "path": "clock.vtt",
+        "bytes": 94,
+        "sha256": "dd8649df4ad52e814fbdd4a4d0957953326b025bd55500c06c6ae280e0164d0f"
+      },
+      {
+        "path": "executed-source.json",
+        "bytes": 1937,
+        "sha256": "9c76d3e7d5fdd6f47a2925bee6651f72b8c10a34bddf409d1f8843732b2bd80c"
+      },
+      {
+        "path": "native-tests.log",
+        "bytes": 8034,
+        "sha256": "80474675fb9938002ae24bbf70ce913ad62767d2a61eb5bb9f3fd233248c0048"
+      },
+      {
+        "path": "navigation.json",
+        "bytes": 1225,
+        "sha256": "56402617b3308eff3a1e4c5148597e6aab0e00f1dfe6c5fc6f5a27aa9f77835f"
+      },
+      {
+        "path": "receiving.json",
+        "bytes": 2806,
+        "sha256": "14aa7e1b59ec1181b0b3c1bf92b044c5f89c57751c8b6204d8f1c6131d79307d"
+      },
+      {
+        "path": "sandbox.json",
+        "bytes": 1728,
+        "sha256": "a23e027ee4aeeb20ce8983f962ddb8f613ff8f925fdc3e1e7ac026990d3135f2"
+      },
+      {
+        "path": "source-receiving.json",
+        "bytes": 1016,
+        "sha256": "6501246c2a02fdb1487f744eac6e4963d4175ac344a3c192ca549f764060fcee"
+      }
+    ]
+  },
+  "review": {
+    "independentReviewer": "Retained MICROVERSE worker, separate from the author. Shared GitHub identity; recorded independent worker evidence, not separate account approval.",
+    "resolvedFinding": "A failed separate clock check refuses navigation before query filtering, including a search with no matching cues. Both reviewer and author independently exercised the maintained dependency graph.",
+    "visualReview": "Lead inspected final actual desktop and 390 px browser screenshots; controls and results remain contained."
+  },
+  "limits": [
+    "Authored original finite-duration WebM and supplied narration establish software receiving, not real clock accuracy or physical skill transfer.",
+    "The separate declared check is excluded from fitting but is not authenticated independent evidence and may have influenced anchor selection.",
+    "Requested time and decoder-presented time are retained separately; an affine request cannot certify source clock truth.",
+    "Navigation declarations are saved separately from the sequence bundle and the older timed-narration sidecar; downstream clock-aware quotations remain a distinct consumer outcome.",
+    "Staging the newly merged scan-region consumer initially missed its existing vendored pixel module. The final composed-main browser run includes that pinned dependency, passes all seven groups and has zero page or asset errors."
+  ]
+}
