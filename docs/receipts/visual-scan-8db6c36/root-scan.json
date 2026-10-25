@@ -1,0 +1,58 @@
+{
+  "fixture": "Original authored 640×360 image sequence: eight one-second states, encoded at 8 fps. No physical demonstration or learning claim.",
+  "tests": [
+    "actual decoded source distinguishes lighting from moved/color-changed regions; all intervals survive sorting without auto-retaining moments",
+    "keyboard-selected scan candidates pass through full-resolution original capture, authored step and byte-bound saved sequence",
+    "fresh maintained sequence consumer reopens original frames and supplied account without scan thumbnails replacing evidence",
+    "cancellation restores controls and preserves retained source plus the earlier completed scan",
+    "replacement cancels an in-flight scan; a wrong clip cannot replace accepted source or leave controls busy",
+    "invalid scan range preserves existing results and source",
+    "actual decoder error lifecycle retains complete missing-interval account without bridging or altering original moments",
+    "desktop and 390px sequence receiving with bounded interval scroll and no horizontal overflow",
+    "clearing/new source discards old scan and the new clip can be scanned independently",
+    "no page exceptions or offsite requests in actual local consumer"
+  ],
+  "errors": [],
+  "offsite": [],
+  "result": "PASS",
+  "clipSha256": "02368c67f237b28e52227b24aec5be2ee841dce797043a0a01648ae05a249b9b",
+  "browser": "156.0.8078.47",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "intervals": [
+    {
+      "index": "0",
+      "state": "compared",
+      "text": "Requested 0.100 s → 1.100 sMean channel change · raw 0.00 · adjusted 0.00 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 0.125 s → 1.000 sInspect earlier · 0.125 sInspect later · 1.000 s"
+    },
+    {
+      "index": "1",
+      "state": "compared",
+      "text": "Requested 1.100 s → 2.100 sMean channel change · raw 30.00 · adjusted 0.00 levels. Uniform shift +30; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 1.000 s → 2.000 sInspect earlier · 1.000 sInspect later · 2.000 s"
+    },
+    {
+      "index": "2",
+      "state": "compared",
+      "text": "Requested 2.100 s → 3.100 sMean channel change · raw 7.13 · adjusted 7.13 levels. Uniform shift +0; 15.6% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 2.000 s → 3.000 sInspect earlier · 2.000 sInspect later · 3.000 s"
+    },
+    {
+      "index": "3",
+      "state": "compared",
+      "text": "Requested 3.100 s → 4.100 sMean channel change · raw 0.00 · adjusted 0.00 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 3.000 s → 4.000 sInspect earlier · 3.000 sInspect later · 4.000 s"
+    },
+    {
+      "index": "4",
+      "state": "compared",
+      "text": "Requested 4.100 s → 5.100 sMean channel change · raw 5.60 · adjusted 5.60 levels. Uniform shift +0; 7.8% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 4.000 s → 5.000 sInspect earlier · 4.000 sInspect later · 5.000 s"
+    },
+    {
+      "index": "5",
+      "state": "compared",
+      "text": "Requested 5.100 s → 6.100 sMean channel change · raw 0.00 · adjusted 0.00 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 5.000 s → 6.000 sInspect earlier · 5.000 sInspect later · 6.000 s"
+    },
+    {
+      "index": "6",
+      "state": "compared",
+      "text": "Requested 6.100 s → 7.100 sMean channel change · raw 0.00 · adjusted 0.00 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 6.000 s → 7.000 sInspect earlier · 6.000 sInspect later · 7.000 s"
+    }
+  ]
+}

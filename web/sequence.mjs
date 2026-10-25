@@ -5,11 +5,13 @@ import {frameOrigin} from '/src/frame-origin.mjs';
 import {loadLocalVideo,releaseVideo,capturePresentedFrame} from '/web/video-input.mjs';
 import {loadLocalImage,releaseImage} from '/web/image-input.mjs';
 import {makeSequenceBundle,readSequenceBundle,releaseSequenceAssets,exportMomentFrame,MAX_FRAME_BYTES} from '/web/sequence-input.mjs';
+import {createVisualScanner} from '/web/visual-scan.mjs';
 
 const $=id=>document.getElementById(id);
 let sequence=null,clip=null,assets=new Map(),selectedStep=null,editingStep=null,editingMoment=null;
 let stepDirty=false,busy=false,revision=0,generation=0,controller=null;
 let selectedCalibration=null;
+let visualScanner=null;
 const status=message=>{$('status').textContent=message;};
 const uid=prefix=>prefix+'-'+crypto.randomUUID();
 const time=value=>value.toFixed(3)+' s';
@@ -22,6 +24,7 @@ function commit(next){sequence=validateSequence(next);revision++;render();}
 function download(blob,name){const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const calibrationMoment=()=>sequence?.moments.find(m=>m.id===selectedCalibration);
 function syncButtons(){
+  visualScanner?.sync();
   $('capture-moment').disabled=busy||(!editingMoment&&(!clip||!sequence||sequence.moments.length>=MAX_MOMENTS));
   $('capture-moment').textContent=editingMoment?'Save moment notes':'Retain this moment';
   $('moment-time').disabled=Boolean(editingMoment);$('cancel-moment').hidden=!editingMoment;
@@ -149,6 +152,7 @@ $('clip-file').addEventListener('change',async()=>{
     candidate=await loadLocalVideo(file);if(!current(request)){releaseVideo(candidate);return;}
     const next=sequence?(assertSequenceClip(sequence,candidate.identity),sequence):createSequence(candidate.identity,{title:$('sequence-title').value,context:$('sequence-context').value});
     const previous=clip;clip=candidate;candidate=null;$('video-host').replaceChildren(clip.video);releaseVideo(previous);
+    visualScanner.receiveClip();
     $('moment-time').max=String(Math.max(0,clip.identity.durationSeconds-.001));commit(next);status('Original clip ready. Retain moments before and after a meaningful change.');
   }catch(error){if(candidate)releaseVideo(candidate);reportFailure(request,error);}finally{endIO(request);}
 });
@@ -193,7 +197,7 @@ $('sequence-file').addEventListener('change',async()=>{
     candidate=await readSequenceBundle(file,{signal:request.signal});if(!current(request)){releaseSequenceAssets(candidate.assets);return;}
     if(version!==revision){releaseSequenceAssets(candidate.assets);candidate=null;status('The account changed while reopening. Your current work was preserved; reopen again when ready.');return;}
     let matching=false;if(clip){try{assertSequenceClip(candidate.sequence,clip.identity);matching=true;}catch{}}
-    if(clip&&!matching){releaseVideo(clip);clip=null;$('video-host').replaceChildren(element('p','Choose the original clip to retain more moments.'));}
+    if(clip&&!matching){releaseVideo(clip);clip=null;visualScanner.clear();$('video-host').replaceChildren(element('p','Choose the original clip to retain more moments.'));}
     const old=assets;assets=candidate.assets;const next=candidate.sequence;candidate=null;
     selectedStep=next.steps[0]?.id||null;sequence=next;resetMomentEditor();resetStepEditor();
     $('sequence-title').value=next.title;$('sequence-context').value=next.context;commit(next);releaseSequenceAssets(old);
@@ -213,9 +217,17 @@ $('export-sequence').addEventListener('click',async()=>{
 });
 $('clear-sequence').addEventListener('click',()=>{
   controller?.abort();generation++;controller=null;busy=false;releaseVideo(clip);clip=null;releaseSequenceAssets(assets);assets=new Map();sequence=null;selectedStep=null;revision++;
+  visualScanner.clear();
   $('video-host').replaceChildren(element('p','Local video preview'));$('clip-file').value='';$('sequence-file').value='';
   $('sequence-title').value='A task explained through its changes';$('sequence-context').value='';$('moment-time').value='0';
   resetMomentEditor();resetStepEditor();render();status('New demonstration. Choose its original clip.');
 });
 window.addEventListener('pagehide',event=>{if(!event.persisted){controller?.abort();releaseVideo(clip);releaseSequenceAssets(assets);}});
+visualScanner=createVisualScanner({getClip:()=>clip,isBusy:()=>busy,canSelect:()=>!editingMoment,
+  beginIO,isCurrent:current,endIO,
+  cancelIO:request=>{if(current(request)){controller?.abort();generation++;controller=null;busy=false;syncButtons();}},
+  onSelect:seconds=>{
+    clip.video.pause();clip.video.currentTime=seconds;$('moment-time').value=String(seconds);revision++;
+    $('moment-time').focus();status('Inspect the sampled time in the clip, then retain the original frame you need.');
+  }});
 render();

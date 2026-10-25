@@ -6,6 +6,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/visual-scan.mjs":["src/visual-scan.mjs","text/javascript; charset=utf-8"],
+  "/web/visual-scan.mjs":["web/visual-scan.mjs","text/javascript; charset=utf-8"],
   "/sequence-edge":["web/sequence-edge.html","text/html; charset=utf-8"],
   "/web/sequence-edge.mjs":["web/sequence-edge.mjs","text/javascript; charset=utf-8"],
   "/src/sequence-edge-study.mjs":["src/sequence-edge-study.mjs","text/javascript; charset=utf-8"],

@@ -1,5 +1,6 @@
 import {MAX_VIDEO_BYTES,clipIdentity,requestedFrameTime} from "/src/frame-origin.mjs";
 import {MAX_IMAGE_SIDE,MAX_IMAGE_PIXELS} from "/src/capture.mjs";
+import {MAX_SAMPLE_SIDE} from "/src/visual-scan.mjs";
 function boundedFrameSize(width,height){
   if(!Number.isInteger(width)||!Number.isInteger(height)||width<1||height<1||width>MAX_IMAGE_SIDE||height>MAX_IMAGE_SIDE||width*height>MAX_IMAGE_PIXELS)throw Error("Choose a video frame up to 8192 pixels per side and 24 megapixels.");
 }
@@ -44,7 +45,7 @@ export function releaseVideo(clip){
 // never inferred from the requested currentTime. One seek is admitted at a time.
 // Reference: developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/requestVideoFrameCallback
 // Prior estate receiving: replay-forge/app/world-source-sync.mjs (0612b54).
-export async function capturePresentedFrame(clip,seconds,{signal}={}){
+async function capturePresentedSnapshot(clip,seconds,{signal,sampleOnly=false}={}){
   const {video,identity}=clip;
   requestedFrameTime(seconds,identity.durationSeconds);
   if(typeof video.requestVideoFrameCallback!=="function")throw Error("This browser cannot report presented-frame timing. Use a source photo instead.");
@@ -67,9 +68,17 @@ export async function capturePresentedFrame(clip,seconds,{signal}={}){
           boundedFrameSize(video.videoWidth,video.videoHeight);
           boundedFrameSize(metadata.width,metadata.height);
           copied=true;clearTimeout(presentationTimer);video.pause();
-          const canvas=document.createElement("canvas");canvas.width=video.videoWidth;canvas.height=video.videoHeight;
+          const canvas=document.createElement("canvas");
+          const scale=sampleOnly?Math.min(1,MAX_SAMPLE_SIDE/Math.max(video.videoWidth,video.videoHeight)):1;
+          canvas.width=Math.max(1,Math.round(video.videoWidth*scale));canvas.height=Math.max(1,Math.round(video.videoHeight*scale));
           const context=canvas.getContext("2d");if(!context)throw Error("The browser cannot copy video pixels.");
           context.drawImage(video,0,0,canvas.width,canvas.height);
+          if(sampleOnly){
+            finish(null,{rgba:context.getImageData(0,0,canvas.width,canvas.height).data,
+              widthPx:canvas.width,heightPx:canvas.height,
+              metadata:{mediaTime:metadata.mediaTime,width:metadata.width,height:metadata.height}});
+            return;
+          }
           // The copied canvas is stable even while PNG encoding completes.
           canvas.toBlob(blob=>blob?finish(null,{blob,metadata:{mediaTime:metadata.mediaTime,width:metadata.width,height:metadata.height}}):finish(Error("The frame could not be saved as PNG.")),"image/png");
         }catch(error){finish(error);}
@@ -89,7 +98,18 @@ export async function capturePresentedFrame(clip,seconds,{signal}={}){
       if(!finished)presentationTimer=setTimeout(requestPresentation,200);
     });
     if(signal?.aborted)throw Error("Frame selection was replaced.");
+    if(sampleOnly)return {rgba:snapshot.rgba,widthPx:snapshot.widthPx,heightPx:snapshot.heightPx,
+      presentedSeconds:snapshot.metadata.mediaTime,requestedSeconds:seconds};
     const stem=identity.name.replace(/\.[^.]+$/,"").replace(/[^a-zA-Z0-9_-]+/g,"-").slice(0,90)||"clip";
     return {file:new File([snapshot.blob],stem+"-frame-"+snapshot.metadata.mediaTime.toFixed(3)+"s.png",{type:"image/png"}),metadata:snapshot.metadata,requestedTimeSeconds:seconds};
   }finally{video.controls=controls;}
+}
+
+export function capturePresentedFrame(clip,seconds,{signal}={}){
+  return capturePresentedSnapshot(clip,seconds,{signal});
+}
+
+// Small inspection samples never enter the original-frame retention/export path.
+export function samplePresentedFrame(clip,seconds,{signal}={}){
+  return capturePresentedSnapshot(clip,seconds,{signal,sampleOnly:true});
 }

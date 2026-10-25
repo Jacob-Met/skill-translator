@@ -22,6 +22,12 @@ incomplete or mistaken. Details and test instructions are in
 
 ## Try it
 
+In **Demonstration sequence**, use **Find moments by visual change** to scan a
+local clip before authoring its steps. Inspect raw and brightness-adjusted image
+changes, choose a candidate, and retain its original full-resolution frame through
+the existing source workflow. Sampling gaps stay visible and no action or purpose
+is inferred. [Workflow, comparison method and verification](docs/VISUAL_SCAN.md).
+
 Requires Node.js 20+, with **no dependency install and no service keys**.
 
     npm test
