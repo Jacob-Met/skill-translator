@@ -24,7 +24,7 @@ export function createNarrationNavigator({getClip,isBusy,canSelect,onSelect}){
  for(const id of ['attribution','offset'])$(id).addEventListener('input',markDirty);
  $('file').addEventListener('change',async()=>{
   const file=$('file').files[0],snapshot=getClip();if(!file||!snapshot)return;
-  const version=++revision;
+  const version=++revision;draftText=null;dirty=true;status('Reading transcript…');controls();
   try{
    if(file.size<1||file.size>MAX_TRANSCRIPT_BYTES)throw Error('Choose a UTF-8 WebVTT file up to 256 KiB.');
    const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(await file.arrayBuffer());

@@ -35,6 +35,7 @@ export async function verifyNarrationDiscoveryControls(browser,url,input,out,err
    File.prototype.arrayBuffer=function(){if(this.name==='asr-synthetic-speech.vtt')return new Promise(resolve=>{window.releaseNarrationRead=async()=>{resolve(await old.call(this));window.narrationReadReleased=true;};});return old.call(this);};
   });
   await upload('narration-file',vttPath);await p.waitForFunction(()=>!!window.releaseNarrationRead);
+  assert.equal(await p.$eval('#narration-pair',e=>e.disabled),true);assert.equal(await p.$$eval('#narration-results button',a=>a.every(e=>e.disabled)),true);
   await p.$eval('#clip-file',e=>e.value='');await upload('clip-file',media);
   await p.waitForFunction(()=>document.getElementById('narration-count').textContent==='No narration paired.'&&document.getElementById('status').textContent.includes('Original clip ready'));
   await p.evaluate(()=>window.releaseNarrationRead());await p.waitForFunction(()=>window.narrationReadReleased);await new Promise(r=>setTimeout(r,100));
