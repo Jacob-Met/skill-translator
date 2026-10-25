@@ -6,6 +6,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/src/account-question.mjs':['src/account-question.mjs','text/javascript; charset=utf-8'],
+  '/web/account-question.mjs':['web/account-question.mjs','text/javascript; charset=utf-8'],
   "/vendor/captionverse/subtitles.mjs":["vendor/captionverse/subtitles.mjs", "text/javascript; charset=utf-8"],
   "/vendor/captionverse/core.mjs":["vendor/captionverse/core.mjs", "text/javascript; charset=utf-8"],
   "/vendor/captionverse/cue-index.mjs":["vendor/captionverse/cue-index.mjs", "text/javascript; charset=utf-8"],
