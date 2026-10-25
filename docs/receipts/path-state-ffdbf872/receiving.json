@@ -1,0 +1,53 @@
+{
+  "base": "11a556e27a26e32fc78d8bc7f157093beb494547",
+  "candidateFiles": [
+    {
+      "path": "src/path-correspondence.mjs",
+      "git_blob": "8d07db4be7964cf8b580b5a7b9ab7a087f325fd7"
+    },
+    {
+      "path": "web/path-timing.mjs",
+      "git_blob": "cec97392a7f44fabefc2817a5bd41cf47def9332"
+    },
+    {
+      "path": "web/path-timing.html",
+      "git_blob": "3c88b9894e353cdb37cdac05f18daf0b91321ec8"
+    },
+    {
+      "path": "web/path-timing.css",
+      "git_blob": "12a1541b89e9699fc99ac89751deb2fc6234794f"
+    },
+    {
+      "path": "test/path-state-correspondence.test.mjs",
+      "git_blob": "5aea6994ba95fc8f2e5394bf5578d6703cc72374"
+    },
+    {
+      "path": "tools/browser-path-correspondence.mjs",
+      "git_blob": "b2248afe93801f5e52d7d8683c0964c31b64e2cf"
+    },
+    {
+      "path": "docs/PATH_STATE_CATEGORIES.md",
+      "git_blob": "668f41235fa5f05ab4453cbe0811e56c5ca82577"
+    }
+  ],
+  "native": {
+    "stateCases": 7,
+    "retainedCorrespondenceCases": 6,
+    "retainedTimingCases": 10,
+    "independentEnumerationCourses": 120
+  },
+  "review": {
+    "hamonlang": "Source/lifecycle review found no scoped blocker.",
+    "microverse": "240 independent exhaustive-path courses plus nonconsecutive selected moment identities matched; literal case/whitespace/Unicode and blank controls retained."
+  },
+  "browser": {
+    "groups": 24,
+    "passed": true,
+    "seconds": 4.33,
+    "strictSandbox": true,
+    "pageErrors": 0,
+    "baseComposition": "Preserves concurrent spatial-correspondence and browser-admission main changes."
+  },
+  "visual": "Narrow original endpoint cards inspected, including original descriptions and side-specific images/annotations.",
+  "limits": "Existing authored descriptions require an explicit shared literal-category convention; no semantic, synonym or physical-state recognition. Geometry and human interval acceptance remain required."
+}
