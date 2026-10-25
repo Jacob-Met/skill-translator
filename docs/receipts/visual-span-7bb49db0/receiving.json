@@ -127,7 +127,7 @@
       "sha": "7f638f1ab1138e4e1a78f91c9431821e56de0609"
     }
   ],
-  "composition": "The original31-file recursively required sequence closure is unchanged through current main except server routes. Current server preserved original-interval playback routes and added two span routes. No sampling, capture, ROI or decoder changes.",
+  "composition": "The original31-file recursively required sequence closure is unchanged through current main except server routes. Current server preserved original-interval playback routes and added two span routes. No sampling, capture, ROI or decoder changes. Subsequently preserved two newly merged amendment-set routes from4ba64342; all14actualbrowser groups rerun. No other sequence closure source changed.",
   "sourceHashes": {
     "src/visual-span.mjs": "f984623b5203c23b9ea564a41c18e5783864e5e81950c21aa8353be8c38c25f0",
     "web/visual-span-view.mjs": "4418b0d214a8e9e45904d376806972d252b53c6e65d05c02fa63b53b83c8d23e",
@@ -135,7 +135,7 @@
     "tools/browser-visual-span.mjs": "3c2e20c3337d0dddcc91777c90b3fbc6affff671940792f5637bebed88c5d638",
     "docs/VISUAL_SPAN.md": "50fb984e701d2bac9d3eea5d76c6a373db4780c84aeb6174c48463d93a15c56c",
     "web/visual-scan.mjs": "2f72eb3538b8dde07ff191da79d5cf0139567082e418ed81a8f3bc39e298fb43",
-    "server.mjs": "ba26eba157150d58130e6ec391a178352dc6042b10b61d028322f2f44b17d7bd"
+    "server.mjs": "1fc8d8b847ada548257487eec3de3d4c40408890e5680f414c6f097d9f093449"
   },
   "native": "TAP version 13\n# Subtest: identical adjacent change magnitudes conceal different endpoint evidence\nok 1 - identical adjacent change magnitudes conceal different endpoint evidence\n  ---\n  duration_ms: 2.583622\n  type: 'test'\n  ...\n# Subtest: a missing interior image does not invent a complete appearance path\nok 2 - a missing interior image does not invent a complete appearance path\n  ---\n  duration_ms: 0.246216\n  type: 'test'\n  ...\n# Subtest: endpoints retain presented/requested time and source, without mutating sample pixels\nok 3 - endpoints retain presented/requested time and source, without mutating sample pixels\n  ---\n  duration_ms: 0.458498\n  type: 'test'\n  ...\n# Subtest: invalid selections, unavailable endpoints and reversed presented times remain explicit\nok 4 - invalid selections, unavailable endpoints and reversed presented times remain explicit\n  ---\n  duration_ms: 0.766979\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 10.726916\n",
   "browser": {
@@ -159,7 +159,7 @@
     "errors": [],
     "offsite": [],
     "result": "PASS",
-    "clipSha256": "5d832e6cdca15f246debfd8ca368228686599342b624762514d285e666356d5d",
+    "clipSha256": "385b63bbfe19e0f3cc753336ebdb40b944870c72ba1d608e990ff32fe2b03750",
     "browser": "156.0.8078.47",
     "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
     "intervals": [
@@ -205,5 +205,6 @@
   "screens": [
     "desktop.png",
     "narrow-panel.png"
-  ]
+  ],
+  "compositionBase": "4ba64342b33ad285bf11a03719b4dfeb72f91bee"
 }
