@@ -37,7 +37,7 @@ $('support').onclick=()=>{if(loading){$('status').textContent='Source import is 
  const report=inspectCueSupport(study),out=$('support-results');
  out.replaceChildren(el('h2','Other-example categorical support'),el('p',report.boundary));
  for(const omission of report.omissions){
-  const section=el('section');section.append(el('h3',`Withheld example ${omission.index+1}`),el('p',`Remaining table: ${omission.status}; held declared decision: ${omission.heldDecision??'unknown'}.`));
+  const section=el('section');section.append(el('p',`Original-evidence rows withheld together: ${omission.omittedIndexes.map(i=>i+1).join(', ')}.`));section.append(el('h3',`Withheld example ${omission.index+1}`),el('p',`Remaining table: ${omission.status}; held declared decision: ${omission.heldDecision??'unknown'}.`));
   if(!omission.combinations.length)section.append(el('p','No remaining separating combination is available; no matching conclusion is supplied.'));
   for(const c of omission.combinations){
    const labels=c.cueIds.map(id=>study.cues.find(cue=>cue.id===id).label).join(' + ');
@@ -52,4 +52,5 @@ $('support').onclick=()=>{if(loading){$('status').textContent='Source import is 
  }catch(e){$('error').textContent=e.message;}};
 
 const questionView=createCueQuestionsView({anchor:$('editor'),getStudy:()=>study,isLoading:()=>loading,onError:message=>$('error').textContent=message,onChange:()=>{revision++;controller?.abort();loading=false;}});
+
 

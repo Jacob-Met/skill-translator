@@ -23,3 +23,36 @@ test('opposing withheld label stays opposing and never refits training',()=>{con
 test('unknown held cue is compatible rather than exact evidence',()=>{const r=inspectCueSupport(study([[null],['0'],['1']],['A','A','B']));const c=r.omissions[0].combinations[0];assert.deepEqual(c.exact,[]);assert.equal(c.unknownCompatible.length,2);assert.equal(c.comparison,'no-exact-support');});
 test('two examples and unknown training labels remain unavailable',()=>{assert.ok(inspectCueSupport(study([['0'],['1']],['A','B'])).omissions.every(o=>o.status==='insufficient-other-examples'));assert.equal(inspectCueSupport(study([['0'],['1'],['2']],['A',null,'B'])).omissions[0].status,'unknown-decisions');});
 
+
+test('renamed duplicate original evidence is withheld together, not exact support',()=>{
+ const s=study([['0'],['0'],['1'],['1']],['A','A','B','B']);
+ s.comparison.examples[1]=structuredClone(s.comparison.examples[0]);
+ s.comparison.examples[1].source.steps[0].id='renamed';
+ s.comparison.examples[1].stepId='renamed';
+ const before=JSON.stringify(s),r=inspectCueSupport(s);
+ assert.deepEqual(r.omissions[0].omittedIndexes,[0,1]);
+ assert.equal(r.omissions[0].status,'no-decision-contrast');
+ assert.deepEqual(r.omissions[0].combinations,[]);
+ assert.equal(JSON.stringify(s),before);
+ assert.deepEqual(inspectCueSupport(JSON.parse(before)),r);
+ s.comparison.examples[1].source.moments[0].image.sha256='a'.repeat(64);
+ // Matching PNG identity in frame-origin is required by sequence admission.
+ s.comparison.examples[1].source.moments[0].origin.frameSha256='a'.repeat(64);
+ assert.deepEqual(inspectCueSupport(s).omissions[0].omittedIndexes,[0]);
+});
+test('same source evidence copies can exhaust remaining examples',()=>{
+ const s=study([['0'],['0'],['1']],['A','A','B']);
+ s.comparison.examples[1]=structuredClone(s.comparison.examples[0]);
+ s.comparison.examples[1].source.steps[0].id='copy';s.comparison.examples[1].stepId='copy';
+ assert.equal(inspectCueSupport(s).omissions[0].status,'insufficient-other-examples');
+ s.comparison.examples[1].source.moments[0].origin.mediaTimeSeconds=1.5;
+ assert.deepEqual(inspectCueSupport(s).omissions[0].omittedIndexes,[0]);
+});
+test('moment renaming does not create independent support',()=>{
+ const s=study([['0'],['0'],['1'],['1']],['A','A','B','B']);
+ const copy=structuredClone(s.comparison.examples[0]);
+ copy.source.moments.forEach(m=>m.id='renamed-'+m.id);
+ copy.source.steps[0].beforeMomentId='renamed-m1';copy.source.steps[0].afterMomentId='renamed-m2';
+ s.comparison.examples[1]=copy;
+ assert.deepEqual(inspectCueSupport(s).omissions[0].omittedIndexes,[0,1]);
+});
