@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "tests": [
+    "original PNG account receives explicit bounds and resolves intermediate movement",
+    "actual complete download reopens with exact original PNG and source custody",
+    "wider declared regions make same nominal movement unresolved",
+    "missing intermediate observation retains no adjacent bound",
+    "wrong original PNG refuses replacement transactionally",
+    "narrow viewport edits invalidate and recompute original conditional findings"
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47"
+}

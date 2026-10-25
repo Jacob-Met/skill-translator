@@ -5,10 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
- "/condition-family":["web/condition-family.html","text/html; charset=utf-8"],
- "/web/condition-family.mjs":["web/condition-family.mjs","text/javascript; charset=utf-8"],
- "/src/condition-family.mjs":["src/condition-family.mjs","text/javascript; charset=utf-8"],
-
+  "/path-regions":["web/path-regions.html","text/html; charset=utf-8"],
+  "/web/path-regions.mjs":["web/path-regions.mjs","text/javascript; charset=utf-8"],
+  "/web/path-regions-input.mjs":["web/path-regions-input.mjs","text/javascript; charset=utf-8"],
+  "/src/path-regions.mjs":["src/path-regions.mjs","text/javascript; charset=utf-8"],
   "/path-guide":["web/path-guide.html","text/html; charset=utf-8"],
   "/web/path-guide.mjs":["web/path-guide.mjs","text/javascript; charset=utf-8"],
   "/web/path-guide-input.mjs":["web/path-guide-input.mjs","text/javascript; charset=utf-8"],
@@ -22,6 +22,9 @@ const routes=Object.freeze({
   "/ordered-tool-access":["web/ordered-tool-access.html","text/html; charset=utf-8"],
   "/web/ordered-tool-access.mjs":["web/ordered-tool-access.mjs","text/javascript; charset=utf-8"],
   "/src/ordered-tool-access.mjs":["src/ordered-tool-access.mjs","text/javascript; charset=utf-8"],
+ "/condition-family":["web/condition-family.html","text/html; charset=utf-8"],
+ "/web/condition-family.mjs":["web/condition-family.mjs","text/javascript; charset=utf-8"],
+ "/src/condition-family.mjs":["src/condition-family.mjs","text/javascript; charset=utf-8"],
   "/condition-outcomes":["web/condition-outcomes.html","text/html; charset=utf-8"],
   "/web/condition-outcomes.mjs":["web/condition-outcomes.mjs","text/javascript; charset=utf-8"],
   "/src/condition-outcomes.mjs":["src/condition-outcomes.mjs","text/javascript; charset=utf-8"],
