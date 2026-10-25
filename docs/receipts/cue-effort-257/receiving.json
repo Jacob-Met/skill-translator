@@ -1,0 +1,33 @@
+{
+  "sourceCommit": "792e93fe3c340dfa2dee78e114fd702eb2a7edf9",
+  "sourceTree": "753301a4bc6652de6cacaba5a43528296b957ef6",
+  "verifiedSourceScope": "495 canonical matching executable/test/web files plus eight exact current-main changed files (six new), not entire repository",
+  "checks": [
+    {
+      "name": "native-composed2",
+      "command": "node --test --test-concurrency=2 test/*.test.mjs",
+      "returncode": 0,
+      "seconds": 15.311224267992657
+    },
+    {
+      "name": "browser-composed2",
+      "command": "node tools/browser-cue-effort.mjs",
+      "returncode": 0,
+      "seconds": 2.570476034001331
+    }
+  ],
+  "runtime": "Node22.23.4 / Linux x86_64 / Chrome156.0.8078.47",
+  "nativePassed": 798,
+  "nativeFailed": 0,
+  "nativeSkipped": 0,
+  "browserGroups": 18,
+  "verifiedSourceFiles": 501,
+  "canonicalSourceFiles": 1105,
+  "sourceScope": "Every received source file matched the canonical Git blob; all native test files were present. This is an executable/test/web subset, not a complete repository checkout.",
+  "review": "Independent MATERIALTRUTH review of exact solver, admission and asynchronous lifecycle; root source and visual receiving; no remaining blocker",
+  "visuals": "390px final browser capture retained. Same consumer at composed380792 was visually inspected; incoming changes after that affected only separate readiness module/tests/receipts.",
+  "limitations": [
+    "Authored categorical tables and authored PNG controls",
+    "No measured learner benefit, inferred sensory ability, physical action correctness or deployment"
+  ]
+}
