@@ -449,3 +449,11 @@ The Demonstration studio can inspect [original audio activity](docs/audio-activi
 ## Ask useful cue questions within a budget
 
 The optional [partial cue-budget planner](docs/CUE_BUDGET.md) reuses retained demonstration cues to minimize the worst remaining decision-label ambiguity when a complete question plan is unaffordable. `node tools/inspect-cue-budget.mjs STUDY.json 1` reports the full compatible alternatives and an explicit one-question budget. Continue a saved plan with `--read CUE_ID CATEGORY`; only supplied readings are retained and each consumes one unit. Unknown decisions and outside-evidence outcomes remain unresolved. This unit-cost workflow does not infer physical skill or make an action decision.
+
+## Audit omitted demonstrations
+
+Open **Audit omitted demonstrations** from Workpiece Response, or visit `/response-holdout`. Import its saved source and declarations. Each additional observation is omitted once while the fixed source, coefficient domain and all other observations remain unchanged. Exact extrema describe the complete remaining family at that omitted sheet size. Inspect whether every prediction lies inside the supplied coordinate bounds, only some do, or none do. An incompatible remainder has no predictive family. All observations, their declared provenance and the original complete-family result remain visible.
+
+Save the original study and reopen it to recompute the audit. Invalid or late imports preserve accepted work. The authored three-size control shows independent width, height and mixed changes; it is not a physical measurement. This is retrospective model sensitivity, not an independent validation study, bad-measurement detector or learning score. Repeated and correlated evidence can appear reassuring, and the original source point is never held out. No measurements are removed or ranked.
+
+Verification: `node --test --test-isolation=none test/response-holdout.test.mjs`. The consumer uses the maintained response-family and pinned CHRONOS exact arithmetic; it does not replace either solver.

@@ -1,0 +1,20 @@
+{
+  "reviewedHead": "3b9457bb5ef2873c05b16c6625f9d477c75e02c5",
+  "reviewer": "hamon-e95e7d4e6bc8-20261025/skill_translator",
+  "command": "node --test --test-isolation=none test/response-holdout.test.mjs test/response-family.test.mjs test/response-holdout-independent.test.mjs",
+  "results": {
+    "namedCases": 21,
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "newIndependentDatasets": 60,
+    "newIndependentOmissions": 240
+  },
+  "oracle": "Independent intersection-of-boundary-pairs LP extrema, separate from maintained polygon clipping; includes bounded uncertain coordinates, decreased width, incompatible remainder and excluded observations. Negative-control occurrence asserted.",
+  "review": "No blocking findings. Independent axis families justify combined interval status. Exact rational extrema determine verdicts; numeric enclosures only display. Distinct IDs validated before omission. Incompatible remainder has null axes. Generation token and worker termination preserve accepted state. Export retains original inputs only.",
+  "limits": [
+    "Local native checks only; no new browser receiving yet.",
+    "Authored mathematical controls, not physical observations or learning-study evidence.",
+    "Current-main shared-file composition and browser receiving remain required."
+  ]
+}

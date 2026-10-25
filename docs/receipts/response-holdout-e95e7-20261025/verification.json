@@ -1,0 +1,56 @@
+{
+  "schema": "hamon-composed-consumer-receiving/1",
+  "team": "hamon-e95e7d4e6bc8-20261025",
+  "date": "2026-10-25",
+  "base": "055a1982424f57c7b46ce2ab74fa4692c59e2c72",
+  "originalPullRequest": 140,
+  "originalHead": "3b9457bb5ef2873c05b16c6625f9d477c75e02c5",
+  "sourceArchiveSha256": "a12d5a03245c9e329acd73f7b6af8fcdca483d4ea21a2650114f9e1ba84833cb",
+  "sourceFiles": {
+    "README.md": "1fef9387e24d7c4ac22e979acd6b1468207e3a52",
+    "server.mjs": "6f714736b9bbf952697f00bd83056e46d164df7d",
+    "web/response-family.html": "1c8da5b87def647e3f903964879180db8ef63a4f",
+    "src/response-holdout.mjs": "d5cd3e283d4b6d71e9e0d3ec981c50a135e4390e",
+    "web/response-holdout.css": "3cee7fa7bcefedde8e6d88588aafc86a1d9e8ba5",
+    "web/response-holdout.html": "824e17afa489e6c45d13480ad67ab965a3c7477c",
+    "web/response-holdout.mjs": "fb5e6da2f771dc9b51f0543073a24dae6c88989e",
+    "web/response-holdout-worker.mjs": "d98e187559b5715f32697ee1f563b94529bb49d1",
+    "test/response-holdout.test.mjs": "52f785ebeadcdcaa21fed98cad734a1f20987650",
+    "test/response-holdout-independent.test.mjs": "40cb4ed1fc10988973f9040749a20146d81a6221",
+    "tools/browser-response-holdout.mjs": "8642e89d9d3dfa98a66905dad6df4a12e44dce88",
+    "docs/receipts/e95e7-pr140-independent/review.json": "5da5fb762017f4f5c74a6dfe781975b632e06114",
+    "docs/receipts/99b09-133-20261024/verification.json": "38e411f358bc7fd431ba498ef8f27cd9974d0f8e"
+  },
+  "native": {
+    "runtime": "Node 22.23.4",
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Affected native tests and maintained integration dependencies; not a whole-repository test claim."
+  },
+  "browser": {
+    "runtime": "Chrome 156.0.8078.47",
+    "sandbox": "Namespace/PID/network and seccomp observed active before product receiving",
+    "groups": 7,
+    "errors": 0,
+    "externalRequests": 0,
+    "receipt": "browser.json",
+    "screenshots": [
+      {
+        "path": "docs/receipts/response-holdout-e95e7-20261025/narrow.png",
+        "sha": "a8dfcce7c8037769f9b959e73ec4c83affcb12df"
+      }
+    ]
+  },
+  "independent": {
+    "datasets": 60,
+    "omissions": 240,
+    "oracle": "Independent pair-of-boundaries linear-program enumeration",
+    "composition": "Every existing server route retained; readable result columns and actual keyboard horizontal scrolling verified at 390 px.",
+    "retainedFailure": "First latest-main runtime package lacked the newly imported native/sequence-edge.mjs dependency and exited before browser load. Complete exact dependency closure was transferred and the actual browser rerun passed."
+  },
+  "limits": [
+    "Authored geometry controls; not measured physical transfer accuracy or learned skill.",
+    "Omission auditing does not rank one observation as faulty and numeric mode does not authenticate source photographs."
+  ]
+}

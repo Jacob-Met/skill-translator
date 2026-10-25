@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "actual Chrome sandbox active",
+    "actual producer download and omission consumer receiving",
+    "complete three-size prediction and real input-only download",
+    "wrong-source import retains accepted original findings",
+    "conflict does not falsely identify one faulty row",
+    "fresh narrow-screen reopening and keyboard selection",
+    "late file read cannot replace a newer accepted example"
+  ],
+  "errors": [],
+  "offsite": []
+}

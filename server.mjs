@@ -6,6 +6,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/web/response-holdout.css":["web/response-holdout.css","text/css; charset=utf-8"],
+  "/response-holdout":["web/response-holdout.html","text/html; charset=utf-8"],
+  "/src/response-holdout.mjs":["src/response-holdout.mjs","text/javascript; charset=utf-8"],
+  "/web/response-holdout.mjs":["web/response-holdout.mjs","text/javascript; charset=utf-8"],
+  "/web/response-holdout-worker.mjs":["web/response-holdout-worker.mjs","text/javascript; charset=utf-8"],
   "/src/clock-quotation.mjs":["src/clock-quotation.mjs","text/javascript; charset=utf-8"],
   "/src/narration-clock.mjs":["src/narration-clock.mjs","text/javascript; charset=utf-8"],
   "/web/narration-clock.mjs":["web/narration-clock.mjs","text/javascript; charset=utf-8"],

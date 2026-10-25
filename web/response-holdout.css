@@ -1,0 +1,11 @@
+@import url('/web/response-family.css');
+pre{max-width:100%;overflow:auto;font-size:.85rem}
+p,li,h2{overflow-wrap:anywhere}details{margin-top:20px}select{width:100%}
+/* Keep readable columns inside a keyboard-scrollable region on narrow screens. */
+.table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.table-wrap table{min-width:720px;table-layout:fixed}
+.table-wrap th,.table-wrap td{overflow-wrap:break-word;vertical-align:top}
+.table-wrap th:first-child,.table-wrap td:first-child{width:22%}
+.table-wrap th:last-child,.table-wrap td:last-child{width:30%}
+.table-scroll-help{font-size:.9rem;margin-bottom:0}
+@media(min-width:800px){.table-scroll-help{display:none}}
