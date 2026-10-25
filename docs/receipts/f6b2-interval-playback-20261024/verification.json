@@ -1,0 +1,126 @@
+{
+  "format": "hamon-receiving/v1",
+  "project": "skill-translator",
+  "issue": 229,
+  "sourceBase": "9f04fff0ae8320b238cb94aa1596b9679e031daf",
+  "initialBase": "76584f302070010472a69f95a22a204da4c587e8",
+  "owner": "hamon-f6b2-estate-20261024",
+  "files": [
+    {
+      "path": "web/interval-playback.mjs",
+      "bytes": 3166,
+      "sha256": "98ce2f105e9187dc68b06c98f33914b302be78daeb507446f21c152544c83ca7",
+      "gitBlob": "fbd9e5b796fe518dec79d2589a961c4082201379"
+    },
+    {
+      "path": "web/path-timing-playback.mjs",
+      "bytes": 6973,
+      "sha256": "d8157e77cf2cf44e63bf4ee24e2de76f08e63213d7de070a3e61ac128bc38a69",
+      "gitBlob": "33a9cdbead435dd96fcfc3e9226197f928227556"
+    },
+    {
+      "path": "test/interval-playback.test.mjs",
+      "bytes": 3737,
+      "sha256": "13b7f995649f52aa8013e2bf606a378e3f73fa4b16a33b1b54c8d37a80e00095",
+      "gitBlob": "3fbb427c9350f9b6dcc14023954bb08f3b8b7ecc"
+    },
+    {
+      "path": "web/path-timing.mjs",
+      "bytes": 8604,
+      "sha256": "8e6ab8747cebd12d115d3ca25e9c9fbd3d243e4167b7514b3ba0d49698ee73bf",
+      "gitBlob": "8cd6f899facebf5129e47f28bc4faeb81cb67de5"
+    },
+    {
+      "path": "web/path-timing.html",
+      "bytes": 2818,
+      "sha256": "ca3bb67ee32de54123fbdb465c23bd7257b52b2e666b4aa94eac8b8623886f28",
+      "gitBlob": "9e66793dec81aaa5edc3ceebedd306079b293f3e"
+    },
+    {
+      "path": "web/path-timing.css",
+      "bytes": 1781,
+      "sha256": "041efe52a2f8b0cf6aa344bf1862d2c8c348fe48d152852c96ee909828d2056b",
+      "gitBlob": "9c58a916a133d60ca97f0244fc6552af84b852d7"
+    },
+    {
+      "path": "tools/browser-interval-playback.mjs",
+      "bytes": 11447,
+      "sha256": "c5f4b80926b7aa47676c4dac3c3e5f0b50eda729c9ee1e3075ab7575ab9f717c",
+      "gitBlob": "de2bbaf12fabcef69d397bbf3f50f345f3afc340"
+    },
+    {
+      "path": "docs/INTERVAL_PLAYBACK.md",
+      "bytes": 3711,
+      "sha256": "bbdda5a353f99bd080a20082065cc5cc746b0fb6d7ca14cb72af402844db198a",
+      "gitBlob": "c78050f1a9b2a7c8c4aba2a2d670d0c8f55a2e5c"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 32940,
+      "sha256": "ff0bcfee3bf90e39f14dae420ea3404ab342fe9d280104d171ebb33371656b7f",
+      "gitBlob": "63294e523a078ec6ca76728525458b143193a52c"
+    }
+  ],
+  "native": {
+    "command": "node --test",
+    "passed": 758,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "command": "PLAYWRIGHT_PATH=... CHROME_PATH=/usr/bin/google-chrome-stable QA_DIR=... node tools/browser-interval-playback.mjs",
+    "source": "9f04fff0ae8320b238cb94aa1596b9679e031daf",
+    "browser": "156.0.8078.47",
+    "groups": 9,
+    "passed": true,
+    "coverage": [
+      "maintained-frame-capture-and-path-producer",
+      "actual-timing-comparison",
+      "exact-clip-rename",
+      "wrong-clip-preserves-accepted",
+      "native-rate-presented-offsets",
+      "interval-change-retires-playback",
+      "native-controls-distinct",
+      "viewing-preserves-export",
+      "stale-digest-closes-source-and-mobile"
+    ],
+    "actualReport": "Stopped: first presented frame at or after endpoint. First 0.000 s; last 0.500 s. Start offset 0.000 s; end offset 0.000 s. These are decoder presentation observations.",
+    "firstClip": {
+      "name": "first.webm",
+      "mimeType": "video/webm",
+      "sizeBytes": 4075,
+      "sha256": "3f314ca83abd0349d7f877dd0dff30d5e60a25f9f2e9600a427edf7316c39e62",
+      "durationSeconds": 2
+    },
+    "secondClip": {
+      "name": "second.webm",
+      "mimeType": "video/webm",
+      "sizeBytes": 4078,
+      "sha256": "bf71ec875c1d3d44efbabcbaccc295c1338e6cfc01874c9548b8137342c25219",
+      "durationSeconds": 4
+    },
+    "pageErrors": [],
+    "sourceMeaning": "Base revision plus the exact candidate files in this manifest",
+    "actualSandboxInspection": true
+  },
+  "review": {
+    "independentReviewer": "retained MECHANISM worker",
+    "scope": "Exact helper, consumer, timing integration, controls, maintained clip acquisition/identity and limits; no material blocker. Root actual desktop/narrow screenshots inspected."
+  },
+  "composition": {
+    "verifiedInitialBaseBlobs": 569,
+    "incomingSourceFiles": 14,
+    "server": "Composed both additive playback asset routes onto fresh current server while retaining incoming target-cue and path-comparison changes."
+  },
+  "observations": [
+    "Generated original four-frame VP9 clips at2fps and1fps were decoded by the real browser; the maintained frame/capture/sequence/path producers created and downloaded both original source bundles.",
+    "Two explicitly matched intervals preserve2x encoded elapsed time; optional viewing leaves the comparison export byte-for-byte equivalent as parsed source data.",
+    "Renamed identical bytes admitted; different original refused while prior clip remains. Interval changes stop managed playback, and delayed original hashing cannot reinstall removed clips."
+  ],
+  "limitations": [
+    "Independent decoder presentation, not synchronized replay or physical real-time proof.",
+    "Actual first/last presented timestamps and endpoint offsets are reported; source ending is distinct from first frame at or beyond requested endpoint.",
+    "Generated controls are original test media, not physical demonstration footage or skill validation.",
+    "No upload, deployment or original clip embedded in comparison downloads."
+  ]
+}
