@@ -1,0 +1,221 @@
+{
+  "team": "hamon-b56d209b-20261024",
+  "issue": 225,
+  "qualifiedBase": "fb5611ae84ff05cee95db4148a1748fcdbc1b78b",
+  "sourceClosure": {
+    "server.mjs": "32dd883fc6e6a174f1c904001c29fc4377042cd5",
+    "native/sequence-edge.mjs": "f672b6422e7ac41d762b47cd31b8d207807a0622",
+    "src/demonstration-sequence.mjs": "3030edd3ad809cab11fc220365aacb34e2d01b42",
+    "src/frame-origin.mjs": "9154d9e63255de95152e3137d5790de5e9f00e42",
+    "src/geometry.mjs": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061",
+    "src/capture.mjs": "763d09298e03c4275b802c83df92c773de62cd67",
+    "src/authoring.mjs": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5",
+    "src/sequence-capture.mjs": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b",
+    "src/capture-editing.mjs": "570ee1ac63928e5837920288243e8ea7621936c9",
+    "src/sequence-edge.mjs": "ca6d46f12e5ad15c54a4d9c1acc430149071b818",
+    "src/sequence-edge-field.mjs": "1515280bd71fe4066633b015b9bd8937dbb6263e",
+    "web/decision-comparison.html": "4ac7103a4673df0c9f75e950f3d7920b849a9e00",
+    "web/decision-comparison.css": "6f67a401f32a4d0d1886f833d84f54f3c24c47e1",
+    "web/decision-comparison.mjs": "0b41450b149d3b39214e39d60e565b3f887cfa63",
+    "src/decision-comparison.mjs": "c9b3df510934428cc1e72bf18207e3cbde438b20",
+    "src/decision-practice.mjs": "5e7d040eb72a9bab753beccc0ff151187daaeb99",
+    "web/sequence-input.mjs": "bf4ece2d96b15bdb8ee88ff537d92f39032c5d6a",
+    "web/image-input.mjs": "954e74a63557cfd2adf53c7be028f134b287e59f",
+    "web/order-evidence-input.mjs": "63be6e9e4722656694cdc83ac3e98ad1e93d830a",
+    "src/order-evidence.mjs": "947c515509de9e5328a689fd6c128b0495f4b2b8",
+    "src/prerequisite-rehearsal.mjs": "b499945c38250474cb3bd41a1b1a87cd757e6a3b",
+    "web/decision-comparison-input.mjs": "1c5458af5f348c0a27d4ffa58946de6cc6004201",
+    "test/decision-comparison.test.mjs": "0225e6e2a0c2a177e90ae8c280ccdebcb8c76e09",
+    "src/account-question.mjs": "dd0017025d564fb1eca51e892b8da0b2c7140065",
+    "web/account-question.mjs": "e058ad36d5ea34644930c06865e9d3836214f692",
+    "test/account-question.test.mjs": "10e2dcd865868bbdd88e418d70293e34b0af252a",
+    "tools/browser-account-question.mjs": "ccf8a8a0a83a72832865ce652ffdc47f10efabec",
+    "docs/ACCOUNT_QUESTIONS.md": "16ca9a205c87cbd4d4c96138a0ee3907d51f3aed",
+    "src/account-reply.mjs": "2577ef5eefb2793fe694938776fd7a4bed85d895",
+    "web/account-reply.mjs": "d68ff6c6affd9460a4a033231f8acb51463851ab",
+    "test/account-reply.test.mjs": "74c8ef75de9a2822a6d3a3f0bd637218c5c0401e",
+    "tools/browser-account-reply.mjs": "577797925cda4cc8b415e321152210cf83838ce4",
+    "docs/ACCOUNT_REPLIES.md": "fd06a11d663d81990f286158a31676ea2990150c",
+    "src/reply-comparison.mjs": "0048a52610def62c6224ac74eb07d30fa88308c4",
+    "web/reply-comparison.mjs": "aae19cd0fa815bb6765140bfc922f7a5bb31f694",
+    "test/reply-comparison.test.mjs": "e59a9f20d64232ecb1658905290c887c3a623f34",
+    "tools/browser-reply-comparison.mjs": "f74da1731379e6c26fcefb464c2a87d9b5f43b74",
+    "docs/REPLY_COMPARISON.md": "07eae56223b6dd10a71d51ea0802f63c5966ee5e",
+    "src/cue-practice.mjs": "2d0d5632f4b8647ef28afe48b6159a483079f7a8",
+    "test/decision-transfer.test.mjs": "ee4e5dac726db5e180ee7ff62177c53ff0ac169a",
+    "web/sequence.html": "da6048283211570cf45232a4f3dd05a50db4e02e",
+    "web/sequence.css": "7cc2ed474ae40bad3ff346129dbe46f5fab842e3",
+    "web/narration-moments.css": "c47438949d613b13f8d1c1b1ab6cb70f0cdcd6e3",
+    "web/sequence.mjs": "8c5585a5179b0639c842755d91927706cf50b1aa",
+    "web/narration-moments.mjs": "4f0b635531661c6a47f7cb0cc1802f0148255d18",
+    "src/timed-narration.mjs": "621f65d37f6c804f8418de97dafe175f60d89041",
+    "vendor/captionverse/subtitles.mjs": "4f3b99c29948a6e11f65c32b38cb0e1155695efb",
+    "vendor/captionverse/core.mjs": "a7455aec1f27d23b27b540a6770c57d917f49b4a",
+    "vendor/captionverse/cue-index.mjs": "272cbf959c738bb0dace95e062b088988b49ec61",
+    "vendor/captionverse/word-timing.mjs": "03e9cf5360be108df41c164c43c87aaa83244dde",
+    "vendor/captionverse/sound-motion.mjs": "7f638f1ab1138e4e1a78f91c9431821e56de0609",
+    "src/narration-moments.mjs": "da90b5de9a6547ff0664ee2a1a1a5d68b1a8377d",
+    "src/practice.mjs": "a2bad45c47a4209f72bb99fcb18405870f85ace5",
+    "src/learner-observation.mjs": "f020776d665d0148c001c22dd9d7d336bd02ecb0",
+    "web/video-input.mjs": "840b8fe255e7694b0e184d14a630263099a476d8",
+    "src/visual-scan.mjs": "c787797d98c7ae431dc21e3141d6529a402282b8",
+    "web/visual-scan.mjs": "beac6fd3c2565a22fdd8158b7e7f4e21a82dc30e",
+    "src/decision-transfer.mjs": "e68f0a32676e47d3f29bf21699399cfdcd8cad5a",
+    "web/decision-transfer.mjs": "9259b97bd7736e753901368d846c68d98878f313",
+    "web/decision-transfer-input.mjs": "8bc5036b2cc52de99d209903df2462128a718faf",
+    "web/decision-transfer.html": "eaedb33454209aec42ba7d032fbf772660cdd9b2",
+    "src/amendment-set.mjs": "93182dc252f4b2f9338f9c41f786026b4f18e084",
+    "web/amendment-set.mjs": "d48e4d9278da26c1c94676f3805a63f17ca5ec28",
+    "test/cue-transfer.test.mjs": "97db5d1edbeb365f594221699ec7c8b711188cef",
+    "tools/browser-cue-transfer.mjs": "9fcae31d370b7b13bbf33240bf67a394231667e2",
+    "docs/CUE_TRANSFER.md": "161a5cb5d057e0a97195155ecf4c2108f9036654",
+    "tools/browser-cue-transfer-source.mjs": "f516fcb30ef21a46ba8a33456247921e227a82f1",
+    "tools/acquire-cue-source.py": "20ca9a40b7eeffef22541c134d5620a4828face6",
+    "tools/capture-cue-source.mjs": "5f66803d4a04b341a06b9012961b8653990ba9cf",
+    "src/visual-span.mjs": "3af56335cc2a57c1dffd4ef5d2b263b89237a183",
+    "web/visual-span-view.mjs": "86387198af4474f79e748fb9fb591afbb8fd9b02",
+    "src/scan-change-regions.mjs": "ee37a5bf925e45a0129dada27a12eac612fb3293",
+    "web/scan-change-regions.mjs": "484c050ea8889bc8e8b7e6364f5a3c5e03f09433",
+    "vendor/microverse/pixel-observations.mjs": "425437d463262f1981a04480f22ec45fbd465693"
+  },
+  "ownedSourcePaths": [
+    "src/decision-transfer.mjs",
+    "web/decision-transfer.mjs",
+    "web/decision-transfer-input.mjs",
+    "web/decision-transfer.html",
+    "test/cue-transfer.test.mjs",
+    "tools/browser-cue-transfer.mjs",
+    "docs/CUE_TRANSFER.md",
+    "tools/browser-cue-transfer-source.mjs",
+    "tools/acquire-cue-source.py",
+    "tools/capture-cue-source.mjs"
+  ],
+  "runtime": {
+    "browser": "Chrome/156.0.8078.47",
+    "chromeExecutable": "/usr/bin/google-chrome-stable",
+    "sandbox": "PID namespaces and Seccomp-BPF independently asserted by authored and producer browser courses"
+  },
+  "native": {
+    "command": "node --test test/account-question.test.mjs test/account-reply.test.mjs test/cue-transfer.test.mjs test/decision-comparison.test.mjs test/decision-transfer.test.mjs test/reply-comparison.test.mjs",
+    "passed": 27,
+    "failed": 0
+  },
+  "authoredBrowser": {
+    "checks": [
+      "two original sources, frames and missing versus supplied cues",
+      "actual Chrome download retains complete raw sources",
+      "selective target help preserves draft, hidden after frame, first answer and exact original comparison in v2 download",
+      "fresh narrow bundle reopen recomputes selective assistance and withheld target",
+      "assistance-format downgrade refuses without replacing accepted rehearsal",
+      "new full reveal retires delayed import and keeps selective-help history",
+      "keyboard missing-cue request remains unknown and reveals no target outcome",
+      "ordinary full-reveal mode remains available"
+    ],
+    "errors": []
+  },
+  "actualSourceProducer": {
+    "result": "PASS",
+    "browser": "Chrome/156.0.8078.47",
+    "sourceHash": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+    "moments": [
+      {
+        "id": "moment-2212f4fb-ea29-48e2-97c4-cbbfc3194fee",
+        "requested": 4,
+        "presented": 4.012,
+        "sha256": "11e33ba39c24827cfc5f2bcefe52fff89f20ee721c5785d506f8e2443d2f0e4e",
+        "calibrated": false
+      },
+      {
+        "id": "moment-ddcb3e0a-9edb-44ac-93cb-095ed5a98552",
+        "requested": 5,
+        "presented": 4.978,
+        "sha256": "576c54facbebf3d32d87262ea245bc016971c9c67f19a4a19c83cbef78f82401",
+        "calibrated": false
+      },
+      {
+        "id": "moment-17a773ed-67a9-463c-8175-309789716c9e",
+        "requested": 6,
+        "presented": 5.978,
+        "sha256": "75641024a7196b61487bed6a2628d06c214641be2cf804a04c5e4bcf1e2b3a29",
+        "calibrated": false
+      },
+      {
+        "id": "moment-191c872b-92cb-404e-bde0-336bbc53b74b",
+        "requested": 7,
+        "presented": 7.012,
+        "sha256": "fa899a61b4ded1fa13f75c215718214e85a43590d92896d98f1df501c450823d",
+        "calibrated": false
+      },
+      {
+        "id": "moment-73da809a-e24d-4969-ac32-ab7eadab12ba",
+        "requested": 8,
+        "presented": 8.012,
+        "sha256": "c2cc3ac2d8b0dd7256b7cfbf3a9e89e5e9be01ce8c69da2f2e758f5c34b3708a",
+        "calibrated": false
+      }
+    ],
+    "frameCount": 5,
+    "observerNotesReusedFromMaintainedCapture": true,
+    "originalExpertCuesSupplied": false,
+    "errors": []
+  },
+  "actualSourceConsumer": {
+    "sourceClipSha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+    "originalMomentIdentities": [
+      {
+        "id": "moment-2212f4fb-ea29-48e2-97c4-cbbfc3194fee",
+        "time": 4.012,
+        "sha256": "11e33ba39c24827cfc5f2bcefe52fff89f20ee721c5785d506f8e2443d2f0e4e"
+      },
+      {
+        "id": "moment-ddcb3e0a-9edb-44ac-93cb-095ed5a98552",
+        "time": 4.978,
+        "sha256": "576c54facbebf3d32d87262ea245bc016971c9c67f19a4a19c83cbef78f82401"
+      },
+      {
+        "id": "moment-17a773ed-67a9-463c-8175-309789716c9e",
+        "time": 5.978,
+        "sha256": "75641024a7196b61487bed6a2628d06c214641be2cf804a04c5e4bcf1e2b3a29"
+      },
+      {
+        "id": "moment-191c872b-92cb-404e-bde0-336bbc53b74b",
+        "time": 7.012,
+        "sha256": "fa899a61b4ded1fa13f75c215718214e85a43590d92896d98f1df501c450823d"
+      },
+      {
+        "id": "moment-73da809a-e24d-4969-ac32-ab7eadab12ba",
+        "time": 8.012,
+        "sha256": "c2cc3ac2d8b0dd7256b7cfbf3a9e89e5e9be01ce8c69da2f2e758f5c34b3708a"
+      }
+    ],
+    "source": "Aerra Carnicom / Aerrapc, Scissors Cutting Card Stock, CC BY-SA 4.0; separately retained source",
+    "observerAuthoredIntervals": true,
+    "originalExpertCuesSupplied": false,
+    "allOriginalPngBytesPreserved": true,
+    "preAnswerCueRequests": 2,
+    "suppliedCueDisclosures": 0,
+    "learningEffectEstablished": false,
+    "errors": []
+  },
+  "sourceAcquisition": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Aerra%27s_Films_of_the_Ordinary_IV_--_Scissors_Cutting_Card_Stock.webm",
+    "sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+    "bytes": 1006547,
+    "attribution": "Aerra Carnicom / Aerrapc",
+    "license": "CC BY-SA 4.0",
+    "descriptionPage": "https://commons.wikimedia.org/wiki/File:Aerra%27s_Films_of_the_Ordinary_IV_--_Scissors_Cutting_Card_Stock.webm"
+  },
+  "limits": [
+    "Observer-authored intervals and notes are not expert accounts.",
+    "Two intervals from the same retained clip are not independent expert demonstrations.",
+    "Missing sensory/recovery cues remain unknown and produce zero supplied cue disclosures.",
+    "No learning effect, competence, correctness, authentication, unseen-target exposure or physical skill is established.",
+    "Actual original video, source bundles, original PNGs and screenshots containing source footage are retained separately; this repository receives numeric provenance and an authored-control capture only."
+  ],
+  "commands": [
+    "node tools/browser-cue-transfer.mjs",
+    "EDGE_VIDEO=<retained-original> EDGE_RECEIPT_DIR=<fresh-producer-output> node tools/capture-cue-source.mjs",
+    "CUE_SOURCE_SEQUENCE=<fresh-producer-output>/scissors-sequence-reviewed.json QA_OUTPUT=<fresh-receiving-output> node tools/browser-cue-transfer-source.mjs"
+  ],
+  "independentReview": "Earth and Ground bounded source/controller reviews plus root actual-source and sandboxed browser receiving; current scan dependencies preserved unchanged."
+}
