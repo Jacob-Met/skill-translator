@@ -8,6 +8,7 @@ const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
   "/sequence-edge":["web/sequence-edge.html","text/html; charset=utf-8"],
   "/web/sequence-edge.mjs":["web/sequence-edge.mjs","text/javascript; charset=utf-8"],
+  "/src/sequence-edge-study.mjs":["src/sequence-edge-study.mjs","text/javascript; charset=utf-8"],
   "/src/sequence-edge-field.mjs":["src/sequence-edge-field.mjs","text/javascript; charset=utf-8"],
   "/src/sequence-edge.mjs":["src/sequence-edge.mjs","text/javascript; charset=utf-8"],
   "/src/pair-sheet-fit.mjs":["src/pair-sheet-fit.mjs","text/javascript; charset=utf-8"],
