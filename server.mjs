@@ -6,6 +6,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/raw-rule-proposals":["web/raw-rule-proposals.html","text/html; charset=utf-8"],
+  "/src/raw-rule-proposals.mjs":["src/raw-rule-proposals.mjs","text/javascript; charset=utf-8"],
+  "/web/raw-rule-proposals.mjs":["web/raw-rule-proposals.mjs","text/javascript; charset=utf-8"],
   '/src/path-axis-prediction.mjs':['src/path-axis-prediction.mjs','text/javascript; charset=utf-8'],
   "/src/relationship-family-design.mjs":["src/relationship-family-design.mjs","text/javascript; charset=utf-8"],
   "/spatial-correspondence":["web/spatial-correspondence.html","text/html; charset=utf-8"],

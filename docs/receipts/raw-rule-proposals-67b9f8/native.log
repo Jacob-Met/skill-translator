@@ -1,0 +1,42 @@
+✔ unfamiliar rotated straight paths infer the geometric axis without extra anchors (295.682305ms)
+✔ symmetric unfamiliar noisy samples agree with an independent horizontal-axis oracle (4.485411ms)
+✔ curved excursion and held-out endpoint failures cannot masquerade as straight agreement (6.895024ms)
+✔ isotropic, coincident and insufficient samples do not receive an axis (6.553271ms)
+✔ missing samples remain explicit and source-only replay recomputes fabricated findings (6.616276ms)
+✔ orthogonal least squares beats a dense independent angle search without outlier deletion (218.518914ms)
+✔ raw annotated coordinates supply a unique inferred rule and unchanged existing practice evaluator (3.229721ms)
+✔ independent rectangular bounds reject a candidate that an enclosing circular adapter would accept (1.417761ms)
+✔ changed original annotation recomputes the inferred relationship (2.012448ms)
+✔ no evidence, unchanged-size ambiguity and unconfirmed correspondences cannot yield a source (1.629334ms)
+✔ input-only proposal replay recomputes source and refuses changed rule or evidence (4.114278ms)
+✔ exact decimal boundary comparisons admit equality and refuse a smaller original bound (1.562493ms)
+✔ the separate affine coefficient domain neither silently vetoes nor enlarges five-rule support (1.879163ms)
+✔ independently calibrated annotations feed maintained family without rewriting source (4.760711ms)
+✔ input-only replay retains full source annotations and recomputes forged coordinates (2.870862ms)
+✔ correspondence and coordinate bounds are supplied explicitly rather than inferred (0.777007ms)
+✔ existing source-bound numeric observations coexist without id collision or rebinding (0.887366ms)
+✔ declared image identity survives while malformed identity refuses without claiming pixel admission (2.788536ms)
+✔ photo-backed coordinates use maintained full-image admission rather than only hash metadata (0.412429ms)
+✔ practice tolerance does not silently become a measurement bound (0.780979ms)
+✔ complete source custody refuses oversize accounts rather than exporting an unreopenable file (7.012946ms)
+✔ reference-anchor expansion cannot produce an oversized numeric export from a small raw account (16.077923ms)
+✔ exact-capacity account uses compact download bytes and remains reopenable (74.440355ms)
+✔ an observed fixed-left relationship changes the actual target while retaining unselected marks (3.802263ms)
+✔ the original source, evidence, reasons and pixel geometry remain recoverable and unchanged (0.974985ms)
+✔ a user choice among indistinguishable surviving rules preserves the unresolved alternatives (0.549988ms)
+✔ untested and contradicted rules cannot be promoted by a choice (1.230457ms)
+✔ inconsistent observations retain no usable choice rather than discarding a failure (0.933298ms)
+✔ saved decisions recompute support and derived source instead of trusting claimed output (1.407086ms)
+✔ a forged choice or stale source anchor is refused on reopening (1.966466ms)
+✔ previous practice placements cannot silently acquire the new rule targets (11.646109ms)
+✔ invalid, duplicate or unsupported choices are refused (1.452602ms)
+✔ reported evidence stays distinct and target comparison recomputes a forged derived source (1.049987ms)
+✔ a valid new interpretation remains usable when the original physical clearance cannot fit (0.978077ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 801.484171
