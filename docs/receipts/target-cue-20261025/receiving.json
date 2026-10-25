@@ -1,0 +1,95 @@
+{
+  "issue": 226,
+  "base": "76584f302070010472a69f95a22a204da4c587e8",
+  "native": {
+    "passed": 5,
+    "node": "22.23.4",
+    "output": "TAP version 13\n# Subtest: separate source-backed reading filters reference records without fitting or inferring target action\nok 1 - separate source-backed reading filters reference records without fitting or inferring target action\n  ---\n  duration_ms: 2.89554\n  type: 'test'\n  ...\n# Subtest: target evidence cannot be a renamed copy of reference before/after evidence\nok 2 - target evidence cannot be a renamed copy of reference before/after evidence\n  ---\n  duration_ms: 1.270371\n  type: 'test'\n  ...\n# Subtest: unknown/unrecorded categories remain reference evidence states rather than target labels\nok 3 - unknown/unrecorded categories remain reference evidence states rather than target labels\n  ---\n  duration_ms: 0.48846\n  type: 'test'\n  ...\n# Subtest: attribution, unique cues and source-frame anchors are admitted before findings\nok 4 - attribution, unique cues and source-frame anchors are admitted before findings\n  ---\n  duration_ms: 1.003223\n  type: 'test'\n  ...\n# Subtest: raw replay retains separate complete sources and ignores saved findings\nok 5 - raw replay retains separate complete sources and ignores saved findings\n  ---\n  duration_ms: 0.909766\n  type: 'test'\n  ...\n1..5\n# tests 5\n# suites 0\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 12.78791\n"
+  },
+  "browser": {
+    "checks": [
+      "original four-example comparison and eight verified frame images",
+      "complementary XOR cue combinations through actual editor",
+      "actual download retains raw source accounts and inputs only",
+      "unknown cue invalidates and refuses a false complete distinction",
+      "same complete cues with different decisions exposes exact conflicting pair",
+      "fresh 390px raw-source reopening and recomputation",
+      "imported arbitrary cue identities preserve editable add/remove and existing categories",
+      "pending import cannot leave old finite-table findings under new source",
+      "mismatched retained source refuses transactionally",
+      "delayed import cannot replace a newer cue declaration",
+      "separate target and unchanged reference original PNG receiving",
+      "attributed target reading and full original source download without refit",
+      "fresh narrow keyboard replay recomputes source-bound findings",
+      "changed target source refuses while accepted source survives",
+      "different valid target PNG bytes refuse original frame identity",
+      "combined original frame budget refuses before decoding oversized target evidence",
+      "new target reading cancels delayed older source adoption"
+    ],
+    "errors": []
+  },
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "review": "SECOND GROUND independently reviewed source binding, frame anchoring, combined resource preflight, transactional source adoption, cleanup, revision/export fences and reran5native groups; no blocker. Malformed-base64 accounting hygiene repaired before receiving. Root inspected actual narrow original-evidence and question consumer.",
+  "screenshots": {
+    "narrow.png": {
+      "git_blob": "9f20956b84ad352204609577657f01b581d82b6d",
+      "sha256": "8817f4b4925a4657ff5b73265f743472841025dd88f7aa0b5d27899b74a3c6c7",
+      "bytes": 204392
+    }
+  },
+  "raw_saved_investigation": {
+    "git_blob": "fa128fb140230eab8e9248867a8432921af7be43",
+    "sha256": "869de61cf431a34eb625dd7b71ef9d731e3e225e7c3df6905c8ae62cc3a3ceb6",
+    "bytes": 37624
+  },
+  "limits": "Separate retained source identity is not proof of independent physical capture. Attributed category readings do not infer an action or prove physical success/learning. Target never enters the unchanged reference training table. Shared48MiB JSON/32MiB encodedPNG/32MP preflight remains explicit.",
+  "team": "hamon-7bb49db0-20261024",
+  "created_at": "2026-10-25T06:29:16.586545+00:00",
+  "source": {
+    "src/target-cue-study.mjs": {
+      "git_blob": "894dc3c03b446e3216f2a7817908636ff9a805af",
+      "sha256": "b4523046a7d6b9f322cd85a99ee210b13a794b9d2e644cd635499b4ef50041db",
+      "bytes": 2885
+    },
+    "web/target-cue-input.mjs": {
+      "git_blob": "df3e47b6611ca387a12b12063d0cbb32b1e3ceec",
+      "sha256": "515acb8026be7bb741b9e896866ea5980c98db42d5b5e05bc244e761902df1ea",
+      "bytes": 4565
+    },
+    "web/target-cue.mjs": {
+      "git_blob": "2de89961bb64a516a4fc03f9dc25358c843c2f12",
+      "sha256": "123abc0f357ab8db181a8f57bb6758839b1fa58aab1b48faf4696bce7def1c7e",
+      "bytes": 6937
+    },
+    "web/target-cue.html": {
+      "git_blob": "b1a3556e4f784b8722f53f9fd60e1960e89a213c",
+      "sha256": "9a9f48dab47ef210ac9422693445726b82330edb0a7d8424bc5345697cbc9c65",
+      "bytes": 2186
+    },
+    "test/target-cue-study.test.mjs": {
+      "git_blob": "d105837627d523265c3bd8e4744d9202a385e244",
+      "sha256": "f392b2c96574f95b63b9d6110ef87cbee16bdfdd399a22c1adfda8a339258923",
+      "bytes": 3928
+    },
+    "tools/browser-target-cue.mjs": {
+      "git_blob": "68b02328c7f6a312f4b65eb258c68754e5db17c2",
+      "sha256": "5ad3afc9e30788c099accade77cced51e5b2d2eb73e91a80995efdbf3a0fb500",
+      "bytes": 13992
+    },
+    "docs/TARGET_CUE_STUDY.md": {
+      "git_blob": "927a057179d1742973bede302f5fb54c6d5c2a50",
+      "sha256": "253396f6d3aebb237243dea61c24c91c105f283347fc99f6cfb40b11f0d2c43c",
+      "bytes": 2674
+    },
+    "server.mjs": {
+      "git_blob": "22956d4096a4664f906ebd8d3c36f60d81391a55",
+      "sha256": "dbe60c3af7c0b935c91097c45c5a64f802716ba9f6f3abe0e3dcd9836fb3ea3e",
+      "bytes": 32744
+    },
+    "web/cue-sufficiency.html": {
+      "git_blob": "b4d044d9f2519a8bf9d6907cbeb9816ff3718edc",
+      "sha256": "e2c46a88f932b0dd3a2c17bc04901a30f41f7bd5c3ce5d83b596cb1526247995",
+      "bytes": 1349
+    }
+  }
+}
