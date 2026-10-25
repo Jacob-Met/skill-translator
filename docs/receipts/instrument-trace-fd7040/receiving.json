@@ -1,0 +1,29 @@
+{
+  "base": "89529cd5cb14b4c5b3a8d0711b572fc9b87cada6",
+  "workerSource": "80dad7a2dff71a0002819bd61f76d7571b5392b9",
+  "runtime": "Node22.23.4 / Chrome156.0.8078.47 / ffmpeg / Linux",
+  "nativeSummary": "# tests 839\n# suites 0\n# pass 839\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 9962.165179\n",
+  "independent": {
+    "head": "80dad7a2dff71a0002819bd61f76d7571b5392b9",
+    "seed": 267131,
+    "traces": 240,
+    "independentlyCheckedIntervals": 284,
+    "checks": "threshold/gap/maximality, original indices, check failure, whole anchor support, mapped playback, stale calibration rejection",
+    "status": "passed"
+  },
+  "sha256": {
+    "src/instrument-trace.mjs": "1652e5134b6c59bec2c6f95aef3270c207eef08a8ab2e100c3ad2157f0d49314",
+    "test/instrument-trace.test.mjs": "7ddd5902928703a1f8fc23e19c26c4de89658fe1b10efe96781067bfa3d8c30f",
+    "tools/pair-instrument-trace.mjs": "1489e59abc14564d9722e69afd3aec0a9ca64d92a9c855481c2d8a13f4b4ab7c",
+    "tools/browser-instrument-trace.mjs": "5a702e3355d5617bfba5b4297821aff184bb781f1a6b8fd84c1a2b264445ddd3",
+    "web/instrument-trace.html": "36dc6140d79ef296a06d14305283df878c26882f186ba492f66d77c8d7da8477",
+    "web/instrument-trace.css": "6780fcc61c23d8e9897655953d8c959a93f7f5820100356734b758acd4371955",
+    "web/instrument-trace.mjs": "a84faa3e399bb97e1fd304b21384ee30a4de981a5d5734550fd325f86f94b85e",
+    "docs/INSTRUMENT_TRACE.md": "06088a3585ed34f252fdfedda3372a395a830b60569741745826338f4d092931",
+    "server.mjs": "32573ad88fb0b5b671b8edd7d0c60526d51f452746514caba88ee9a5134c04db",
+    "web/index.html": "4ec69fee0ebc653d15cc1cc3105d8e74863f977d00ad1e6e8e9b98b389e236bf"
+  },
+  "composition": "Only four routes and one index link inserted into exact merged shared source; current unrelated readiness alternatives preserved. Initial insufficient-context patch refused before writes; exact unique anchors and original Git hashes were then used.",
+  "review": "MATERIALTRUTH independent source/core/CLI review found no blockers; actual sandboxed browser receiving passed.",
+  "limits": "Supplied scalar/units/calibration/clock declarations and authored video controls; no physical sensor accuracy, hardware action or learning-benefit claim."
+}

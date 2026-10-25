@@ -1,3 +1,4 @@
+import {inspectCueReadingSupport} from '/src/cue-reading-support.mjs';
 import {inspectCueQuestions,inspectCueEffort,importCueQuestionPlan,CUE_QUESTION_PLAN} from '/src/cue-questions.mjs';
 const el=(tag,text)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
 export function createCueQuestionsView({anchor,getStudy,isLoading,onError,onChange=()=>{}}){
@@ -48,6 +49,27 @@ export function createCueQuestionsView({anchor,getStudy,isLoading,onError,onChan
     const label=el('label',`Supply an actually inspected category for ${name}`),input=el('input');input.maxLength=160;label.append(input);
     const apply=el('button','Retain this reading');apply.onclick=()=>{if(isLoading()){onError('Source import is pending.');return;}try{const next=[...readings,{cueId:q.cueId,value:input.value}];inspectCueQuestions(getStudy(),next);readings=next;changed();render();}catch(e){onError(e.message);}};
     section.append(label,apply);results.append(section);
+   }
+   const support=inspectCueReadingSupport(study,readings);
+   if(support.minimalUnsupportedGroups.length){
+    const explanation=el('section');explanation.id='cue-reading-support';
+    explanation.append(el('h3','Why these readings have no joint retained example'),el('p',support.boundary),el('p',`${support.minimalUnsupportedGroups.length} inclusion-minimal unsupported groups. Every supplied reading remains retained.`));
+    for(const group of support.minimalUnsupportedGroups){
+     const detail=el('details');detail.open=support.minimalUnsupportedGroups.length===1;
+     detail.append(el('summary',group.cueIds.map(id=>study.cues.find(c=>c.id===id).label).join(' + ')));
+     for(const row of group.exampleWitnesses)detail.append(el('p',`Original example ${row.index+1} is excluded by: ${row.exclusions.map(e=>`${study.cues.find(c=>c.id===e.cueId).label} — supplied “${e.suppliedValue}”, retained “${e.retainedValue}”`).join('; ')}.${row.unknownCueIds.length?' Unknown source categories do not exclude it: '+row.unknownCueIds.join(', ')+'.':''}`));
+     for(const witness of group.removalWitnesses)detail.append(el('p',`Within this group, omitting ${study.cues.find(c=>c.id===witness.cueId).label} leaves compatible original examples ${witness.compatibleExampleIndexes.map(i=>i+1).join(', ')}. This is not a recommendation to discard the reading.`));
+     explanation.append(detail);
+    }
+    results.append(explanation);
+   }
+   const unused=study.cues.filter(c=>!readings.some(r=>r.cueId===c.id));
+   if(!report.questions.length&&unused.length){
+    const extra=el('section');extra.id='cue-extra-reading';extra.append(el('h3','Retain another already inspected category'),el('p','You can challenge the remaining reference support with another category you have actually inspected. This records evidence; it does not recommend an unavailable observation or select an action.'));
+    const choose=el('select');choose.id='cue-extra-cue';for(const cue of unused){const option=el('option',cue.label);option.value=cue.id;choose.append(option);}const cueLabel=el('label','Declared cue ');cueLabel.append(choose);
+    const input=el('input');input.id='cue-extra-value';input.maxLength=160;const valueLabel=el('label','Actually inspected category ');valueLabel.append(input);
+    const retain=el('button','Retain additional reading');retain.id='cue-extra-retain';retain.onclick=()=>{if(isLoading()){onError('Source import is pending.');return;}try{const next=[...readings,{cueId:choose.value,value:input.value}];inspectCueQuestions(getStudy(),next);readings=next;changed();render();}catch(e){onError(e.message);}};
+    extra.append(cueLabel,valueLabel,retain);results.append(extra);
    }
    onError('');
   }catch(e){clear();onError(e.message);}

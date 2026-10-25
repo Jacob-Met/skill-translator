@@ -2,7 +2,7 @@
   "schema": "hamon-product-receiving/v1",
   "issue": "https://github.com/Jacob-Met/skill-translator/issues/271",
   "team": "hamon-e95e7d4e6bc8-20261025",
-  "compositionBase": "612d16a0e7b5e136237e4eb317303a3fc8c455f7",
+  "compositionBase": "8f82e8559fb78664cf9d421313c2ff8ec9b94042",
   "source": [
     {
       "path": "src/demonstration-holdout.mjs",
@@ -31,8 +31,8 @@
     },
     {
       "path": "server.mjs",
-      "sha256": "809f3d88ed0d301c13027c13a48cd94ef92412b8284733fec376ebd3a9ee593b",
-      "gitBlob": "9464c8e32f24279260743cef6f59f9f86260d311"
+      "sha256": "04303db210155c158936fdf2b1982cded321e23c5aa185c464b53c472d11cdcd",
+      "gitBlob": "8d3a0091b7e99668cbc5697698d58fe04274dc27"
     },
     {
       "path": "test/demonstration-holdout.test.mjs",
@@ -60,7 +60,8 @@
       "archiveSha256": "c49e1843cb6209b7194ae84acb9683f4ed1a29256ce8bae7d1725631f97f01cb",
       "command": "node --test --test-isolation=none test/response-holdout.test.mjs test/response-family.test.mjs test/response-holdout-independent.test.mjs test/demonstration-holdout.test.mjs"
     },
-    "browserGroups": 18
+    "browserGroups": 18,
+    "browserRecheck": "All18 actual sandboxed browser groups repeated after preserving current instrument/cue server routes; zero page errors/offsite requests"
   },
   "scope": "Retrospective conditional model sensitivity with authored original-image controls; no physical calibration, fault diagnosis or learning efficacy"
 }

@@ -1,0 +1,45 @@
+{
+  "sourceCommit": "96cc2bcf67f2851d88c458adaba7ee3d535c0288",
+  "sourceTree": "0dad6f880d852801a95f581bf45ac9df5e75c537",
+  "scope": "Canonical-blob-verified executable/test/web subset; not entire repository",
+  "verifiedFiles": 529,
+  "canonicalFiles": 1149,
+  "allMaintainedNativeTestsPresent": true,
+  "omittedGroups": {
+    "FEATURE_REHEARSAL_INTEGRATION.md": 1,
+    "FEATURE_WIDTH_INTEGRATION.md": 1,
+    "WIDTH_ALLOWANCE_INTEGRATION.md": 1,
+    "docs": 494,
+    "requirements-native-edge.txt": 1,
+    "test": 3,
+    "tools": 119
+  },
+  "runtime": {
+    "node": "22.23.4",
+    "chrome": "156.0.8078.47",
+    "sandboxActive": true
+  },
+  "native": {
+    "pass": 834,
+    "fail": 0,
+    "skip": 0,
+    "command": "node --test --test-concurrency=2 followed by every canonical test/*.test.mjs path"
+  },
+  "browser": {
+    "pass": 8,
+    "command": "node tools/browser-cue-reading-support.mjs",
+    "checks": [
+      "six original demonstrations and two explicit readings retain one reference label",
+      "blank additional category refuses without changing accepted evidence",
+      "third already-inspected reading challenges support and retires a stale export",
+      "actual raw download retains every original PNG and supplied reading without derived diagnosis",
+      "fresh narrow keyboard reopen recomputes original-row and removal witnesses",
+      "unknown categories retain a row and prevent a false unsupported-group finding",
+      "all inclusion-minimal groups remain navigable, including a pair beside a singleton",
+      "malformed replacement preserves accepted original evidence and all readings"
+    ],
+    "errors": []
+  },
+  "review": "Independent MICROVERSE source/caller review; no remaining blocker. Root composed current server routes and inspected desktop/narrow captures.",
+  "limits": "Authored categorical/PNG controls. No physical contradiction, faulty-reading attribution, action recommendation or learning-effect claim."
+}

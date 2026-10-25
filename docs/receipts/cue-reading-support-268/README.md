@@ -1,0 +1,7 @@
+# Original cue-reading support receiving
+
+Source96cc2bcf67f2851d88c458adaba7ee3d535c0288 / tree0dad6f880d852801a95f581bf45ac9df5e75c537 was composed with current grouped-omission, response-holdout and weighted-budget source. The qualified canonical-blob-verified executable/test/web subset contains529 of1149 repository files and every maintained native test; it is not a complete repository checkout. All834 native tests and8 sandboxed Chrome journey groups passed. Desktop and390px captures were visually inspected.
+
+Six authored original demonstrations support every pair of supplied categories while the complete three-category reading has no retained example. The real consumer retains all readings, explains every inclusion-minimal unsupported group with original-row exclusions and per-removal witnesses, preserves unknown categories, downloads all original PNGs and recomputes after fresh narrow keyboard reopen. The negative controls prevent stale export success and transactional source replacement on malformed input. Independent source review found no blocker.
+
+An initial browser assertion compared a maintained exporter result to a fixture without its recomputed findings; only the assertion was corrected to compare exact source format/sequence/frame bytes. Product/export behavior was not changed. These are authored conditional controls, not evidence of a physical contradiction, a faulty reading or learning benefit.
