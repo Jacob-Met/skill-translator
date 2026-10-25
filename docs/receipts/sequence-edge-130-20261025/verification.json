@@ -1,7 +1,7 @@
 {
   "issue": 174,
-  "base_commit": "f48d23dd064c141cfe92ae099a77575963aed6a1",
-  "base_tree": "114c1a7ff68cb272da16f3cb407fcdaaacc04c30",
+  "base_commit": "f5bd89e58d5deb99828bfc24eb3fd44af8631683",
+  "base_tree": "00e94e29067d59e44bd4e7b844127aa8a3342102",
   "native_contract": {
     "named_tests": 5,
     "composed_with_http": 6,
@@ -45,7 +45,7 @@
     "tools/native-sequence-edge-controls.mjs": "c77d9282835b01a9b90e48756469be3aa41a720874b0e09db31ae63f209f63e3",
     "web/sequence-edge.html": "bd9071ad5a6bf982c1decfbe58a97abbc5e415c9c64eb6cb24c97d459f9e0631",
     "web/sequence-edge.mjs": "5b4bcffa88ccb4608e8f02b410f2fd61bb98b0e4f75571db6576c021da9da5db",
-    "server.mjs": "e3e048e07e8af83e2318fea1d93928596a9afe331123ceafea3f42b6785ddfad",
+    "server.mjs": "1ce34c1976ed168722d3a5a461c3c5291bdc1bb78db9f542e6d8ff01aaf7120a",
     "web/sequence.html": "16a68644666246cf97c5e75552909b9750c05e872b9af26dc83f315dc0d086c7",
     "test/sequence-edge.test.mjs": "866be5b7d720fe6eccdc0a0efc2ea61ec4d31f657fc8ce1426deda59b51c63b6",
     "test/sequence-edge-native.test.py": "fc619a15e5d12a604961cdb90e0030eb577f1e89b37b0feb2b20413dcb99d6e0",
@@ -56,7 +56,7 @@
     "docs/receipts/sequence-edge-130-20261025/native-api-receipt.json": "e48283e0b934786fe4d4f3b5934c72764223c76a13ccd475d7e65ad32bdf2f67",
     "docs/receipts/sequence-edge-130-20261025/alpha-failed-candidate.json": "bddb46a238b03b8de4feec59d11aa0322d5fba2580e6ad9176a58a5812b282e0"
   },
-  "verified_unchanged_code_blobs": 269,
+  "verified_unchanged_code_blobs": 284,
   "alpha_correction": {
     "status": "corrected; renewed MICROVERSE independent decode review accepted and Python5/5 independently rerun",
     "old_candidate": "alpha-failed-candidate.json",
@@ -69,15 +69,15 @@
     "fresh_real_source_directory": "/tmp/skill-source-edge-alpha-corrected"
   },
   "current_composition": {
-    "upstream": "17exact current files received; remove six additive hooks and all upstream server bytes match",
-    "native": "19/19 edge, condition-judgment-set and pair-sheet native groups pass",
-    "browser": "6/6 fresh actual original-video consumer groups pass, zero errors",
+    "upstream": "12exact current files received including context-consistency closure; remove six additive hooks to reproduce all currentserver bytes",
+    "native": "6/6 edge+actual HTTP groups pass",
+    "browser": "6/6 actual original-video groups pass, zero errors",
     "fingerprints": {
-      "verified_unchanged_code_blobs": 269,
+      "verified_unchanged_code_blobs": 284,
       "missing": [],
       "mismatched": [],
       "main_touched_blob_shas": {
-        "server.mjs": "25007b40673f961d46c407cb54b99d9a35c4599b",
+        "server.mjs": "3ca5d3f85d7a7050e25e080983a977d39cd98b95",
         "web/sequence.html": "27dacf220585717e7efc37ace72af779c6ff265c"
       }
     }
