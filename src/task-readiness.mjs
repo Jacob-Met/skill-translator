@@ -4,6 +4,7 @@ import {validateSequence} from './demonstration-sequence.mjs';
 import {importPrerequisiteRehearsal} from './prerequisite-rehearsal.mjs';
 export const READINESS_FORMAT='skill-translator.task-readiness/v1';
 export const PRACTICE_READINESS_FORMAT='skill-translator.task-readiness/v2';
+export const ALTERNATIVE_READINESS_FORMAT='skill-translator.task-readiness/v3';
 const assert=(ok,message)=>{if(!ok)throw new Error(message);};
 const text=(v,label,max=1600)=>{assert(typeof v==='string'&&v.trim()&&v.length<=max,`${label} must contain bounded text`);return v.trim();};
 const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
@@ -18,14 +19,26 @@ export function createReadiness(sequence,prerequisiteRecord,definitions){
     assert(!Object.hasOwn(d,'requires'),'Use the maintained prerequisite declaration; completion checks cannot redefine dependencies');
     assert(Array.isArray(d.checks)&&d.checks.length>0&&d.checks.length<=8,'Declare 1–8 observable completion checks per step');
     const keys=new Set();const checks=d.checks.map(c=>{assert(c&&typeof c.id==='string'&&/^[a-zA-Z][\w-]{0,63}$/.test(c.id)&&!keys.has(c.id),'Check identifiers must be unique and short');keys.add(c.id);let placement; if(c.placement!==undefined){const context=readinessPracticeTask(source,d.stepId,c.placement);placement={widthMm:context.widthMm,heightMm:context.heightMm};} return {id:c.id,prompt:text(c.prompt,'Completion check'),basis:text(c.basis,'Expert basis'),...(placement?{placement}:{})};});
-    return {stepId:d.stepId,checks};
+    let completionRoutes;
+    if(d.completionRoutes!==undefined){
+      assert(Array.isArray(d.completionRoutes)&&d.completionRoutes.length>=1&&d.completionRoutes.length<=8,'Declare 1–8 explicit completion routes');
+      const routeIds=new Set(),sets=new Set(),used=new Set();
+      completionRoutes=Array.from(d.completionRoutes).map(route=>{
+        assert(route&&typeof route.id==='string'&&/^[a-zA-Z][\w-]{0,63}$/.test(route.id)&&!routeIds.has(route.id),'Completion route identifiers must be distinct and short');routeIds.add(route.id);
+        assert(Array.isArray(route.checkIds)&&route.checkIds.length>=1&&route.checkIds.length<=checks.length&&new Set(route.checkIds).size===route.checkIds.length&&Array.from(route.checkIds).every(id=>checks.some(c=>c.id===id)),'Each route needs distinct declared check identities');
+        const key=JSON.stringify([...route.checkIds].sort());assert(!sets.has(key),'Do not duplicate the same check set');sets.add(key);route.checkIds.forEach(id=>used.add(id));
+        return {id:route.id,label:text(route.label,'Completion route label',160),basis:text(route.basis,'Author equivalence basis'),checkIds:[...route.checkIds]};
+      });
+      assert(checks.every(c=>used.has(c.id)),'Every declared check must occur in an explicit completion route');
+    }
+    return {stepId:d.stepId,checks,...(completionRoutes?{completionRoutes}:{})};
   });
-  return {format:steps.some(s=>s.checks.some(c=>c.placement))?PRACTICE_READINESS_FORMAT:READINESS_FORMAT,source,prerequisites,definitions:steps,events:[]};
+  return {format:steps.some(s=>s.completionRoutes)?ALTERNATIVE_READINESS_FORMAT:steps.some(s=>s.checks.some(c=>c.placement))?PRACTICE_READINESS_FORMAT:READINESS_FORMAT,source,prerequisites,definitions:steps,events:[]};
 }
 function replay(sequence,input,additionalEvents=[]){
-  assert([READINESS_FORMAT,PRACTICE_READINESS_FORMAT].includes(input?.format),'Unsupported readiness study');
+  assert([READINESS_FORMAT,PRACTICE_READINESS_FORMAT,ALTERNATIVE_READINESS_FORMAT].includes(input?.format),'Unsupported readiness study');
   const base=createReadiness(sequence,input.prerequisites,input.definitions);
-  assert(input.format===base.format,'Practice-backed checks require the v2 readiness format');
+  assert(input.format===base.format,base.format===ALTERNATIVE_READINESS_FORMAT||input.format===ALTERNATIVE_READINESS_FORMAT?'Alternative completion routes require matching v3 format and declarations':'Practice-backed checks require the v2 readiness format');
   assert(same(base.source,validateSequence(input.source)),'The demonstration frames or authored account changed');
   assert(Array.isArray(input.events)&&input.events.length<=500,'Keep at most 500 journal events');
   const replayEvents=additionalEvents.length?[...input.events,...additionalEvents]:input.events;
@@ -48,8 +61,11 @@ function replay(sequence,input,additionalEvents=[]){
     if(memo.has(id))return memo.get(id);
     const definition=byId.get(id),blockedBy=parents.get(id).filter(dep=>!status(dep,memo).complete);
     const checks=definition.checks.map(c=>({...c,observation:observations.get(id).get(c.id)||null}));
-    const complete=blockedBy.length===0&&checks.every(c=>c.observation?.value==='pass');
-    const result={stepId:id,ready:blockedBy.length===0,complete,blockedBy,checks};memo.set(id,result);return result;
+    const routeFindings=definition.completionRoutes?.map(route=>({...route,satisfied:route.checkIds.every(id=>checks.find(c=>c.id===id).observation?.value==='pass'),unestablishedCheckIds:route.checkIds.filter(id=>checks.find(c=>c.id===id).observation?.value!=='pass')}));
+    const sharedCheckIds=routeFindings?checks.filter(c=>routeFindings.every(route=>route.checkIds.includes(c.id))).map(c=>c.id):null;
+    const satisfied=routeFindings?routeFindings.some(route=>route.satisfied):checks.every(c=>c.observation?.value==='pass');
+    const complete=blockedBy.length===0&&satisfied;
+    const result={stepId:id,ready:blockedBy.length===0,complete,blockedBy,checks,...(routeFindings?{completionAlternatives:{sharedCheckIds,routes:routeFindings}}:{})};memo.set(id,result);return result;
   }
   for(const [eventIndex,e] of replayEvents.entries()){
     // Admit the complete original journal before considering the appended event,

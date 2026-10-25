@@ -1,6 +1,6 @@
 import {readinessPracticeTask,inspectReadinessPractice} from '/src/readiness-practice.mjs';
 import {renderPracticeEvidence} from '/web/readiness-practice.mjs';
-import {renderReadinessExplanation} from '/web/readiness-explanation.mjs';
+import {renderReadinessExplanation,renderCompletionAlternatives} from '/web/readiness-explanation.mjs';
 import {createReadiness,importReadiness,readinessFindings,recordReadiness} from '/src/task-readiness.mjs';
 import {importPrerequisiteRehearsal} from '/src/prerequisite-rehearsal.mjs';
 import {openReadinessBundle,saveReadinessBundle} from '/web/task-readiness-source.mjs';
@@ -22,15 +22,38 @@ function author(){
     const after=evidence.sequence.moments.find(m=>m.id===step.afterMomentId);
     const checks=el('div');checks.className='completion-checks';
     const add=el('button','Add another completion check');add.type='button';add.className='add-completion-check';let nextCheck=1;
+    const routeSwitch=el('label','Use explicitly authored alternative completion methods '),routesEnabled=el('input');routesEnabled.type='checkbox';routesEnabled.className='completion-routes-enabled';routeSwitch.prepend(routesEnabled);
+    const routesArea=el('div');routesArea.className='completion-route-editor';routesArea.hidden=true;
+    routesArea.append(el('p','Declare the complete required check set for each method and explain why it is sufficient. Every check must appear in a method. Only one method must have all its checks satisfied, while the original prerequisites still apply. These declarations apply only to this new journal after freezing.'));
+    const routes=el('div');routes.className='completion-route-list';const addRouteButton=el('button','Add another method');addRouteButton.type='button';addRouteButton.className='add-completion-route';let nextRoute=1;
+    function syncRouteMembers(){
+      const rows=[...checks.children];
+      for(const route of routes.children){
+        const list=route.querySelector('.route-members'),existing=new Map([...list.children].map(label=>[label.dataset.checkId,label]));
+        for(const label of existing.values())if(!rows.some(row=>row.dataset.checkId===label.dataset.checkId))label.remove();
+        rows.forEach((row,index)=>{const id=row.dataset.checkId;let label=existing.get(id);if(!label){label=el('label');label.dataset.checkId=id;const input=el('input');input.type='checkbox';input.value=id;label.append(input,el('span'));}label.querySelector('span').textContent=' '+(row.querySelector('.prompt').value.trim()||`Completion check ${index+1}`);list.append(label);});
+      }
+    }
+    function updateRouteControls(){const rows=[...routes.children];addRouteButton.disabled=rows.length>=8;rows.forEach((row,index)=>{const title=`Alternative method ${index+1} of ${rows.length}`;row.querySelector('.route-title').textContent=title;row.setAttribute('aria-label',title);row.querySelector('.remove-completion-route').disabled=rows.length===1;});}
+    function addRoute(focus=false){
+      if(routes.children.length>=8)return;
+      const row=el('div');row.className='completion-route';row.setAttribute('role','group');row.dataset.routeId=`method-${nextRoute++}`;const title=el('h4','Alternative method');title.className='route-title';row.append(title);
+      for(const [key,titleText,max] of [['route-label','Method name',160],['route-basis','Author explanation: why this complete set is sufficient',1600]]){const label=el('label',titleText),input=el(key==='route-label'?'input':'textarea');input.className=key;input.maxLength=max;label.append(input);row.append(label);}
+      const members=el('div');members.className='route-members';members.setAttribute('role','group');members.setAttribute('aria-label','Checks required together for this method');row.append(el('p','All selected checks are required together in this method:'),members);
+      const remove=el('button','Remove this draft method');remove.type='button';remove.className='remove-completion-route';remove.addEventListener('click',()=>{if(routes.children.length===1)return;const index=[...routes.children].indexOf(row);row.remove();revision++;updateRouteControls();routes.children[Math.min(index,routes.children.length-1)].querySelector('.route-label').focus();});row.append(remove);routes.append(row);syncRouteMembers();updateRouteControls();if(focus)row.querySelector('.route-label').focus();
+    }
+    addRouteButton.addEventListener('click',()=>{if(routes.children.length>=8)return;revision++;addRoute(true);});
+    routesArea.append(routes,addRouteButton);routesEnabled.addEventListener('change',()=>{routesArea.hidden=!routesEnabled.checked;revision++;if(routesEnabled.checked&&!routes.children.length){addRoute();addRoute();}syncRouteMembers();});
     function updateCheckControls(){
       const rows=[...checks.children];add.disabled=rows.length>=8;
       rows.forEach((row,index)=>{const title=`Completion check ${index+1} of ${rows.length}`;row.querySelector('.check-title').textContent=title;row.setAttribute('aria-label',title);row.querySelector('.remove-completion-check').disabled=rows.length===1;});
+      syncRouteMembers();
     }
     function addCheck(focus=false){
       if(checks.children.length>=8)return;
       const row=el('div');row.className='completion-check';row.setAttribute('role','group');row.dataset.checkId=nextCheck===1?'completion':`completion-${nextCheck}`;nextCheck++;
       const title=el('h4','Completion check');title.className='check-title';row.append(title);
-      for(const [key,title] of [['prompt','Observable completion check'],['basis','Expert explanation of this check']]){const label=el('label',title),input=el('textarea');input.className=key;input.maxLength=1600;label.append(input);row.append(label);}
+      for(const [key,title] of [['prompt','Observable completion check'],['basis','Expert explanation of this check']]){const label=el('label',title),input=el('textarea');input.className=key;input.maxLength=1600;if(key==='prompt')input.addEventListener('input',syncRouteMembers);label.append(input);row.append(label);}
       if(after.calibratedTask){
         const label=el('label','Use all placement tolerances from this calibrated after-state for this check '),binding=el('input');binding.type='checkbox';binding.className='placement-binding';label.prepend(binding);row.append(label);
         for(const [key,title,value] of [['widthMm','Practice width (mm)',after.calibratedTask.source.widthMm],['heightMm','Practice height (mm)',after.calibratedTask.source.heightMm]]){const label=el('label',title),input=el('input');input.type='number';input.step='any';input.className=key;input.value=value;label.append(input);row.append(label);}
@@ -40,7 +63,7 @@ function author(){
       row.append(remove);checks.append(row);updateCheckControls();if(focus)row.querySelector('.prompt').focus();
     }
     add.addEventListener('click',()=>{if(checks.children.length>=8)return;revision++;addCheck(true);});
-    addCheck();field.append(checks,add,el('p','Declare 1–8 distinct checks. Every check needs its own evidence before this step receives completion credit. A geometric result does not supply a separate material, support or other physical observation.'));
+    addCheck();field.append(checks,add,el('p','Declare 1–8 distinct checks. By default every check is required. A geometric result does not supply a separate material, support or other physical observation.'),routeSwitch,routesArea);
     $('definitions').append(field);
   }
   $('authoring').hidden=false;$('lesson').hidden=true;
@@ -51,7 +74,7 @@ function render(){
   const previous=$('step').value;$('step').replaceChildren();
   for(const s of evidence.sequence.steps){const o=el('option',s.title);o.value=s.id;$('step').append(o);}if(evidence.sequence.steps.some(s=>s.id===previous))$('step').value=previous;
   $('ledger').replaceChildren();
-  for(const s of findings.steps){const card=el('div');card.className='entry';card.append(el('strong',evidence.sequence.steps.find(x=>x.id===s.stepId).title));for(const c of s.checks)card.append(el('p',`${c.prompt}: ${c.observation?`${c.observation.value} (${c.observation.evidenceClass}) — ${c.observation.note}`:'No retained observation'}`));for(const c of s.checks)if(c.observation?.practice){const details=el('details');details.append(el('summary','Inspect retained placement evidence'),renderPracticeEvidence(c.observation.practice));card.append(details);}$('ledger').append(card);}
+  for(const s of findings.steps){const card=el('div');card.className='entry';card.append(el('strong',evidence.sequence.steps.find(x=>x.id===s.stepId).title));card.append(renderCompletionAlternatives(s));for(const c of s.checks)card.append(el('p',`${c.prompt}: ${c.observation?`${c.observation.value} (${c.observation.evidenceClass}) — ${c.observation.note}`:'No retained observation'}`));for(const c of s.checks)if(c.observation?.practice){const details=el('details');details.append(el('summary','Inspect retained placement evidence'),renderPracticeEvidence(c.observation.practice));card.append(details);}$('ledger').append(card);}
   $('history').replaceChildren();
   for(const item of findings.journal){const p=el('p');if(item.type==='invalidation')p.textContent=`Event ${item.eventIndex+1}: downstream observation credit cleared for ${item.stepIds.join(', ')}.`;else p.textContent=`Event ${item.eventIndex+1}, ${item.stepId}: ${item.prediction} — ${item.reason}. Declared prerequisite evidence: ${item.evidenceReady?'satisfied':'not established'}. ${item.blockedBy.length?'Uncompleted prerequisites: '+item.blockedBy.join(', '):''}`;$('history').append(p);}
   populateChecks();clearReveal();
@@ -81,7 +104,7 @@ $('source-file').addEventListener('change',e=>load(e.target.files[0],false));
 $('study-file').addEventListener('change',e=>load(e.target.files[0],true));
 for(const id of ['authoring','lesson'])$(id).addEventListener('input',()=>{revision++;});
 $('freeze').addEventListener('click',guard(()=>{
-  const definitions=[...$('definitions').children].map(f=>({stepId:f.dataset.stepId,checks:[...f.querySelector('.completion-checks').children].map(row=>({id:row.dataset.checkId,prompt:row.querySelector('.prompt').value,basis:row.querySelector('.basis').value,...(row.querySelector('.placement-binding')?.checked?{placement:{widthMm:Number(row.querySelector('.widthMm').value),heightMm:Number(row.querySelector('.heightMm').value)}}:{})}))}));
+  const definitions=[...$('definitions').children].map(f=>({stepId:f.dataset.stepId,checks:[...f.querySelector('.completion-checks').children].map(row=>({id:row.dataset.checkId,prompt:row.querySelector('.prompt').value,basis:row.querySelector('.basis').value,...(row.querySelector('.placement-binding')?.checked?{placement:{widthMm:Number(row.querySelector('.widthMm').value),heightMm:Number(row.querySelector('.heightMm').value)}}:{})})),...(f.querySelector('.completion-routes-enabled').checked?{completionRoutes:[...f.querySelector('.completion-route-list').children].map(row=>({id:row.dataset.routeId,label:row.querySelector('.route-label').value,basis:row.querySelector('.route-basis').value,checkIds:[...row.querySelectorAll('.route-members input:checked')].map(input=>input.value)}))}:{})}));
   study=createReadiness(evidence.sequence,declaration,definitions);revision++;render();message('Declarations frozen. The observation journal starts empty.');
 }));
 $('step').addEventListener('change',()=>{revision++;populateChecks();resetDrafts();clearReveal();});
@@ -91,6 +114,7 @@ $('choose').addEventListener('click',guard(()=>{
   const s=readinessFindings(evidence.sequence,study).steps.find(s=>s.stepId===$('step').value),source=evidence.sequence.steps.find(x=>x.id===s.stepId);
   $('finding').append(el('h3',s.ready?'Declared prerequisites are satisfied':'Prerequisites are not established'),el('p',s.blockedBy.length?'Inspect these uncompleted prerequisites: '+s.blockedBy.join(', '):'This concerns the declared prerequisites only. Completion checks still require observations.'),el('p','Author intended result: '+source.intent));
   $('finding').append(renderReadinessExplanation({sequence:evidence.sequence,study,selectedStepId:s.stepId,urlFor:evidence.urlFor}));
+  $('finding').append(renderCompletionAlternatives(s));
   for(const edge of study.prerequisites.dependencies.filter(e=>e.after===s.stepId))$('finding').append(el('p',`Declared prerequisite ${edge.before}: ${edge.reason}`));
   for(const c of s.checks)$('finding').append(el('p',`${c.prompt} — Expert basis: ${c.basis}`));
   const moments=new Set([source.beforeMomentId,source.afterMomentId]);for(const id of s.blockedBy){const dep=evidence.sequence.steps.find(x=>x.id===id);moments.add(dep.afterMomentId);}

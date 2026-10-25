@@ -3,4 +3,5 @@
 .readiness-evidence-explanation{margin:20px 0;padding:16px;border-left:4px solid #174d4c;background:#f1f6f2}.readiness-evidence-explanation article{padding:12px 0;border-top:1px solid #ccd6cd}.readiness-evidence-explanation details{margin-top:12px}.readiness-evidence-explanation summary{cursor:pointer;font-weight:600}.readiness-evidence-explanation figure{margin:12px 0}
 
 .completion-check{border:1px solid #ccd6cd;border-radius:8px;padding:12px;margin:16px 0}.completion-check h4{margin:0 0 12px}
+.completion-route-editor{border-left:4px solid #174d4c;padding:0 12px}.completion-route,.completion-alternatives article{border:1px solid #ccd6cd;border-radius:8px;margin:16px 0;padding:12px}.completion-route input:not([type=checkbox]){display:block;width:100%}.completion-alternatives h5{font-size:1rem;margin:8px 0}.route-members label{overflow-wrap:anywhere}
 
