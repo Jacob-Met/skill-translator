@@ -1,0 +1,25 @@
+# Inspect a pair band against the whole nominal sheet
+
+The maintained pair-interpretation receiver now asks whether either declared pair band can fit anywhere on the supplied rectangular practice sheet, with both endpoints free. It keeps the original source image, all retained actual placements, both conditional assessments and the original point scores unchanged. It does not hold an observed anchor fixed, propose a correction, choose a rule or establish physical feasibility.
+
+A 32 ± 1 mm source pair cannot fit the whole nominal 10 × 10 mm sheet under this guarded geometric test: even opposite corners are only approximately 14.142 mm apart. The learner may nevertheless correctly follow the adapted 3.2 mm criterion. The new explanation distinguishes a sheet-incompatible nominal criterion from an actual placement discrepancy. When the band is not excluded, the wording says only that sheet geometry does not rule it out; other constraints remain unassessed.
+
+## Maintained arithmetic and numerical policy
+
+`polygonPairDistance` owns the exact squared extrema and rational witnesses over the two copies of the sheet rectangle. No new distance solver or calibration is introduced. `nominalGeometryPolicy` is an exact-value-preserving extraction from the existing annotation-bound module: `scale = max(1,width,height)` and `guardMm = scale * 1e-9`. Existing annotation reports retain the same scale, multiplication and output values. The pair check combines the same two endpoint guards used by the existing pair-region interpretation and keeps the operational relationship allowance `toleranceMm + 1e-9` separate.
+
+Strict exclusion compares the exact maximum squared distance against the squared positive lower band threshold after subtracting the numerical guard. A band near this threshold remains boundary-unresolved. Any admitted actual within witness conflicting with exclusion also forces unresolved status. The inherited guard is a conservative comparison policy, not a certified machine-rounding theorem, physical uncertainty interval or calibration guarantee. Square roots and displayed band values are approximate.
+
+This distinction is necessary. On a 10 × 10 sheet, a source expectation `Math.hypot(10,10)+1` and tolerance `1-1e-9` give an operational allowance of exactly 1. Opposite-corner actual placements receive within: rounded distance 14.142135623730951 differs from reference 15.142135623730951 by exactly −1. Yet a naive exact squared comparison against the rounded lower threshold would exclude the entire sheet. The maintained within verdict is preserved, and this case is explicitly boundary-unresolved.
+
+## Evidence custody and receiving
+
+No new saved answer is authoritative. The existing raw pair-interpretation record is unchanged; reopening recomputes sheet findings from admitted source, session and declarations. Original and current rounds, missing attempts and source changes keep their existing lifecycle. Geometric corner witnesses explain the range; they are not suggested replacement placements.
+
+Seven focused native tests cover strict exclusion, attainable and touching bands, the rounded-diagonal negative control, near-boundary policy, incomplete attempts, mixed transfer rules and source refusal. A portable golden control retains 12 complete original annotation reports at three sheet sizes and four point/segment/area declarations; the policy extraction preserves them byte-for-byte.
+
+The maintained browser course is extended with original-PNG small-sheet receiving, distinct incomplete and correct actual rounds, raw download/reopen, narrow keyboard changes and the rounded boundary. The frozen candidate passed all 16 actual browser groups in sandboxed Chrome 156, with no page errors, offsite requests or CSP violations. Desktop, 390px and numerical-boundary screenshots were directly inspected. Default Node discovery reported 593 passes, zero failures/skips; this includes fixture-module loads rather than 593 newly added behaviors. Seven focused behavioral groups and 12 golden compatibility reports passed. Independent reviewers accepted exact-policy and consumer-lifecycle changes. Commands, source identities, original download and limits are recorded in [verification.json](receipts/pair-sheet-fit-20261025/verification.json). Normal integration and merged receiving remain separate gates.
+
+## Current-source composition
+
+The feature was composed onto main `0de96ff094f3ef40de648b45b778f5e67955add8`, tree `96e8e4280dc4cecc3f3e7e2b9b471a39c749f887`. Only the server overlapped: its single added route preserves all current routes byte-for-byte. The complete composed run passed **606 default-discovery Node tests, zero failures/skips**, including fixture-module loads, and **16 actual sandboxed browser groups**, zero page errors/offsite requests/CSP violations. The original593/16 run, original screenshots and exact source identities remain labeled separately. Feature core, UI and browser harness were unchanged. Normal merge and merged receiving remain distinct from this qualification.

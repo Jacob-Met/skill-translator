@@ -1,0 +1,1 @@
+{"command": "node --test --test-concurrency=2", "exitCode": 0, "seconds": 11.492976597000961}

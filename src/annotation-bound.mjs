@@ -3,6 +3,12 @@
 import {derive,adapt,calibrate,fromImage,evaluate,GeometryError} from './geometry.mjs';
 import {normalizeLearnerObservation} from './learner-observation.mjs';
 import {importPractice} from './practice.mjs';
+// Shared numerical policy only: not a measurement or calibration uncertainty.
+// Callers first admit finite physical dimensions through the maintained setup.
+export function nominalGeometryPolicy(widthMm,heightMm){
+ const scale=Math.max(1,widthMm,heightMm),guardMm=scale*1e-9;
+ return {scale,guardMm};
+}
 export const ANNOTATION_BOUND_SCHEMA='skill-translator-annotation-bound/v1';
 const fail=(ok,s)=>{if(!ok)throw new GeometryError(s);};
 const copy=x=>JSON.parse(JSON.stringify(x));
@@ -40,7 +46,7 @@ export function inspectAnnotationBound(setup,observation,input){
  const sign=Math.sign(denominators[0].v);
  fail(denominators.every(q=>Math.sign(q.v)===sign&&Math.abs(q.v)>Math.max(1e-12,q.scale*1e-10)),'Region reaches a singular or numerically unsupported perspective mapping');
  const polygon=vertices.map(p=>{const q=fromImage(h,p);fail(q.u>=0&&q.u<=1&&q.v>=0&&q.v<=1,'The full declared region must remain inside the calibrated workpiece; no clipping is performed');return {x:q.u*target.widthMm,y:q.v*target.heightMm};});
- const scale=Math.max(1,target.widthMm,target.heightMm),guardMm=scale*1e-9;
+ const {scale,guardMm}=nominalGeometryPolicy(target.widthMm,target.heightMm);
  if(polygon.length===4){const turns=polygon.map((p,i)=>cross(p,polygon[(i+1)%4],polygon[(i+2)%4]));fail(turns.every(n=>n>scale*scale*1e-12)||turns.every(n=>n< -scale*scale*1e-12),'Mapped region is too thin or numerically nonconvex; use an explicit segment or point');}
  const goal={x:mark.xMm,y:mark.yMm};
  const distances=polygon.map(p=>Math.hypot(p.x-goal.x,p.y-goal.y));
