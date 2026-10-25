@@ -1,0 +1,55 @@
+{
+  "base_commit": "fd8224cb32da5c1763b22aacc20aef6f92fccfe1",
+  "base_tree": "49a22c400145c66b66e1427a5ec98922a948cdff",
+  "issue": 163,
+  "source_receiving": "541 then9 local-cache blobs verified against current GitHub tree SHA; exact server fetched via connector; all non-receipt current files present",
+  "native": {
+    "command": "node --test --test-concurrency=2 --test-isolation=none test/*.test.mjs",
+    "tests": 533,
+    "passed": 533,
+    "failed": 0,
+    "skipped": 0,
+    "base_commit": "f14ba411ff62a12949dde9f55aab6331a447542d"
+  },
+  "focused": {
+    "command": "node test/sequence-path.test.mjs",
+    "tests": 10,
+    "passed": 10,
+    "includes": "100 independent collinear analytic controls"
+  },
+  "browser": {
+    "command": "node tools/browser-sampled-path.mjs",
+    "groups": 8,
+    "passed": 8,
+    "chrome": "156.0.8078.47",
+    "screenshots": [
+      "desktop.png",
+      "narrow.png"
+    ],
+    "display": "Return-to-origin labels1 and3 are grouped at their drawing location without changing raw coordinates; final8-group course rerun."
+  },
+  "review": "Independent retained second_ground worker: real10 tests rerun and maintained producer/source/image lifecycle inspected; no blocking finding. Finite guards addressed earlier concern.",
+  "limits": "Authored analytic PNG controls only; no physical motion, physical skill, learning effect, deployment or Nebius qualification claimed. Default sandbox refused localhost; supported require_escalated execution approved local native/browser checks.",
+  "sha256": {
+    "src/sequence-path.mjs": "45d8e5fbd143a9c25d51796c0cccb99d815569e42fb801b5fc83ec859183bda4",
+    "web/sampled-path.html": "311219a1f5dcba1a69686ab68edb75c41d6e933b37bb84b0ce5ab51fcd404d39",
+    "web/sampled-path.mjs": "71fbcd7eb9d2a87cbd9b6ffed9d6b57ccdccd7a45ae31dfd9643ec380abb1f39",
+    "web/sampled-path-input.mjs": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3",
+    "web/sampled-path.css": "862d4608e6997e08d136d6a4b41b3704f1f3ced6c904b84f2b2d4c12aef8baf4",
+    "web/sequence.html": "ee08c4d6d09288be5de14ee70df9de0648262749936ecef340e87577e08dfd50",
+    "server.mjs": "586967981feade16c9fd55786753c39b67423927b22fbae6ab433e7401ed1c09",
+    "test/sequence-path.test.mjs": "cc3fb20d450da4dc6132f5a266aae1fefe6ccedd3b40debf1a30f4b4e4055927",
+    "test/helpers/sampled-path-fixture.mjs": "4d15188fed2994045f6455c6ad113424c927f484a54398a1fc5fed27a4c6b529",
+    "tools/browser-sampled-path.mjs": "439b988a32bcfc6a725fedeb742cd26b40446ec41a271df07c907dae29a8ce20",
+    "docs/SAMPLED_PATH.md": "0d8ae9fdbc55d5c7deaafb63582763e36284f9c14c9e2baf192df90af127ab0b"
+  },
+  "numerical_review": "Actual producer changed-view repeated point initially exposed a spurious143-degree turn from rounding residue. Final code uses disclosed64*Number.EPSILON*max(1,dimensions,absolute coordinates) numerical-length convention before direction normalization. Raw chords remain unchanged and tiny values render exponentially. Regression with repeated point now unresolved; resolvable1e-8mm right angle remains observed. Full533 native and8 browser groups rerun after correction.",
+  "composition": {
+    "changed_upstream": "Additive condition-outcomes and ordered-tool-access source/tests/routes; sampled-path dependencies and original sequence consumer unchanged",
+    "received": "15 nonreceipt upstream files verified by Git blob SHA; current server fetched and5 sampled-path routes appended without removing upstream routes",
+    "command": "node --test --test-isolation=none test/sequence-path.test.mjs test/server.test.mjs test/condition-outcomes.test.mjs test/ordered-tool-access.test.mjs",
+    "native_log": "ed raw admission remain explicit (13.177131ms)\n\u2714 actual HTTP serves interactive app assets without internet dependencies or traversal (114.966021ms)\n\u2139 tests 23\n\u2139 suites 0\n\u2139 pass 23\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 586.170632\n",
+    "browser_groups": 8,
+    "browser_result": "PASS"
+  }
+}
