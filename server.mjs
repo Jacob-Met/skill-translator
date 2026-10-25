@@ -155,6 +155,7 @@ const routes=Object.freeze({
   "/src/relationship-rehearsal.mjs":["src/relationship-rehearsal.mjs","text/javascript; charset=utf-8"],
 "/decision-transfer":["web/decision-transfer.html", "text/html; charset=utf-8"],
 "/src/decision-transfer.mjs":["src/decision-transfer.mjs", "text/javascript; charset=utf-8"],
+  '/src/frame-help-practice.mjs':['src/frame-help-practice.mjs','text/javascript; charset=utf-8'],
 "/web/decision-transfer-input.mjs":["web/decision-transfer-input.mjs", "text/javascript; charset=utf-8"],
 "/web/decision-transfer.mjs":["web/decision-transfer.mjs", "text/javascript; charset=utf-8"],
 
