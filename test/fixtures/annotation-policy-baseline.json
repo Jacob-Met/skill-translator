@@ -1,0 +1,667 @@
+{
+  "source": "src/annotation-bound.mjs before exact-value-preserving policy extraction",
+  "baseCommit": "f5714ea100133852a9cb5106f1b3bf1ad1ac40c6",
+  "sourceSHA256": "7b90da2b51029f0e2a729c00c706c7927652023ecf452d606327d657647d622d",
+  "cases": [
+    {
+      "widthMm": 10,
+      "heightMm": 10,
+      "halfWidthPx": 0,
+      "halfHeightPx": 0,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 30,
+          "xMax": 30,
+          "yMin": 40,
+          "yMax": 40
+        },
+        "vertices": [
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "polygon": [
+          {
+            "x": 2,
+            "y": 3
+          }
+        ],
+        "dimension": "point",
+        "target": {
+          "x": 2,
+          "y": 3
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 0,
+        "guardMm": 1e-8,
+        "status": "all-within",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 10,
+      "heightMm": 10,
+      "halfWidthPx": 1,
+      "halfHeightPx": 0,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 29,
+          "xMax": 31,
+          "yMin": 40,
+          "yMax": 40
+        },
+        "vertices": [
+          {
+            "x": 29,
+            "y": 40
+          },
+          {
+            "x": 31,
+            "y": 40
+          }
+        ],
+        "polygon": [
+          {
+            "x": 1.9,
+            "y": 3
+          },
+          {
+            "x": 2.1,
+            "y": 3
+          }
+        ],
+        "dimension": "segment",
+        "target": {
+          "x": 2,
+          "y": 3
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 0.10000000000000009,
+        "guardMm": 1e-8,
+        "status": "all-within",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 10,
+      "heightMm": 10,
+      "halfWidthPx": 0,
+      "halfHeightPx": 2,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 30,
+          "xMax": 30,
+          "yMin": 38,
+          "yMax": 42
+        },
+        "vertices": [
+          {
+            "x": 30,
+            "y": 38
+          },
+          {
+            "x": 30,
+            "y": 42
+          }
+        ],
+        "polygon": [
+          {
+            "x": 2,
+            "y": 2.8000000000000003
+          },
+          {
+            "x": 2,
+            "y": 3.2
+          }
+        ],
+        "dimension": "segment",
+        "target": {
+          "x": 2,
+          "y": 3
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 0.20000000000000018,
+        "guardMm": 1e-8,
+        "status": "all-within",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 10,
+      "heightMm": 10,
+      "halfWidthPx": 2,
+      "halfHeightPx": 3,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 28,
+          "xMax": 32,
+          "yMin": 37,
+          "yMax": 43
+        },
+        "vertices": [
+          {
+            "x": 28,
+            "y": 37
+          },
+          {
+            "x": 32,
+            "y": 37
+          },
+          {
+            "x": 32,
+            "y": 43
+          },
+          {
+            "x": 28,
+            "y": 43
+          }
+        ],
+        "polygon": [
+          {
+            "x": 1.7999999999999998,
+            "y": 2.7
+          },
+          {
+            "x": 2.2,
+            "y": 2.7
+          },
+          {
+            "x": 2.2,
+            "y": 3.3000000000000003
+          },
+          {
+            "x": 1.7999999999999998,
+            "y": 3.3000000000000003
+          }
+        ],
+        "dimension": "area",
+        "target": {
+          "x": 2,
+          "y": 3
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 0.36055512754639923,
+        "guardMm": 1e-8,
+        "status": "all-within",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 50,
+      "halfWidthPx": 0,
+      "halfHeightPx": 0,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 30,
+          "xMax": 30,
+          "yMin": 40,
+          "yMax": 40
+        },
+        "vertices": [
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "polygon": [
+          {
+            "x": 20,
+            "y": 15
+          }
+        ],
+        "dimension": "point",
+        "target": {
+          "x": 20,
+          "y": 15
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 0,
+        "guardMm": 1.0000000000000001e-7,
+        "status": "all-within",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 50,
+      "halfWidthPx": 1,
+      "halfHeightPx": 0,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 29,
+          "xMax": 31,
+          "yMin": 40,
+          "yMax": 40
+        },
+        "vertices": [
+          {
+            "x": 29,
+            "y": 40
+          },
+          {
+            "x": 31,
+            "y": 40
+          }
+        ],
+        "polygon": [
+          {
+            "x": 19,
+            "y": 15
+          },
+          {
+            "x": 21,
+            "y": 15
+          }
+        ],
+        "dimension": "segment",
+        "target": {
+          "x": 20,
+          "y": 15
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 1,
+        "guardMm": 1.0000000000000001e-7,
+        "status": "unresolved",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 50,
+      "halfWidthPx": 0,
+      "halfHeightPx": 2,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 30,
+          "xMax": 30,
+          "yMin": 38,
+          "yMax": 42
+        },
+        "vertices": [
+          {
+            "x": 30,
+            "y": 38
+          },
+          {
+            "x": 30,
+            "y": 42
+          }
+        ],
+        "polygon": [
+          {
+            "x": 20,
+            "y": 14.000000000000002
+          },
+          {
+            "x": 20,
+            "y": 16
+          }
+        ],
+        "dimension": "segment",
+        "target": {
+          "x": 20,
+          "y": 15
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 1,
+        "guardMm": 1.0000000000000001e-7,
+        "status": "unresolved",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 100,
+      "heightMm": 50,
+      "halfWidthPx": 2,
+      "halfHeightPx": 3,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 28,
+          "xMax": 32,
+          "yMin": 37,
+          "yMax": 43
+        },
+        "vertices": [
+          {
+            "x": 28,
+            "y": 37
+          },
+          {
+            "x": 32,
+            "y": 37
+          },
+          {
+            "x": 32,
+            "y": 43
+          },
+          {
+            "x": 28,
+            "y": 43
+          }
+        ],
+        "polygon": [
+          {
+            "x": 18,
+            "y": 13.5
+          },
+          {
+            "x": 22,
+            "y": 13.5
+          },
+          {
+            "x": 22,
+            "y": 16.5
+          },
+          {
+            "x": 18,
+            "y": 16.5
+          }
+        ],
+        "dimension": "area",
+        "target": {
+          "x": 20,
+          "y": 15
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 2.5,
+        "guardMm": 1.0000000000000001e-7,
+        "status": "unresolved",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 240,
+      "heightMm": 160,
+      "halfWidthPx": 0,
+      "halfHeightPx": 0,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 30,
+          "xMax": 30,
+          "yMin": 40,
+          "yMax": 40
+        },
+        "vertices": [
+          {
+            "x": 30,
+            "y": 40
+          }
+        ],
+        "polygon": [
+          {
+            "x": 48,
+            "y": 48
+          }
+        ],
+        "dimension": "point",
+        "target": {
+          "x": 48,
+          "y": 48
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 0,
+        "guardMm": 2.4000000000000003e-7,
+        "status": "all-within",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 240,
+      "heightMm": 160,
+      "halfWidthPx": 1,
+      "halfHeightPx": 0,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 29,
+          "xMax": 31,
+          "yMin": 40,
+          "yMax": 40
+        },
+        "vertices": [
+          {
+            "x": 29,
+            "y": 40
+          },
+          {
+            "x": 31,
+            "y": 40
+          }
+        ],
+        "polygon": [
+          {
+            "x": 45.6,
+            "y": 48
+          },
+          {
+            "x": 50.4,
+            "y": 48
+          }
+        ],
+        "dimension": "segment",
+        "target": {
+          "x": 48,
+          "y": 48
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 2.3999999999999986,
+        "guardMm": 2.4000000000000003e-7,
+        "status": "unresolved",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 240,
+      "heightMm": 160,
+      "halfWidthPx": 0,
+      "halfHeightPx": 2,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 30,
+          "xMax": 30,
+          "yMin": 38,
+          "yMax": 42
+        },
+        "vertices": [
+          {
+            "x": 30,
+            "y": 38
+          },
+          {
+            "x": 30,
+            "y": 42
+          }
+        ],
+        "polygon": [
+          {
+            "x": 48,
+            "y": 44.800000000000004
+          },
+          {
+            "x": 48,
+            "y": 51.2
+          }
+        ],
+        "dimension": "segment",
+        "target": {
+          "x": 48,
+          "y": 48
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 3.200000000000003,
+        "guardMm": 2.4000000000000003e-7,
+        "status": "unresolved",
+        "missing": []
+      }
+    },
+    {
+      "widthMm": 240,
+      "heightMm": 160,
+      "halfWidthPx": 2,
+      "halfHeightPx": 3,
+      "report": {
+        "id": "a",
+        "rectangle": {
+          "xMin": 28,
+          "xMax": 32,
+          "yMin": 37,
+          "yMax": 43
+        },
+        "vertices": [
+          {
+            "x": 28,
+            "y": 37
+          },
+          {
+            "x": 32,
+            "y": 37
+          },
+          {
+            "x": 32,
+            "y": 43
+          },
+          {
+            "x": 28,
+            "y": 43
+          }
+        ],
+        "polygon": [
+          {
+            "x": 43.199999999999996,
+            "y": 43.2
+          },
+          {
+            "x": 52.8,
+            "y": 43.2
+          },
+          {
+            "x": 52.8,
+            "y": 52.800000000000004
+          },
+          {
+            "x": 43.199999999999996,
+            "y": 52.800000000000004
+          }
+        ],
+        "dimension": "area",
+        "target": {
+          "x": 48,
+          "y": 48
+        },
+        "toleranceMm": 1,
+        "nominal": {
+          "within": true,
+          "errorMm": 0,
+          "dxMm": 0,
+          "dyMm": 0,
+          "toleranceMm": 1
+        },
+        "minDistanceMm": 0,
+        "maxDistanceMm": 6.788225099390862,
+        "guardMm": 2.4000000000000003e-7,
+        "status": "unresolved",
+        "missing": []
+      }
+    }
+  ]
+}

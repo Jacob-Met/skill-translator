@@ -1,0 +1,111 @@
+{
+  "issue": 179,
+  "baseCommit": "0de96ff094f3ef40de648b45b778f5e67955add8",
+  "baseTree": "96e8e4280dc4cecc3f3e7e2b9b471a39c749f887",
+  "scope": "Guarded whole-sheet nominal pair-band explanation; both endpoints free. No anchored correction, physical feasibility or learning claim.",
+  "native": {
+    "command": "node --test --test-concurrency=2",
+    "pass": 606,
+    "fail": 0,
+    "skip": 0,
+    "execution": "native-composed-v1-result.json",
+    "log": "native-composed-v1.tap.gz",
+    "discovery": "Default Node discovery includes fixture-module loads; not directly comparable to earlier test/*.test.mjs-only counts."
+  },
+  "focusedNative": {
+    "command": "node --test --test-isolation=none test/pair-sheet-fit.test.mjs",
+    "behavioralGroups": 7,
+    "goldenPriorAnnotationReports": 12
+  },
+  "browser": {
+    "command": "CHROME_BINARY=/opt/google/chrome/chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=<isolated179-composed-v1> node tools/browser-pair-interpretations.mjs",
+    "groups": 16,
+    "execution": "browser-composed-v1-result.json",
+    "receipt": "browser-composed-v1.log",
+    "errors": [],
+    "offsite": [],
+    "csp": [],
+    "version": "156.0.8078.47",
+    "sandbox": "chromiumSandbox true; observed Namespace/PID/network/seccomp/adequately-sandboxed text retained in browser receipt"
+  },
+  "sourceSHA256": {
+    "src/pair-sheet-fit.mjs": "0d54b0a34b1ec19122a9f689354699967b1b36e23e5c1b8bb4b3e8d86e9e6e02",
+    "src/annotation-bound.mjs": "293cd2f78aceb22babc450682a4b10be9f61325b9d342961811d0de9c1e29083",
+    "src/polygon-pair-distance.mjs": "797dcf802a10fc5dd17525befd9d2b6800c6d348def2c518494c31dd0071d34c",
+    "vendor/chronos/exact-halfplanes.mjs": "3f2020d8adac92ac1b82331dd5b30964a889a85d249e81cd16bb9dbba99b1150",
+    "src/pair-interpretations.mjs": "ca50dc11e2cdb5f89911cb1577eb50eac58185cf3f203463a22c433c352bf600",
+    "src/task-relationships.mjs": "e1c0a8568f04302e782c50cb17ac85a661c374847ec45d70738d84696259a563",
+    "src/practice.mjs": "283909901f4d436affc4382373e455fbf3951d221a1d4918d261453e9c6c3bd6",
+    "src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+    "src/learner-observation.mjs": "8e7b0bf128ca22ef79e33e89d3f64a2906b9340911d5b41a8b5cebead5b75431",
+    "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+    "src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+    "web/pair-interpretations.mjs": "616fe9a26c42c626d7a934c601feef20031b7e3d45d63436e06f9feab83fb427",
+    "web/pair-interpretations.html": "7f27f4ac728a029ba4a503c0092781c5beb6b79a51cc288ca0450b1e9b19bf8e",
+    "web/pair-interpretations.css": "4ceecb679c2aee507e94531afa03b4e803a7e38de0a95c28818bf15f46a7016c",
+    "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+    "web/relationships.html": "cb1dbe272e7f25536e2f6ae730149b212721761fab9ea59dd7d27dbabb9abcbf",
+    "server.mjs": "7dc885d477cba3a4638100792e1ae464b98ccf2847d9d45737b6560c6c86c800",
+    "tools/browser-pair-interpretations.mjs": "52ed2ca78165a0fadbfa98e4aa425a7439635b217aec7546be7bb745a7eee8f3"
+  },
+  "receivingIdentities": "composed-v1-identities.json",
+  "independentReviews": [
+    "independent-core-review.json",
+    "independent-consumer-review.json"
+  ],
+  "visualReview": "SKILL worker directly inspected desktop,390px and numerical-boundary screenshots. Original source, guarded nominal range, independent conditional assessments and unchanged actual point results are clear. The narrow table scrolls inside its container; keyboard round selection/page overflow exercised. Boundary control explicitly preserves unresolved geometry rather than false impossibility. Retained PNGs are from the original feature receiving, not newly labeled current-composition screenshots; unchanged runtime feature layout was exercised by the current16-group browser course.",
+  "screenshotSHA256": {
+    "sheet-fit-desktop.png": "52b6aa3ef6f2e500371f136602d56fdab45ee9d11c8d73fa20fd202a5eefd9d0",
+    "sheet-fit-mobile.png": "cf250f809c73c305e06737ebb18b69d5bae97cdf5998b9dcfe016870c2e1adbe",
+    "sheet-boundary-mobile.png": "95dfa302afbb34342a801e0876b25e65dee365f12ca23ead9de697f6330bdcba"
+  },
+  "rawDownload": "sheet-fit.json",
+  "numericalControl": "Original rounded-diagonal WITHIN witness stays within while naive exact squared exclusion becomes boundary-unresolved. The inherited scale-aware guard is comparison policy, not a certified rounding/calibration interval.",
+  "status": "Current-main composition qualified606 default-discovery native passes/0fail/skip and16 actual browsergroups; normal merge and merged consumer verification remain separate gates.",
+  "originalBaseQualification": {
+    "baseCommit": "f5714ea100133852a9cb5106f1b3bf1ad1ac40c6",
+    "baseTree": "2559f03e0e7fe7b12ee12af3d8b1453811fa723f",
+    "native": {
+      "command": "node --test --test-concurrency=2",
+      "pass": 593,
+      "fail": 0,
+      "skip": 0,
+      "execution": "native-v1-result.json",
+      "log": "native-v1.tap.gz",
+      "discovery": "Default Node discovery includes fixture-module loads; not directly comparable to earlier test/*.test.mjs-only counts."
+    },
+    "browser": {
+      "command": "CHROME_BINARY=/opt/google/chrome/chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=<isolated179-v1> node tools/browser-pair-interpretations.mjs",
+      "groups": 16,
+      "execution": "browser-v1-result.json",
+      "receipt": "browser-receipt.json",
+      "errors": [],
+      "offsite": [],
+      "csp": [],
+      "version": "156.0.8078.47",
+      "sandbox": "chromiumSandbox true; observed Namespace/PID/network/seccomp/adequately-sandboxed text retained in browser receipt"
+    },
+    "sourceSHA256": {
+      "src/pair-sheet-fit.mjs": "0d54b0a34b1ec19122a9f689354699967b1b36e23e5c1b8bb4b3e8d86e9e6e02",
+      "src/annotation-bound.mjs": "293cd2f78aceb22babc450682a4b10be9f61325b9d342961811d0de9c1e29083",
+      "src/polygon-pair-distance.mjs": "797dcf802a10fc5dd17525befd9d2b6800c6d348def2c518494c31dd0071d34c",
+      "vendor/chronos/exact-halfplanes.mjs": "3f2020d8adac92ac1b82331dd5b30964a889a85d249e81cd16bb9dbba99b1150",
+      "src/pair-interpretations.mjs": "ca50dc11e2cdb5f89911cb1577eb50eac58185cf3f203463a22c433c352bf600",
+      "src/task-relationships.mjs": "e1c0a8568f04302e782c50cb17ac85a661c374847ec45d70738d84696259a563",
+      "src/practice.mjs": "283909901f4d436affc4382373e455fbf3951d221a1d4918d261453e9c6c3bd6",
+      "src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "src/learner-observation.mjs": "8e7b0bf128ca22ef79e33e89d3f64a2906b9340911d5b41a8b5cebead5b75431",
+      "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "web/pair-interpretations.mjs": "616fe9a26c42c626d7a934c601feef20031b7e3d45d63436e06f9feab83fb427",
+      "web/pair-interpretations.html": "7f27f4ac728a029ba4a503c0092781c5beb6b79a51cc288ca0450b1e9b19bf8e",
+      "web/pair-interpretations.css": "4ceecb679c2aee507e94531afa03b4e803a7e38de0a95c28818bf15f46a7016c",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "web/relationships.html": "cb1dbe272e7f25536e2f6ae730149b212721761fab9ea59dd7d27dbabb9abcbf",
+      "server.mjs": "176e8fcbb1f2516433279e769350ac7cf5ccf248d3eb74c938109b804df82a89",
+      "tools/browser-pair-interpretations.mjs": "52ed2ca78165a0fadbfa98e4aa425a7439635b217aec7546be7bb745a7eee8f3"
+    },
+    "receivingIdentities": "v1-identities.json"
+  },
+  "composition": "Only owned overlap server.mjs: one additive route onto exact0de96ff server; all incoming nonowned source preserved. All feature core/UI/harness bytes unchanged."
+}

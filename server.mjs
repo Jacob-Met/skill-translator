@@ -11,6 +11,7 @@ const routes=Object.freeze({
   "/web/pair-interpretations.mjs":["web/pair-interpretations.mjs","text/javascript; charset=utf-8"],
   "/web/pair-interpretations.css":["web/pair-interpretations.css","text/css; charset=utf-8"],
   "/src/pair-interpretations.mjs":["src/pair-interpretations.mjs","text/javascript; charset=utf-8"],
+  "/src/pair-sheet-fit.mjs":["src/pair-sheet-fit.mjs","text/javascript; charset=utf-8"],
   "/path-regions":["web/path-regions.html","text/html; charset=utf-8"],
   "/web/path-regions.mjs":["web/path-regions.mjs","text/javascript; charset=utf-8"],
   "/web/path-regions-input.mjs":["web/path-regions-input.mjs","text/javascript; charset=utf-8"],
