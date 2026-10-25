@@ -5,3 +5,5 @@
 
 
 #proposal-confirm{display:inline-block;width:auto;margin-right:8px}#proposals button{max-width:100%;overflow-wrap:anywhere;text-align:left}
+
+#proposal-evidence figure{margin:0;min-width:0}#proposal-evidence figcaption{font-weight:650}.proposal-frame{display:block;width:100%;max-height:280px;object-fit:contain}
