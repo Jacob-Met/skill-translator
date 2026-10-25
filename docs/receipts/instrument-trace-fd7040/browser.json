@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "checks": [
+    "actual encoded authored video -> original presented PNGs -> source bundle -> CLI trace pairing -> original byte-verified consumer",
+    "keyboard requested0.8–1.2s playback reports independently presented original frame times: Playback interval-end-presented; requested 0.8–1.2000000000000002 s, first presented 0.85 s, last 1.25 s. These are video presentation times, not instrument sample timestamps.",
+    "declared threshold edit retires stale playback/save, changed-input no-candidate control, actual raw-only download",
+    "fresh390px original source, downloaded trace and original clip reopen without horizontal overflow",
+    "changed source and different original clip preserve accepted evidence; failed independent clock keeps candidates but refuses playback",
+    "late trace read cannot overwrite a newer declared threshold draft"
+  ],
+  "errors": [],
+  "offsite": [],
+  "source": {
+    "kind": "authored encoded moving pattern, not physical skill",
+    "clip": {
+      "name": "authored-original.webm",
+      "mimeType": "video/webm",
+      "sizeBytes": 120687,
+      "sha256": "aa9d2defc7bd4355be76b1025015ea318e38ecadefd17d84d2ff65b4b100c1dc",
+      "durationSeconds": 4
+    },
+    "originalPresentedTimes": [
+      0.4,
+      3.45
+    ]
+  },
+  "scalarEvidence": "authored numeric readings, not instrument accuracy",
+  "browser": "Chrome/156.0.8078.47"
+}
