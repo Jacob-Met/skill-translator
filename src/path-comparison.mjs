@@ -44,7 +44,43 @@ export function inspectPathComparison(raw){
  }
  const indices=[];for(let cell=[n-1,m-1];cell;cell=previous[cell[0]][cell[1]])indices.push(cell);indices.reverse();
  const distanceMm=cost[n-1][m-1];
- const coupling=indices.map(([i,j])=>({firstIndex:i,secondIndex:j,firstMomentId:a[i].momentId,secondMomentId:b[j].momentId,firstPresentedSeconds:a[i].presentedSeconds,secondPresentedSeconds:b[j].presentedSeconds,distanceMm:distances[i][j],bottleneck:distances[i][j]===distanceMm}));
+ const coupling=couplingRecords(indices,paths,distances,distanceMm);
  return {distanceMm,coupling,paths,dimensions:dimensions[0],pairedDistancesMm:distances,
   boundary:'The minimum largest separation is a discrete Frechet comparison of nominal selected samples under the declared point and coordinate correspondence. The coupling preserves order but may repeat a sample; it is not a synchronized timeline, inferred physical correspondence, continuous path distance, speed, technique score or evidence of learning. Different sampling can change the result. No mirroring, rotation, translation or rescaling is fitted. Missing and unselected motion remains unobserved. One deterministic optimal coupling is shown; alternatives may exist. Calibration and numerical errors are not bounded by this value.'};
+}
+
+function couplingRecords(indices,paths,distances,limit){
+ const [a,b]=paths.map(p=>p.samples);
+ return indices.map(([i,j])=>({firstIndex:i,secondIndex:j,firstMomentId:a[i].momentId,secondMomentId:b[j].momentId,firstPresentedSeconds:a[i].presentedSeconds,secondPresentedSeconds:b[j].presentedSeconds,distanceMm:distances[i][j],bottleneck:distances[i][j]===limit}));
+}
+
+/** Inspect alternatives at the unchanged nominal optimum, not inferred timing. */
+export function inspectPathCouplingAlternatives(raw,choice=null){
+ const original=inspectPathComparison(raw),d=original.pairedDistancesMm,limit=original.distanceMm,n=d.length,m=d[0].length;
+ const forward=Array.from({length:n},()=>Array(m).fill(0n)),backward=Array.from({length:n},()=>Array(m).fill(0n));
+ // Every accepted cell has separation <= the original global minimum. Count
+ // all monotone prefixes and suffixes; their product counts paths through it.
+ for(let i=0;i<n;i++)for(let j=0;j<m;j++)if(d[i][j]<=limit)forward[i][j]=i===0&&j===0?1n:(forward[i-1]?.[j]??0n)+(forward[i]?.[j-1]??0n)+(forward[i-1]?.[j-1]??0n);
+ for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)if(d[i][j]<=limit)backward[i][j]=i===n-1&&j===m-1?1n:(backward[i+1]?.[j]??0n)+(backward[i]?.[j+1]??0n)+(backward[i+1]?.[j+1]??0n);
+ const total=forward[n-1][m-1];check(total>0n,'No minimizing coupling could be reproduced from the original comparison.');
+ const pairs=[];
+ for(let i=0;i<n;i++)for(let j=0;j<m;j++){
+  const through=forward[i][j]*backward[i][j];if(through===0n)continue;
+  pairs.push({firstIndex:i,secondIndex:j,firstMomentId:original.paths[0].samples[i].momentId,secondMomentId:original.paths[1].samples[j].momentId,distanceMm:d[i][j],couplingsThrough:String(through),requiredInEveryOptimalCoupling:through===total});
+ }
+ let selectedCoupling=original.coupling;
+ if(choice!==null){
+  check(choice&&typeof choice==='object'&&!Array.isArray(choice),'Choose a paired sample from the minimizing alternatives.');
+  const i=choice.firstIndex,j=choice.secondIndex;
+  check(Number.isInteger(i)&&Number.isInteger(j)&&i>=0&&j>=0&&i<n&&j<m&&forward[i][j]>0n&&backward[i][j]>0n,'Choose a pair belonging to a minimizing coupling.');
+  // A possible pair alone is not a complete comparison. Recover a full
+  // minimizing witness through it, rather than combine incompatible choices.
+  const prefix=[];let cell=[i,j];
+  while(cell){prefix.push(cell);const [x,y]=cell;cell=[[x-1,y-1],[x-1,y],[x,y-1]].find(([a,b])=>a>=0&&b>=0&&forward[a][b]>0n)??null;}prefix.reverse();
+  const suffix=[];cell=[i,j];
+  while(cell){const [x,y]=cell;cell=[[x+1,y+1],[x+1,y],[x,y+1]].find(([a,b])=>a<n&&b<m&&backward[a][b]>0n)??null;if(cell)suffix.push(cell);}
+  selectedCoupling=couplingRecords([...prefix,...suffix],original.paths,d,limit);
+ }
+ return {original,optimalCouplings:String(total),pairs,selectedCoupling,
+  boundary:'These alternatives are exact for the computed nominal sample distances and the unchanged minimum. Counts describe monotone sampled pairings, not probabilities or physical correspondence. A pair required by every computed optimum does not establish synchronized time. Possible pairs cannot necessarily be combined in one pairing; inspect a complete witness. Tiny calibration arithmetic changes may alter ties. No tolerance is silently applied.'};
 }

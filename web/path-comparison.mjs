@@ -1,23 +1,41 @@
-import {createPathComparison,inspectPathComparison} from '/src/path-comparison.mjs';
+import {createPathComparison,inspectPathCouplingAlternatives} from '/src/path-comparison.mjs';
 import {readSampledPathBundle} from '/web/sampled-path-input.mjs';
 import {readPathComparisonBundle,makePathComparisonBundle} from '/web/path-comparison-input.mjs';
 import {releaseSequenceAssets} from '/web/sequence-input.mjs';
 const $=id=>document.getElementById(id),el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 const ns='http://www.w3.org/2000/svg',svg=(tag,attrs={})=>{const n=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);return n;};
-let sources=[null,null],accepted=null,findings=null,revision=0,selected=0;
+let sources=[null,null],accepted=null,findings=null,alternatives=null,activeCoupling=[],revision=0,selected=0;
 const status=s=>{$('status').textContent=s;};
 const mm=v=>`${v!==0&&Math.abs(v)<.0005?v.toExponential(4):v.toFixed(3)} mm`;
-function invalidate(){revision++;accepted=null;findings=null;$('result').hidden=true;status('Inputs changed. Compare again to inspect their ordered samples.');}
+function invalidate(){revision++;accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status('Inputs changed. Compare again to inspect their ordered samples.');}
 function names(){for(let i=0;i<2;i++)$(i?'second-name':'first-name').textContent=sources[i]?`${sources[i].study.sequence.title} · ${sources[i].study.label} · ${sources[i].study.samples.length} selected samples`:'Not opened';}
-function show(study,result=inspectPathComparison(study)){
- accepted=study;findings=result;selected=0;$('result').hidden=false;
- $('summary').textContent=`Minimum largest paired separation: ${mm(result.distanceMm)}. ${result.coupling.length} paired samples cover both complete selected paths in order.`;
- $('limits').textContent=result.boundary;$('evidence').textContent=JSON.stringify(study,null,2);$('coupling').replaceChildren();
- result.coupling.forEach((pair,index)=>{const row=el('tr'),cell=el('td'),button=el('button',`${pair.firstIndex+1} ↔ ${pair.secondIndex+1}${pair.bottleneck?' · bottleneck':''}`);button.type='button';button.addEventListener('click',()=>{selected=index;draw();});cell.append(button);row.append(cell,el('td',`${pair.firstPresentedSeconds} s`),el('td',`${pair.secondPresentedSeconds} s`),el('td',mm(pair.distanceMm)));$('coupling').append(row);});draw();
- status('Ordered samples compared. Both original sources remain unchanged.');
+function show(study,analysis=inspectPathCouplingAlternatives(study)){
+ accepted=study;alternatives=analysis;findings=analysis.original;selected=0;$('result').hidden=false;
+ $('limits').textContent=findings.boundary;$('evidence').textContent=JSON.stringify(study,null,2);
+ $('alternative-summary').textContent=`${BigInt(analysis.optimalCouplings).toLocaleString()} computed pairings tie for this minimum. ${analysis.pairs.length} paired sample combinations occur; ${analysis.pairs.filter(p=>p.requiredInEveryOptimalCoupling).length} occur in every minimizing pairing.`;
+ $('alternative-limits').textContent=analysis.boundary;
+ $('alternative-first').replaceChildren();findings.paths[0].samples.forEach((sample,index)=>{const option=el('option',`A${index+1}: ${sample.momentLabel} · ${sample.presentedSeconds} s`);option.value=String(index);$('alternative-first').append(option);});
+ renderAlternativeChoices();renderCoupling(findings.coupling);status('Ordered samples compared. Both original sources remain unchanged.');
 }
+function renderCoupling(coupling,chosen=null){
+ activeCoupling=coupling;selected=chosen?coupling.findIndex(p=>p.firstIndex===chosen.firstIndex&&p.secondIndex===chosen.secondIndex):0;
+ $('summary').textContent=`Minimum largest paired separation: ${mm(findings.distanceMm)}. ${coupling.length} paired samples cover both complete selected paths in order.`;
+ $('witness-kind').textContent=chosen?`One complete minimizing pairing through A${chosen.firstIndex+1} ↔ B${chosen.secondIndex+1}. Other possible pairs cannot necessarily be combined with this choice.`:'The original deterministic minimizing pairing is shown.';
+ $('coupling').replaceChildren();coupling.forEach((pair,index)=>{const row=el('tr'),cell=el('td'),button=el('button',`${pair.firstIndex+1} ↔ ${pair.secondIndex+1}${pair.bottleneck?' · bottleneck':''}`);button.type='button';button.addEventListener('click',()=>{selected=index;draw();});cell.append(button);row.append(cell,el('td',`${pair.firstPresentedSeconds} s`),el('td',`${pair.secondPresentedSeconds} s`),el('td',mm(pair.distanceMm)));$('coupling').append(row);});draw();
+}
+function renderAlternativeChoices(){
+ if(!accepted||!alternatives)return;
+ const firstIndex=Number($('alternative-first').value),current=accepted;const possible=alternatives.pairs.filter(p=>p.firstIndex===firstIndex);
+ $('alternative-partners').replaceChildren();
+ for(const pair of possible){
+  const sample=findings.paths[1].samples[pair.secondIndex],button=el('button',`B${pair.secondIndex+1} · ${sample.presentedSeconds} s${pair.requiredInEveryOptimalCoupling?' · required in every pairing':''}`);button.type='button';button.dataset.first=String(firstIndex);button.dataset.second=String(pair.secondIndex);button.title=`${sample.momentLabel}. ${pair.couplingsThrough} minimizing pairings contain this pair.`;
+  button.addEventListener('click',()=>{if(accepted!==current)return;try{const result=inspectPathCouplingAlternatives(current,pair);renderCoupling(result.selectedCoupling,pair);status(`Inspecting a complete minimizing pairing through A${pair.firstIndex+1} and B${pair.secondIndex+1}. Original sources and minimum are unchanged.`);}catch(error){status(error.message);}});$('alternative-partners').append(button);
+ }
+}
+$('alternative-first').addEventListener('change',renderAlternativeChoices);
+$('default-coupling').addEventListener('click',()=>{if(accepted&&findings){renderCoupling(findings.coupling);status('Original deterministic pairing restored. The sources and minimum are unchanged.');}});
 function draw(){
- const pair=findings.coupling[selected];[...$('coupling').children].forEach((r,i)=>{r.dataset.selected=String(i===selected);r.querySelector('button').setAttribute('aria-pressed',String(i===selected));});
+ const pair=activeCoupling[selected];[...$('coupling').children].forEach((r,i)=>{r.dataset.selected=String(i===selected);r.querySelector('button').setAttribute('aria-pressed',String(i===selected));});
  $('frames').replaceChildren();
  [pair.firstIndex,pair.secondIndex].forEach((index,side)=>{
   const sample=findings.paths[side].samples[index],figure=el('figure'),view=svg('svg',{viewBox:`0 0 ${sample.image.widthPx} ${sample.image.heightPx}`,role:'img','aria-label':`${side?'Second':'First'} original frame, ${sample.momentLabel}; declared point marked`});
@@ -42,15 +60,16 @@ for(const [id,index]of [['first',0],['second',1]])$(id).addEventListener('change
 $('saved').addEventListener('change',async()=>{
  const token=++revision,file=$('saved').files[0];$('saved').value='';if(!file)return;let received;
  status('Reading saved comparison. Previous accepted work is retained until both sources pass admission.');
- try{received=await readPathComparisonBundle(file);const result=inspectPathComparison(received.study);if(token!==revision){for(const s of received.sources)releaseSequenceAssets(s.assets);return;}
+ try{received=await readPathComparisonBundle(file);const result=inspectPathCouplingAlternatives(received.study);if(token!==revision){for(const s of received.sources)releaseSequenceAssets(s.assets);return;}
   for(const s of sources)if(s)releaseSequenceAssets(s.assets);sources=received.sources;$('basis').value=received.study.declaration.basis;$('confirm').checked=true;names();show(received.study,result);received=null;
  }catch(error){if(received)for(const s of received.sources)releaseSequenceAssets(s.assets);if(token===revision)status(`Input refused: ${error.message} Previous accepted work is unchanged.`);}
 });
 $('editor').addEventListener('input',invalidate);
-$('editor').addEventListener('submit',event=>{event.preventDefault();revision++;try{if(sources.some(s=>!s))throw Error('Open both declared sampled paths first.');show(createPathComparison(...sources.map(s=>s.study),{samePointAndCoordinates:$('confirm').checked,basis:$('basis').value}));}catch(error){accepted=null;findings=null;$('result').hidden=true;status(error.message);}});
+$('editor').addEventListener('submit',event=>{event.preventDefault();revision++;try{if(sources.some(s=>!s))throw Error('Open both declared sampled paths first.');show(createPathComparison(...sources.map(s=>s.study),{samePointAndCoordinates:$('confirm').checked,basis:$('basis').value}));}catch(error){accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status(error.message);}});
 $('save').addEventListener('click',async()=>{if(!accepted)return;const token=revision,study=accepted,current=sources;try{const blob=await makePathComparisonBundle(study,current);if(token!==revision||study!==accepted){status('Inputs changed during saving. No older comparison was downloaded.');return;}const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='demonstrated-path-comparison.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(error){if(token===revision)status(`Cannot save: ${error.message}`);}});
 addEventListener('pagehide',()=>{
- revision++;for(const s of sources)if(s)releaseSequenceAssets(s.assets);sources=[null,null];accepted=null;findings=null;selected=0;
+ revision++;for(const s of sources)if(s)releaseSequenceAssets(s.assets);sources=[null,null];accepted=null;findings=null;alternatives=null;activeCoupling=[];selected=0;
  $('result').hidden=true;$('frames').replaceChildren();$('coupling').replaceChildren();$('diagram').replaceChildren();$('evidence').textContent='';
+ $('alternative-first').replaceChildren();$('alternative-partners').replaceChildren();$('alternative-summary').textContent='';$('alternative-limits').textContent='';$('witness-kind').textContent='';
  $('confirm').checked=false;$('basis').value='';names();status('Reopen the original source accounts or your saved comparison after returning to this page.');
 });

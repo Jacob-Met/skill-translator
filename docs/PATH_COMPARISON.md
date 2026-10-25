@@ -2,7 +2,8 @@
 
 From the sampled-path investigation, save two declared accounts and open
 **Compare ordered samples across two demonstrations** (`/path-comparison`).
-Each account retains its entire original demonstration and verified PNGs.
+Each account retains its complete original sequence record and verified PNGs;
+the original video file is not embedded.
 Declare that its point has the same meaning in both examples and that origin,
 axis directions, scale and corner meanings agree. Matching size labels alone
 do not establish that declaration. The instrument fits no registration.
@@ -66,3 +67,55 @@ fresh reopening, transactional refusal, delayed import/export retirement and
 390px/keyboard receiving in sandboxed Chrome. The browser course creates
 explicitly authored geometric/raster controls. It is not a physical learning
 experiment or Nebius/NVIDIA runtime qualification.
+
+
+## Inspect alternatives to the displayed pairing
+
+The original deterministic pairing is one minimizing witness. The same
+computed distance table can permit others. The comparison now reports the
+number of minimizing monotone pairings, all possible paired sample combinations
+and which pairs occur in every computed optimum. Choose a first sample, then
+one of its possible second samples to inspect a **complete** minimizing pairing
+containing that pair. The existing table, original images, point overlays and
+presented times follow this witness. **Show original pairing** returns to the
+original deterministic view without changing any source or the minimum.
+
+For the horizontal/vertical excursion control above, four computed pairings
+have the same approximately 5 mm minimum. The two middle samples are about
+7.071 mm apart and cannot be paired in any optimum. Eight combinations remain
+possible, and only the first and last pairs are required. Possible pairs cannot
+necessarily be combined arbitrarily into one complete pairing: this is why each
+selection supplies an actual full witness.
+
+For three exactly repeated nominal positions with unchanged camera calibration,
+there are thirteen minimizing pairings and all nine pairs are possible. The
+first and last pairs alone are mandatory. With separately calibrated views,
+tiny homography arithmetic differences in a nominally stationary control leave
+only the diagonal minimizing pairing. These counts describe computed nominal
+geometry; uniqueness is not evidence of physical correspondence or synchronized
+time. No numerical or physical tolerance is silently introduced.
+
+The bounded calculation counts monotone prefixes and suffixes through every
+cell whose separation is at most the unchanged original minimum. Their product
+counts complete minimizing pairings through that cell. A pair is required only
+when this count equals the total. Counts use integer arithmetic and serialize
+as decimal text. At the inherited 12-by-12 limit, an all-zero table has
+45,046,719 pairings but only 144 cells; the implementation does not enumerate
+all paths. Selected witnesses remain at most 23 cells.
+
+The original source-only bundle format is unchanged. Downloading after selecting
+an alternative still retains the original raw sources and declarations, and
+reopening recomputes alternatives and restores the original view. A selected
+pair is an inspection choice, not an adopted physical correspondence. Failed
+replacement imports preserve the currently accepted witness. Editing inputs,
+valid source replacement and navigation retire its view with the same source
+lifecycle as the original comparison.
+
+`node test/path-coupling-alternatives.test.mjs` checks six additional groups,
+including 200 producer-backed comparisons against exhaustive enumeration of all
+small-path couplings. Every possible pair gets an independently checked complete
+witness; source immutability, malformed/unavailable selections, raw recomputation,
+the numerical negative control and full 12-by-12 capacity are included. The
+maintained browser course now exercises alternative selection, original-frame
+identity, default restoration, raw-only download/reopen, refusal retention and
+keyboard/narrow inspection alongside the existing receiving controls.
