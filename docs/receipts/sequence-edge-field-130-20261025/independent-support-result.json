@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "frame": 0,
+      "edgePixels": 30411,
+      "segments": 144,
+      "allSupportExactlyMatches": true,
+      "bandMilliseconds": 5.645085000000087,
+      "cloudScanMilliseconds": 61.63794600000015
+    },
+    {
+      "frame": 1,
+      "edgePixels": 8810,
+      "segments": 34,
+      "allSupportExactlyMatches": true,
+      "bandMilliseconds": 0.4148150000000044,
+      "cloudScanMilliseconds": 3.4823689999999203
+    },
+    {
+      "frame": 2,
+      "edgePixels": 30030,
+      "segments": 122,
+      "allSupportExactlyMatches": true,
+      "bandMilliseconds": 2.0955429999999353,
+      "cloudScanMilliseconds": 43.25551400000009
+    },
+    {
+      "frame": 3,
+      "edgePixels": 23526,
+      "segments": 104,
+      "allSupportExactlyMatches": true,
+      "bandMilliseconds": 1.6398900000000936,
+      "cloudScanMilliseconds": 30.02103000000011
+    },
+    {
+      "frame": 4,
+      "edgePixels": 15983,
+      "segments": 70,
+      "allSupportExactlyMatches": true,
+      "bandMilliseconds": 0.9080289999999707,
+      "cloudScanMilliseconds": 13.664756999999895
+    }
+  ],
+  "controls": 600
+}
