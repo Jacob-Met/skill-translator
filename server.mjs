@@ -362,6 +362,7 @@ const routes=Object.freeze({
   "/rule-adoption":["web/rule-adoption.html","text/html; charset=utf-8"],
   "/web/rule-adoption.mjs":["web/rule-adoption.mjs","text/javascript; charset=utf-8"],
   "/web/rule-adoption.css":["web/rule-adoption.css","text/css; charset=utf-8"],
+  "/src/rule-proposals.mjs":["src/rule-proposals.mjs","text/javascript; charset=utf-8"],
   "/src/rule-adoption.mjs":["src/rule-adoption.mjs","text/javascript; charset=utf-8"],
   "/calibration":["web/calibration.html","text/html; charset=utf-8"],
   "/web/calibration.html":["web/calibration.html","text/html; charset=utf-8"],
@@ -424,6 +425,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
 
 
 

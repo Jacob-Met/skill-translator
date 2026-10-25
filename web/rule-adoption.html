@@ -10,8 +10,8 @@
 <h3 id="sourceTitle"></h3><p id="sourceProvenance" class="muted"></p><p id="evidenceMeta"></p>
 <div class="controls"><button id="exampleUnique">Authored rule-change example</button><button id="exampleAmbiguous">Authored unresolved example</button></div></section>
 <div id="error" role="alert"></div><div id="status" role="status" aria-live="polite"></div>
-<section class="panel"><h2>2. Choose explicitly</h2><p class="muted">Only rules compatible with retained observations can be chosen. A choice among multiple survivors remains your decision; the ambiguity is retained. Unselected marks keep their original rule.</p>
-<div id="ruleChoices"></div><p class="caution">These five geometric rules are tested under the supplied source calibration and measurement bounds. Compatibility does not establish physical skill or exclude relationships outside this family.</p></section>
+<section class="panel"><h2>2. Review proposed relationships</h2><button id="proposeRules" type="button" disabled>Propose supported rules for undecided marks</button><p id="proposalSummary" role="status"></p><p class="muted">Only rules compatible with retained observations can be chosen. A choice among multiple survivors remains your decision; the ambiguity is retained. Unselected marks keep their original rule.</p>
+<div id="ruleChoices"></div><p id="proposalLimits" class="muted"></p><p class="caution">These five geometric rules are tested under the supplied source calibration and measurement bounds. Compatibility does not establish physical skill or exclude relationships outside this family.</p></section>
 <section class="comparison"><div class="panel"><h2>3. Inspect the target change</h2><div class="dimensions"><label>Target width (mm)<input id="widthMm" type="number" min="1" max="10000" step="any" value="400"></label><label>Target height (mm)<input id="heightMm" type="number" min="1" max="10000" step="any" value="150"></label></div>
 <svg id="targetMap" viewBox="0 0 640 410" role="img" aria-label="Original and proposed task positions"></svg>
 <p class="legend">○ Original target &nbsp; ◆ Chosen-rule target &nbsp; → Change in position</p><p id="originalFailure" class="caution"></p><div id="targetChanges"></div></div>
@@ -24,4 +24,5 @@
 <footer>Original and proposed sources remain separate. Choosing a different rule does not change the source photograph or turn authored examples into measured outcomes.</footer>
 <p><a href="/relationship-discovery">Discover repeatable pair relationships across source demonstrations</a></p>
 </main><script type="module" src="/web/rule-adoption.mjs"></script></body></html>
+
 
