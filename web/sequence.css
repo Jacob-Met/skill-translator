@@ -14,3 +14,10 @@ h1,h2,h3,button{overflow-wrap:anywhere}
 .scan-interval p{margin:.4rem 0}.scan-measures{font-size:.86rem;line-height:1.5}
 .scan-preview figure{margin:.7rem 0}.scan-preview canvas{width:min(100%,320px);height:auto;display:block;background:#142a25}
 .scan-preview figcaption{font-size:.8rem;margin-top:.3rem}.visual-scan .actions{flex-wrap:wrap}
+
+.audio-activity{margin:1rem 0;padding:1rem;border:1px solid #c9c5bb;border-radius:6px;min-width:0}
+.audio-activity summary{cursor:pointer;font-weight:700}
+.audio-activity label{display:block;margin-top:.8rem}
+.audio-activity button{margin:.4rem .4rem .4rem 0;max-width:100%;white-space:normal}
+#audio-enabled{width:auto}
+#audio-status,#audio-event-detail{overflow-wrap:anywhere}
