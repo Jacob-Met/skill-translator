@@ -1,0 +1,35 @@
+{
+  "checks": [
+    "actual Chrome namespace/seccomp sandbox verified",
+    "raw annotation requires explicit correspondence and separate bounds",
+    "maintained exact-image admission displays independently authored original pixels",
+    "wrong original image refuses without replacing accepted pixels",
+    "two separately calibrated sources produce maintained mixed-response evidence",
+    "actual completed download retains every raw annotation and correspondence",
+    "source-retaining omission selects and verifies the exact original image",
+    "omitted source cannot borrow a different original image",
+    "actual numeric export is received by the maintained Response Lab",
+    "reopen recomputes from raw annotations and requires original pixel reattachment",
+    "source-only reopened account recomputes omitted predictions without saved verdicts",
+    "maintained image-coordinate refusal preserves complete accepted account",
+    "late image decode is released and cannot attach to a different source",
+    "late account import cannot overwrite a newer retained-source removal",
+    "source removal retires the previous omission audit",
+    "390px omission keyboard selection and exact original image receiving",
+    "fresh390px exact-image reattachment and keyboard source inspection",
+    "390px labeled cards expose every declaration and source-removal action"
+  ],
+  "errors": [],
+  "offsite": [],
+  "inputs": [
+    {
+      "name": "wide.png",
+      "sha256": "b7fed7aa04ad5bba1bf2e73789e7a2ce7c9f21c9614d2c3161d14d0442eb3d88"
+    },
+    {
+      "name": "tall.png",
+      "sha256": "3b5a1723366196b9d1264fda28ba35a93d7d5c3702deaa069c3030fee888e681"
+    }
+  ],
+  "limits": "Original authored PNG and analytic controls only. No physical demonstration, calibration accuracy or skill efficacy claimed."
+}
