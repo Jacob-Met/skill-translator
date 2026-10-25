@@ -5,6 +5,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/evidence-conflict-alternatives.mjs":["src/evidence-conflict-alternatives.mjs","text/javascript; charset=utf-8"],
   "/evidence-conflicts.mjs":["web/evidence-conflicts.mjs","text/javascript; charset=utf-8"],
   "/src/evidence-conflicts.mjs":["src/evidence-conflicts.mjs","text/javascript; charset=utf-8"],
   "/pair-interpretations":["web/pair-interpretations.html","text/html; charset=utf-8"],

@@ -421,3 +421,8 @@ Native checks: `node test/relationship-rehearsal.test.mjs`. Browser receiving:
 ## Inspect placements before target help
 
 The workpiece rehearsal links to `/assistance-review`. Open its original exported rehearsal to compare each retained pre-request snapshot with committed placements. Missing marks, newly added marks, later help requests and paired same-mark errors remain distinct. Uncommitted trials receive no calculated feedback; saved files retain the original producer input. This descriptive review does not estimate a causal learning effect. See [assistance review](docs/ASSISTANCE_REVIEW.md).
+
+
+### Inspect alternative smallest conflict groups
+
+The observation evidence panel can navigate every equally small conflict group with previous/next or a direct group number, while keeping the original source observations and full-family participation visible. [Alternative-group inspection](docs/EVIDENCE_CONFLICT_ALTERNATIVES.md) explains the exact rank selection and its limits.
