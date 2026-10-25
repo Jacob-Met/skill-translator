@@ -9,6 +9,7 @@ import {createObservation,analyzeEvidence,proposeEvidenceVariation,
   exportEvidence,importEvidence} from "/src/evidence.mjs";
 
 const $=id=>document.getElementById(id);
+const contextButton=document.createElement("button");contextButton.id="contextStudy";contextButton.type="button";contextButton.disabled=true;contextButton.textContent="Check a comparable context →";$("reviewRuleChoices").after(contextButton);
 const ns="http://www.w3.org/2000/svg";
 function svgEl(parent,tag,attrs={},content=""){
   const el=document.createElementNS(ns,tag);
@@ -250,6 +251,7 @@ function evidenceDrawing(result){
 function updateEvidence(){
   const result=analyzeEvidence(demo,chosen().id,observations);
   const summary=$("evidenceSummary");summary.dataset.status=result.status;
+  $("contextStudy").disabled=result.observations.length<2;
   const count=result.compatibleRules.length;
   summary.textContent=result.status==="no-evidence"?"No additional observations for this mark. All five rules remain untested.":
     result.status==="none-compatible"?"All five rules are contradicted. Recheck the evidence or consider a different relationship; none is selected automatically.":
@@ -491,6 +493,10 @@ $("useTargetSize").addEventListener("click",()=>{
   $("obsWidth").value=target.widthMm;$("obsHeight").value=target.heightMm;
 });
 $("planUncertainty").addEventListener("input",updateEvidenceProposal);
+$("contextStudy").addEventListener("click",()=>{
+  try{sessionStorage.setItem("skill-translator-context-input/v1",JSON.stringify({schema:"skill-translator-context-input/v1",source:demo,selectedMark:chosen().id,observationEvidence:exportEvidence(demo,observations)}));location.assign("/context-consistency");}
+  catch(err){error("Context input could not be opened; previous evidence remains. "+err.message);}
+});
 $("practiceTask").addEventListener("click",()=>{
   try{sessionStorage.setItem("skill-translator-practice-input/v1",JSON.stringify({demo,
     widthMm:target.widthMm,heightMm:target.heightMm,mirrored:mirrored(),showGoals:$("showGoal").checked}));
