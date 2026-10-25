@@ -10,7 +10,7 @@ Unit-count mode assumes every unread cue is available and costs one question. De
 
 ## CLI and source-only interchange
 
-The **Open a source-only unit-count budget plan against these originals** control accepts either the maintained `skill-translator.cue-budget/v1` plan or the CLI's `{input, report}` envelope. Only `input` is admitted; saved derived reports are ignored and recomputed. The original demonstration metadata, cue declarations, and decision rows must match the accepted complete study. A mismatched plan leaves accepted originals, readings, and budget intact.
+The **Open a source-only budget plan against these originals** control accepts either the maintained `skill-translator.cue-budget/v1` plan or the CLI's `{input, report}` envelope. Only `input` is admitted; saved derived reports are ignored and recomputed. The original demonstration metadata, cue declarations, and decision rows must match the accepted complete study. A mismatched plan leaves accepted originals, readings, and budget intact. The same final page also accepts weighted `skill-translator.cue-budget/v2` plans in the distinct declared-effort mode; an active effort profile must match before source-only intake. See [declared-effort budget use](CUE_EFFORT_BUDGET_CONSUMER.md).
 
 **Save source-only budget plan** emits exactly the maintained plan format, suitable for the CLI. It contains source metadata, explicit readings, and the remaining budget, but no original PNG bytes. Opening it therefore requires the matching complete study already loaded.
 
@@ -26,7 +26,7 @@ The ordinary **Save** control in unit-count mode emits:
 }
 ```
 
-The abbreviated objects above stand for the full admitted cue study and the complete original-PNG comparison bundle. `budgetPlan` is the sole source of study/readings/budget: conflicting top-level study, question readings, or effort plans are refused. Older v1/v2 bundles remain supported for equal-count and declared-effort modes. A v3 bundle can reopen in a fresh browser and recompute the budget result without any saved derived report.
+The abbreviated objects above stand for the full admitted cue study and the complete original-PNG comparison bundle. `budgetPlan` is the sole source of study/readings/budget: conflicting top-level study, question readings, or effort plans are refused. Older v1/v2 bundles remain supported for equal-count and declared-effort modes. A v3 bundle requires a unit-count v1 budget plan and can reopen in a fresh browser to recompute the result without any saved derived report. A weighted v2 plan requires the separate complete v4 envelope; putting it inside v3 is refused, preserving declared units and costs.
 
 All original bytes undergo the existing comparison import verification. Unsupported reading conjunctions remain available through the existing original-row explanation. Neither budget exhaustion nor an unsupported combination silently deletes evidence.
 
