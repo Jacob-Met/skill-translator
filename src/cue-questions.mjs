@@ -59,6 +59,7 @@ export function importCueQuestionPlan(value,raw){
   check(typeof c.basis==='string'&&c.basis.trim()&&c.basis.length<=1000,'Supply an availability and effort basis of at most 1000 characters');
   return {cueId:c.cueId,available:c.available,effort:c.effort,basis:c.basis.trim()};
  });
+ check(seen.size===study.cues.length,'Declare every retained cue without missing entries');
  return {format:CUE_QUESTION_PLAN,cues:study.cues.map(c=>cues.find(p=>p.cueId===c.id))};
 }
 export function inspectCueQuestions(value,readings=[]){return inspectQuestions(value,readings);}

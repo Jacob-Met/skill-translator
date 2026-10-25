@@ -49,6 +49,7 @@ test('unknown and novel readings cannot manufacture finite effort support',()=>{
 test('plans require complete unique cues, integer costs, explicit availability and attributed basis',()=>{
  const s=study([['0','0'],['1','1']],['A','B']),p=planFor(s,[1,1000]);
  for(const mutate of [p=>p.format='unknown',p=>p.cues.pop(),p=>p.cues[1].cueId='c0',p=>p.cues[0].cueId='other',p=>p.cues[0].available='false',p=>p.cues[0].basis=' ',...[-1,0,1.5,1001,NaN,Infinity,'1',null].map(x=>p=>p.cues[0].effort=x)]){const bad=structuredClone(p);mutate(bad);assert.throws(()=>inspectCueEffort(s,[],bad));}
+ const sparse=structuredClone(p);delete sparse.cues[0];assert.throws(()=>importCueQuestionPlan(s,sparse),/missing entries/);
  assert.deepEqual(importCueQuestionPlan(s,{...p,cues:[...p.cues].reverse()}),p);
  assert.equal(inspectCueEffort(s,[],p).worstCaseEffort,1);
 });
