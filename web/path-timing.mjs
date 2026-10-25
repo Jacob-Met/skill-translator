@@ -18,7 +18,7 @@ function render(){
  $('sources').textContent=['left','right'].map((side,index)=>`${index===0?'First':'Second'}: ${state[side]?.sequence.title??'not loaded'}`).join(' · ');
  $('match-fields').disabled=!(state.left&&state.right);
  $('proposal-fields').disabled=!(state.left&&state.right);
- $('proposals').replaceChildren();
+ $('proposals').replaceChildren();$('proposal-evidence').replaceChildren();
  $('remove').disabled=!state.study?.correspondences.length;$('save').disabled=!state.study;
  for(const side of ['left','right'])for(const end of ['from','to']){
   const select=$(side+'-'+end),prior=select.value;select.replaceChildren();
@@ -70,11 +70,25 @@ for(const side of ['left','right'])$(side+'-file').addEventListener('change',eve
 $('study-file').addEventListener('change',event=>readFile(event.target,'study'));
 // Proposals are recomputed from the currently admitted original paths and never
 // become saved correspondences until the ordinary authored form is submitted.
+function showProposalEvidence(proposal){
+ const row=inspectPathTiming(createPathTiming(state.left,state.right,[{...proposal,label:'Unaccepted geometric interval proposal'}])).rows[0],target=$('proposal-evidence');target.replaceChildren();
+ const heading=node('h3','Review the proposed original endpoints',target);heading.tabIndex=-1;node('p','These are original retained frames with the selected annotated point. Inspect their meaning before naming and adding this interval.',target);
+ const grid=node('div',undefined,target);grid.className='columns';
+ for(const side of ['left','right'])for(const [index,sample] of [row[side].samples[0],row[side].samples.at(-1)].entries()){
+  const card=node('figure',undefined,grid),asset=state[side+'Assets'].get(sample.momentId);if(!asset)throw Error('An original endpoint image is unavailable.');
+  node('figcaption',`${side==='left'?'First':'Second'} demonstration · ${index?'End':'Start'} · ${sample.momentLabel} · ${fmt(sample.presentedSeconds)} s`,card);
+  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${sample.image.widthPx} ${sample.image.heightPx}`);svg.setAttribute('role','img');svg.setAttribute('aria-label',`Original retained endpoint ${sample.momentLabel} with selected annotation`);svg.classList.add('proposal-frame');
+  const image=document.createElementNS(ns,'image');image.setAttribute('href',asset.media.url);image.setAttribute('width',sample.image.widthPx);image.setAttribute('height',sample.image.heightPx);svg.append(image);
+  if(sample.sourcePx){const point=document.createElementNS(ns,'circle');for(const[k,v]of Object.entries({cx:sample.sourcePx.x,cy:sample.sourcePx.y,r:Math.max(sample.image.widthPx,sample.image.heightPx)/45,fill:'none',stroke:'#b73320','stroke-width':3}))point.setAttribute(k,v);svg.append(point);}
+  card.append(svg);node('p',sample.basis,card);
+ }
+ heading.focus();
+}
 function retireProposalBasis(){if(proposalBasis!==null&&$('basis').value===proposalBasis)$('basis').value='';proposalBasis=null;}
-function clearProposals(){ retireProposalBasis();$('proposals').replaceChildren(); }
+function clearProposals(){ retireProposalBasis();$('proposals').replaceChildren();$('proposal-evidence').replaceChildren(); }
 for(const id of ['proposal-confirm','proposal-distance'])$(id).addEventListener('input',clearProposals);
 for(const side of ['left','right'])for(const end of ['from','to'])$(side+'-'+end).addEventListener('change',()=>{
- retireProposalBasis();
+ retireProposalBasis();$('proposal-evidence').replaceChildren();
 });
 $('propose').addEventListener('click',()=>{
  clearProposals();
@@ -98,7 +112,7 @@ $('propose').addEventListener('click',()=>{
    const button=node('button',`Fill proposed interval ${index+1}: ${row.left.fromMomentId} → ${row.left.toMomentId} / ${row.right.fromMomentId} → ${row.right.toMomentId}`,target);button.type='button';button.disabled=!afterLast;
    button.addEventListener('click',()=>{
     for(const side of ['left','right'])for(const end of ['from','to'])$(side+'-'+end).value=row[side][end+'MomentId'];
-    $('basis').value=row.basis;$('label').value='';proposalBasis=row.basis;$('label').focus();
+    showProposalEvidence(row);$('basis').value=row.basis;$('label').value='';proposalBasis=row.basis;
     say('Proposed endpoints filled. Review or change them, name the action and confirm its correspondence before adding the interval.');
    });
   }
