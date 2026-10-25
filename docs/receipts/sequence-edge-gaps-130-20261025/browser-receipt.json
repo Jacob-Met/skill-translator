@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "tests": [
+    "actual original frame native output exposes eight certified gaps across seven proposals without detector retuning",
+    "source-only study save/reopen preserves exact report and observer review; gap witnesses recomputed",
+    "candidate changes clear prior witnesses; no-gap explicitly withholds continuity",
+    "wrong source preserves accepted evidence and moment navigation retires/recomputes source-bound witnesses",
+    "390px original-frame gap inspection fits"
+  ],
+  "errors": []
+}

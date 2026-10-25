@@ -1,0 +1,17 @@
+{
+  "sourceVideoSha256": "7dd438a32071a1ed2903841be9b207f0565cb17a31413d6812bd85e6dd2c6d4d",
+  "privateOriginalMedia": "Not included; Wikimedia Video_of_paper_cutter_office_device.webm, Erik P\u00e5lsson / Sounds of Changes; source identity/license retained in private experiment",
+  "crossingProbes": {
+    "population": 26009,
+    "nonparallelCrossings": 46,
+    "disjointSupportCrossings": 0,
+    "crossingsWithoutBothLocalTwoPixelSupport": 0
+  },
+  "alongSupport": {
+    "candidates": 474,
+    "candidatesWithCertifiedMidpoint": 34,
+    "internalGaps": 44,
+    "selection": "All candidates from all five original retained frames; fixed ROI and detector profile"
+  },
+  "boundary": "No contact, physical scale, continuous boundary or physical edge absence inferred"
+}

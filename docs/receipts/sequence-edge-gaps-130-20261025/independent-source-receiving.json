@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "method": "All474 actual candidate gap counts and exact rational midpoint coordinates independently match Python full support-cloud projections",
+  "milliseconds": 8623.518833,
+  "results": [
+    {
+      "momentId": "moment-d4ed905e-b60e-427a-9547-dc93b7426691",
+      "candidates": 144,
+      "gaps": 8,
+      "candidatesWithGaps": 7
+    },
+    {
+      "momentId": "moment-374cb5b5-cf01-44db-9dcd-f41c7774e4bd",
+      "candidates": 34,
+      "gaps": 5,
+      "candidatesWithGaps": 5
+    },
+    {
+      "momentId": "moment-6ff762b2-6bb2-484e-bf4e-6817f54fbb8f",
+      "candidates": 122,
+      "gaps": 19,
+      "candidatesWithGaps": 10
+    },
+    {
+      "momentId": "moment-e9e39cad-2b35-405c-8625-f11b5b7f7761",
+      "candidates": 104,
+      "gaps": 10,
+      "candidatesWithGaps": 10
+    },
+    {
+      "momentId": "moment-987f3ec4-5c3b-47d0-a5ed-dce4ce76e306",
+      "candidates": 70,
+      "gaps": 2,
+      "candidatesWithGaps": 2
+    }
+  ]
+}
