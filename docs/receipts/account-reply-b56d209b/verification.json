@@ -1,0 +1,40 @@
+{
+  "team": "hamon-b56d209b-20261024",
+  "issue": 214,
+  "base": "bd200b7b076e552b608398ced1f8d221923d25aa",
+  "sourceScope": {
+    "files": 33,
+    "unchangedCurrentMainBlobs": 25,
+    "changedSourcePaths": 8
+  },
+  "native": {
+    "runtime": "Node22.23.4",
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "newGroups": 11,
+    "legacyQuestionGroups": 8,
+    "errors": 0,
+    "desktopAnd390pxInspected": true,
+    "activeSandbox": "Direct installed Chrome; Namespace/PID/network/Seccomp/TSYNC"
+  },
+  "independentReview": {
+    "reviewer": "Retained team lead",
+    "result": "No blocking finding",
+    "scope": [
+      "Exact original comparison/question binding and self-declared authorship",
+      "Maintained immutable selected-field update with all other sources and PNG bytes preserved",
+      "Explicit explanation/amendment/withdrawal distinction and unknown semantics",
+      "Separate source/comparison downloads and reset global relationship",
+      "Question/reply/source invalidation and cross-panel pending read/export guards"
+    ]
+  },
+  "receivingRepair": "Actual browser receiving exposed a retired file chooser keeping the previous filename, so selecting the same old question after receiving an amended comparison produced no change event. Source/question retirement now clears both chooser values; the browser asserts this and receives the real mismatch refusal. Expectations/timeouts were not relaxed.",
+  "limits": [
+    "Focused native/consumer receiving, not a full repository suite.",
+    "Authored original PNG controls; attribution is supplied, not authenticated.",
+    "No source replacement, outbound message, field/teaching-effect validation or deployment."
+  ]
+}

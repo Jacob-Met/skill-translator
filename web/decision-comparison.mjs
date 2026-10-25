@@ -41,6 +41,6 @@ async function receive(file,replace){
 $('source').onchange=e=>receive(e.target.files[0],false);$('open').onchange=e=>receive(e.target.files[0],true);
 for(const id of ['relationship','explanation'])$(id).oninput=invalidate;
 $('save').onclick=()=>run(async()=>{const value=study();compareDecisionAccounts(value);const rev=revision,blob=await makeComparison(value,sources);if(rev!==revision)throw Error('Comparison changed; retry export');download(blob,'decision-comparison.json');});
-accountQuestions=mountAccountQuestion({container:$('account-questions'),getComparison:study,onChange:()=>{revision++;controller?.abort();generation++;busy=false;sync();},download});
+accountQuestions=mountAccountQuestion({container:$('account-questions'),getComparison:study,getSources:()=>sources,onChange:()=>{revision++;controller?.abort();generation++;busy=false;sync();},download});
 window.addEventListener('beforeunload',()=>{controller?.abort();release(sources);});render();
 
