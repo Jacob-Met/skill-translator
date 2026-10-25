@@ -1,3 +1,4 @@
+import {requireChromiumSandbox} from './support/chromium-sandbox.mjs';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -11,7 +12,14 @@ await writeFile(out+'/first.json',JSON.stringify(first));await writeFile(out+'/r
 const server=createAppServer();await new Promise(ok=>server.listen(0,'127.0.0.1',ok));const base='http://127.0.0.1:'+server.address().port;
 let browser;const report={tests:[],result:'FAIL'},errors=[];
 try{
- browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY||'/usr/bin/chromium',headless:true});
+ browser=await puppeteer.launch({executablePath:process.env.CHROME_BINARY||'/usr/bin/google-chrome-stable',headless:true});
+ const admissionPage=await browser.newPage();
+ try{
+  const cdp=await admissionPage.createCDPSession();
+  const sandbox=await requireChromiumSandbox({send:(method,params)=>cdp.send(method,params)});
+  await writeFile(out+'/sandbox.json',JSON.stringify(sandbox,null,2));
+ }catch(error){await writeFile(out+'/sandbox.json',JSON.stringify(error.receipt??{admitted:false,failure:String(error)},null,2));throw error;}
+ finally{await admissionPage.close();}
  const page=await browser.newPage();page.on('pageerror',e=>errors.push(String(e)));await page.setViewport({width:1280,height:1000});await page.goto(base+'/relationship-discovery',{waitUntil:'networkidle0'});
  await (await page.$('#sources')).uploadFile(out+'/first.json',out+'/rotated.json');await page.select('#evidence','authored-example');await page.click('#analyze');assert.match(await page.$eval('#error',e=>e.textContent),/Confirm/);
  await page.click('#identities');await page.click('#analyze');await page.waitForFunction(()=>document.querySelector('#summary').textContent.includes('1 repeatable'));

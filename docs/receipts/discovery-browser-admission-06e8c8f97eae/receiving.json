@@ -1,0 +1,164 @@
+{
+  "base": "c786e7077cb9027a1e8267e1c43f3c69fa480e69",
+  "reason": "An observed machine wrapper appended --no-sandbox. Earlier functional courses did not claim active-sandbox admission.",
+  "defaultExecutable": "/usr/bin/google-chrome-stable",
+  "helper": {
+    "owner": "Jacob-Met/synapse",
+    "commit": "9f669e7b935d5152eeaa9c6969767182501c79a0",
+    "path": "scripts/support/chromium-sandbox.mjs",
+    "sha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "reuse": "Existing tools/support/chromium-sandbox.mjs; unchanged"
+  },
+  "discovery": {
+    "sandbox": {
+      "schema": "hamon-chromium-sandbox/v1",
+      "qualification": "Linux Chromium status in the supplied isolated CDP page",
+      "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "startedAt": "2026-10-25T23:36:34.047Z",
+      "completedAt": "2026-10-25T23:36:34.128Z",
+      "durationMs": 80.14392900000001,
+      "admitted": true,
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "target": {
+        "targetId": "C0675D13246A1B9F893ED1F23DEBB855",
+        "type": "page",
+        "title": "about:blank",
+        "url": "about:blank",
+        "attached": true,
+        "canAccessOpener": false,
+        "browserContextId": "E525BEFF94AECE4040B522BA3885BE76"
+      },
+      "url": "chrome://sandbox/",
+      "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+      "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+      "observation": {
+        "rows": {
+          "layer1": "Namespace",
+          "pid": "Yes",
+          "network": "Yes",
+          "seccomp": "Yes",
+          "tsync": "Yes"
+        },
+        "checks": {
+          "adequate": true,
+          "layer1": true,
+          "pid": true,
+          "network": true,
+          "seccomp": true,
+          "tsync": true
+        },
+        "populated": true,
+        "duplicates": [],
+        "active": true
+      },
+      "failure": null
+    },
+    "functionalGroups": 7,
+    "passed": true,
+    "journey": {
+      "tests": [
+        "Unfamiliar native annotation files infer fixed60mm pair distance with two component contradictions; no expert pair entries",
+        "Existing authored adaptation comparison and raw original-only export preserve source",
+        "New scaled source visibly removes repeatable distance proposal and retains contradicting row",
+        "Raw replay recomputes hypotheses; malformed import preserves accepted investigation",
+        "Delayed import retires after a newer investigation",
+        "390px keyboard course has no horizontal overflow",
+        "Selected inferred distance reaches maintained fixed-versus-adapted pair consumer; both actual assessments remain incomplete; native export retains every discovery source and separate tolerance"
+      ],
+      "result": "PASS"
+    }
+  },
+  "families": {
+    "sandbox": {
+      "schema": "hamon-chromium-sandbox/v1",
+      "qualification": "Linux Chromium status in the supplied isolated CDP page",
+      "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "startedAt": "2026-10-25T23:36:36.317Z",
+      "completedAt": "2026-10-25T23:36:36.388Z",
+      "durationMs": 70.81761599999999,
+      "admitted": true,
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "target": {
+        "targetId": "329BE7A4B2AADCD3D5F3EE4EDB324A1C",
+        "type": "page",
+        "title": "about:blank",
+        "url": "about:blank",
+        "attached": true,
+        "canAccessOpener": false,
+        "browserContextId": "31A603C0120865D35377FE956EB2A1B1"
+      },
+      "url": "chrome://sandbox/",
+      "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+      "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+      "observation": {
+        "rows": {
+          "layer1": "Namespace",
+          "pid": "Yes",
+          "network": "Yes",
+          "seccomp": "Yes",
+          "tsync": "Yes"
+        },
+        "checks": {
+          "adequate": true,
+          "layer1": true,
+          "pid": true,
+          "network": true,
+          "seccomp": true,
+          "tsync": true
+        },
+        "populated": true,
+        "duplicates": [],
+        "active": true
+      },
+      "failure": null
+    },
+    "functionalGroups": 7,
+    "passed": true,
+    "journey": {
+      "tests": [
+        "Actual original annotation intake flows through maintained discovery to automatic fixed/proportional inference without authored pair or model entries",
+        "Unfamiliar target predicts92.6mm from source-conditioned width response without inventing actual practice",
+        "Native practice history preserves original failed point scores; prior actual90.6mm yields-2mm hypothesis residual while current round stays missing",
+        "Raw export retains original source and complete actual session; malformed receiving preserves accepted practice",
+        "New contradictory source removes the apparent width model; no fallback prediction is shown",
+        "Unchanged source sizes preserve four competing explanations and predictions",
+        "Fresh390px reload and raw reopen recompute inferred family and retain actual history with keyboard access"
+      ],
+      "result": "PASS"
+    }
+  },
+  "negativeControls": {
+    "actualDirectBinaryAdmitted": true,
+    "controls": [
+      {
+        "name": "inactive-seccomp",
+        "refused": true,
+        "code": "inactive_sandbox"
+      },
+      {
+        "name": "missing-positive-summary",
+        "refused": true,
+        "code": "timeout"
+      }
+    ]
+  },
+  "independentReview": "Loom: all three receiving-script lifecycle/ordering changes reviewed, no blockers, parse checks passed. Root executed actual direct-binary journeys and helper negative controls.",
+  "commands": [
+    "PUPPETEER_PATH=<installed package> CHROME_BINARY=/usr/bin/google-chrome-stable QA_OUTPUT=<fresh owned directory> node tools/browser-relationship-discovery.mjs",
+    "PUPPETEER_PATH=<installed package> CHROME_BINARY=/usr/bin/google-chrome-stable QA_OUTPUT=<fresh owned directory> node tools/browser-relationship-families.mjs"
+  ],
+  "limits": "Linux Chromium admission for isolated test sessions. No machine wrapper, account, browser install or security setting changed; no product behavior changes.",
+  "concurrentComposition": "Rule-proposal and sampled-path-axis changes retained; final receiving reruns use the exact composed server"
+}
