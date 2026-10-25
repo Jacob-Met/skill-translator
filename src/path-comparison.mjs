@@ -54,15 +54,24 @@ function couplingRecords(indices,paths,distances,limit){
  return indices.map(([i,j])=>({firstIndex:i,secondIndex:j,firstMomentId:a[i].momentId,secondMomentId:b[j].momentId,firstPresentedSeconds:a[i].presentedSeconds,secondPresentedSeconds:b[j].presentedSeconds,distanceMm:distances[i][j],bottleneck:distances[i][j]===limit}));
 }
 
+/** Shared bounded monotone-grid counting for nominal and supplied-bound consumers.
+ * Matrices describe computed pair distances; counts are not probabilities.
+ */
+export function countMonotoneCouplings(d,limit){
+ check(Array.isArray(d)&&d.length>=2&&d.length<=12&&Array.isArray(d[0])&&d[0].length>=2&&d[0].length<=12,'Supply a bounded 2–12 by 2–12 pair-distance grid.');
+ const n=d.length,m=d[0].length;
+ check(Number.isFinite(limit)&&limit>=0&&Array.from(d).every(row=>Array.isArray(row)&&row.length===m&&Array.from(row).every(x=>Number.isFinite(x)&&x>=0)),'Supply finite nonnegative pair distances and a finite nonnegative bound.');
+ const forward=Array.from({length:n},()=>Array(m).fill(0n)),backward=Array.from({length:n},()=>Array(m).fill(0n));
+ // Count all monotone prefixes and suffixes admitted by the supplied bound.
+ for(let i=0;i<n;i++)for(let j=0;j<m;j++)if(d[i][j]<=limit)forward[i][j]=i===0&&j===0?1n:(forward[i-1]?.[j]??0n)+(forward[i]?.[j-1]??0n)+(forward[i-1]?.[j-1]??0n);
+ for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)if(d[i][j]<=limit)backward[i][j]=i===n-1&&j===m-1?1n:(backward[i+1]?.[j]??0n)+(backward[i]?.[j+1]??0n)+(backward[i+1]?.[j+1]??0n);
+ return {forward,backward,total:forward[n-1][m-1]};
+}
+
 /** Inspect alternatives at the unchanged nominal optimum, not inferred timing. */
 export function inspectPathCouplingAlternatives(raw,choice=null){
  const original=inspectPathComparison(raw),d=original.pairedDistancesMm,limit=original.distanceMm,n=d.length,m=d[0].length;
- const forward=Array.from({length:n},()=>Array(m).fill(0n)),backward=Array.from({length:n},()=>Array(m).fill(0n));
- // Every accepted cell has separation <= the original global minimum. Count
- // all monotone prefixes and suffixes; their product counts paths through it.
- for(let i=0;i<n;i++)for(let j=0;j<m;j++)if(d[i][j]<=limit)forward[i][j]=i===0&&j===0?1n:(forward[i-1]?.[j]??0n)+(forward[i]?.[j-1]??0n)+(forward[i-1]?.[j-1]??0n);
- for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)if(d[i][j]<=limit)backward[i][j]=i===n-1&&j===m-1?1n:(backward[i+1]?.[j]??0n)+(backward[i]?.[j+1]??0n)+(backward[i+1]?.[j+1]??0n);
- const total=forward[n-1][m-1];check(total>0n,'No minimizing coupling could be reproduced from the original comparison.');
+ const {forward,backward,total}=countMonotoneCouplings(d,limit);check(total>0n,'No minimizing coupling could be reproduced from the original comparison.');
  const pairs=[];
  for(let i=0;i<n;i++)for(let j=0;j<m;j++){
   const through=forward[i][j]*backward[i][j];if(through===0n)continue;
