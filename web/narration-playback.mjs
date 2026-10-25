@@ -8,7 +8,7 @@ const seconds=n=>n===null?'not reported':n.toFixed(3)+' s';
 export function mountNarrationPlayback(container){
  let study=null,stepId=null,clip=null,revision=0,loadToken=0,loading=false,blocked=true,playing=null,disposed=false;
  node('h3','Watch and hear the original utterance',container);
- node('p','Optionally pair the exact original clip. Playback requests the complete mapped utterance interval at 1× encoded timeline rate. Audio is original source content, not generated speech or proof that the supplied transcript is correct. Video-frame timestamps do not establish sample-exact audio boundaries.',container);
+ node('p','Optionally pair the exact original clip. Playback requests the complete mapped utterance interval at 1× encoded timeline rate. Audio comes from the paired source clip; the player does not generate speech or verify the supplied transcript. Video-frame timestamps do not establish sample-exact audio boundaries.',container);
  const fileLabel=node('label','Pair original MP4 or WebM',container),file=node('input',undefined,fileLabel);file.type='file';file.accept='.mp4,.webm,video/mp4,video/webm';file.id='narration-playback-file';
  const host=node('div',undefined,container);host.className='narration-original-video';
  const choiceLabel=node('label','Overlapping supplied utterance',container),choice=node('select',undefined,choiceLabel);choice.id='narration-playback-cue';

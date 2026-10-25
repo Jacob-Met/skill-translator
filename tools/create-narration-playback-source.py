@@ -33,8 +33,10 @@ def main():
              "-b:v","0","-crf","35","-row-mt","1","-threads","1","-pix_fmt","yuv420p",
              "-c:a","libopus","-b:a","48k","-map_metadata","-1",str(root/"original.webm")]
     run(command);commands.append(command)
+    def milliseconds(seconds):
+        return math.floor(seconds*1000+.5)
     def timestamp(seconds):
-        ms=round(seconds*1000);h,ms=divmod(ms,3600000);m,ms=divmod(ms,60000);s,ms=divmod(ms,1000)
+        ms=milliseconds(seconds);h,ms=divmod(ms,3600000);m,ms=divmod(ms,60000);s,ms=divmod(ms,1000)
         return f"{h:02d}:{m:02d}:{s:02d}.{ms:03d}"
     intervals=[(0,durations[0]),(second,end)]
     transcript="WEBVTT\n\nNOTE Authored synthetic speech control. Times are authored from source synthesis segments.\nThe second supplied cue deliberately differs from spoken blue: glue. No ASR or timing authentication.\n\n"
@@ -47,7 +49,7 @@ def main():
     files=[{"file":p.name,"bytes":p.stat().st_size,"sha256":hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(root.iterdir()) if p.is_file()]
     receipt={"schema":"skill-translator.authored-utterance-source/v1","spokenText":spoken,
              "suppliedText":supplied,"utteranceAudioSeconds":durations,"gapSeconds":gap,
-             "authoredIntervals":[{"startSeconds":round(a,3),"endSeconds":round(b,3)} for a,b in intervals],
+             "authoredIntervals":[{"startSeconds":milliseconds(a)/1000,"endSeconds":milliseconds(b)/1000} for a,b in intervals],
              "videoDurationSeconds":float(probe["format"]["duration"]),"ffmpegVersion":run(["ffmpeg","-version"]).stdout.splitlines()[0],
              "generationCommands":commands,"streams":[{"codec":s["codec_name"],"type":s["codec_type"],"width":s.get("width"),"height":s.get("height"),"sampleRate":s.get("sample_rate")} for s in probe["streams"]],
              "files":files,"boundary":"New repository-authored synthetic speech/video and authored supplied transcript mismatch. Not the unavailable pinned CAPTIONVERSE binary, not an ASR result, a physical expert demonstration or authenticated speech/timing. Source Opus audio is retained in the original clip; video presentation timestamps do not identify sample-exact audio boundaries."}

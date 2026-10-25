@@ -1,0 +1,809 @@
+{
+  "schema": "skill-translator.narrationPlayback-qualification/v1",
+  "issue": 251,
+  "reviewedCoreCommit": "bedef8e5c2fa14a25b49dd021c2e2807edb47e08",
+  "baseMain": "cca60a08844070385c7201f13d74920a612f1f36",
+  "native": {
+    "tests": 52,
+    "passed": 52,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 201.612425
+  },
+  "browser": {
+    "passed": 10,
+    "checks": [
+      "Maintained studio captured two distinct original moving PNGs with presentation times and verified hashes, then authored two steps.",
+      "Exact original clip starts muted, explicit audio enable survives two complete utterances with actual presented endpoints; supplied glue mismatch remains literal and both exports remain byte-identical with no automatic quote selection.",
+      "Saved clock navigation reaches actual managed playback at its mapped interval; failed separate check refuses replacement and preserves accepted playable account.",
+      "Wrong clip replacement preserves accepted video; partly overlapping but incomplete first utterance refuses playback without clipping while the second remains available.",
+      "Cue and authored-step changes retire managed playback; an unpaired attribution draft stops and blocks playback until a valid record reopens.",
+      "Quote and export actions invalidate delayed imports without stranding suspension; an older receive cannot unsuspend a newer pending receive.",
+      "Delayed original clip admissions cannot override an unpaired draft or replace a newer accepted clip.",
+      "A new source session retires active playback and releases its clip even for identical source bytes; reopened narration requires explicit clip pairing again.",
+      "A fresh390px session reopens source and record, explicitly pairs the original media, enables audio and plays by keyboard with contained layout and byte-identical saved outputs.",
+      "An original clip with no audio stream still pairs and presents the supplied interval when audio is enabled; no speech or quotation is inferred from silence."
+    ],
+    "errors": [],
+    "browser": "156.0.8078.47",
+    "node": "v22.23.4",
+    "sandbox": {
+      "schema": "hamon-chromium-sandbox/v1",
+      "qualification": "Linux Chromium status in the supplied isolated CDP page",
+      "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "startedAt": "2026-10-25T15:59:24.659Z",
+      "completedAt": "2026-10-25T15:59:24.757Z",
+      "durationMs": 97.94170400000007,
+      "admitted": true,
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "target": {
+        "targetId": "3AD890D4E2C1F5E6CEC39F714B35079C",
+        "type": "page",
+        "title": "about:blank",
+        "url": "about:blank",
+        "attached": true,
+        "canAccessOpener": false,
+        "browserContextId": "D7FCDB918BE2374474BC9BC56BD51F39"
+      },
+      "url": "chrome://sandbox/",
+      "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+      "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+      "observation": {
+        "rows": {
+          "layer1": "Namespace",
+          "pid": "Yes",
+          "network": "Yes",
+          "seccomp": "Yes",
+          "tsync": "Yes"
+        },
+        "checks": {
+          "adequate": true,
+          "layer1": true,
+          "pid": true,
+          "network": true,
+          "seccomp": true,
+          "tsync": true
+        },
+        "populated": true,
+        "duplicates": [],
+        "active": true
+      },
+      "failure": null
+    },
+    "receiverSha256": "f8364c26a17bca7c29ecad50605b9ecea0800eff9677e240b9b64864e5f9b8b8"
+  },
+  "regression": {
+    "passed": 14,
+    "checks": [
+      "Maintained constant-offset baseline requests2.2seconds for original transcript cue2seconds.",
+      "Declared affine clock changes ordinary preview request to2.4seconds and labels cue extrapolation.",
+      "Actual studio captures original pixels and separately retains requested/presented frame time and verified PNG hash.",
+      "Failed separate check refuses all previews and stays refused even for an empty search result.",
+      "Saved original navigation reopens; wrong source and malformed UTF8 replacements refuse without erasing accepted choices.",
+      "Fresh390px session reopens source declarations and uses keyboard preview with contained layout.",
+      "A delayed saved-record read cannot regain authority after a new clip session, even with identical clip bytes.",
+      "The original video step misses its first utterance under offset0; saved clock navigation restores overlap and explicit quotation retains original source frames, words, times and declarations.",
+      "Wrong clip, failed clock, future format, changed authored source and malformed UTF8 refuse without erasing the accepted quotation; the studio also refuses a quotation-sidecar format instead of losing its clock.",
+      "Switching to ordinary offset first creates a draft and disables saved output; explicit pairing changes overlap, and exact-source sidecar reopening restores the accepted clock quotation.",
+      "Fresh390px quotation receiving recomputes the v2 sidecar, supports keyboard selection and preserves the complete narrated original-frame bundle on export.",
+      "The maintained demonstration studio receives and re-exports the separately narrated sequence with exact original moments, requested/presented times and PNG records.",
+      "Decision practice reproduces the original before-frame pixels, withholds the supplied clock quotation before prediction, then reveals the retained literal account after an explicit uncertainty response.",
+      "A delayed clock-navigation read cannot pair an account after a newer original-source import, even when the source bytes are identical."
+    ],
+    "errors": [],
+    "browser": "156.0.8078.47",
+    "node": "v22.23.4",
+    "sandbox": {
+      "schema": "hamon-chromium-sandbox/v1",
+      "qualification": "Linux Chromium status in the supplied isolated CDP page",
+      "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "startedAt": "2026-10-25T15:51:54.128Z",
+      "completedAt": "2026-10-25T15:51:54.211Z",
+      "durationMs": 82.31070199999999,
+      "admitted": true,
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "target": {
+        "targetId": "D62BF3F3AE35B64D1A6F34BF47594F3E",
+        "type": "page",
+        "title": "about:blank",
+        "url": "about:blank",
+        "attached": true,
+        "canAccessOpener": false,
+        "browserContextId": "84C8DC2456D11678AA782A35994B2DFF"
+      },
+      "url": "chrome://sandbox/",
+      "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+      "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+      "observation": {
+        "rows": {
+          "layer1": "Namespace",
+          "pid": "Yes",
+          "network": "Yes",
+          "seccomp": "Yes",
+          "tsync": "Yes"
+        },
+        "checks": {
+          "adequate": true,
+          "layer1": true,
+          "pid": true,
+          "network": true,
+          "seccomp": true,
+          "tsync": true
+        },
+        "populated": true,
+        "duplicates": [],
+        "active": true
+      },
+      "failure": null
+    },
+    "receiverSha256": "4f1b0d91c2be9c9750ad335de48970ca3f8c808353be0cb7f21b3652df7c07ec"
+  },
+  "sourceSnapshots": [
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 3486,
+      "sha256": "d71e2946b1be517ce76203def71cce69c5dbda96f5a9754c5a7f7a2679decf5d",
+      "gitBlobSha": "b1aeba1161715de5992d2ce269d64623839c2f68"
+    },
+    {
+      "path": "README.md",
+      "bytes": 58191,
+      "sha256": "459c0fdd5d33bb9ed0d16e36a6ed1648d111a630cb3531e3a3f4e62b91d3b47f",
+      "gitBlobSha": "c6bba15d637ad6dee5ce4a2450950d36d25ea63b"
+    },
+    {
+      "path": "docs/clock-aware-quotations.md",
+      "bytes": 4839,
+      "sha256": "6cbfbd742c364eaabfb42e7c36019c085a1859a0462a20532e5a4c30ed5777e3",
+      "gitBlobSha": "86952462c574fa25d8b006cb27d312ecd1637ee3"
+    },
+    {
+      "path": "docs/narration-moment-discovery.md",
+      "bytes": 7303,
+      "sha256": "bb5069522593b25c8c3c3d7840ea0c2afa2b14aeccc342e84a9f52aec4f0ffc5",
+      "gitBlobSha": "6bd759b0a9ee791a3093b04316d6606d5204b5fc"
+    },
+    {
+      "path": "native/sequence-edge.mjs",
+      "bytes": 2514,
+      "sha256": "2e2109addb5e70ce3178d49f739905992609fb88acf318475a6428354f79e63a",
+      "gitBlobSha": "f672b6422e7ac41d762b47cd31b8d207807a0622"
+    },
+    {
+      "path": "package.json",
+      "bytes": 230,
+      "sha256": "1ae464b0142254deedca00d691d201f44945f5bf57d9b7951ab9aa7386261aa5",
+      "gitBlobSha": "606f8d32d75315976559fbe14469b9405cd91175"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 34056,
+      "sha256": "3c493c504c5d2e6565ebb4d9c235665a4b58793b3aff78fe63c0a1f8eec2eb69",
+      "gitBlobSha": "a8aaf8eac3f16709fd482a4942b231fdde018758"
+    },
+    {
+      "path": "src/authoring.mjs",
+      "bytes": 1825,
+      "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "gitBlobSha": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5"
+    },
+    {
+      "path": "src/capture-editing.mjs",
+      "bytes": 3930,
+      "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+      "gitBlobSha": "570ee1ac63928e5837920288243e8ea7621936c9"
+    },
+    {
+      "path": "src/capture.mjs",
+      "bytes": 6096,
+      "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "gitBlobSha": "763d09298e03c4275b802c83df92c773de62cd67"
+    },
+    {
+      "path": "src/clock-quotation.mjs",
+      "bytes": 987,
+      "sha256": "5297a12834cda7ca0e81251e070ca2b2029eaa0fd99d9cdd05c45f115caa19ba",
+      "gitBlobSha": "ae07a057b97cb85dbfcf703c40a08872d4523f65"
+    },
+    {
+      "path": "src/decision-practice.mjs",
+      "bytes": 6613,
+      "sha256": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+      "gitBlobSha": "5e7d040eb72a9bab753beccc0ff151187daaeb99"
+    },
+    {
+      "path": "src/demonstration-sequence.mjs",
+      "bytes": 10025,
+      "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "gitBlobSha": "3030edd3ad809cab11fc220365aacb34e2d01b42"
+    },
+    {
+      "path": "src/frame-origin.mjs",
+      "bytes": 3292,
+      "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "gitBlobSha": "9154d9e63255de95152e3137d5790de5e9f00e42"
+    },
+    {
+      "path": "src/geometry.mjs",
+      "bytes": 7305,
+      "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "gitBlobSha": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061"
+    },
+    {
+      "path": "src/learner-observation.mjs",
+      "bytes": 2466,
+      "sha256": "8e7b0bf128ca22ef79e33e89d3f64a2906b9340911d5b41a8b5cebead5b75431",
+      "gitBlobSha": "f020776d665d0148c001c22dd9d7d336bd02ecb0"
+    },
+    {
+      "path": "src/narration-clock.mjs",
+      "bytes": 2624,
+      "sha256": "c8cf2b297db7a3e342b1d7a21dd3fc2786d8858cd753792e6ad96b0f8856af35",
+      "gitBlobSha": "4f7a26a7c091881225d3d852b00da7c4e79a091c"
+    },
+    {
+      "path": "src/narration-moments.mjs",
+      "bytes": 4857,
+      "sha256": "4774e13a6dd99ce545b8c31a428e3d6dbf229cd911b57cfa9e03e0486b6f37f6",
+      "gitBlobSha": "b89a9435ca8045b1de2833befd6657bd9b870e0c"
+    },
+    {
+      "path": "src/narration-playback.mjs",
+      "bytes": 946,
+      "sha256": "ad8bd4439b3941f673e308bdef5cd8e1c35740262f2cc87e6130075556cd9e66",
+      "gitBlobSha": "61289c6c2d1eba9702ab424e0c23743f077b086a"
+    },
+    {
+      "path": "src/practice.mjs",
+      "bytes": 7944,
+      "sha256": "283909901f4d436affc4382373e455fbf3951d221a1d4918d261453e9c6c3bd6",
+      "gitBlobSha": "a2bad45c47a4209f72bb99fcb18405870f85ace5"
+    },
+    {
+      "path": "src/scan-change-regions.mjs",
+      "bytes": 1802,
+      "sha256": "81a16d40f941b71d7b5480599f8b4b3200efddfb43626b7c02232841234cb260",
+      "gitBlobSha": "ee37a5bf925e45a0129dada27a12eac612fb3293"
+    },
+    {
+      "path": "src/sequence-capture.mjs",
+      "bytes": 1672,
+      "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "gitBlobSha": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b"
+    },
+    {
+      "path": "src/sequence-edge-field.mjs",
+      "bytes": 2195,
+      "sha256": "2f64058c6dbed20d4be4c5f3d9899c5916b2f78e338f0e98a4d19abbc58a76dd",
+      "gitBlobSha": "1515280bd71fe4066633b015b9bd8937dbb6263e"
+    },
+    {
+      "path": "src/sequence-edge.mjs",
+      "bytes": 4867,
+      "sha256": "789b9f96cae89adcfaf833fc2d58dad625849b157988ce311bba2a7958533bc3",
+      "gitBlobSha": "ca6d46f12e5ad15c54a4d9c1acc430149071b818"
+    },
+    {
+      "path": "src/timed-narration.mjs",
+      "bytes": 8712,
+      "sha256": "abc47051d84ec34814dae81f82191c401ecdb1bf6548337207e91415cf2675f1",
+      "gitBlobSha": "637e855f0e50963d558a2bddac37da5d86c68b71"
+    },
+    {
+      "path": "src/visual-scan.mjs",
+      "bytes": 6092,
+      "sha256": "984d964b6bd3f5b6d5dc9c31e10b0c058e4b2aba2d4e87edddf8e7905e41d3c2",
+      "gitBlobSha": "c787797d98c7ae431dc21e3141d6529a402282b8"
+    },
+    {
+      "path": "src/visual-span.mjs",
+      "bytes": 1991,
+      "sha256": "f984623b5203c23b9ea564a41c18e5783864e5e81950c21aa8353be8c38c25f0",
+      "gitBlobSha": "3af56335cc2a57c1dffd4ef5d2b263b89237a183"
+    },
+    {
+      "path": "test/clock-quotation.test.mjs",
+      "bytes": 6534,
+      "sha256": "8b3c2d1006642a665c942cd9a4335ff64c7a5adae3aebf2c04d8e1728fa28ce6",
+      "gitBlobSha": "11ed1dd8101b29a37f5ad2682bdfcd90f9966e4d"
+    },
+    {
+      "path": "test/demonstration-sequence.test.mjs",
+      "bytes": 5193,
+      "sha256": "98e12c5bab7f2556fdfd090f604731e88ff4a1a475f0f2bf75d1f609ff3990e1",
+      "gitBlobSha": "88a05d9b8e3f75f892fb6a62ccd1716db3266f58"
+    },
+    {
+      "path": "test/interval-playback.test.mjs",
+      "bytes": 3737,
+      "sha256": "13b7f995649f52aa8013e2bf606a378e3f73fa4b16a33b1b54c8d37a80e00095",
+      "gitBlobSha": "3fbb427c9350f9b6dcc14023954bb08f3b8b7ecc"
+    },
+    {
+      "path": "test/narration-clock.test.mjs",
+      "bytes": 5443,
+      "sha256": "431e6c24d1a52db377c7a87b5bf39c0abe7a75441ae8f01c648ae553c79e32a6",
+      "gitBlobSha": "bbf61c6a2e98c32e22fef2069abaef09a239fcb1"
+    },
+    {
+      "path": "test/narration-moments.test.mjs",
+      "bytes": 4171,
+      "sha256": "03fa3b58c36c952a882970abcdda5f6ee22df3719c202a9be47b4b6a0d4fcc3d",
+      "gitBlobSha": "5a400d6f9e95475cb70d0880432dd14084078a3a"
+    },
+    {
+      "path": "test/narration-playback.test.mjs",
+      "bytes": 3751,
+      "sha256": "02c6c5276b319b768d809d1e3f3d76f8e298164eb754840151cabe9cff7a9614",
+      "gitBlobSha": "b255e3cbcadc4c3b22ede392a4ba28ad43fe8af8"
+    },
+    {
+      "path": "test/sequence-capture.test.mjs",
+      "bytes": 5696,
+      "sha256": "d48e8139466866cd8e0a064f0c9eeb2bf4726fef3db16904cf8b1caa0550d147",
+      "gitBlobSha": "5f918af61e609ad9915b82cfdfec8df6bff7fbbe"
+    },
+    {
+      "path": "test/timed-narration.test.mjs",
+      "bytes": 7517,
+      "sha256": "412469560dfd38f723cea71e5c81c0c64eb5e546789edff1bd8a3ca2fd0022a6",
+      "gitBlobSha": "49a43093d067c3def452fda23265f650aa609b7f"
+    },
+    {
+      "path": "tools/browser-clock-quotations.mjs",
+      "bytes": 25925,
+      "sha256": "4f1b0d91c2be9c9750ad335de48970ca3f8c808353be0cb7f21b3652df7c07ec",
+      "gitBlobSha": "f7812ef18d5e4067072b9f0547c8a31d846e5a3c"
+    },
+    {
+      "path": "tools/browser-narration-playback.mjs",
+      "bytes": 21709,
+      "sha256": "f8364c26a17bca7c29ecad50605b9ecea0800eff9677e240b9b64864e5f9b8b8",
+      "gitBlobSha": "f33aa365275ac1e16bbe5ad0f89b109d48fb0f38"
+    },
+    {
+      "path": "tools/create-narration-playback-source.py",
+      "bytes": 4628,
+      "sha256": "3528a45483d840d53044dd1a777dded6447566ba2a2fbae4abc78ade56403908",
+      "gitBlobSha": "1cda6c8aafeab73c692ff5768d9826eea93ba47c"
+    },
+    {
+      "path": "tools/sequence-edge-native.py",
+      "bytes": 4750,
+      "sha256": "a43f9604fb3a225f2b002770e4d80ac3e405bd97cd3c936a47e8e3a4d8bb6fb6",
+      "gitBlobSha": "1d6f60a3ee23dbb4cc41173a4a4c1db834cee2ac"
+    },
+    {
+      "path": "vendor/captionverse/core.mjs",
+      "bytes": 14987,
+      "sha256": "698eca7b188c835890501a608c375739d3eaf10d95ff3d76f88ec61692eee9f0",
+      "gitBlobSha": "a7455aec1f27d23b27b540a6770c57d917f49b4a"
+    },
+    {
+      "path": "vendor/captionverse/cue-index.mjs",
+      "bytes": 2618,
+      "sha256": "4231f0c9927a56434fcfb8542b4356e3630fa0672a7a0e618d3ade107d186623",
+      "gitBlobSha": "272cbf959c738bb0dace95e062b088988b49ec61"
+    },
+    {
+      "path": "vendor/captionverse/review-vtt.mjs",
+      "bytes": 2903,
+      "sha256": "b4cc0171b3d0ba3e5c7bf48a3614e3ae58aa4979dd274e959422e520497610d3",
+      "gitBlobSha": "5359bbb7e5d0b2d9db1e97c8252afab2af700d2a"
+    },
+    {
+      "path": "vendor/captionverse/sound-motion.mjs",
+      "bytes": 1814,
+      "sha256": "1d36d832415914416b58a0a38a586bf50b50e4b43898b78a696bccf68582bdc3",
+      "gitBlobSha": "7f638f1ab1138e4e1a78f91c9431821e56de0609"
+    },
+    {
+      "path": "vendor/captionverse/subtitles.mjs",
+      "bytes": 10518,
+      "sha256": "ad432f5ee546f448a070e360d56c474544c9b438c170ceb07c337f78aa789491",
+      "gitBlobSha": "4f3b99c29948a6e11f65c32b38cb0e1155695efb"
+    },
+    {
+      "path": "vendor/captionverse/word-timing.mjs",
+      "bytes": 4687,
+      "sha256": "f14dfb72a146d380ae5d056c6bbd09fe2e8edd9eab4882e6a35b08d69ce66f10",
+      "gitBlobSha": "03e9cf5360be108df41c164c43c87aaa83244dde"
+    },
+    {
+      "path": "vendor/microverse/pixel-observations.mjs",
+      "bytes": 10320,
+      "sha256": "f6efa157931d86230a20555d5c203630210add240f1855184d88a694805be3d2",
+      "gitBlobSha": "425437d463262f1981a04480f22ec45fbd465693"
+    },
+    {
+      "path": "web/decision-practice.css",
+      "bytes": 1612,
+      "sha256": "673b7435a50850feddbbbb39672e6b57a92b6b52e1c2a50ff6bc9c6db53c9f79",
+      "gitBlobSha": "c8259143d92b4187fa9ea0ffa15200079d092984"
+    },
+    {
+      "path": "web/decision-practice.html",
+      "bytes": 5351,
+      "sha256": "799e5ccf16c57dc71306e39d5f0054d9c2fda73b472400e160a1e92062c30e66",
+      "gitBlobSha": "100b6abb1165e67b76509cb08ca9b6388f072004"
+    },
+    {
+      "path": "web/decision-practice.mjs",
+      "bytes": 11611,
+      "sha256": "51684555b61bf42cee6577985a10d16afac4e0ab80c64323ec23b89d770e029b",
+      "gitBlobSha": "51c75cb0d166bfaf5838c765b1981603e43b42d5"
+    },
+    {
+      "path": "web/image-input.mjs",
+      "bytes": 1511,
+      "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "gitBlobSha": "954e74a63557cfd2adf53c7be028f134b287e59f"
+    },
+    {
+      "path": "web/interval-playback.mjs",
+      "bytes": 3166,
+      "sha256": "98ce2f105e9187dc68b06c98f33914b302be78daeb507446f21c152544c83ca7",
+      "gitBlobSha": "fbd9e5b796fe518dec79d2589a961c4082201379"
+    },
+    {
+      "path": "web/narration-clock.mjs",
+      "bytes": 3666,
+      "sha256": "aec49a4ce0d62e67b79d038f699f609315d0fb23f3bff8fcea6f89279bb4e7a8",
+      "gitBlobSha": "05399f56e2431d3b787ea819433c334bbf484624"
+    },
+    {
+      "path": "web/narration-moments.css",
+      "bytes": 523,
+      "sha256": "eb02d32d35786462fb2c11f336bb8a17566ef64fa74f1a6f25d28a5ead406780",
+      "gitBlobSha": "c47438949d613b13f8d1c1b1ab6cb70f0cdcd6e3"
+    },
+    {
+      "path": "web/narration-moments.mjs",
+      "bytes": 8982,
+      "sha256": "0b1c6dfb7bfbc7dbeb1ccac2dcf5f09180aae5ca4282c44008ebe3b12a46a854",
+      "gitBlobSha": "3db66c7d9af012c1148f2cc29436a573c08038cb"
+    },
+    {
+      "path": "web/narration-playback.mjs",
+      "bytes": 8077,
+      "sha256": "a4d2eefab11ae9bcd8d2c9c00d2564c7c2ad6bbd70026daa0911d7b982a5e18d",
+      "gitBlobSha": "6e6c59cdb329c58741fa524507b593eb77b26a90"
+    },
+    {
+      "path": "web/scan-change-regions.mjs",
+      "bytes": 3115,
+      "sha256": "3facd34d44b24ef5244f001e425fbd92590c28a483c166a95d2cf5aa0ac08de8",
+      "gitBlobSha": "484c050ea8889bc8e8b7e6364f5a3c5e03f09433"
+    },
+    {
+      "path": "web/sequence-input.mjs",
+      "bytes": 4361,
+      "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "gitBlobSha": "bf4ece2d96b15bdb8ee88ff537d92f39032c5d6a"
+    },
+    {
+      "path": "web/sequence.css",
+      "bytes": 7292,
+      "sha256": "f1208264c3253b05bd022b038b29eb53fcc468a860e0182b6a7d7b29180fa287",
+      "gitBlobSha": "7cc2ed474ae40bad3ff346129dbe46f5fab842e3"
+    },
+    {
+      "path": "web/sequence.html",
+      "bytes": 12981,
+      "sha256": "1446d2bd4d563545ad6d2b8287ec91b647db9c1ed47107a66a2d8143d2a5ad21",
+      "gitBlobSha": "da6048283211570cf45232a4f3dd05a50db4e02e"
+    },
+    {
+      "path": "web/sequence.mjs",
+      "bytes": 24554,
+      "sha256": "4f501aaa949a8797e7c7fcbddff7c5251f4f824a1e98e668e5e9a5a92b28f774",
+      "gitBlobSha": "8c5585a5179b0639c842755d91927706cf50b1aa"
+    },
+    {
+      "path": "web/styles.css",
+      "bytes": 13526,
+      "sha256": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "gitBlobSha": "f541f3fd091191bf223a75a55b47ded7d61b64fc"
+    },
+    {
+      "path": "web/timed-narration.css",
+      "bytes": 1050,
+      "sha256": "27b650007a788efabf064456153d2340b00595d55ed13cb6b2a800c35ad91291",
+      "gitBlobSha": "6167c64a3fb38218052e5f0eb67233d965491f67"
+    },
+    {
+      "path": "web/timed-narration.html",
+      "bytes": 3920,
+      "sha256": "8b2fba0b051ed04e3d3ed1f72769c0fac47e469ae8c7df2ea006260a36c278aa",
+      "gitBlobSha": "6dbdb9f5b265ab32215a4f3b629108282e4c78cb"
+    },
+    {
+      "path": "web/timed-narration.mjs",
+      "bytes": 10123,
+      "sha256": "cdecc735b35b53c7f9468e1dc49138596cf65380a97d902d2e07c9225ba5691d",
+      "gitBlobSha": "b9e000ecec19e7f8cc825fba77e255d50b60278e"
+    },
+    {
+      "path": "web/video-input.mjs",
+      "bytes": 7765,
+      "sha256": "c18126063b571df87fa33c74c1436cffb974458dcebd3634bf3fd37d61a09d39",
+      "gitBlobSha": "840b8fe255e7694b0e184d14a630263099a476d8"
+    },
+    {
+      "path": "web/visual-scan.mjs",
+      "bytes": 9297,
+      "sha256": "d9f3cc560144849fc660c192b5b956d8a2ac8c5db4f4846064309c701695e426",
+      "gitBlobSha": "beac6fd3c2565a22fdd8158b7e7f4e21a82dc30e"
+    },
+    {
+      "path": "web/visual-span-view.mjs",
+      "bytes": 3828,
+      "sha256": "4418b0d214a8e9e45904d376806972d252b53c6e65d05c02fa63b53b83c8d23e",
+      "gitBlobSha": "86387198af4474f79e748fb9fb591afbb8fd9b02"
+    }
+  ],
+  "externalSources": [
+    {
+      "repository": "Jacob-Met/hamon-workshop",
+      "commit": "3b0a64a3783aa106ccedf537d8b2ef995c9e1f06",
+      "path": "tests/support/chromium-sandbox.mjs",
+      "sha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "gitBlobSha": "74448e8878dcf285267467b74984121dd897c25c"
+    }
+  ],
+  "archive": {
+    "file": "receiving.tar.gz",
+    "bytes": 4353198,
+    "sha256": "898e7b17321da87097b824141656e5d4fb6e18b0954dfef7d6faae88fea89cfb",
+    "gitBlobSha": "5031406235185cc7eef16b20f859505f1d0659ef"
+  },
+  "sourceReceiving": {
+    "sourceSha256": "c8c04c501a2d6335fd594778fc3e918150666846b080a8ec7cb03d0e7f18b43a",
+    "sourceDeclaration": {
+      "schema": "skill-translator.authored-utterance-source/v1",
+      "spokenText": [
+        "Inspect the green square.",
+        "Now inspect the blue square."
+      ],
+      "suppliedText": [
+        "Inspect the green square.",
+        "Now inspect the glue square."
+      ],
+      "utteranceAudioSeconds": [
+        1.563,
+        1.8115
+      ],
+      "gapSeconds": 0.4,
+      "authoredIntervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1.563
+        },
+        {
+          "startSeconds": 1.963,
+          "endSeconds": 3.775
+        }
+      ],
+      "videoDurationSeconds": 5.008,
+      "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+      "generationCommands": [
+        [
+          "ffmpeg",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-f",
+          "lavfi",
+          "-i",
+          "flite=textfile=/home/ubuntu/hamon-767440375f61/narration-playback-source-v2/utterance-0.txt:voice=kal",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "/home/ubuntu/hamon-767440375f61/narration-playback-source-v2/utterance-0.wav"
+        ],
+        [
+          "ffmpeg",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-f",
+          "lavfi",
+          "-i",
+          "flite=textfile=/home/ubuntu/hamon-767440375f61/narration-playback-source-v2/utterance-1.txt:voice=kal",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "/home/ubuntu/hamon-767440375f61/narration-playback-source-v2/utterance-1.wav"
+        ],
+        [
+          "ffmpeg",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-i",
+          "/home/ubuntu/hamon-767440375f61/narration-playback-source-v2/utterance-0.wav",
+          "-i",
+          "/home/ubuntu/hamon-767440375f61/narration-playback-source-v2/utterance-1.wav",
+          "-f",
+          "lavfi",
+          "-i",
+          "color=c=0x14212b:size=320x180:rate=25:duration=5,drawbox=x=36:y=64:w=48:h=48:color=0x77dd88:t=fill:enable='lt(t,1.963)',drawbox=x=236:y=64:w=48:h=48:color=0x6699ff:t=fill:enable='gte(t,1.963)'",
+          "-filter_complex",
+          "[0:a]apad=pad_dur=0.4[first];[first][1:a]concat=n=2:v=0:a=1,apad=whole_dur=5[audio]",
+          "-map",
+          "2:v",
+          "-map",
+          "[audio]",
+          "-t",
+          "5",
+          "-c:v",
+          "libvpx-vp9",
+          "-b:v",
+          "0",
+          "-crf",
+          "35",
+          "-row-mt",
+          "1",
+          "-threads",
+          "1",
+          "-pix_fmt",
+          "yuv420p",
+          "-c:a",
+          "libopus",
+          "-b:a",
+          "48k",
+          "-map_metadata",
+          "-1",
+          "/home/ubuntu/hamon-767440375f61/narration-playback-source-v2/original.webm"
+        ]
+      ],
+      "streams": [
+        {
+          "codec": "vp9",
+          "type": "video",
+          "width": 320,
+          "height": 180,
+          "sampleRate": null
+        },
+        {
+          "codec": "opus",
+          "type": "audio",
+          "width": null,
+          "height": null,
+          "sampleRate": "48000"
+        }
+      ],
+      "files": [
+        {
+          "file": "original.webm",
+          "bytes": 29295,
+          "sha256": "c8c04c501a2d6335fd594778fc3e918150666846b080a8ec7cb03d0e7f18b43a"
+        },
+        {
+          "file": "transcript.vtt",
+          "bytes": 381,
+          "sha256": "bb52b23a5ba4fc2d13a73aafb69c9dad6dd7cbb15a93b672c50934aa366fdcd9"
+        },
+        {
+          "file": "utterance-0.txt",
+          "bytes": 26,
+          "sha256": "77433d0a26f076b5428398ac1478648a1c2c2154f1acbe85e92c3ca4d05676a2"
+        },
+        {
+          "file": "utterance-0.wav",
+          "bytes": 150126,
+          "sha256": "5bbb718803eb8bc1c1a392c29ae1aa009c7e736b433011f5f16d0f67c3c06f29"
+        },
+        {
+          "file": "utterance-1.txt",
+          "bytes": 29,
+          "sha256": "e18c77e1502c31be48c8dabcb3e4ec077ad3af7df8e02e0fbdef3e598a8e05ff"
+        },
+        {
+          "file": "utterance-1.wav",
+          "bytes": 173982,
+          "sha256": "0c40d222a893bc3657f3ea1ed9747f55dc0d26c9d60062aa8788ceb8f4320851"
+        }
+      ],
+      "boundary": "New repository-authored synthetic speech/video and authored supplied transcript mismatch. Not the unavailable pinned CAPTIONVERSE binary, not an ASR result, a physical expert demonstration or authenticated speech/timing. Source Opus audio is retained in the original clip; video presentation timestamps do not identify sample-exact audio boundaries."
+    },
+    "transcriptSha256": "bb52b23a5ba4fc2d13a73aafb69c9dad6dd7cbb15a93b672c50934aa366fdcd9",
+    "studioBundleSha256": "5b2dc711bd05f30aafaa8f55bd510dca01aaf3617401ca9347dbcb869739739e",
+    "clockRecordSha256": "18c850ec07c12c09014111b84b58e0b1d2048877e11680b8c5f72a17dcfac167",
+    "silentSourceSha256": "e156eeed51e2b5fcc2b925930ef03e3e322e6094f26fbe06ecc692bb875115b0",
+    "originalMoments": [
+      {
+        "image": {
+          "sha256": "f0a97fd10fdabbe6c0a68adee8253a3db3d3fca83ce27a9e6e376627f8aa204c",
+          "widthPx": 320,
+          "heightPx": 180,
+          "mimeType": "image/png",
+          "name": "original-frame-0.240s.png",
+          "pixelCoordinates": "browser-oriented"
+        },
+        "origin": {
+          "kind": "local-video-frame",
+          "timing": "requestVideoFrameCallback",
+          "clip": {
+            "name": "original.webm",
+            "mimeType": "video/webm",
+            "sizeBytes": 29295,
+            "sha256": "c8c04c501a2d6335fd594778fc3e918150666846b080a8ec7cb03d0e7f18b43a",
+            "durationSeconds": 5.008
+          },
+          "requestedTimeSeconds": 0.2,
+          "mediaTimeSeconds": 0.24,
+          "frameSha256": "f0a97fd10fdabbe6c0a68adee8253a3db3d3fca83ce27a9e6e376627f8aa204c",
+          "widthPx": 320,
+          "heightPx": 180,
+          "decodedWidthPx": 320,
+          "decodedHeightPx": 180
+        }
+      },
+      {
+        "image": {
+          "sha256": "34c6f4bde4362673d657a74496e4d2349a55fcd816e39ed13d5adb261c21ed2b",
+          "widthPx": 320,
+          "heightPx": 180,
+          "mimeType": "image/png",
+          "name": "original-frame-4.640s.png",
+          "pixelCoordinates": "browser-oriented"
+        },
+        "origin": {
+          "kind": "local-video-frame",
+          "timing": "requestVideoFrameCallback",
+          "clip": {
+            "name": "original.webm",
+            "mimeType": "video/webm",
+            "sizeBytes": 29295,
+            "sha256": "c8c04c501a2d6335fd594778fc3e918150666846b080a8ec7cb03d0e7f18b43a",
+            "durationSeconds": 5.008
+          },
+          "requestedTimeSeconds": 4.6,
+          "mediaTimeSeconds": 4.64,
+          "frameSha256": "34c6f4bde4362673d657a74496e4d2349a55fcd816e39ed13d5adb261c21ed2b",
+          "widthPx": 320,
+          "heightPx": 180,
+          "decodedWidthPx": 320,
+          "decodedHeightPx": 180
+        }
+      }
+    ],
+    "observations": [
+      {
+        "cue": 0,
+        "text": "Stopped: interval-end-presented. First presented 0.000 s; last 1.600 s. Start offset 0.000 s; end offset 0.037 s. These are video presentation observations, not audio sample boundaries."
+      },
+      {
+        "cue": 1,
+        "text": "Stopped: interval-end-presented. First presented 2.000 s; last 3.800 s. Start offset 0.037 s; end offset 0.025 s. These are video presentation observations, not audio sample boundaries."
+      },
+      {
+        "cue": 1,
+        "text": "Stopped: interval-end-presented. First presented 2.080 s; last 3.880 s. Start offset 0.017 s; end offset 0.005 s. These are video presentation observations, not audio sample boundaries."
+      }
+    ],
+    "qualification": "Authored Flite speech with intentional supplied-text mismatch; browser audio enabled and presented video observed, no human listening or ASR accuracy claim."
+  },
+  "review": "Independent retained MATERIALTRUTH worker reviewed exact core bedef8e5c2fa14a25b49dd021c2e2807edb47e08: no blocking source/custody/playback issue. Complete mapped cue validation, separate quotation selection, full-clip identity admission, accepted-clip preservation, stale-load resource release, adapter revision/load tokens and separate caller receiving ownership were checked against unchanged video-input, interval-playback and narration import kernels. Source review only; root executed native/browser courses. Later audio-description wording clarifies that the player does not generate speech; original source clips may themselves be authored synthetic speech.",
+  "visualReview": "Lead inspected actual desktop/narrow source playback screenshots. Original green and blue frames, explicit audio control, literal supplied mismatch and timing receipts remained visible in the contained 390px layout.",
+  "limits": [
+    "Authored Flite source and intentional supplied-text mismatch; not ASR or verified expert demonstration.",
+    "Browser explicitly enabled original audio and observed presented video; no human audibility or sample-exact audio-boundary claim.",
+    "Playback never adopts a quote or changes saved source/narration records."
+  ]
+}
