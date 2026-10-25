@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "two original sources, frames and missing versus supplied cues",
+    "actual Chrome download retains complete raw sources",
+    "explicit question retains supplied and missing source anchors",
+    "fresh narrow reopen recomputes source-linked question",
+    "mismatched question preserves accepted evidence",
+    "keyboard revision retires prior question until explicit retention",
+    "late question reopen cannot overwrite a newer retained question",
+    "source comparison edits invalidate retained question"
+  ],
+  "errors": []
+}

@@ -1,0 +1,73 @@
+{
+  "team": "hamon-b56d209b-20261024",
+  "issue": 212,
+  "base": "f2619beaf618a6349aa50767e5b4f8319ec35cb6",
+  "sourceScope": {
+    "files": 28,
+    "unchangedGitBlobsVerified": 20,
+    "changedSourcePaths": 8,
+    "baselineBlobs": {
+      "server.mjs": "87739004e3e0dea425be6b5dc7a4ea83c1b0882f",
+      "native/sequence-edge.mjs": "f672b6422e7ac41d762b47cd31b8d207807a0622",
+      "src/demonstration-sequence.mjs": "3030edd3ad809cab11fc220365aacb34e2d01b42",
+      "src/frame-origin.mjs": "9154d9e63255de95152e3137d5790de5e9f00e42",
+      "src/geometry.mjs": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061",
+      "src/capture.mjs": "763d09298e03c4275b802c83df92c773de62cd67",
+      "src/authoring.mjs": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5",
+      "src/sequence-capture.mjs": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b",
+      "src/capture-editing.mjs": "570ee1ac63928e5837920288243e8ea7621936c9",
+      "src/sequence-edge.mjs": "ca6d46f12e5ad15c54a4d9c1acc430149071b818",
+      "src/sequence-edge-field.mjs": "1515280bd71fe4066633b015b9bd8937dbb6263e",
+      "web/decision-comparison.html": "15375547f9abc1c6d724eba3c3585ad5b251988a",
+      "web/decision-comparison.css": "6f67a401f32a4d0d1886f833d84f54f3c24c47e1",
+      "web/decision-comparison.mjs": "9dcb8092d19951a7bdc6b011f979328330522c32",
+      "src/decision-comparison.mjs": "c9b3df510934428cc1e72bf18207e3cbde438b20",
+      "src/decision-practice.mjs": "5e7d040eb72a9bab753beccc0ff151187daaeb99",
+      "web/sequence-input.mjs": "bf4ece2d96b15bdb8ee88ff537d92f39032c5d6a",
+      "web/image-input.mjs": "954e74a63557cfd2adf53c7be028f134b287e59f",
+      "web/order-evidence-input.mjs": "63be6e9e4722656694cdc83ac3e98ad1e93d830a",
+      "src/order-evidence.mjs": "947c515509de9e5328a689fd6c128b0495f4b2b8",
+      "src/prerequisite-rehearsal.mjs": "b499945c38250474cb3bd41a1b1a87cd757e6a3b",
+      "web/decision-comparison-input.mjs": "1c5458af5f348c0a27d4ffa58946de6cc6004201",
+      "test/decision-comparison.test.mjs": "0225e6e2a0c2a177e90ae8c280ccdebcb8c76e09"
+    }
+  },
+  "native": {
+    "runtime": "Node 22.23.4 on isolated authorized Linux receiver",
+    "command": "node --test test/account-question.test.mjs test/decision-comparison.test.mjs",
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "command": "PUPPETEER_PATH=... CHROME_BINARY=/usr/bin/google-chrome-stable QA_OUTPUT=... node tools/browser-account-question.mjs",
+    "groups": 8,
+    "errors": [],
+    "desktopAnd390pxInspected": true,
+    "sandbox": {
+      "layer1": "Namespace",
+      "pidNamespaces": true,
+      "networkNamespaces": true,
+      "seccompBpf": true,
+      "tsync": true
+    }
+  },
+  "independentReview": {
+    "reviewer": "Retained team lead",
+    "result": "No blocking finding",
+    "scope": [
+      "Normalized complete-source binding and distinct selected example anchors",
+      "All four original fields and explicitly absent text",
+      "No inferred agreement or supplied author answer",
+      "Input-only replay recomputes evidence and discards forged findings",
+      "Bounded export/reopen and draft/source/async revision handling",
+      "Narrow additive existing-consumer/server composition"
+    ]
+  },
+  "limits": [
+    "Focused dependency and actual consumer receiving, not full repository suite.",
+    "Authored source PNG controls; no physical skill, semantic inference or teaching-effect validation.",
+    "Question reopens after the matching complete comparison; paired files are explicit.",
+    "No deployment or account messaging."
+  ]
+}

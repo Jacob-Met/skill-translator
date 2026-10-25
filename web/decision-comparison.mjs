@@ -1,11 +1,13 @@
+import {mountAccountQuestion} from '/web/account-question.mjs';
 import {DECISION_COMPARISON_FORMAT,compareDecisionAccounts,rehearseDecisionExample} from '/src/decision-comparison.mjs';
 import {readSequenceBundle,makeSequenceBundle,releaseSequenceAssets} from '/web/sequence-input.mjs';
 import {budget} from '/web/order-evidence-input.mjs';
 import {readComparison,makeComparison,release} from '/web/decision-comparison-input.mjs';
 const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 let sources=[],selected=[],revision=0,generation=0,controller=null,busy=false;
+let accountQuestions;
 const study=()=>({format:DECISION_COMPARISON_FORMAT,examples:sources.map((s,i)=>({source:s.sequence,stepId:selected[i]})),relationship:$('relationship').value,explanation:$('explanation').value});
-function invalidate(){revision++;controller?.abort();generation++;busy=false;sync();}
+function invalidate(){revision++;controller?.abort();generation++;busy=false;sync();accountQuestions?.refresh();}
 function sync(){$('save').disabled=busy||sources.length<2;$('source').disabled=busy||sources.length>=6;}
 function download(blob,name){const url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function run(action){Promise.resolve().then(action).catch(e=>{$('error').textContent=e.message;});}
@@ -21,7 +23,7 @@ function render(){
  const raw=node('button','Save original source'),practice=node('button','Save selected practice');
  raw.onclick=()=>run(async()=>{const rev=revision,blob=await makeSequenceBundle(s.sequence,s.assets);if(rev!==revision)throw Error('Selection changed; retry export');download(blob,`decision-source-${i+1}.json`);});
  practice.onclick=()=>run(()=>{const p=rehearseDecisionExample(study(),i);download(new Blob([JSON.stringify(p)],{type:'application/json'}),`decision-practice-${i+1}.json`);});card.append(raw,practice);$('examples').append(card);
- });sync();
+ });sync();accountQuestions?.refresh();
 }
 async function receive(file,replace){
  if(!file)return;controller?.abort();controller=new AbortController();const token=++generation,rev=revision,signal=controller.signal;busy=true;sync();let incoming;
@@ -39,4 +41,6 @@ async function receive(file,replace){
 $('source').onchange=e=>receive(e.target.files[0],false);$('open').onchange=e=>receive(e.target.files[0],true);
 for(const id of ['relationship','explanation'])$(id).oninput=invalidate;
 $('save').onclick=()=>run(async()=>{const value=study();compareDecisionAccounts(value);const rev=revision,blob=await makeComparison(value,sources);if(rev!==revision)throw Error('Comparison changed; retry export');download(blob,'decision-comparison.json');});
+accountQuestions=mountAccountQuestion({container:$('account-questions'),getComparison:study,onChange:()=>{revision++;controller?.abort();generation++;busy=false;sync();},download});
 window.addEventListener('beforeunload',()=>{controller?.abort();release(sources);});render();
+
