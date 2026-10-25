@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "tests": [
+    "original sampled-path producer bundle yields middle4mm guide excursion with original images and projected fixed-line overlays",
+    "complete actual guide download reopens natively and in-browser with unchanged original sampled source/PNGs",
+    "missing intermediate sample cannot silently become agreement",
+    "wrong-image source replacement leaves accepted original guide evidence intact",
+    "newer criterion edit cancels delayed source receiving",
+    "390px keyboard criterion revision changes only conditional sampled findings"
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47"
+}
