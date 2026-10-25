@@ -41,3 +41,22 @@ Verification: `node test/cue-support.test.mjs`; actual browser receiving uses
 Native controls cover XOR, replicated and opposing labels, unknown readings,
 unavailable cases, raw replay, immutable sources and independent row partitions.
 
+
+## Withhold a whole original clip
+
+Select **Withhold this original clip (all its retained intervals)** before
+inspecting support to exclude every reference interval with the held example's
+declared original clip SHA-256. This tests whether a same-label witness comes
+only from another interval of that clip. Switching scope clears prior findings;
+inspect again to recompute. The original exact-evidence scope remains the default.
+The report shows which original rows were excluded in either scope.
+
+A clip is grouped by its declared byte digest. Re-encoded or edited copies can
+have different digests, and different clips can share pixels, scenes, people or
+recording sessions. This is not a test of statistical independence. No claim of
+new-situation accuracy or learning follows from support surviving this audit.
+
+The scope is a view choice, not a source annotation, and is not saved in the raw
+cue study. Reopen the same saved sources, explicitly choose a scope and inspect
+again. A whole-clip omission can leave no decision contrast or too few examples;
+those cases retain their unavailable outcomes rather than a matching conclusion.

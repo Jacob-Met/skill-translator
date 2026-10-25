@@ -33,9 +33,12 @@ $('inspect').onclick=()=>{if(loading){$('status').textContent='Source import is 
 $('save').onclick=async()=>{try{if(loading)throw Error('Source import is pending');const accepted=importCueStudy(study),questionPlan=questionView.plan(),questionReadings=questionView.readings(),rev=revision,comparison=JSON.parse(await(await makeComparison(accepted.comparison,sources)).text());if(rev!==revision)throw Error('Inputs changed during export; retry');const blob=new Blob([JSON.stringify({format:questionPlan?'skill-translator.cue-bundle/v2':'skill-translator.cue-bundle/v1',study:accepted,comparison,questionReadings,...(questionPlan?{questionPlan}:{})})],{type:'application/json'});if(blob.size>48*1024*1024)throw Error('Complete study exceeds 48 MB');const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='cue-study.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){$('error').textContent=e.message;}};
 window.addEventListener('beforeunload',()=>{controller?.abort();release(sources);});
 
+const clipAuditLabel=el('label','Withhold this original clip (all its retained intervals) '),clipAudit=el('input');
+clipAudit.type='checkbox';clipAudit.id='withhold-original-clip';clipAuditLabel.prepend(clipAudit);$('support').before(clipAuditLabel);
+clipAudit.onchange=()=>{$('support-results').replaceChildren();};
 $('support').onclick=()=>{if(loading){$('status').textContent='Source import is pending; wait or edit to cancel it.';return;}try{
- const report=inspectCueSupport(study),out=$('support-results');
- out.replaceChildren(el('h2','Other-example categorical support'),el('p',report.boundary));
+ const report=inspectCueSupport(study,{withhold:clipAudit.checked?'original-clip':'original-evidence'}),out=$('support-results');
+ out.replaceChildren(el('h2','Other-example categorical support'),el('p',report.withholdingBoundary),el('p',report.boundary));
  for(const omission of report.omissions){
   const section=el('section');section.append(el('p',`Original-evidence rows withheld together: ${omission.omittedIndexes.map(i=>i+1).join(', ')}.`));section.append(el('h3',`Withheld example ${omission.index+1}`),el('p',`Remaining table: ${omission.status}; held declared decision: ${omission.heldDecision??'unknown'}.`));
   if(!omission.combinations.length)section.append(el('p','No remaining separating combination is available; no matching conclusion is supplied.'));
@@ -52,5 +55,6 @@ $('support').onclick=()=>{if(loading){$('status').textContent='Source import is 
  }catch(e){$('error').textContent=e.message;}};
 
 const questionView=createCueQuestionsView({anchor:$('editor'),getStudy:()=>study,isLoading:()=>loading,onError:message=>$('error').textContent=message,onChange:()=>{revision++;controller?.abort();loading=false;}});
+
 
 

@@ -45,7 +45,35 @@ try{
  checks.push('renamed identical original evidence withheld together through complete source importer');
  await(await p.$('#support-results section')).screenshot({path:out+'/duplicate-narrow.png'});
  await p.setViewport({width:1280,height:900});await(await p.$('#support-results section')).screenshot({path:out+'/duplicate-desktop.png'});
+ await p.setViewport({width:390,height:844});
+ // Change the duplicate's presented interval, keeping its declared original clip.
+ const intervals=structuredClone(duplicated);
+ intervals.study.cues[0].label='Interval texture';
+ intervals.study.comparison.examples[1].source.moments[0].origin.mediaTimeSeconds=1.5;
+ intervals.comparison.study=structuredClone(intervals.study.comparison);
+ intervals.comparison.sources[1].sequence=structuredClone(intervals.study.comparison.examples[1].source);
+ await writeFile(out+'/intervals.json',JSON.stringify(intervals));
+ await(await p.$('#open')).uploadFile(out+'/intervals.json');await p.waitForFunction(()=>document.querySelector('#cues input')?.value==='Interval texture');
+ assert.equal(await p.$eval('#withhold-original-clip',e=>e.checked),false);
+ await p.click('#support');assert.match(await p.$eval('#support-results section',e=>e.textContent),/same-declared-label/);
+ await p.focus('#withhold-original-clip');await p.keyboard.press('Space');
+ assert.equal(await p.$eval('#support-results',e=>e.textContent),'');
+ await p.click('#support');const clipResult=await p.$eval('#support-results section',e=>e.textContent);
+ assert.match(clipResult,/withheld together: 1, 2/);assert.match(clipResult,/no-decision-contrast/);assert.doesNotMatch(clipResult,/same-declared-label/);
+ checks.push('different intervals support each other by default but explicit clip omission removes their support; keyboard toggle retires stale report');
+ const independent=structuredClone(saved);independent.study.rows=structuredClone(duplicated.study.rows);independent.study.cues[0].label='Other clip texture';
+ await writeFile(out+'/other-clips.json',JSON.stringify(independent));await(await p.$('#open')).uploadFile(out+'/other-clips.json');await p.waitForFunction(()=>document.querySelector('#cues input')?.value==='Other clip texture');
+ await p.click('#support');assert.match(await p.$eval('#support-results section',e=>e.textContent),/same-declared-label/);
+ checks.push('same categories on other original clip digests remain available in clip scope');
+ const oneClip=structuredClone(intervals);oneClip.study.cues[0].label='One clip texture';
+ oneClip.study.rows=oneClip.study.rows.slice(0,2);oneClip.study.comparison.examples=oneClip.study.comparison.examples.slice(0,2);oneClip.comparison.study=structuredClone(oneClip.study.comparison);oneClip.comparison.sources=oneClip.comparison.sources.slice(0,2);
+ await writeFile(out+'/one-clip.json',JSON.stringify(oneClip));await(await p.$('#open')).uploadFile(out+'/one-clip.json');await p.waitForFunction(()=>document.querySelector('#cues input')?.value==='One clip texture');
+ await p.click('#support');assert.match(await p.$eval('#support-results section',e=>e.textContent),/insufficient-other-examples/);assert.doesNotMatch(await p.$eval('#support-results',e=>e.textContent),/same-declared-label/);
+ assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));await p.screenshot({path:out+'/clip-scope-narrow.png',fullPage:true});
+ checks.push('all examples from one clip leave insufficient support with no fabricated witness');
+ await p.click('#withhold-original-clip');assert.equal(await p.$eval('#support-results',e=>e.textContent),'');
  assert.deepEqual(errors,[]);await writeFile(out+'/receipt.json',JSON.stringify({checks,errors},null,2));console.log(checks);
 }finally{await browser?.close();await new Promise(r=>server.close(r));}
+
 
 
