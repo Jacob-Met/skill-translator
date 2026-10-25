@@ -1,0 +1,71 @@
+{
+  "schema": "hamon-receiving/v1",
+  "issue": 182,
+  "team": "hamon-887a4d-20261024",
+  "base_commit": "0de96ff094f3ef40de648b45b778f5e67955add8",
+  "source_sha256": {
+    "src/evidence-conflict-alternatives.mjs": "37c4ca662a6b349bd858cc3530b8999550c397dbcb2e2cb195836e9b3f42e216",
+    "web/evidence-conflicts.mjs": "dd5f6da0cdbb8c4ebcecbf9c955d7c8d1ca55d8c927af37edbb338b02818e265",
+    "server.mjs": "22d96f24184dd75eb1689af5a50cd34bc445b2552ba5b4c94217af3146e7a5d3",
+    "test/evidence-conflict-alternatives.test.mjs": "748b4702716939dee956042cb35c2eceacbb253d0b7204d348307d8ba851fc65",
+    "tools/browser-evidence-conflict-alternatives.mjs": "ab8aec006a3fc1d5518dfff852360d0d5d7c84c7d35c629f58cf763d6d4ba1e9",
+    "docs/EVIDENCE_CONFLICT_ALTERNATIVES.md": "7a73bbe41ac59682d8f63cfd28e157e2d437a5b36a6d9dc51e45f6ce1b9fab99"
+  },
+  "native": {
+    "command": "npm test",
+    "tests": 589,
+    "passed": 589,
+    "failed": 0,
+    "skipped": 0
+  },
+  "focused": {
+    "groups": 4,
+    "independent_exhaustive_geometric_studies": 80,
+    "all_ranks_checked": true,
+    "full_contract_records": 60,
+    "full_contract_groups": 900
+  },
+  "independent_review": {
+    "reviewer": "retained materialtruth worker",
+    "checks": "Every rank 0–899 in the 60-record Cartesian family; every selected witness rejects all five maintained rules; original source preservation and input-order controls.",
+    "blocking_findings": 0
+  },
+  "browser": {
+    "groups": [
+      "actual namespace and seccomp browser sandbox verified",
+      "actual authored observations produce a two-record conflict despite individually supported rules",
+      "keyboard next, exact jump and invalid index expose complete alternate source witnesses without changing records",
+      "equally small alternatives retain participation and keyboard-selectable original observation diagram",
+      "real browser download retains only unchanged original observation inputs",
+      "fresh390px receiver recomputes same groups from original source and downloaded evidence",
+      "wrong-source import refuses transactionally with previous conflict and observations retained",
+      "full60record narrow receiver directly inspects finalgroup900 without dropping any original observation",
+      "ordinary explicit observation edit invalidates stale conflict explanation"
+    ],
+    "errors": [],
+    "evidenceClass": "authored geometric examples",
+    "browser": "Chrome/156.0.8078.47",
+    "sandboxDisabled": false,
+    "sandboxStatus": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "passed": true
+  },
+  "visual_review": {
+    "reviewer": "root",
+    "desktop": "Original observation labels, selected group and all five residual witnesses remain readable. Same original diagram controls are retained.",
+    "narrow_390": "Group 900 reachable with original records 29 and 59; controls wrap within viewport; no horizontal document overflow."
+  },
+  "limits": [
+    "Authored geometric controls, not physical skill validation.",
+    "Only five retained geometric rules and their unchanged residual/declared-uncertainty admission.",
+    "Minimum-cardinality groups differ from all inclusion-minimal groups; counts are not probabilities.",
+    "Group number is a view choice; raw evidence export is unchanged."
+  ],
+  "screenshots": {
+    "desktop.png": {
+      "sha256": "03414e64601b98cf26967cde4dea764a71a906a81b864a07802cb0340dba9ba2"
+    },
+    "narrow-last900.png": {
+      "sha256": "f6a0c5a67109ffc42660bb3a15ebc77f2d25e70276777957b9c16367ede6b3e2"
+    }
+  }
+}
