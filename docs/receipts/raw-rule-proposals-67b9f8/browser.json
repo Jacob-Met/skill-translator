@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "tests": [
+    "original annotated sources infer fixed-left proposal with separate bounds and changed target",
+    "original PNG reattachment and source ID collision control; wrong image preserves verified pixels",
+    "target edits retire acceptance until complete recomputation",
+    "source-only proposal reopens with all raw annotations and original PNG at390px",
+    "accepted inferred raw-source relationship enters maintained fresh practice",
+    "changed original annotation changes the inferred relationship and target",
+    "new target action retires older raw-account import",
+    "anisotropic bounds refuse the false circumscribed-circle proposal"
+  ],
+  "errors": [],
+  "uid": 65534,
+  "chromiumSandbox": true
+}
