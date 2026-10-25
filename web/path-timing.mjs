@@ -62,7 +62,7 @@ async function readFile(input,kind){
   }else{
    releaseSequenceAssets(state[kind+'Assets']);state[kind]=received.study;state[kind+'Assets']=received.assets;state.study=null;
   }
-  received=null;generation++;pending[kind]=null;$('proposal-confirm').checked=false;render();say(kind==='study'?'Comparison reopened with both verified original frame bundles.':'Original path and frames accepted. Declare interval matches for the currently paired sources.');
+  received=null;generation++;pending[kind]=null;$('proposal-confirm').checked=false;$('proposal-state').checked=false;render();say(kind==='study'?'Comparison reopened with both verified original frame bundles.':'Original path and frames accepted. Declare interval matches for the currently paired sources.');
  }catch(error){releaseReceived();if(isCurrent())say('Not accepted: '+error.message+'. Existing accepted work is unchanged.');}
  finally{if(pending[kind]===operation)pending[kind]=null;}
 }
@@ -80,13 +80,13 @@ function showProposalEvidence(proposal){
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${sample.image.widthPx} ${sample.image.heightPx}`);svg.setAttribute('role','img');svg.setAttribute('aria-label',`Original retained endpoint ${sample.momentLabel} with selected annotation`);svg.classList.add('proposal-frame');
   const image=document.createElementNS(ns,'image');image.setAttribute('href',asset.media.url);image.setAttribute('width',sample.image.widthPx);image.setAttribute('height',sample.image.heightPx);svg.append(image);
   if(sample.sourcePx){const point=document.createElementNS(ns,'circle');for(const[k,v]of Object.entries({cx:sample.sourcePx.x,cy:sample.sourcePx.y,r:Math.max(sample.image.widthPx,sample.image.heightPx)/45,fill:'none',stroke:'#b73320','stroke-width':3}))point.setAttribute(k,v);svg.append(point);}
-  card.append(svg);node('p',sample.basis,card);
+  card.append(svg);node('p',sample.basis,card);const moment=state[side].sequence.moments.find(m=>m.id===sample.momentId);node('p',moment.visibleState?`Authored visible state: ${moment.visibleState}`:'No visible-state description supplied; this sample has no category constraint.',card);
  }
  heading.focus();
 }
 function retireProposalBasis(){if(proposalBasis!==null&&$('basis').value===proposalBasis)$('basis').value='';proposalBasis=null;}
 function clearProposals(){ retireProposalBasis();$('proposals').replaceChildren();$('proposal-evidence').replaceChildren(); }
-for(const id of ['proposal-confirm','proposal-distance'])$(id).addEventListener('input',clearProposals);
+for(const id of ['proposal-confirm','proposal-distance','proposal-state'])$(id).addEventListener('input',clearProposals);
 for(const side of ['left','right'])for(const end of ['from','to'])$(side+'-'+end).addEventListener('change',()=>{
  retireProposalBasis();$('proposal-evidence').replaceChildren();
 });
@@ -96,16 +96,17 @@ $('propose').addEventListener('click',()=>{
   if(!state.left||!state.right)throw Error('Open both original paths first.');
   const raw=$('proposal-distance').value;
   if(!raw.trim())throw Error('Supply a geometric discrepancy bound.');
-  const report=proposePathCorrespondences(state.left,state.right,{sameCoordinateFrame:$('proposal-confirm').checked,maxDistanceMm:Number(raw)}),target=$('proposals');
+  const report=proposePathCorrespondences(state.left,state.right,{sameCoordinateFrame:$('proposal-confirm').checked,maxDistanceMm:Number(raw),sharedVisibleStateCategories:$('proposal-state').checked}),target=$('proposals');
   const descriptions={
    'missing-observations':'A selected position is missing. No alignment is proposed; missing samples are not bridged.',
-   'no-alignment':'No full monotone alignment fits this bound. No interval endpoints are proposed.',
+   'no-alignment':report.stateConstraint?'No full monotone alignment satisfies both the bound and declared literal categories. No interval endpoints are proposed.':'No full monotone alignment fits this bound. No interval endpoints are proposed.',
    'endpoints-only':'No internal correspondence is forced across all admitted alignments. Endpoint intervals do not resolve the internal ambiguity.',
    'internal-correspondences':'Internal sample correspondences shared by every admitted alignment were found.'
   };
   node('p',descriptions[report.status],target);
   node('p',`${report.alignmentCount} admissible full alignments; ${report.forcedPairs.length} forced sample pairs; ${report.ambiguousPairs.length} optional pairs.`,target);
   node('p',report.boundary,target);
+  if(Number.isInteger(report.stateConstraint?.excludedGeometricPairs))node('p',`${report.stateConstraint.excludedGeometricPairs} otherwise geometric sample pairs have different nonempty category text. Unlabeled selected samples remain unconstrained: first ${report.stateConstraint.unknownSamples.left.length}, second ${report.stateConstraint.unknownSamples.right.length}.`,target);
   const last=state.study?.correspondences.at(-1);
   for(const [index,row] of report.proposals.entries()){
    const afterLast=['left','right'].every(side=>!last||state[side].samples.findIndex(s=>s.momentId===row[side].fromMomentId)>=state[side].samples.findIndex(s=>s.momentId===last[side].toMomentId));
