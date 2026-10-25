@@ -2,7 +2,7 @@ import {createSequence,validateSequence,appendMoment,editMoment,removeMoment,ups
 import {MAX_ANNOTATION_BYTES} from '/src/sequence-capture.mjs';
 import {createPractice} from '/src/practice.mjs';
 import {frameOrigin} from '/src/frame-origin.mjs';
-import {loadLocalVideo,releaseVideo,capturePresentedFrame} from '/web/video-input.mjs';
+import {loadLocalVideo,releaseVideo as releaseLocalVideo,capturePresentedFrame} from '/web/video-input.mjs';
 import {loadLocalImage,releaseImage} from '/web/image-input.mjs';
 import {makeSequenceBundle,readSequenceBundle,releaseSequenceAssets,exportMomentFrame,MAX_FRAME_BYTES} from '/web/sequence-input.mjs';
 import {createVisualScanner} from '/web/visual-scan.mjs';
@@ -23,12 +23,17 @@ function endIO(request){if(current(request)){busy=false;controller=null;syncButt
 function commit(next){sequence=validateSequence(next);revision++;render();}
 function download(blob,name){const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const calibrationMoment=()=>sequence?.moments.find(m=>m.id===selectedCalibration);
+function releaseVideo(loaded){
+  if(loaded)for(const event of ['seeking','seeked'])loaded.video.removeEventListener(event,syncButtons);
+  releaseLocalVideo(loaded);
+}
 function syncButtons(){
   visualScanner?.sync();
-  $('capture-moment').disabled=busy||(!editingMoment&&(!clip||!sequence||sequence.moments.length>=MAX_MOMENTS));
-  $('capture-moment').textContent=editingMoment?'Save moment notes':'Retain this moment';
+  const seeking=Boolean(clip?.video.seeking);
+  $('capture-moment').disabled=busy||(!editingMoment&&(seeking||!clip||!sequence||sequence.moments.length>=MAX_MOMENTS));
+  $('capture-moment').textContent=editingMoment?'Save moment notes':seeking?'Waiting for video…':'Retain this moment';
   $('moment-time').disabled=Boolean(editingMoment);$('cancel-moment').hidden=!editingMoment;
-  $('use-playhead').disabled=busy||!clip||Boolean(editingMoment);
+  $('use-playhead').disabled=busy||seeking||!clip||Boolean(editingMoment);
   $('save-step').disabled=busy||!sequence||sequence.moments.length<2;
   $('export-sequence').disabled=busy||!sequence?.steps.length||stepDirty||Boolean(editingMoment);
   $('draft-status').textContent=stepDirty?'Unsaved step draft. Save or clear it before exporting.':editingStep?'Editing the selected step. Its retained frame identities stay unchanged.':sequence?.moments.length>=2?'Choose the evidence, then describe the intended change.':'Retain two moments to explain a change.';
@@ -151,7 +156,9 @@ $('clip-file').addEventListener('change',async()=>{
   try{
     candidate=await loadLocalVideo(file);if(!current(request)){releaseVideo(candidate);return;}
     const next=sequence?(assertSequenceClip(sequence,candidate.identity),sequence):createSequence(candidate.identity,{title:$('sequence-title').value,context:$('sequence-context').value});
-    const previous=clip;clip=candidate;candidate=null;$('video-host').replaceChildren(clip.video);releaseVideo(previous);
+    const previous=clip;clip=candidate;candidate=null;
+    for(const event of ['seeking','seeked'])clip.video.addEventListener(event,syncButtons);
+    $('video-host').replaceChildren(clip.video);releaseVideo(previous);
     visualScanner.receiveClip();
     $('moment-time').max=String(Math.max(0,clip.identity.durationSeconds-.001));commit(next);status('Original clip ready. Retain moments before and after a meaningful change.');
   }catch(error){if(candidate)releaseVideo(candidate);reportFailure(request,error);}finally{endIO(request);}
@@ -228,6 +235,7 @@ visualScanner=createVisualScanner({getClip:()=>clip,isBusy:()=>busy,canSelect:()
   cancelIO:request=>{if(current(request)){controller?.abort();generation++;controller=null;busy=false;syncButtons();}},
   onSelect:seconds=>{
     clip.video.pause();clip.video.currentTime=seconds;$('moment-time').value=String(seconds);revision++;
+    syncButtons();
     $('moment-time').focus();status('Inspect the sampled time in the clip, then retain the original frame you need.');
   }});
 render();

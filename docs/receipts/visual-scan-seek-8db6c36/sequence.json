@@ -1,0 +1,41 @@
+{
+  "fixture": "original authored four-frame video; no physical demonstration or learner claim",
+  "result": "PASS",
+  "sourceHashes": {
+    "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+    "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+    "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+    "tools/browser-sequence.mjs": "527ac5e2cc5ae1ba1af9727b62c1f55266bb3a3eb494cdfa739771a9b713f2d4",
+    "web/sequence.mjs": "c02270b3cd753e32b526cc2214aa2854b32e34bc4068526cb5d5ee44d71f1ebc",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+    "web/sequence.html": "b6a33fb91aa6834aae889da253fe29242a24f15c4e009c07ee40802bc5799519",
+    "web/sequence.css": "f1208264c3253b05bd022b038b29eb53fcc468a860e0182b6a7d7b29180fa287",
+    "web/video-input.mjs": "c18126063b571df87fa33c74c1436cffb974458dcebd3634bf3fd37d61a09d39",
+    "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+    "server.mjs": "85d46620672959ed17f7e383f623e9ec55938b496b43c70eb550a610b7e2cb31"
+  },
+  "browser": "156.0.8078.47",
+  "presentedTimes": [
+    0.5,
+    1
+  ],
+  "tests": [
+    "two actual selected video frames retain distinct requested/presented times and known red/blue pixels",
+    "actual before/after step separates supplied intent from unsupplied sensory and recovery cues",
+    "download includes exact independently hashed PNG bytes and source/frame/clip records",
+    "referenced moment deletion refuses and revisions preserve step/moment/source identities",
+    "fresh-page reopen verifies actual before/after pixels and recomputes forged findings",
+    "wrong original clip and swapped PNG replacement refuse without discarding current account",
+    "export rejects swapped File bytes even when cached media metadata still matches",
+    "revision fence preserves a newer text edit against a delayed saved sequence",
+    "newer sequence import supersedes delayed older JSON without stale adoption",
+    "overlapping authored steps remain explicit instead of being presented as a causal chain",
+    "clear/new clip supersedes delayed PNG capture and the new decoder remains usable",
+    "desktop evidence layout and 390px controls receive without horizontal overflow",
+    "strict application CSP, zero offsite requests and no page exceptions",
+    "producer, dependencies, server and course source hashes stayed unchanged during receiving"
+  ],
+  "errors": [],
+  "offsite": [],
+  "csp": []
+}

@@ -38,6 +38,11 @@ full-resolution PNG through the maintained source workflow. A new capture record
 the frame actually presented by the decoder; it does not assert that a new seek
 returned the identical sampled frame.
 
+The capture and playhead controls wait while the original video is seeking.
+**Waiting for video…** changes back to **Retain this moment** when that seek
+finishes. This also applies when you scrub the original video yourself. Notes
+on an already retained moment remain editable independently of the playhead.
+
 Name the before/after moments, write the intended change and any supplied cues,
 then save the existing sequence with its retained frames. Small scan previews
 never replace the original PNGs in that export. Scan results themselves are
