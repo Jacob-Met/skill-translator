@@ -6,6 +6,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/relationship-family-design.mjs":["src/relationship-family-design.mjs","text/javascript; charset=utf-8"],
   '/src/path-axis.mjs':['src/path-axis.mjs','text/javascript; charset=utf-8'],
   '/web/path-axis-view.mjs':['web/path-axis-view.mjs','text/javascript; charset=utf-8'],
   "/relationship-families":["web/relationship-families.html","text/html; charset=utf-8"],

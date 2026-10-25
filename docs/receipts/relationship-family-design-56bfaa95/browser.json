@@ -1,0 +1,62 @@
+{
+  "tests": [
+    "Unfamiliar213×157 source yields automatic distinguishing sizes without candidate input or actual placements",
+    "Preview changes hypothetical dimensions only, preserving original sources and empty practice",
+    "An independently authored new width-response demonstration at the suggested size removes the competing families through ordinary intake",
+    "Actual practice locks preview and malformed input preserves its scores and dimensions",
+    "Raw source/session export reopens and recomputes design on fresh390px page",
+    "Submicron interval endpoints remain distinct and nonzero in the actual displayed recommendations",
+    "A full12-source account preserves every source and declines an unusable thirteenth-source recommendation",
+    "Zero-response negative control yields no informative recommendation"
+  ],
+  "result": "PASS",
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-25T23:41:41.621Z",
+    "completedAt": "2026-10-25T23:41:41.687Z",
+    "durationMs": 66.41995300000002,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "B5B33897CCDE3FA2E0532DC975CE7CAC",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "480847FCA3D351F5778A9B9DB281D511"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  }
+}
