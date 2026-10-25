@@ -1,0 +1,10 @@
+{
+  "parent": "0de96ff094f3ef40de648b45b778f5e67955add8",
+  "parentTree": "96e8e4280dc4cecc3f3e7e2b9b471a39c749f887",
+  "serverSha256": "10543d90eae284bb70c3b0ac222616c34c78999b594ea93b10a27647aeaaa818",
+  "gitBlob": "30e8360b08cc0ebfd260f4e3f521fdd454ad8341",
+  "incomingVerified": 7,
+  "otherCandidateFilesUnchanged": 24,
+  "qualification": "All275upstream routes preserved;279composed unique routes have existing assets; actual exact-byte GET/bodylessHEAD,MIME,CSP passed for original family/outcomes,newjudgmentsets,and2incomingevidenceconflict routes.",
+  "browser": "Ninegroups passed on unchanged consumer/worker/core; only serverroutecomposition changed; postmerge browser will verify final composition."
+}

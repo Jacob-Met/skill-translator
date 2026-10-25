@@ -1,0 +1,18 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await page.$eval('#witnesses',e=>e.textContent)).includes('Unresolved geometry survives either'))
+
+    at file:///tmp/hamon-a9a3-skill-180-v1/source/tools/browser-condition-judgment-sets.mjs:22:515 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v22.23.4

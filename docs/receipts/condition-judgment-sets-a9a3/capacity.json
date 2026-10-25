@@ -1,0 +1,8 @@
+{
+  "family": 8191,
+  "sets": 8,
+  "branches": 512,
+  "elapsedMs": 92.221811,
+  "resultJsonBytes": 4628661,
+  "decision": "Use dedicated worker for bounded analysis; avoid even this measured main-thread delay and keep imports/edits responsive."
+}

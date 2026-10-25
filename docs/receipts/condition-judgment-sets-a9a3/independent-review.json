@@ -1,0 +1,23 @@
+{
+  "reviewer": "hamon-a9a3aa15-20261024/microverse",
+  "files": {
+    "src/condition-judgment-sets.mjs": "c74fbe2829260aa41a83c6a11885cf55568bc167148f3323782cda3d3fb43364",
+    "web/condition-judgment-sets.mjs": "35b0304a5dcb58761cc5c7a931dd356fce7efb09f839a61e378e2f780a76da14",
+    "test/condition-judgment-sets.test.mjs": "f0854c16ad5c1c243846181ba3639d8ed38494b87bd6e35b6ee1376faf7ebcc5"
+  },
+  "command": "node test/condition-judgment-sets.test.mjs",
+  "tests": 7,
+  "passed": 7,
+  "failed": 0,
+  "checks": [
+    "Known/holds bit patterns correctly encode false-on-any-outside, true-only-all-within, otherwise unresolved; unresolved geometry survives both hypothetical labels.",
+    "144 complete maintained outcome recomputations agree with branch remaining masks. All uncontradicted combinations retained rather than minimal or fully consistent subset.",
+    "Round identities are admitted only from retained unknown outcomes, sorted canonically, and duplicate equivalent sets rejected. Branch bit meanings use canonical order.",
+    "No contrast and empty-family statuses remain explicit in UI; no automatic best-set selection or claim of physical impossibility.",
+    "Source-only import/download preserves original judgments, hypothetical branch never mutates them.",
+    "Dirty declarations terminate workers, clear results and increment epoch; branch/combination selection remains explicit.",
+    "8191-family capacity preserves all512 branches across eight sets, no sampled/pruned hypotheses."
+  ],
+  "findings": [],
+  "limits": "Source review and native execution; browser receiving remains root-owned. No source edits."
+}
