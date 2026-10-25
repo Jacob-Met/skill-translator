@@ -22,6 +22,7 @@ export function narrationNavigationSource(value){return value?.format===CLOCK_NA
 function aligned(value,clip,seconds){return value.format===CLOCK_NAVIGATION_FORMAT?mapNarrationTime(value.clock,clip.durationSeconds,seconds):{seconds:seconds+value.offsetSeconds,extrapolated:false};}
 export function narrationMomentCandidates(navigation,clip,{query='',page=0}={}){
  const value=importNarrationNavigation(navigation,clip),accepted=narrationNavigationSource(value);
+ if(value.format===CLOCK_NAVIGATION_FORMAT)check(inspectNarrationClock(value.clock,clip.durationSeconds).checkPassed,'Separate clock check exceeds the declared tolerance; inspect the anchors before navigation.');
  check(typeof query==='string'&&query.length<=200,'Search with at most 200 characters.');
  check(Number.isInteger(page)&&page>=0,'Choose a nonnegative result page.');
  const needle=query.trim().toLowerCase(),all=parseNarration(accepted.transcript);

@@ -22,6 +22,7 @@ test('failed separate check never silently navigates using offset or forged fit 
  assert.equal(inspectNarrationClock(bad,130).checkPassed,false);
  const n=create(bad);assert.throws(()=>requestedNarrationMoment(n,clip,0,'start'),/Separate clock check/);
  assert.throws(()=>narrationMomentCandidates(n,clip),/Separate clock check/);
+ assert.throws(()=>narrationMomentCandidates(n,clip,{query:'absent text'}),/Separate clock check/);
 });
 test('affine mapping preserves cue words, raw anchors, source and requested/presented distinction',()=>{
  const n=create(),raw=JSON.stringify(n),accepted=importNarrationNavigation(JSON.parse(raw),clip);

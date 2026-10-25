@@ -1,3 +1,4 @@
+import {renderChangeRegions} from '/web/scan-change-regions.mjs';
 import {createVisualSpanView} from '/web/visual-span-view.mjs';
 import {createVisualScanPlan, inspectVisualScan, MAX_SCAN_SAMPLES} from '/src/visual-scan.mjs';
 import {samplePresentedFrame} from '/web/video-input.mjs';
@@ -73,6 +74,7 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
       if (interval.status === 'compared') {
         item.append(node('p', `Mean channel change · raw ${level(interval.meanAbsoluteChange)} · adjusted ${level(interval.meanAdjustedChange)} levels. Uniform shift ${interval.uniformBrightnessShift >= 0 ? '+' : ''}${interval.uniformBrightnessShift}; ${(interval.changedPixelFraction * 100).toFixed(1)}% of sampled pixels have a residual channel change of at least 16 levels.`, 'scan-measures'));
         item.append(node('p', `Presented interval ${seconds(interval.before.presentedSeconds)} → ${seconds(interval.after.presentedSeconds)}`, 'note'));
+        item.append(renderChangeRegions(report.samples[interval.before.index], report.samples[interval.after.index]));
       } else item.append(node('p', statusLabels[interval.status], 'note'));
       for (const frame of [interval.before, interval.after]) {
         if (frame.status === 'failed') item.append(node('p', `Frame request failed: ${frame.error}`, 'note'));

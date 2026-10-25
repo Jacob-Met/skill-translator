@@ -28,6 +28,10 @@ changes, choose a candidate, and retain its original full-resolution frame throu
 the existing source workflow. Sampling gaps stay visible and no action or purpose
 is inferred. [Workflow, comparison method and verification](docs/VISUAL_SCAN.md).
 
+Expand **Locate changed appearance in these samples** on a compared interval to
+inspect connected regions on both small scan frames. Raw scores, original footage
+and full-resolution retention remain available. [Method and limits](docs/SCAN_CHANGE_REGIONS.md).
+
 Requires Node.js 20+, with **no dependency install and no service keys**.
 
     npm test
