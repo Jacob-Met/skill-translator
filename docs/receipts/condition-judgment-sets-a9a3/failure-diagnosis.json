@@ -1,0 +1,13 @@
+{
+  "actualRun": "Node22 Chrome, root brokered",
+  "remoteLog": "/tmp/hamon-a9a3-skill-180-v1/browser.log",
+  "failedAssertion": "#witnesses contains Unresolved geometry survives either",
+  "selectedConjunction": 3,
+  "round4Statuses": [
+    "outside",
+    "incomplete"
+  ],
+  "cause": "Harness selected length+guide; known outside length makes entire conjunction fail, so no unresolved message is appropriate. Guide-only conjunction2 is unresolved.",
+  "oldCourseSha256": "6b6d023bc8312620d776b3caa6bb3a1d1dc3f520c7e8b302b51cb722915d97ff",
+  "productionCoreOrUIChanged": false
+}

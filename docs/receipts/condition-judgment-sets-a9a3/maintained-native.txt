@@ -1,0 +1,14 @@
+✔ complete family exposes disagreement hidden by sole minimal subset (8.588763ms)
+✔ missing geometry preserves unresolved family and survives either hypothetical judgment (2.955548ms)
+✔ no contrast, contradictory training and already judged rounds remain explicit (3.561859ms)
+✔ independent hypothetical-label recomputation oracle across81 assignments preserves source (164.189539ms)
+✔ all8191 uncontradicted alternatives remain present without opposing judgments (15.118609ms)
+✔ original normalized study round-trips; derived claims cannot override family and malformed source refuses (5.79887ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 212.520507
