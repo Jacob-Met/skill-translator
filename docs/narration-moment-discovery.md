@@ -25,3 +25,19 @@ The course also checks a wrong source declaration, negative and out-of-range off
 Executed on Node 22.23.4 with sandboxed Chrome 156: all 667 native tests and eight browser receiving groups passed. Requested cue midpoints 1.15 s and 3.58 s produced original presented frames at 1.125 s and 3.542 s. The saved records retain both times. PNG SHA-256 values were `e0046001fd9fcfe2d470b3c759889a7b06b44addfead52b023c2146888a7827e` and `5a7b1e665f9fa70265bd5c7fcff0ba219e32ef5ead9b4c0859049349d4db1ad3`.
 
 This input is synthetic speech with an existing recognition error. Its receiving evidence concerns working source navigation and preserved original frames and words; it is not evidence of a learned physical skill or a successful real craft demonstration.
+
+## Align an external transcript clock
+
+A constant offset cannot align a transcript whose clock runs at a different rate. Enable optional clock alignment in the existing studio, set the ordinary offset to zero, and supply two corresponding landmarks in increasing order on both timelines. Describe how you identified them. The navigator uses the straight-line mapping through those two points; it does not estimate correspondences or identify physical action onsets.
+
+Supply a third, separate check point and a tolerance in seconds. This point is excluded from the two-anchor calculation. Its signed residual is predicted clip time minus supplied clip time. A residual larger in magnitude than the declared tolerance prevents mapped navigation; it never falls back to the ordinary offset. A passing check establishes consistency only at that supplied point. You may already have used it to choose the anchors, so the application does not claim independent held-out validation. Unmodeled clock jumps, edits and changing drift can still make other times wrong. Zero tolerance is strict on represented floating-point arithmetic; no hidden numerical allowance is added.
+
+Cue intervals extending beyond the fitting landmarks are labeled. Individual requested start/midpoint/end times also report whether they are extrapolated. Out-of-clip requests remain unavailable, without clamping. Preview and original full-frame capture continue through the existing source receiver, retaining both requested and actually presented timestamps.
+
+Save narration and clock declarations to preserve the complete literal transcript, attribution, original clip identity, raw landmarks, separate check and tolerance. Reopen it with the matching original clip; mapping and check are recomputed. The saved record is limited to 2 MiB; the original transcript remains limited to 256 KiB. This navigation record is separate from the sequence bundle and timed-narration quotation sidecar. It does not rescale or rewrite that older sidecar's transcript timestamps. Invalid replacements preserve the accepted navigator; editing clock settings requires explicit pairing, and replacing the clip retires the old navigation.
+
+The authored browser control compares an offset-only request of 2.2 seconds with a two-anchor request of 2.4 seconds. Actual decoder presentation can differ and remains separately recorded. This is a software timing control, not evidence of improved physical skill, valid sensory interpretation or Nebius model execution.
+
+Run the focused and maintained source controls:
+
+    node --test test/narration-clock.test.mjs test/narration-moments.test.mjs test/timed-narration.test.mjs test/demonstration-sequence.test.mjs test/sequence-capture.test.mjs
