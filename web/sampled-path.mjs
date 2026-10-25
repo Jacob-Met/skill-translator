@@ -1,3 +1,4 @@
+import {proposePathSummary} from '/src/path-summary.mjs';
 import {createSequencePath,importSequencePath,inspectSequencePath} from '/src/sequence-path.mjs';
 import {readSampledPathBundle,makeSampledPathBundle} from '/web/sampled-path-input.mjs';
 import {releaseSequenceAssets,makeSequenceBundle} from '/web/sequence-input.mjs';
@@ -27,7 +28,7 @@ function sourceForm(sequence,study=null){
 function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const mm=x=>x===null?'Unavailable':`${x!==0&&Math.abs(x)<.0005?x.toExponential(6):x.toFixed(3)} mm`;
 function show(study){
- const findings=inspectSequencePath(study);accepted=study;$('result').hidden=false;
+ const findings=inspectSequencePath(study);accepted=study;$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
  $('summary').textContent=`Endpoint distance: ${mm(findings.endpointDistanceMm)}. Complete sampled-path sum: ${mm(findings.sampledPathDistanceMm)}. Observed adjacent chords: ${findings.observedSegmentCount} of ${findings.segments.length}; their covered sum is ${mm(findings.coveredChordDistanceMm)}.`;
  $('segments').replaceChildren();
  for(const s of findings.segments){const row=el('tr');for(const value of [`${s.fromMomentId} → ${s.toMomentId}`,`${s.elapsedSeconds} s`,s.distanceMm===null?'Missing observation':mm(s.distanceMm),s.delta?`${mm(s.delta.xMm)}, ${mm(s.delta.yMm)}`:'Unavailable'])row.append(el('td',value));$('segments').append(row);}
@@ -55,3 +56,26 @@ async function save(original){if(!accepted)return;const token=revision,current=a
 $('save').addEventListener('click',()=>save(false));
 $('source-save').addEventListener('click',()=>save(true));
 addEventListener('pagehide',()=>{revision++;releaseSequenceAssets(assets);assets=new Map();});
+
+
+$('compact-bound').addEventListener('input',()=>{$('compact-result').replaceChildren();$('compact-status').textContent='Discrepancy changed. Propose again to recompute.';});
+$('compact-propose').addEventListener('click',()=>{
+ if(!accepted)return;
+ $('compact-result').replaceChildren();
+ try{
+  const bound=$('compact-bound').value.trim();if(!bound)throw Error('Supply a maximum nominal sample deviation.');
+  const proposal=proposePathSummary(accepted,Number(bound)),findings=inspectSequencePath(accepted);
+  $('compact-status').textContent=`Proposed ${proposal.retainedIndices.length} of ${proposal.originalSampleCount} original samples; ${proposal.omittedIndices.length} omitted from this explanation only. Maximum omitted deviation: ${mm(proposal.maximumOmittedDeviationMm)}.`;
+  const residuals=new Map(proposal.intervals.flatMap(span=>span.residuals.map(r=>[r.sampleIndex,r.deviationMm])));
+  const list=el('ol');
+  findings.samples.forEach((sample,i)=>{
+   const item=el('li'),retained=proposal.retainedIndices.includes(i);
+   item.dataset.retained=String(retained);
+   item.append(el('span',`${i+1}. ${sample.momentLabel} · ${sample.presentedSeconds} s · ${!sample.position?'Missing observation — retained gap':retained?'Retained original frame':`Omitted from proposal; deviation ${mm(residuals.get(i))}`} `));
+   const inspect=el('button','Inspect original frame');inspect.type='button';
+   inspect.addEventListener('click',()=>{const row=[...$('samples').children].find(r=>r.dataset.moment===sample.momentId);row.scrollIntoView({block:'center'});row.querySelector('.mark').focus({preventScroll:true});});
+   item.append(inspect);list.append(item);
+  });
+  $('compact-result').append(list,el('p',proposal.boundary));
+ }catch(error){$('compact-status').textContent=`Proposal unavailable: ${error.message}`;}
+});
