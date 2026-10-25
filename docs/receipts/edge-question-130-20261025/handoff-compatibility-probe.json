@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "kind": "Compatibility experiment only; no stripped history exported and no author answer supplied",
+  "directWrapperRejection": "Unsupported decision-practice format",
+  "projectionQuestion": "What happened between the retained frames?",
+  "projectionDrops": {
+    "reportDisclosures": 2,
+    "explicitCandidateInspections": 1,
+    "originalReports": 5
+  },
+  "referencedAuthoredFields": [],
+  "frameOnlyAmendmentRefuses": true,
+  "conclusion": "A direct source-preserving review adapter is needed before teacher handoff; flattening silently loses pixel assistance. Frame-only learner questions must remain ineligible for existing authored-field amendment unless a distinct new source account is explicitly supplied."
+}

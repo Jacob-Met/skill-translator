@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "kind": "Actual original source with explicitly authored learner and author UI controls, no expert-authentication or learning-effect claim",
+  "tests": [
+    "real frame-only learner question receives complete pixel assistance; source amendment refused and reviewer browsing leaves history unchanged",
+    "future learner explicitly chooses an authored account anchor after reveal; original frame-only exercise is not rewritten",
+    "explicit confirmed amendment saves/reopens whole original exercise, question and pixel-assistance history",
+    "separate familiar retry changes only supplied account and retains original images/reports with empty history",
+    "changed original account refuses without replacing accepted author review",
+    "new author draft retires pending complete export and cannot be silently omitted",
+    "390px teacher review fits and actual familiar retry consumer withholds changed account until reveal",
+    "ordinary reviewer refuses raw edge metadata instead of displaying a history with pixel assistance omitted"
+  ],
+  "errors": []
+}

@@ -11,6 +11,9 @@ const routes=Object.freeze({
   "/sequence-edge":["web/sequence-edge.html","text/html; charset=utf-8"],
   "/web/sequence-edge.mjs":["web/sequence-edge.mjs","text/javascript; charset=utf-8"],
   "/src/sequence-edge-study.mjs":["src/sequence-edge-study.mjs","text/javascript; charset=utf-8"],
+  "/edge-clarification":["web/edge-clarification.html","text/html; charset=utf-8"],
+  "/web/edge-clarification.mjs":["web/edge-clarification.mjs","text/javascript; charset=utf-8"],
+  "/web/edge-evidence-view.mjs":["web/edge-evidence-view.mjs","text/javascript; charset=utf-8"],
   "/edge-decision":["web/edge-decision.html","text/html; charset=utf-8"],
   "/web/edge-decision.mjs":["web/edge-decision.mjs","text/javascript; charset=utf-8"],
   "/src/edge-decision-practice.mjs":["src/edge-decision-practice.mjs","text/javascript; charset=utf-8"],
@@ -318,7 +321,7 @@ export function createAppServer(){
     res.setHeader("Content-Security-Policy",
       "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     const path=req.url?.split("?")[0];
-    if(path==="/edge-decision")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
+    if(path==="/edge-decision"||path==="/edge-clarification")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/sequence-edge")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/api/sequence-edge"&&req.method==="POST"){await serveSequenceEdge(req,res);return;}
     const route=Object.prototype.hasOwnProperty.call(routes,path)?routes[path]:null;
