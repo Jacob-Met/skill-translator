@@ -1,6 +1,6 @@
 // Candidate navigation only. The studio retains original presented frames.
 import {createSequence,assertSequenceClip} from './demonstration-sequence.mjs';
-import {createNarration,importNarration,parseNarration} from './timed-narration.mjs';
+import {createNarration,importNarration,parseNarration,NARRATION_FORMAT} from './timed-narration.mjs';
 import {requestedFrameTime} from './frame-origin.mjs';
 import {inspectNarrationClock,mapNarrationTime} from './narration-clock.mjs';
 export const NARRATION_PAGE_SIZE=50;
@@ -13,7 +13,8 @@ export function createNarrationNavigation(clip,details){
  return {format:CLOCK_NAVIGATION_FORMAT,narration,clock:inspectNarrationClock(details.clock,clip.durationSeconds).clock};
 }
 export function importNarrationNavigation(value,clip){
- if(value?.format!==CLOCK_NAVIGATION_FORMAT){const accepted=importNarration(value?.source,value);assertSequenceClip(accepted.source,clip);return accepted;}
+ if(value?.format!==CLOCK_NAVIGATION_FORMAT){check(value?.format===NARRATION_FORMAT,'Choose a saved studio navigation record; reopen clock-aware quotation records in Timed narration.');const accepted=importNarration(value?.source,value);assertSequenceClip(accepted.source,clip);return accepted;}
+ check(value.narration?.format===NARRATION_FORMAT,'A saved studio navigation wrapper requires its original v1 narration; reopen clock-aware quotation records in Timed narration.');
  const narration=importNarration(value.narration?.source,value.narration);assertSequenceClip(narration.source,clip);
  check(narration.offsetSeconds===0,'Use zero offset with a declared clock mapping.');
  return {format:CLOCK_NAVIGATION_FORMAT,narration,clock:inspectNarrationClock(value.clock,clip.durationSeconds).clock};
