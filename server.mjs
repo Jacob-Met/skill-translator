@@ -6,6 +6,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/spatial-correspondence":["web/spatial-correspondence.html","text/html; charset=utf-8"],
+  "/src/spatial-correspondence.mjs":["src/spatial-correspondence.mjs","text/javascript; charset=utf-8"],
+  "/web/spatial-correspondence.mjs":["web/spatial-correspondence.mjs","text/javascript; charset=utf-8"],
   '/src/path-axis.mjs':['src/path-axis.mjs','text/javascript; charset=utf-8'],
   '/web/path-axis-view.mjs':['web/path-axis-view.mjs','text/javascript; charset=utf-8'],
   "/relationship-families":["web/relationship-families.html","text/html; charset=utf-8"],

@@ -28,7 +28,7 @@ export function inspectRelationshipFamilies(raw){
   return {id:candidate.id,from:candidate.from,to:candidate.to,kind:candidate.kind,referenceMm:candidate.readings[0].valueMm,hypotheses,compatibleFamilies,
    status:compatibleFamilies.length>1?'ambiguous':compatibleFamilies.length===1?'single-compatible':hypotheses.some(h=>h.status==='incomplete')?'incomplete':'none-compatible'};
  });
- return {study,pairs,limitation:'Four transparent pair-response hypotheses are tested against the supplied calibrated annotations. The exploratory threshold is applied to each model after readings are expressed in reference-workpiece millimetres. Multiple survivors stay ambiguous; a single survivor is only unique inside this tested family. No execution tolerance, causal constraint or physical success is inferred.'};
+ return {study,pairs,limitation:'Four transparent pair-response hypotheses are tested against the supplied calibrated annotations. The exploratory threshold is applied to each model after readings are expressed in reference-workpiece millimetres. Spatial mappings selected by pair-distance agreement condition the evidence; repeated distances in those sources are not independent validation of a fixed-distance rule. Multiple survivors stay ambiguous; a single survivor is only unique inside this tested family. No execution tolerance, causal constraint or physical success is inferred.'};
 }
 export function predictRelationshipFamilies(raw,{widthMm,heightMm}){
  check([widthMm,heightMm].every(x=>typeof x==='number'&&Number.isFinite(x)&&x>=1&&x<=10000),'Target dimensions must be 1–10000 mm');
