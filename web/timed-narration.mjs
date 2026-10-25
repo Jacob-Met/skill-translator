@@ -47,7 +47,7 @@ function render(reset=false){
   const m=study.source.moments.find(m=>m.id===found.step[role+'MomentId']),fig=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption');
   img.src=accepted.assets.get(m.id).media.url;img.alt=m.label;caption.textContent=role+': '+m.label+' · '+m.origin.mediaTimeSeconds+' s';fig.append(img,caption);return fig;
  }));
- $('account').textContent=JSON.stringify({intent:found.step.intent,visibleChange:found.step.visibleChange,sensoryCue:found.step.sensoryCue,recoveryCue:found.step.recoveryCue},null,2);
+ $('account').replaceChildren(...[['intent','Intended result'],['visibleChange','Visible change'],['sensoryCue','Supplied sensory cue'],['recoveryCue','Recovery account']].flatMap(([key,label])=>{const name=document.createElement('dt'),value=document.createElement('dd');name.textContent=label;value.textContent=found.step[key]||'Not supplied';return [name,value];}));
  $('alignment').textContent='Offset '+study.offsetSeconds+' s. '+found.cues.length+' overlapping cue(s). '+found.outsideClip.length+' cue(s) extend outside the clip; nothing is silently clipped. Overlap does not establish that speech describes this action.';
  const selected=study.selections.find(s=>s.stepId===stepId&&s.field===field)?.cueIndices||[];
  $('cues').replaceChildren(...found.cues.map(c=>{
