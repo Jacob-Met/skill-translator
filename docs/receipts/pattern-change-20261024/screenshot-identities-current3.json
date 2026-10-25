@@ -1,0 +1,26 @@
+{
+  "collinear-mobile.png": {
+    "sha256": "55cdb3d0effc7b3c8289d19532d07281306857ff3dd4e6f4b89f3591bba99889",
+    "bytes": 609766
+  },
+  "change-desktop.png": {
+    "sha256": "50e8713ebc26f3cc0c3deac47c826ee602d10b05bfdb8025f847c91c4264753f",
+    "bytes": 560872
+  },
+  "pattern-mobile.png": {
+    "sha256": "b322234e99ab7ecdbb9ad18895ca1059c5eb28debd7cf95a21a0c516e5707931",
+    "bytes": 629060
+  },
+  "change-mobile.png": {
+    "sha256": "50e8713ebc26f3cc0c3deac47c826ee602d10b05bfdb8025f847c91c4264753f",
+    "bytes": 560872
+  },
+  "pattern-desktop.png": {
+    "sha256": "056111fcad413a61c718c2da2f27ddd98d3768f12638658f6bc095911ea6576b",
+    "bytes": 835798
+  },
+  "collinear-desktop.png": {
+    "sha256": "45f9beb37553774ba612a8ba7722a4f081be899c5e1d3c618d36641c292245e0",
+    "bytes": 818959
+  }
+}

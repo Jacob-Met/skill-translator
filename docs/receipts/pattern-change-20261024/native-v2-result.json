@@ -1,0 +1,1 @@
+{"command": "node --test --test-concurrency=2 test/*.test.mjs", "exitCode": 0, "seconds": 10.969980754998687}

@@ -1,0 +1,56 @@
+{
+  "issue": 162,
+  "scope": "Original authored planar demonstration-state consumer; not physical demonstration, tracking, learning, deployment or merged-source verification",
+  "execution": {
+    "host": "eff5d9f5-c26a-4983-9737-a75db735bef1",
+    "browser": "156.0.8078.47",
+    "sandbox": "Namespace, PID/network namespaces, Seccomp-BPF and adequately sandboxed verified from chrome://sandbox; full text retained in browser receipt"
+  },
+  "native": {
+    "command": "node --test --test-concurrency=2 test/*.test.mjs",
+    "passed": 522,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "executionReceipt": "native-v1-result.json"
+  },
+  "browser": {
+    "command": "CHROME_BINARY=/opt/google/chrome/chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=<owned-receipts-directory> node tools/browser-pattern-change.mjs",
+    "completeGroups": 11,
+    "pageErrors": 0,
+    "offsiteRequests": 0,
+    "cspViolations": 0,
+    "receipt": "browser-v1-receipt.json"
+  },
+  "review": {
+    "peer": "Retained team MECHANISM worker; source/lifecycle review and independent proper-versus-reflected non-axis-aligned quadrilateral control",
+    "findings": "No blocking finding; four reversed triples only for reflection, six preserved pair distances for both",
+    "receipt": "independent-review.json",
+    "desktop": "Root inspected actual desktop screenshot, no blocking layout finding",
+    "narrow": "SKILL worker inspected actual390px full-page pattern-mobile.png: original images, table, witness and boundary remain in reading order without clipped controls or page overflow; keyboard removal also exercised"
+  },
+  "sourceSHA256": {
+    "src/pattern-change.mjs": "627bdd5d0f8272f4f3b40f1b84fb8f94d64b9e7fc7d0d52246cff9920d0645df",
+    "vendor/chronos/exact-halfplanes.mjs": "3f2020d8adac92ac1b82331dd5b30964a889a85d249e81cd16bb9dbba99b1150",
+    "src/sequence-change.mjs": "1abe0f2392f47ca18477097ea3d100aff4a92ecc1815f87e3a1800e02f80d81e",
+    "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+    "src/sequence-capture.mjs": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+    "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+    "src/capture-editing.mjs": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+    "src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+    "src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+    "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+    "web/sequence-change.mjs": "c11437f5f1fbdb7f9a62cfe5502f6936c2197f52ce474fbd3ea6b233c6cbf6fa",
+    "web/sequence-change-input.mjs": "c1452e7c8be99517d49025f3297fcbcd66aba30ac202db2221dbed163beaf355",
+    "web/sequence-change.html": "4f780e75df69f3de676047a756ced14ffbdf9722381df2d9c9798883ea0bc630",
+    "web/sequence-change.css": "be7d0fa8418a0be79c4a08075c6c0c6613a3ec81a29463f761858740789541f0",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+    "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+    "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+    "server.mjs": "8772ee2d06a5f74269015eb13be36f62aa629257d54815acf8f9249849448c51",
+    "tools/browser-pattern-change.mjs": "f5922513518c0c5e777dfe8b28b3ab6d6ecf49cb909c988ed3ebba6ace5b103b"
+  },
+  "testSHA256": "0e8ba3238e39ef9fc30e5812329df45fb99af6da67186e6e20c87898aa225632",
+  "status": "Historical revision1 qualification, superseded by composed revision2 verification.json",
+  "candidateRevision": 1
+}

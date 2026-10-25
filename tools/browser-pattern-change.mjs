@@ -1,0 +1,104 @@
+import {collinearGeometry,collinearComparison} from '../test/pattern-change-fixtures.mjs';
+// Actual source PNGs and calibrated-state consumer; original authored control.
+import {createRequire} from 'node:module';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {createAppServer} from '../server.mjs';
+import {createSequence,appendMoment,attachMomentCalibration,upsertStep} from '../src/demonstration-sequence.mjs';
+import {createCapture,appendCaptureMark} from '../src/capture.mjs';
+import {frameOrigin} from '../src/frame-origin.mjs';
+const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_PATH||process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/playwright');
+const out=resolve(process.env.RECEIPT_DIR||'/tmp/skill-pattern-change-receiving');await mkdir(out,{recursive:true});
+const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+const paths=['test/pattern-change-fixtures.mjs','src/pattern-change.mjs','vendor/chronos/exact-halfplanes.mjs','src/sequence-change.mjs','src/demonstration-sequence.mjs','src/sequence-capture.mjs','src/capture.mjs','src/capture-editing.mjs','src/geometry.mjs','src/authoring.mjs','src/frame-origin.mjs','web/sequence-change.mjs','web/sequence-change-input.mjs','web/sequence-change.html','web/sequence-change.css','web/sequence-input.mjs','web/image-input.mjs','web/styles.css','server.mjs','tools/browser-pattern-change.mjs'];
+const hashes=async()=>Object.fromEntries(await Promise.all(paths.map(async p=>[p,hash(await readFile(new URL('../'+p,import.meta.url)))])));
+const receipt={fixture:'Original authored PNGs, analytic planar projection and supplied timeline; no physical demonstration or tracking claim',result:'FAIL',sourceHashes:await hashes(),tests:[],errors:[],offsite:[],csp:[]};
+const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;let browser;
+async function until(page,predicate,arg){const end=Date.now()+15000;while(Date.now()<end){if(await page.evaluate(predicate,arg))return;await new Promise(r=>setTimeout(r,40));}throw Error('Unmet browser condition: '+String(predicate));}
+const status=(page,value)=>until(page,value=>!document.querySelector('#change-step').disabled&&document.querySelector('#change-status').textContent.includes(value),value);
+const input=(page,value,name='source.json')=>page.locator('#change-file').setInputFiles({name,mimeType:'application/json',buffer:Buffer.from(JSON.stringify(value))});
+async function download(page,name){const next=page.waitForEvent('download');await page.locator('#save-change').click();await (await next).saveAs(resolve(out,name));return JSON.parse(await readFile(resolve(out,name),'utf8'));}
+const record=name=>receipt.tests.push(name),close=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} != ${b}`);
+try{
+  browser=await chromium.launch({headless:true,chromiumSandbox:true,executablePath:process.env.CHROME_BINARY||'/usr/local/bin/google-chrome'});receipt.browser=browser.version();
+  const sandboxPage=await browser.newPage();await sandboxPage.goto('chrome://sandbox');
+  receipt.sandbox=await sandboxPage.locator('body').innerText();
+  assert.match(receipt.sandbox,/Layer 1 Sandbox\s+Namespace/);
+  assert.match(receipt.sandbox,/PID namespaces\s+Yes/);assert.match(receipt.sandbox,/Network namespaces\s+Yes/);
+  assert.match(receipt.sandbox,/Seccomp-BPF sandbox\s+Yes/);assert.match(receipt.sandbox,/You are adequately sandboxed/);
+  await sandboxPage.close();
+  const context=await browser.newContext({viewport:{width:1380,height:1000}});await context.addInitScript(()=>{window.__csp=[];document.addEventListener('securitypolicyviolation',e=>window.__csp.push(e.violatedDirective));});
+  context.on('page',page=>{page.on('pageerror',e=>receipt.errors.push(e.message));page.on('request',r=>{const u=new URL(r.url());if(['http:','https:','ws:','wss:'].includes(u.protocol)&&u.origin!==origin)receipt.offsite.push(u.href);});});
+  const page=await context.newPage();await page.goto(origin+'/sequence-change');
+  // Independent analytic image projection creates known physical point states.
+  const project=(i,u,v)=>i?{x:(80+500*u+10*v)/(1+.1*u+.05*v),y:(30+40*u+350*v)/(1+.1*u+.05*v)}:{x:10+600*u,y:10+360*v};
+  const geometry=[0,1].map(i=>({corners:[[0,0],[1,0],[1,1],[0,1]].map(([u,v])=>project(i,u,v)),points:(i?[[.3,.5],[.9,.5],[.3,.1]]:[[.2,.3],[.7,.3],[.2,.7]]).map(([u,v])=>project(i,u,v))}));
+  const pngs=await page.evaluate(geometry=>geometry.map((g,i)=>{const c=document.createElement('canvas');c.width=640;c.height=420;const x=c.getContext('2d');x.fillStyle='#f2e7c9';x.fillRect(0,0,c.width,c.height);x.fillStyle='#e0cf9f';x.beginPath();g.corners.forEach((p,j)=>j?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.closePath();x.fill();x.strokeStyle='#314f39';x.lineWidth=2;x.stroke();g.points.forEach((p,j)=>{x.fillStyle=j?'#bd4624':'#214cad';x.beginPath();x.arc(p.x,p.y,5,0,Math.PI*2);x.fill();});return c.toDataURL('image/png').split(',')[1];}),geometry);
+  const clip={name:'authored-plane.webm',mimeType:'video/webm',sizeBytes:1000,sha256:'a'.repeat(64),durationSeconds:5};let sequence=createSequence(clip,{title:'Move the guide on a fixed mat',context:'Original analytic geometry with changing camera view'});const frames=[];
+  for(const [i,id]of ['before','after'].entries()){
+    const bytes=Buffer.from(pngs[i],'base64'),image={name:id+'.png',mimeType:'image/png',sha256:hash(bytes),widthPx:640,heightPx:420,pixelCoordinates:'browser-oriented'};
+    sequence=appendMoment(sequence,{id,label:i?'Guide after adjustment':'Guide before adjustment',visibleState:'Three supplied guide points',image,origin:frameOrigin(clip,i?3.25:.25,{mediaTime:i?3:0,width:640,height:420},image)});
+    let task=createCapture(image,geometry[i].corners,300,180,{title:'Fixed planar mat'});
+    for(const [j,sourcePx]of geometry[i].points.entries())task=appendCaptureMark(task,{label:j===2?'Corner guide point':j?'Rear guide point':'Front guide point',kind:'fraction',sourcePx,toleranceMm:2});
+    sequence=attachMomentCalibration(sequence,id,task);frames.push({momentId:id,pngBase64:pngs[i]});
+  }
+  sequence=upsertStep(sequence,{id:'adjust',title:'Adjust the guide',beforeMomentId:'before',afterMomentId:'after',intent:'Inspect position and spacing',visibleChange:'The supplied points move and separate',recoveryCue:'Recheck the intended spacing'});
+  const bundle={format:'skill-translator.sequence-bundle/v1',sequence,frames};
+  const missing=structuredClone(bundle);delete missing.sequence.moments[1].calibratedTask;await input(page,missing);await status(page,'Reopened verified');
+  await page.locator('#reference-label').fill('Fixed mat');await page.locator('#reference-basis').fill('The same numbered corners are used in both frames.');await page.locator('#reference-confirm').check();await page.locator('#declare-reference').click();await status(page,'both retained');
+  const different=structuredClone(bundle);different.sequence.moments[1].calibratedTask.source.widthMm=301;await input(page,different);await status(page,'Reopened verified');await page.locator('#reference-label').fill('Fixed mat');await page.locator('#reference-basis').fill('The same numbered corners are used in both frames.');await page.locator('#reference-confirm').check();await page.locator('#declare-reference').click();await status(page,'identical supplied');
+  await input(page,bundle);await status(page,'Reopened verified');assert.equal(await page.locator('#source-frames svg image').count(),2);
+  assert.deepEqual(await page.locator('#source-frames svg image').evaluateAll(async images=>{const result=[];for(const image of images){const decoded=new Image();decoded.src=image.getAttribute('href');await decoded.decode();const c=document.createElement('canvas');c.width=640;c.height=420;const x=c.getContext('2d');x.drawImage(decoded,0,0);result.push([...x.getImageData(2,2,1,1).data]);}return result;}),[[242,231,201,255],[242,231,201,255]]);
+  await page.locator('#reference-label').fill('Fixed mat');await page.locator('#reference-basis').fill('The same numbered corners are used in both frames.');await page.locator('#declare-reference').click();await status(page,'Explicitly confirm');await page.locator('#reference-confirm').check();await page.locator('#declare-reference').click();await status(page,'Shared reference retained');
+  record('actual retained PNGs render; missing/different calibration and undeclared common reference refuse comparison');
+  const pair=async(a,b,label)=>{await page.locator('#before-mark').selectOption(a);await page.locator('#after-mark').selectOption(b);await page.locator('#pair-label').fill(label);await page.locator('#add-pair').click();};
+  await pair('authored-1','authored-1','Front guide point');await status(page,'correspondence added');assert.match(await page.locator('#change-rows tr').first().textContent(),/60.00, 54.0090.00, 90.0030.00, 36.00/);assert.match(await page.locator('#unpaired-points').textContent(),/Rear guide point/);
+  await pair('authored-1','authored-2','Duplicate identity');await status(page,'only one');assert.equal(await page.locator('#change-rows tr').count(),1);
+  await pair('authored-2','authored-2','Rear guide point');await status(page,'correspondence added');assert.equal(await page.locator('#common-plane circle').count(),4);assert.equal(await page.locator('#source-frames circle').count(),4);assert.match(await page.locator('#relationship-result').textContent(),/150.00 → 180.00 mm; change 30.00 mm/);record('declared one-to-one points recover analytic physical endpoints despite changed perspective and expose changed separation');
+  const saved=await download(page,'comparison.json');assert.equal(saved.comparison.pairs.length,2);assert.equal(saved.sourceBundle.sequence.moments[1].calibratedTask.evidenceClass,'human-annotated-local-image');for(let i=0;i<2;i++)assert.equal(hash(Buffer.from(saved.sourceBundle.frames[i].pngBase64,'base64')),sequence.moments[i].image.sha256);
+  saved.comparison.evidence={pairs:[{dxMm:999}]};await input(page,saved);await status(page,'Reopened verified');assert.match(await page.locator('#change-rows tr').first().textContent(),/30.00, 36.00/);assert.doesNotMatch(await page.locator('#change-rows').textContent(),/999/);record('complete source PNGs, calibration, actual/requested times and declarations survive export/reopen while derived output is recomputed');
+  const wrong=structuredClone(saved);wrong.sourceBundle.frames[1].pngBase64=pngs[0];await input(page,wrong);await status(page,'does not match');assert.equal(await page.locator('#change-rows tr').count(),2);record('wrong PNG/source pairing refuses without replacing the accepted comparison');
+  await page.evaluate(()=>{const original=File.prototype.text;window.__text=original;File.prototype.text=function(){if(this.name==='slow.json')return new Promise((resolve,reject)=>{window.__releaseText=()=>original.call(this).then(resolve,reject);});return original.call(this);};});
+  await input(page,bundle,'slow.json');await until(page,()=>typeof window.__releaseText==='function');await page.locator('#reference-basis').fill('Newer reference explanation');await page.evaluate(()=>window.__releaseText());await status(page,'changed while reading');assert.equal(await page.locator('#change-rows tr').count(),2);assert.equal(await page.locator('#reference-basis').inputValue(),'Newer reference explanation');assert.equal(await page.locator('#save-change').isDisabled(),true);
+  await page.locator('#discard-reference').click();await page.evaluate(()=>{window.__releaseText=undefined;});await input(page,bundle,'slow.json');await until(page,()=>typeof window.__releaseText==='function');await input(page,saved);await status(page,'Reopened verified');await page.evaluate(async()=>{File.prototype.text=window.__text;await window.__releaseText();await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));});assert.equal(await page.locator('#change-rows tr').count(),2);record('newer reference edits and newer source imports supersede a delayed comparison read');
+  await page.evaluate(()=>{const original=File.prototype.arrayBuffer;window.__bytes=original;File.prototype.arrayBuffer=function(){if(this.name==='before.png')return new Promise((resolve,reject)=>{window.__releaseBytes=()=>original.call(this).then(resolve,reject);});return original.call(this);};});
+  let downloads=0;page.on('download',()=>downloads++);await page.locator('#save-change').click();await until(page,()=>typeof window.__releaseBytes==='function');await page.locator('#reference-basis').fill('A newer statement during saving');await page.evaluate(async()=>{File.prototype.arrayBuffer=window.__bytes;await window.__releaseBytes();});await status(page,'changed while saving');assert.equal(downloads,0);await page.locator('#discard-reference').click();record('an actual retained-byte export cannot silently save an older reference draft');
+  await pair('authored-3','authored-3','Corner guide point');await status(page,'correspondence added');
+  assert.equal(await page.locator('#pattern-pairs tr').count(),3);
+  assert.match(await page.locator('#pattern-summary').textContent(),/all 3 pair separations/);
+  assert.match(await page.locator('#pattern-orientation').textContent(),/1 nominal side reversal/);
+  assert.match(await page.locator('#pattern-witnesses').textContent(),/Corner guide point/);
+  record('all three declared source relationships are inspected and the original triangle reversal has an explicit witness');
+  const patternSaved=await download(page,'pattern.json');await input(page,patternSaved);await status(page,'Reopened verified');
+  assert.equal(await page.locator('#pattern-pairs tr').count(),3);assert.match(await page.locator('#pattern-orientation').textContent(),/1 nominal side reversal/);
+  assert.equal(await page.locator('#source-frames svg image').count(),2);record('actual complete original-image download reopens with recomputed whole-pattern findings');
+  await page.screenshot({path:resolve(out,'pattern-desktop.png'),fullPage:true});await page.setViewportSize({width:390,height:844});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:resolve(out,'pattern-mobile.png'),fullPage:true});
+  await page.locator('#paired-points button').last().focus();await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#pattern-pairs tr').count(),1);assert.match(await page.locator('#pattern-orientation').textContent(),/At least three/);
+  assert.match(await page.locator('#unpaired-points').textContent(),/Corner guide point/);record('keyboard correspondence removal refreshes complete coverage and triangle availability at390px');
+  await page.screenshot({path:resolve(out,'change-desktop.png'),fullPage:true});await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:resolve(out,'change-mobile.png'),fullPage:true});
+  await page.locator('#paired-points button').last().click();assert.equal(await page.locator('#change-rows tr').count(),1);assert.match(await page.locator('#unpaired-points').textContent(),/Rear guide point/);assert.equal(await page.locator('#source-frames svg image').count(),2);record('desktop and 390px controls retain original source evidence while correspondence removal leaves unpaired marks explicit');
+  const collinearPngs=await page.evaluate(geometry=>geometry.map(g=>{
+    const c=document.createElement('canvas');c.width=640;c.height=480;const x=c.getContext('2d');x.fillStyle='#f2e7c9';x.fillRect(0,0,640,480);
+    x.strokeStyle='#314f39';x.beginPath();g.corners.forEach((p,j)=>j?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.closePath();x.stroke();
+    g.points.forEach(p=>{x.fillStyle='#214cad';x.beginPath();x.arc(p.x,p.y,4,0,Math.PI*2);x.fill();});return c.toDataURL('image/png').split(',')[1];
+  }),collinearGeometry());
+  const collinearImages=collinearPngs.map((png,i)=>({name:(i?'after':'before')+'.png',mimeType:'image/png',sha256:hash(Buffer.from(png,'base64')),widthPx:640,heightPx:480,pixelCoordinates:'browser-oriented'}));
+  const collinear=collinearComparison(collinearImages);
+  const collinearBundle={format:'skill-translator.state-change-bundle/v1',sourceBundle:{format:'skill-translator.sequence-bundle/v1',sequence:collinear.sequence,frames:collinearPngs.map((pngBase64,i)=>({momentId:i?'after':'before',pngBase64}))},comparison:collinear};
+  await input(page,collinearBundle);await status(page,'Reopened verified');assert.equal(await page.locator('#source-frames svg image').count(),2);
+  assert.match(await page.locator('#pattern-orientation').textContent(),/1 nominal side reversal/);
+  assert.match(await page.locator('#pattern-boundary').textContent(),/Near-collinear signs can reverse from calibration arithmetic alone/);
+  assert.match(await page.locator('#pattern-boundary').textContent(),/no visible or physical reversal is established/);
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await page.screenshot({path:resolve(out,'collinear-mobile.png'),fullPage:true});await page.setViewportSize({width:1380,height:1000});
+  await page.screenshot({path:resolve(out,'collinear-desktop.png'),fullPage:true});
+  const collinearSaved=await download(page,'collinear-comparison.json');await input(page,collinearSaved);await status(page,'Reopened verified');
+  assert.match(await page.locator('#pattern-boundary').textContent(),/calibration arithmetic alone/);
+  record('actual unchanged collinear PNG control exposes nominal rounding reversal with explicit no-visible-or-physical-reversal warning and raw reopen');
+  receipt.csp=await page.evaluate(()=>window.__csp);assert.deepEqual(receipt.errors,[]);assert.deepEqual(receipt.offsite,[]);assert.deepEqual(receipt.csp,[]);assert.deepEqual(await hashes(),receipt.sourceHashes);record('strict application CSP, no offsite requests or page errors, and exact source stability');receipt.result='PASS';
+}finally{await writeFile(resolve(out,'browser-receipt.json'),JSON.stringify(receipt,null,2)+'\n');await browser?.close();await new Promise(r=>server.close(r));console.log(JSON.stringify(receipt,null,2));}
+

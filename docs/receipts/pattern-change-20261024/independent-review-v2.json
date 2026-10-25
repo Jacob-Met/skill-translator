@@ -1,0 +1,25 @@
+{
+  "reviewer": "hamon-c11405-20261024/mechanism",
+  "recordedFrom": "Direct independent worker review message delivered before current-main composition; reviewed source unchanged by the additive server-route composition",
+  "candidateRevision": 2,
+  "conclusion": "No blocking finding",
+  "scope": "Narrow interpretation/control delta review; previous core and source-lifecycle review retained",
+  "checked": [
+    "UI explicitly labels nominal side reversal and does not establish visible or physical reversal",
+    "Core boundary explicitly explains calibration-only near-collinear sign changes",
+    "Exact rational predicate unchanged",
+    "Fixture holds ideal v=.3 points fixed while projecting through two independent cameras and maintained calibration",
+    "Source lifecycle unchanged"
+  ],
+  "independentExecution": {
+    "command": "node --test --test-isolation=none --test-name-pattern='exact nominal reversal' test/pattern-change.test.mjs",
+    "namedPasses": 1
+  },
+  "sourceSHA256": {
+    "src/pattern-change.mjs": "a9bafa8cb357e555b43d86f4ac7bfaf357ee2e27593b85864d1045336717d2b8",
+    "web/sequence-change.mjs": "292baf7e8bb38cdfab9bf7fcafed0bee216f9148f5a70c0c637a49c87e4c144f",
+    "web/sequence-change.html": "43b7b6024f7943f3ccd7b975261135acd5a44fc63b2ac4d532aace8a5519a7b4",
+    "test/pattern-change-fixtures.mjs": "7357f07fcba536826d6070d32ead096bddfdd6920c6d0af2d8870e11439122d7",
+    "test/pattern-change.test.mjs": "5a3c1bfaa92f2c5041b0c21d97030407e4fa84d83e250aded47ce91531868644"
+  }
+}
