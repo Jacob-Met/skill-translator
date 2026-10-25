@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "base_commit": "78ef606ce0dd928220d604cc28039d41b8513cee",
+  "worker_candidate": "1e41566186e056489858405ad2eb324f5b1db4bb",
+  "source_blobs": {
+    "README.md": "e21b9a6414e353312d9f2e33ce1adf80790fc3f5",
+    "src/cue-budget.mjs": "4fc9300dc5bd3db55ad3bd6dd8783399f66a6ff7",
+    "test/cue-budget.test.mjs": "a39dda6685ad4dc6fdf912bdf36d12b496448c8c",
+    "test/cue-budget-fixture.mjs": "80abda4255e479bb1a0ef51f09c6d47d7ea9bd9a",
+    "tools/inspect-cue-budget.mjs": "c49f761c12c41f97da470a8898a256318fe301c9",
+    "docs/CUE_BUDGET.md": "3c5c4d72a7605c35724c0b865c07aade59cbcd06",
+    "docs/receipts/cue-budget-fd7040/receive-independent.mjs": "32b6be2910a56fd9ce617b998f320ceeae25e40e"
+  },
+  "environment": {
+    "node": "v22.23.4",
+    "platform": "Linux x86_64 authorized isolated RDC workspace"
+  },
+  "commands": [
+    "npm test",
+    "node test/cue-budget.test.mjs",
+    "node docs/receipts/cue-budget-fd7040/receive-independent.mjs"
+  ],
+  "native": {
+    "tests": 806,
+    "pass": 806,
+    "fail": 0,
+    "skip": 0,
+    "full_log_sha256": "2315206441f537ac1e11076da3432210edd2702e1b2ef8e48d4c1df5c9918b61"
+  },
+  "actual_cli": {
+    "tests": 8,
+    "pass": 8,
+    "fail": 0,
+    "skip": 0,
+    "observed": [
+      "source plan",
+      "save/reopen",
+      "forged score ignored",
+      "matching-source refusal with no stdout",
+      "explicit reading consumes one unit",
+      "no-budget/duplicate/outside-evidence behavior"
+    ]
+  },
+  "independent": {
+    "source": "1e41566186e056489858405ad2eb324f5b1db4bb",
+    "seed": 267061,
+    "independentTables": 80,
+    "budgetPairs": 400,
+    "branchThresholds": "all verified",
+    "status": "passed"
+  },
+  "review": "Independent MATERIALTRUTH worker source review plus independent Pareto objective and every displayed child-bound reconstruction passed; root reproduced plateau defect and reviewed corrected source.",
+  "retained_failure": "Original branch-local tie breaking increased questions from1to2 under a larger budget without improving the3-label ceiling. Threshold-conditioned reconstruction and independent policy-frontier controls correct this.",
+  "limits": [
+    "Authored categorical controls, not a physical-learning study.",
+    "Unit-cost baseline only; per-cue effort/availability contract remains with #257.",
+    "CLI validates retained demonstration metadata, not original PNG byte custody.",
+    "No UI changes, external services or physical operations."
+  ]
+}

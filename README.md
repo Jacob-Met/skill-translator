@@ -445,3 +445,7 @@ Open **Inspect supplied narration** from the demonstration studio to pair an aut
 [Find original moments from narration](docs/narration-moment-discovery.md) explains literal cue search and explicit preview in the existing sequence studio before retaining a source frame.
 
 The Demonstration studio can inspect [original audio activity](docs/audio-activity.md), explicitly pair its container clock to the original clip, and carry selected candidates through original playback and ordinary frame capture. Fixed energy candidates retain gaps and quiet/short misses; physical meaning remains authored.
+
+## Ask useful cue questions within a budget
+
+The optional [partial cue-budget planner](docs/CUE_BUDGET.md) reuses retained demonstration cues to minimize the worst remaining decision-label ambiguity when a complete question plan is unaffordable. `node tools/inspect-cue-budget.mjs STUDY.json 1` reports the full compatible alternatives and an explicit one-question budget. Continue a saved plan with `--read CUE_ID CATEGORY`; only supplied readings are retained and each consumes one unit. Unknown decisions and outside-evidence outcomes remain unresolved. This unit-cost workflow does not infer physical skill or make an action decision.
