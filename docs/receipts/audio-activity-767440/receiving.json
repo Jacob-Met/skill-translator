@@ -1,0 +1,65 @@
+{
+  "passed": 7,
+  "checks": [
+    "Actual browser Web Audio energy is measured against media.currentTime for original moving sound, moving silence and a separately delayed heldback source; full callbacks retained with150ms observation bound.",
+    "Existing narration preview and Use current playhead synchronously retire managed audio callbacks and timer; unrelated original playback proceeds beyond the old interval with no stale completion, while navigation remains byte-identical.",
+    "Audio candidate preview reaches unchanged studio capture, retaining distinct original PNGs with requested/presented times and an explicit authored step; listening alone captures nothing.",
+    "Wrong original source and corrupted PCM refuse while preserving accepted navigation; an explicit adverse origin makes the complete mapped interval unavailable without clipping, and saved declarations reopen.",
+    "Origin drafts retire playback; stale native reads cannot replace a newer accepted navigation or regain authority after a new same-byte source session.",
+    "Fresh390px session reopens original retained frames and source-bound audio evidence, uses keyboard preview with contained layout and saves unchanged native/declaration evidence.",
+    "Actual gap-containing original imports with missing coverage explicit and complete nonbridging candidates retained."
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "node": "v22.23.4",
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-25T16:49:03.366Z",
+    "completedAt": "2026-10-25T16:49:03.454Z",
+    "durationMs": 87.45627300000001,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "8730C6C4EAD68266DEBE83D2319E4510",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "336E67AC82EDD8F1A290ED8ED5C41E19"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  },
+  "receiverSha256": "aaa573801e3a0b401a8216f549c92daf766ee0ea8657eb0169d348ede276a59e"
+}
