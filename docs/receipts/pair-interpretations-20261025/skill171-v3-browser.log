@@ -1,0 +1,46 @@
+[Reading 42 lines from start (total: 42 lines, 0 remaining)]
+
+{
+  "result": "FAIL",
+  "fixture": "Authored original PNG and retained manual placements; no physical skill or learning claim",
+  "sourceHashes": {
+    "src/pair-interpretations.mjs": "ca50dc11e2cdb5f89911cb1577eb50eac58185cf3f203463a22c433c352bf600",
+    "src/task-relationships.mjs": "e1c0a8568f04302e782c50cb17ac85a661c374847ec45d70738d84696259a563",
+    "src/practice.mjs": "283909901f4d436affc4382373e455fbf3951d221a1d4918d261453e9c6c3bd6",
+    "src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+    "src/learner-observation.mjs": "8e7b0bf128ca22ef79e33e89d3f64a2906b9340911d5b41a8b5cebead5b75431",
+    "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+    "src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+    "web/pair-interpretations.mjs": "5ead3ee54ca038c8df2636b8931d1e45de934f5648978f44ad1d57179bd2f960",
+    "web/pair-interpretations.html": "922bf2df9abfd61ab6718b1db99e78a43d54d706e868b24aae594185cf620712",
+    "web/pair-interpretations.css": "4ceecb679c2aee507e94531afa03b4e803a7e38de0a95c28818bf15f46a7016c",
+    "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+    "web/relationships.html": "cb1dbe272e7f25536e2f6ae730149b212721761fab9ea59dd7d27dbabb9abcbf",
+    "server.mjs": "2536830ecbdd9d3ab34b1bad57b5a56824b9dcb9cf1540dd3c3df980c3181f29",
+    "tools/browser-pair-interpretations.mjs": "573350e4dc12283c2d44be5bcb92ce7a47da9b6291e63cbdb53e477f99f687e2"
+  },
+  "tests": [
+    "maintained relationship receiver reaches the additive interpretation consumer",
+    "verified original PNG and actual two-round32/64mm opposing conditional assessments preserve original point scores",
+    "390px consumer fits and keyboard round selection changes actual evidence",
+    "actual download retains exact raw source/session and reopening ignores forged derived answers",
+    "criterion edits invalidate prior findings and input replacement hides stale source/output"
+  ],
+  "errors": [],
+  "offsite": [],
+  "csp": [],
+  "browser": "156.0.8078.47",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed."
+}
+file:///tmp/hamon-c11405-skill-171/source-v2/tools/browser-pair-interpretations.mjs:16
+async function poll(page,predicate,arg){const end=Date.now()+15000;while(Date.now()<end){if(await page.evaluate(predicate,arg))return;await new Promise(r=>setTimeout(r,40));}throw Error('Unmet browser condition: '+String(predicate));}
+                                                                                                                                                                                    ^
+
+Error: Unmet browser condition: ({selector,text})=>document.querySelector(selector).textContent.includes(text)
+    at poll (file:///tmp/hamon-c11405-skill-171/source-v2/tools/browser-pair-interpretations.mjs:16:181)
+    at async until (file:///tmp/hamon-c11405-skill-171/source-v2/tools/browser-pair-interpretations.mjs:17:42)
+    at async file:///tmp/hamon-c11405-skill-171/source-v2/tools/browser-pair-interpretations.mjs:39:172
+
+Node.js v22.23.4
+
+[executed on device: cursor (eff5d9f5-c26a-4983-9737-a75db735bef1)]

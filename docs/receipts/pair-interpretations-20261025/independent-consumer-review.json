@@ -1,0 +1,16 @@
+{
+  "reviewer": "hamon-c11405/mechanism",
+  "conclusion": "No remaining narrow lifecycle/export blocker after same-file capture/reset fix",
+  "scope": "Source review and independent isolated VM event-order control; actual browser harness reviewed but not executed here",
+  "hashes": {
+    "web/pair-interpretations.mjs": "5ead3ee54ca038c8df2636b8931d1e45de934f5648978f44ad1d57179bd2f960",
+    "tools/browser-pair-interpretations.mjs": "8365e1e4ba2398c9c28f908ae8a2ecfbbd4b692550efa63bf4491203cdd5e342"
+  },
+  "checks": [
+    "Selected original File captured before input reset",
+    "Criterion change while image read pending invalidates old attachment and releases its URL",
+    "Reselecting same File can admit matching original after cancellation",
+    "Criterion edit invalidates export until recomputation"
+  ],
+  "reviewedBrowserAddition": "Actual delayed PNG arrayBuffer + criterion edit + same-file reattach control"
+}
