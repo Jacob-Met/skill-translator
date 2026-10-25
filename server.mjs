@@ -5,6 +5,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/path-regions":["web/path-regions.html","text/html; charset=utf-8"],
+  "/web/path-regions.mjs":["web/path-regions.mjs","text/javascript; charset=utf-8"],
+  "/web/path-regions-input.mjs":["web/path-regions-input.mjs","text/javascript; charset=utf-8"],
+  "/src/path-regions.mjs":["src/path-regions.mjs","text/javascript; charset=utf-8"],
   "/path-guide":["web/path-guide.html","text/html; charset=utf-8"],
   "/web/path-guide.mjs":["web/path-guide.mjs","text/javascript; charset=utf-8"],
   "/web/path-guide-input.mjs":["web/path-guide-input.mjs","text/javascript; charset=utf-8"],
