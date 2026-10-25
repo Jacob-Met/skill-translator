@@ -25,7 +25,7 @@ assert.equal(JSON.stringify({setup,observation}),before);
 assert.equal(inspectDirectedPairRegion(setup,observation,rule,declarations).status,'unresolved');
 assert.equal(inspectDirectedPairRegion(setup,observation,{...rule,toleranceMm:3},declarations).status,'all-within');
 const shifted=structuredClone(observation);shifted.points[1].pixel.x=50;assert.equal(inspectDirectedPairRegion(setup,shifted,rule,declarations).status,'all-outside');
-assert.throws(()=>inspectDirectedPairRegion(setup,observation,{...rule,kind:'distance'},declarations));
+assert.throws(()=>inspectDirectedPairRegion(setup,observation,{...rule,kind:'angle'},declarations),/supported relationship criterion/);
 
 });
 test('raw source binding, zero-region parity, missing/refused regions and custody',()=>{

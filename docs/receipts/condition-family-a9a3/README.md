@@ -1,0 +1,11 @@
+# Complete remaining requirement-family receiving
+
+Six new native groups plus six maintained outcome-study groups pass in native.txt. They cover216 hypothetical-label recomputations across81 assignments, all8191 alternatives, missing/contradictory evidence, source custody and malformed admission. independent-review.json records independent same-team review with exact source identities; the connected GitHub account is shared.
+
+The initial actual Chrome course failed because the acceptable option lacked its opening tag. initial-browser-failure.json retains the actual empty selection, explicit choose-judgment prompt, no-page-error state and original source hash. failed-consumer.html.txt preserves that exact prior source. The corrected markup was parsed locally, and the receiving course now checks actual selected values before previews.
+
+browser.json records the corrected eight-group actual Chrome pass with served-source hashes. desktop.png and narrow.png are actual screenshots; root visually reviewed both. input.json and original-condition-outcomes.json are the genuine remote source and Chrome download, verified byte-identical. No hypothetical judgment changed the original evidence. custody.json retains their exact SHA256.
+
+This verifies authored software controls and actual receiver behavior, not causal necessity, physical skill or a prospective learning benefit. Source integration and fresh merged receiving are separate from this candidate receipt.
+
+Current-main composition: all25 staged source/docs/test blobs were verified against their Git identities before writes at d72c31d3ebbb6be9311acd5f75bf89edfee2a0c5. The exact upstream server gained only the three condition-family routes. All258 upstream route mappings remain intact;261 composed routes have unique keys and existing assets. Targeted affected-route GET/HEAD checks passed with exact file bytes, correct MIME, bodyless HEAD and preserved CSP. Native condition dependencies were unchanged. Fresh actual receiving of this composed server passed all eight groups in composed-browser.json. Both composed screenshots were byte-identical to the retained desktop.png/narrow.png; duplicate copies were removed only after exact equality checks. composition.json records the final server identity, route evidence and screenshot hashes.

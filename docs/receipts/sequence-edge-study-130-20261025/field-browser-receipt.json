@@ -1,0 +1,33 @@
+{
+  "result": "PASS",
+  "tests": [
+    "complete field raw source roundtrip and support-count tamper refusal retain accepted evidence",
+    "original v1 real source account still reopens with exact legacy support overlay",
+    "all five unfamiliar real frames admitted without threshold or ROI retuning; three exceed prior point cap",
+    "all original detected pixels rendered from complete field",
+    "390px consumer fits"
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "summary": "30411 edge pixels and 144 candidate segments. Original presented frame 0.507s. OpenCV 4.13.0."
+    },
+    {
+      "index": 1,
+      "summary": "8810 edge pixels and 34 candidate segments. Original presented frame 2.007s. OpenCV 4.13.0."
+    },
+    {
+      "index": 2,
+      "summary": "30030 edge pixels and 122 candidate segments. Original presented frame 4.007s. OpenCV 4.13.0."
+    },
+    {
+      "index": 3,
+      "summary": "23526 edge pixels and 104 candidate segments. Original presented frame 6.007s. OpenCV 4.13.0."
+    },
+    {
+      "index": 4,
+      "summary": "15983 edge pixels and 70 candidate segments. Original presented frame 7.973s. OpenCV 4.13.0."
+    }
+  ],
+  "errors": []
+}

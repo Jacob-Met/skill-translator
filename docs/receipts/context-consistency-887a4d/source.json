@@ -1,0 +1,1 @@
+{"title":"Authored conflict investigation","provenance":"Authored analytic examples; no physical experiment","source":{"widthMm":100,"heightMm":80,"corners":[{"x":0,"y":0},{"x":100,"y":0},{"x":100,"y":80},{"x":0,"y":80}]},"landmarks":[{"id":"guide","label":"Guide","kind":"edge_offset_mm","edge":"left","sourcePx":{"x":20,"y":30},"toleranceMm":50}]}

@@ -1,0 +1,46 @@
+{
+  "format": "hamon.independent-review/v1",
+  "reviewer": "hamon-a9a3aa15-20261024/microverse; independent direct worker, same connected account",
+  "issue": 166,
+  "reviewed_files_sha256": {
+    "src/condition-family.mjs": "8d79a654bc07ccee0b0a27296807df59c8fc69f1defba3e5e92f8e66d55dcb11",
+    "web/condition-family.mjs": "c732851e2847f5c816f254755cf0396b9bc8bdd255ecc1b48563cf9d84911572",
+    "web/condition-family.html": "0e96a68cb5a00cfd5c87ee7f809d7a779d1588b9a1db199257e7445a897618e9",
+    "web/condition-outcomes.html": "f73846cded4993829965993957e539d6dce48b719dc5388ae8f26715257d998f",
+    "server.mjs": "ed62ab3a1fee402d896d11d1c7f69f992a615a58ed5b682953e9c64d0f92f4b5",
+    "test/condition-family.test.mjs": "ca15c9320da512a2f0924d64f1eb7cdb8a17ecfe9b5722b26504705e7de9cec9",
+    "tools/browser-condition-family.mjs": "a441323e41e5fb5463c9df880c50f76bfdea60bc7f1081150db7ab42122e1e61",
+    "docs/CONDITION_FAMILY.md": "50d99837ef2793ab25ca4a60c7b88963573b415609e5fc2ca8ca76f11ab6e61f"
+  },
+  "commands": [
+    {
+      "command": "node test/condition-family.test.mjs",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "command": "node test/condition-outcomes.test.mjs",
+      "passed": 6,
+      "failed": 0
+    }
+  ],
+  "executed_coverage": [
+    "Minimal-only counterexample retains extra compatible conjunction and exposes disagreement",
+    "Unresolved training evidence stays in complete uncontradicted family",
+    "Unresolved observed geometry survives either hypothetical label",
+    "All81 original label assignments and216 hypothetical label recomputations match maintained complete recomputation",
+    "Already judged rounds are not offered as unjudged targets",
+    "8191 family members retain a disjoint complete partition without opposing judgments",
+    "Original normalized study/derived-output mutation checks and malformed source refusal"
+  ],
+  "source_review": [
+    "Filtering status!=contradicted correctly includes consistent, unresolved and insufficient-contrast hypotheses.",
+    "Three-valued conjunction partitions are exhaustive and disjoint: any outside fails; allwithin holds; otherwise unresolved.",
+    "Acceptable hypothetical removes only fails, unacceptable removes only holds; unresolved survives either. No original judgment is mutated.",
+    "Current normalized original study is the sole export source; no hypothetical preview or finding is serialized.",
+    "Round/hypothetical changes clear preview; delayed imports are fenced by epoch; combination changes also invalidate pending import.",
+    "UI scope and counts state finite alternatives rather than probabilities; no label or action is automatically chosen."
+  ],
+  "findings": [],
+  "limits": "Local native tests and source review only. Actual production browser receiving remains separate; no edits to Skill or frozen Microverse source."
+}

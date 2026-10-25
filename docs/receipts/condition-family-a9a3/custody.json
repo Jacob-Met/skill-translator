@@ -1,0 +1,14 @@
+{
+  "actualInputSha256": "6492965561de6f76631732dbe6aa21bca73034eb5680cc3fab718b9483a3ff1f",
+  "actualChromeDownloadSha256": "6492965561de6f76631732dbe6aa21bca73034eb5680cc3fab718b9483a3ff1f",
+  "byteIdentical": true,
+  "reconstructed": false,
+  "composedReceiving": {
+    "parent": "d72c31d3ebbb6be9311acd5f75bf89edfee2a0c5",
+    "actualInputSha256": "6492965561de6f76631732dbe6aa21bca73034eb5680cc3fab718b9483a3ff1f",
+    "actualChromeDownloadSha256": "6492965561de6f76631732dbe6aa21bca73034eb5680cc3fab718b9483a3ff1f",
+    "bytesEach": 2156,
+    "confirmedBy": "root actual RDC retrieval",
+    "identicalToRetainedFiles": true
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "skill-translator-assistance-trace-receipt/v1",
+  "base_commit": "82304fd829a280b0da1823eea724cf217399458d",
+  "base_tree": "b511421aa4a4484e71b96cd7113ac8fe9f4acd2f",
+  "source_files": {
+    "src/assistance-trace.mjs": "66aa03e617f2a07bd70d5bcebc7119b201ded3b1",
+    "test/assistance-trace.test.mjs": "b73e12b5c82c285c17a3a19bc131a70056d89e19",
+    "web/assistance-trace-view.mjs": "f54e1650fb07ed5115d2417813d8b97bc534b5e4",
+    "web/assistance-review.mjs": "4ea2491a8dfe4283e379264722f450a513001ff2",
+    "server.mjs": "93760017076bdae55d28305ac2e83bd21f729231",
+    "tools/browser-assistance-trace.mjs": "64ed1ee4026e69a7a40bdff5896665b308214cc7",
+    "docs/ASSISTANCE_REVIEW.md": "17b5f8dcf7b364dd35f337ce8c1205f4a2fe757d"
+  },
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "node": "24.19.0",
+    "tests": 448,
+    "pass": 448,
+    "fail": 0,
+    "skipped": 0,
+    "log": "/tmp/skill-trace-composed-native.log",
+    "tested_base_commit": "4aec08394c8ad94c944982757302aa977c766a5a"
+  },
+  "browser": {
+    "user": "nobody",
+    "puppeteer": "25.16.0",
+    "chrome": "156.0.8078.47",
+    "sandbox_probe": {
+      "namespace": true,
+      "pid_namespace": true,
+      "network_namespace": true,
+      "seccomp_bpf": true,
+      "tsync": true,
+      "adequately_sandboxed": true
+    },
+    "trace": {
+      "groups": [
+        "actual producer revisions are available lazily without changing existing checkpoint findings",
+        "selected-mark action indices retain interleaved edits and expose earlier correction separately from later recorded help",
+        "mirrored trace changes display only and original rehearsal export remains exact",
+        "no-help committed revisions remain reviewable while uncommitted traces stay withheld",
+        "narrow keyboard scrubbing and desktop diagram preserve readable physical coordinates",
+        "maximum2048-action/30-mark revision trace retains every edit and request (583ms open and final scrub)"
+      ],
+      "browser": "Chrome/156.0.8078.47",
+      "scope": "Authored diagram edit history; no physical motion or causal learning claim"
+    },
+    "existing_assistance": {
+      "groups": [
+        "actual rehearsal producer records two first-trial requests, a partial no-help commitment and an uncommitted helped trial",
+        "review recomputes first and later snapshots, paired error and newly added marks from actual producer actions",
+        "partial no-help trial has no invented snapshot and uncommitted helped trial has no target feedback",
+        "completed input-only download and fresh reopen preserve original producer record exactly",
+        "invalid action history refuses without replacing accepted findings",
+        "slower older invalid import cannot overwrite newer accepted review or report stale error",
+        "desktop and narrow review retain readable scrollable tables and keyboard focus",
+        "maximum2048-action/30-mark input retains2017 requests with bounded30-row rendering (365ms load and selection)"
+      ],
+      "browser": "Chrome/156.0.8078.47",
+      "scope": "Authored diagram rehearsal; no causal, physical or learning-effect qualification"
+    },
+    "tested_base_commit": "4aec08394c8ad94c944982757302aa977c766a5a",
+    "latest_composition": "Final4aec composed trace course passed6groups using memory-backed temporary storage and unchanged sandboxed Chrome after disk ENOSPC (process receipt dae63b). Temporary output did not persist across execution namespaces; earlier identical-client screenshots remain retained. Latest82304 source adds only unrelated cue routes/client modules; every loaded replay dependency remains identical. Final server received11HTTP routes, including new upstream cue assets and owned replay routes. No unchanged full-suite/browser rerun was needed."
+  },
+  "review_findings_resolved": [
+    "Browser harness awaited asynchronous lazy-disclosure rendering before reading trace elements.",
+    "Square-workpiece viewport resized to fill a narrow card instead of retaining unused wide margins."
+  ],
+  "visual_review": "Worker inspected actual390px full-page and focused trace panel, plus responsive browser assertions; physical coordinates remain visible with keyboard scrubbing.",
+  "limits": [
+    "Editable authored diagram history only.",
+    "Connecting segments represent successive diagram edits, not measured physical motion.",
+    "Before a target request does not establish absence of outside or source help.",
+    "No causal correction, learning effect, physical skill, deployment or provider qualification claimed."
+  ],
+  "independent_review": {
+    "reviewer": "Root contributor, team hamon-6770099628af-20261024",
+    "native_cases": 7,
+    "passed": 7,
+    "findings": "Exact global action indices/help boundaries, repeated/missing points, within-sheet geometry and uncommitted withholding accepted; no blocker.",
+    "visual": "Root viewed final390px focused panel; target and edits visible, readable coordinates and keyboard range focus."
+  },
+  "final_route_receiving": {
+    "base_commit": "82304fd829a280b0da1823eea724cf217399458d",
+    "routes_tested": 11,
+    "passed": 11,
+    "receipt": "765c25"
+  }
+}

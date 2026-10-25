@@ -22,6 +22,12 @@ incomplete or mistaken. Details and test instructions are in
 
 ## Try it
 
+In **Demonstration sequence**, use **Find moments by visual change** to scan a
+local clip before authoring its steps. Inspect raw and brightness-adjusted image
+changes, choose a candidate, and retain its original full-resolution frame through
+the existing source workflow. Sampling gaps stay visible and no action or purpose
+is inferred. [Workflow, comparison method and verification](docs/VISUAL_SCAN.md).
+
 Requires Node.js 20+, with **no dependency install and no service keys**.
 
     npm test
@@ -416,3 +422,20 @@ success nor diagram success establishes physical skill or a learning effect.
 
 Native checks: `node test/relationship-rehearsal.test.mjs`. Browser receiving:
 `PUPPETEER_PATH=... CHROME_BINARY=... QA_OUTPUT=... node tools/browser-relationship-rehearsal.mjs`.
+
+
+## Inspect placements before target help
+
+The workpiece rehearsal links to `/assistance-review`. Open its original exported rehearsal to compare each retained pre-request snapshot with committed placements. Missing marks, newly added marks, later help requests and paired same-mark errors remain distinct. Uncommitted trials receive no calculated feedback; saved files retain the original producer input. This descriptive review does not estimate a causal learning effect. See [assistance review](docs/ASSISTANCE_REVIEW.md).
+
+
+### Inspect alternative smallest conflict groups
+
+The observation evidence panel can navigate every equally small conflict group with previous/next or a direct group number, while keeping the original source observations and full-family participation visible. [Alternative-group inspection](docs/EVIDENCE_CONFLICT_ALTERNATIVES.md) explains the exact rank selection and its limits.
+
+## Preserve timed narration beside a demonstration
+
+Open **Inspect supplied narration** from the demonstration studio to pair an author-supplied WebVTT transcript with the original retained sequence. Inspect overlapping words beside before/after frames, explicitly select attributed quotations, and save a separate narrated account without replacing original notes. No transcription, sensory inference or learning result is claimed. [Input contract and workflow](docs/TIMED_NARRATION.md).
+
+
+[Find original moments from narration](docs/narration-moment-discovery.md) explains literal cue search and explicit preview in the existing sequence studio before retaining a source frame.

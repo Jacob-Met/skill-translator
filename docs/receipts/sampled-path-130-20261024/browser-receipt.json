@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "tests": [
+    "ordinary sequence navigation imports all exact original PNG frames",
+    "intermediate excursion yields10mm sampled chord sum despite0mm endpoints",
+    "actual complete download reopens with exact original PNG bytes and recomputed native findings",
+    "missing interior breaks both adjacent chords while known endpoints remain separate",
+    "wrong retained PNG refuses transactionally without replacing accepted work",
+    "a later declaration edit cancels delayed original-source receiving",
+    "390px and keyboard declarations preserve source frames and recompute accepted geometry",
+    "strict maintained CSP and actual browser have no page exceptions"
+  ],
+  "errors": [],
+  "csp": [],
+  "sourceHashes": {
+    "src/sequence-path.mjs": "45d8e5fbd143a9c25d51796c0cccb99d815569e42fb801b5fc83ec859183bda4",
+    "web/sampled-path.mjs": "71fbcd7eb9d2a87cbd9b6ffed9d6b57ccdccd7a45ae31dfd9643ec380abb1f39",
+    "web/sampled-path-input.mjs": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3",
+    "web/sampled-path.html": "311219a1f5dcba1a69686ab68edb75c41d6e933b37bb84b0ce5ab51fcd404d39",
+    "web/sampled-path.css": "862d4608e6997e08d136d6a4b41b3704f1f3ced6c904b84f2b2d4c12aef8baf4",
+    "server.mjs": "586967981feade16c9fd55786753c39b67423927b22fbae6ab433e7401ed1c09",
+    "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+    "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+  },
+  "browser": "156.0.8078.47"
+}

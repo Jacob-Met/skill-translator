@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "tests": [
+    "unrelated origin refuses before native execution",
+    "out-of-source ROI refuses through actual endpoint",
+    "wrong retained PNG refuses through actual endpoint",
+    "single native worker admits first and refuses concurrent second request",
+    "worker releases and independently recomputes subsequent request"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "actualRemoteArtifacts": [
+    {
+      "name": "browser.json",
+      "bytes": 2575,
+      "sha256": "20116f7892ca8d922736bab4e8c8e0f220432777f992d654c33844cf327661bc"
+    },
+    {
+      "name": "input.json",
+      "bytes": 2432,
+      "sha256": "d260dca96809e7bb03de30b52f2db47501b5e8ea9cb4ef105f19c922269f3bc9"
+    },
+    {
+      "name": "condition-judgment-sets.json",
+      "bytes": 2432,
+      "sha256": "d260dca96809e7bb03de30b52f2db47501b5e8ea9cb4ef105f19c922269f3bc9"
+    },
+    {
+      "name": "original-condition-outcomes.json",
+      "bytes": 2204,
+      "sha256": "ced0191ac82e7c4c5f2b8252c2e474c0647457757fcde3896610e00fae7f44a4"
+    },
+    {
+      "name": "native.txt",
+      "bytes": 1794,
+      "sha256": "5603d1dce887cba63003f1463501be5eed2252690b2cf29640cef81c7b78c366"
+    },
+    {
+      "name": "initial-browser-failure.txt",
+      "bytes": 499,
+      "sha256": "412ee112db2f1895039648c4fa26974059c3b17f4ccb4722da7de3f822052b02"
+    },
+    {
+      "name": "desktop.png",
+      "bytes": 310569,
+      "sha256": "acb057f34f630b4d67540a1e29a1bb45e259de73a8b4ddaededf8eb8c58c2342"
+    },
+    {
+      "name": "narrow.png",
+      "bytes": 289239,
+      "sha256": "9932a1adae4e4dd68ffb448d749bae5b8e7fb514a42421e9837c3def4c7a0949"
+    }
+  ],
+  "inputAccountDownloadByteIdentical": true,
+  "originalDownloadEqualsEmbeddedOriginal": true,
+  "reconstructed": false,
+  "actualBrowserPassed": 9,
+  "screensVisuallyReviewedBy": "root"
+}

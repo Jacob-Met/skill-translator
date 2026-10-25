@@ -1,0 +1,20 @@
+✔ complete family exposes disagreement hidden by sole minimal subset (7.799122ms)
+✔ missing geometry preserves unresolved family and survives either hypothetical judgment (2.909558ms)
+✔ no contrast, contradictory training and already judged rounds remain explicit (6.902672ms)
+✔ independent hypothetical-label recomputation oracle across81 assignments preserves source (174.768137ms)
+✔ all8191 uncontradicted alternatives remain present without opposing judgments (14.118931ms)
+✔ original normalized study round-trips; derived claims cannot override family and malformed source refuses (5.712474ms)
+✔ shortened-arm outcome distinguishes length; translated unacceptable outcome exposes missing positional requirement (1.588232ms)
+✔ additional requirement can invalidate a consistent conjunction and cannot use categorical-cover pruning (0.689436ms)
+✔ missing endpoint is unresolved; unknown outcome never contributes a vote (1.122976ms)
+✔ source-only replay discards supplied findings and preserves exact raw history and bases (2.933025ms)
+✔ independent direct conjunction oracle checks all81 supplied-label assignments (36.306642ms)
+✔ maximum13 criteria enumerate8191 conjunctions without dropping originals (9.991666ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 306.958912

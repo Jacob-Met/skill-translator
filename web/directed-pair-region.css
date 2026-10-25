@@ -1,2 +1,3 @@
-p{overflow-wrap:anywhere}
+p,pre{overflow-wrap:anywhere}
+pre{white-space:pre-wrap}
 svg{min-height:220px}

@@ -1,0 +1,36 @@
+{
+  "issue": 172,
+  "status": "local qualification and independent review complete; publication pending",
+  "source_parent_candidate": "7392d8995e18fe55ab661ef2cba7398806bf0abd",
+  "native": {
+    "new_named_tests": 7,
+    "composed_named_tests": 18,
+    "existing_exact_kernel_receiver_tests": 7,
+    "failed": 0
+  },
+  "browser": {
+    "groups": 6,
+    "errors": 0,
+    "receipt": "browser-receipt.json"
+  },
+  "limits": [
+    "Authored software controls only",
+    "Explicit supplied common-plane rectangles, not estimated physical uncertainty",
+    "No aggregate path interval inferred"
+  ],
+  "sha256": {
+    "src/path-regions.mjs": "80e21148439b58faa6a3211879a18798b6cacefb17b61b396503e92785bd2d90",
+    "web/path-regions-input.mjs": "b066b3c6f2e27090fd097f14367bbbc24f5787614c34dd3e437e168a0f0309bd",
+    "web/path-regions.mjs": "803e2a5857d674419250fc2a4be2d9f3bc992b02521bc2fbe8079cc78e56afae",
+    "test/path-regions.test.mjs": "59102ec7e04e2582c5dd21da1f27a59e1f184a572ca17d6bddef22252277f01e"
+  },
+  "independent_review": {
+    "reviewer": "MICROVERSE retained direct worker",
+    "result": "accepted",
+    "named_tests": 7,
+    "scope": "admission, exact extrema witnesses and threshold equality, missing, source custody, no joint-path sum"
+  },
+  "base_commit": "d2df62028426c42a368352a1a3a1f82b2497cedc",
+  "base_tree": "9c58961454a282fc89b16c57279b2c8ac80dd234",
+  "verified_unchanged_code_blobs": 425
+}

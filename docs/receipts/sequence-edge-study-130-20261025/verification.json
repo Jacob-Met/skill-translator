@@ -1,0 +1,38 @@
+{
+  "prerequisites": [
+    "#174 merged5e62cbf; exactmerged20blob+actualconsumer received",
+    "#193 merged2c0c8da; exactmerged18blob+actualfiveframes received"
+  ],
+  "source": "Original paper-cutter source video7dd438a32071a1ed2903841be9b207f0565cb17a31413d6812bd85e6dd2c6d4d; source media private",
+  "native": "4new +6existing edge groups pass",
+  "browser": "5study groups,6prior scissors groups,5complete-field/legacy groups pass; zero errors",
+  "review": "MICROVERSE independently4groups passed; core and source lifecycle accepted",
+  "limitation": "Independent observations only; no cross-frame matching, physical contact or unseen progression inference",
+  "issue": 195,
+  "base_commit": "2c0c8da34b5a9b1ac75ab5c3cfdf528ef0b55e5a",
+  "base_tree": "64c940f22d22a48836d0c4a2bf291faca730379b",
+  "current_receiving": "Fresh actualstudy5groups pass on actualmergedcompactparent, zeroerrors",
+  "fingerprints": {
+    "base_commit": "2c0c8da34b5a9b1ac75ab5c3cfdf528ef0b55e5a",
+    "base_tree": "64c940f22d22a48836d0c4a2bf291faca730379b",
+    "verified_unchanged_runtime_blobs": 288,
+    "missing": [],
+    "mismatched": [],
+    "delivery_baselines": {
+      "docs/SEQUENCE_EDGE_STUDY.md": null,
+      "docs/receipts/sequence-edge-study-130-20261025/browser-receipt.json": null,
+      "docs/receipts/sequence-edge-study-130-20261025/field-browser-receipt.json": null,
+      "docs/receipts/sequence-edge-study-130-20261025/independent-study-receiving.json": null,
+      "docs/receipts/sequence-edge-study-130-20261025/prior-browser-receipt.json": null,
+      "docs/receipts/sequence-edge-study-130-20261025/verification.json": null,
+      "server.mjs": "8caf74e36d0c6679c09567648be4b2af2c168642",
+      "src/sequence-edge-study.mjs": null,
+      "test/sequence-edge-study.test.mjs": null,
+      "tools/browser-edge-field.mjs": "3f6867c7659d8722eeecb9719a343b1ca7d0b3bd",
+      "tools/browser-edge-study.mjs": null,
+      "tools/browser-sequence-edge.mjs": "bb2fcbf568770aac6e699d76362db7fd6deb9a93",
+      "web/sequence-edge.html": "141d2f0efdd6261f12a03828ff9619a79757377c",
+      "web/sequence-edge.mjs": "78d2a0bcf87bd5f86ff4b128e983520becf928d7"
+    }
+  }
+}

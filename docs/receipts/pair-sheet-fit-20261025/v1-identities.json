@@ -1,0 +1,117 @@
+{
+  "root": "/tmp/skill-c11405-sheet-fit-next",
+  "manifest": "/workspace/scratch/c11405aec71b/context/skill-sheet-fit-owned-paths.json",
+  "baseDir": "/tmp/hamon-c11405-skill-171/source-merged-v1",
+  "destination": "/tmp/hamon-c11405-skill-179",
+  "commands": [
+    [
+      "native",
+      "node --test --test-concurrency=2"
+    ],
+    [
+      "browser",
+      "node tools/browser-pair-interpretations.mjs"
+    ]
+  ],
+  "candidateManifest": {
+    "issue": 179,
+    "root": "/tmp/skill-c11405-sheet-fit-next",
+    "baseCommit": "f5714ea100133852a9cb5106f1b3bf1ad1ac40c6",
+    "baseTree": "2559f03e0e7fe7b12ee12af3d8b1453811fa723f",
+    "paths": [
+      {
+        "path": "src/pair-sheet-fit.mjs",
+        "sha256": "0d54b0a34b1ec19122a9f689354699967b1b36e23e5c1b8bb4b3e8d86e9e6e02",
+        "bytes": 3972
+      },
+      {
+        "path": "src/annotation-bound.mjs",
+        "sha256": "293cd2f78aceb22babc450682a4b10be9f61325b9d342961811d0de9c1e29083",
+        "bytes": 6357
+      },
+      {
+        "path": "test/pair-sheet-fit.test.mjs",
+        "sha256": "d8c641e035252e9b9f3703ceb080bc390c88b5d1c296827007d8cceba77221ac",
+        "bytes": 5165
+      },
+      {
+        "path": "test/fixtures/pair-sheet-fixture.mjs",
+        "sha256": "1357d3d584ee9537ada21157371c2e1740dd44975080f37372c7d953c5abc686",
+        "bytes": 864
+      },
+      {
+        "path": "test/fixtures/annotation-policy-baseline.json",
+        "sha256": "b2e4f7181086111bd18ff3f6ce376e3554dcff52a51ed43ef681a305392d01d1",
+        "bytes": 13199
+      },
+      {
+        "path": "web/pair-interpretations.mjs",
+        "sha256": "616fe9a26c42c626d7a934c601feef20031b7e3d45d63436e06f9feab83fb427",
+        "bytes": 11618
+      },
+      {
+        "path": "web/pair-interpretations.html",
+        "sha256": "7f27f4ac728a029ba4a503c0092781c5beb6b79a51cc288ca0450b1e9b19bf8e",
+        "bytes": 3857
+      },
+      {
+        "path": "tools/browser-pair-interpretations.mjs",
+        "sha256": "52ed2ca78165a0fadbfa98e4aa425a7439635b217aec7546be7bb745a7eee8f3",
+        "bytes": 17197
+      },
+      {
+        "path": "server.mjs",
+        "sha256": "176e8fcbb1f2516433279e769350ac7cf5ccf248d3eb74c938109b804df82a89",
+        "bytes": 25665
+      },
+      {
+        "path": "docs/PAIR_SHEET_FIT.md",
+        "sha256": "8e3eb8c5f695389671747f420e65d3ed4640da22e71c45d9067bcab101f82f0c",
+        "bytes": 3805
+      }
+    ],
+    "qualification": "7 focused named tests pass;12 golden prior annotation reports identical; independent exact-policy review requested; actual16-group extended browser pending"
+  },
+  "files": {
+    "src/pair-sheet-fit.mjs": {
+      "sha256": "0d54b0a34b1ec19122a9f689354699967b1b36e23e5c1b8bb4b3e8d86e9e6e02",
+      "bytes": 3972
+    },
+    "src/annotation-bound.mjs": {
+      "sha256": "293cd2f78aceb22babc450682a4b10be9f61325b9d342961811d0de9c1e29083",
+      "bytes": 6357
+    },
+    "test/pair-sheet-fit.test.mjs": {
+      "sha256": "d8c641e035252e9b9f3703ceb080bc390c88b5d1c296827007d8cceba77221ac",
+      "bytes": 5165
+    },
+    "test/fixtures/pair-sheet-fixture.mjs": {
+      "sha256": "1357d3d584ee9537ada21157371c2e1740dd44975080f37372c7d953c5abc686",
+      "bytes": 864
+    },
+    "test/fixtures/annotation-policy-baseline.json": {
+      "sha256": "b2e4f7181086111bd18ff3f6ce376e3554dcff52a51ed43ef681a305392d01d1",
+      "bytes": 13199
+    },
+    "web/pair-interpretations.mjs": {
+      "sha256": "616fe9a26c42c626d7a934c601feef20031b7e3d45d63436e06f9feab83fb427",
+      "bytes": 11618
+    },
+    "web/pair-interpretations.html": {
+      "sha256": "7f27f4ac728a029ba4a503c0092781c5beb6b79a51cc288ca0450b1e9b19bf8e",
+      "bytes": 3857
+    },
+    "tools/browser-pair-interpretations.mjs": {
+      "sha256": "52ed2ca78165a0fadbfa98e4aa425a7439635b217aec7546be7bb745a7eee8f3",
+      "bytes": 17197
+    },
+    "server.mjs": {
+      "sha256": "176e8fcbb1f2516433279e769350ac7cf5ccf248d3eb74c938109b804df82a89",
+      "bytes": 25665
+    },
+    "docs/PAIR_SHEET_FIT.md": {
+      "sha256": "8e3eb8c5f695389671747f420e65d3ed4640da22e71c45d9067bcab101f82f0c",
+      "bytes": 3805
+    }
+  }
+}

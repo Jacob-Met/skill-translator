@@ -1,0 +1,76 @@
+{
+  "issue": 162,
+  "candidateRevision": 2,
+  "baseCommit": "a5a718f9ff9ab74dc0609a6a3a1fb438af6c9749",
+  "baseTree": "62cf9cf0d0727461ae0a3cce70f3ed2cdc80caf1",
+  "composition": "Preserves incoming condition-changes/outcomes, ordered-tool-access and sampled-path source/routes. Only additive pattern route composed onto current3 server.",
+  "scope": "Authored original-PNG, source-bound planar endpoint consumer; not physical demonstration/learning, tracking, deployment or merged-source verification",
+  "execution": {
+    "host": "eff5d9f5-c26a-4983-9737-a75db735bef1",
+    "browser": "156.0.8078.47",
+    "sandbox": "Namespace layer, PID/network namespaces, Seccomp-BPF and adequately sandboxed explicitly verified; observed text retained in browser-receipt.json"
+  },
+  "native": {
+    "command": "node --test --test-concurrency=2 test/*.test.mjs",
+    "passed": 551,
+    "failed": 0,
+    "skipped": 0,
+    "executionReceipt": "native-current3-result.json",
+    "log": "native-current3.tap.gz"
+  },
+  "browser": {
+    "command": "CHROME_BINARY=/opt/google/chrome/chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=<owned-v2-receipts> node tools/browser-pattern-change.mjs",
+    "completeGroups": 12,
+    "pageErrors": 0,
+    "offsiteRequests": 0,
+    "cspViolations": 0,
+    "executionReceipt": "browser-current3-result.json",
+    "receipt": "browser-receipt.json",
+    "log": "browser-current3.log"
+  },
+  "review": {
+    "peer": "Retained direct MECHANISM worker; core/lifecycle and independent proper-vs-reflected quadrilateral review accepted",
+    "initialControl": "independent-review.json",
+    "revision2": "independent-review-v2.json",
+    "visual": "Root inspected current3 collinear desktop. SKILL and root inspected retained current2 desktop/narrow PNGs; collinear hashes are unchanged at current3. Pattern PNGs remain labeled current2; current3 identities separately recorded."
+  },
+  "interpretationControl": "Analytically unchanged collinear points acquire opposite nominal signs from independent projection/calibration arithmetic. Exact predicate retained; visible wording explicitly establishes no visible/physical reversal. No epsilon or uncertainty certificate introduced.",
+  "sourceSHA256": {
+    "test/pattern-change-fixtures.mjs": "7357f07fcba536826d6070d32ead096bddfdd6920c6d0af2d8870e11439122d7",
+    "src/pattern-change.mjs": "a9bafa8cb357e555b43d86f4ac7bfaf357ee2e27593b85864d1045336717d2b8",
+    "vendor/chronos/exact-halfplanes.mjs": "3f2020d8adac92ac1b82331dd5b30964a889a85d249e81cd16bb9dbba99b1150",
+    "src/sequence-change.mjs": "1abe0f2392f47ca18477097ea3d100aff4a92ecc1815f87e3a1800e02f80d81e",
+    "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+    "src/sequence-capture.mjs": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+    "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+    "src/capture-editing.mjs": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+    "src/geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+    "src/authoring.mjs": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+    "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+    "web/sequence-change.mjs": "292baf7e8bb38cdfab9bf7fcafed0bee216f9148f5a70c0c637a49c87e4c144f",
+    "web/sequence-change-input.mjs": "c1452e7c8be99517d49025f3297fcbcd66aba30ac202db2221dbed163beaf355",
+    "web/sequence-change.html": "43b7b6024f7943f3ccd7b975261135acd5a44fc63b2ac4d532aace8a5519a7b4",
+    "web/sequence-change.css": "be7d0fa8418a0be79c4a08075c6c0c6613a3ec81a29463f761858740789541f0",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+    "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+    "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+    "server.mjs": "7fc55c0f70c51a2e38878564df8fbe0a1a7ab5d1f0a1a61862e6a82c7b67c5d2",
+    "tools/browser-pattern-change.mjs": "d3579bb33b8ba2a04e833070c4331e6a972c6a1c29cac4876a71985bfca2b018"
+  },
+  "testSHA256": "5a3c1bfaa92f2c5041b0c21d97030407e4fa84d83e250aded47ce91531868644",
+  "status": "Qualified latest-main composed revision2 candidate; normal merge and fresh merged-source receiving remain separate gates.",
+  "failedInvocation": {
+    "command": "node tools/browser-pattern-change.mjs with CHROME_BINARY and RECEIPT_DIR omitted",
+    "result": "Failed sandbox admission on the default unqualified Chrome before any course groups ran; not a consumer pass. Correct explicit qualified Chrome and isolated output path passed with identical source.",
+    "executionReceipt": "browser-current2-result.json",
+    "log": "browser-current2.log"
+  },
+  "rawDownloads": [
+    "pattern.json",
+    "collinear-comparison.json"
+  ],
+  "screenshots": {
+    "current3IdentityLedger": "screenshot-identities-current3.json",
+    "retainedFiles": "Pattern desktop/mobile PNG files retained from current2 fd8224 receiving; their current3 pixels differ, so they are not relabeled as latest. Both collinear PNG hashes are identical across current2/current3. Latest current3 collinear desktop inspected directly by root. Current3 browser assertions passed at both widths."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "reviewer": "hamon-c11405/mechanism",
+  "scope": "Independent exact-policy source review,7 maintained tests and33 independent nominal controls; no browser claim",
+  "checks": [
+    "Three Pythagorean rectangles and swapped axes preserve exact squared maxima/status",
+    "Below/touching/above guarded thresholds remain not-ruled-out/boundary-unresolved/excluded",
+    "Fifteen actual admitted diagonal placements remain WITHIN and never categorical excluded",
+    "Original source and existing scores unchanged",
+    "Maintained annotation policy extraction golden parity reexecuted"
+  ],
+  "cases": 33,
+  "hashes": {
+    "src/pair-sheet-fit.mjs": "0d54b0a34b1ec19122a9f689354699967b1b36e23e5c1b8bb4b3e8d86e9e6e02",
+    "src/annotation-bound.mjs": "293cd2f78aceb22babc450682a4b10be9f61325b9d342961811d0de9c1e29083"
+  },
+  "conclusion": "No blocking exact predicate or numerical-interpretation finding. Guard is explicitly inherited policy, not a certified error/calibration bound. Free endpoints on nominal sheet do not establish anchored feasibility."
+}

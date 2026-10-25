@@ -1,0 +1,57 @@
+{
+  "schema": "skill-translator-guide-alignment-receipt/v1",
+  "base_commit": "7e7e6d728ee51ffd8fd6061533ddb687c1bf8526",
+  "base_tree": "d670015ea75c18cd049c4a3a5f59a65fe22fd02c",
+  "source_files": {
+    "src/guide-alignment.mjs": "22633b110ccfbbfeb23319f0d5e55ac171a43d34",
+    "test/guide-alignment.test.mjs": "97779ade8ef38d8be47a48e925c55dad1ed5def7",
+    "web/guide-alignment.html": "c30ef71192198116f46299b29163102a2a2ae59f",
+    "web/guide-alignment.css": "3390dc32ef2d2523e966e29a05a1a2704a5ae5ba",
+    "web/guide-alignment.mjs": "35eec6696b3794ee2c6aab797117f6838c68b8f0",
+    "server.mjs": "461347cbb3894b73363caa5fde965a0122a7f6c4",
+    "web/practice.html": "d5fec1245a43abf30b0b045c810660e06aa0105b",
+    "tools/browser-guide-alignment.mjs": "bbd84230b8f7aec7246eabc790e881437bb40338",
+    "docs/GUIDE_ALIGNMENT.md": "d4d13f5447e244ba49423c49a473d2ccc3169897"
+  },
+  "native": {
+    "command": "node --test --test-isolation=none test/*.test.mjs",
+    "node": "24.19.0",
+    "tests": 464,
+    "passed": 464,
+    "failed": 0,
+    "skipped": 0,
+    "focused_cases": 10
+  },
+  "browser": {
+    "groups": [
+      "actual maintained practice records bent, rigidly rotated, collapsed-guide and empty rounds with original criteria",
+      "missing marks and coincident observed guide anchors remain unavailable rather than passing",
+      "rigid rotation retains functional alignment while point scores fail; bent row passes points but fails its separate guide criterion",
+      "completed source-only download and fresh reopen retain exact original source, all four rounds and selected criterion",
+      "mismatched source criterion refuses while preserving accepted original review",
+      "newer criterion draft cancels a delayed original-file replacement and hides stale findings",
+      "desktop and390px geometry, explicit coordinate witnesses and keyboard table inspection remain usable"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "scope": "Authored planar guide relationships; no contact, correction, motion or physical skill qualification"
+  },
+  "runtime": {
+    "user": "nobody",
+    "puppeteer": "25.16.0",
+    "sandbox": "Chrome namespace, PID, network, Seccomp and TSYNC independently verified enabled; no sandbox bypass",
+    "temporary_storage": "Memory-backed temporary profile and downloads; artifacts copied before namespace exit"
+  },
+  "visual_review": "Worker inspected actual 390px focused results: readable distinct assessments, target/retained geometry and horizontally scrollable keyboard-accessible coordinate table; browser asserts no document overflow. Desktop1280 screenshot retained.",
+  "independent_review": {
+    "reviewer": "Root contributor, team hamon-6770099628af-20261024",
+    "native_cases": 10,
+    "passed": 10,
+    "finding": "Directed adapted-line offset, explicit projection and preservation of original point criteria accepted; no core blocker."
+  },
+  "harness_correction": "Initial mismatch-message assertion expected differs but maintained producer says differ; assertion corrected and entire seven-group receiving course passed. No product change was needed.",
+  "limits": [
+    "Authored planar diagram criterion only.",
+    "No contact, fit, proposed correction, physical motion, physical skill or causal learning qualification.",
+    "Original practice producer and schema remain unchanged."
+  ]
+}

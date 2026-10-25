@@ -1,0 +1,7 @@
+{
+  "state": "failed candidate; not published",
+  "old_source_sha256": "09045d8a2abe8e3f0da69b95e468cf82e7953bfd82f11ddedf6059383228a575",
+  "observed_failure": "Fully transparent hidden RGB stroke yielded494edge pixels and4segments with IMREAD_COLOR, despite no visible stroke",
+  "prior_checks": "Prior source/browser/image controls passed but did not test alpha; their passes do not qualify nonopaque source behavior",
+  "resolution": "IMREAD_UNCHANGED, explicit uint8/nonopaque-alpha admission, opaque-RGBA parity and transparent/16bit refusal controls"
+}

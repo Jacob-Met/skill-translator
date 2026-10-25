@@ -1,0 +1,3 @@
+# Qualified local runtime for the optional source-native edge adapter.
+opencv-python-headless==4.13.0.92
+numpy==2.3.5

@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Demonstration sequence · Skill Translator</title>
   <link rel="stylesheet" href="/web/sequence.css">
+  <link rel="stylesheet" href="/web/narration-moments.css">
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="/">SKILL TRANSLATOR</a><nav aria-label="Workbenches"><a href="/capture">Source capture</a><a href="/practice">Practice</a><a href="/task-readiness">Reason about next steps</a><a href="/prerequisite-rehearsal">Rehearse prerequisites</a> <a href="/order-evidence">Compare demonstrated order</a> <a href="/decision-comparison">Compare decision cues</a></nav></header>
+  <header class="topbar"><a class="brand" href="/">SKILL TRANSLATOR</a><nav aria-label="Workbenches"><a href="/capture">Source capture</a><a href="/practice">Practice</a><a href="/task-readiness">Reason about next steps</a><a href="/prerequisite-rehearsal">Rehearse prerequisites</a> <a href="/order-evidence">Compare demonstrated order</a> <a href="/decision-comparison">Compare decision cues</a> <a href="/timed-narration">Inspect supplied narration</a></nav></header>
   <main>
     <section class="intro"><p class="eyebrow">THE EXPERT'S ACCOUNT</p><h1>The moments that<br>change a task.</h1><p class="lead">Keep the evidence before and after an action. Explain the intended result, the cue you notice, and what you would do if it goes wrong.</p></section>
     <section class="document-card" aria-label="Demonstration details">
@@ -20,6 +21,34 @@
         <label for="clip-file">Original MP4 or WebM clip</label><input id="clip-file" type="file" accept=".mp4,.webm,video/mp4,video/webm">
         <div id="video-host" class="video-host"><p>Local video preview</p></div>
         <p id="clip-summary" class="note">The video and retained images stay in your browser.</p>
+        <details class="visual-scan" id="visual-scan">
+          <summary>Find moments by visual change</summary>
+          <p>Sample the clip to locate changes worth inspecting. You choose which original moments to retain.</p>
+          <div class="two-fields"><div><label for="scan-from">Scan from · seconds</label><input id="scan-from" type="number" min="0" step="any" value="0"></div><div><label for="scan-until">Scan until · seconds</label><input id="scan-until" type="number" min="0" step="any"></div></div>
+          <label for="scan-count">Number of sampled frames · 2–64</label><input id="scan-count" type="number" min="2" max="64" step="1" value="24">
+          <div class="actions"><button id="scan-start" class="quiet" disabled>Scan image changes</button><button id="scan-cancel" class="quiet" disabled>Cancel scan</button></div>
+          <progress id="scan-progress" aria-label="Frames sampled" value="0" max="24" hidden></progress>
+          <p id="scan-status" class="note" role="status" aria-live="polite">Pair the original clip to scan its image changes.</p>
+          <div id="scan-results" hidden>
+            <p id="scan-summary"></p>
+            <label for="scan-order">Inspect intervals by</label><select id="scan-order"><option value="time">Time order</option><option value="meanAdjustedChange">Largest adjusted change</option><option value="meanAbsoluteChange">Largest raw change</option></select>
+            <div id="scan-preview" class="scan-preview"></div><ol id="scan-intervals" class="scan-intervals"></ol>
+          </div>
+          <p class="note">Samples are at most 160 pixels per side. Scores compare RGB channel levels (0–255); adjustment removes one uniform brightness shift. Compare raw values too: illumination, camera motion and real global changes can look alike. Intervening motion and small details may be missed. This does not identify actions or explain their purpose.</p>
+        </details>
+<details id="narration-moments" class="narration-moments">
+ <summary>Find moments from supplied narration</summary>
+ <p>Search the words supplied with this clip, inspect their timing, then choose which original frame to retain. Narration can guide inspection; it does not identify an action or its exact onset.</p>
+ <label for="narration-file">Supplied UTF-8 WebVTT transcript · up to 256 KiB</label><input id="narration-file" type="file" accept=".vtt,text/vtt" disabled>
+ <label for="narration-attribution">Who supplied it, and how was it obtained?</label><textarea id="narration-attribution" rows="2" maxlength="1200" disabled></textarea>
+ <label for="narration-offset">Seconds added to transcript times</label><input id="narration-offset" type="number" step="any" min="-10800" max="10800" value="0" disabled>
+ <div class="actions"><button id="narration-pair" class="quiet" disabled>Pair supplied narration</button><button id="narration-discard" class="quiet" disabled>Discard narration draft</button></div>
+ <p id="narration-status" class="note" role="status" aria-live="polite">Load the original clip in the studio before pairing narration.</p>
+ <label for="narration-search">Find literal words in the transcript</label><input id="narration-search" type="search" maxlength="200" disabled>
+ <p id="narration-count" class="note">No narration paired.</p><div id="narration-results"></div>
+ <div class="actions"><button id="narration-previous" class="quiet" disabled>Previous 50 cues</button><button id="narration-next" class="quiet" data-last="true" disabled>Next 50 cues</button></div>
+ <p class="note">Start, midpoint and end are requested times. Preview does not retain a frame. Use the studio's Retain this moment button; its actual presented time and full PNG remain the evidence. Out-of-clip times are not clamped. Narration settings remain local to this clip session; keep the original transcript and save the authored sequence. Use <a href="/timed-narration">Inspect supplied narration</a> to retain explicit quotations beside authored steps.</p>
+</details>
         <div class="two-fields"><div><label for="moment-time">Requested time · seconds</label><input id="moment-time" type="number" min="0" step="0.001" value="0"><button id="use-playhead" class="quiet" disabled>Use video playhead</button></div><div><label for="moment-label">Moment title</label><input id="moment-label" type="text" maxlength="120" placeholder="Before the fold"></div></div>
         <label for="moment-state">What is visibly present?</label><textarea id="moment-state" rows="2" maxlength="1600" placeholder="Describe the material, tool, support or alignment you can see."></textarea>
         <div class="actions"><button id="capture-moment" class="primary" disabled>Retain this moment</button><button id="cancel-moment" class="quiet" hidden>Cancel note edit</button></div>
@@ -35,11 +64,11 @@
         <div class="actions"><button id="save-step" class="primary" disabled>Save authored step</button><button id="cancel-step" class="quiet">Clear step draft</button></div><p id="draft-status" class="note">Retain two moments to explain a change.</p>
       </section>
     </div>
-    <section class="moments-section"><div class="section-heading"><div><p class="eyebrow">SOURCE MOMENTS</p><h2>Retained evidence</h2></div><span id="moment-count" class="count">0 / 12</span></div><div id="moments" class="moment-grid"><p class="empty">Retained frames will appear here in presented-time order.</p></div></section>
+    <p><a href="/sequence-edge">Inspect visible edge proposals in original frames without physical calibration</a>.</p><section class="moments-section"><div class="section-heading"><div><p class="eyebrow">SOURCE MOMENTS</p><h2>Retained evidence</h2></div><span id="moment-count" class="count">0 / 12</span></div><div id="moments" class="moment-grid"><p class="empty">Retained frames will appear here in presented-time order.</p></div></section>
     <section class="explanation-section"><p class="eyebrow">03 / INSPECT THE ACCOUNT</p><h2>What changes, and why it matters</h2><div id="steps" class="step-tabs" aria-label="Authored steps"></div><div id="step-detail" class="step-detail"><p class="empty">Save an authored step to compare its before and after evidence.</p></div><p id="account-gaps" class="note"></p></section>
     <section id="calibration-panel" class="calibration-section card" aria-labelledby="calibration-heading">
       <p class="eyebrow">04 / PRACTICE A RETAINED STATE</p><h2 id="calibration-heading">Calibrate a retained moment</h2>
-      <p class="lead">Keep a geometric task beside the moment it came from. Save its exact PNG, annotate it in <a href="/capture" target="_blank" rel="noopener">Source capture in a new tab</a>, then attach the exported annotations here. With both states calibrated, save the sequence and <a href="/sequence-change" target="_blank" rel="noopener">compare their declared geometric change</a>.</p>
+      <p class="lead">Keep a geometric task beside the moment it came from. Save its exact PNG, annotate it in <a href="/capture" target="_blank" rel="noopener">Source capture in a new tab</a>, then attach the exported annotations here. With both states calibrated, save the sequence and <a href="/sequence-change" target="_blank" rel="noopener">compare their declared geometric change</a>, or <a href="/sampled-path" target="_blank" rel="noopener">inspect matched intermediate states along a sampled path</a>.</p>
       <div class="calibration-grid"><div>
         <label for="calibration-moment">Source moment</label><select id="calibration-moment"></select>
         <p id="calibration-source" class="note">Retain a source moment to begin.</p>

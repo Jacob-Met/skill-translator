@@ -1,0 +1,10 @@
+{
+  "repository": "Jacob-Met/chronos-vision",
+  "commit": "4b9ad234bd4754909be8c7ac4fdaeea45d5c1ee8",
+  "path": "app/exact-circle-support.mjs",
+  "blob": "d0d2e4f07e67192be141cf3dd0fac46fd2552dc0",
+  "sha256": "2798bb28008650b077694ed7b3c5d4fd3ff78d4a8b590813394ff742a157017e",
+  "localPath": "vendor/chronos/exact-circle-support.mjs",
+  "consumer": "src/context-disk-support.mjs",
+  "modifications": "None. Exact maintained source bytes; existing exact-halfplanes dependency is byte-identical."
+}

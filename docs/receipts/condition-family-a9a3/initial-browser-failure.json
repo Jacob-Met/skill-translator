@@ -1,0 +1,17 @@
+{
+  "failed_packet_sha256": "7ba437ac46ac0d7e5289658f9836384b53a1a71e0400cf26176d14a2db5d0ab8",
+  "reported_environment": "Root RDC Node22 / Chrome156",
+  "failure": "browser-condition-family.mjs:27:79 expected preview-summary to contain 1 alternatives remain",
+  "cause": "Malformed closing option tag carried value=acceptable; the acceptable option start tag was absent. Browser could not select acceptable. Native family computation was correct.",
+  "failed_html_sha256": "0e96a68cb5a00cfd5c87ee7f809d7a779d1588b9a1db199257e7445a897618e9",
+  "fix": "Close placeholder option and create explicit acceptable option start tag. Harness now asserts each returned selected value before requesting preview.",
+  "status": "Source corrected; actual browser rerun pending.",
+  "actual_runtime_state": {
+    "hypotheticalValue": "",
+    "previewDisabled": false,
+    "summary": "Choose an explicit hypothetical judgment.",
+    "previewResults": "",
+    "pageErrors": [],
+    "remoteScreenshot": "/tmp/hamon-a9a3-skill-166/diagnostic-browser/failure.png"
+  }
+}

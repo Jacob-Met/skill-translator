@@ -1,0 +1,88 @@
+{
+  "schema": "hamon.reply-comparison-receiving.v1",
+  "issue": 217,
+  "baseCommit": "ec018214dcfbb049770a0b60de8f710f092615dd",
+  "receivedSourceBlobs": {
+    "server.mjs": "7c47f77a2405e347f4bfa6e81bd7c3f48bf9004a",
+    "native/sequence-edge.mjs": "f672b6422e7ac41d762b47cd31b8d207807a0622",
+    "src/demonstration-sequence.mjs": "3030edd3ad809cab11fc220365aacb34e2d01b42",
+    "src/frame-origin.mjs": "9154d9e63255de95152e3137d5790de5e9f00e42",
+    "src/geometry.mjs": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061",
+    "src/capture.mjs": "763d09298e03c4275b802c83df92c773de62cd67",
+    "src/authoring.mjs": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5",
+    "src/sequence-capture.mjs": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b",
+    "src/capture-editing.mjs": "570ee1ac63928e5837920288243e8ea7621936c9",
+    "src/sequence-edge.mjs": "ca6d46f12e5ad15c54a4d9c1acc430149071b818",
+    "src/sequence-edge-field.mjs": "1515280bd71fe4066633b015b9bd8937dbb6263e",
+    "web/decision-comparison.html": "257f58c726b97cd1a5d614b945ff60bf5601e103",
+    "web/decision-comparison.css": "6f67a401f32a4d0d1886f833d84f54f3c24c47e1",
+    "web/decision-comparison.mjs": "0b41450b149d3b39214e39d60e565b3f887cfa63",
+    "src/decision-comparison.mjs": "c9b3df510934428cc1e72bf18207e3cbde438b20",
+    "src/decision-practice.mjs": "5e7d040eb72a9bab753beccc0ff151187daaeb99",
+    "web/sequence-input.mjs": "bf4ece2d96b15bdb8ee88ff537d92f39032c5d6a",
+    "web/image-input.mjs": "954e74a63557cfd2adf53c7be028f134b287e59f",
+    "web/order-evidence-input.mjs": "63be6e9e4722656694cdc83ac3e98ad1e93d830a",
+    "src/order-evidence.mjs": "947c515509de9e5328a689fd6c128b0495f4b2b8",
+    "src/prerequisite-rehearsal.mjs": "b499945c38250474cb3bd41a1b1a87cd757e6a3b",
+    "web/decision-comparison-input.mjs": "1c5458af5f348c0a27d4ffa58946de6cc6004201",
+    "test/decision-comparison.test.mjs": "0225e6e2a0c2a177e90ae8c280ccdebcb8c76e09",
+    "src/account-question.mjs": "dd0017025d564fb1eca51e892b8da0b2c7140065",
+    "web/account-question.mjs": "e058ad36d5ea34644930c06865e9d3836214f692",
+    "test/account-question.test.mjs": "10e2dcd865868bbdd88e418d70293e34b0af252a",
+    "tools/browser-account-question.mjs": "ccf8a8a0a83a72832865ce652ffdc47f10efabec",
+    "docs/ACCOUNT_QUESTIONS.md": "16ca9a205c87cbd4d4c96138a0ee3907d51f3aed",
+    "src/account-reply.mjs": "2577ef5eefb2793fe694938776fd7a4bed85d895",
+    "web/account-reply.mjs": "bf8ef3c1f0859867f0c816e9d1c367ea51c74b9b",
+    "test/account-reply.test.mjs": "74c8ef75de9a2822a6d3a3f0bd637218c5c0401e",
+    "tools/browser-account-reply.mjs": "577797925cda4cc8b415e321152210cf83838ce4",
+    "docs/ACCOUNT_REPLIES.md": "fd06a11d663d81990f286158a31676ea2990150c",
+    "src/reply-comparison.mjs": "0048a52610def62c6224ac74eb07d30fa88308c4",
+    "web/reply-comparison.mjs": "28469891436ab6d0ecc4aac6a45f6fddef83f836",
+    "test/reply-comparison.test.mjs": "e59a9f20d64232ecb1658905290c887c3a623f34",
+    "tools/browser-reply-comparison.mjs": "f74da1731379e6c26fcefb464c2a87d9b5f43b74",
+    "docs/REPLY_COMPARISON.md": "07eae56223b6dd10a71d51ea0802f63c5966ee5e"
+  },
+  "unchangedDependencyBlobsVerified": 31,
+  "native": {
+    "passed": 21,
+    "command": "node --test test/decision-comparison.test.mjs test/account-question.test.mjs test/account-reply.test.mjs test/reply-comparison.test.mjs"
+  },
+  "browser": {
+    "product": "Chrome/156.0.8078.47",
+    "executable": "/usr/bin/google-chrome-stable",
+    "sandbox": "chrome://sandbox adequately sandboxed; no --no-sandbox",
+    "newCourse": {
+      "checks": [
+        "two original sources, frames and missing versus supplied cues",
+        "actual Chrome download retains complete raw sources",
+        "two attributed alternatives retained and duplicate refused without replacement",
+        "actual compact raw comparison download keeps shared original question and both replies",
+        "fresh narrow receiving recomputes every alternative from matching original source",
+        "explicit keyboard selection uses maintained source exporter and preserves other reply plus original PNGs",
+        "wrong-question comparison preserves retained alternatives",
+        "late comparison import cannot erase a newer retained reply",
+        "changed question retires its old reply comparison"
+      ],
+      "errors": []
+    },
+    "legacyCourses": [
+      {
+        "path": "tools/browser-account-reply.mjs",
+        "groups": 11,
+        "passed": true
+      },
+      {
+        "path": "tools/browser-account-question.mjs",
+        "groups": 8,
+        "passed": true
+      }
+    ],
+    "desktopAnd390pxCapturesInspected": true
+  },
+  "integration": "Exact merged ec018214 server plus the two additive reply-comparison routes; all narration-moments and existing routes retained.",
+  "independentReview": {
+    "reviewer": "retained Experimental Earth worker",
+    "finding": "Sparse native reply arrays were admitted; dense own-index admission and regression added, then re-reviewed without remaining source blocker."
+  },
+  "boundary": "Supplied author/source attribution is not authentication. Alternatives retain explanations, proposals and withdrawals without semantic agreement, voting or truth inference. Explicit selection uses the maintained single-reply source exporter."
+}

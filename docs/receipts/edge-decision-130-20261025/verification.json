@@ -1,0 +1,12 @@
+{
+  "base_commit": "fc39b9bcbe417891301ad0d160486870df266d0d",
+  "base_tree": "00bbedc915ea8e8a1fe97d75bb64b1dea58873f4",
+  "native_groups": 22,
+  "new_native_groups": 7,
+  "actual_browser_groups": 9,
+  "independent_review": "MICROVERSE independently7/7 native groups; concrete disclosure/UI/source custody accepted. Candidate budget defect repaired:59candidate inspections reserve2disclosures+3ordinary actions to64. Renewed review accepted.",
+  "browser_original_source": "Original five paper-cutter PNGs and all five independent reports; authored UI actions, not observed learning",
+  "runtime": "Local Chrome156 and Node24; no new provider/deployment/native detector changes",
+  "custody": "Original source once, report entries once, raw events; full source/reports unchanged; pending import/export retirement; source after data withheld until maintained reveal",
+  "ordinary_reducer": "Existing decision-practice.mjs unchanged; first response, reveal, anchored reconsideration and unknown/no-score outputs delegated"
+}

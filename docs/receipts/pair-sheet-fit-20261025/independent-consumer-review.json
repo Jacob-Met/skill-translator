@@ -1,0 +1,22 @@
+{
+  "status": "ACCEPTED",
+  "scope": "Independent source review of consumer-only sheet-fit delta; no independent browser claim",
+  "files": [
+    {
+      "path": "web/pair-interpretations.mjs",
+      "sha256": "616fe9a26c42c626d7a934c601feef20031b7e3d45d63436e06f9feab83fb427"
+    },
+    {
+      "path": "web/pair-interpretations.html",
+      "sha256": "7f27f4ac728a029ba4a503c0092781c5beb6b79a51cc288ca0450b1e9b19bf8e"
+    }
+  ],
+  "findings": [
+    "sheetFit is cleared with every existing finding invalidation; async source/image lifecycle remains unchanged",
+    "Current admitted record is passed synchronously into sheet-fit assessment before findings render; export additionally requires sheetFit",
+    "Raw export still passes original record through importPairInterpretations and never serializes sheetFit",
+    "All sheet-fit values/reasons and exact witness strings use textContent, with explicit whole-sheet/unanchored assumptions",
+    "Status labels preserve excluded, boundary-unresolved and not-ruled-out distinctions; inherited numerical guard is expressly not a physical/calibration bound",
+    "Existing actual point scores and conditional assessment display remain unchanged"
+  ]
+}

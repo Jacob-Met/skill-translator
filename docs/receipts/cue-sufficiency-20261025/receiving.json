@@ -1,0 +1,97 @@
+{
+  "team": "hamon-7bb49db0-20261024",
+  "original_pr": 126,
+  "original_head": "a6a9ab4bef79cd1765d7e4eebddc34263eb2bc1a",
+  "composition_base": "81c6721d86724f77123b5d406cace87427e1de43",
+  "runtime_dependency_base": "bd200b7b076e552b608398ced1f8d221923d25aa",
+  "refresh": "Current server preserves newer account-reply, narration and path-comparison routes; other cue runtime dependencies unchanged. Fresh actual 10-group browser repeated on composed server.",
+  "native": {
+    "node": "22.23.4",
+    "passed": 13,
+    "logs": {
+      "skill-cue-core.log": "TAP version 13\n# Subtest: complementary cues distinguish XOR decisions while neither cue alone does\nok 1 - complementary cues distinguish XOR decisions while neither cue alone does\n  ---\n  duration_ms: 4.184468\n  type: 'test'\n  ...\n# Subtest: redundant distinguishing cues retain every minimal alternative\nok 2 - redundant distinguishing cues retain every minimal alternative\n  ---\n  duration_ms: 0.464735\n  type: 'test'\n  ...\n# Subtest: identical complete cues with different decisions expose conflict\nok 3 - identical complete cues with different decisions expose conflict\n  ---\n  duration_ms: 0.279717\n  type: 'test'\n  ...\n# Subtest: unknowns neither count as differences nor hide observed differences\nok 4 - unknowns neither count as differences nor hide observed differences\n  ---\n  duration_ms: 0.685926\n  type: 'test'\n  ...\n# Subtest: constant decision labels supply no discriminating evidence\nok 5 - constant decision labels supply no discriminating evidence\n  ---\n  duration_ms: 0.711765\n  type: 'test'\n  ...\n# Subtest: independent subset oracle agrees across 200 deterministic varied categorical tables\nok 6 - independent subset oracle agrees across 200 deterministic varied categorical tables\n  ---\n  duration_ms: 54.624477\n  type: 'test'\n  ...\n# Subtest: malformed or changed source and oversized declarations refuse, derived output is discarded\nok 7 - malformed or changed source and oversized declarations refuse, derived output is discarded\n  ---\n  duration_ms: 0.981797\n  type: 'test'\n  ...\n# Subtest: each claimed indispensable cue has an actual contrast witness within its combination\nok 8 - each claimed indispensable cue has an actual contrast witness within its combination\n  ---\n  duration_ms: 0.50037\n  type: 'test'\n  ...\n1..8\n# tests 8\n# suites 0\n# pass 8\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 72.921821\n",
+      "skill-comparison-core.log": "TAP version 13\n# Subtest: different source cues remain supplied or missing, never inferred equal\nok 1 - different source cues remain supplied or missing, never inferred equal\n  ---\n  duration_ms: 2.526207\n  type: 'test'\n  ...\n# Subtest: handoff keeps selected original source and records exposed account familiarity\nok 2 - handoff keeps selected original source and records exposed account familiarity\n  ---\n  duration_ms: 1.373634\n  type: 'test'\n  ...\n# Subtest: duplicate, missing and invalid correspondence refuses without changing accepted study\nok 3 - duplicate, missing and invalid correspondence refuses without changing accepted study\n  ---\n  duration_ms: 0.78838\n  type: 'test'\n  ...\n# Subtest: relationship is explicitly authored and forged conclusions are discarded\nok 4 - relationship is explicitly authored and forged conclusions are discarded\n  ---\n  duration_ms: 0.374038\n  type: 'test'\n  ...\n# Subtest: changed input alters account and source frames; six examples remain complete\nok 5 - changed input alters account and source frames; six examples remain complete\n  ---\n  duration_ms: 0.810318\n  type: 'test'\n  ...\n1..5\n# tests 5\n# suites 0\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 12.139617\n"
+    }
+  },
+  "browser": {
+    "checks": [
+      "original four-example comparison and eight verified frame images",
+      "complementary XOR cue combinations through actual editor",
+      "actual download retains raw source accounts and inputs only",
+      "unknown cue invalidates and refuses a false complete distinction",
+      "same complete cues with different decisions exposes exact conflicting pair",
+      "fresh 390px raw-source reopening and recomputation",
+      "imported arbitrary cue identities preserve editable add/remove and existing categories",
+      "pending import cannot leave old finite-table findings under new source",
+      "mismatched retained source refuses transactionally",
+      "delayed import cannot replace a newer cue declaration"
+    ],
+    "errors": []
+  },
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "regression": {
+    "old_source_negative": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Finite example comparisonExact categories and decisions are user declarations about these retained examples. Distinguishing them establishes neither causal necessity nor a rule for an unseen situation. Unknown is not a category. No automatic decision or physical instruction follows.State: distinguished. 1 inclusion-minimal combinations.Texture + ResistanceWithin combination cue2 + cue1, removing cue2 leaves examples 1 and 3 without a known distinction.Within combination cue2 + cue1, removing cue1 leaves examples 1 and 2 without a known distinction.Examples 1 and 2: distinguished; known distinguishing cues: cue1; unknown cues: none.Examples 1 and 3: distinguished; known distinguishing cues: cue2; unknown cues: none.Examples 2 and 4: distinguished; known distinguishing cues: cue2; unknown cues: none.Examples 3 and 4: distinguished; known distinguishing cues: cue1; unknown cues: none.'\n- ''\n\n    at file:///tmp/hamon-7bb49db0/skill-translator-receiver/tools/browser-cue-import.mjs:31:526 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 'Finite example comparisonExact categories and decisions are user declarations about these retained examples. Distinguishing them establishes neither causal necessity nor a rule for an unseen situation. Unknown is not a category. No automatic decision or physical instruction follows.State: distinguished. 1 inclusion-minimal combinations.Texture + ResistanceWithin combination cue2 + cue1, removing cue2 leaves examples 1 and 3 without a known distinction.Within combination cue2 + cue1, removing cue1 leaves examples 1 and 2 without a known distinction.Examples 1 and 2: distinguished; known distinguishing cues: cue1; unknown cues: none.Examples 1 and 3: distinguished; known distinguishing cues: cue2; unknown cues: none.Examples 2 and 4: distinguished; known distinguishing cues: cue2; unknown cues: none.Examples 3 and 4: distinguished; known distinguishing cues: cue1; unknown cues: none.',\n  expected: '',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.4\n",
+    "correction": "Pending import cannot inspect accepted prior study; every successful source adoption explicitly clears prior conclusions. Revision edits cancel and release pending source.",
+    "corrected_run": "{\n  \"checks\": [\n    \"original four-example comparison and eight verified frame images\",\n    \"complementary XOR cue combinations through actual editor\",\n    \"actual download retains raw source accounts and inputs only\",\n    \"unknown cue invalidates and refuses a false complete distinction\",\n    \"same complete cues with different decisions exposes exact conflicting pair\",\n    \"fresh 390px raw-source reopening and recomputation\",\n    \"imported arbitrary cue identities preserve editable add/remove and existing categories\",\n    \"pending import cannot leave old finite-table findings under new source\",\n    \"mismatched retained source refuses transactionally\",\n    \"delayed import cannot replace a newer cue declaration\"\n  ],\n  \"errors\": []\n}"
+  },
+  "review": {
+    "independent": "SKILL worker independently reviewed original eight-file composition and exhaustive finite-table oracle. SECOND GROUND peer found the asynchronous stale-result race and reviewed the correction.",
+    "visual": "Lead inspected actual 390px screenshot; no clipping or layout blocker.",
+    "scope": "13 focused native checks and 10 actual browser groups, not whole-repository test qualification."
+  },
+  "screenshots": {
+    "narrow.png": {
+      "sha256": "ac80b9ede17e438592a23e69e91eb0a37436682379f7288711d198f9c1dd6438",
+      "git_blob": "381b3dde7bda84a89bfeca3779933f502488fa1a",
+      "bytes": 363496
+    }
+  },
+  "limitations": [
+    "Finite authored categorical distinctions only; no causal rule, learning gain or physical transfer claim.",
+    "Original source/images and explicit labels remain unchanged; saved findings are recomputed."
+  ],
+  "source": {
+    "docs/CUE_SUFFICIENCY.md": {
+      "sha256": "51221cfd38047d5b86ff9a3d428904f744afacb0a9e92c82123b1211dc725515",
+      "git_blob": "e2a358a1d9badb655a8211169e4106ea3ffcd8c4",
+      "bytes": 2984
+    },
+    "server.mjs": {
+      "sha256": "2fb88f5aa476db0df532bdaa11e02375b4c21f7421a1ed51141f6cb5b248a6ff",
+      "git_blob": "1be17b649ffe3366263f4de693c7610e49e4f937",
+      "bytes": 31735
+    },
+    "src/cue-sufficiency.mjs": {
+      "sha256": "d5e14e92cbbbfd7e7e8ec38cda1d80582988e8919bbe4868f078a20771cbc4df",
+      "git_blob": "10d2d727734f89e3d36ba7cb7f3f379d484cf1a5",
+      "bytes": 3796
+    },
+    "test/cue-sufficiency.test.mjs": {
+      "sha256": "2cea0b8d1dff30c031eff283f27b22cc37f7fd89fc1b3677422fba0ca786adf0",
+      "git_blob": "4ae65b55bf15d0a1a8290c0681eb7d65d68a3d41",
+      "bytes": 5210
+    },
+    "tools/browser-cue-sufficiency.mjs": {
+      "sha256": "3131b49d796f792cb8293a29eb39ae088856e14ae76c426250a751c9981951ef",
+      "git_blob": "6c07330d91cc8abc43ac5d7730e252b1417bfbdb",
+      "bytes": 9167
+    },
+    "web/cue-sufficiency.html": {
+      "sha256": "f80c2084d4b870b074210fc8da784e45e3a3b00887b0c2c00b1b7eb90a1a9968",
+      "git_blob": "91e2fcb30cb712d0495842c04634a0685167f3cc",
+      "bytes": 1120
+    },
+    "web/cue-sufficiency.mjs": {
+      "sha256": "8d4abbe390fa216ccd01fb215c8a759e6723b3a9e05c8dffa942fb041815e187",
+      "git_blob": "43096acfafdbf09ed887246cddfeac5001134dc4",
+      "bytes": 5920
+    },
+    "web/decision-comparison.html": {
+      "sha256": "38de06e6d8434daf82e17f3d4bc8914b6f8b0a0c4b23ebc0043ca63b7a196881",
+      "git_blob": "4ac7103a4673df0c9f75e950f3d7920b849a9e00",
+      "bytes": 1827
+    }
+  },
+  "created_at": "2026-10-25T06:01:42.219416+00:00",
+  "refresh_2": "Two additive reply-comparison routes composed from fresh main. No cue runtime dependency changed; full actual browser10 passed on prior server with all other routes identical."
+}

@@ -1,0 +1,69 @@
+{
+  "boundary": "Actual Chrome file-input to rendered completion on an authored maximum-history control with saturated task and learner text fields; not a learning or physical performance measurement",
+  "runs": [
+    {
+      "label": "before",
+      "elapsedMs": 713.3999999985099,
+      "completedDownloadMatches": true
+    },
+    {
+      "label": "after",
+      "elapsedMs": 192,
+      "completedDownloadMatches": true
+    },
+    {
+      "label": "after",
+      "elapsedMs": 204.5,
+      "completedDownloadMatches": true
+    },
+    {
+      "label": "before",
+      "elapsedMs": 717.1000000014901,
+      "completedDownloadMatches": true
+    },
+    {
+      "label": "before",
+      "elapsedMs": 726.6999999992549,
+      "completedDownloadMatches": true
+    },
+    {
+      "label": "after",
+      "elapsedMs": 204.90000000037253,
+      "completedDownloadMatches": true
+    }
+  ],
+  "hashes": {
+    "before": {
+      "server.mjs": "aaa0ccc7e8e6019a45277b9649d8f30e6d62371c3f2c729e814530b0cd18f6a0",
+      "src/cue-practice.mjs": "c5096cf910e595a12fb1298f4bccba6b1c97751957dabd83dd3d027b845da046",
+      "src/decision-practice.mjs": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+      "web/cue-practice.mjs": "9076c312bf01e1cb31f3fbe4a9bbac0eddc2b2952a109242846b1e977fa2166c"
+    },
+    "after": {
+      "server.mjs": "e063cf094a9d8736f6c68f6f27ccf135eec167c1ef0f6b79e3df9c4fd53b0084",
+      "src/cue-practice.mjs": "197f0306c3ddbefcfdf2fd410fe61344acd0cbab89405af0cf082377e6ae2a84",
+      "src/decision-practice.mjs": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+      "web/cue-practice.mjs": "9076c312bf01e1cb31f3fbe4a9bbac0eddc2b2952a109242846b1e977fa2166c"
+    }
+  },
+  "input": {
+    "bytes": 396297,
+    "steps": 24,
+    "events": 143,
+    "sha256": "8e7d90961e55fecd05310214e7af8e46a38b75eb74a9411d52ab5a7919786ef7"
+  },
+  "before": {
+    "medianMs": 717.1000000014901,
+    "minMs": 713.3999999985099,
+    "maxMs": 726.6999999992549
+  },
+  "after": {
+    "medianMs": 204.5,
+    "minMs": 192,
+    "maxMs": 204.90000000037253
+  },
+  "medianRatio": 3.5066014669999515,
+  "result": "PASS",
+  "errors": [],
+  "offsite": []
+}
