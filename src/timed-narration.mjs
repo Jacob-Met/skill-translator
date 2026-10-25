@@ -2,7 +2,9 @@ import {parseSubtitles} from '../vendor/captionverse/subtitles.mjs';
 // Timed narration is supplied testimony, not a measured sensory signal.
 import {validateSequence,upsertStep} from './demonstration-sequence.mjs';
 import {GeometryError} from './geometry.mjs';
+import {inspectNarrationClock,mapNarrationTime} from './narration-clock.mjs';
 export const NARRATION_FORMAT='skill-translator.timed-narration/v1';
+export const CLOCK_NARRATION_FORMAT='skill-translator.timed-narration/v2';
 export const MAX_TRANSCRIPT_BYTES=256*1024;
 const check=(ok,message)=>{if(!ok)throw new GeometryError(message);};
 const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
@@ -42,9 +44,23 @@ export function createNarration(sequence,{text,attribution,offsetSeconds=0}){
  if(parsed.provenance)check(parsed.provenance.sourceSha256===source.clip.sha256,'The CAPTIONVERSE declared source digest does not match this demonstration clip.');
  return {format:NARRATION_FORMAT,source,transcript:text,attribution:attribution.trim(),offsetSeconds,selections:[]};
 }
+export function createClockNarration(sequence,{text,attribution,clock}){
+ const original=createNarration(sequence,{text,attribution,offsetSeconds:0});
+ const report=inspectNarrationClock(clock,original.source.clip.durationSeconds);
+ check(report.checkPassed,'Separate clock check exceeds the declared tolerance; quotes cannot use this mapping.');
+ return {...original,format:CLOCK_NARRATION_FORMAT,clock:report.clock};
+}
+function alignedCue(study,c){
+ if(study.format!==CLOCK_NARRATION_FORMAT)return {...c,alignedStartSeconds:c.startSeconds+study.offsetSeconds,alignedEndSeconds:c.endSeconds+study.offsetSeconds};
+ const a=mapNarrationTime(study.clock,study.source.clip.durationSeconds,c.startSeconds),b=mapNarrationTime(study.clock,study.source.clip.durationSeconds,c.endSeconds);
+ return {...c,alignedStartSeconds:a.seconds,alignedEndSeconds:b.seconds,extrapolated:a.extrapolated||b.extrapolated};
+}
 export function importNarration(sequence,value){
- check(value?.format===NARRATION_FORMAT,'Unsupported timed-narration record.');
- const accepted=createNarration(sequence,{text:value.transcript,attribution:value.attribution,offsetSeconds:value.offsetSeconds});
+ check([NARRATION_FORMAT,CLOCK_NARRATION_FORMAT].includes(value?.format),'Unsupported timed-narration record.');
+ if(value.format===CLOCK_NARRATION_FORMAT)check(value.offsetSeconds===0,'Clock narration requires zero additional offset.');
+ else check(!Object.hasOwn(value,'clock'),'Clock declarations require a v2 narration record.');
+ const details={text:value.transcript,attribution:value.attribution,offsetSeconds:value.offsetSeconds,clock:value.clock};
+ const accepted=value.format===CLOCK_NARRATION_FORMAT?createClockNarration(sequence,details):createNarration(sequence,details);
  check(same(accepted.source,validateSequence(value.source)),'The source demonstration changed; pair the matching original sequence.');
  check(Array.isArray(value.selections)&&value.selections.length<=48,'Keep at most 48 narration selections.');
  for(const selection of value.selections){
@@ -61,7 +77,7 @@ export function narrationForStep(study,stepId){
  const step=study.source.steps.find(s=>s.id===stepId);check(step,'Choose an authored demonstration step.');
  const start=study.source.moments.find(m=>m.id===step.beforeMomentId).origin.mediaTimeSeconds;
  const end=study.source.moments.find(m=>m.id===step.afterMomentId).origin.mediaTimeSeconds;
- const all=parseNarration(study.transcript).map(c=>({...c,alignedStartSeconds:c.startSeconds+study.offsetSeconds,alignedEndSeconds:c.endSeconds+study.offsetSeconds}));
+ const all=parseNarration(study.transcript).map(c=>alignedCue(study,c));
  return {step,startSeconds:start,endSeconds:end,cues:all.filter(c=>c.alignedStartSeconds<end&&c.alignedEndSeconds>start),
   outsideClip:all.filter(c=>c.alignedStartSeconds<0||c.alignedEndSeconds>study.source.clip.durationSeconds).map(c=>c.index)};
 }
@@ -80,8 +96,9 @@ function buildNarratedSequence(study){
  for(const selection of study.selections){
   const step=source.steps.find(s=>s.id===selection.stepId);
   check(step,'Choose an authored demonstration step.');
-  const quotes=selection.cueIndices.map(i=>{const c=cues[i];check(c,'Selected cue is unavailable.');return '['+c.startSeconds+'–'+c.endSeconds+' s transcript] '+c.text;}).join('\n');
-  source=upsertStep(source,{...step,[selection.field]:[step[selection.field],'Supplied narration ('+study.attribution+'; offset '+study.offsetSeconds+' s):\n'+quotes].filter(Boolean).join('\n\n')});
+  const quotes=selection.cueIndices.map(i=>{const c=cues[i];check(c,'Selected cue is unavailable.');const mapped=alignedCue(study,c);return '['+c.startSeconds+'–'+c.endSeconds+' s transcript'+(study.format===CLOCK_NARRATION_FORMAT?'; '+mapped.alignedStartSeconds+'–'+mapped.alignedEndSeconds+' s clip'+(mapped.extrapolated?'; extrapolated beyond fitting landmarks':''):'')+'] '+c.text;}).join('\n');
+  const timing=study.format===CLOCK_NARRATION_FORMAT?'declared clock '+study.clock.anchors.map(a=>a.transcriptSeconds+'→'+a.clipSeconds+' s').join(', ')+'; separate check '+study.clock.verification.transcriptSeconds+'→'+study.clock.verification.clipSeconds+' s, tolerance '+study.clock.toleranceSeconds+' s; basis retained in narration record':'offset '+study.offsetSeconds+' s';
+  source=upsertStep(source,{...step,[selection.field]:[step[selection.field],'Supplied narration ('+study.attribution+'; '+timing+'):\n'+quotes].filter(Boolean).join('\n\n')});
  }
  return source;
 }

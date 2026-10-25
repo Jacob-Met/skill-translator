@@ -6,6 +6,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/clock-quotation.mjs":["src/clock-quotation.mjs","text/javascript; charset=utf-8"],
   "/src/narration-clock.mjs":["src/narration-clock.mjs","text/javascript; charset=utf-8"],
   "/web/narration-clock.mjs":["web/narration-clock.mjs","text/javascript; charset=utf-8"],
   "/src/scan-change-regions.mjs":["src/scan-change-regions.mjs","text/javascript; charset=utf-8"],
