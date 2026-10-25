@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "tests": [
+    "one proposal action fills unique mark, preserves manual ambiguous choice and recomputes unfamiliar target",
+    "clearing inferred draft restores proposal availability without overwriting other choices",
+    "original input decision reopens at390px with recomputed proposal and original source",
+    "accepted inferred relationship enters actual maintained fresh practice",
+    "changed observations produce fractional rather than fixed-left proposal through keyboard action",
+    "proposal action retires an older delayed decision import",
+    "opposing observations cannot yield inferred success or practice handoff"
+  ],
+  "errors": [],
+  "chromiumSandbox": true,
+  "uid": 65534
+}
