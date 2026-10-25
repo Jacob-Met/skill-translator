@@ -1,0 +1,209 @@
+{
+  "baseCommit": "aaeb04cf1e7258a11ea6fc35527e3b1c412c1423",
+  "immutableClosureBase": "1f5447a75e0109bfc4a881eb9be1c491d7b94cbd",
+  "closureManifest": [
+    {
+      "path": "server.mjs",
+      "sha": "22956d4096a4664f906ebd8d3c36f60d81391a55"
+    },
+    {
+      "path": "web/sequence.html",
+      "sha": "da6048283211570cf45232a4f3dd05a50db4e02e"
+    },
+    {
+      "path": "web/sequence.mjs",
+      "sha": "8c5585a5179b0639c842755d91927706cf50b1aa"
+    },
+    {
+      "path": "src/visual-scan.mjs",
+      "sha": "c787797d98c7ae431dc21e3141d6529a402282b8"
+    },
+    {
+      "path": "test/visual-scan.test.mjs",
+      "sha": "9015cf5648d8a00dcab96ca333ef0f5c68fad280"
+    },
+    {
+      "path": "native/sequence-edge.mjs",
+      "sha": "f672b6422e7ac41d762b47cd31b8d207807a0622"
+    },
+    {
+      "path": "web/sequence.css",
+      "sha": "7cc2ed474ae40bad3ff346129dbe46f5fab842e3"
+    },
+    {
+      "path": "web/narration-moments.css",
+      "sha": "c47438949d613b13f8d1c1b1ab6cb70f0cdcd6e3"
+    },
+    {
+      "path": "web/narration-moments.mjs",
+      "sha": "4f0b635531661c6a47f7cb0cc1802f0148255d18"
+    },
+    {
+      "path": "src/demonstration-sequence.mjs",
+      "sha": "3030edd3ad809cab11fc220365aacb34e2d01b42"
+    },
+    {
+      "path": "src/sequence-capture.mjs",
+      "sha": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b"
+    },
+    {
+      "path": "src/practice.mjs",
+      "sha": "a2bad45c47a4209f72bb99fcb18405870f85ace5"
+    },
+    {
+      "path": "src/frame-origin.mjs",
+      "sha": "9154d9e63255de95152e3137d5790de5e9f00e42"
+    },
+    {
+      "path": "web/video-input.mjs",
+      "sha": "840b8fe255e7694b0e184d14a630263099a476d8"
+    },
+    {
+      "path": "web/image-input.mjs",
+      "sha": "954e74a63557cfd2adf53c7be028f134b287e59f"
+    },
+    {
+      "path": "web/sequence-input.mjs",
+      "sha": "bf4ece2d96b15bdb8ee88ff537d92f39032c5d6a"
+    },
+    {
+      "path": "web/visual-scan.mjs",
+      "sha": "a09b3b4c2fb732161ce126fa06e3bd74ba473385"
+    },
+    {
+      "path": "src/geometry.mjs",
+      "sha": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061"
+    },
+    {
+      "path": "src/sequence-edge.mjs",
+      "sha": "ca6d46f12e5ad15c54a4d9c1acc430149071b818"
+    },
+    {
+      "path": "src/timed-narration.mjs",
+      "sha": "621f65d37f6c804f8418de97dafe175f60d89041"
+    },
+    {
+      "path": "src/narration-moments.mjs",
+      "sha": "da90b5de9a6547ff0664ee2a1a1a5d68b1a8377d"
+    },
+    {
+      "path": "src/capture.mjs",
+      "sha": "763d09298e03c4275b802c83df92c773de62cd67"
+    },
+    {
+      "path": "src/capture-editing.mjs",
+      "sha": "570ee1ac63928e5837920288243e8ea7621936c9"
+    },
+    {
+      "path": "src/learner-observation.mjs",
+      "sha": "f020776d665d0148c001c22dd9d7d336bd02ecb0"
+    },
+    {
+      "path": "src/sequence-edge-field.mjs",
+      "sha": "1515280bd71fe4066633b015b9bd8937dbb6263e"
+    },
+    {
+      "path": "vendor/captionverse/subtitles.mjs",
+      "sha": "4f3b99c29948a6e11f65c32b38cb0e1155695efb"
+    },
+    {
+      "path": "src/authoring.mjs",
+      "sha": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5"
+    },
+    {
+      "path": "vendor/captionverse/core.mjs",
+      "sha": "a7455aec1f27d23b27b540a6770c57d917f49b4a"
+    },
+    {
+      "path": "vendor/captionverse/cue-index.mjs",
+      "sha": "272cbf959c738bb0dace95e062b088988b49ec61"
+    },
+    {
+      "path": "vendor/captionverse/word-timing.mjs",
+      "sha": "03e9cf5360be108df41c164c43c87aaa83244dde"
+    },
+    {
+      "path": "vendor/captionverse/sound-motion.mjs",
+      "sha": "7f638f1ab1138e4e1a78f91c9431821e56de0609"
+    }
+  ],
+  "composition": "The original31-file recursively required sequence closure is unchanged through current main except server routes. Current server preserved original-interval playback routes and added two span routes. No sampling, capture, ROI or decoder changes.",
+  "sourceHashes": {
+    "src/visual-span.mjs": "f984623b5203c23b9ea564a41c18e5783864e5e81950c21aa8353be8c38c25f0",
+    "web/visual-span-view.mjs": "4418b0d214a8e9e45904d376806972d252b53c6e65d05c02fa63b53b83c8d23e",
+    "test/visual-span.test.mjs": "201d24eaa74591eb9d123784ee660d7b7ee2febda3b1db293e46f48e005e03c6",
+    "tools/browser-visual-span.mjs": "3c2e20c3337d0dddcc91777c90b3fbc6affff671940792f5637bebed88c5d638",
+    "docs/VISUAL_SPAN.md": "50fb984e701d2bac9d3eea5d76c6a373db4780c84aeb6174c48463d93a15c56c",
+    "web/visual-scan.mjs": "2f72eb3538b8dde07ff191da79d5cf0139567082e418ed81a8f3bc39e298fb43",
+    "server.mjs": "ba26eba157150d58130e6ec391a178352dc6042b10b61d028322f2f44b17d7bd"
+  },
+  "native": "TAP version 13\n# Subtest: identical adjacent change magnitudes conceal different endpoint evidence\nok 1 - identical adjacent change magnitudes conceal different endpoint evidence\n  ---\n  duration_ms: 2.583622\n  type: 'test'\n  ...\n# Subtest: a missing interior image does not invent a complete appearance path\nok 2 - a missing interior image does not invent a complete appearance path\n  ---\n  duration_ms: 0.246216\n  type: 'test'\n  ...\n# Subtest: endpoints retain presented/requested time and source, without mutating sample pixels\nok 3 - endpoints retain presented/requested time and source, without mutating sample pixels\n  ---\n  duration_ms: 0.458498\n  type: 'test'\n  ...\n# Subtest: invalid selections, unavailable endpoints and reversed presented times remain explicit\nok 4 - invalid selections, unavailable endpoints and reversed presented times remain explicit\n  ---\n  duration_ms: 0.766979\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 10.726916\n",
+  "browser": {
+    "fixture": "Original authored 640\u00d7360 image sequence: eight one-second states, encoded at 8 fps. No physical demonstration or learning claim.",
+    "tests": [
+      "actual decoded source distinguishes lighting from moved/color-changed regions; all intervals survive sorting without auto-retaining moments",
+      "whole-frame multi-interval appearance comparison retains chronological evidence and delegates actual original-video seek",
+      "candidate selection immediately disables capture/playhead during a real seek and restores them on decoder readiness",
+      "span endpoint preview hands off to actual full-resolution original capture",
+      "keyboard-selected scan candidates pass through full-resolution original capture, authored step and byte-bound saved sequence",
+      "fresh maintained sequence consumer reopens original frames and supplied account without scan thumbnails replacing evidence",
+      "cancellation restores controls and preserves retained source plus the earlier completed scan",
+      "replacement cancels an in-flight scan; a wrong clip cannot replace accepted source or leave controls busy",
+      "invalid scan range preserves existing results and source",
+      "actual decoder error lifecycle retains complete missing-interval account without bridging or altering original moments",
+      "decoder failure leaves explicit incomplete span rather than a complete path sum",
+      "desktop and 390px sequence receiving with bounded interval scroll and no horizontal overflow",
+      "clearing/new source discards old scan and the new clip can be scanned independently",
+      "no page exceptions or offsite requests in actual local consumer"
+    ],
+    "errors": [],
+    "offsite": [],
+    "result": "PASS",
+    "clipSha256": "5d832e6cdca15f246debfd8ca368228686599342b624762514d285e666356d5d",
+    "browser": "156.0.8078.47",
+    "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "intervals": [
+      {
+        "index": "0",
+        "state": "compared",
+        "text": "Requested 0.100 s \u2192 1.100 sMean channel change \u00b7 raw 0.00 \u00b7 adjusted 0.00 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 0.125 s \u2192 1.000 sInspect earlier \u00b7 0.125 sInspect later \u00b7 1.000 s"
+      },
+      {
+        "index": "1",
+        "state": "compared",
+        "text": "Requested 1.100 s \u2192 2.100 sMean channel change \u00b7 raw 30.00 \u00b7 adjusted 0.00 levels. Uniform shift +30; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 1.000 s \u2192 2.000 sInspect earlier \u00b7 1.000 sInspect later \u00b7 2.000 s"
+      },
+      {
+        "index": "2",
+        "state": "compared",
+        "text": "Requested 2.100 s \u2192 3.100 sMean channel change \u00b7 raw 7.13 \u00b7 adjusted 7.13 levels. Uniform shift +0; 15.6% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 2.000 s \u2192 3.000 sInspect earlier \u00b7 2.000 sInspect later \u00b7 3.000 s"
+      },
+      {
+        "index": "3",
+        "state": "compared",
+        "text": "Requested 3.100 s \u2192 4.100 sMean channel change \u00b7 raw 0.00 \u00b7 adjusted 0.00 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 3.000 s \u2192 4.000 sInspect earlier \u00b7 3.000 sInspect later \u00b7 4.000 s"
+      },
+      {
+        "index": "4",
+        "state": "compared",
+        "text": "Requested 4.100 s \u2192 5.100 sMean channel change \u00b7 raw 5.60 \u00b7 adjusted 5.60 levels. Uniform shift +0; 7.8% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 4.000 s \u2192 5.000 sInspect earlier \u00b7 4.000 sInspect later \u00b7 5.000 s"
+      },
+      {
+        "index": "5",
+        "state": "compared",
+        "text": "Requested 5.100 s \u2192 6.100 sMean channel change \u00b7 raw 0.00 \u00b7 adjusted 0.00 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 5.000 s \u2192 6.000 sInspect earlier \u00b7 5.000 sInspect later \u00b7 6.000 s"
+      },
+      {
+        "index": "6",
+        "state": "compared",
+        "text": "Requested 6.100 s \u2192 7.100 sMean channel change \u00b7 raw 0.00 \u00b7 adjusted 0.00 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 6.000 s \u2192 7.000 sInspect earlier \u00b7 6.000 sInspect later \u00b7 7.000 s"
+      }
+    ]
+  },
+  "independentReview": "SECOND GROUND independently reran4native groups and reviewed endpoint admission, all-interval retention, incomplete path withholding, source identity and original capture delegation; no blocker.",
+  "harnessRepair": "Playwright waitForFunction used unsafe-eval under the product CSP. Node-side locator/state polling removed that harness dependency. CSP and sandbox remain unchanged.",
+  "screens": [
+    "desktop.png",
+    "narrow-panel.png"
+  ]
+}

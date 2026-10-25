@@ -1,3 +1,4 @@
+import {createVisualSpanView} from '/web/visual-span-view.mjs';
 import {createVisualScanPlan, inspectVisualScan, MAX_SCAN_SAMPLES} from '/src/visual-scan.mjs';
 import {samplePresentedFrame} from '/web/video-input.mjs';
 
@@ -19,10 +20,12 @@ const statusLabels = {
 
 export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurrent, endIO, cancelIO, onSelect}) {
   let active = null, report = null, pairedHash = null;
+  const spanView=createVisualSpanView({host:$('scan-results'),isBusy,canSelect,onSelect:selectFrame});
   const say = text => { $('scan-status').textContent = text; };
 
   function sync() {
     const busy = isBusy();
+    spanView.sync();
     $('scan-start').disabled = busy || !getClip();
     $('scan-cancel').disabled = !active || !isCurrent(active);
     for (const id of ['scan-from', 'scan-until', 'scan-count', 'scan-order']) $(id).disabled = busy;
@@ -51,6 +54,7 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
   function renderReport() {
     $('scan-intervals').replaceChildren();
     $('scan-results').hidden = !report;
+    spanView.receive(report);
     if (!report) { $('scan-preview').replaceChildren(); return; }
     const result = inspectVisualScan(report.plan, report.samples);
     const {plan} = result;
