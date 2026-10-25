@@ -1,0 +1,64 @@
+{
+  "checks": 1500,
+  "candidates": 75,
+  "independentIntervals": 300,
+  "nonzeroSpreads": 20,
+  "cases": [
+    {
+      "kind": "horizontal",
+      "sign": -1,
+      "recommendation": {
+        "widthMm": 394,
+        "heightMm": 69.5,
+        "separatedPairs": 6
+      }
+    },
+    {
+      "kind": "horizontal",
+      "sign": 1,
+      "recommendation": {
+        "widthMm": 394,
+        "heightMm": 69.5,
+        "separatedPairs": 6
+      }
+    },
+    {
+      "kind": "vertical",
+      "sign": -1,
+      "recommendation": {
+        "widthMm": 394,
+        "heightMm": 69.5,
+        "separatedPairs": 6
+      }
+    },
+    {
+      "kind": "vertical",
+      "sign": 1,
+      "recommendation": {
+        "widthMm": 394,
+        "heightMm": 69.5,
+        "separatedPairs": 6
+      }
+    },
+    {
+      "kind": "distance",
+      "sign": 1,
+      "recommendation": {
+        "widthMm": 394,
+        "heightMm": 69.5,
+        "separatedPairs": 6
+      }
+    }
+  ],
+  "dimensionBoundaryCourses": 5,
+  "capAt12": {
+    "recommendationPresent": false,
+    "actual13thRefusal": null
+  },
+  "source_sha256": {
+    "relationship-family-design.mjs": "c3bf9eb0cfa5d9010d28f98a6a4628386a7516aa0fc2011a8c4d8bc18f0dc7f7",
+    "relationship-families.mjs": "3933cae3d3f45298b9532dc460c23de603ce2ee00e487fde61d742128162bb02",
+    "relationship-discovery.mjs": "abcb47c87b884e5742648f6286fcabc2048f77d3d62ddf780cde44759a413ca5",
+    "geometry.mjs": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8"
+  }
+}
