@@ -189,7 +189,7 @@ $('capture-moment').addEventListener('click',async()=>{
 });
 $('cancel-moment').addEventListener('click',()=>{resetMomentEditor();status('Moment note edit cancelled.');});
 $('use-playhead').addEventListener('click',()=>{
-  if(!clip||busy||editingMoment)return;clip.video.pause();
+  if(!clip||busy||editingMoment)return;audioNavigator?.cancelPlayback();clip.video.pause();
   const selected=Math.min(clip.video.currentTime,Math.max(0,clip.identity.durationSeconds-.001));
   $('moment-time').value=selected.toFixed(3);revision++;
   status('Requested time set from the video playhead. Retain this moment to preserve its actual presented frame.');
@@ -237,6 +237,7 @@ $('clear-sequence').addEventListener('click',()=>{
 });
 window.addEventListener('pagehide',event=>{if(!event.persisted){controller?.abort();releaseVideo(clip);releaseSequenceAssets(assets);}});
 function previewRequestedMoment(seconds){
+ audioNavigator?.cancelPlayback();
  clip.video.pause();clip.video.currentTime=seconds;$('moment-time').value=String(seconds);revision++;
  syncButtons();
  $('moment-time').focus();status('Inspect the sampled time in the clip, then retain the original frame you need.');

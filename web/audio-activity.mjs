@@ -23,6 +23,7 @@ export function createAudioActivityNavigator({host,getClip,isBusy,canSelect,onSe
  const message=text=>{status.textContent=text;};
  const event=()=>mapped.find(e=>e.id===choice.value);
  function cancel(){const old=playing;playing=null;old?.abort();getClip()?.video.pause();}
+ function cancelPlayback(){if(!playing)return false;cancel();message('Activity playback retired by another studio preview or playhead action. Original source and navigation remain paired.');controls();return true;}
  function blocked(){return !getClip()||isBusy()||!canSelect()||reading!==null;}
  function controls(){const unavailable=blocked();source.disabled=!getClip()||isBusy();origin.disabled=basis.disabled=unavailable||!analysis;pair.disabled=unavailable||!analysis;choice.disabled=unavailable||dirty||!mapped.length;audio.disabled=unavailable;play.disabled=preview.disabled=unavailable||dirty||!event()?.available||Boolean(getClip()?.video.seeking&&!playing);stop.disabled=!playing;save.disabled=unavailable||dirty||!declaration;if(getClip())audio.checked=!getClip().video.muted;}
  function describe(){const e=event();detail.textContent=e?'Container '+e.start.exactSeconds+'–'+e.end.exactSeconds+' seconds; requested browser interval '+e.startSeconds.toFixed(3)+'–'+e.endSeconds.toFixed(3)+' s; '+e.windowCount+' windows; peak RMS '+e.peakRms.toFixed(4)+(e.available?'':'. Unavailable: complete interval lies outside this clip.'):'No qualifying activity candidate. Silence, short/quiet events and missing coverage are not evidence of task completion.';}
@@ -51,5 +52,5 @@ export function createAudioActivityNavigator({host,getClip,isBusy,canSelect,onSe
  stop.addEventListener('click',()=>{cancel();message('Activity playback stopped. Original source and analysis remain paired.');controls();});
  preview.addEventListener('click',()=>{if(preview.disabled)return;const selected=event();cancel();onSelect(selected.startSeconds);message('Requested original frame at activity onset '+selected.startSeconds.toFixed(3)+' s. Inspect it, then retain and describe it using the studio controls.');controls();});
  save.addEventListener('click',()=>{if(save.disabled)return;const text=JSON.stringify({format:NAV,report:raw,declaration},null,2),blob=new Blob([text],{type:'application/json'});if(blob.size>MAX_BYTES){message('Complete navigation exceeds48MiB; no source discarded.');return;}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='audio-navigation.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
- addEventListener('pagehide',e=>{if(!e.persisted){revision++;reading=null;cancel();}});reset(getClip());return {sync};
+ addEventListener('pagehide',e=>{if(!e.persisted){revision++;reading=null;cancel();}});reset(getClip());return {sync,cancelPlayback};
 }
