@@ -1,0 +1,14 @@
+{
+  "reviewer": "hamon-c11405/experimental_earth",
+  "source": "/workspace/scratch/c11405aec71b/skill-translator/src/pair-interpretations.mjs",
+  "sha256": "ca50dc11e2cdb5f89911cb1577eb50eac58185cf3f203463a22c433c352bf600",
+  "status": "PASS",
+  "checks": [
+    "Anisotropic 200 x 50 target differs from original 100 x 100 source",
+    "Actual 150/180 mm placements outside original width remain admitted on retained target",
+    "Fixed 50 mm vs adapted hypot(60,20) classifications agree with independent geometry",
+    "Original per-point assessment exactly equals maintained evaluatePractice",
+    "Original source/session byte structure unchanged"
+  ],
+  "limits": "Authored nominal control; not photo/browser receiving or uncertainty validation"
+}

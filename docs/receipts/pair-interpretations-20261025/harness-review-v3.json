@@ -1,0 +1,8 @@
+{
+  "reviewer": "hamon-c11405-20261024/mechanism",
+  "scope": "Harness-only correction after strict CSP rejected Playwright waitForFunction; production app unchanged",
+  "harnessSHA256": "573350e4dc12283c2d44be5bcb92ce7a47da9b6291e63cbdb53e477f99f687e2",
+  "appSHA256": "5ead3ee54ca038c8df2636b8931d1e45de934f5648978f44ad1d57179bd2f960",
+  "finding": "Accepted bounded15s direct predicate-evaluation polling. Existing actual UI/source assertions retained; CSP and production lifecycle unchanged. Historical review hashes retained separately.",
+  "execution": "Source delta review; actual browser-v3 receiving remains pending"
+}

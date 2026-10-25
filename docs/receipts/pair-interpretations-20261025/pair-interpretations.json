@@ -1,0 +1,160 @@
+{
+  "schema": "skill-translator-pair-interpretations/v1",
+  "source": {
+    "title": "Guide separation on a wider sheet",
+    "provenance": "Authored source PNG and nominal manual placements; no physical demonstration",
+    "source": {
+      "widthMm": 100,
+      "heightMm": 100,
+      "corners": [
+        {
+          "x": 50,
+          "y": 40
+        },
+        {
+          "x": 550,
+          "y": 40
+        },
+        {
+          "x": 550,
+          "y": 360
+        },
+        {
+          "x": 50,
+          "y": 360
+        }
+      ],
+      "image": {
+        "name": "authored-source.png",
+        "mimeType": "image/png",
+        "sha256": "665085f2c15c0a9533cbc71f8205a8bfc8c3c053ea0f90ea88d4ef903b0f3b79",
+        "widthPx": 600,
+        "heightPx": 400,
+        "pixelCoordinates": "browser-oriented"
+      }
+    },
+    "landmarks": [
+      {
+        "id": "a",
+        "label": "Front guide",
+        "kind": "fraction",
+        "sourcePx": {
+          "x": 150,
+          "y": 136
+        },
+        "toleranceMm": 1
+      },
+      {
+        "id": "b",
+        "label": "Rear guide",
+        "kind": "fraction",
+        "sourcePx": {
+          "x": 310,
+          "y": 136
+        },
+        "toleranceMm": 1
+      }
+    ],
+    "unknowns": [
+      "No expert necessity or learner intent is inferred."
+    ]
+  },
+  "session": {
+    "schema": "skill-translator-practice/v1",
+    "reference": {
+      "provenance": "Authored source PNG and nominal manual placements; no physical demonstration",
+      "source": {
+        "widthMm": 100,
+        "heightMm": 100,
+        "corners": [
+          {
+            "x": 50,
+            "y": 40
+          },
+          {
+            "x": 550,
+            "y": 40
+          },
+          {
+            "x": 550,
+            "y": 360
+          },
+          {
+            "x": 50,
+            "y": 360
+          }
+        ],
+        "image": {
+          "sha256": "665085f2c15c0a9533cbc71f8205a8bfc8c3c053ea0f90ea88d4ef903b0f3b79",
+          "widthPx": 600,
+          "heightPx": 400
+        }
+      },
+      "landmarks": [
+        {
+          "id": "a",
+          "sourcePx": {
+            "x": 150,
+            "y": 136
+          },
+          "kind": "fraction",
+          "edge": null,
+          "toleranceMm": 1
+        },
+        {
+          "id": "b",
+          "sourcePx": {
+            "x": 310,
+            "y": 136
+          },
+          "kind": "fraction",
+          "edge": null,
+          "toleranceMm": 1
+        }
+      ],
+      "target": {
+        "widthMm": 200,
+        "heightMm": 100
+      }
+    },
+    "round": 2,
+    "history": [
+      {
+        "round": 1,
+        "attempts": [
+          {
+            "id": "a",
+            "xMm": 20,
+            "yMm": 30
+          },
+          {
+            "id": "b",
+            "xMm": 52,
+            "yMm": 30
+          }
+        ]
+      }
+    ],
+    "attempts": [
+      {
+        "id": "a",
+        "xMm": 40,
+        "yMm": 30
+      },
+      {
+        "id": "b",
+        "xMm": 104,
+        "yMm": 30
+      }
+    ]
+  },
+  "pair": {
+    "id": "declared-pair",
+    "label": "Declared pair separation",
+    "from": "a",
+    "to": "b",
+    "kind": "distance",
+    "toleranceMm": 1
+  },
+  "basis": "Expert-authored contrast: fixed source guide separation versus the existing per-mark rules; neither automatically selected."
+}

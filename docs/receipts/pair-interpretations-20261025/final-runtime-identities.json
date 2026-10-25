@@ -1,0 +1,13 @@
+{
+  "source": "/tmp/hamon-c11405-skill-171/source-v2",
+  "sha256": {
+    "src/pair-interpretations.mjs": "ca50dc11e2cdb5f89911cb1577eb50eac58185cf3f203463a22c433c352bf600",
+    "test/pair-interpretations.test.mjs": "ef916eeaad41223fa2d79a9b0d349a89d814a564ac59af5078e7e4753ed90694",
+    "web/pair-interpretations.html": "922bf2df9abfd61ab6718b1db99e78a43d54d706e868b24aae594185cf620712",
+    "web/pair-interpretations.mjs": "4d872381ef9b7cf58bdc20c9debfe8c01a32bf5bf093f930b7cafc5bdfd4f49f",
+    "web/pair-interpretations.css": "4ceecb679c2aee507e94531afa03b4e803a7e38de0a95c28818bf15f46a7016c",
+    "web/relationships.html": "cb1dbe272e7f25536e2f6ae730149b212721761fab9ea59dd7d27dbabb9abcbf",
+    "server.mjs": "2536830ecbdd9d3ab34b1bad57b5a56824b9dcb9cf1540dd3c3df980c3181f29",
+    "tools/browser-pair-interpretations.mjs": "5da3df21b080f69c7c554418552b821be075e63a284b22a0201a7f4688df3551"
+  }
+}
