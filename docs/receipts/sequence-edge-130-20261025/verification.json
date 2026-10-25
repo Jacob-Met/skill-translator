@@ -1,0 +1,85 @@
+{
+  "issue": 174,
+  "base_commit": "f48d23dd064c141cfe92ae099a77575963aed6a1",
+  "base_tree": "114c1a7ff68cb272da16f3cb407fcdaaacc04c30",
+  "native_contract": {
+    "named_tests": 5,
+    "composed_with_http": 6,
+    "failed": 0
+  },
+  "native_image_tests": {
+    "tests": 5,
+    "failed": 0,
+    "runtime": {
+      "opencv_python_headless": "4.13.0.92",
+      "numpy": "2.3.5"
+    }
+  },
+  "real_source": {
+    "video_sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+    "actual_captured_frames": 5,
+    "browser_groups": 6,
+    "endpoint_control_groups": 5,
+    "errors": 0,
+    "media_in_repository": false
+  },
+  "independent_review": {
+    "reviewer": "MICROVERSE retained worker",
+    "result": "accepted",
+    "tests_rerun": 5,
+    "scope": "exact integer support, source identity, PNG/raster gates, worker mutex/timeout and resource bounds"
+  },
+  "limitations": [
+    "Local CPU only; no Nebius/OpenCV5 qualification",
+    "Imported native results remain producer reports; browser recomputes support geometry but not Canny",
+    "No physical scale, contact, persistent material identity or skill assessment",
+    "Fixed thresholds omit weak/blurred edges; alternatives/failures retained in experiment"
+  ],
+  "sha256": {
+    "src/sequence-edge.mjs": "84d7196b33c1cb414956bb76e912b0986988c3b5b5396bd656bdad89f4edffe6",
+    "native/sequence-edge.mjs": "ff0fc45f062378b2118b7ed4123685c972ebd3713f3dfe7ddc400124d49872a8",
+    "tools/sequence-edge-native.py": "9b2b22260b6ff69f3d65ebb1f1a02e8c66d58f9d7264ff30b5ae2de049d15448",
+    "tools/inspect-sequence-edge.mjs": "3953702bbe2a9e86620e6a1599d206004f0a720dba333d27c9168c358eeb2cb2",
+    "tools/capture-edge-demonstration.mjs": "f10b515fdfcf505c7315e501af66149560a6442de97a46cbe9895da949c9a84b",
+    "tools/browser-sequence-edge.mjs": "173d9ae1f0dc55ffbf3967f07d5d4d7f18541eb574dc125c70ea84550bdf5663",
+    "tools/native-sequence-edge-controls.mjs": "c77d9282835b01a9b90e48756469be3aa41a720874b0e09db31ae63f209f63e3",
+    "web/sequence-edge.html": "bd9071ad5a6bf982c1decfbe58a97abbc5e415c9c64eb6cb24c97d459f9e0631",
+    "web/sequence-edge.mjs": "5b4bcffa88ccb4608e8f02b410f2fd61bb98b0e4f75571db6576c021da9da5db",
+    "server.mjs": "e3e048e07e8af83e2318fea1d93928596a9afe331123ceafea3f42b6785ddfad",
+    "web/sequence.html": "16a68644666246cf97c5e75552909b9750c05e872b9af26dc83f315dc0d086c7",
+    "test/sequence-edge.test.mjs": "866be5b7d720fe6eccdc0a0efc2ea61ec4d31f657fc8ce1426deda59b51c63b6",
+    "test/sequence-edge-native.test.py": "fc619a15e5d12a604961cdb90e0030eb577f1e89b37b0feb2b20413dcb99d6e0",
+    "requirements-native-edge.txt": "88b3348e1c774be9c2d8bd0a483aa264db9166f21c0eeea25d72db08e76aa33b",
+    "docs/SEQUENCE_EDGE.md": "71f2d400032afb538840e1a5ac70c19b4933be0676016866bbe123a73d7e4127",
+    "docs/receipts/sequence-edge-130-20261025/capture-receipt.json": "a3d9f91712cfd4d38b0626460d3cfcb956be967757013fb6fc6a1dcdd6f18865",
+    "docs/receipts/sequence-edge-130-20261025/browser-receipt.json": "868ed088a93075b1307f8f58a1d2857f8361a9ea476bf5df6f9b4765ca75f50d",
+    "docs/receipts/sequence-edge-130-20261025/native-api-receipt.json": "e48283e0b934786fe4d4f3b5934c72764223c76a13ccd475d7e65ad32bdf2f67",
+    "docs/receipts/sequence-edge-130-20261025/alpha-failed-candidate.json": "bddb46a238b03b8de4feec59d11aa0322d5fba2580e6ad9176a58a5812b282e0"
+  },
+  "verified_unchanged_code_blobs": 269,
+  "alpha_correction": {
+    "status": "corrected; renewed MICROVERSE independent decode review accepted and Python5/5 independently rerun",
+    "old_candidate": "alpha-failed-candidate.json",
+    "sourceDecode": "unchanged-u8-opaque",
+    "controls": [
+      "fully transparent hidden RGB refused",
+      "opaque RGBA retains identical edges/candidates",
+      "16-bit samples explicitly refused"
+    ],
+    "fresh_real_source_directory": "/tmp/skill-source-edge-alpha-corrected"
+  },
+  "current_composition": {
+    "upstream": "17exact current files received; remove six additive hooks and all upstream server bytes match",
+    "native": "19/19 edge, condition-judgment-set and pair-sheet native groups pass",
+    "browser": "6/6 fresh actual original-video consumer groups pass, zero errors",
+    "fingerprints": {
+      "verified_unchanged_code_blobs": 269,
+      "missing": [],
+      "mismatched": [],
+      "main_touched_blob_shas": {
+        "server.mjs": "25007b40673f961d46c407cb54b99d9a35c4599b",
+        "web/sequence.html": "27dacf220585717e7efc37ace72af779c6ff265c"
+      }
+    }
+  }
+}

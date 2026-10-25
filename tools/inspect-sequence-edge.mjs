@@ -1,0 +1,13 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {spawn} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+import {validateSequence} from '../src/demonstration-sequence.mjs';
+const [input,momentId,roiText,output]=process.argv.slice(2);
+if(!input||!momentId||!roiText||!output)throw Error('Usage: node tools/inspect-sequence-edge.mjs sequence.json moment-id x,y,width,height new-report.json');
+const text=await readFile(input,'utf8');if(Buffer.byteLength(text)>64*1024*1024)throw Error('Source bundle exceeds64MiB');
+const raw=JSON.parse(text);if(raw.format!=='skill-translator.sequence-bundle/v1')throw Error('Supply an original sequence bundle');
+const sequence=validateSequence(raw.sequence),moment=sequence.moments.find(m=>m.id===momentId);if(!moment)throw Error('Select a retained source moment');
+const frames=raw.frames.filter(f=>f.momentId===momentId);if(frames.length!==1)throw Error('Exactly one original PNG must match selected moment');
+const request={momentId,image:moment.image,origin:moment.origin,pngBase64:frames[0].pngBase64,roi:roiText.split(',').map(Number)};
+const child=spawn(process.env.SKILL_EDGE_PYTHON||'python3',[fileURLToPath(new URL('./sequence-edge-native.py',import.meta.url))],{stdio:['pipe','pipe','pipe']});let stdout='',stderr='';const timer=setTimeout(()=>child.kill(),15000);child.stdout.on('data',data=>{stdout+=data;if(stdout.length>8*1024*1024)child.kill();});child.stderr.on('data',data=>{stderr+=data;if(stderr.length>10000)child.kill();});child.stdin.end(JSON.stringify(request));
+const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve);});clearTimeout(timer);if(code!==0)throw Error(stderr||'Native proposal worker stopped');const report=JSON.parse(stdout);await writeFile(output,JSON.stringify(report,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({output,candidates:report.candidates.length,edgePixels:report.points.length,opencv:report.method.opencvVersion}));

@@ -1,3 +1,4 @@
+import {serveSequenceEdge} from "./native/sequence-edge.mjs";
 import http from "node:http";
 import {readFile} from "node:fs/promises";
 import {dirname,join,resolve} from "node:path";
@@ -5,6 +6,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/sequence-edge":["web/sequence-edge.html","text/html; charset=utf-8"],
+  "/web/sequence-edge.mjs":["web/sequence-edge.mjs","text/javascript; charset=utf-8"],
+  "/src/sequence-edge.mjs":["src/sequence-edge.mjs","text/javascript; charset=utf-8"],
   "/src/evidence-conflict-alternatives.mjs":["src/evidence-conflict-alternatives.mjs","text/javascript; charset=utf-8"],
   "/evidence-conflicts.mjs":["web/evidence-conflicts.mjs","text/javascript; charset=utf-8"],
   "/src/evidence-conflicts.mjs":["src/evidence-conflicts.mjs","text/javascript; charset=utf-8"],
@@ -299,6 +303,8 @@ export function createAppServer(){
     res.setHeader("Content-Security-Policy",
       "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     const path=req.url?.split("?")[0];
+    if(path==="/sequence-edge")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
+    if(path==="/api/sequence-edge"&&req.method==="POST"){await serveSequenceEdge(req,res);return;}
     const route=Object.prototype.hasOwnProperty.call(routes,path)?routes[path]:null;
     if(req.method!=="GET"&&req.method!=="HEAD"){
       res.writeHead(405,{"Allow":"GET, HEAD"});res.end("Method not allowed");return;
