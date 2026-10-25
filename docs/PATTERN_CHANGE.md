@@ -1,0 +1,23 @@
+# Inspect the whole demonstrated point pattern
+
+Open a saved sequence or calibrated comparison in **Compare demonstrated states**. Retain the original before/after frames, declare their common planar reference and explicitly pair the points you mean to compare. The **Whole pattern** section recomputes all pair separations, ordered by their absolute change. This exposes a changed relationship outside the pair selected in the existing individual inspection.
+
+With three or more correspondences, every point triple is inspected for a change of side. Three noncollinear points can retain all their separations while reversing orientation; pair distances alone miss that distinction. A reversed triple excludes one common planar translation and proper rotation for the nominal computed coordinates. It does not distinguish reflection from deformation, a mistaken correspondence or a mistaken calibration. Exactly collinear computed triples remain explicit. Near-collinear signs can reverse from projection/calibration arithmetic alone: an authored control with unchanged ideal collinear points produces opposite nominal signs while its largest separation change is only 2.84 × 10⁻¹⁴ mm. No visible or physical reversal is thereby established. The first 30 reversal/collinearity witnesses are displayed with the full evaluated counts.
+
+This is an endpoint description. It neither fits a motion nor replaces the existing recovery or practice evaluators. It does not decide which relationships are necessary for the task, establish tolerance, infer the intervening path or assess physical learning. Unpaired source marks remain excluded and visibly listed. Distances are nominal calibrated numbers; two-decimal zero is not equality. Triangle signs use the maintained exact rational arithmetic over those computed binary64 coordinates, not a propagated annotation or calibration uncertainty interval.
+
+No new saved derived answer is authoritative. The existing complete original-image comparison download retains raw source and correspondence declarations; reopening recomputes the pattern. Changing reference, step or correspondence uses the maintained source lifecycle.
+
+## Verification
+
+`node test/pattern-change.test.mjs` exercises translation, proper rotation, a changed remote pair, reflection, collinearity, missing source coverage, permutation, immutable source/reopening, source-image refusal and complete 30-point capacity (435 pairs and 4,060 triples). `node tools/browser-pattern-change.mjs` runs the original-image consumer course, including a three-point reversal, actual download/reopen and narrow keyboard correspondence removal. It requires a functioning local HTTP listener and a sandbox-capable Chrome/Playwright environment; running the command is distinct from a recorded passing receipt.
+
+## Received revision 2
+
+The candidate was composed onto main `fd8224cb32da5c1763b22aacc20aef6f92fccfe1`, preserving incoming condition-changes, condition-outcomes and ordered-tool-access work. The full native suite passed **541 cases**, with zero failures or skips. The actual Chrome 156 course passed **12 complete browser groups**, with namespace/seccomp sandbox admission and zero page errors, offsite requests or CSP violations. This includes original PNG intake, wrong-source refusal, stale read/save protection, complete source relationships, a nominal reversal witness, actual download/reopen, and 390 px keyboard removal.
+
+The additional unchanged-collinear PNG control retains the nominal sign result alongside an explicit statement that calibration arithmetic alone can reverse near-collinear signs, establishing no visible or physical reversal. Exact predicates are retained; no invented epsilon or uncertainty certificate hides this numerical finding.
+
+Independent source/lifecycle review and a non-axis-aligned quadrilateral control preserved all six distances for both proper motion and reflection, while only reflection reversed its four nominal triangles. The independent revision 2 review accepted the numerical caveat and ran the new named collinear control. Exact commands, source hashes, actual downloaded raw inputs and limits are recorded in [verification.json](receipts/pattern-change-20261024/verification.json). These are source/consumer qualification results; normal merge, installed applications, deployment and physical learning remain separate claims.
+
+A first receiving invocation omitted the explicit qualified Chrome path and isolated receipt directory. Sandbox admission refused that default executable before the course began. The corrected invocation passed all 12 groups with unchanged source; both invocation logs are retained distinctly in the receiving record.

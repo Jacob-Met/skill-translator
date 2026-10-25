@@ -5,6 +5,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/pattern-change.mjs":["src/pattern-change.mjs","text/javascript; charset=utf-8"],
   "/ordered-tool-access":["web/ordered-tool-access.html","text/html; charset=utf-8"],
   "/web/ordered-tool-access.mjs":["web/ordered-tool-access.mjs","text/javascript; charset=utf-8"],
   "/src/ordered-tool-access.mjs":["src/ordered-tool-access.mjs","text/javascript; charset=utf-8"],

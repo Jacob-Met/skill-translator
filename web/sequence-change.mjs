@@ -1,3 +1,4 @@
+import {inspectPatternChange} from '/src/pattern-change.mjs';
 import {createStateChange,validateStateChange,declareStateReference,upsertCorrespondence,removeCorrespondence,stateChangeEvidence,separationChange,MAX_CORRESPONDENCES} from '/src/sequence-change.mjs';
 import {toDisplay} from '/src/geometry.mjs';
 import {readStateChangeBundle,makeStateChangeBundle} from '/web/sequence-change-input.mjs';
@@ -52,6 +53,16 @@ function relationship(){
   try{const r=separationChange(state,$('relationship-first').value,$('relationship-second').value);$('relationship-result').textContent=`Separation: ${number(r.before.distanceMm)} → ${number(r.after.distanceMm)} mm; change ${number(r.change.distanceMm)} mm. Directed horizontal separation: ${number(r.before.horizontalMm)} → ${number(r.after.horizontalMm)} mm. Directed vertical separation: ${number(r.before.verticalMm)} → ${number(r.after.verticalMm)} mm.`;}
   catch(error){$('relationship-result').textContent=error.message;}
 }
+function pattern(){
+  const report=inspectPatternChange(state);
+  $('pattern-summary').textContent=report.pairs.length?`${report.pairedPoints} declared points · all ${report.pairs.length} pair separations · largest absolute change ${number(report.largestSeparationChangeMm)} mm. Unpaired source marks are excluded; see the coverage above.`:'Pair at least two source points to inspect their relationships.';
+  $('pattern-pairs').replaceChildren(...report.rankedPairs.map(p=>{const row=node('tr');for(const value of [p.labels.join(' / '),number(p.beforeMm),number(p.afterMm),number(p.changeMm)])row.append(node('td',value));return row;}));
+  $('pattern-orientation').textContent=report.triangles.length?`All ${report.triangles.length} point triples inspected: ${report.reversed.length} nominal side reversal(s), ${report.degenerate.length} collinear in at least one state. ${report.reversed.length?'The computed nominal points cannot all be related by one planar translation and proper rotation; this does not establish a visible or physical reversal.':'No nominal reversal was found; this alone does not establish a rigid motion.'}`:'At least three correspondences are needed to inspect triangle sides.';
+  const witnesses=[...report.reversed,...report.degenerate];
+  $('pattern-witnesses').replaceChildren(...witnesses.slice(0,30).map(t=>node('li',`${t.labels.join(' / ')}: ${t.finding==='reversed'?'nominal side reversal':'collinear in at least one state'} (signed sides ${t.before} → ${t.after}).`)));
+  $('pattern-witness-limit').textContent=witnesses.length>30?`Showing the first 30 of ${witnesses.length} witnesses. All triples were evaluated; remove or isolate correspondences to inspect another subset.`:'';
+  $('pattern-boundary').textContent=report.boundary;
+}
 function render(){
   $('change-workspace').hidden=!state;if(!state){sync();return;}
   options($('change-step'),state.sequence.steps.map(s=>[s.id,s.title]),state.stepId);
@@ -62,8 +73,9 @@ function render(){
   for(const [id,m]of [['before-mark',before],['after-mark',after]])options($(id),(m.calibratedTask?.landmarks??[]).map(mark=>[mark.id,sourceMarkLabel(mark)]),$(id).value);
   $('paired-points').replaceChildren(...state.pairs.map(p=>{const a=before.calibratedTask.landmarks.find(m=>m.id===p.beforeMarkId),b=after.calibratedTask.landmarks.find(m=>m.id===p.afterMarkId);const li=node('li',`${p.label} — before: ${sourceMarkLabel(a)}; after: ${sourceMarkLabel(b)}`),button=node('button','Remove');button.type='button';button.className='quiet';button.addEventListener('click',()=>{state=removeCorrespondence(state,p.id);edited();render();status('Removed the correspondence; original source marks remain.');});li.append(button);return li;}));
   $('change-results').hidden=!state.reference||!state.pairs.length;
+  $('pattern-panel').hidden=!state.reference;
   if(state.reference){const evidence=stateChangeEvidence(state);$('unpaired-points').textContent=`Unpaired before: ${evidence.unpaired.before.map(p=>p.label).join(', ')||'none'}. Unpaired after: ${evidence.unpaired.after.map(p=>p.label).join(', ')||'none'}.`;
-    drawPlane(evidence);$('change-rows').replaceChildren(...evidence.pairs.map((p,i)=>{const tr=node('tr');for(const value of [`${i+1}. ${p.label}`,point(p.before),point(p.after),`${number(p.dxMm)}, ${number(p.dyMm)}`,number(p.endpointDistanceMm)])tr.append(node('td',value));return tr;}));
+    drawPlane(evidence);pattern();$('change-rows').replaceChildren(...evidence.pairs.map((p,i)=>{const tr=node('tr');for(const value of [`${i+1}. ${p.label}`,point(p.before),point(p.after),`${number(p.dxMm)}, ${number(p.dyMm)}`,number(p.endpointDistanceMm)])tr.append(node('td',value));return tr;}));
   }else $('unpaired-points').textContent='Source marks remain unpaired until you declare their common reference and correspondence.';
   $('relationship-panel').hidden=state.pairs.length<2;
   options($('relationship-first'),state.pairs.map(p=>[p.id,p.label]),$('relationship-first').value);
@@ -87,3 +99,4 @@ for(const id of ['relationship-first','relationship-second'])$(id).addEventListe
 $('save-change').addEventListener('click',async()=>{if(!state||referenceDirty||pairDirty)return;const op=begin();try{const blob=await makeStateChangeBundle(state,assets,{signal:op.signal});if(!current(op)||revision!==op.revision){if(current(op))status('The comparison changed while saving. Save the current declarations again.');return;}const url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='demonstrated-state-change.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('Saved the complete source frames, annotations and current declarations. Derived differences will be recomputed when reopened.');}catch(error){if(current(op))status(error.message);}finally{finish(op);}});
 window.addEventListener('pagehide',event=>{if(event.persisted)return;controller?.abort();releaseSequenceAssets(assets);});
 render();
+
