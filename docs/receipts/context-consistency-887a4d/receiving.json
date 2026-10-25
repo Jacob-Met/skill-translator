@@ -1,0 +1,91 @@
+{
+  "base": "f48d23dd064c141cfe92ae099a77575963aed6a1",
+  "implementationSha256": {
+    "docs/context-consistency.md": "3445e0c224510a3d4953eaef66d0cd47951d5077570447546a1025c832135d4f",
+    "server.mjs": "b596f5013e4ece8106a9107c35741fc1d64b9ffcf877f30400ebcd119a4bd2df",
+    "src/context-consistency.mjs": "cc985ea3614cc8eaecf3575aad2a7224b3d8933d0bc8b1038caa4c5746c8f032",
+    "src/context-disk-support.mjs": "63ae69a0544b835809718566a0c1dd6ab0683a2864dc34c2606d8c8854868d59",
+    "test/context-consistency.test.mjs": "7875f1a549f897664b1c99c5c19e2c165efde29b6c554357b4c627db2ccbb574",
+    "tools/browser-context-consistency.mjs": "ed09c9e18cc4327dc7d5016903dee6a5800e1df21d36d5c41d5cd9f52eca3bc9",
+    "vendor/chronos/exact-circle-source-lock.json": "261ba85e4806d1ce193c1001db8d2d3e0c51d8652f7a41eb5c55261beed2404f",
+    "vendor/chronos/exact-circle-support.mjs": "2798bb28008650b077694ed7b3c5d4fd3ff78d4a8b590813394ff742a157017e",
+    "web/app.mjs": "8f45d08e222253f8ecc0f4bb403305eca5774913eafc134f15cbe80030318207",
+    "web/context-consistency-worker.mjs": "8b85ba056fb0d5f70e291057bd40fdf43953d3fd1f351dafe09b287d99c15d30",
+    "web/context-consistency.css": "881becae9b561606445abf57519c6776bce7e457e3c8ea9333c3023944a3a48d",
+    "web/context-consistency.html": "bf1c77f7b2b251f131be8c7a455cb9faa7db28c95f187e0b14188240f912c64e",
+    "web/context-consistency.mjs": "d36f4797fcbef3e3917b4a816736a1c0e4cb60e0e3ae13bc77e5a1c58fdd904e"
+  },
+  "native": {
+    "command": "node --test test/*.test.mjs",
+    "tests": 613,
+    "passed": 613,
+    "failed": 0,
+    "skipped": 0
+  },
+  "focused": {
+    "groups": 10,
+    "independentPairOracles": 150
+  },
+  "browser": {
+    "groups": 8,
+    "passed": 8,
+    "errors": [],
+    "evidenceClass": "authored geometric examples",
+    "browser": "Chrome/156.0.8078.47",
+    "sandboxDisabled": false
+  },
+  "reuse": {
+    "repository": "Jacob-Met/chronos-vision",
+    "commit": "4b9ad234bd4754909be8c7ac4fdaeea45d5c1ee8",
+    "path": "app/exact-circle-support.mjs",
+    "blob": "d0d2e4f07e67192be141cf3dd0fac46fd2552dc0",
+    "sha256": "2798bb28008650b077694ed7b3c5d4fd3ff78d4a8b590813394ff742a157017e"
+  },
+  "artifacts": {
+    "desktop.png": {
+      "sha": "5b47bc9b7dd2f21d626a318f37fac85f24d5c4cc",
+      "sha256": "1a69251924ff3bef9a5f335ba000db50932df626562fc45f2d264fd0ed27d926",
+      "bytes": 423724
+    },
+    "narrow.png": {
+      "sha": "81635546b8c588f93af389396b1ba97498411c65",
+      "sha256": "065b433f2a2a228da9e736d5acbe015af1ab74f72b66b9a7548216819812cfb6",
+      "bytes": 416459
+    },
+    "browser.json": {
+      "sha": "a13500a1f80a710eee2effb81e1ce3d18bb056d4",
+      "sha256": "679de92cf915073258929dc501c6aa40571a1e6480d00131c4c4518475208ac0",
+      "bytes": 1176
+    },
+    "skill-context-consistency.json": {
+      "sha": "c5cc7a0f806e12501a563f0fdd50a4a5767f2992",
+      "sha256": "d57542605fd7fe4e001a36a215f310310b9080b471db64434f88b9c804950b38",
+      "bytes": 4160
+    },
+    "source.json": {
+      "sha": "c71ef7cc778a2aa54d5beb881b1f171664040187",
+      "sha256": "8bb9e637576a13a4567aee6dcb2234ae602115512f15d98f201b37a50155a010",
+      "bytes": 349
+    },
+    "wrong-source.json": {
+      "sha": "7fb42290f7b58ab6f450e5a2a5288e19601bc30e",
+      "sha256": "a8bc2d652f02fc3c9e7f69c9770dca2021b17a6ab40abe1b56b32fd5cd5507a3",
+      "bytes": 2002
+    },
+    "widened.json": {
+      "sha": "21b112c2cb3af9f00371cfa82edf9e7f4dc98a06",
+      "sha256": "e2fe769fd1fdc60f66036cd42af4f97dc15cde148aad31695d96c985c2e4744d",
+      "bytes": 2000
+    }
+  },
+  "independentReview": {
+    "review": "Workshop independent Skill Translator context review",
+    "lateContradictionPermutations": 4,
+    "allFourRecordsRetained": true,
+    "threeRecordCertificateExcludesUninformativeLargeDisk": true,
+    "weightedBoundIndependentlyReconstructed": true,
+    "commonPointChecksAllFour": true,
+    "exhaustedWorkMakesNoPartialClaim": true,
+    "limits": "Actual browser course remains root receiving."
+  }
+}
