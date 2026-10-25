@@ -30,15 +30,26 @@ function replay(sequence,input){
   assert(Array.isArray(input.events)&&input.events.length<=500,'Keep at most 500 journal events');
   const byId=new Map(base.definitions.map(s=>[s.stepId,s]));
   const observations=new Map(base.definitions.map(s=>[s.stepId,new Map()]));
+  // Compile only this admitted journal's graph. Preserve declaration order so
+  // blocked-by and transitive invalidation witnesses remain byte-compatible.
+  const parents=new Map(base.definitions.map(s=>[s.stepId,[]]));
+  const children=new Map(base.definitions.map(s=>[s.stepId,[]]));
+  for(const edge of base.prerequisites.dependencies){parents.get(edge.after).push(edge.before);children.get(edge.before).push(edge.after);}
+  const downstream=new Map();
+  for(const id of byId.keys()){
+    const out=new Set();
+    function scan(parent){for(const child of children.get(parent))if(!out.has(child)){out.add(child);scan(child);}}
+    scan(id);downstream.set(id,[...out]);
+  }
+  const statusMemo=new Map();
   const choices=[],events=[];let practiceBytes=0;
-  function status(id,memo=new Map()){
+  function status(id,memo=statusMemo){
     if(memo.has(id))return memo.get(id);
-    const definition=byId.get(id),blockedBy=base.prerequisites.dependencies.filter(e=>e.after===id).map(e=>e.before).filter(dep=>!status(dep,memo).complete);
+    const definition=byId.get(id),blockedBy=parents.get(id).filter(dep=>!status(dep,memo).complete);
     const checks=definition.checks.map(c=>({...c,observation:observations.get(id).get(c.id)||null}));
     const complete=blockedBy.length===0&&checks.every(c=>c.observation?.value==='pass');
     const result={stepId:id,ready:blockedBy.length===0,complete,blockedBy,checks};memo.set(id,result);return result;
   }
-  function descendants(id){const out=new Set();function scan(parent){for(const edge of base.prerequisites.dependencies)if(edge.before===parent&&!out.has(edge.after)){out.add(edge.after);scan(edge.after);}}scan(id);return out;}
   for(const e of input.events){
     assert(e&&byId.has(e.stepId),'Journal action refers to an unavailable step');
     if(e.type==='observe'||e.type==='practice'){
@@ -59,9 +70,10 @@ function replay(sequence,input){
       // Observing a blocked step is retained, but cannot earn completion credit.
       // Every revision invalidates downstream observations, even pass→pass:
       // a newly observed predecessor is not evidence of an unchanged successor.
-      const invalidated=[...descendants(e.stepId)].filter(id=>observations.get(id).size);
-      for(const id of descendants(e.stepId))observations.get(id).clear();
+      const invalidated=downstream.get(e.stepId).filter(id=>observations.get(id).size);
+      for(const id of downstream.get(e.stepId))observations.get(id).clear();
       observations.get(e.stepId).set(e.checkId,{value,note,evidenceClass,eventIndex:events.length,...(received?{practice:received}:{})});
+      statusMemo.clear();
       events.push(received?{type:'practice',stepId:e.stepId,checkId:e.checkId,note,session:received.session}:{type:'observe',stepId:e.stepId,checkId:e.checkId,value,note,evidenceClass});
       // Derived invalidation is computed on replay, never accepted from saved input.
       if(invalidated.length)choices.push({type:'invalidation',eventIndex:events.length-1,stepIds:invalidated});
@@ -78,3 +90,4 @@ function replay(sequence,input){
 export function importReadiness(sequence,input){return replay(sequence,input).study;}
 export function readinessFindings(sequence,input){const {study,...findings}=replay(sequence,input);return findings;}
 export function recordReadiness(sequence,input,event){const accepted=importReadiness(sequence,input);return importReadiness(sequence,{...accepted,events:[...accepted.events,event]});}
+
