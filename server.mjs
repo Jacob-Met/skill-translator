@@ -6,6 +6,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/demonstration-holdout.mjs":["src/demonstration-holdout.mjs","text/javascript; charset=utf-8"],
+  "/web/demonstration-holdout-worker.mjs":["web/demonstration-holdout-worker.mjs","text/javascript; charset=utf-8"],
   '/instrument-trace':['web/instrument-trace.html','text/html; charset=utf-8'],
   '/src/instrument-trace.mjs':['src/instrument-trace.mjs','text/javascript; charset=utf-8'],
   '/web/instrument-trace.mjs':['web/instrument-trace.mjs','text/javascript; charset=utf-8'],

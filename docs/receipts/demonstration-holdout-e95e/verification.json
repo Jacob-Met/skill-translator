@@ -1,0 +1,67 @@
+{
+  "schema": "hamon-product-receiving/v1",
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/271",
+  "team": "hamon-e95e7d4e6bc8-20261025",
+  "compositionBase": "8f82e8559fb78664cf9d421313c2ff8ec9b94042",
+  "source": [
+    {
+      "path": "src/demonstration-holdout.mjs",
+      "sha256": "8cb776571f5803d8568fbd14a7219d868d35415ae683d04017d637b72bd5627d",
+      "gitBlob": "f376aabc3c9943439d64a974443f052412af3403"
+    },
+    {
+      "path": "web/demonstration-holdout-worker.mjs",
+      "sha256": "7ec2413502b1a9dad550c45357c49bea0bc83d8efc66bf2ad6c1e21415af31be",
+      "gitBlob": "07abae92a7d52406ac7e29fb6ecbd8173c8c8140"
+    },
+    {
+      "path": "web/response-demonstrations.mjs",
+      "sha256": "b2169002c9e145ebc41603ae501f4e4abcc8bbe3c0fb595a4f347dec26403147",
+      "gitBlob": "99cc6b2570913ff020cb9019873a82070d3e2c82"
+    },
+    {
+      "path": "web/response-demonstrations.html",
+      "sha256": "534a3e5666c62f4e5ccfa3af834056ab2ecf02fd95e712dc29c831cdbe31678c",
+      "gitBlob": "a4f6331b5d81b999a5eac362875602d08dc006f0"
+    },
+    {
+      "path": "web/response-demonstrations.css",
+      "sha256": "bcae5be3a2d5251f9b9b9169f0dee06d34e1d347f0b4808d30e42b0350a9153b",
+      "gitBlob": "eda7d7cc3c4f238916674c848daaf2b54d025d70"
+    },
+    {
+      "path": "server.mjs",
+      "sha256": "04303db210155c158936fdf2b1982cded321e23c5aa185c464b53c472d11cdcd",
+      "gitBlob": "8d3a0091b7e99668cbc5697698d58fe04274dc27"
+    },
+    {
+      "path": "test/demonstration-holdout.test.mjs",
+      "sha256": "317da4aa30e882db6cfadba3c19801448235fd800fbbc2edfccbcd86533f5b9d",
+      "gitBlob": "e238ddf013e034a9b19f467280052159bece6de8"
+    },
+    {
+      "path": "tools/browser-demonstration-holdout.mjs",
+      "sha256": "21f0fd06e7b888e355b03b8207927e989bb44b0e8912cb9c1f7da670127833d5",
+      "gitBlob": "cdab25cfe8daae3825b848208f63c467d5e29119"
+    },
+    {
+      "path": "docs/DEMONSTRATION_HOLDOUT.md",
+      "sha256": "7f9059a2bc3cf03173fb66b40a7e83942ac76af5edbb9b7aa1e16ad210c8a9ab",
+      "gitBlob": "c11a7d5956e09d9f34b975ae028fc9bace8b2eb5"
+    }
+  ],
+  "received": {
+    "runtime": "Node.js22.23.4; Chrome156.0.8078.47 with actual namespace/PID/network/seccomp sandbox",
+    "native": {
+      "passedRunnerEntries": 22,
+      "namedCases": 21,
+      "sourceCustodyAssertionFiles": 1,
+      "failed": 0,
+      "archiveSha256": "c49e1843cb6209b7194ae84acb9683f4ed1a29256ce8bae7d1725631f97f01cb",
+      "command": "node --test --test-isolation=none test/response-holdout.test.mjs test/response-family.test.mjs test/response-holdout-independent.test.mjs test/demonstration-holdout.test.mjs"
+    },
+    "browserGroups": 18,
+    "browserRecheck": "All18 actual sandboxed browser groups repeated after preserving current instrument/cue server routes; zero page errors/offsite requests"
+  },
+  "scope": "Retrospective conditional model sensitivity with authored original-image controls; no physical calibration, fault diagnosis or learning efficacy"
+}

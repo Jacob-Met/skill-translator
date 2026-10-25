@@ -4,6 +4,7 @@ import {loadLocalImage,releaseImage} from './image-input.mjs';
 import {validateResponseStudy} from '../src/response-family.mjs';
 import {DEMONSTRATION_RESPONSE_SCHEMA,validateDemonstrationResponse,analyzeDemonstrationResponse,exportDemonstrationResponse,responseFromDemonstrations} from '../src/response-demonstrations.mjs';
 const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+let omissionAudit=null,auditWorker=null;
 let account=null,analysis=null,pending=null,inspection='reference',generation=0,imageGeneration=0,media=null;
 const status=t=>{$('status').textContent=t;},fmt=n=>Number(n.toPrecision(6)).toString();
 function release(){imageGeneration++;releaseImage(media);media=null;}
@@ -39,7 +40,7 @@ function render(){
  $('demonstrations').replaceChildren(...account.demonstrations.map(d=>{const row=analysis.response.observations.find(r=>r.id===d.id),tr=node('tr');tr.append(node('td',`${d.label} · ${d.id} (${d.evidenceClass})`),node('td',`(${fmt(row.xMm)}, ${fmt(row.yMm)}) mm`),node('td',`${row.widthMm} × ${row.heightMm} mm; ±(${row.xBoundMm}, ${row.yBoundMm}) mm`));const td=node('td'),button=node('button','Remove');button.onclick=()=>{const draft=pending,previousInspection=inspection;accept({...account,demonstrations:account.demonstrations.filter(r=>r.id!==d.id)},'Source removed; remaining original evidence recomputed.');pending=draft;inspection=previousInspection;$('admission').hidden=!pending;render();};button.setAttribute('aria-label','Remove '+d.label);td.append(button);tr.append(td);[...tr.children].forEach((cell,i)=>cell.dataset.label=['Additional source','Derived position','Workpiece and bounds','Action'][i]);return tr;}));
  $('limits').replaceChildren(...[...analysis.limitations,...a.limitations].map(t=>node('li',t)));draw();
 }
-function accept(raw,message){const next=validateDemonstrationResponse(raw),out=analyzeDemonstrationResponse(next);generation++;release();account=next;analysis=out;pending=null;inspection='reference';$('admission').hidden=true;render();status(message);}
+function accept(raw,message){const next=validateDemonstrationResponse(raw),out=analyzeDemonstrationResponse(next);generation++;auditWorker?.terminate();omissionAudit=null;$('audit-result').hidden=true;$('audit-status').textContent='';$('omission-audit').hidden=false;release();account=next;analysis=out;pending=null;inspection='reference';$('admission').hidden=true;render();status(message);}
 async function jsonFile(file){if(!file||file.size>2_000_000)throw Error('Choose JSON no larger than2MB');return JSON.parse(await file.text());}
 $('account-file').onchange=async()=>{const token=++generation;try{const raw=await jsonFile($('account-file').files[0]);if(token!==generation)return;accept(raw.schema===DEMONSTRATION_RESPONSE_SCHEMA?raw:{schema:DEMONSTRATION_RESPONSE_SCHEMA,referenceStudy:validateResponseStudy(raw),demonstrations:[]},'Reference and raw annotations accepted; all derived coordinates recomputed.');}catch(e){if(token===generation)status(`Import refused: ${e.message}. Previous account retained.`);}finally{$('account-file').value='';}};
 $('annotation-file').onchange=async()=>{if(!account)return;const token=++generation;try{const raw=await jsonFile($('annotation-file').files[0]);if(token!==generation)return;const task=annotationTask(raw);pending=raw;generation++;release();$('pending-mark').replaceChildren(...task.landmarks.map(m=>{const o=node('option',m.label+' · '+m.id);o.value=m.id;return o;}));$('label').value=raw.title||'Additional source';$('x-bound').value='';$('y-bound').value='';$('correspondence').checked=false;$('pending-title').textContent=`${raw.title||'Additional source'} · ${task.source.widthMm} × ${task.source.heightMm} mm`;$('admission').hidden=false;inspection='pending';render();status('Additional annotation inspected. Choose correspondence and declare bounds before retaining it.');}catch(e){if(token===generation)status(`Annotation refused: ${e.message}. Previous account and pending source retained.`);}finally{$('annotation-file').value='';}};
@@ -52,3 +53,19 @@ function download(value,name){const url=URL.createObjectURL(new Blob([JSON.strin
 $('save').onclick=()=>{if(account)download(exportDemonstrationResponse(account),'skill-response-demonstrations.json');};
 $('export-response').onclick=()=>{if(account)download(responseFromDemonstrations(account),'skill-response-family.json');};
 window.addEventListener('resize',draw);window.addEventListener('pagehide',event=>{if(!event.persisted)release();});
+
+const auditLabels={contained:'Every remaining-model prediction is inside the supplied bounds',overlaps:'Some predictions are inside; others are outside',excluded:'No compatible prediction','remainder-incompatible':'Remaining observations are incompatible; no prediction'};
+function selectAudit(){
+ const row=omissionAudit?.rows.find(r=>r.omission.observation.id===$('audit-row').value);if(!row)return;
+ const o=row.omission;$('audit-summary').textContent=`${o.observation.label}: ${auditLabels[o.status]}. ${o.retainedCount} other observations retained.`;
+ $('audit-custody').textContent=row.sourceKind==='retained-annotation'?'The original additional annotation and explicit corresponding mark remain available for inspection. Pair its original image to inspect pixels.':'This row was supplied numerically. No additional original annotation exists for this observation; inspection shows the fixed reference only.';
+ $('audit-exact').textContent=JSON.stringify(o.axes,null,2);
+}
+$('audit-run').onclick=()=>{
+ if(!account)return;const token=generation;auditWorker?.terminate();const worker=new Worker('/web/demonstration-holdout-worker.mjs',{type:'module'});auditWorker=worker;
+ $('audit-status').textContent='Computing complete source-retaining omission audit.';
+ worker.onmessage=event=>{worker.terminate();if(token!==generation||worker!==auditWorker)return;if(event.data.error){$('audit-status').textContent='Audit refused: '+event.data.error;return;}omissionAudit=event.data.result;$('audit-row').replaceChildren(...omissionAudit.rows.map(r=>{const o=node('option',r.omission.observation.label+' · '+r.omission.observation.id);o.value=r.omission.observation.id;return o;}));$('audit-result').hidden=!omissionAudit.rows.length;selectAudit();$('audit-status').textContent=`Complete: ${omissionAudit.rows.length} omissions recomputed from retained original inputs.`;};
+ worker.onerror=()=>{worker.terminate();if(token===generation&&worker===auditWorker)$('audit-status').textContent='Audit unavailable; original account retained.';};worker.postMessage(account);
+};
+$('audit-row').onchange=selectAudit;
+$('audit-inspect').onclick=()=>{const row=omissionAudit?.rows.find(r=>r.omission.observation.id===$('audit-row').value);if(!row)return;inspection=row.inspection;release();render();$('inspection').focus();$('source-canvas').scrollIntoView({block:'center'});};
