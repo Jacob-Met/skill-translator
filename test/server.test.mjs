@@ -1,3 +1,4 @@
+import {readFile} from 'node:fs/promises';
 import test from "node:test";
 import assert from "node:assert/strict";
 import {createAppServer} from "../server.mjs";
@@ -7,6 +8,9 @@ test("actual HTTP serves interactive app assets without internet dependencies or
   const base="http://127.0.0.1:"+server.address().port;
   try{
     for(const [url,type] of [
+      ["/web/visual-scan.mjs","text/javascript"],["/src/visual-scan.mjs","text/javascript"],
+      ["/web/scan-change-regions.mjs","text/javascript"],["/src/scan-change-regions.mjs","text/javascript"],
+      ["/vendor/microverse/pixel-observations.mjs","text/javascript"],
       ["/","text/html"],["/affine-challenge","text/html"],["/web/affine-challenge.css","text/css"],["/web/affine-challenge.mjs","text/javascript"],["/src/affine-challenge.mjs","text/javascript"],["/response-family","text/html"],["/web/response-family.css","text/css"],["/web/response-family.mjs","text/javascript"],["/src/response-family.mjs","text/javascript"],["/vendor/chronos/exact-halfplanes.mjs","text/javascript"],["/web/styles.css","text/css"],
       ["/observe-attempt","text/html"],["/web/observe-attempt.css","text/css"],
       ["/web/observe-attempt.mjs","text/javascript"],["/src/learner-observation.mjs","text/javascript"],
@@ -26,6 +30,13 @@ test("actual HTTP serves interactive app assets without internet dependencies or
       assert.ok(r.headers.get("content-type").includes(type));
       assert.equal(r.headers.get("content-security-policy").includes("connect-src 'none'"),true);
       assert.ok((await r.text()).length>50);
+    }
+    for(const route of ['/src/scan-change-regions.mjs','/web/scan-change-regions.mjs']) {
+      const response=await fetch(base+route);
+      assert.equal(await response.text(),await readFile(new URL('..'+route,import.meta.url),'utf8'),route+' serves exact maintained module');
+      const moduleHead=await fetch(base+route,{method:'HEAD'});
+      assert.equal(moduleHead.status,200);assert.match(moduleHead.headers.get('content-type'),/^text\/javascript/);
+      assert.equal(await moduleHead.text(),'');
     }
     const head=await fetch(base+"/",{method:"HEAD"});
     assert.equal(head.status,200);assert.equal((await head.text()).length,0);

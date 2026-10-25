@@ -70,6 +70,64 @@ try{
   assert.equal(await page.locator('.scan-interval').first().getAttribute('data-index'),'2');
   record('actual decoded source distinguishes lighting from moved/color-changed regions; all intervals survive sorting without auto-retaining moments');
 
+  const regionsAt=index=>page.locator('.scan-interval[data-index="'+index+'"] details').filter({has:page.locator('summary',{hasText:'Locate changed appearance in these samples'})});
+  const movementRegions=regionsAt(2),lightRegions=regionsAt(1);
+  assert.equal(await movementRegions.count(),1);
+  assert.equal(await movementRegions.locator('canvas').count(),0);
+  assert.equal(await lightRegions.locator('canvas').count(),0);
+  await movementRegions.locator('summary').focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(()=>[...document.querySelectorAll('.scan-interval[data-index="2"] details')].some(d=>d.querySelector('summary')?.textContent==='Locate changed appearance in these samples'&&d.querySelectorAll('canvas').length===2));
+  assert.equal(await movementRegions.evaluate(d=>d.open),true);
+  assert.equal(await movementRegions.locator('summary').evaluate(s=>s===document.activeElement),true);
+  assert.match(await movementRegions.textContent(),/2 connected regions/);
+  assert.deepEqual(await movementRegions.locator('canvas').evaluateAll(cs=>cs.map(c=>[c.width,c.height])),[[160,90],[160,90]]);
+  await lightRegions.locator('summary').click();
+  await page.waitForFunction(()=>[...document.querySelectorAll('.scan-interval[data-index="1"] details')].some(d=>d.querySelector('summary')?.textContent==='Locate changed appearance in these samples'&&d.querySelectorAll('canvas').length===2));
+  assert.match(await lightRegions.textContent(),/0 connected regions/);
+  assert.equal(await lightRegions.locator('li').count(),0);
+  await movementRegions.locator('summary').focus();await page.keyboard.press('Enter');await page.keyboard.press('Enter');
+  assert.equal(await movementRegions.locator('canvas').count(),2);
+  assert.equal(await movementRegions.locator('summary').evaluate(s=>s===document.activeElement),true);
+  await movementRegions.scrollIntoViewIfNeeded();
+  await page.screenshot({path:out+'/change-regions-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  await movementRegions.scrollIntoViewIfNeeded();
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  await page.screenshot({path:out+'/change-regions-narrow.png',fullPage:true});
+  await page.setViewportSize({width:1380,height:980});
+  record('actual decoded movement yields two localized appearance regions while uniform lighting yields none; lazy first open preserves keyboard focus and narrow layout');
+  report.regionRendering=await page.evaluate(async()=>{
+    const {renderChangeRegions}=await import('/web/scan-change-regions.mjs');
+    const frame=t=>({widthPx:160,heightPx:90,presentedSeconds:t,rgba:Uint8ClampedArray.from(Array.from({length:160*90},()=>[40,55,65,255]).flat())});
+    const before=frame(0),after=frame(1);
+    for(let y=20;y<50;y++)for(let x=30;x<55;x++)after.rgba.set([180,75,85,255],4*(y*160+x));
+    const host=document.createElement('div');host.hidden=true;document.body.append(host);
+    try {
+      const start=performance.now();
+      const panels=Array.from({length:63},()=>renderChangeRegions(before,after));
+      host.append(...panels);
+      const initialMilliseconds=performance.now()-start;
+      const initialCanvasCount=host.querySelectorAll('canvas').length;
+      const openCosts=[];
+      for(const panel of panels.slice(0,5)) {
+        const requested=performance.now();let eventStart;
+        panel.addEventListener('toggle',()=>{eventStart=performance.now();},{capture:true,once:true});
+        const result=await new Promise(resolve=>{
+          panel.addEventListener('toggle',()=>resolve({eventMilliseconds:performance.now()-eventStart,wallMilliseconds:performance.now()-requested,canvasCount:panel.querySelectorAll('canvas').length}),{once:true});
+          panel.open=true;
+        });
+        openCosts.push(result);
+      }
+      return {sampleDimensions:[160,90],panelCount:63,initialMilliseconds,initialCanvasCount,openCosts,interpretation:'Initial closed-panel construction plus first-open handler and wall costs for five panels, one authored changed patch. This is not scan decoding latency or physical-task performance.'};
+    } finally {host.remove();}
+  });
+  assert.equal(report.regionRendering.initialCanvasCount,0);
+  assert.equal(report.regionRendering.openCosts.length,5);
+  assert.ok(report.regionRendering.openCosts.every(x=>x.canvasCount===2&&Number.isFinite(x.eventMilliseconds)&&Number.isFinite(x.wallMilliseconds)));
+  record('63 closed region panels construct without raster analysis; five first-open render costs recorded without asserting hardware-specific latency');
+
+
   const readiness=await page.evaluate(()=>{
     document.querySelector('.scan-interval[data-index="2"] button').click();
     return {seeking:document.querySelector('#video-host video').seeking,captureDisabled:document.querySelector('#capture-moment').disabled,playheadDisabled:document.querySelector('#use-playhead').disabled};
@@ -118,6 +176,7 @@ try{
   await page.locator('#scan-until').fill('7.1');await page.locator('#scan-count').fill('8');await page.locator('#scan-start').click();await scanStatus(page,'decoder failure');
   await page.evaluate(()=>window.__restoreScanCallback());
   assert.equal(await page.locator('.scan-interval').count(),7);assert.ok(await page.locator('.scan-interval[data-state="missing-frame"]').count()>0);
+  assert.equal(await page.locator('.scan-interval[data-state="missing-frame"] details').filter({has:page.locator('summary',{hasText:'Locate changed appearance in these samples'})}).count(),0);
   assert.equal(await page.locator('#source-identity').textContent(),kept);assert.equal(await page.locator('#scan-start').isEnabled(),true);
   record('actual decoder error lifecycle retains complete missing-interval account without bridging or altering original moments');
 
