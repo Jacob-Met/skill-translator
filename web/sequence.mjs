@@ -1,3 +1,4 @@
+import {createNarrationNavigator} from '/web/narration-moments.mjs';
 import {createSequence,validateSequence,appendMoment,editMoment,removeMoment,upsertStep,removeStep,sequenceFindings,assertSequenceClip,MAX_MOMENTS,attachMomentCalibration,removeMomentCalibration,momentTask} from '/src/demonstration-sequence.mjs';
 import {MAX_ANNOTATION_BYTES} from '/src/sequence-capture.mjs';
 import {createPractice} from '/src/practice.mjs';
@@ -12,6 +13,7 @@ let sequence=null,clip=null,assets=new Map(),selectedStep=null,editingStep=null,
 let stepDirty=false,busy=false,revision=0,generation=0,controller=null;
 let selectedCalibration=null;
 let visualScanner=null;
+let narrationNavigator=null;
 const status=message=>{$('status').textContent=message;};
 const uid=prefix=>prefix+'-'+crypto.randomUUID();
 const time=value=>value.toFixed(3)+' s';
@@ -29,6 +31,7 @@ function releaseVideo(loaded){
 }
 function syncButtons(){
   visualScanner?.sync();
+  narrationNavigator?.sync();
   const seeking=Boolean(clip?.video.seeking);
   $('capture-moment').disabled=busy||(!editingMoment&&(seeking||!clip||!sequence||sequence.moments.length>=MAX_MOMENTS));
   $('capture-moment').textContent=editingMoment?'Save moment notes':seeking?'Waiting for video…':'Retain this moment';
@@ -230,12 +233,14 @@ $('clear-sequence').addEventListener('click',()=>{
   resetMomentEditor();resetStepEditor();render();status('New demonstration. Choose its original clip.');
 });
 window.addEventListener('pagehide',event=>{if(!event.persisted){controller?.abort();releaseVideo(clip);releaseSequenceAssets(assets);}});
+function previewRequestedMoment(seconds){
+ clip.video.pause();clip.video.currentTime=seconds;$('moment-time').value=String(seconds);revision++;
+ syncButtons();
+ $('moment-time').focus();status('Inspect the sampled time in the clip, then retain the original frame you need.');
+}
 visualScanner=createVisualScanner({getClip:()=>clip,isBusy:()=>busy,canSelect:()=>!editingMoment,
   beginIO,isCurrent:current,endIO,
   cancelIO:request=>{if(current(request)){controller?.abort();generation++;controller=null;busy=false;syncButtons();}},
-  onSelect:seconds=>{
-    clip.video.pause();clip.video.currentTime=seconds;$('moment-time').value=String(seconds);revision++;
-    syncButtons();
-    $('moment-time').focus();status('Inspect the sampled time in the clip, then retain the original frame you need.');
-  }});
+  onSelect:previewRequestedMoment});
+narrationNavigator=createNarrationNavigator({getClip:()=>clip,isBusy:()=>busy,canSelect:()=>!editingMoment,onSelect:previewRequestedMoment});
 render();
