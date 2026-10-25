@@ -56,3 +56,29 @@ test('moment renaming does not create independent support',()=>{
  s.comparison.examples[1]=copy;
  assert.deepEqual(inspectCueSupport(s).omissions[0].omittedIndexes,[0,1]);
 });
+test('whole clip audit excludes correlated different-time intervals',()=>{
+ const s=study([['0'],['0'],['1'],['1']],['A','A','B','B']);
+ s.comparison.examples[1]=structuredClone(s.comparison.examples[0]);
+ s.comparison.examples[1].source.steps[0].id='other-interval';s.comparison.examples[1].stepId='other-interval';
+ s.comparison.examples[1].source.moments[0].origin.mediaTimeSeconds=1.5;
+ assert.equal(inspectCueSupport(s).omissions[0].combinations[0].comparison,'same-declared-label');
+ const before=JSON.stringify(s),audit=inspectCueSupport(s,{withhold:'original-clip'});
+ assert.deepEqual(audit.omissions[0].omittedIndexes,[0,1]);assert.equal(audit.omissions[0].status,'no-decision-contrast');
+ assert.equal(JSON.stringify(s),before);
+ assert.throws(()=>inspectCueSupport(s,{withhold:'unknown'}));
+});
+test('whole clip audit retains same labels supported by another clip',()=>{
+ const s=study([['0'],['0'],['1'],['1']],['A','A','B','B']);
+ const audit=inspectCueSupport(s,{withhold:'original-clip'});
+ assert.ok(audit.omissions.every(o=>o.omittedIndexes.length===1));
+ assert.ok(audit.omissions.every(o=>o.combinations[0].comparison==='same-declared-label'));
+});
+test('whole clip audit never invents an independent comparison from one clip',()=>{
+ const s=study([['0'],['1']],['A','B']);
+ s.comparison.examples[1]=structuredClone(s.comparison.examples[0]);
+ s.comparison.examples[1].source.steps[0].id='second';s.comparison.examples[1].stepId='second';
+ s.comparison.examples[1].source.moments[0].origin.mediaTimeSeconds=1.5;
+ const audit=inspectCueSupport(s,{withhold:'original-clip'});
+ assert.ok(audit.omissions.every(o=>o.status==='insufficient-other-examples'));
+ assert.ok(audit.omissions.every(o=>o.combinations.length===0));
+});
