@@ -1,12 +1,14 @@
+import {mountContextAllowance} from '/web/context-allowance-view.mjs';
 import {CONTEXT_SCHEMA,CONTEXT_INPUT_SCHEMA,MAX_CONTEXT_BYTES,readContextInput,createContextStudy,contextOriginalRules} from '/src/context-consistency.mjs';
 import {loadLocalImage,releaseImage} from '/web/image-input.mjs';
 import {assertImageMatches} from '/src/capture.mjs';
 const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+const allowanceView=mountContextAllowance($('result'));
 let input=null,accepted=null,result=null,generation=0,worker=null,media=null,imageGeneration=0;
 const say=text=>{$('status').textContent=text;};
 const fmt=x=>Number.isInteger(x)?String(x):Number(x).toPrecision(6);
 const mid=q=>(q.lower+q.upper)/2;
-function clearComputation(){generation++;worker?.terminate();worker=null;accepted=null;result=null;$('result').hidden=true;$('save').disabled=true;}
+function clearComputation(){allowanceView.reset();generation++;worker?.terminate();worker=null;accepted=null;result=null;$('result').hidden=true;$('save').disabled=true;}
 function edited(){clearComputation();say('Declaration changed. Inspect again before using or saving a result.');}
 function imageStatus(){const image=input?.source.source.image;$('imageLabel').hidden=!image;$('imageStatus').textContent=image?`Original source image ${image.name} · SHA-256 ${image.sha256}. ${media?'Matching original bytes reattached in this session.':'Original image not attached in this session.'} Additional observation positions are supplied separately; this image does not verify them.`:'This account contains authored planar annotations without an original image identity.';$('sourceImage').hidden=!media;if(media)$('sourceImage').src=media.url;else $('sourceImage').removeAttribute('src');}
 function renderRows(ids=[]){const selected=new Set(ids);$('rows').replaceChildren();for(const o of input.observationEvidence.observations.filter(o=>o.landmarkId===$('mark').value)){const label=node('label'),check=node('input'),text=node('span',`${o.label} (${o.id}) · ${o.widthMm} × ${o.heightMm} mm · (${o.xMm}, ${o.yMm}) mm · radius ${o.uncertaintyMm} mm · ${o.evidenceClass}`);check.type='checkbox';check.value=o.id;check.checked=selected.has(o.id);check.dataset.observationId=o.id;label.append(check,text);$('rows').append(label);}}
@@ -41,7 +43,7 @@ function renderResult(){
 function compute(){
  clearComputation();let account;try{account=createContextStudy(input,draft());}catch(e){say('Context refused: '+e.message);return;}
  const token=generation;say('Checking exact declared disks; original evidence remains retained.');const w=new Worker('/web/context-consistency-worker.mjs',{type:'module'});worker=w;
- w.onmessage=event=>{if(token!==generation)return;w.terminate();worker=null;if(event.data.error){say('Computation refused: '+event.data.error);return;}accepted=account;result=event.data.result;renderResult();$('save').disabled=false;say(result.status==='unresolved'?'No complete certificate obtained; original inputs can still be saved.':'Conditional mathematical result recomputed from the original inputs.');};
+ w.onmessage=event=>{if(token!==generation)return;w.terminate();worker=null;if(event.data.error){say('Computation refused: '+event.data.error);return;}accepted=account;result=event.data.result;renderResult();allowanceView.ready(accepted);$('save').disabled=false;say(result.status==='unresolved'?'No complete certificate obtained; original inputs can still be saved.':'Conditional mathematical result recomputed from the original inputs.');};
  w.onerror=()=>{if(token!==generation)return;w.terminate();worker=null;say('The computation worker failed. No new result is claimed; inspect again or retain the original inputs.');};w.postMessage(account);
 }
 $('contextForm').addEventListener('input',edited);$('contextForm').onsubmit=e=>{e.preventDefault();compute();};$('mark').onchange=()=>{edited();renderRows();};

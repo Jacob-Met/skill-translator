@@ -1,0 +1,103 @@
+{
+  "nativeBase": "f5bd89e58d5deb99828bfc24eb3fd44af8631683",
+  "integrationBase": "2c0c8da34b5a9b1ac75ab5c3cfdf528ef0b55e5a",
+  "implementationSha256": {
+    "docs/context-allowance.md": "2cdc89bfd026e412482b0b1b7a3d73ec7f28eef91372645f74094b1298598075",
+    "server.mjs": "eb2ab34c2b8ca770898a3b5b8d8272526cf9269d92e1de03fc34d4322524b011",
+    "src/context-allowance.mjs": "4636f813172b6ae17e73858f089e86b78baeaad9dd649387b146d804c6d14361",
+    "test/context-allowance.test.mjs": "6316777520309ae578fe00172c6f6dbf7c8cef3e7b282ad76e4d55defbeca86b",
+    "tools/browser-context-allowance.mjs": "b525dc29fe608172f32a825cd54a43fd44f354bd9b9dbd9bd6befb9f00088671",
+    "web/context-allowance-view.mjs": "935ecb2fd6cca538cd3ee85cf8ef2c122c4949a0901c79bbbc82fdcafb90cce9",
+    "web/context-allowance-worker.mjs": "b4616c0798010b305f1ceaa15ab1a807c65688dea4b2c670145a3ff9b7aed750",
+    "web/context-consistency.mjs": "73b38e6741123b0efacfa00b165c51e50795ef83e3084e40f62768bb931dfb19"
+  },
+  "native": {
+    "tests": 617,
+    "passed": 617,
+    "failures": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "groups": 11,
+    "passed": 11
+  },
+  "independentReview": {
+    "pairOracles": 300,
+    "boundary": 113,
+    "interior": 187,
+    "threeActiveUnequalRadius": {
+      "optimum": "301/16",
+      "point": [
+        "171/4",
+        "87/2"
+      ],
+      "weights": [
+        {
+          "numerator": "5",
+          "denominator": "48"
+        },
+        {
+          "numerator": "11",
+          "denominator": "24"
+        },
+        {
+          "numerator": "7",
+          "denominator": "16"
+        }
+      ]
+    },
+    "budgetRefusals": 4,
+    "implementationHashes": {
+      "src/context-allowance.mjs": "4636f813172b6ae17e73858f089e86b78baeaad9dd649387b146d804c6d14361",
+      "web/context-allowance-view.mjs": "935ecb2fd6cca538cd3ee85cf8ef2c122c4949a0901c79bbbc82fdcafb90cce9"
+    },
+    "review": "Dual/primal equality and exact clipped unequal pair oracle independently checked; no blocker. UI stale worker tokens inspected only; actual browser root gate."
+  },
+  "artifacts": {
+    "desktop.png": {
+      "sha": "7d72796a3f69f7961edf82dc4be77922dee34548",
+      "sha256": "30f160ae395a9a904cf7b5cd2d3b58bb888feca2c8cbebf0bad9fa2f610db704",
+      "bytes": 545847
+    },
+    "narrow.png": {
+      "sha": "c4942e62177c4eedf6c6e9ab7835b7dd78b2df43",
+      "sha256": "ad73e8e841e180bb2fc4dc0dcc7c37d2f79772eeb7186986ea33547994903a12",
+      "bytes": 457274
+    },
+    "narrow-allowance96.png": {
+      "sha": "f6b65c91ec2fb4c1d6d863413ee62fa41e9be5b6",
+      "sha256": "c9ddf19b5969910d796ee0673c3279621380cf69fa07a086b29c149a0f5d7b85",
+      "bytes": 532311
+    },
+    "browser.json": {
+      "sha": "185706769df261204ca17a77256e13655f4fd983",
+      "sha256": "852e26728f142963e4aef9e6f0fd76422c76618ead0da11cb30f5777beb3de8c",
+      "bytes": 1447
+    },
+    "skill-context-consistency.json": {
+      "sha": "c5cc7a0f806e12501a563f0fdd50a4a5767f2992",
+      "sha256": "d57542605fd7fe4e001a36a215f310310b9080b471db64434f88b9c804950b38",
+      "bytes": 4160
+    },
+    "four.json": {
+      "sha": "de98b19013eb49051157cf07ce1c546678a0788f",
+      "sha256": "28ea91083c844ce49dbe41aafb9bed7d038967f700ccc89ad050dc8b208c02de",
+      "bytes": 2439
+    },
+    "source.json": {
+      "sha": "c71ef7cc778a2aa54d5beb881b1f171664040187",
+      "sha256": "8bb9e637576a13a4567aee6dcb2234ae602115512f15d98f201b37a50155a010",
+      "bytes": 349
+    },
+    "wrong-source.json": {
+      "sha": "7fb42290f7b58ab6f450e5a2a5288e19601bc30e",
+      "sha256": "a8bc2d652f02fc3c9e7f69c9770dca2021b17a6ab40abe1b56b32fd5cd5507a3",
+      "bytes": 2002
+    },
+    "widened.json": {
+      "sha": "21b112c2cb3af9f00371cfa82edf9e7f4dc98a06",
+      "sha256": "e2fe769fd1fdc60f66036cd42af4f97dc15cde148aad31695d96c985c2e4744d",
+      "bytes": 2000
+    }
+  }
+}

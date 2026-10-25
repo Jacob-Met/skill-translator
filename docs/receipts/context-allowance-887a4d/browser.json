@@ -1,0 +1,21 @@
+{
+  "groups": [
+    "actual namespace and seccomp browser sandbox verified",
+    "real producer observations reach source-only context inspector with no implicit comparability",
+    "explicit three-disk context exposes joint conflict with exact positive25/36 certificate",
+    "explicit optional allowance proves25/36 without replacing original contradiction",
+    "actual browser download retains source, all original observations and explicit declaration only",
+    "fresh390px raw receiver recomputes identical conflict and readable layout",
+    "wrong-source account refuses transactionally while previous valid result and raw save remain",
+    "ordinary declaration edit retires previous result and saving",
+    "fresh explicitly widened raw input verifies common point against all selected disks",
+    "fresh widened context gives zero allowance with max-zero convention",
+    "four-record raw receiving exposes full-context96 allowance and every retained original bound at390px"
+  ],
+  "errors": [],
+  "evidenceClass": "authored geometric examples",
+  "browser": "Chrome/156.0.8078.47",
+  "sandboxDisabled": false,
+  "sandboxStatus": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "passed": true
+}
