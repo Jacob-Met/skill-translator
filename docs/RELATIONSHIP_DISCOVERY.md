@@ -1,0 +1,25 @@
+# Discover demonstrated pair relationships
+
+Open **Discover repeatable pair relationships** from Rule adoption, or visit `/relationship-discovery`. Supply two to twelve existing calibrated annotation JSON files. Confirm once that shared mark IDs identify corresponding task points; labels or appearance alone do not establish correspondence. Select the evidence category and an exploratory maximum observed range in millimetres.
+
+The mechanism derives each point using the maintained planar calibration, enumerates every pair from the first source, and measures signed horizontal separation, signed vertical separation and Euclidean distance in every source. It requires no manually entered pair list or proposed relation types. A pair is **repeatable** only when all sources contain both points and its maximum minus minimum reading is within the supplied threshold (with the maintained style of1e-9mm numerical comparison allowance). A larger spread is **contradicted**, including when another source is missing that pair. Remaining missing coverage is **incomplete**. Every reading and the two extrema witnesses remain inspectable.
+
+The unfamiliar-workpiece comparison reuses `adapt(derive(reference), width, height)`. It exposes when existing authored per-point rules would move a suggested relationship outside the measured range. It never installs a fixed relationship, changes execution tolerances, moves actual placements or changes practice scores. This is an investigation and explanation consumer, not an automatic instruction or completed adaptation solver.
+
+The source files, calibrated geometry, point identities and source categories remain expert inputs. The increment removes manual enumeration of candidate pairs and relation types. No image identity, force, contact, physical necessity, measurement uncertainty coverage or learning benefit is inferred. Two similar annotations may produce repeatable descriptive measurements without establishing independent physical evidence. Displayed diagrams reconstruct annotations; they are not verified original image pixels.
+
+`importRelationshipDiscovery` admits bounded original inputs and drops claimed findings. `discoverRelationships` recomputes candidates and witnesses. `compareDiscoveredTransfer` adds an existing-rule target comparison. Saved `skill-translator.relationship-discovery/v1` investigations contain only the accepted threshold and original annotations with confirmed correspondence and evidence category. Reopening recomputes results. Changed calibration is new input, not authentication of old measurements.
+
+## Verification
+
+`node test/relationship-discovery.test.mjs` executes seven test groups, including70 unfamiliar analytic coordinate cases, rotation versus scaled negative control, missing correspondence, forged findings, raw replay and unchanged source. `node tools/browser-relationship-discovery.mjs` exercises actual native-file intake, source change, transfer contrast, raw save/reopen, malformed and delayed receiving, and390px keyboard use through the maintained server. Browser execution requires an already functioning sandboxed Chromium and Puppeteer; the script does not disable browser sandboxing. These are authored geometry and software-course controls, not a physical demonstration or learner study.
+
+## Maintained pair consumer
+
+A selected repeatable distance can be opened in the existing Pair interpretations consumer. The reviewer separately supplies a comparison tolerance and rationale. `createDiscoveredPairReview` creates an empty native practice session at the requested workpiece size, without inventing placements. The existing consumer compares fixed-source and authored adapted separation and its maintained whole-sheet feasibility test. Actual scores remain incomplete until actual placements are supplied. Horizontal and vertical proposals remain investigable here but are not silently converted into distance criteria.
+
+The optional discovery provenance uses pair format `skill-translator-pair-interpretations/v2`; legacy v1 remains unchanged. The original study and selected candidate ID travel with native export/reopen. Admission recomputes repeatability and verifies exact original source and pair identity. Forged derived answers, source changes, missing evidence or downgrade to v1 are refused. Editing a different pair requires a separate original pair investigation rather than misattributing the discovery.
+
+## Integrated receiving — October25,2026
+
+The composed current-main candidate (`afe5624f412b72c48edabd565115c881630d6316` baseline, preserving its context-allowance routes) passed36 focused native tests and all seven maintained-browser groups on Node22.23.4/Chrome156. Root independently inspected desktop,390px and native pair-consumer pixels. The unrelated newly supplied60mm pair becomes contradicted when a120mm source is added; the selected distance opens the actual pair consumer with empty placements and retains its raw study through v2 export. See `docs/receipts/relationship-discovery-20261025/receiving.json` and screenshots. These are authored geometry/software results; physical learning remains unqualified.

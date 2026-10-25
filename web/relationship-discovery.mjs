@@ -1,0 +1,54 @@
+import {createDiscoveredPairReview} from '/src/discovered-pair-review.mjs';
+import {DISCOVERY_FORMAT,importRelationshipDiscovery,discoverRelationships,compareDiscoveredTransfer} from '/src/relationship-discovery.mjs';
+import {derive} from '/src/geometry.mjs';
+const $=id=>document.getElementById(id);let study=null,result=null,revision=0;
+const ns='http://www.w3.org/2000/svg';
+function node(tag,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;}
+function svg(tag,attrs){const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);return e;}
+function accept(raw){const checked=importRelationshipDiscovery(raw),computed=discoverRelationships(checked);study=checked;result=computed;revision++;$('deviation').value=study.deviationMm;$('save').disabled=false;$('error').textContent='';$('transfer').textContent='';render();}
+function render(){
+ $('summary').textContent=`${study.demonstrations.length} sources; ${result.candidates.length} automatically enumerated pair relationships: ${result.counts.repeatable} repeatable, ${result.counts.contradicted} contradicted, ${result.counts.incomplete} incomplete. Accepted maximum observed range: ${study.deviationMm} mm. No pair or relation type was supplied.`;
+ $('limits').textContent=result.limitation;
+ const previous=$('candidate').value;$('candidate').replaceChildren();
+ for(const c of result.candidates.filter(c=>$('filter').value==='all'||c.status==='repeatable')){const o=node('option',`${c.from} → ${c.to} · ${c.kind} · ${c.status}`);o.value=c.id;$('candidate').append(o);}
+ if([...$('candidate').options].some(o=>o.value===previous))$('candidate').value=previous;detail();
+}
+function detail(){
+ $('transfer').textContent='';$('sourcesView').replaceChildren();const c=result?.candidates.find(c=>c.id===$('candidate').value);
+ if(!c){$('finding').textContent='No candidates in this view. Choose all candidates to inspect contradictions or missing evidence.';return;}
+ $('finding').textContent=`${c.kind}: ${c.minMm.toFixed(3)}–${c.maxMm.toFixed(3)} mm; observed range ${c.spreadMm.toFixed(3)} mm. ${c.status}. Extremes: ${c.witnesses.minimum} and ${c.witnesses.maximum}.`;
+ for(const [i,row] of study.demonstrations.entries()){
+  const card=node('article');card.className='source-card';card.append(node('h3',row.annotation.title||row.id),node('p',`${row.id} · ${row.evidenceClass}`));
+  const reading=c.readings[i];card.append(node('p',reading.valueMm===null?`Unobserved pair: missing ${reading.missing.join(', ')}`:`${reading.valueMm.toFixed(3)} mm`));
+  const d=derive(row.annotation),w=d.source.widthMm,h=d.source.heightMm,scale=Math.min(260/w,160/h),x=20,y=15;
+  const view=svg('svg',{viewBox:'0 0 300 190',role:'img','aria-label':`${row.id}: calibrated ${c.from} to ${c.to} pair`});view.append(svg('rect',{x,y,width:w*scale,height:h*scale,fill:'#e4eee7',stroke:'#668574'}));
+  const points=[c.from,c.to].map(id=>d.landmarks.find(m=>m.id===id));
+  if(points.every(Boolean))view.append(svg('line',{x1:x+points[0].uv.u*w*scale,y1:y+points[0].uv.v*h*scale,x2:x+points[1].uv.u*w*scale,y2:y+points[1].uv.v*h*scale,stroke:'#0d6746','stroke-width':2}));
+  for(const m of points.filter(Boolean)){view.append(svg('circle',{cx:x+m.uv.u*w*scale,cy:y+m.uv.v*h*scale,r:4,fill:'#b45d13'}));const label=svg('text',{x:x+m.uv.u*w*scale+7,y:y+m.uv.v*h*scale-5,'font-size':12});label.textContent=m.id;view.append(label);}
+  card.append(view,node('p',`${w} × ${h} mm. Diagram of supplied annotations; original image pixels are not verified here.`));$('sourcesView').append(card);
+ }
+}
+function refuse(error){$('error').textContent=`Input refused; retained investigation unchanged. ${error.message}`;}
+$('analyze').onclick=async()=>{
+ const token=++revision;try{
+  if(!$('identities').checked)throw Error('Confirm corresponding mark IDs first.');
+  const files=[...$('sources').files];if(files.length<2||files.length>12)throw Error('Choose 2–12 annotation files.');
+  if(files.reduce((s,f)=>s+f.size,0)>1_900_000)throw Error('Keep source files below 1.9 MB combined.');
+  const category=$('evidence').value,deviation=Number($('deviation').value);
+  const annotations=await Promise.all(files.map(f=>f.text().then(JSON.parse)));if(token!==revision)return;
+  accept({format:DISCOVERY_FORMAT,deviationMm:deviation,demonstrations:annotations.map((annotation,i)=>({id:`source-${i+1}`,annotation,evidenceClass:category,correspondenceConfirmed:true}))});$('status').textContent='Original annotations retained. Pair candidates inferred from all supplied sources.';
+ }catch(error){if(token===revision)refuse(error);}
+};
+$('reopen').onchange=async event=>{const token=++revision,file=event.target.files?.[0];event.target.value='';if(!file)return;try{if(file.size>2_000_000)throw Error('File exceeds 2 MB.');const raw=JSON.parse(await file.text());if(token!==revision)return;accept(raw);$('status').textContent='Recomputed every candidate from the retained original annotations.';}catch(error){if(token===revision)refuse(error);}};
+for(const id of ['sources','identities','evidence','deviation'])$(id).addEventListener('change',()=>{revision++;});
+$('deviation').addEventListener('change',()=>{if(study)try{accept({...study,deviationMm:Number($('deviation').value)});}catch(error){refuse(error);}});
+$('filter').onchange=()=>{if(result)render();};$('candidate').onchange=detail;
+for(const id of ['width','height'])$(id).oninput=()=>{$('transfer').textContent='';};
+$('compare').onclick=()=>{try{if(!study)throw Error('Open an investigation first.');const r=compareDiscoveredTransfer(study,Number($('width').value),Number($('height').value)),c=r.candidates.find(c=>c.id===$('candidate').value);if(!c)throw Error('Select a candidate.');$('transfer').textContent=`Existing authored adaptation: ${c.authoredTargetMm.toFixed(3)} mm; ${c.outsideObservedRangeMm.toFixed(3)} mm outside the observed range. Candidate status remains ${c.status}; no rule or score changed.`;$('error').textContent='';}catch(error){$('error').textContent=error.message;}};
+$('save').onclick=()=>{if(!study)return;const url=URL.createObjectURL(new Blob([JSON.stringify(importRelationshipDiscovery(study),null,2)+'\n'],{type:'application/json'})),a=node('a');a.href=url;a.download='skill-relationship-discovery.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('example').onclick=()=>{
+ const annotation=(points,w,h)=>({title:'Authored rotated point pair',provenance:'Analytic authored control; no physical demonstration',source:{widthMm:w,heightMm:h,corners:[{x:0,y:0},{x:w,y:0},{x:w,y:h},{x:0,y:h}]},landmarks:points.map((p,i)=>({id:i?'b':'a',label:i?'B':'A',kind:'fraction',sourcePx:{x:p[0],y:p[1]},toleranceMm:1}))});
+ accept({format:DISCOVERY_FORMAT,deviationMm:.001,demonstrations:[annotation([[20,30],[50,70]],200,150),annotation([[80,40],[40,70]],240,180)].map((a,i)=>({id:`example-${i}`,annotation:a,evidenceClass:'authored-example',correspondenceConfirmed:true}))});$('status').textContent='Authored example: rotated pair preserves distance while directed components change.';
+};
+
+$('reviewPair').onclick=()=>{try{if(!$('reviewTolerance').value.trim())throw Error('Declare a comparison tolerance independently of the exploratory range.');const record=createDiscoveredPairReview(study,$('candidate').value,{widthMm:Number($('width').value),heightMm:Number($('height').value),toleranceMm:Number($('reviewTolerance').value),basis:$('reviewBasis').value});sessionStorage.setItem('skill-translator-discovered-pair/v1',JSON.stringify(record));location.assign('/pair-interpretations');}catch(error){$('error').textContent=error.message;}};

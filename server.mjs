@@ -6,6 +6,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/discovered-pair-review.mjs":["src/discovered-pair-review.mjs","text/javascript; charset=utf-8"],
+  "/relationship-discovery":["web/relationship-discovery.html","text/html; charset=utf-8"],
+  "/src/relationship-discovery.mjs":["src/relationship-discovery.mjs","text/javascript; charset=utf-8"],
+  "/web/relationship-discovery.mjs":["web/relationship-discovery.mjs","text/javascript; charset=utf-8"],
+  "/web/relationship-discovery.css":["web/relationship-discovery.css","text/css; charset=utf-8"],
   "/src/demonstration-holdout.mjs":["src/demonstration-holdout.mjs","text/javascript; charset=utf-8"],
   "/web/demonstration-holdout-worker.mjs":["web/demonstration-holdout-worker.mjs","text/javascript; charset=utf-8"],
   '/instrument-trace':['web/instrument-trace.html','text/html; charset=utf-8'],

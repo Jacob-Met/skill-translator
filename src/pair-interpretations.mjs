@@ -1,16 +1,30 @@
 import {GeometryError} from './geometry.mjs';
 import {createRelationshipReview,evaluateRelationships} from './task-relationships.mjs';
+import {discoverRelationships} from './relationship-discovery.mjs';
 export const PAIR_INTERPRETATIONS_SCHEMA='skill-translator-pair-interpretations/v1';
+export const DISCOVERED_PAIR_SCHEMA='skill-translator-pair-interpretations/v2';
 const fail=(ok,message)=>{if(!ok)throw new GeometryError(message);};
-export function createPairInterpretations(source,session,pair,basis){
+const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+export function createPairInterpretations(source,session,pair,basis,discoveryEvidence=null){
  fail(typeof basis==='string'&&basis.trim().length>0&&basis.length<=2000,'State a basis for comparing these two interpretations (up to 2000 characters)');
  fail(pair?.kind==='distance','Compare a nominal pair distance');
  const accepted=createRelationshipReview(source,session,[pair]);
- return {schema:PAIR_INTERPRETATIONS_SCHEMA,source:accepted.source,session:accepted.session,pair:accepted.rules[0],basis};
+ let discovery=null;
+ if(discoveryEvidence!==null){
+  const checked=discoverRelationships(discoveryEvidence.study),candidate=checked.candidates.find(c=>c.id===discoveryEvidence.candidateId);
+  fail(candidate?.status==='repeatable'&&candidate.kind===pair.kind&&candidate.from===pair.from&&candidate.to===pair.to,'The selected discovered pair must still be repeatable and match this declaration');
+  fail(JSON.stringify(canonical(checked.study.demonstrations[0].annotation))===JSON.stringify(canonical(source)),'Discovered pair reference differs from this practice source');
+  discovery={study:checked.study,candidateId:candidate.id};
+ }
+ const result={schema:discovery?DISCOVERED_PAIR_SCHEMA:PAIR_INTERPRETATIONS_SCHEMA,source:accepted.source,session:accepted.session,pair:accepted.rules[0],basis,...(discovery?{discoveryEvidence:discovery}:{})};
+ fail(!discovery||new TextEncoder().encode(JSON.stringify(result)).length<=2_000_000,'Complete discovered-pair record exceeds 2 MB; no original source is discarded');
+ return result;
 }
 export function importPairInterpretations(raw){
- fail(raw?.schema===PAIR_INTERPRETATIONS_SCHEMA,'Unsupported pair interpretation record');
- return createPairInterpretations(raw.source,raw.session,raw.pair,raw.basis);
+ fail([PAIR_INTERPRETATIONS_SCHEMA,DISCOVERED_PAIR_SCHEMA].includes(raw?.schema),'Unsupported pair interpretation record');
+ fail(raw.schema!==DISCOVERED_PAIR_SCHEMA||raw.discoveryEvidence,'A v2 discovered-pair record requires its original discovery evidence');
+ fail(raw.schema!==PAIR_INTERPRETATIONS_SCHEMA||raw.discoveryEvidence===undefined,'Discovery evidence requires the v2 pair format');
+ return createPairInterpretations(raw.source,raw.session,raw.pair,raw.basis,raw.discoveryEvidence??null);
 }
 export function assessPairInterpretations(raw){
  const accepted=importPairInterpretations(raw),{source,session,pair,basis}=accepted;
@@ -45,3 +59,4 @@ export function assessPairInterpretations(raw){
    'A basis may be declared after seeing outcomes; declaration timing is not authenticated.'
   ]};
 }
+

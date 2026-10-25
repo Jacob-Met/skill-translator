@@ -1,0 +1,43 @@
+{
+  "format": "skill-translator.relationship-discovery-receiving/v1",
+  "date": "2026-10-25",
+  "base": "afe5624f412b72c48edabd565115c881630d6316",
+  "composition": "Preserved concurrently merged context-allowance routes in server.mjs; replayed full browser course after composition.",
+  "environment": {
+    "node": "v22.23.4",
+    "browser": "Chrome/156.0.8078.47",
+    "platform": "Linux",
+    "launch": "Installed Puppeteer with normal Chrome launch; no added sandbox-disabling arguments"
+  },
+  "native": {
+    "tests": 36,
+    "passed": 36,
+    "failed": 0
+  },
+  "browser": {
+    "result": "PASS",
+    "courses": [
+      "Unfamiliar original annotation JSONs infer fixed60mm distance with two component contradictions, without supplied pair/type entries",
+      "Existing authored target comparison and original-input-only export",
+      "Third120mm source contradicts formerly repeatable proposal",
+      "Reopen recomputes; malformed input preserves accepted investigation",
+      "Delayed old import cannot replace newer investigation",
+      "390px keyboard focus and no horizontal overflow",
+      "Selected inferred distance reaches native pair comparison; actual assessments remain incomplete and v2 export preserves entire source study and separately declared tolerance"
+    ]
+  },
+  "commands": [
+    "node --test test/relationship-discovery.test.mjs test/discovered-pair-review.test.mjs test/pair-interpretations.test.mjs test/task-relationships.test.mjs test/practice.test.mjs",
+    "PUPPETEER_PATH=<installed module> CHROME_BINARY=<installed Chrome> QA_OUTPUT=<isolated output> node tools/browser-relationship-discovery.mjs"
+  ],
+  "limits": [
+    "Calibrated annotations and confirmed point identities remain expert inputs.",
+    "Authored geometry establishes software behavior, not physical task necessity, original-image-byte verification or learner benefit.",
+    "Only distance proposals bridge into the maintained distance-pair consumer; signed components remain inspectable hypotheses."
+  ],
+  "screenshots": [
+    "desktop.png",
+    "narrow.png",
+    "pair-consumer.png"
+  ]
+}
