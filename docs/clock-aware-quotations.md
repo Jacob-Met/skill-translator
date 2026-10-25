@@ -11,3 +11,13 @@ Ordinary VTT plus constant offset continues to use the original v1 record and un
 An authored baseline control has a retained step at 57–59 seconds and a supplied utterance at 50–52 seconds. Offset 2 finds no overlap; declared mapping 2 + 1.1t places the same original words at 57–59.2 seconds. This is a software timing/quotation example, not an observed craft clock error or learning study.
 
 The exact-boundary control uses a binary-exact affine map to preserve half-open step overlap: a cue ending at the step start or starting at its end is excluded. Original notes, selected literal payloads, source moments, clock failure, format downgrade and authored-account custody are checked by the native suite. Actual source-video, quotation, studio and decision-practice receiving is recorded separately after execution.
+
+## Watch and hear an utterance in its original context
+
+After pairing a narration account, optionally pair the exact original MP4 or WebM in Timed narration. Choose an overlapping utterance and play its complete mapped source interval. Playback uses the encoded timeline at 1× and does not crop the interval to the authored step. If any part lies outside the original clip, playback refuses that interval rather than clipping it. Quotation selection remains a separate explicit action and works without the original clip.
+
+The source starts muted. Enable original audio if wanted, or use the video's native mute control. This plays audio already in the source; it does not generate speech, establish that audio is present, or verify the supplied words. Silent clips remain usable. The displayed first/last timestamps and endpoint offsets describe video-frame presentation, not sample-exact audio boundaries. Playback may reach the first presented frame after the requested endpoint.
+
+Changing the source, narration draft, selected step or utterance retires current interval playback. A rejected replacement clip leaves the previously accepted clip paired. New source admission and late decoder results cannot regain control of an earlier session. Native video controls may inspect other original times when the account is active; their playback is explicitly separate from managed utterance viewing.
+
+The original clip remains external to saved narration and sequence files. Existing complete clip identity, raw transcript, clock declarations and source inputs govern later pairing; listening does not silently add a quotation, alter the author's words or create learner-assistance history. Receiving uses a newly authored Flite speech/video control and an explicitly authored supplied-transcript mismatch. It is not an ASR result, a physical expert demonstration or a learning study.

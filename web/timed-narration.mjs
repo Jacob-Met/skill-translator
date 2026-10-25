@@ -2,9 +2,12 @@ import {createNarration,createClockNarration,CLOCK_NARRATION_FORMAT,importNarrat
 import {readSequenceBundle,makeSequenceBundle,releaseSequenceAssets} from '/web/sequence-input.mjs';
 import {narrationFromNavigation} from '/src/clock-quotation.mjs';
 import {inspectNarrationClock} from '/src/narration-clock.mjs';
+import {mountNarrationPlayback} from '/web/narration-playback.mjs';
 const $=id=>document.getElementById(id);
-let accepted=null,study=null,transcript=null,draftClock=null,revision=0,pending=false;
+let accepted=null,study=null,transcript=null,draftClock=null,revision=0,pending=false,receiving=null;
 const status=text=>{$('status').textContent=text;};
+const playback=mountNarrationPlayback($('narration-playback'));
+function syncPlayback(){playback.update(study,$('step').value,{suspended:pending||receiving!==null});}
 function clockSummary(clock){
  if(!clock)return 'Using the ordinary transcript offset.';
  const r=inspectNarrationClock(clock,accepted.sequence.clip.durationSeconds);
@@ -22,12 +25,13 @@ $('navigation').onchange=()=>receive('navigation',2*1024*1024,async(file,version
  study=next;transcript=next.transcript;draftClock=next.clock??null;pending=false;$('transcript').value='';$('attribution').value=next.attribution;$('offset').value=next.offsetSeconds;$('pair').disabled=false;
  clockControls();render(true);status('Saved navigation received against this original clip. Inspect mapped overlap and choose quotations explicitly.');
 });
-function dirty(){revision++;pending=true;$('pair').disabled=!accepted||transcript===null;for(const id of ['select','save','export'])$(id).disabled=true;if(study)status('Narration settings have an unpaired draft. Pair them to replace the accepted account; the displayed account is unchanged.');}
+function dirty(){revision++;pending=true;playback.suspend();$('pair').disabled=!accepted||transcript===null;for(const id of ['select','save','export'])$(id).disabled=true;if(study)status('Narration settings have an unpaired draft. Pair them to replace the accepted account; the displayed account is unchanged.');}
 for(const id of ['attribution','offset'])$(id).addEventListener('input',dirty);
 async function receive(id,limit,operation){
- const file=$(id).files[0];if(!file)return;const version=++revision;
+ const file=$(id).files[0];if(!file)return;const version=++revision;receiving=version;playback.suspend();
  try{if(file.size>limit)throw Error('The selected file exceeds the input limit.');await operation(file,version);}
  catch(error){if(version===revision)status('Import refused: '+error.message);}
+ finally{if(receiving===version){receiving=null;syncPlayback();}}
 }
 $('source').onchange=()=>receive('source',48*1024*1024,async(file,version)=>{
  const next=await readSequenceBundle(file);
@@ -40,14 +44,14 @@ $('transcript').onchange=()=>receive('transcript',MAX_TRANSCRIPT_BYTES,async(fil
  const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(await file.arrayBuffer());if(version!==revision)return;parseNarration(text);
  draftClock=null;clockControls();transcript=text;dirty();status('Transcript read for ordinary offset pairing. Confirm its attribution and timing offset, then pair.');
 });
-$('pair').onclick=()=>{revision++;try{
+$('pair').onclick=()=>{revision++;playback.suspend();try{
  if(!accepted||transcript===null)throw Error('Open a sequence and transcript first.');
  if(!$('offset').value.trim())throw Error('Declare a timing offset, including zero.');
  if(draftClock&&Number($('offset').value)!==0)throw Error('Clock narration requires zero additional offset.');
  const details={text:transcript,attribution:$('attribution').value,offsetSeconds:Number($('offset').value)};
  const next=draftClock?createClockNarration(accepted.sequence,{...details,clock:draftClock}):createNarration(accepted.sequence,details);
  study=next;pending=false;render(true);status('Supplied narration paired. Inspect the overlap before choosing quotes.');
-}catch(error){status('Pairing refused: '+error.message);}};
+}catch(error){status('Pairing refused: '+error.message);}finally{syncPlayback();}};
 $('open').onchange=()=>receive('open',4*1024*1024,async(file,version)=>{
  if(!accepted)throw Error('Pair the original demonstration first.');
  const raw=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer()));if(version!==revision)return;
@@ -59,7 +63,7 @@ for(const id of ['step','field'])$(id).onchange=()=>{revision++;render();};
 function render(reset=false){
  if(!study)return;$('work').hidden=false;$('title').textContent=study.source.title;
  if(reset)$('step').replaceChildren(...study.source.steps.map(s=>new Option(s.title,s.id)));
- const stepId=$('step').value;
+ const stepId=$('step').value;playback.update(study,stepId,{suspended:pending||receiving!==null});
  for(const id of ['select','save','export'])$(id).disabled=pending;
  if(!stepId){$('range').textContent='Author a before/after step in the studio first.';$('frames').replaceChildren();$('cues').replaceChildren();$('select').disabled=true;$('export').disabled=true;return;}
  const found=narrationForStep(study,stepId),field=$('field').value;
