@@ -64,7 +64,7 @@ $('compact-propose').addEventListener('click',()=>{
  $('compact-result').replaceChildren();
  try{
   const bound=$('compact-bound').value.trim();if(!bound)throw Error('Supply a maximum nominal sample deviation.');
-  const proposal=proposePathSummary(accepted,Number(bound)),findings=inspectSequencePath(accepted);
+  const proposalSource=accepted,proposal=proposePathSummary(proposalSource,Number(bound)),findings=inspectSequencePath(proposalSource);
   $('compact-status').textContent=`Proposed ${proposal.retainedIndices.length} of ${proposal.originalSampleCount} original samples; ${proposal.omittedIndices.length} omitted from this explanation only. Maximum omitted deviation: ${mm(proposal.maximumOmittedDeviationMm)}.`;
   const residuals=new Map(proposal.intervals.flatMap(span=>span.residuals.map(r=>[r.sampleIndex,r.deviationMm])));
   const list=el('ol');
@@ -73,7 +73,7 @@ $('compact-propose').addEventListener('click',()=>{
    item.dataset.retained=String(retained);
    item.append(el('span',`${i+1}. ${sample.momentLabel} · ${sample.presentedSeconds} s · ${!sample.position?'Missing observation — retained gap':retained?'Retained original frame':`Omitted from proposal; deviation ${mm(residuals.get(i))}`} `));
    const inspect=el('button','Inspect original frame');inspect.type='button';
-   inspect.addEventListener('click',()=>{const row=[...$('samples').children].find(r=>r.dataset.moment===sample.momentId);row.scrollIntoView({block:'center'});row.querySelector('.mark').focus({preventScroll:true});});
+   inspect.addEventListener('click',()=>{if(accepted!==proposalSource)return;const row=[...$('samples').children].find(r=>r.dataset.moment===sample.momentId);row.scrollIntoView({block:'center'});row.querySelector('.mark').focus({preventScroll:true});});
    item.append(inspect);list.append(item);
   });
   $('compact-result').append(list,el('p',proposal.boundary));
