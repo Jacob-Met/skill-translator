@@ -5,6 +5,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/evidence-conflicts.mjs":["web/evidence-conflicts.mjs","text/javascript; charset=utf-8"],
+  "/src/evidence-conflicts.mjs":["src/evidence-conflicts.mjs","text/javascript; charset=utf-8"],
   "/pair-interpretations":["web/pair-interpretations.html","text/html; charset=utf-8"],
   "/web/pair-interpretations.mjs":["web/pair-interpretations.mjs","text/javascript; charset=utf-8"],
   "/web/pair-interpretations.css":["web/pair-interpretations.css","text/css; charset=utf-8"],
@@ -311,6 +313,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
 
 
 

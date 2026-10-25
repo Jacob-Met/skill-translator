@@ -1,3 +1,4 @@
+import {renderEvidenceConflicts} from '/evidence-conflicts.mjs';
 import {derive,adapt,toDisplay,fromDisplay,fromImage,evaluate} from "/src/geometry.mjs";
 import {appendAnnotation} from "/src/authoring.mjs";
 import {demonstration} from "/src/demo.mjs";
@@ -256,6 +257,7 @@ function updateEvidence(){
     count+" rules remain compatible. The current observations do not resolve their differences.";
   $("evidenceCounts").textContent=result.authoredCount+" authored examples · "+result.reportedCount+
     " reported measurements for “"+chosen().label+"”.";
+  renderEvidenceConflicts({demo,landmarkId:chosen().id,observations,summary,ruleNames,onInspect:id=>{viewObservationId=id;evidenceDrawing(result);}});
   const cards=$("candidateCards");cards.replaceChildren();
   result.candidates.forEach((candidate,i)=>{
     const card=document.createElement("article");card.className="candidate-card "+candidate.status;

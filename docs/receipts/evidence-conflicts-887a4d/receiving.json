@@ -1,0 +1,65 @@
+{
+  "format": "skill-translator.evidence-conflicts-receiving/v1",
+  "claim": 177,
+  "base": "0868eadf9d0375e7d33ff2f17b39d83c18d8de8a",
+  "baseTree": "843e183136b863ff469603bf359ccb517137a3c5",
+  "team": "hamon-887a4d-20261024",
+  "commands": [
+    "node --test --test-concurrency=2 test/*.test.mjs",
+    "PUPPETEER_PATH=/home/ubuntu/.npm/_npx/4b4c857f6efdfb61/node_modules/puppeteer/lib/puppeteer/puppeteer.js CHROME_BINARY=/opt/google/chrome/chrome QA_OUTPUT=/tmp/hamon-887a4d-skill-receipt2 node tools/browser-evidence-conflicts.mjs"
+  ],
+  "environment": {
+    "node": "22.23.4",
+    "browser": "Chrome/156.0.8078.47",
+    "sandbox": "Namespace,PID/network namespaces,Seccomp-BPF,TSYNC yes; adequately sandboxed"
+  },
+  "results": {
+    "native": {
+      "tests": 585,
+      "passed": 585,
+      "failed": 0,
+      "skipped": 0
+    },
+    "browser": {
+      "groups": 7,
+      "errors": 0,
+      "checks": [
+        "Actual sandbox status",
+        "Actual authored forms→two-record conflict",
+        "Two complete groups and original-observation keyboard selection",
+        "Actual original-input download",
+        "Fresh390px source+download reopen",
+        "Wrong-source refusal preserves prior evidence",
+        "Ordinary explicit edit clears obsolete explanation"
+      ]
+    },
+    "capacity": {
+      "observations": 60,
+      "completeMinimumGroups": "900"
+    }
+  },
+  "independentReview": {
+    "reviewer": "materialtruth",
+    "method": "Inspected exact residual reuse and consumer hooks; separately counted via inclusion-exclusion over all32omitted-rule subsets.",
+    "studies": 30,
+    "recordParticipationChecks": 1335,
+    "blockingFindings": []
+  },
+  "visualReview": {
+    "reviewer": "root",
+    "desktop": "Actual conflict panel inspected at1280viewport; readable originals/residuals/participation.",
+    "narrow": "Actual390px panel inspected; no bodyoverflow and original observation buttons remain keyboard accessible."
+  },
+  "initialReceiving": {
+    "status": "incomplete, not qualified",
+    "reason": "Desktop screenshot stalled after opening narrow page; diagnostic attachment changed viewport.",
+    "repair": "Explicit foreground/desktop viewport before screenshot, bounded protocol, actual sandbox assertion and complete connection cleanup.",
+    "rerun": "Fresh output directory; all7groups passed."
+  },
+  "limits": [
+    "Authored geometric evidence only; no physical transfer qualification.",
+    "Five retained interpretations only; minimum-size conflicts are not every inclusion-minimal subset.",
+    "Counts describe record combinations, not independent physical evidence or probabilities.",
+    "Original observations/uncertainty radii/rules unchanged; exported inputs recompute on reopen."
+  ]
+}
