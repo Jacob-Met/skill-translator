@@ -1,4 +1,5 @@
 import {createNarrationNavigator} from '/web/narration-moments.mjs';
+import {createAudioActivityNavigator} from '/web/audio-activity.mjs';
 import {createSequence,validateSequence,appendMoment,editMoment,removeMoment,upsertStep,removeStep,sequenceFindings,assertSequenceClip,MAX_MOMENTS,attachMomentCalibration,removeMomentCalibration,momentTask} from '/src/demonstration-sequence.mjs';
 import {MAX_ANNOTATION_BYTES} from '/src/sequence-capture.mjs';
 import {createPractice} from '/src/practice.mjs';
@@ -14,6 +15,7 @@ let stepDirty=false,busy=false,revision=0,generation=0,controller=null;
 let selectedCalibration=null;
 let visualScanner=null;
 let narrationNavigator=null;
+let audioNavigator=null;
 const status=message=>{$('status').textContent=message;};
 const uid=prefix=>prefix+'-'+crypto.randomUUID();
 const time=value=>value.toFixed(3)+' s';
@@ -32,6 +34,7 @@ function releaseVideo(loaded){
 function syncButtons(){
   visualScanner?.sync();
   narrationNavigator?.sync();
+  audioNavigator?.sync();
   const seeking=Boolean(clip?.video.seeking);
   $('capture-moment').disabled=busy||(!editingMoment&&(seeking||!clip||!sequence||sequence.moments.length>=MAX_MOMENTS));
   $('capture-moment').textContent=editingMoment?'Save moment notes':seeking?'Waiting for video…':'Retain this moment';
@@ -186,7 +189,7 @@ $('capture-moment').addEventListener('click',async()=>{
 });
 $('cancel-moment').addEventListener('click',()=>{resetMomentEditor();status('Moment note edit cancelled.');});
 $('use-playhead').addEventListener('click',()=>{
-  if(!clip||busy||editingMoment)return;clip.video.pause();
+  if(!clip||busy||editingMoment)return;audioNavigator?.cancelPlayback();clip.video.pause();
   const selected=Math.min(clip.video.currentTime,Math.max(0,clip.identity.durationSeconds-.001));
   $('moment-time').value=selected.toFixed(3);revision++;
   status('Requested time set from the video playhead. Retain this moment to preserve its actual presented frame.');
@@ -234,6 +237,7 @@ $('clear-sequence').addEventListener('click',()=>{
 });
 window.addEventListener('pagehide',event=>{if(!event.persisted){controller?.abort();releaseVideo(clip);releaseSequenceAssets(assets);}});
 function previewRequestedMoment(seconds){
+ audioNavigator?.cancelPlayback();
  clip.video.pause();clip.video.currentTime=seconds;$('moment-time').value=String(seconds);revision++;
  syncButtons();
  $('moment-time').focus();status('Inspect the sampled time in the clip, then retain the original frame you need.');
@@ -243,4 +247,7 @@ visualScanner=createVisualScanner({getClip:()=>clip,isBusy:()=>busy,canSelect:()
   cancelIO:request=>{if(current(request)){controller?.abort();generation++;controller=null;busy=false;syncButtons();}},
   onSelect:previewRequestedMoment});
 narrationNavigator=createNarrationNavigator({getClip:()=>clip,isBusy:()=>busy,canSelect:()=>!editingMoment,onSelect:previewRequestedMoment});
+const audioHost=document.createElement('details');
+document.getElementById('narration-moments').after(audioHost);
+audioNavigator=createAudioActivityNavigator({host:audioHost,getClip:()=>clip,isBusy:()=>busy,canSelect:()=>!editingMoment,onSelect:previewRequestedMoment});
 render();
