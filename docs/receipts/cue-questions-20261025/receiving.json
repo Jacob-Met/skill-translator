@@ -1,0 +1,98 @@
+{
+  "issue": 222,
+  "base": "bef0e1b2805d831d06d9dde4cc0c505c7e1ae0ce",
+  "native": {
+    "passed": 5,
+    "output": "TAP version 13\n# Subtest: independent depth-two decision-tree enumeration agrees across512 tables\nok 1 - independent depth-two decision-tree enumeration agrees across512 tables\n  ---\n  duration_ms: 74.553489\n  type: 'test'\n  ...\n# Subtest: adaptive branches need two questions where every fixed set needs three\nok 2 - adaptive branches need two questions where every fixed set needs three\n  ---\n  duration_ms: 1.314702\n  type: 'test'\n  ...\n# Subtest: unknown categories remain compatible across known and novel branches\nok 3 - unknown categories remain compatible across known and novel branches\n  ---\n  duration_ms: 0.305547\n  type: 'test'\n  ...\n# Subtest: outside evidence and unknown labels are unavailable rather than predictions\nok 4 - outside evidence and unknown labels are unavailable rather than predictions\n  ---\n  duration_ms: 0.157337\n  type: 'test'\n  ...\n# Subtest: conflicting rows cannot be distinguished and malformed readings refuse\nok 5 - conflicting rows cannot be distinguished and malformed readings refuse\n  ---\n  duration_ms: 0.311697\n  type: 'test'\n  ...\n1..5\n# tests 5\n# suites 0\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 82.868802\n",
+    "independent": "SECOND GROUND peer reran5including512decision-tree tables, added100random unknown-preserving filtering/read-order/nonmutation controls; combined6pass."
+  },
+  "browser": {
+    "checks": [
+      "original four-example comparison and eight verified frame images",
+      "complementary XOR cue combinations through actual editor",
+      "actual download retains raw source accounts and inputs only",
+      "unknown cue invalidates and refuses a false complete distinction",
+      "same complete cues with different decisions exposes exact conflicting pair",
+      "fresh 390px raw-source reopening and recomputation",
+      "imported arbitrary cue identities preserve editable add/remove and existing categories",
+      "pending import cannot leave old finite-table findings under new source",
+      "mismatched retained source refuses transactionally",
+      "delayed import cannot replace a newer cue declaration",
+      "adaptive question branch original-source raw save and narrow keyboard reopen"
+    ],
+    "errors": []
+  },
+  "omission_regression": {
+    "checks": [
+      "original four-example comparison and eight verified frame images",
+      "complementary XOR cue combinations through actual editor",
+      "all four withheld XOR patterns lack exact retained support",
+      "actual download retains raw source accounts and inputs only",
+      "unknown cue invalidates and refuses a false complete distinction",
+      "same complete cues with different decisions exposes exact conflicting pair",
+      "fresh 390px raw-source reopening and recomputation",
+      "keyboard narrow raw reopen recomputes omission support",
+      "imported arbitrary cue identities preserve editable add/remove and existing categories",
+      "pending-source clicks cannot retain old conclusions under incoming examples",
+      "mismatched retained source refuses transactionally",
+      "delayed import cannot replace a newer cue declaration",
+      "alternative cue subsets retain opposing exact-label accounts without choosing a rule"
+    ],
+    "errors": []
+  },
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "composition": "Current base server plus exactly2new question routes; all existing received core dependencies unchanged.13omission groups passed on that final server.",
+  "review": "Independent peer reviewed core/component/composer, exact memo states, all tied plans, unknown branches, source-only reading replay and import lifecycle; no blocker. Stale error message after successful inspection repaired. Lead inspected actual390px question capture.",
+  "screenshots": {
+    "narrow.png": {
+      "git_blob": "c6cb9cea600ebaedfc6885534736361e6af883c0",
+      "sha256": "bdb16a9c47e832a85dae3e21d28f3f88659ec4a977fcc0ff8c3a00935b941b7e",
+      "bytes": 425430
+    }
+  },
+  "limits": "Worst-case questions distinguish declared retained labels, not physical actions, prediction quality, cognitive effort or learned skill. All user-supplied categories and unknown-compatible originals remain visible.",
+  "team": "hamon-7bb49db0-20261024",
+  "created_at": "2026-10-25T06:13:34.154956+00:00",
+  "source": {
+    "src/cue-questions.mjs": {
+      "git_blob": "799b18012b28946f861feb549ce58d7030714ed2",
+      "sha256": "27eb6ac7f6d22714b78eb8f4b06d7e14e022c0f43be4b62e8f46f7a133b2e3ba",
+      "bytes": 3349
+    },
+    "test/cue-questions.test.mjs": {
+      "git_blob": "949a62eac94a7891e9a5d3976e37a86b89c8f51b",
+      "sha256": "2d0a8bedb69b93e5864d9b209dbfc5b1c67067d23a2b90786cb94367f049f525",
+      "bytes": 3987
+    },
+    "web/cue-questions-view.mjs": {
+      "git_blob": "8757e3ec3f6b8cac300543d01eedb5518721f4d0",
+      "sha256": "9c367bc6756f2956c14c8f89b7e6b98a8521c7d74a681aba6eea40e30f7a2773",
+      "bytes": 3168
+    },
+    "web/cue-sufficiency.mjs": {
+      "git_blob": "36906a54ce8b24fc6df32660d37d929b881f1159",
+      "sha256": "16a75d006f8ec69d8cd7cc308371f02e196ab4353c919a4d75eca12c0366f74d",
+      "bytes": 8084
+    },
+    "web/cue-sufficiency.html": {
+      "git_blob": "240e09a1ccbb1798201834525f80ebaf4b9465a6",
+      "sha256": "17930191d5dbfdac91a32a95483f7b7639d5c9a8986776098125cc7637f84b48",
+      "bytes": 1238
+    },
+    "server.mjs": {
+      "git_blob": "4d41886d55188ea733c897fdc3e288f218199566",
+      "sha256": "3cbdb6f23e5d1b2b165e2ff47990d1c4bf4b98c1c8bfd6e31741abe64927aade",
+      "bytes": 32002
+    },
+    "tools/browser-cue-questions.mjs": {
+      "git_blob": "fc102a3962217e9512d6d8197f94e9fcfc89c263",
+      "sha256": "95b7314521ba2ea59a1ca9429e36d360c312da1745e7dcecbc5ac1b2c3ee548e",
+      "bytes": 10999
+    },
+    "docs/CUE_QUESTIONS.md": {
+      "git_blob": "2455fdf37466b085ca18e055e96d71d469f0a053",
+      "sha256": "a44f5ed75a48547a3f4db224e34f3bded637cf6a01573f185edb3b7f73288255",
+      "bytes": 2959
+    }
+  }
+}
