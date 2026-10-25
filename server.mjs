@@ -6,11 +6,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
-  "/src/context-allowance.mjs":["src/context-allowance.mjs","text/javascript; charset=utf-8"],
-  "/web/context-allowance-worker.mjs":["web/context-allowance-worker.mjs","text/javascript; charset=utf-8"],
-  "/web/context-allowance-view.mjs":["web/context-allowance-view.mjs","text/javascript; charset=utf-8"],
   "/sequence-edge":["web/sequence-edge.html","text/html; charset=utf-8"],
   "/web/sequence-edge.mjs":["web/sequence-edge.mjs","text/javascript; charset=utf-8"],
+  "/src/sequence-edge-field.mjs":["src/sequence-edge-field.mjs","text/javascript; charset=utf-8"],
   "/src/sequence-edge.mjs":["src/sequence-edge.mjs","text/javascript; charset=utf-8"],
   "/src/pair-sheet-fit.mjs":["src/pair-sheet-fit.mjs","text/javascript; charset=utf-8"],
   "/condition-judgment-sets":["web/condition-judgment-sets.html","text/html; charset=utf-8"],
@@ -22,6 +20,9 @@ const routes=Object.freeze({
   "/web/context-consistency-worker.mjs":["web/context-consistency-worker.mjs","text/javascript; charset=utf-8"],
   "/web/context-consistency.css":["web/context-consistency.css","text/css; charset=utf-8"],
   "/src/context-consistency.mjs":["src/context-consistency.mjs","text/javascript; charset=utf-8"],
+  "/src/context-allowance.mjs":["src/context-allowance.mjs","text/javascript; charset=utf-8"],
+  "/web/context-allowance-worker.mjs":["web/context-allowance-worker.mjs","text/javascript; charset=utf-8"],
+  "/web/context-allowance-view.mjs":["web/context-allowance-view.mjs","text/javascript; charset=utf-8"],
   "/src/context-disk-support.mjs":["src/context-disk-support.mjs","text/javascript; charset=utf-8"],
   "/vendor/chronos/exact-circle-support.mjs":["vendor/chronos/exact-circle-support.mjs","text/javascript; charset=utf-8"],
   "/src/evidence-conflict-alternatives.mjs":["src/evidence-conflict-alternatives.mjs","text/javascript; charset=utf-8"],
@@ -313,7 +314,7 @@ export function createAppServer(){
     res.setHeader("Content-Security-Policy",
       "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     const path=req.url?.split("?")[0];
-    if(path==="/sequence-edge")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
+    if(path==="/sequence-edge")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/api/sequence-edge"&&req.method==="POST"){await serveSequenceEdge(req,res);return;}
     const route=Object.prototype.hasOwnProperty.call(routes,path)?routes[path]:null;
     if(req.method!=="GET"&&req.method!=="HEAD"){

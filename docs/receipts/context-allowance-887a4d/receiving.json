@@ -1,9 +1,9 @@
 {
   "nativeBase": "f5bd89e58d5deb99828bfc24eb3fd44af8631683",
-  "integrationBase": "5e62cbf022a2f64d88db0917e8e3ba8340329ba8",
+  "integrationBase": "2c0c8da34b5a9b1ac75ab5c3cfdf528ef0b55e5a",
   "implementationSha256": {
     "docs/context-allowance.md": "2cdc89bfd026e412482b0b1b7a3d73ec7f28eef91372645f74094b1298598075",
-    "server.mjs": "5dccd5015fe9a790672e25c250286a11625c5b54d60b97f611e78a35a2f35b3c",
+    "server.mjs": "eb2ab34c2b8ca770898a3b5b8d8272526cf9269d92e1de03fc34d4322524b011",
     "src/context-allowance.mjs": "4636f813172b6ae17e73858f089e86b78baeaad9dd649387b146d804c6d14361",
     "test/context-allowance.test.mjs": "6316777520309ae578fe00172c6f6dbf7c8cef3e7b282ad76e4d55defbeca86b",
     "tools/browser-context-allowance.mjs": "b525dc29fe608172f32a825cd54a43fd44f354bd9b9dbd9bd6befb9f00088671",

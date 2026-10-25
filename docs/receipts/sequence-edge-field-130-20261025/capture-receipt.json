@@ -1,0 +1,43 @@
+{
+  "result": "PASS",
+  "browser": "156.0.8078.47",
+  "sourceHash": "7dd438a32071a1ed2903841be9b207f0565cb17a31413d6812bd85e6dd2c6d4d",
+  "moments": [
+    {
+      "id": "moment-d4ed905e-b60e-427a-9547-dc93b7426691",
+      "requested": 0.5,
+      "presented": 0.507,
+      "sha256": "f5829510620bbe2fca485cbb9f5f8ea9d4217360a33468927a6a8ba5293ecc37",
+      "calibrated": false
+    },
+    {
+      "id": "moment-374cb5b5-cf01-44db-9dcd-f41c7774e4bd",
+      "requested": 2,
+      "presented": 2.007,
+      "sha256": "063c606d7f877c4f8c239ce39745fe538ca71871db8f7f7bd9ceb8e81fccbb68",
+      "calibrated": false
+    },
+    {
+      "id": "moment-6ff762b2-6bb2-484e-bf4e-6817f54fbb8f",
+      "requested": 4,
+      "presented": 4.007,
+      "sha256": "53e72b4b281db3eae49cd0fc14abf74362ea67fdf854a92fd487a1810727c5fc",
+      "calibrated": false
+    },
+    {
+      "id": "moment-e9e39cad-2b35-405c-8625-f11b5b7f7761",
+      "requested": 6,
+      "presented": 6.007,
+      "sha256": "571c2e0a7da28bc5fd404dd0cf9ba06784da4797550416d50498d77abb710e2f",
+      "calibrated": false
+    },
+    {
+      "id": "moment-987f3ec4-5c3b-47d0-a5ed-dce4ce76e306",
+      "requested": 8,
+      "presented": 7.973,
+      "sha256": "938f26466626a218a10dc3f670b987f263a7d2181038103e0b371247287f6f43",
+      "calibrated": false
+    }
+  ],
+  "frameCount": 5
+}
