@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createSequence,appendMoment,upsertStep} from '../src/demonstration-sequence.mjs';
+import {frameOrigin} from '../src/frame-origin.mjs';
+import {DECISION_COMPARISON_FORMAT,importDecisionComparison,compareDecisionAccounts,rehearseDecisionExample} from '../src/decision-comparison.mjs';
+const clip={name:'authored.webm',mimeType:'video/webm',sizeBytes:1000,sha256:'a'.repeat(64),durationSeconds:10};
+function source(){let s=createSequence(clip,{title:'Authored explanation'});for(const n of [1,2,3]){const image={name:`frame-${n}.png`,mimeType:'image/png',sha256:String(n).repeat(64),widthPx:100,heightPx:80,pixelCoordinates:'browser-oriented'};s=appendMoment(s,{id:`moment-${n}`,label:`Moment ${n}`,visibleState:'Authored state',image,origin:frameOrigin(clip,n,{mediaTime:n,width:100,height:80},image)});}for(const n of [1,2])s=upsertStep(s,{id:`step-${n}`,beforeMomentId:`moment-${n}`,afterMomentId:`moment-${n+1}`,title:`Step ${n}`,intent:'Align the edge',visibleChange:'A visible authored change',sensoryCue:'',recoveryCue:'Pause if the edge drifts'});return s;}
+
+function study(){const a=source(),b=source(); b.clip.sha256='b'.repeat(64);for(const m of b.moments)m.origin.clip.sha256=b.clip.sha256;b.steps[0].sensoryCue='Resistance changes';return {format:DECISION_COMPARISON_FORMAT,examples:[{source:a,stepId:'step-1'},{source:b,stepId:'step-1'}],relationship:'unresolved',explanation:''};}
+
+import {createAccountQuestion,importAccountQuestion,inspectAccountQuestion} from '../src/account-question.mjs';
+const input={field:'sensoryCue',exampleIndices:[0,1],judgment:'unresolved',basis:'Only one account supplies a cue',question:'Was resistance also relevant in the first demonstration?'};
+
+import {createAccountReply,inspectAccountReply,importAccountReply} from '../src/account-reply.mjs';
+const answer={exampleIndex:0,kind:'explanation',answer:'The first clip omitted the tactile cue from its notes.',suppliedBy:'Declared demonstrator',basis:'Explicit authored test control'};
+
+import {createReplyComparison,importReplyComparison,inspectReplyComparison,selectComparedReply} from '../src/reply-comparison.mjs';
+function replies(c,q){return ['Feel resistance increase','Pause when resistance decreases'].map((replacement,i)=>createAccountReply(c,q,{...answer,kind:'proposed-amendment',replacement,authorConfirmed:true,suppliedBy:`Declared author ${i+1}`}));}
+test('competing attributed accounts retain original source and every answer without a winner',()=>{const c=study(),q=createAccountQuestion(c,input),raw=replies(c,q),before=JSON.stringify({c,raw}),s=createReplyComparison(c,q,raw),f=inspectReplyComparison(c,s);assert.deepEqual(f.alternatives.map(a=>a.reply.suppliedBy),['Declared author 1','Declared author 2']);assert.deepEqual(f.alternatives.map(a=>a.amendedSource.steps[0].sensoryCue),raw.map(r=>r.replacement));assert.equal(f.preferredReply,null);assert.equal(JSON.stringify({c,raw}),before);assert.deepEqual(importReplyComparison(c,JSON.parse(JSON.stringify(s))),s);});
+test('explicit selection returns maintained reply with original source binding, not composite amendment',()=>{const c=study(),q=createAccountQuestion(c,input),raw=replies(c,q),s=createReplyComparison(c,q,raw);assert.deepEqual(selectComparedReply(c,s,1),raw[1]);assert.throws(()=>selectComparedReply(c,s,2));});
+test('withdrawal and explanation retain distinct meanings beside proposed changes',()=>{const c=study(),q=createAccountQuestion(c,input),raw=replies(c,q);raw.push(createAccountReply(c,q,{...answer,exampleIndex:1,kind:'withdrawal',authorConfirmed:true}));raw.push(createAccountReply(c,q,answer));const f=inspectReplyComparison(c,createReplyComparison(c,q,raw));assert.equal(f.alternatives[2].amendedSource.steps[0].sensoryCue,'');assert.equal(f.alternatives[3].amendedSource,undefined);});
+test('mismatched question/source, duplicate replies and capacity refuse',()=>{const c=study(),q=createAccountQuestion(c,input),raw=replies(c,q);assert.throws(()=>createReplyComparison(c,q,[raw[0],raw[0]]));assert.throws(()=>createReplyComparison(c,q,[raw[0]]));assert.throws(()=>createReplyComparison(c,q,[...raw,...Array.from({length:5},(_,i)=>({...raw[0],suppliedBy:String(i)}))]));assert.throws(()=>createReplyComparison(c,{...q,question:'Different'},raw));const s=createReplyComparison(c,q,raw),changed=structuredClone(c);changed.examples[0].source.steps[0].intent='Changed';assert.throws(()=>importReplyComparison(changed,s));});
+
+test('sparse native reply arrays cannot stand for retained testimony',()=>{const c=study(),q=createAccountQuestion(c,input),raw=replies(c,q);for(const sparse of [Array(2),[raw[0],,]])assert.throws(()=>createReplyComparison(c,q,sparse));const value=createReplyComparison(c,q,raw);value.replies=Array(2);assert.throws(()=>importReplyComparison(c,value));});
