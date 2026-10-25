@@ -3,9 +3,17 @@ import {importCueStudy,inspectCueStudy} from './cue-sufficiency.mjs';
 /** Retrospective categorical support, never an action rule or accuracy estimate. */
 export function inspectCueSupport(value){
  const study=importCueStudy(value);
+ const identities=study.comparison.examples.map(({source,stepId})=>{
+  const step=source.steps.find(s=>s.id===stepId);
+  return JSON.stringify([source.clip.sha256,...[step.beforeMomentId,step.afterMomentId].map(id=>{
+   const moment=source.moments.find(m=>m.id===id);
+   return [moment.image.sha256,moment.origin.mediaTimeSeconds];
+  })]);
+ });
  return {omissions:study.rows.map((held,index)=>{
-  if(study.rows.length<3)return {index,status:'insufficient-other-examples',heldDecision:held.decision,combinations:[]};
-  const indexes=study.rows.map((_,i)=>i).filter(i=>i!==index);
+  const omittedIndexes=identities.flatMap((identity,i)=>identity===identities[index]?[i]:[]);
+  const indexes=study.rows.map((_,i)=>i).filter(i=>!omittedIndexes.includes(i));
+  if(indexes.length<2)return {index,omittedIndexes,status:'insufficient-other-examples',heldDecision:held.decision,combinations:[]};
   const training={...study,comparison:{...study.comparison,examples:indexes.map(i=>study.comparison.examples[i])},rows:indexes.map(i=>study.rows[i])};
   const findings=inspectCueStudy(training);
   const combinations=findings.minimalCueSets.map(cueIds=>{
@@ -24,7 +32,8 @@ export function inspectCueSupport(value){
    const comparison=held.decision===null?'held-label-unknown':!exact.length?'no-exact-support':labels.every(label=>label===held.decision)?'same-declared-label':'opposing-declared-label';
    return {cueIds:[...cueIds],exact,unknownCompatible,excluded,exactLabels:labels,comparison};
   });
-  return {index,status:findings.status,heldDecision:held.decision,combinations};
- }),boundary:'Each example is omitted from the categorical separation calculation. Exact matches are other retained declarations, not independent measurements, predictions, evidence of causation or a guarantee for unseen situations. Unknown-compatible rows provide no exact support. No learning or physical-skill score is calculated.'};
+  return {index,omittedIndexes,status:findings.status,heldDecision:held.decision,combinations};
+ }),boundary:'Each example and renamed copies of its original clip, ordered frame hashes and presented times are omitted together from the categorical separation calculation. Different evidence may still be correlated. Exact matches are other retained declarations, not independent measurements, predictions, evidence of causation or a guarantee for unseen situations. Unknown-compatible rows provide no exact support. No learning or physical-skill score is calculated.'};
 }
+
 

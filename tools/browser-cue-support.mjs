@@ -32,6 +32,20 @@ try{
  const bad=structuredClone(saved);bad.study.comparison.examples[0].source.steps[0].intent='Changed';await writeFile(out+'/bad.json',JSON.stringify(bad));await(await p.$('#open')).uploadFile(out+'/bad.json');await p.waitForFunction(()=>document.getElementById('error').textContent.includes('refused'));assert.equal(await p.$$eval('#examples img',a=>a.length),8);checks.push('mismatched retained source refuses transactionally');
  await p.evaluate(()=>{document.getElementById('open').value='';const old=File.prototype.text;File.prototype.text=function(){if(this.name==='cue-study.json')return new Promise(resolve=>{window.releaseRead=async()=>resolve(await old.call(this));});return old.call(this);};});await(await p.$('#open')).uploadFile(out+'/cue-study.json');await p.waitForFunction(()=>!!window.releaseRead);await p.$eval('#cues input',e=>{e.value='Newer cue';e.dispatchEvent(new Event('input'));});await p.evaluate(()=>window.releaseRead());await new Promise(r=>setTimeout(r,150));assert.equal(await p.$eval('#cues input',e=>e.value),'Newer cue');checks.push('delayed import cannot replace a newer cue declaration');
  await p.evaluate(()=>{const rows=[['A','0','1'],['A','0','0'],['B','1','1'],['B','1','1']];document.querySelectorAll('#examples article').forEach((article,i)=>{const inputs=article.querySelectorAll('input');for(const [j,value] of [[0,rows[i][0]],[2,rows[i][1]],[3,rows[i][2]]]){inputs[j].value=value;inputs[j].dispatchEvent(new Event('input'));}});});await p.click('#support');const first=await p.$eval('#support-results section',e=>e.textContent);assert.match(first,/same-declared-label/);assert.match(first,/opposing-declared-label/);checks.push('alternative cue subsets retain opposing exact-label accounts without choosing a rule');await p.screenshot({path:out+'/support-narrow.png',fullPage:true});
+ const duplicated=structuredClone(saved);
+ duplicated.study.rows=[{decision:'A',basis:'Authored',values:['0','0']},{decision:'A',basis:'Authored',values:['0','0']},{decision:'B',basis:'Authored',values:['1','1']},{decision:'B',basis:'Authored',values:['1','1']}];
+ duplicated.study.comparison.examples[1]=structuredClone(duplicated.study.comparison.examples[0]);
+ duplicated.study.comparison.examples[1].source.steps[0].id='renamed-copy';duplicated.study.comparison.examples[1].stepId='renamed-copy';
+ duplicated.comparison.study=structuredClone(duplicated.study.comparison);
+ duplicated.comparison.sources[1]=structuredClone(duplicated.comparison.sources[0]);duplicated.comparison.sources[1].sequence.steps[0].id='renamed-copy';
+ await writeFile(out+'/duplicated.json',JSON.stringify(duplicated));
+ await(await p.$('#open')).uploadFile(out+'/duplicated.json');await p.waitForFunction(()=>document.querySelector('#cues input')?.value==='Texture');
+ await p.click('#support');const duplicateResult=await p.$eval('#support-results section',e=>e.textContent);
+ assert.match(duplicateResult,/Original-evidence rows withheld together: 1, 2/);assert.match(duplicateResult,/no-decision-contrast/);assert.doesNotMatch(duplicateResult,/same-declared-label/);
+ checks.push('renamed identical original evidence withheld together through complete source importer');
+ await(await p.$('#support-results section')).screenshot({path:out+'/duplicate-narrow.png'});
+ await p.setViewport({width:1280,height:900});await(await p.$('#support-results section')).screenshot({path:out+'/duplicate-desktop.png'});
  assert.deepEqual(errors,[]);await writeFile(out+'/receipt.json',JSON.stringify({checks,errors},null,2));console.log(checks);
 }finally{await browser?.close();await new Promise(r=>server.close(r));}
+
 
