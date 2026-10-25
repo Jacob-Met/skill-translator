@@ -1,0 +1,37 @@
+// Actual receiver: authored raw practice -> condition-set UI -> download/reopen.
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {createRequire} from 'node:module';
+import {mkdir,writeFile,readdir,readFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createPractice,placePractice,retryPractice} from '../src/practice.mjs';
+import {importConditionOutcomes} from '../src/condition-outcomes.mjs';
+import {createAppServer} from '../server.mjs';
+const require=createRequire(import.meta.url),puppeteer=require(process.env.PUPPETEER_PATH||'puppeteer');
+const output=resolve(process.env.QA_OUTPUT||'/tmp/condition-family-receiving');await mkdir(output,{recursive:true});
+const {raw}=await import('../test/condition-outcomes-fixture.mjs');
+const original={format:'skill-translator.condition-outcomes/v1',conditions:structuredClone(raw),includePointScore:false,judgments:['acceptable','unacceptable','unknown','unknown'].map((outcome,i)=>({round:i+1,outcome,basis:'Authored prototype control'}))};
+original.conditions.session.attempts=[{id:'m0',xMm:20,yMm:50},{id:'m1',xMm:50,yMm:50},{id:'m2',xMm:50,yMm:71}];
+const input=resolve(output,'input.json');await writeFile(input,JSON.stringify(original));
+const server=createAppServer();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const baseUrl=`http://127.0.0.1:${server.address().port}`;
+let browser;
+try{
+browser=await puppeteer.launch({headless:true,executablePath:process.env.CHROME_BINARY,args:[]});
+const page=await browser.newPage(),errors=[],responses=[],sourceHashes={};page.on('pageerror',e=>errors.push(e.message));
+page.on('response',response=>{if(response.url().startsWith(baseUrl)&&['document','script','stylesheet'].includes(response.request().resourceType()))responses.push((async()=>{assert(response.status()===200,'Successful source response: '+response.url());const bytes=await response.buffer();sourceHashes[new URL(response.url()).pathname]=createHash('sha256').update(bytes).digest('hex');})());});
+ const processArgs=browser.process().spawnargs;assert(!processArgs.some(arg=>/^--(no-sandbox|disable-setuid-sandbox)/.test(arg)),'Browser sandbox must remain enabled');
+ await page.setViewport({width:1280,height:900});
+ await page.goto(baseUrl+'/condition-outcomes');await Promise.all([page.waitForNavigation(),page.click('a[href="/condition-family"]')]);await(await page.$('#open')).uploadFile(input);await page.waitForFunction(()=>!document.querySelector('#workspace').hidden);
+ await page.select('#round','4');assert((await page.$eval('#prediction',e=>e.textContent)).includes('disagreement. 1 hold; 1 fail; 0 unresolved'));assert.equal(await page.$$eval('#combination option',x=>x.length),2);
+ assert.deepEqual(await page.select('#hypothetical','acceptable'),['acceptable']);await page.click('#preview');assert((await page.$eval('#preview-summary',e=>e.textContent)).includes('1 alternatives remain'));assert((await page.$eval('#preview-results',e=>e.textContent)).includes('3: Length + Offset — eliminated'));assert.deepEqual(await page.select('#hypothetical','unacceptable'),['unacceptable']);assert.equal(await page.$eval('#preview-results',e=>e.textContent),'');await page.click('#preview');assert((await page.$eval('#preview-results',e=>e.textContent)).includes('1: Length — eliminated'));
+ await page.select('#combination','3');assert((await page.$eval('#witnesses',e=>e.textContent)).includes('Offset: outside'));await page.screenshot({path:resolve(output,'desktop.png'),fullPage:true});
+ const cdp=await page.createCDPSession();await cdp.send('Browser.setDownloadBehavior',{behavior:'allow',downloadPath:output});await page.click('#save');let file;for(let i=0;i<100;i++){file=(await readdir(output)).find(f=>f==='original-condition-outcomes.json');if(file)break;await new Promise(r=>setTimeout(r,50));}assert(file);assert.deepEqual(JSON.parse(await readFile(resolve(output,file),'utf8')),original);
+ await page.setViewport({width:390,height:844});await page.reload();await(await page.$('#open')).uploadFile(resolve(output,file));await page.waitForFunction(()=>!document.querySelector('#workspace').hidden);await page.select('#round','4');assert.deepEqual(await page.select('#hypothetical','acceptable'),['acceptable']);await page.focus('#preview');await page.keyboard.press('Enter');assert((await page.$eval('#preview-summary',e=>e.textContent)).includes('1 alternatives remain'));assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:resolve(output,'narrow.png'),fullPage:true});
+ const missing=structuredClone(original);missing.conditions=raw;await writeFile(resolve(output,'missing.json'),JSON.stringify(missing));await(await page.$('#open')).uploadFile(resolve(output,'missing.json'));await page.waitForFunction(()=>document.querySelector('#open').value==='');await page.select('#round','4');assert((await page.$eval('#prediction',e=>e.textContent)).includes('unresolved. 1 hold; 0 fail; 1 unresolved'));assert.deepEqual(await page.select('#hypothetical','unacceptable'),['unacceptable']);await page.click('#preview');assert((await page.$eval('#preview-results',e=>e.textContent)).includes('unresolved geometry survives either judgment'));
+ const noContrast=structuredClone(original);noContrast.judgments.forEach(j=>j.outcome='unknown');await writeFile(resolve(output,'no-contrast.json'),JSON.stringify(noContrast));await(await page.$('#open')).uploadFile(resolve(output,'no-contrast.json'));await page.waitForFunction(()=>document.querySelector('#summary').textContent.includes('No opposing'));assert((await page.$eval('#prediction',e=>e.textContent)).includes('insufficient-contrast'));
+ const bad=structuredClone(original);bad.conditions.source.landmarks[0].toleranceMm=3;await writeFile(resolve(output,'bad.json'),JSON.stringify(bad));await(await page.$('#open')).uploadFile(resolve(output,'bad.json'));await page.waitForFunction(()=>document.querySelector('#error').textContent.includes('differ'));assert((await page.$eval('#summary',e=>e.textContent)).includes('No opposing'));
+ await page.evaluate(()=>{window.savedRead=File.prototype.text;File.prototype.text=async function(){const value=await window.savedRead.call(this);window.pending=true;await new Promise(r=>window.release=r);return value;};});await(await page.$('#open')).uploadFile(input);await page.waitForFunction(()=>window.pending);assert.deepEqual(await page.select('#hypothetical','acceptable'),['acceptable']);await page.evaluate(()=>window.release());await new Promise(r=>setTimeout(r,50));assert((await page.$eval('#summary',e=>e.textContent)).includes('No opposing'));assert.equal(await page.$eval('#preview-results',e=>e.textContent),'');await page.evaluate(()=>File.prototype.text=window.savedRead);
+ await Promise.all(responses);assert.deepEqual(errors,[]);await writeFile(resolve(output,'browser.json'),JSON.stringify({passed:8,checks:['complete-family disagreement hidden by minimal-only view','explicit reciprocal elimination previews','exact criterion witnesses','unchanged original actual download','390px keyboard reopen','unresolved geometry survives both labels','insufficient contrast and invalid-source preservation','newer hypothetical edit fences delayed import'],sourceHashes,browserVersion:await browser.version(),errors},null,2));console.log('Eight actual condition-family receiving groups passed.');
+
+}finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}

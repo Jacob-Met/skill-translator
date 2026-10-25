@@ -1,0 +1,15 @@
+{
+  "parent": "d72c31d3ebbb6be9311acd5f75bf89edfee2a0c5",
+  "verifiedUpstreamGitBlobs": 25,
+  "preservedUpstreamRoutes": 258,
+  "distinctComposedRoutes": 261,
+  "serverSha256": "f0cc3098cc578e0a42993432b22b5a107a779804c4890516579b3917f5e6d40e",
+  "verification": "coordination/skill-166-check-route-composition.mjs checked all upstream mappings/asset existence and exact-byte GET, bodyless HEAD, MIME and CSP for161/166 and affected upstream routes. Loopback execution approved by automatic review.",
+  "browserGroups": 8,
+  "composedScreensByteIdenticalToRetained": {
+    "desktop.png": "2fae863a9ba026910ff2ecea4a61fc35f570af1b865515d3c541d20d01ccca5c",
+    "narrow.png": "a26ea5a3f983bcbd5c8e507f9dcadcfce2eb3cce46a1ce6f8349af81feefed17"
+  },
+  "duplicateScreenshotFilesRemovedOnlyAfterByteEquality": true,
+  "qualifiedNativeDependenciesChanged": false
+}
