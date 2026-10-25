@@ -1,15 +1,18 @@
+import {mountPathTimingPlayback} from '/web/path-timing-playback.mjs';
 import {createPathTiming,inspectPathTiming} from '/src/path-timing.mjs';
 import {readTimingPath,readPathTimingBundle,makePathTimingBundle} from '/web/path-timing-input.mjs';
 import {releaseSequenceAssets} from '/web/sequence-input.mjs';
 const $=id=>document.getElementById(id);
 const state={left:null,right:null,study:null,leftAssets:new Map(),rightAssets:new Map()};let generation=0;
 const pending={left:null,right:null,study:null};
+const playback=mountPathTimingPlayback($('clip-playback'));
 function invalidate(){generation++;for(const kind of ['left','right','study']){pending[kind]?.abort();pending[kind]=null;}}
 const say=message=>{$('status').textContent=message;};
 const fmt=value=>Number(value.toPrecision(6)).toString();
 function node(tag,text,parent){const element=document.createElement(tag);if(text!==undefined)element.textContent=text;if(parent)parent.append(element);return element;}
 function pair(list,key,value){node('dt',key,list);node('dd',value,list);}
 function render(){
+ playback.update(state.study);
  $('sources').textContent=['left','right'].map((side,index)=>`${index===0?'First':'Second'}: ${state[side]?.sequence.title??'not loaded'}`).join(' · ');
  $('match-fields').disabled=!(state.left&&state.right);
  $('remove').disabled=!state.study?.correspondences.length;$('save').disabled=!state.study;
