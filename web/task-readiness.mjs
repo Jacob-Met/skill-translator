@@ -19,13 +19,28 @@ function author(){
     const details=el('details');details.append(el('summary','Inspect retained before/after evidence'));
     for(const id of [step.beforeMomentId,step.afterMomentId]){const m=evidence.sequence.moments.find(x=>x.id===id),fig=el('figure'),img=el('img');img.src=evidence.urlFor(id);img.alt=m.label;fig.append(img,el('figcaption',`${m.label} · ${m.origin.mediaTimeSeconds}s · ${m.visibleState}`));details.append(fig);}field.append(details);
     for(const edge of declaration.dependencies.filter(e=>e.after===step.id))field.append(el('p',`Declared prerequisite: ${evidence.sequence.steps.find(s=>s.id===edge.before).title} — ${edge.reason}`));
-    for(const [key,title] of [['prompt','Observable completion check'],['basis','Expert explanation of this check']]){const label=el('label',title),input=el('textarea');input.className=key;input.maxLength=1600;label.append(input);field.append(label);}
     const after=evidence.sequence.moments.find(m=>m.id===step.afterMomentId);
-    if(after.calibratedTask){
-      const label=el('label','Use all placement tolerances from this calibrated after-state as the check '),binding=el('input');binding.type='checkbox';binding.className='placement-binding';label.prepend(binding);field.append(label);
-      for(const [key,title,value] of [['widthMm','Practice width (mm)',after.calibratedTask.source.widthMm],['heightMm','Practice height (mm)',after.calibratedTask.source.heightMm]]){const label=el('label',title),input=el('input');input.type='number';input.step='any';input.className=key;input.value=value;label.append(input);field.append(label);}
-      field.append(el('p','This explicit binding replaces a manual result with a computed geometric criterion only. Other physical completion conditions require separate reported checks.'));
+    const checks=el('div');checks.className='completion-checks';
+    const add=el('button','Add another completion check');add.type='button';add.className='add-completion-check';let nextCheck=1;
+    function updateCheckControls(){
+      const rows=[...checks.children];add.disabled=rows.length>=8;
+      rows.forEach((row,index)=>{const title=`Completion check ${index+1} of ${rows.length}`;row.querySelector('.check-title').textContent=title;row.setAttribute('aria-label',title);row.querySelector('.remove-completion-check').disabled=rows.length===1;});
     }
+    function addCheck(focus=false){
+      if(checks.children.length>=8)return;
+      const row=el('div');row.className='completion-check';row.setAttribute('role','group');row.dataset.checkId=nextCheck===1?'completion':`completion-${nextCheck}`;nextCheck++;
+      const title=el('h4','Completion check');title.className='check-title';row.append(title);
+      for(const [key,title] of [['prompt','Observable completion check'],['basis','Expert explanation of this check']]){const label=el('label',title),input=el('textarea');input.className=key;input.maxLength=1600;label.append(input);row.append(label);}
+      if(after.calibratedTask){
+        const label=el('label','Use all placement tolerances from this calibrated after-state for this check '),binding=el('input');binding.type='checkbox';binding.className='placement-binding';label.prepend(binding);row.append(label);
+        for(const [key,title,value] of [['widthMm','Practice width (mm)',after.calibratedTask.source.widthMm],['heightMm','Practice height (mm)',after.calibratedTask.source.heightMm]]){const label=el('label',title),input=el('input');input.type='number';input.step='any';input.className=key;input.value=value;label.append(input);row.append(label);}
+      }
+      const remove=el('button','Remove this draft check');remove.type='button';remove.className='remove-completion-check';
+      remove.addEventListener('click',()=>{if(checks.children.length===1)return;const index=[...checks.children].indexOf(row);row.remove();revision++;updateCheckControls();const remaining=checks.children[Math.min(index,checks.children.length-1)];remaining.querySelector('.prompt').focus();});
+      row.append(remove);checks.append(row);updateCheckControls();if(focus)row.querySelector('.prompt').focus();
+    }
+    add.addEventListener('click',()=>{if(checks.children.length>=8)return;revision++;addCheck(true);});
+    addCheck();field.append(checks,add,el('p','Declare 1–8 distinct checks. Every check needs its own evidence before this step receives completion credit. A geometric result does not supply a separate material, support or other physical observation.'));
     $('definitions').append(field);
   }
   $('authoring').hidden=false;$('lesson').hidden=true;
@@ -66,7 +81,7 @@ $('source-file').addEventListener('change',e=>load(e.target.files[0],false));
 $('study-file').addEventListener('change',e=>load(e.target.files[0],true));
 for(const id of ['authoring','lesson'])$(id).addEventListener('input',()=>{revision++;});
 $('freeze').addEventListener('click',guard(()=>{
-  const definitions=[...$('definitions').children].map(f=>({stepId:f.dataset.stepId,checks:[{id:'completion',prompt:f.querySelector('.prompt').value,basis:f.querySelector('.basis').value,...(f.querySelector('.placement-binding')?.checked?{placement:{widthMm:Number(f.querySelector('.widthMm').value),heightMm:Number(f.querySelector('.heightMm').value)}}:{})}]}));
+  const definitions=[...$('definitions').children].map(f=>({stepId:f.dataset.stepId,checks:[...f.querySelector('.completion-checks').children].map(row=>({id:row.dataset.checkId,prompt:row.querySelector('.prompt').value,basis:row.querySelector('.basis').value,...(row.querySelector('.placement-binding')?.checked?{placement:{widthMm:Number(row.querySelector('.widthMm').value),heightMm:Number(row.querySelector('.heightMm').value)}}:{})}))}));
   study=createReadiness(evidence.sequence,declaration,definitions);revision++;render();message('Declarations frozen. The observation journal starts empty.');
 }));
 $('step').addEventListener('change',()=>{revision++;populateChecks();resetDrafts();clearReveal();});
@@ -109,3 +124,4 @@ $('retain-practice').addEventListener('click',guard(()=>{
   study=recordReadiness(evidence.sequence,study,{type:'practice',stepId:$('step').value,checkId:$('check').value,note:$('note').value,session:practiceDraft.session});
   revision++;resetObservation();render();message('Raw practice evidence retained. The geometric check and downstream credit were recomputed.');
 }));
+
