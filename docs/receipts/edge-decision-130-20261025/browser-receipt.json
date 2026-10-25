@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "kind": "Actual source evidence with authored UI actions, not an observed learner trial",
+  "tests": [
+    "actual reviewed-study download hands original source into neutral step setup; all after-derived content withheld",
+    "draft survives evidence request; first answer locks; after evidence reveals with distinct assistance chronology",
+    "a newer reflection draft retires pending whole-source export and cannot be silently omitted",
+    "original five PNGs/reports and first response plus evidence-linked reconsideration survive real save/reopen",
+    "wrong original report identity refuses transactionally without replacing accepted exercise",
+    "390px source-frame reasoning and retained reflection fit",
+    "missing after evidence remains unknown; reveal-first assistance survives later uncertainty response",
+    "newer learner observation retires delayed full exercise import and preserves accepted source",
+    "59candidate inspections preserve both disclosures and complete prediction/reveal/reflection at64events"
+  ],
+  "errors": []
+}

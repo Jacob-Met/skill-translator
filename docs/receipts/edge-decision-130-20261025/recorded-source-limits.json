@@ -1,0 +1,27 @@
+{
+  "sourceVideoSha256": "7dd438a32071a1ed2903841be9b207f0565cb17a31413d6812bd85e6dd2c6d4d",
+  "crossings": {
+    "allPairs": 26009,
+    "nonparallelCrossings": 46,
+    "unsupportedCrossings": 0
+  },
+  "productionAxialGapTest": {
+    "candidatePopulation": 474,
+    "candidatesWithGaps": 34,
+    "gaps": 44
+  },
+  "laterExploratoryLimit": {
+    "additionalProjectionMidpointsChecked": 106236,
+    "additionalUnsupportedMidpoints": 4,
+    "diskUnionProposalsWithExactWitnessValidation": {
+      "candidatesWithWitnesses": 45,
+      "witnesses": 59,
+      "newlyAffectedCandidateCount": 11,
+      "newGapApproximatePixelRange": [
+        0.00019367688881288928,
+        0.4694407825658142
+      ]
+    }
+  },
+  "decision": "No new gap classifier promoted; original sufficient-only limits retained in learner journey. No physical interpretation or continuity claim."
+}
