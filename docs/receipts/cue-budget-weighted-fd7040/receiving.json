@@ -1,0 +1,31 @@
+{
+  "base": "055a1982424f57c7b46ce2ab74fa4692c59e2c72",
+  "workerSource": "ef512837641f1b6ebdf33b9f72437d88a3a86be6",
+  "runtime": "Node22.23.4 / Linux",
+  "commands": [
+    "npm test",
+    "node docs/receipts/cue-budget-weighted-fd7040/receive-independent.mjs"
+  ],
+  "native": {
+    "tests": 813,
+    "passed": 813,
+    "failed": 0,
+    "skipped": 0
+  },
+  "independent": {
+    "source": "ef512837641f1b6ebdf33b9f72437d88a3a86be6",
+    "seed": 267117,
+    "independentTables": 60,
+    "budgetPairs": 420,
+    "branchThresholds": "all verified",
+    "status": "passed"
+  },
+  "sha256": {
+    "src/cue-budget.mjs": "db0eb16e56589c629d6008f6843e5da7131d0b805a29c67968870127f0102d5c",
+    "tools/inspect-cue-budget.mjs": "efc0df2177fa2037b7b52972d70fc64794be86f67cdad16443e411f8e1e00883",
+    "docs/CUE_BUDGET.md": "1a903ad8270d8da5abb7b683f41e42d092e7da088a85ec2736ab1f999e7d909b",
+    "test/cue-budget-effort.test.mjs": "881389d3bf7c183ba3cd1c4c8a93dd9a0d1f59e959cf9defbf005f1bb6e8f65c"
+  },
+  "review": "MATERIALTRUTH worker independently reviewed sparse attainable-effort thresholds and complete policy frontier, including all branch continuations. Actual CLI weighted reading and refusal controls executed.",
+  "limits": "Declared effort units and authored categorical cue evidence; no physical skill benefit, probability or original PNG-byte authentication claim."
+}
