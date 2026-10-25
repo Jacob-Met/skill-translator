@@ -80,9 +80,9 @@
       "bytes": 1238
     },
     "server.mjs": {
-      "git_blob": "4d41886d55188ea733c897fdc3e288f218199566",
-      "sha256": "3cbdb6f23e5d1b2b165e2ff47990d1c4bf4b98c1c8bfd6e31741abe64927aade",
-      "bytes": 32002
+      "git_blob": "0259918d7fea8e1d20c2b400bb9089a089f640fc",
+      "sha256": "d845c95e6f6e64efb642db92297e7c9c9670a161034c8dbad0b3ef82d6b9c4cd",
+      "bytes": 32409
     },
     "tools/browser-cue-questions.mjs": {
       "git_blob": "fc102a3962217e9512d6d8197f94e9fcfc89c263",
@@ -94,5 +94,7 @@
       "sha256": "a44f5ed75a48547a3f4db224e34f3bded637cf6a01573f185edb3b7f73288255",
       "bytes": 2959
     }
-  }
+  },
+  "composition_base": "ffde5b5e7e1e55b19288f84c5a0127acfd1846cb",
+  "refresh": "Concurrent path-timing contribution adds5independent route entries and its own consumer. Preserve all current routes; all cue/question/support runtime dependencies remain unchanged. No missing source result is counted as a pass."
 }
