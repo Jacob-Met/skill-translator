@@ -1,9 +1,9 @@
 {
   "format": "hamon-integration-receipt/v1",
   "issue": "https://github.com/Jacob-Met/skill-translator/issues/213",
-  "base": "99b2aaddc2e761b2ff71f96989be162567407f95",
+  "base": "bef0e1b2805d831d06d9dde4cc0c505c7e1ae0ce",
   "owner": "hamon-f6b2-estate-20261024",
-  "recordedAt": "2026-10-25T06:11:33.776Z",
+  "recordedAt": "2026-10-25T06:15:42.547Z",
   "environment": {
     "node": "22.23.4",
     "platform": "Linux x86_64",
@@ -15,8 +15,8 @@
     "PLAYWRIGHT_PATH=<installed Playwright> QA_DIR=<isolated receiving output> node tools/browser-path-timing.mjs"
   ],
   "native": {
-    "tests": 710,
-    "pass": 710,
+    "tests": 718,
+    "pass": 718,
     "fail": 0,
     "skipped": 0
   },
@@ -67,28 +67,22 @@
         "sourcePath": "src/sequence-path.mjs"
       },
       {
-        "path": "/web/sequence-input.mjs",
-        "bytes": 4361,
-        "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
-        "sourcePath": "web/sequence-input.mjs"
-      },
-      {
         "path": "/web/sampled-path-input.mjs",
         "bytes": 1803,
         "sha256": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3",
         "sourcePath": "web/sampled-path-input.mjs"
       },
       {
+        "path": "/web/sequence-input.mjs",
+        "bytes": 4361,
+        "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+        "sourcePath": "web/sequence-input.mjs"
+      },
+      {
         "path": "/src/demonstration-sequence.mjs",
         "bytes": 10025,
         "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
         "sourcePath": "src/demonstration-sequence.mjs"
-      },
-      {
-        "path": "/src/capture.mjs",
-        "bytes": 6096,
-        "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
-        "sourcePath": "src/capture.mjs"
       },
       {
         "path": "/src/geometry.mjs",
@@ -101,6 +95,12 @@
         "bytes": 1511,
         "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
         "sourcePath": "web/image-input.mjs"
+      },
+      {
+        "path": "/src/capture.mjs",
+        "bytes": 6096,
+        "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+        "sourcePath": "src/capture.mjs"
       },
       {
         "path": "/src/frame-origin.mjs",
@@ -127,16 +127,16 @@
         "sourcePath": "src/authoring.mjs"
       },
       {
-        "path": "/path-timing",
-        "bytes": 2735,
-        "sha256": "93295c704763e75a7a52f71dd079006e2f328c3b712009283c1dc3f1411e19ad",
-        "sourcePath": "web/path-timing.html"
-      },
-      {
         "path": "/web/path-timing.css",
         "bytes": 1635,
         "sha256": "8416c1044b286f20a8cf865d529da9af6b731456adf747a39a1483297b1f0986",
         "sourcePath": "web/path-timing.css"
+      },
+      {
+        "path": "/path-timing",
+        "bytes": 2735,
+        "sha256": "93295c704763e75a7a52f71dd079006e2f328c3b712009283c1dc3f1411e19ad",
+        "sourcePath": "web/path-timing.html"
       },
       {
         "path": "/web/path-timing.mjs",
@@ -187,22 +187,16 @@
         "sourcePath": "src/geometry.mjs"
       },
       {
-        "path": "/src/capture.mjs",
-        "bytes": 6096,
-        "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
-        "sourcePath": "src/capture.mjs"
-      },
-      {
         "path": "/web/image-input.mjs",
         "bytes": 1511,
         "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
         "sourcePath": "web/image-input.mjs"
       },
       {
-        "path": "/src/sequence-capture.mjs",
-        "bytes": 1672,
-        "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
-        "sourcePath": "src/sequence-capture.mjs"
+        "path": "/src/capture.mjs",
+        "bytes": 6096,
+        "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+        "sourcePath": "src/capture.mjs"
       },
       {
         "path": "/src/frame-origin.mjs",
@@ -211,16 +205,22 @@
         "sourcePath": "src/frame-origin.mjs"
       },
       {
-        "path": "/src/authoring.mjs",
-        "bytes": 1825,
-        "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
-        "sourcePath": "src/authoring.mjs"
-      },
-      {
         "path": "/src/capture-editing.mjs",
         "bytes": 3930,
         "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
         "sourcePath": "src/capture-editing.mjs"
+      },
+      {
+        "path": "/src/sequence-capture.mjs",
+        "bytes": 1672,
+        "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+        "sourcePath": "src/sequence-capture.mjs"
+      },
+      {
+        "path": "/src/authoring.mjs",
+        "bytes": 1825,
+        "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+        "sourcePath": "src/authoring.mjs"
       }
     ]
   },
@@ -269,9 +269,9 @@
     },
     {
       "path": "server.mjs",
-      "bytes": 32142,
-      "sha256": "ce2cf0664ef6c7a64a20dc4f239b0d36faf923d2c66b86080aeb1f6dfc96ebc3",
-      "gitBlob": "6df431c5e19a7cc3be9e8233f4b6c5ddcdb32ae6"
+      "bytes": 32225,
+      "sha256": "65316b416e84bc33dbbc0fe8fd83195b7ec3b2c688b20d2e3b74d06d76c89780",
+      "gitBlob": "0480b9521aee2ddf5822fda24488a1897e6158ea"
     },
     {
       "path": "web/sampled-path.html",
@@ -287,7 +287,7 @@
     }
   ],
   "visualReview": "Root inspected actual desktop and 390px narrow screenshots. Original frame previews, timing/geometry labels and unavailable geometry were visible.",
-  "preservedIncoming": "Composed current main 99b2aaddc2e761b2ff71f96989be162567407f95 including merged path-comparison, cue-sufficiency and reply-comparison; server routes are additive.",
+  "preservedIncoming": "Composed current main 99b2aaddc2e761b2ff71f96989be162567407f95 including merged path-comparison, cue-sufficiency and reply-comparison; server routes are additive. The later cue-support server conflict was resolved additively against bef0e1b2805d831d06d9dde4cc0c505c7e1ae0ce; the complete composed suite reran with 718 passes and the actual browser course reran with 13 passes.",
   "receivingCorrections": [
     "Review found ordinary overlapping left/right reads canceled one another. Independent per-input controllers now admit either completion order; whole-study replacement and accepted edits retire both.",
     "Initial full-suite materialization omitted two existing JSON receipt fixtures; their exact base blobs were supplied before final full-suite execution.",
