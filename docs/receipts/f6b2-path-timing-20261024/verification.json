@@ -1,0 +1,302 @@
+{
+  "format": "hamon-integration-receipt/v1",
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/213",
+  "base": "99b2aaddc2e761b2ff71f96989be162567407f95",
+  "owner": "hamon-f6b2-estate-20261024",
+  "recordedAt": "2026-10-25T06:11:33.776Z",
+  "environment": {
+    "node": "22.23.4",
+    "platform": "Linux x86_64",
+    "chrome": "156.0.8078.47",
+    "sandbox": "Direct Chrome with chromiumSandbox true; actual chrome://sandbox inspected"
+  },
+  "commands": [
+    "node --test test/*.test.mjs",
+    "PLAYWRIGHT_PATH=<installed Playwright> QA_DIR=<isolated receiving output> node tools/browser-path-timing.mjs"
+  ],
+  "native": {
+    "tests": 710,
+    "pass": 710,
+    "fail": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "groups": 13,
+    "passed": true,
+    "coverage": [
+      "actual-sampled-path-downloads-and-entry",
+      "explicit-timing",
+      "original-frame-preview",
+      "complete-download-reopen",
+      "forged-findings-ignored",
+      "corrupt-source-transaction",
+      "raw-account-refusal",
+      "overlap-refusal",
+      "missing-geometry",
+      "retired-read",
+      "mobile-and-remove",
+      "independent-overlapping-side-reads",
+      "accepted-edit-retires-both-replacements"
+    ],
+    "browser": "156.0.8078.47",
+    "source": "uncommitted receiving tree",
+    "pageErrors": [],
+    "responses": [
+      {
+        "path": "/sampled-path",
+        "bytes": 2988,
+        "sha256": "57708553c51eb1421e9bbce7c21cebf2094e18ed94c1ddbb0f1125953f88d3ba",
+        "sourcePath": "web/sampled-path.html"
+      },
+      {
+        "path": "/web/sampled-path.css",
+        "bytes": 1496,
+        "sha256": "5f656635563fd20ba8ccaf56098ee1666101b3f8e2e223085ed2de336c4b7ce6",
+        "sourcePath": "web/sampled-path.css"
+      },
+      {
+        "path": "/web/sampled-path.mjs",
+        "bytes": 9658,
+        "sha256": "71fbcd7eb9d2a87cbd9b6ffed9d6b57ccdccd7a45ae31dfd9643ec380abb1f39",
+        "sourcePath": "web/sampled-path.mjs"
+      },
+      {
+        "path": "/src/sequence-path.mjs",
+        "bytes": 8079,
+        "sha256": "45d8e5fbd143a9c25d51796c0cccb99d815569e42fb801b5fc83ec859183bda4",
+        "sourcePath": "src/sequence-path.mjs"
+      },
+      {
+        "path": "/web/sequence-input.mjs",
+        "bytes": 4361,
+        "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+        "sourcePath": "web/sequence-input.mjs"
+      },
+      {
+        "path": "/web/sampled-path-input.mjs",
+        "bytes": 1803,
+        "sha256": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3",
+        "sourcePath": "web/sampled-path-input.mjs"
+      },
+      {
+        "path": "/src/demonstration-sequence.mjs",
+        "bytes": 10025,
+        "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+        "sourcePath": "src/demonstration-sequence.mjs"
+      },
+      {
+        "path": "/src/capture.mjs",
+        "bytes": 6096,
+        "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+        "sourcePath": "src/capture.mjs"
+      },
+      {
+        "path": "/src/geometry.mjs",
+        "bytes": 7305,
+        "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+        "sourcePath": "src/geometry.mjs"
+      },
+      {
+        "path": "/web/image-input.mjs",
+        "bytes": 1511,
+        "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+        "sourcePath": "web/image-input.mjs"
+      },
+      {
+        "path": "/src/frame-origin.mjs",
+        "bytes": 3292,
+        "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+        "sourcePath": "src/frame-origin.mjs"
+      },
+      {
+        "path": "/src/sequence-capture.mjs",
+        "bytes": 1672,
+        "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+        "sourcePath": "src/sequence-capture.mjs"
+      },
+      {
+        "path": "/src/capture-editing.mjs",
+        "bytes": 3930,
+        "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+        "sourcePath": "src/capture-editing.mjs"
+      },
+      {
+        "path": "/src/authoring.mjs",
+        "bytes": 1825,
+        "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+        "sourcePath": "src/authoring.mjs"
+      },
+      {
+        "path": "/path-timing",
+        "bytes": 2735,
+        "sha256": "93295c704763e75a7a52f71dd079006e2f328c3b712009283c1dc3f1411e19ad",
+        "sourcePath": "web/path-timing.html"
+      },
+      {
+        "path": "/web/path-timing.css",
+        "bytes": 1635,
+        "sha256": "8416c1044b286f20a8cf865d529da9af6b731456adf747a39a1483297b1f0986",
+        "sourcePath": "web/path-timing.css"
+      },
+      {
+        "path": "/web/path-timing.mjs",
+        "bytes": 8442,
+        "sha256": "9d473dc5c30fb5e916e0052a4621d000d4e587cbd4950e0d608b84c82bfaa092",
+        "sourcePath": "web/path-timing.mjs"
+      },
+      {
+        "path": "/src/path-timing.mjs",
+        "bytes": 5679,
+        "sha256": "01063efa277feed5bf25f1c8282e21c88d81a893a484a1eb41ad4d57116adc53",
+        "sourcePath": "src/path-timing.mjs"
+      },
+      {
+        "path": "/web/path-timing-input.mjs",
+        "bytes": 2536,
+        "sha256": "feed8b1a9140ccc630acb471f36c8637128015bf93a51289eb324d8c5993eeb1",
+        "sourcePath": "web/path-timing-input.mjs"
+      },
+      {
+        "path": "/web/sequence-input.mjs",
+        "bytes": 4361,
+        "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+        "sourcePath": "web/sequence-input.mjs"
+      },
+      {
+        "path": "/src/sequence-path.mjs",
+        "bytes": 8079,
+        "sha256": "45d8e5fbd143a9c25d51796c0cccb99d815569e42fb801b5fc83ec859183bda4",
+        "sourcePath": "src/sequence-path.mjs"
+      },
+      {
+        "path": "/web/sampled-path-input.mjs",
+        "bytes": 1803,
+        "sha256": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3",
+        "sourcePath": "web/sampled-path-input.mjs"
+      },
+      {
+        "path": "/src/demonstration-sequence.mjs",
+        "bytes": 10025,
+        "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+        "sourcePath": "src/demonstration-sequence.mjs"
+      },
+      {
+        "path": "/src/geometry.mjs",
+        "bytes": 7305,
+        "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+        "sourcePath": "src/geometry.mjs"
+      },
+      {
+        "path": "/src/capture.mjs",
+        "bytes": 6096,
+        "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+        "sourcePath": "src/capture.mjs"
+      },
+      {
+        "path": "/web/image-input.mjs",
+        "bytes": 1511,
+        "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+        "sourcePath": "web/image-input.mjs"
+      },
+      {
+        "path": "/src/sequence-capture.mjs",
+        "bytes": 1672,
+        "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+        "sourcePath": "src/sequence-capture.mjs"
+      },
+      {
+        "path": "/src/frame-origin.mjs",
+        "bytes": 3292,
+        "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+        "sourcePath": "src/frame-origin.mjs"
+      },
+      {
+        "path": "/src/authoring.mjs",
+        "bytes": 1825,
+        "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+        "sourcePath": "src/authoring.mjs"
+      },
+      {
+        "path": "/src/capture-editing.mjs",
+        "bytes": 3930,
+        "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+        "sourcePath": "src/capture-editing.mjs"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "src/path-timing.mjs",
+      "bytes": 5679,
+      "sha256": "01063efa277feed5bf25f1c8282e21c88d81a893a484a1eb41ad4d57116adc53",
+      "gitBlob": "bd692bbc18ff1dbb5eddb27193d845ca5d1ec8f1"
+    },
+    {
+      "path": "web/path-timing.html",
+      "bytes": 2735,
+      "sha256": "93295c704763e75a7a52f71dd079006e2f328c3b712009283c1dc3f1411e19ad",
+      "gitBlob": "7a8d2abb6c716eb68c9e94fff24c9df24f90a1e1"
+    },
+    {
+      "path": "web/path-timing.css",
+      "bytes": 1635,
+      "sha256": "8416c1044b286f20a8cf865d529da9af6b731456adf747a39a1483297b1f0986",
+      "gitBlob": "a851c6acd7e6c47beedf0080989f498e4281ea1e"
+    },
+    {
+      "path": "web/path-timing-input.mjs",
+      "bytes": 2536,
+      "sha256": "feed8b1a9140ccc630acb471f36c8637128015bf93a51289eb324d8c5993eeb1",
+      "gitBlob": "d57a62a869b8653a3afcf8bc4f05483a811a2377"
+    },
+    {
+      "path": "web/path-timing.mjs",
+      "bytes": 8442,
+      "sha256": "9d473dc5c30fb5e916e0052a4621d000d4e587cbd4950e0d608b84c82bfaa092",
+      "gitBlob": "c1bc23510e1e7fa1be7623ffa2fefe33279ab159"
+    },
+    {
+      "path": "test/path-timing.test.mjs",
+      "bytes": 5608,
+      "sha256": "450c5ed3e6a091b54d823ad8500a0bdc4d9decd19605ffab4a274f768c907b6e",
+      "gitBlob": "35be8267601c2ec4d73e003b9821c6cb50893e31"
+    },
+    {
+      "path": "docs/PATH_TIMING.md",
+      "bytes": 3781,
+      "sha256": "f86b4adfe7656bfcba0f0d76391e6ab2f1c4d5484013aa18777274408c4b631c",
+      "gitBlob": "21df3f1f04f2cbaff0f641c45170474357314eaa"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 32142,
+      "sha256": "ce2cf0664ef6c7a64a20dc4f239b0d36faf923d2c66b86080aeb1f6dfc96ebc3",
+      "gitBlob": "6df431c5e19a7cc3be9e8233f4b6c5ddcdb32ae6"
+    },
+    {
+      "path": "web/sampled-path.html",
+      "bytes": 2988,
+      "sha256": "57708553c51eb1421e9bbce7c21cebf2094e18ed94c1ddbb0f1125953f88d3ba",
+      "gitBlob": "c1d9db0b526c82c130a75176db0cdd189f801a11"
+    },
+    {
+      "path": "tools/browser-path-timing.mjs",
+      "bytes": 10506,
+      "sha256": "17aeff6b0b5b25ec25f789f2547d774e74e25b25eb65120d72585e9791ef159a",
+      "gitBlob": "247216d2d3827053bf38fcdee767762d8367ee3c"
+    }
+  ],
+  "visualReview": "Root inspected actual desktop and 390px narrow screenshots. Original frame previews, timing/geometry labels and unavailable geometry were visible.",
+  "preservedIncoming": "Composed current main 99b2aaddc2e761b2ff71f96989be162567407f95 including merged path-comparison, cue-sufficiency and reply-comparison; server routes are additive.",
+  "receivingCorrections": [
+    "Review found ordinary overlapping left/right reads canceled one another. Independent per-input controllers now admit either completion order; whole-study replacement and accepted edits retire both.",
+    "Initial full-suite materialization omitted two existing JSON receipt fixtures; their exact base blobs were supplied before final full-suite execution.",
+    "Initial browser assertion used unsupported fieldset disabled semantics; the receiver now reads the actual disabled property. Initial failure logs remain in isolated receiving output."
+  ],
+  "limits": [
+    "Timing correspondence and planar references remain explicit user declarations; no automatic action alignment, physical skill, task success or efficiency claim.",
+    "Original authored PNGs qualify custody, decoding, export/import and retained timestamp arithmetic, not recorded physical performance.",
+    "Complete original sources and PNGs remain in the downloaded comparison. Missing selected geometry prevents complete chord rates; no interpolation bridges it.",
+    "No deployment or external submission."
+  ]
+}

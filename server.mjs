@@ -6,6 +6,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/path-timing':['web/path-timing.html','text/html; charset=utf-8'],
+  '/web/path-timing.mjs':['web/path-timing.mjs','text/javascript; charset=utf-8'],
+  '/web/path-timing.css':['web/path-timing.css','text/css; charset=utf-8'],
+  '/web/path-timing-input.mjs':['web/path-timing-input.mjs','text/javascript; charset=utf-8'],
+  '/src/path-timing.mjs':['src/path-timing.mjs','text/javascript; charset=utf-8'],
   "/cue-sufficiency":["web/cue-sufficiency.html","text/html; charset=utf-8"],
   "/src/cue-sufficiency.mjs":["src/cue-sufficiency.mjs","text/javascript; charset=utf-8"],
   "/web/cue-sufficiency.mjs":["web/cue-sufficiency.mjs","text/javascript; charset=utf-8"],

@@ -1,0 +1,53 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {setTimeout as pause} from 'node:timers/promises';
+import {createAppServer} from '../server.mjs';
+import {pathFixture,pathAccount} from '../test/helpers/sampled-path-fixture.mjs';
+const {chromium}=await import(process.env.PLAYWRIGHT_PATH||'playwright');
+const output=process.env.QA_DIR||'docs/receipts/path-timing-f6b2';await mkdir(output,{recursive:true});
+const server=createAppServer();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome-stable',chromiumSandbox:true});
+const page=await browser.newPage({viewport:{width:1100,height:850}}),errors=[],responses=[],responseTasks=[];page.on('pageerror',e=>errors.push(e.message));
+const base='http://127.0.0.1:'+server.address().port;
+page.on('response',response=>{if(response.url().startsWith(base)&&response.status()===200)responseTasks.push(response.body().then(bytes=>responses.push({path:new URL(response.url()).pathname,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')})));});
+const upload=async(id,value,name='input.json')=>page.locator('#'+id).setInputFiles({name,mimeType:'application/json',buffer:Buffer.from(JSON.stringify(value))});
+const poll=async(predicate,arg)=>{const deadline=Date.now()+15000;while(Date.now()<deadline){if(await page.evaluate(predicate,arg))return;await pause(40);}throw Error('Browser condition did not complete in time.');};
+async function downloadJson(button){const event=page.waitForEvent('download');await page.locator(button).click();const download=await event,stream=await download.createReadStream(),chunks=[];for await(const chunk of stream)chunks.push(chunk);return JSON.parse(Buffer.concat(chunks).toString());}
+try{
+ await page.goto('chrome://sandbox');const sandbox=await page.locator('body').innerText();assert.match(sandbox,/adequately sandboxed/i);await writeFile(output+'/sandbox.txt',sandbox);
+ await page.goto(base+'/sampled-path');
+ const generated=await page.evaluate(async()=>{const result=[];for(let i=0;i<3;i++){const canvas=document.createElement('canvas');canvas.width=640;canvas.height=420;const ctx=canvas.getContext('2d');ctx.fillStyle=['#dedbc9','#cedbc9','#c9d4db'][i];ctx.fillRect(0,0,640,420);ctx.fillStyle='#174739';ctx.fillRect(30+i*30,50,12,12);ctx.font='20px sans-serif';ctx.fillText('Authored browser control '+(i+1),80,100);const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png')),bytes=new Uint8Array(await blob.arrayBuffer()),hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),v=>v.toString(16).padStart(2,'0')).join('');result.push({image:{name:'frame-'+i+'.png',mimeType:'image/png',sha256:hash,widthPx:640,heightPx:420,pixelCoordinates:'browser-oriented'},pngBase64:canvas.toDataURL('image/png').split(',')[1]});}return result;});
+ function bundle(times,missing=[]){const sequence=pathFixture(undefined,{times,images:generated.map(x=>x.image)}),account=pathAccount(sequence,missing),{sequence:ignored,...path}=account;return {format:'skill-translator.sampled-path-bundle/v1',sourceBundle:{format:'skill-translator.sequence-bundle/v1',sequence,frames:sequence.moments.map((m,i)=>({momentId:m.id,pngBase64:generated[i].pngBase64}))},path};}
+ async function throughProducer(raw){await upload('input',raw);await poll(time=>!document.querySelector('#result').hidden&&JSON.parse(document.querySelector('#evidence').textContent).sequence.moments[0].origin.mediaTimeSeconds===time,raw.sourceBundle.sequence.moments[0].origin.mediaTimeSeconds);return downloadJson('#save');}
+ const left=await throughProducer(bundle([1,2,5])),right=await throughProducer(bundle([10,12,18]));
+ assert.equal(left.sourceBundle.frames[0].pngBase64,generated[0].pngBase64);assert.equal(right.sourceBundle.frames[2].pngBase64,generated[2].pngBase64);
+ await page.locator('a[href="/path-timing"]').click();
+ await page.evaluate(()=>{const original=File.prototype.text;File.prototype.text=function(){if(this.name==='left-delayed.json')return new Promise(resolve=>{window.releaseLeft=async()=>resolve(await original.call(this));});return original.call(this);};});
+ await upload('left-file',left,'left-delayed.json');await poll(()=>typeof window.releaseLeft==='function');
+ await upload('right-file',right);await poll(()=>document.querySelector('#sources').textContent.includes('Second: An authored'));
+ assert.equal(await page.locator('#match-fields').evaluate(element=>element.disabled),true);
+ await page.evaluate(()=>window.releaseLeft());await poll(()=>!document.querySelector('#match-fields').disabled);
+ assert.match(await page.locator('#sources').innerText(),/First: An authored.*Second: An authored/);
+ await page.locator('#label').fill('Whole sampled excursion');await page.locator('#basis').fill('Authored matching action endpoints');await page.locator('#match-form button').click();
+ await poll(()=>document.querySelector('#results').textContent.includes('Second / first elapsed time: 2×'));
+ assert.equal(await page.locator('#results img').count(),6);assert.equal(await page.locator('#results article').count(),1);
+ const saved=await downloadJson('#save');
+ assert.equal(saved.format,'skill-translator.path-timing-bundle/v1');assert.equal(saved.leftBundle.sourceBundle.frames.length,3);assert.equal(saved.rightBundle.sourceBundle.frames[2].pngBase64,generated[2].pngBase64);
+ saved.findings={elapsedRatio:999};await upload('study-file',saved);await poll(()=>document.querySelector('#status').textContent.includes('reopened'));assert.match(await page.locator('#results').innerText(),/elapsed time: 2×/);
+ await page.locator('#results details').first().evaluate(element=>element.open=true);await poll(()=>[...document.querySelectorAll('#results details:first-of-type img')].some(img=>img.complete&&img.naturalWidth===640));await page.screenshot({path:output+'/desktop.png',fullPage:true});
+ const corrupt=structuredClone(saved);corrupt.rightBundle.sourceBundle.frames[1].pngBase64=generated[0].pngBase64;await upload('study-file',corrupt);await poll(()=>document.querySelector('#status').textContent.includes('Not accepted:'));assert.match(await page.locator('#results').innerText(),/elapsed time: 2×/);
+ await upload('left-file',pathAccount());await poll(()=>document.querySelector('#status').textContent.includes('Not accepted:'));assert.match(await page.locator('#results').innerText(),/elapsed time: 2×/);
+ await page.locator('#label').fill('Overlapping invalid interval');await page.locator('#basis').fill('Negative control');await page.locator('#left-from').selectOption('moment-0');await page.locator('#right-from').selectOption('moment-0');await page.locator('#match-form button').click();assert.equal(await page.locator('#results article').count(),1);assert.match(await page.locator('#status').innerText(),/overlap/);
+ const missing=structuredClone(saved);missing.rightBundle.path.samples[1].markId=null;await upload('study-file',missing);await poll(()=>document.querySelector('#status').textContent.includes('reopened'));assert.match(await page.locator('#results').innerText(),/Unavailable: a selected observation is missing/);assert.match(await page.locator('#results').innerText(),/elapsed time: 2×/);
+ await page.evaluate(()=>{const original=File.prototype.text;File.prototype.text=function(){if(this.name==='delayed.json')return new Promise(resolve=>{window.releaseDelayed=async()=>resolve(await original.call(this));});return original.call(this);};});
+ await upload('study-file',saved,'delayed.json');await poll(()=>typeof window.releaseDelayed==='function');await upload('study-file',missing,'newer.json');await poll(()=>document.querySelector('#status').textContent.includes('reopened'));await page.evaluate(()=>window.releaseDelayed());await pause(100);assert.match(await page.locator('#results').innerText(),/Unavailable: a selected observation is missing/);
+ await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:output+'/narrow.png',fullPage:true});await page.locator('#results').scrollIntoViewIfNeeded();await page.screenshot({path:output+'/narrow-detail.png'});
+ await page.evaluate(()=>{window.releaseReplacements={};const original=File.prototype.text;File.prototype.text=function(){if(this.name==='replace-left.json'||this.name==='replace-right.json'){const file=this;return new Promise(resolve=>{window.releaseReplacements[file.name]=async()=>resolve(await original.call(file));});}return original.call(this);};});
+ const nextLeft=structuredClone(left),nextRight=structuredClone(right);nextLeft.sourceBundle.sequence.title='Retired left replacement';nextRight.sourceBundle.sequence.title='Retired right replacement';
+ await upload('left-file',nextLeft,'replace-left.json');await upload('right-file',nextRight,'replace-right.json');await poll(()=>Object.keys(window.releaseReplacements).length===2);
+ await page.locator('#remove').click();assert.equal(await page.locator('#results article').count(),0);assert.equal(await page.locator('#save').isDisabled(),true);assert.equal(await page.locator('#match-fields').evaluate(element=>element.disabled),false);
+ await page.evaluate(()=>Promise.all(Object.values(window.releaseReplacements).map(release=>release())));await pause(100);
+ assert.doesNotMatch(await page.locator('#sources').innerText(),/Retired/);assert.equal(await page.locator('#results article').count(),0);assert.equal(await page.locator('#match-fields').evaluate(element=>element.disabled),false);
+ await Promise.all(responseTasks);assert.deepEqual(errors,[]);const coverage=['actual-sampled-path-downloads-and-entry','explicit-timing','original-frame-preview','complete-download-reopen','forged-findings-ignored','corrupt-source-transaction','raw-account-refusal','overlap-refusal','missing-geometry','retired-read','mobile-and-remove','independent-overlapping-side-reads','accepted-edit-retires-both-replacements'];const receipt={groups:coverage.length,passed:true,coverage,browser:browser.version(),source:process.env.SOURCE_SHA||'uncommitted receiving tree',pageErrors:errors,responses};await writeFile(output+'/browser.json',JSON.stringify(receipt,null,2));console.log(JSON.stringify({...receipt,responses:responses.length}));
+}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

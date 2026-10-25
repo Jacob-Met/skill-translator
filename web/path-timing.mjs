@@ -1,0 +1,71 @@
+import {createPathTiming,inspectPathTiming} from '/src/path-timing.mjs';
+import {readTimingPath,readPathTimingBundle,makePathTimingBundle} from '/web/path-timing-input.mjs';
+import {releaseSequenceAssets} from '/web/sequence-input.mjs';
+const $=id=>document.getElementById(id);
+const state={left:null,right:null,study:null,leftAssets:new Map(),rightAssets:new Map()};let generation=0;
+const pending={left:null,right:null,study:null};
+function invalidate(){generation++;for(const kind of ['left','right','study']){pending[kind]?.abort();pending[kind]=null;}}
+const say=message=>{$('status').textContent=message;};
+const fmt=value=>Number(value.toPrecision(6)).toString();
+function node(tag,text,parent){const element=document.createElement(tag);if(text!==undefined)element.textContent=text;if(parent)parent.append(element);return element;}
+function pair(list,key,value){node('dt',key,list);node('dd',value,list);}
+function render(){
+ $('sources').textContent=['left','right'].map((side,index)=>`${index===0?'First':'Second'}: ${state[side]?.sequence.title??'not loaded'}`).join(' · ');
+ $('match-fields').disabled=!(state.left&&state.right);
+ $('remove').disabled=!state.study?.correspondences.length;$('save').disabled=!state.study;
+ for(const side of ['left','right'])for(const end of ['from','to']){
+  const select=$(side+'-'+end),prior=select.value;select.replaceChildren();
+  for(const sample of state[side]?.samples??[]){const moment=state[side].sequence.moments.find(m=>m.id===sample.momentId);const option=node('option',`${moment.label} · ${fmt(moment.origin.mediaTimeSeconds)} s${sample.markId===null?' · missing position':''}`,select);option.value=sample.momentId;}
+  const last=state.study?.correspondences.at(-1)?.[side].toMomentId;
+  if(end==='from'&&last)select.value=last;else if([...select.options].some(o=>o.value===prior))select.value=prior;
+  if(end==='to'&&select.options.length)select.selectedIndex=select.options.length-1;
+ }
+ const target=$('results');target.replaceChildren();if(!state.study){node('p','No interval comparison yet.',target);return;}
+ const result=inspectPathTiming(state.study);
+ node('p',`Matched intervals total: first ${fmt(result.matchedElapsedSeconds.left)} s; second ${fmt(result.matchedElapsedSeconds.right)} s. Only declared intervals contribute.`,target);
+ for(const [index,row] of result.rows.entries()){
+  const article=node('article',undefined,target);node('h3',`${index+1}. ${row.label}`,article);node('p',row.basis,article);
+  node('p',`Second / first elapsed time: ${fmt(row.elapsedRatio)}×; difference ${fmt(row.elapsedDifferenceSeconds)} s.`,article).className='metric';
+  const columns=node('div',undefined,article);columns.className='columns';
+  for(const side of ['left','right']){const data=row[side],part=node('div',undefined,columns);node('h4',side==='left'?'First demonstration':'Second demonstration',part);const dl=node('dl',undefined,part);
+   pair(dl,'Presented times',`${fmt(data.startSeconds)}–${fmt(data.endSeconds)} s`);pair(dl,'Elapsed',`${fmt(data.elapsedSeconds)} s`);pair(dl,'Share of matched time',`${fmt(100*data.shareOfMatchedTime)}%`);
+   pair(dl,'Sampled chord sum',data.complete?`${fmt(data.sampledChordDistanceMm)} mm`:`Incomplete; ${fmt(data.coveredChordDistanceMm)} mm across known adjacent samples`);
+   pair(dl,'Chord sum / elapsed',data.complete?`${fmt(data.sampledChordDistancePerSecond)} mm/s (sampled quantity)`:'Unavailable: a selected observation is missing');
+   pair(dl,'Reference',`${result.references[side].label}: ${result.references[side].basis}`);
+   const details=node('details',undefined,part);node('summary','Inspect source samples and gaps',details);const list=node('ul',undefined,details);
+   for(const sample of data.samples){const item=node('li',`${sample.momentLabel} (${sample.momentId}) · presented ${fmt(sample.presentedSeconds)} s · ${sample.position?`(${fmt(sample.position.xMm)}, ${fmt(sample.position.yMm)}) mm`:'missing position'} · ${sample.basis}`,list);const asset=state[side+'Assets'].get(sample.momentId);if(asset){const image=node('img',undefined,item);image.src=asset.media.url;image.alt=`Original retained frame: ${sample.momentLabel}`;image.loading='lazy';image.className='source-frame';}}
+   node('p',data.unselectedMoments.length?`Unselected retained moments inside this interval: ${data.unselectedMoments.map(m=>`${m.label} (${fmt(m.presentedSeconds)} s)`).join('; ')}.`:'No other retained moments inside this interval. Motion between samples remains unobserved.',details);
+  }
+  node('p',row.sampledChordDifferenceMm===null?'A missing selected sample prevents comparing complete sampled chord sums.':`Second minus first sampled chord sum: ${fmt(row.sampledChordDifferenceMm)} mm. Sampling density and each declared calibration affect this comparison.`,article);
+ }
+ node('p',result.boundary,target).className='boundary';
+}
+async function readFile(input,kind){
+ const file=input.files?.[0];input.value='';if(!file)return;
+ if(kind==='study')invalidate();else{generation++;pending.study?.abort();pending.study=null;pending[kind]?.abort();pending[kind]=null;}
+ const operation=new AbortController();pending[kind]=operation;const signal=operation.signal,isCurrent=()=>pending[kind]===operation&&!signal.aborted;let received=null;
+ function releaseReceived(){if(!received)return;if(kind==='study'){releaseSequenceAssets(received.leftAssets);releaseSequenceAssets(received.rightAssets);}else releaseSequenceAssets(received.assets);received=null;}
+ say('Reading original frames; accepted evidence remains until admission.');
+ try{
+  received=kind==='study'?await readPathTimingBundle(file,{signal}):await readTimingPath(file,{signal});
+  if(!isCurrent()){releaseReceived();return;}
+  if(kind==='study'){
+   inspectPathTiming(received.study);releaseSequenceAssets(state.leftAssets);releaseSequenceAssets(state.rightAssets);
+   state.left=received.study.paths.left;state.right=received.study.paths.right;state.study=received.study;state.leftAssets=received.leftAssets;state.rightAssets=received.rightAssets;
+  }else{
+   releaseSequenceAssets(state[kind+'Assets']);state[kind]=received.study;state[kind+'Assets']=received.assets;state.study=null;
+  }
+  received=null;generation++;pending[kind]=null;render();say(kind==='study'?'Comparison reopened with both verified original frame bundles.':'Original path and frames accepted. Declare interval matches for the currently paired sources.');
+ }catch(error){releaseReceived();if(isCurrent())say('Not accepted: '+error.message+'. Existing accepted work is unchanged.');}
+ finally{if(pending[kind]===operation)pending[kind]=null;}
+}
+for(const side of ['left','right'])$(side+'-file').addEventListener('change',event=>readFile(event.target,side));
+$('study-file').addEventListener('change',event=>readFile(event.target,'study'));
+$('match-form').addEventListener('submit',event=>{event.preventDefault();try{
+ const row={label:$('label').value,basis:$('basis').value,left:{fromMomentId:$('left-from').value,toMomentId:$('left-to').value},right:{fromMomentId:$('right-from').value,toMomentId:$('right-to').value}};
+ const accepted=createPathTiming(state.left,state.right,[...(state.study?.correspondences??[]),row]);inspectPathTiming(accepted);invalidate();state.study=accepted;render();$('label').value='';$('basis').value='';say('Corresponding interval retained.');
+ }catch(error){say(error.message);}});
+$('remove').addEventListener('click',()=>{if(!state.study)return;invalidate();const rows=state.study.correspondences.slice(0,-1);state.study=rows.length?createPathTiming(state.left,state.right,rows):null;render();say('Last interval removed. Original paths are retained.');});
+$('save').addEventListener('click',async()=>{if(!state.study)return;const token=generation,study=state.study;try{const blob=await makePathTimingBundle(study,state.leftAssets,state.rightAssets);if(token!==generation||study!==state.study)return;const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='demonstration-path-timing.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);say('Complete comparison and both original frame bundles downloaded.');}catch(error){if(token===generation)say(`Cannot save: ${error.message}`);}});
+addEventListener('pagehide',event=>{if(!event.persisted){invalidate();releaseSequenceAssets(state.leftAssets);releaseSequenceAssets(state.rightAssets);state.leftAssets=new Map();state.rightAssets=new Map();}});
+render();
