@@ -24,6 +24,7 @@ const routes=Object.freeze({
   "/src/target-cue-study.mjs":["src/target-cue-study.mjs","text/javascript; charset=utf-8"],
   "/web/target-cue-input.mjs":["web/target-cue-input.mjs","text/javascript; charset=utf-8"],
   "/web/target-cue.mjs":["web/target-cue.mjs","text/javascript; charset=utf-8"],
+  "/src/cue-reading-support.mjs":["src/cue-reading-support.mjs","text/javascript; charset=utf-8"],
   "/src/cue-questions.mjs":["src/cue-questions.mjs","text/javascript; charset=utf-8"],
   "/web/cue-questions-view.mjs":["web/cue-questions-view.mjs","text/javascript; charset=utf-8"],
   '/path-timing':['web/path-timing.html','text/html; charset=utf-8'],
