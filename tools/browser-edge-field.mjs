@@ -20,10 +20,10 @@ try{
   await page.locator('#show-pixels').check();assert.equal(await page.locator('#edge-view image').count(),2);
   if(i===0){
    const download=page.waitForEvent('download');await page.locator('#edge-save').click();await(await download).saveAs(out+'/complete-field-account.json');
-   const raw=JSON.parse(await readFile(out+'/complete-field-account.json','utf8'));assert.equal(raw.account.report.format,'skill-translator.sequence-edge-report/v2');assert.equal(raw.account.report.field.count,count);assert.equal(raw.account.report.points,undefined);
+   const raw=JSON.parse(await readFile(out+'/complete-field-account.json','utf8'));assert.equal((raw.account??raw.study.entries[0]).report.format,'skill-translator.sequence-edge-report/v2');assert.equal((raw.account??raw.study.entries[0]).report.field.count,count);assert.equal((raw.account??raw.study.entries[0]).report.points,undefined);
    await page.locator('#edge-source').setInputFiles(out+'/complete-field-account.json');await page.waitForFunction(()=>document.querySelector('#edge-status').textContent.includes('report received'));
    await page.screenshot({path:out+'/paper-cutter-field.png',fullPage:true});
-   const tampered=structuredClone(raw.account.report);tampered.candidates[0].supportCount++;
+   const tampered=structuredClone((raw.account??raw.study.entries[0]).report);tampered.candidates[0].supportCount++;
    await page.locator('#edge-report').setInputFiles({name:'tampered.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(tampered))});await page.waitForFunction(()=>document.querySelector('#edge-status').textContent.includes('refused'));assert.match(await page.locator('#edge-summary').textContent(),/^30411 edge pixels/);
    receipt.tests.push('complete field raw source roundtrip and support-count tamper refusal retain accepted evidence');
   }

@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "tests": [
+    "two actual native frame reports retain independent selected/rejected reviews across navigation; other moments stay uninspected",
+    "one original PNG sequence and all reviews reopen; source step anchors remain independent and missing after evidence explicit",
+    "invalid multi-report import preserves complete previously accepted study",
+    "newer review edit retires an in-flight whole-study export",
+    "390px study overview and original-frame review fit"
+  ],
+  "errors": []
+}

@@ -1,0 +1,46 @@
+{
+  "originalVideoSha256": "7dd438a32071a1ed2903841be9b207f0565cb17a31413d6812bd85e6dd2c6d4d",
+  "retainedMoments": [
+    {
+      "momentId": "moment-d4ed905e-b60e-427a-9547-dc93b7426691",
+      "presentedSeconds": 0.507,
+      "status": "unreviewed"
+    },
+    {
+      "momentId": "moment-374cb5b5-cf01-44db-9dcd-f41c7774e4bd",
+      "presentedSeconds": 2.007,
+      "status": "unreviewed"
+    },
+    {
+      "momentId": "moment-6ff762b2-6bb2-484e-bf4e-6817f54fbb8f",
+      "presentedSeconds": 4.007,
+      "status": "unreviewed"
+    },
+    {
+      "momentId": "moment-e9e39cad-2b35-405c-8625-f11b5b7f7761",
+      "presentedSeconds": 6.007,
+      "status": "unreviewed"
+    },
+    {
+      "momentId": "moment-987f3ec4-5c3b-47d0-a5ed-dce4ce76e306",
+      "presentedSeconds": 7.973,
+      "status": "unreviewed"
+    }
+  ],
+  "steps": [
+    {
+      "stepId": "step-490e7ab0-e86c-4af9-93de-0aa8794a6a65",
+      "title": "Inspect the visible separation",
+      "beforeStatus": "unreviewed",
+      "afterStatus": "unreviewed"
+    }
+  ],
+  "checks": [
+    "all five actual source reports independently revalidated",
+    "missing intermediate explicitly uninspected",
+    "duplicate and wrong-source moment reports refuse",
+    "review status retained separately",
+    "original source unchanged"
+  ],
+  "boundary": "Each review concerns one original frame. Labels and step descriptions are observer-authored; no feature identity or unseen progression is inferred."
+}
