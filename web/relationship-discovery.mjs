@@ -52,3 +52,5 @@ $('example').onclick=()=>{
 };
 
 $('reviewPair').onclick=()=>{try{if(!$('reviewTolerance').value.trim())throw Error('Declare a comparison tolerance independently of the exploratory range.');const record=createDiscoveredPairReview(study,$('candidate').value,{widthMm:Number($('width').value),heightMm:Number($('height').value),toleranceMm:Number($('reviewTolerance').value),basis:$('reviewBasis').value});sessionStorage.setItem('skill-translator-discovered-pair/v1',JSON.stringify(record));location.assign('/pair-interpretations');}catch(error){$('error').textContent=error.message;}};
+
+$('openFamilies').onclick=()=>{try{if(!study)throw Error('Open original demonstrations first.');const target={widthMm:Number($('width').value),heightMm:Number($('height').value)};if(!Object.values(target).every(v=>Number.isFinite(v)&&v>=1&&v<=10000))throw Error('Target dimensions must be 1–10000 mm.');sessionStorage.setItem('skill-translator-relationship-families/v1',JSON.stringify({study:importRelationshipDiscovery(study),target}));location.assign('/relationship-families');}catch(error){$('error').textContent=error.message;}};
