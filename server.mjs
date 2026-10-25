@@ -6,6 +6,15 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/vendor/captionverse/subtitles.mjs":["vendor/captionverse/subtitles.mjs", "text/javascript; charset=utf-8"],
+  "/vendor/captionverse/core.mjs":["vendor/captionverse/core.mjs", "text/javascript; charset=utf-8"],
+  "/vendor/captionverse/cue-index.mjs":["vendor/captionverse/cue-index.mjs", "text/javascript; charset=utf-8"],
+  "/vendor/captionverse/word-timing.mjs":["vendor/captionverse/word-timing.mjs", "text/javascript; charset=utf-8"],
+  "/vendor/captionverse/sound-motion.mjs":["vendor/captionverse/sound-motion.mjs", "text/javascript; charset=utf-8"],
+  "/timed-narration":["web/timed-narration.html", "text/html; charset=utf-8"],
+  "/web/timed-narration.mjs":["web/timed-narration.mjs", "text/javascript; charset=utf-8"],
+  "/web/timed-narration.css":["web/timed-narration.css", "text/css; charset=utf-8"],
+  "/src/timed-narration.mjs":["src/timed-narration.mjs", "text/javascript; charset=utf-8"],
   "/src/visual-scan.mjs":["src/visual-scan.mjs","text/javascript; charset=utf-8"],
   "/web/visual-scan.mjs":["web/visual-scan.mjs","text/javascript; charset=utf-8"],
   "/sequence-edge":["web/sequence-edge.html","text/html; charset=utf-8"],

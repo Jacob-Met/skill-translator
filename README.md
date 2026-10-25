@@ -432,3 +432,7 @@ The workpiece rehearsal links to `/assistance-review`. Open its original exporte
 ### Inspect alternative smallest conflict groups
 
 The observation evidence panel can navigate every equally small conflict group with previous/next or a direct group number, while keeping the original source observations and full-family participation visible. [Alternative-group inspection](docs/EVIDENCE_CONFLICT_ALTERNATIVES.md) explains the exact rank selection and its limits.
+
+## Preserve timed narration beside a demonstration
+
+Open **Inspect supplied narration** from the demonstration studio to pair an author-supplied WebVTT transcript with the original retained sequence. Inspect overlapping words beside before/after frames, explicitly select attributed quotations, and save a separate narrated account without replacing original notes. No transcription, sensory inference or learning result is claimed. [Input contract and workflow](docs/TIMED_NARRATION.md).
