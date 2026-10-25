@@ -1,5 +1,5 @@
 // Expert-declared dependencies and reported observations, not inferred causality.
-import {readinessPracticeTask,inspectReadinessPractice} from './readiness-practice.mjs';
+import {readinessPracticeTask,inspectReadinessPractice,PRACTICE_EVENT_BYTES} from './readiness-practice.mjs';
 import {validateSequence} from './demonstration-sequence.mjs';
 import {importPrerequisiteRehearsal} from './prerequisite-rehearsal.mjs';
 export const READINESS_FORMAT='skill-translator.task-readiness/v1';
@@ -22,12 +22,13 @@ export function createReadiness(sequence,prerequisiteRecord,definitions){
   });
   return {format:steps.some(s=>s.checks.some(c=>c.placement))?PRACTICE_READINESS_FORMAT:READINESS_FORMAT,source,prerequisites,definitions:steps,events:[]};
 }
-function replay(sequence,input){
+function replay(sequence,input,additionalEvents=[]){
   assert([READINESS_FORMAT,PRACTICE_READINESS_FORMAT].includes(input?.format),'Unsupported readiness study');
   const base=createReadiness(sequence,input.prerequisites,input.definitions);
   assert(input.format===base.format,'Practice-backed checks require the v2 readiness format');
   assert(same(base.source,validateSequence(input.source)),'The demonstration frames or authored account changed');
   assert(Array.isArray(input.events)&&input.events.length<=500,'Keep at most 500 journal events');
+  const replayEvents=additionalEvents.length?[...input.events,...additionalEvents]:input.events;
   const byId=new Map(base.definitions.map(s=>[s.stepId,s]));
   const observations=new Map(base.definitions.map(s=>[s.stepId,new Map()]));
   // Compile only this admitted journal's graph. Preserve declaration order so
@@ -42,7 +43,7 @@ function replay(sequence,input){
     scan(id);downstream.set(id,[...out]);
   }
   const statusMemo=new Map();
-  const choices=[],events=[];let practiceBytes=0;
+  const choices=[],events=[],canonicalPracticeSizes=[];let practiceBytes=0;
   function status(id,memo=statusMemo){
     if(memo.has(id))return memo.get(id);
     const definition=byId.get(id),blockedBy=parents.get(id).filter(dep=>!status(dep,memo).complete);
@@ -50,7 +51,21 @@ function replay(sequence,input){
     const complete=blockedBy.length===0&&checks.every(c=>c.observation?.value==='pass');
     const result={stepId:id,ready:blockedBy.length===0,complete,blockedBy,checks};memo.set(id,result);return result;
   }
-  for(const e of input.events){
+  for(const [eventIndex,e] of replayEvents.entries()){
+    // Admit the complete original journal before considering the appended event,
+    // including when that event would exceed capacity. This keeps refusal order.
+    if(eventIndex===input.events.length){
+      assert(replayEvents.length<=500,'Keep at most 500 journal events');
+      // The former second replay received canonical prior sessions. Admit the
+      // original raw history first, then use those same canonical byte budgets
+      // for the new event; ignored fields must not falsely consume append space.
+      practiceBytes=0;
+      for(const size of canonicalPracticeSizes){
+        practiceBytes+=size;
+        assert(practiceBytes<=4_000_000,'Keep retained practice evidence below 4 MB per study');
+        assert(size<=PRACTICE_EVENT_BYTES,'Keep each retained practice session below 1 MB');
+      }
+    }
     assert(e&&byId.has(e.stepId),'Journal action refers to an unavailable step');
     if(e.type==='observe'||e.type==='practice'){
       const check=byId.get(e.stepId).checks.find(c=>c.id===e.checkId);
@@ -61,6 +76,7 @@ function replay(sequence,input){
         practiceBytes+=new TextEncoder().encode(JSON.stringify(e.session)).length;
         assert(practiceBytes<=4_000_000,'Keep retained practice evidence below 4 MB per study');
         received=inspectReadinessPractice(base.source,e.stepId,check.placement,e.session);
+        if(additionalEvents.length&&eventIndex<input.events.length)canonicalPracticeSizes.push(new TextEncoder().encode(JSON.stringify(received.session)).length);
         value=received.value;evidenceClass='computed-placement';
       }else assert(!check.placement,'Import matching raw practice evidence for this geometric check');
       assert(byId.get(e.stepId).checks.some(c=>c.id===e.checkId),'Choose a declared completion check');
@@ -89,5 +105,5 @@ function replay(sequence,input){
 }
 export function importReadiness(sequence,input){return replay(sequence,input).study;}
 export function readinessFindings(sequence,input){const {study,...findings}=replay(sequence,input);return findings;}
-export function recordReadiness(sequence,input,event){const accepted=importReadiness(sequence,input);return importReadiness(sequence,{...accepted,events:[...accepted.events,event]});}
+export function recordReadiness(sequence,input,event){return replay(sequence,input,[event]).study;}
 
