@@ -1,0 +1,275 @@
+{
+  "result": "PASS",
+  "source": {
+    "author": "Aerra Carnicom / Aerrapc",
+    "title": "Aerra’s Films of the Ordinary IV — Scissors Cutting Card Stock",
+    "url": "https://commons.wikimedia.org/wiki/File:Aerra%27s_Films_of_the_Ordinary_IV_--_Scissors_Cutting_Card_Stock.webm",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe"
+  },
+  "checks": [
+    "32 actual presented-frame samples yield31 explicit adjacent intervals without automatic retention",
+    "Candidate inspection recaptures1920×1080 original images; saved source hashes and fresh maintained sequence reopen agree",
+    "Actual source receiving has no page exception or offsite application request"
+  ],
+  "errors": [],
+  "offsite": [],
+  "browser": "156.0.8078.47",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "duration": 9.288,
+  "chronological": [
+    {
+      "index": 0,
+      "state": "compared",
+      "text": "Requested 0.100 s → 0.390 sMean channel change · raw 0.75 · adjusted 0.75 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 0.079 s → 0.412 sInspect earlier · 0.079 sInspect later · 0.412 s"
+    },
+    {
+      "index": 1,
+      "state": "compared",
+      "text": "Requested 0.390 s → 0.681 sMean channel change · raw 0.84 · adjusted 0.84 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 0.412 s → 0.678 sInspect earlier · 0.412 sInspect later · 0.678 s"
+    },
+    {
+      "index": 2,
+      "state": "compared",
+      "text": "Requested 0.681 s → 0.971 sMean channel change · raw 0.25 · adjusted 0.25 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 0.678 s → 0.945 sInspect earlier · 0.678 sInspect later · 0.945 s"
+    },
+    {
+      "index": 3,
+      "state": "compared",
+      "text": "Requested 0.971 s → 1.261 sMean channel change · raw 0.28 · adjusted 0.28 levels. Uniform shift +0; 0.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 0.945 s → 1.245 sInspect earlier · 0.945 sInspect later · 1.245 s"
+    },
+    {
+      "index": 4,
+      "state": "compared",
+      "text": "Requested 1.261 s → 1.552 sMean channel change · raw 22.04 · adjusted 22.04 levels. Uniform shift +0; 32.9% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 1.245 s → 1.578 sInspect earlier · 1.245 sInspect later · 1.578 s"
+    },
+    {
+      "index": 5,
+      "state": "compared",
+      "text": "Requested 1.552 s → 1.842 sMean channel change · raw 30.96 · adjusted 30.96 levels. Uniform shift +0; 40.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 1.578 s → 1.845 sInspect earlier · 1.578 sInspect later · 1.845 s"
+    },
+    {
+      "index": 6,
+      "state": "compared",
+      "text": "Requested 1.842 s → 2.132 sMean channel change · raw 17.96 · adjusted 17.89 levels. Uniform shift +1; 26.8% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 1.845 s → 2.145 sInspect earlier · 1.845 sInspect later · 2.145 s"
+    },
+    {
+      "index": 7,
+      "state": "compared",
+      "text": "Requested 2.132 s → 2.423 sMean channel change · raw 27.32 · adjusted 27.32 levels. Uniform shift +0; 35.4% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 2.145 s → 2.445 sInspect earlier · 2.145 sInspect later · 2.445 s"
+    },
+    {
+      "index": 8,
+      "state": "compared",
+      "text": "Requested 2.423 s → 2.713 sMean channel change · raw 36.99 · adjusted 36.99 levels. Uniform shift +0; 51.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 2.445 s → 2.745 sInspect earlier · 2.445 sInspect later · 2.745 s"
+    },
+    {
+      "index": 9,
+      "state": "compared",
+      "text": "Requested 2.713 s → 3.003 sMean channel change · raw 35.19 · adjusted 35.19 levels. Uniform shift +0; 57.2% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 2.745 s → 3.012 sInspect earlier · 2.745 sInspect later · 3.012 s"
+    },
+    {
+      "index": 10,
+      "state": "compared",
+      "text": "Requested 3.003 s → 3.294 sMean channel change · raw 47.45 · adjusted 47.45 levels. Uniform shift +0; 71.7% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 3.012 s → 3.312 sInspect earlier · 3.012 sInspect later · 3.312 s"
+    },
+    {
+      "index": 11,
+      "state": "compared",
+      "text": "Requested 3.294 s → 3.584 sMean channel change · raw 40.07 · adjusted 40.07 levels. Uniform shift +0; 61.8% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 3.312 s → 3.612 sInspect earlier · 3.312 sInspect later · 3.612 s"
+    },
+    {
+      "index": 12,
+      "state": "compared",
+      "text": "Requested 3.584 s → 3.874 sMean channel change · raw 26.56 · adjusted 26.56 levels. Uniform shift +0; 47.1% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 3.612 s → 3.878 sInspect earlier · 3.612 sInspect later · 3.878 s"
+    },
+    {
+      "index": 13,
+      "state": "compared",
+      "text": "Requested 3.874 s → 4.165 sMean channel change · raw 31.41 · adjusted 31.19 levels. Uniform shift +3; 57.5% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 3.878 s → 4.145 sInspect earlier · 3.878 sInspect later · 4.145 s"
+    },
+    {
+      "index": 14,
+      "state": "compared",
+      "text": "Requested 4.165 s → 4.455 sMean channel change · raw 33.35 · adjusted 33.14 levels. Uniform shift -2; 52.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 4.145 s → 4.479 sInspect earlier · 4.145 sInspect later · 4.479 s"
+    },
+    {
+      "index": 15,
+      "state": "compared",
+      "text": "Requested 4.455 s → 4.745 sMean channel change · raw 13.26 · adjusted 13.26 levels. Uniform shift +0; 24.9% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 4.479 s → 4.778 sInspect earlier · 4.479 sInspect later · 4.778 s"
+    },
+    {
+      "index": 16,
+      "state": "compared",
+      "text": "Requested 4.745 s → 5.035 sMean channel change · raw 7.46 · adjusted 7.46 levels. Uniform shift +0; 14.1% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 4.778 s → 5.012 sInspect earlier · 4.778 sInspect later · 5.012 s"
+    },
+    {
+      "index": 17,
+      "state": "compared",
+      "text": "Requested 5.035 s → 5.326 sMean channel change · raw 22.33 · adjusted 22.33 levels. Uniform shift +0; 39.8% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 5.012 s → 5.312 sInspect earlier · 5.012 sInspect later · 5.312 s"
+    },
+    {
+      "index": 18,
+      "state": "compared",
+      "text": "Requested 5.326 s → 5.616 sMean channel change · raw 32.16 · adjusted 32.16 levels. Uniform shift +0; 52.8% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 5.312 s → 5.612 sInspect earlier · 5.312 sInspect later · 5.612 s"
+    },
+    {
+      "index": 19,
+      "state": "compared",
+      "text": "Requested 5.616 s → 5.906 sMean channel change · raw 13.15 · adjusted 13.15 levels. Uniform shift +0; 27.9% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 5.612 s → 5.912 sInspect earlier · 5.612 sInspect later · 5.912 s"
+    },
+    {
+      "index": 20,
+      "state": "compared",
+      "text": "Requested 5.906 s → 6.197 sMean channel change · raw 15.08 · adjusted 15.08 levels. Uniform shift +0; 29.6% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 5.912 s → 6.178 sInspect earlier · 5.912 sInspect later · 6.178 s"
+    },
+    {
+      "index": 21,
+      "state": "compared",
+      "text": "Requested 6.197 s → 6.487 sMean channel change · raw 9.68 · adjusted 9.68 levels. Uniform shift +0; 17.0% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 6.178 s → 6.512 sInspect earlier · 6.178 sInspect later · 6.512 s"
+    },
+    {
+      "index": 22,
+      "state": "compared",
+      "text": "Requested 6.487 s → 6.777 sMean channel change · raw 5.58 · adjusted 5.58 levels. Uniform shift +0; 12.7% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 6.512 s → 6.745 sInspect earlier · 6.512 sInspect later · 6.745 s"
+    },
+    {
+      "index": 23,
+      "state": "compared",
+      "text": "Requested 6.777 s → 7.068 sMean channel change · raw 8.48 · adjusted 8.48 levels. Uniform shift +0; 18.8% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 6.745 s → 7.078 sInspect earlier · 6.745 sInspect later · 7.078 s"
+    },
+    {
+      "index": 24,
+      "state": "compared",
+      "text": "Requested 7.068 s → 7.358 sMean channel change · raw 10.94 · adjusted 10.94 levels. Uniform shift +0; 23.5% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 7.078 s → 7.378 sInspect earlier · 7.078 sInspect later · 7.378 s"
+    },
+    {
+      "index": 25,
+      "state": "compared",
+      "text": "Requested 7.358 s → 7.648 sMean channel change · raw 12.77 · adjusted 12.77 levels. Uniform shift +0; 22.9% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 7.378 s → 7.679 sInspect earlier · 7.378 sInspect later · 7.679 s"
+    },
+    {
+      "index": 26,
+      "state": "compared",
+      "text": "Requested 7.648 s → 7.939 sMean channel change · raw 18.35 · adjusted 18.33 levels. Uniform shift -1; 36.2% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 7.679 s → 7.945 sInspect earlier · 7.679 sInspect later · 7.945 s"
+    },
+    {
+      "index": 27,
+      "state": "compared",
+      "text": "Requested 7.939 s → 8.229 sMean channel change · raw 13.54 · adjusted 13.54 levels. Uniform shift +0; 25.6% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 7.945 s → 8.212 sInspect earlier · 7.945 sInspect later · 8.212 s"
+    },
+    {
+      "index": 28,
+      "state": "compared",
+      "text": "Requested 8.229 s → 8.519 sMean channel change · raw 10.45 · adjusted 10.33 levels. Uniform shift -1; 21.5% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 8.212 s → 8.512 sInspect earlier · 8.212 sInspect later · 8.512 s"
+    },
+    {
+      "index": 29,
+      "state": "compared",
+      "text": "Requested 8.519 s → 8.810 sMean channel change · raw 3.59 · adjusted 3.33 levels. Uniform shift -1; 3.7% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 8.512 s → 8.778 sInspect earlier · 8.512 sInspect later · 8.778 s"
+    },
+    {
+      "index": 30,
+      "state": "compared",
+      "text": "Requested 8.810 s → 9.100 sMean channel change · raw 2.27 · adjusted 2.14 levels. Uniform shift -1; 1.6% of sampled pixels have a residual channel change of at least 16 levels.Presented interval 8.778 s → 9.112 sInspect earlier · 8.778 sInspect later · 9.112 s"
+    }
+  ],
+  "rankedIndices": [
+    10,
+    11,
+    8,
+    9,
+    14,
+    18,
+    13,
+    5,
+    7,
+    12,
+    17,
+    4,
+    26,
+    6,
+    20,
+    27,
+    15,
+    19,
+    25,
+    24,
+    28,
+    21,
+    23,
+    16,
+    22,
+    29,
+    30,
+    1,
+    0,
+    3,
+    2
+  ],
+  "moments": [
+    {
+      "id": "moment-31314eea-c6be-47c8-beab-5e98b9d13204",
+      "label": "Earlier candidate image",
+      "visibleState": "Selected from the highest adjusted-change interval for observer inspection; no action or contact verdict supplied.",
+      "image": {
+        "sha256": "6366b454f0017a1b9c03bfdf6e209a35c1f792ec5c178f6133afa40cd3425b38",
+        "widthPx": 1920,
+        "heightPx": 1080,
+        "mimeType": "image/png",
+        "name": "scissors-frame-3.012s.png",
+        "pixelCoordinates": "browser-oriented"
+      },
+      "origin": {
+        "kind": "local-video-frame",
+        "timing": "requestVideoFrameCallback",
+        "clip": {
+          "name": "scissors.webm",
+          "mimeType": "video/webm",
+          "sizeBytes": 1006547,
+          "sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+          "durationSeconds": 9.288
+        },
+        "requestedTimeSeconds": 3.012,
+        "mediaTimeSeconds": 3.012,
+        "frameSha256": "6366b454f0017a1b9c03bfdf6e209a35c1f792ec5c178f6133afa40cd3425b38",
+        "widthPx": 1920,
+        "heightPx": 1080,
+        "decodedWidthPx": 1920,
+        "decodedHeightPx": 1080
+      }
+    },
+    {
+      "id": "moment-ae1027e4-b4eb-4265-8995-a14c1285ec37",
+      "label": "Later candidate image",
+      "visibleState": "Selected from the highest adjusted-change interval for observer inspection; no action or contact verdict supplied.",
+      "image": {
+        "sha256": "5f1be8134d80b2eb27fd65ec669c57e446bd874cd1656b3cd2a106d488ea11f4",
+        "widthPx": 1920,
+        "heightPx": 1080,
+        "mimeType": "image/png",
+        "name": "scissors-frame-3.312s.png",
+        "pixelCoordinates": "browser-oriented"
+      },
+      "origin": {
+        "kind": "local-video-frame",
+        "timing": "requestVideoFrameCallback",
+        "clip": {
+          "name": "scissors.webm",
+          "mimeType": "video/webm",
+          "sizeBytes": 1006547,
+          "sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+          "durationSeconds": 9.288
+        },
+        "requestedTimeSeconds": 3.312,
+        "mediaTimeSeconds": 3.312,
+        "frameSha256": "5f1be8134d80b2eb27fd65ec669c57e446bd874cd1656b3cd2a106d488ea11f4",
+        "widthPx": 1920,
+        "heightPx": 1080,
+        "decodedWidthPx": 1920,
+        "decodedHeightPx": 1080
+      }
+    }
+  ]
+}

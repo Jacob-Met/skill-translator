@@ -70,6 +70,14 @@ try{
   assert.equal(await page.locator('.scan-interval').first().getAttribute('data-index'),'2');
   record('actual decoded source distinguishes lighting from moved/color-changed regions; all intervals survive sorting without auto-retaining moments');
 
+  const readiness=await page.evaluate(()=>{
+    document.querySelector('.scan-interval[data-index="2"] button').click();
+    return {seeking:document.querySelector('#video-host video').seeking,captureDisabled:document.querySelector('#capture-moment').disabled,playheadDisabled:document.querySelector('#use-playhead').disabled};
+  });
+  assert.deepEqual(readiness,{seeking:true,captureDisabled:true,playheadDisabled:true});
+  await page.waitForFunction(()=>!document.querySelector('#video-host video').seeking&&!document.querySelector('#capture-moment').disabled);
+  record('candidate selection immediately disables capture/playhead during a real seek and restores them on decoder readiness');
+
   await retainSample(page,2,0,'Before movement');await retainSample(page,2,1,'After movement');
   assert.deepEqual(await page.locator('.moment-card img').evaluateAll(imgs=>imgs.map(i=>[i.naturalWidth,i.naturalHeight])),[[640,360],[640,360]]);
   assert.ok(await page.locator('#scan-preview canvas').evaluate(canvas=>canvas.width<=160&&canvas.height<=160));

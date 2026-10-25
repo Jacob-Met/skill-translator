@@ -1,0 +1,9 @@
+{
+  "base": "fc39b9bcbe417891301ad0d160486870df266d0d",
+  "sha256": {
+    "web/sequence.mjs": "c02270b3cd753e32b526cc2214aa2854b32e34bc4068526cb5d5ee44d71f1ebc",
+    "tools/browser-visual-scan.mjs": "06f20a5380593bde3c5dde54b40f2a0a8ef95c69e69dcfaaddff8c2e12b0b39b",
+    "tools/browser-visual-scan-field.mjs": "9c284028d2c6f9c9b99de565f27d407459afad0d0b021ee11e96e92f1bdb9902",
+    "docs/VISUAL_SCAN.md": "91f900825b4bf36b210f1637e49b011e4e393e5d4f45be72b69dbd73eb6179cd"
+  }
+}
