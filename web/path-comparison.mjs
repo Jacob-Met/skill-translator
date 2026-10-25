@@ -1,16 +1,19 @@
+import {inspectPathAxisPrediction} from '/src/path-axis-prediction.mjs';
+import {calibrate,toImage} from '/src/geometry.mjs';
 import {createPathComparison,inspectPathCouplingAlternatives} from '/src/path-comparison.mjs';
 import {readSampledPathBundle} from '/web/sampled-path-input.mjs';
 import {readPathComparisonBundle,makePathComparisonBundle} from '/web/path-comparison-input.mjs';
 import {releaseSequenceAssets} from '/web/sequence-input.mjs';
 const $=id=>document.getElementById(id),el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 const ns='http://www.w3.org/2000/svg',svg=(tag,attrs={})=>{const n=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);return n;};
+let axisPrediction=null;
 let sources=[null,null],accepted=null,findings=null,alternatives=null,activeCoupling=[],revision=0,selected=0;
 const status=s=>{$('status').textContent=s;};
 const mm=v=>`${v!==0&&Math.abs(v)<.0005?v.toExponential(4):v.toFixed(3)} mm`;
-function invalidate(){revision++;accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status('Inputs changed. Compare again to inspect their ordered samples.');}
+function invalidate(){axisPrediction=null;revision++;accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status('Inputs changed. Compare again to inspect their ordered samples.');}
 function names(){for(let i=0;i<2;i++)$(i?'second-name':'first-name').textContent=sources[i]?`${sources[i].study.sequence.title} · ${sources[i].study.label} · ${sources[i].study.samples.length} selected samples`:'Not opened';}
 function show(study,analysis=inspectPathCouplingAlternatives(study)){
- accepted=study;alternatives=analysis;findings=analysis.original;selected=0;$('result').hidden=false;
+ axisPrediction=null;$('axis-prediction-result').replaceChildren();accepted=study;alternatives=analysis;findings=analysis.original;selected=0;$('result').hidden=false;
  $('limits').textContent=findings.boundary;$('evidence').textContent=JSON.stringify(study,null,2);
  $('alternative-summary').textContent=`${BigInt(analysis.optimalCouplings).toLocaleString()} computed pairings tie for this minimum. ${analysis.pairs.length} paired sample combinations occur; ${analysis.pairs.filter(p=>p.requiredInEveryOptimalCoupling).length} occur in every minimizing pairing.`;
  $('alternative-limits').textContent=analysis.boundary;
@@ -40,6 +43,10 @@ function draw(){
  [pair.firstIndex,pair.secondIndex].forEach((index,side)=>{
   const sample=findings.paths[side].samples[index],figure=el('figure'),view=svg('svg',{viewBox:`0 0 ${sample.image.widthPx} ${sample.image.heightPx}`,role:'img','aria-label':`${side?'Second':'First'} original frame, ${sample.momentLabel}; declared point marked`});
   view.append(svg('image',{href:sources[side].assets.get(sample.momentId).media.url,width:sample.image.widthPx,height:sample.image.heightPx}),svg('circle',{cx:sample.sourcePx.x,cy:sample.sourcePx.y,r:Math.max(sample.image.widthPx,sample.image.heightPx)/45,fill:'none',stroke:side?'#c54b40':'#14756a','stroke-width':3}));
+  if(axisPrediction?.axis.status==='resolved'){
+   const moment=accepted.paths[side].sequence.moments.find(m=>m.id===sample.momentId),source=moment.calibratedTask.source,h=calibrate(source.corners),[a,b]=axisPrediction.axis.endpoints.map(p=>toImage(h,p.xMm/source.widthMm,p.yMm/source.heightMm));
+   view.append(svg('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:'#9a4b00','stroke-width':3,'stroke-dasharray':'9 6'}));
+  }
   figure.append(view,el('figcaption',`${side?'Second':'First'}: ${sample.momentLabel} · original presented time ${sample.presentedSeconds} s · ${sample.markLabel}`),el('p',sample.basis));
   const details=el('details');details.append(el('summary','Inspect retained image identity and coordinates'),el('pre',JSON.stringify({image:sample.image,sourcePx:sample.sourcePx,position:sample.position},null,2)));figure.append(details);$('frames').append(figure);
  });
@@ -73,3 +80,11 @@ addEventListener('pagehide',()=>{
  $('alternative-first').replaceChildren();$('alternative-partners').replaceChildren();$('alternative-summary').textContent='';$('alternative-limits').textContent='';$('witness-kind').textContent='';
  $('confirm').checked=false;$('basis').value='';names();status('Reopen the original source accounts or your saved comparison after returning to this page.');
 });
+
+
+$('predict-axis').addEventListener('click',()=>{if(!accepted)return;try{
+ axisPrediction=inspectPathAxisPrediction(accepted);const r=axisPrediction,target=$('axis-prediction-result');target.replaceChildren();
+ target.append(el('p',r.axis.status==='resolved'?`First-source fitted RMS residual: ${mm(r.training.rmsResidualMm)}. Second-source RMS residual: ${mm(r.rmsResidualMm)}; maximum: ${mm(r.maxResidualMm)}.`:`First-source direction ${r.axis.status.replaceAll('-',' ')}. No axis prediction is available.`));
+ for(const row of r.rows)target.append(el('p',`${row.momentId} · second-source presented time ${row.presentedSeconds} s · signed perpendicular residual ${row.residualMm===null?'unresolved':mm(row.residualMm)}.`));
+ target.append(el('p','Dashed amber segments on the original frame pair show the first-source fitted axis over its training extent. The mathematical reference line is unbounded. Choose any pairing row to inspect its original pixels.'),el('p',r.boundary));draw();status('Second path inspected against the unchanged first-source axis. Neither source nor the ordered comparison changed.');
+}catch(error){axisPrediction=null;$('axis-prediction-result').replaceChildren();draw();status(error.message);}});

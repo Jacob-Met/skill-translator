@@ -1,0 +1,11 @@
+# A first-source axis hypothesis on a second demonstration
+
+In the maintained `/path-comparison` consumer, open two complete original-frame sampled paths and explicitly declare their common point and coordinate meanings. Compare them, then select **Inspect second path against first axis**.
+
+The first demonstration alone supplies the total-least-squares line. All second-source selected samples are evaluated against that unchanged infinite line. The second path cannot rotate, translate or refit it. The display keeps the ordinary discrete Frechet comparison and its selectable original frame pairs; dashed amber segments show the first-source axis on each selected original frame. Every second-source residual and the RMS/maximum remain visible. Neither fitting nor prediction changes a source annotation, tolerance, criterion or score.
+
+This answers a different question from matching the complete sampled paths: new along-line extents can retain zero perpendicular residual while the discrete Frechet result is nonzero. Conversely, a parallel6mm departure remains6mm here even though refitting the second path would show nearly zero residual. Such a difference supports a geometric hypothesis only under the supplied calibration and coordinate declaration. It does not establish a required physical invariant, an actual guide, task success, movement order, continuous path, timing or learning. No pass threshold is inferred.
+
+The existing comparison bundle retains both original source accounts and PNGs. Prediction is recomputed after reopen, and source/declaration edits retire the previous prediction. Source order is deliberate: reversing the sources changes which demonstration trains the hypothesis. Coincident or directionally unresolved first-source geometry yields no prediction.
+
+`node test/path-axis-prediction.test.mjs` covers resampling, held-out parallel displacement, interior departure, reference degeneracy, missing/mismatched source refusals and19unfamiliar rotated held-out controls. `node tools/browser-path-axis-prediction.mjs` covers sandbox admission, source-PNG intake, preserved ordinary comparison, actual download/fresh replay, changing second-source input and narrow keyboard receiving.
