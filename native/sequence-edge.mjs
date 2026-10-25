@@ -13,7 +13,7 @@ export async function runSequenceEdge(raw){
  timer=setTimeout(()=>{timedOut=true;child.kill('SIGKILL');},15000);
  child.on('error',reject);child.stdin.on('error',()=>{});child.stdout.on('data',data=>{stdout+=data;if(stdout.length>8*1024*1024){tooLarge=true;child.kill();}});child.stderr.on('data',data=>{stderr+=data;if(stderr.length>10000){tooLarge=true;child.kill();}});
  child.on('close',code=>{try{if(timedOut)throw Error('Source edge worker exceeded15seconds');if(code!==0||tooLarge)throw Error(tooLarge?'Native report exceeded capacity':stderr.trim()||'Source edge worker stopped');resolve(receiveSequenceEdge(sequence,JSON.parse(stdout)));}catch(error){reject(error);}});
- child.stdin.end(JSON.stringify({momentId:moment.id,image:moment.image,origin:moment.origin,pngBase64:raw.pngBase64,roi:raw.roi}));
+ child.stdin.end(JSON.stringify({momentId:moment.id,image:moment.image,origin:moment.origin,pngBase64:raw.pngBase64,roi:raw.roi,representation:raw.representation}));
  });}finally{clearTimeout(timer);running=false;}
 }
 export async function serveSequenceEdge(req,res){

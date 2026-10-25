@@ -8,6 +8,8 @@ cv2.setRNGSeed(130)
 LIMIT=24*1024*1024
 
 def inspect(request):
+    compact=request.get('representation')=='complete-field'
+    if request.get('representation') not in (None,'complete-field'):raise ValueError('Unsupported edge representation')
     image=request['image']; data=base64.b64decode(request['pngBase64'],validate=True)
     if not 0<len(data)<=16*1024*1024 or data[:8]!=b'\x89PNG\r\n\x1a\n': raise ValueError('A bounded original PNG is required')
     width,height=struct.unpack('>II',data[16:24])
@@ -26,7 +28,7 @@ def inspect(request):
     else:raise ValueError('Unsupported original PNG channels')
     edge=cv2.Canny(gray,50,150,apertureSize=3,L2gradient=True)
     ys,xs=np.nonzero(edge)
-    if len(xs)>20000:raise ValueError('Complete edge cloud exceeds20000pixels; narrow the ROI')
+    if not compact and len(xs)>20000:raise ValueError('Complete edge cloud exceeds20000pixels; narrow the ROI')
     raw=cv2.HoughLinesP(edge,1,np.pi/180,40,minLineLength=80,maxLineGap=10)
     lines=[] if raw is None else [tuple(map(int,row)) for row in raw[:,0]]
     if len(lines)>256:raise ValueError('More than256 complete candidates; narrow the ROI')
@@ -38,9 +40,17 @@ def inspect(request):
         cross=(xs-a)*dy-(ys-b)*dx
         squared_length=dx*dx+dy*dy
         selected=(projection>=0)&(projection<=squared_length)&(cross*cross<=4*squared_length)
-        support=np.flatnonzero(selected).tolist()
+        support=int(np.count_nonzero(selected)) if compact else np.flatnonzero(selected).tolist()
         candidates.append({'id':'segment-'+str(len(candidates)+1),'a':{'x':a+x,'y':b+y},'b':{'x':c+x,'y':d+y},'lengthPx':length,'supportIndices':support,'supportBandPx':2,'roiBoundaryNear':any(px<=1 or px>=w-2 or py<=1 or py>=h-2 for px,py in [(a,b),(c,d)])})
-    return {'format':'skill-translator.sequence-edge-report/v1','momentId':request['momentId'],'image':image,'origin':request['origin'],'roi':roi,'method':{'name':'opencv-canny-hough-segments/v1','sourceDecode':'unchanged-u8-opaque','cannyLow':50,'cannyHigh':150,'aperture':3,'l2Gradient':True,'rhoPx':1,'thetaRadians':math.pi/180,'votes':40,'minimumLengthPx':80,'maximumGapPx':10,'opencvVersion':cv2.__version__,'numpyVersion':np.__version__},'points':[{'x':int(px)+x,'y':int(py)+y} for py,px in zip(ys,xs)],'candidates':candidates,'boundary':'Every reported segment is an image-space proposal from fixed OpenCV settings. Support is a geometric subset of complete ROI edge pixels, not a probability or boundary label. Blur, low contrast, texture and occlusion can omit or create segments. No physical scale, contact, persistence or task success is inferred.'}
+    result={'format':'skill-translator.sequence-edge-report/v1','momentId':request['momentId'],'image':image,'origin':request['origin'],'roi':roi,'method':{'name':'opencv-canny-hough-segments/v1','sourceDecode':'unchanged-u8-opaque','cannyLow':50,'cannyHigh':150,'aperture':3,'l2Gradient':True,'rhoPx':1,'thetaRadians':math.pi/180,'votes':40,'minimumLengthPx':80,'maximumGapPx':10,'opencvVersion':cv2.__version__,'numpyVersion':np.__version__},'points':None if compact else [{'x':int(px)+x,'y':int(py)+y} for py,px in zip(ys,xs)],'candidates':candidates,'boundary':'Every reported segment is an image-space proposal from fixed OpenCV settings. Support is a geometric subset of complete ROI edge pixels, not a probability or boundary label. Blur, low contrast, texture and occlusion can omit or create segments. No physical scale, contact, persistence or task success is inferred.'}
+
+    if compact:
+        result['format']='skill-translator.sequence-edge-report/v2'
+        result.pop('points')
+        result['field']={'encoding':'roi-row-major-lsb0/v1','data':base64.b64encode(np.packbits(edge.reshape(-1)!=0,bitorder='little').tobytes()).decode(),'count':len(xs)}
+        for candidate in result['candidates']:
+            candidate['supportCount']=candidate.pop('supportIndices')
+    return result
 
 if __name__=='__main__':
     try:

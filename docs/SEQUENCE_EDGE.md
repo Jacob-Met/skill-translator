@@ -14,7 +14,7 @@ The observer can leave a report unreviewed, reject its proposals, or select one 
 
 The existing Node server retains its normal static behavior. The source-edge page additionally calls a same-origin local endpoint. Install the optional pinned dependencies in a suitable Python environment using `requirements-native-edge.txt`, then set `SKILL_EDGE_PYTHON` to that environment's Python before starting the existing server. The qualified environment used OpenCV 4.13.0.92 and NumPy 2.3.5. This is local CPU execution, not Nebius or OpenCV 5 platform qualification.
 
-The endpoint accepts only same-origin JSON, at most 22 MiB per request, one worker at a time, and kills a worker after 15 seconds. It invokes one fixed Python script without a shell or client-supplied filesystem path. The selected source image is bounded before decoding. The ROI contains at most 1,048,576 pixels; reports admit at most 20,000 edge pixels and 256 candidates, refusing overflow rather than truncating.
+The endpoint accepts only same-origin JSON, at most 22 MiB per request, one worker at a time, and kills a worker after 15 seconds. It invokes one fixed Python script without a shell or client-supplied filesystem path. The selected source image is bounded before decoding. The ROI contains at most 1,048,576 pixels; the browser retains the complete edge field as a bounded bitmap and admits at most 256 candidates. Legacy coordinate-list reports retain their 20,000-pixel cap. Candidate overflow refuses rather than truncating. See [complete edge fields](SEQUENCE_EDGE_FIELD.md) for encoding, exact support and the crowded real-source receiving.
 
 An equivalent file workflow is available:
 

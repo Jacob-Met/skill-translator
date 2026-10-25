@@ -1,0 +1,46 @@
+{
+  "prerequisite": "#174 merged and all20merged blobs independently received; actualmergedconsumer6groupspassed",
+  "native_js": "9/9 named groups pass",
+  "native_python": "7/7 named groups pass",
+  "independent_review": "SECOND GROUND accepted canonical bitmap and exact conservative support enumeration; independently3/3 field groups passed",
+  "browser": "5 real paper-cutter/legacy groups and 6 prior scissors groups pass; zero errors",
+  "media": "Original source video, PNGs, screenshots and source-bearing accounts are internal permitted inputs; not packaged",
+  "source_video_sha256": "7dd438a32071a1ed2903841be9b207f0565cb17a31413d6812bd85e6dd2c6d4d",
+  "new_behavior": "Complete fixed-profile edge fields remove legacy point cap for actual crowdedframes; candidate cap and ROI unchanged",
+  "remaining_limits": [
+    "No semantic object identity or contact inference",
+    "All candidates beyond256 still refuse",
+    "Imported detector fields remain producer reports, not browser rerun of Canny"
+  ],
+  "issue": 193,
+  "base_commit": "5e62cbf022a2f64d88db0917e8e3ba8340329ba8",
+  "base_tree": "b30c20167614b9e626a9cbaa5542dbb98a8b94aa",
+  "current_receiving": "Allfiveactualpaper-cutter frames, v1legacymergedaccount, supporttamper, rawreopen and390px pass on actualmergedruntime",
+  "fingerprints": {
+    "base_commit": "5e62cbf022a2f64d88db0917e8e3ba8340329ba8",
+    "base_tree": "b30c20167614b9e626a9cbaa5542dbb98a8b94aa",
+    "verified_unchanged_runtime_blobs": 286,
+    "missing": [],
+    "mismatched": [],
+    "delivery_baselines": {
+      "docs/SEQUENCE_EDGE.md": "0e4c328d8e4a30c3c8a26f4c6892b14c9d11da4c",
+      "docs/SEQUENCE_EDGE_FIELD.md": null,
+      "docs/receipts/sequence-edge-field-130-20261025/browser-receipt.json": null,
+      "docs/receipts/sequence-edge-field-130-20261025/capture-receipt.json": null,
+      "docs/receipts/sequence-edge-field-130-20261025/independent-support-result.json": null,
+      "docs/receipts/sequence-edge-field-130-20261025/prior-browser-receipt.json": null,
+      "docs/receipts/sequence-edge-field-130-20261025/verification.json": null,
+      "native/sequence-edge.mjs": "2b0373cc6a096aac912d4143f51cb14681d9adbc",
+      "server.mjs": "80cccd1d6cf396403de00a625fc2e035a1d90d94",
+      "src/sequence-edge-field.mjs": null,
+      "src/sequence-edge.mjs": "92f62ec982a82e7eeafc7ea0fa9b71484622f3c5",
+      "test/sequence-edge-field.test.mjs": null,
+      "test/sequence-edge-native.test.py": "7d2d933dfdb441e391e6b973592fe18e1c34edca",
+      "test/sequence-edge.test.mjs": "fa1653afc95b8e55c95ff085573084b1a836d160",
+      "tools/browser-edge-field.mjs": null,
+      "tools/browser-sequence-edge.mjs": "54b8290ce7bd6ff9c43b183a9a800da691d29eed",
+      "tools/sequence-edge-native.py": "e499a481b2a88fa4ccbaf9a0a3efba893b432425",
+      "web/sequence-edge.mjs": "67bc6bd4d8546b7a9beb9e1951d23026e0493035"
+    }
+  }
+}
