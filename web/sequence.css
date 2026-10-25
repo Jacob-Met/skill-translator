@@ -5,3 +5,12 @@ h1,h2,h3,button{overflow-wrap:anywhere}
 .calibration-section{margin-top:42px}.calibration-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px}.calibration-grid>div{min-width:0}.calibration-preview{position:relative;margin-top:20px;background:#07110c;border:1px solid var(--line);border-radius:8px;overflow:hidden}.calibration-preview img{display:block;width:100%;height:auto}.calibration-preview svg{position:absolute;inset:0;width:100%;height:100%}.calibration-preview circle{fill:#14241a;stroke:#f4cc8e;stroke-width:2;vector-effect:non-scaling-stroke}.calibration-preview text{fill:#fff3d9;text-anchor:middle;dominant-baseline:central;font-family:system-ui,sans-serif}.calibration-marks{padding-left:24px;font-size:.8rem;color:#c5d6b8;overflow-wrap:anywhere}.calibration-marks li{margin:12px 0}.calibration-marks small{display:block;color:var(--muted)}
 @media(max-width:850px){.calibration-grid{grid-template-columns:1fr;gap:12px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+.visual-scan{margin:1.1rem 0;padding:1rem;border:1px solid var(--line);border-radius:12px;background:#102017}
+.visual-scan summary{cursor:pointer;font-weight:700;color:var(--accent)}
+.visual-scan summary:focus-visible{outline:3px solid #e7bd84;outline-offset:3px}
+.visual-scan progress{width:100%;margin-top:.75rem}
+.scan-intervals{padding:0;list-style:none;max-height:30rem;overflow:auto;overscroll-behavior:contain}
+.scan-interval{padding:.8rem 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.scan-interval p{margin:.4rem 0}.scan-measures{font-size:.86rem;line-height:1.5}
+.scan-preview figure{margin:.7rem 0}.scan-preview canvas{width:min(100%,320px);height:auto;display:block;background:#142a25}
+.scan-preview figcaption{font-size:.8rem;margin-top:.3rem}.visual-scan .actions{flex-wrap:wrap}

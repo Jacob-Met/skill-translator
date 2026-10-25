@@ -1,0 +1,9 @@
+{
+  "fixture": "Original authored 640\u00d7360 image sequence, encoded at 2 fps. No physical demonstration or learning claim.",
+  "tests": [],
+  "errors": [],
+  "offsite": [],
+  "result": "FAIL",
+  "clipSha256": "d7b7128bfd3bafeec1d3673642652d3d140a1dbd44c398d7b8ab4942c9466728",
+  "browser": "156.0.8078.47"
+}
