@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "two original sources, frames and missing versus supplied cues",
+    "actual Chrome download retains complete raw sources",
+    "explicit explanation retains attribution without making amendment",
+    "separate amended source and comparison preserve all original frame bytes and other example",
+    "explicit attributed withdrawal preserves original text and pixels while yielding unknown",
+    "fresh narrow original comparison question and reply receiving",
+    "fresh received withdrawal recomputes optional-field removal",
+    "wrong question refuses without replacing accepted reply",
+    "late reply cannot replace newer keyboard-retained answer",
+    "reply changes cancel a pending question-file replacement",
+    "downloaded amended comparison is received and old question cannot silently rebind"
+  ],
+  "errors": []
+}
