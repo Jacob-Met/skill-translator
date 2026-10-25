@@ -1,9 +1,9 @@
 {
   "issue": 162,
   "candidateRevision": 2,
-  "baseCommit": "fd8224cb32da5c1763b22aacc20aef6f92fccfe1",
-  "baseTree": "49a22c400145c66b66e1427a5ec98922a948cdff",
-  "composition": "Preserves incoming condition-changes/outcomes and ordered-tool-access source and routes. Only additive pattern route is composed into latest server.",
+  "baseCommit": "a5a718f9ff9ab74dc0609a6a3a1fb438af6c9749",
+  "baseTree": "62cf9cf0d0727461ae0a3cce70f3ed2cdc80caf1",
+  "composition": "Preserves incoming condition-changes/outcomes, ordered-tool-access and sampled-path source/routes. Only additive pattern route composed onto current3 server.",
   "scope": "Authored original-PNG, source-bound planar endpoint consumer; not physical demonstration/learning, tracking, deployment or merged-source verification",
   "execution": {
     "host": "eff5d9f5-c26a-4983-9737-a75db735bef1",
@@ -12,11 +12,11 @@
   },
   "native": {
     "command": "node --test --test-concurrency=2 test/*.test.mjs",
-    "passed": 541,
+    "passed": 551,
     "failed": 0,
     "skipped": 0,
-    "executionReceipt": "native-current2-result.json",
-    "log": "native-current2.tap.gz"
+    "executionReceipt": "native-current3-result.json",
+    "log": "native-current3.tap.gz"
   },
   "browser": {
     "command": "CHROME_BINARY=/opt/google/chrome/chrome PLAYWRIGHT_PATH=/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright RECEIPT_DIR=<owned-v2-receipts> node tools/browser-pattern-change.mjs",
@@ -24,15 +24,15 @@
     "pageErrors": 0,
     "offsiteRequests": 0,
     "cspViolations": 0,
-    "executionReceipt": "browser-current2-isolated-result.json",
+    "executionReceipt": "browser-current3-result.json",
     "receipt": "browser-receipt.json",
-    "log": "browser-current2-isolated.log"
+    "log": "browser-current3.log"
   },
   "review": {
     "peer": "Retained direct MECHANISM worker; core/lifecycle and independent proper-vs-reflected quadrilateral review accepted",
     "initialControl": "independent-review.json",
     "revision2": "independent-review-v2.json",
-    "visual": "Root inspected desktop; SKILL worker inspected both current390px pattern and collinear screenshots. Original images, tables, nominal labels and numerical caveats retained without clipped controls; browser asserts no page overflow and exercises keyboard removal."
+    "visual": "Root inspected current3 collinear desktop. SKILL and root inspected retained current2 desktop/narrow PNGs; collinear hashes are unchanged at current3. Pattern PNGs remain labeled current2; current3 identities separately recorded."
   },
   "interpretationControl": "Analytically unchanged collinear points acquire opposite nominal signs from independent projection/calibration arithmetic. Exact predicate retained; visible wording explicitly establishes no visible/physical reversal. No epsilon or uncertainty certificate introduced.",
   "sourceSHA256": {
@@ -54,7 +54,7 @@
     "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
     "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
     "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
-    "server.mjs": "c46e68dfe40cb70a87215731286826164337eff37a9efb2189d908008eaa216f",
+    "server.mjs": "7fc55c0f70c51a2e38878564df8fbe0a1a7ab5d1f0a1a61862e6a82c7b67c5d2",
     "tools/browser-pattern-change.mjs": "d3579bb33b8ba2a04e833070c4331e6a972c6a1c29cac4876a71985bfca2b018"
   },
   "testSHA256": "5a3c1bfaa92f2c5041b0c21d97030407e4fa84d83e250aded47ce91531868644",
@@ -68,5 +68,9 @@
   "rawDownloads": [
     "pattern.json",
     "collinear-comparison.json"
-  ]
+  ],
+  "screenshots": {
+    "current3IdentityLedger": "screenshot-identities-current3.json",
+    "retainedFiles": "Pattern desktop/mobile PNG files retained from current2 fd8224 receiving; their current3 pixels differ, so they are not relabeled as latest. Both collinear PNG hashes are identical across current2/current3. Latest current3 collinear desktop inspected directly by root. Current3 browser assertions passed at both widths."
+  }
 }

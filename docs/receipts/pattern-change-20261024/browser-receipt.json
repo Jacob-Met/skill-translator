@@ -20,7 +20,7 @@
     "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
     "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
     "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
-    "server.mjs": "c46e68dfe40cb70a87215731286826164337eff37a9efb2189d908008eaa216f",
+    "server.mjs": "7fc55c0f70c51a2e38878564df8fbe0a1a7ab5d1f0a1a61862e6a82c7b67c5d2",
     "tools/browser-pattern-change.mjs": "d3579bb33b8ba2a04e833070c4331e6a972c6a1c29cac4876a71985bfca2b018"
   },
   "tests": [
