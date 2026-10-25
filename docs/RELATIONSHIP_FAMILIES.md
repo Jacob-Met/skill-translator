@@ -1,0 +1,25 @@
+# How a demonstrated relationship responds to workpiece size
+
+Relationship discovery finds approximately fixed physical pair measurements. A relation can be useful even when its physical length changes: three differently sized workpieces can preserve a horizontal separation of20% of width. This increment automatically tests four transparent response families for every reference pair and each horizontal, vertical and distance measurement: fixed, proportional to width, proportional to height, and proportional to workpiece diagonal.
+
+The model hypotheses are built in, not entered for each pair. Each observed reading is divided by the corresponding dimension ratio to the original reference. The mechanism compares the resulting range in **reference-workpiece millimetres** with the retained exploratory threshold. This threshold is not a learned execution tolerance or a calibration uncertainty bound. All original source readings, scale factors, normalized readings, missing points and extrema witnesses remain available. Every example must contain the pair to establish descriptive compatibility. Contradiction is not discarded when another example is missing.
+
+Unchanged dimensions leave all four hypotheses compatible. Uniform scaling cannot distinguish the three proportional families. The consumer preserves those alternatives; it does not select whichever prediction is most convenient. An additional inconsistent source may leave no compatible family. Neither case produces a fallback claim of success. A unique survivor is unique only in this finite tested family.
+
+## Maintained journey
+
+Open original annotations in Relationship discovery, then open **Compare fixed and proportional families**. No additional pair list or model declaration is required. Inspect inferred candidates and vary the hypothetical target workpiece. Predictions anchor each surviving model to the original source reading. The nominal sheet check supplies only a necessary extent constraint. A hypothesis outside that extent cannot place the pair on the sheet; one inside is not established physically feasible.
+
+An optional matching native Practice session supplies actual learner placements and all retained rounds. The receiver compares the same actual pair measurement with every surviving prediction and reports residuals. It reuses native practice admission and point scoring, including source identity, history and photo-observation custody. No new relationship tolerance is required or invented, so residuals are not new pass/fail skill scores. A closer prediction does not establish learner intent or causal task necessity. Missing current placements remain incomplete even when an earlier round is fully observed.
+
+Hypothetical exploration has no fabricated practice session and remains available when the original authored point rules cannot fit the requested workpiece. An attached actual session fixes its dimensions until explicitly starting a fresh comparison. Raw family-review exports retain original demonstrations, selected enumerated pair, target and the entire native session if present. Derived hypotheses and scores are recomputed when reopened. Image-backed annotation metadata uses the maintained admission path; the page does not claim reattachment or verification of original image pixels.
+
+## Evidence and boundaries
+
+Native tests cover independent anisotropic width-response controls, unchanged-size ambiguity, proportional-family ambiguity under uniform scaling, fresh contradictions, missing correspondence, unchanged source/session, original point-score parity and history, raw replay and invalid source/target admission. The browser course uses unfamiliar241/389/307mm-wide sources, infers a20%-width separation, predicts92.6mm on a463mm workpiece, and compares an actual90.6mm history without replacing existing failed point scores. A fourth source removes the model. These are authored geometric software controls, not physical demonstrations or learner-benefit evidence.
+
+The source calibrations, dimensions and explicitly confirmed mark correspondences remain supplied inputs. This mechanism removes per-pair enumeration and model-choice labor; it does not solve automatic point perception or infer force/contact. Continuous affine response and actual coupled layout solvers remain separate maintained work.
+
+## Receiving
+
+On current base `f17cc0d83b166e583b944e4d6def488f6cc166f0`,26 native affected tests and7 actual Chrome browser groups pass. Root inspected desktop and390px renderings, added a real page reload before raw reopening, and reran after composing the concurrent timing route. Gauge independently reviewed the mechanism and actual-session custody and ran10 focused groups without blockers. Exact commands, coverage and runtime correction are in `docs/receipts/relationship-families-20261025/receiving.json`. Screenshots show the actual maintained page with the unfamiliar course and real authored practice history; no screenshot implies a physical learner trial.
