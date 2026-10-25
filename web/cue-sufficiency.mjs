@@ -1,4 +1,4 @@
-import {inspectCueQuestions} from '/src/cue-questions.mjs';
+import {inspectCueQuestions,importCueQuestionPlan} from '/src/cue-questions.mjs';
 import {createCueQuestionsView} from '/web/cue-questions-view.mjs';
 import {inspectCueSupport} from '/src/cue-support.mjs';
 import {CUE_FORMAT,importCueStudy,inspectCueStudy} from '/src/cue-sufficiency.mjs';
@@ -20,17 +20,17 @@ function render(){
 }
 $('add').onclick=()=>{if(study.cues.length>=8)return;invalidate();let n=0;while(study.cues.some(c=>c.id==='cue'+n))n++;study.cues.push({id:'cue'+n,label:'',basis:''});study.rows.forEach(r=>r.values.push(null));render();};
 $('open').onchange=async event=>{
- const file=event.target.files[0];if(!file)return;invalidate();loading=true;loading=true;controller=new AbortController();const rev=revision,signal=controller.signal;let incoming;
+ const file=event.target.files[0];if(!file)return;revision++;controller?.abort();questionView.suspend();$('results').replaceChildren();$('support-results').replaceChildren();loading=true;controller=new AbortController();const rev=revision,signal=controller.signal;let incoming;
  try{if(file.size>48*1024*1024)throw Error('Keep the complete study within 48 MB');const raw=JSON.parse(await file.text());let next;
- if(raw.format==='skill-translator.cue-bundle/v1'){
- next=importCueStudy(raw.study);incoming=await readComparison(new File([JSON.stringify(raw.comparison)],'comparison.json'),{signal});
+ if(['skill-translator.cue-bundle/v1','skill-translator.cue-bundle/v2'].includes(raw.format)){
+ if(raw.format==='skill-translator.cue-bundle/v1'&&raw.questionPlan!==undefined)throw Error('Cue effort assumptions require the v2 bundle');next=importCueStudy(raw.study);incoming=await readComparison(new File([JSON.stringify(raw.comparison)],'comparison.json'),{signal});
  if(JSON.stringify(next.comparison)!==JSON.stringify(incoming.study))throw Error('Cue account differs from retained comparison');
  }else{incoming=await readComparison(file,{signal});next={format:CUE_FORMAT,comparison:incoming.study,cues:[{id:'cue0',label:'',basis:''}],rows:incoming.study.examples.map(()=>({decision:null,basis:'',values:[null]}))};}
- const questionReadings=raw.format==='skill-translator.cue-bundle/v1'?(raw.questionReadings??[]):[];if(raw.format==='skill-translator.cue-bundle/v1')inspectCueQuestions(next,questionReadings);if(rev!==revision||signal.aborted){release(incoming.sources);return;}release(sources);sources=incoming.sources;incoming=null;study=next;loading=false;$('results').replaceChildren();$('support-results').replaceChildren();render();questionView.restore(questionReadings);$('error').textContent='';$('status').textContent='Original frame bytes checked. Declare cues and decisions before inspection.';
+ const isCueBundle=['skill-translator.cue-bundle/v1','skill-translator.cue-bundle/v2'].includes(raw.format);const questionReadings=isCueBundle?(raw.questionReadings??[]):[];const questionPlan=raw.format==='skill-translator.cue-bundle/v2'?importCueQuestionPlan(next,raw.questionPlan):null;if(isCueBundle)inspectCueQuestions(next,questionReadings);if(rev!==revision||signal.aborted){release(incoming.sources);return;}release(sources);sources=incoming.sources;incoming=null;study=next;loading=false;$('results').replaceChildren();$('support-results').replaceChildren();render();questionView.restore(questionReadings,questionPlan);$('error').textContent='';$('status').textContent='Original frame bytes checked. Declare cues and decisions before inspection.';
  }catch(e){if(rev===revision)loading=false;if(incoming)release(incoming.sources);if(rev===revision)$('error').textContent='Import refused; accepted work retained. '+e.message;}
 };
 $('inspect').onclick=()=>{if(loading){$('status').textContent='Source import is pending; wait or edit to cancel it.';return;}try{const f=inspectCueStudy(study),out=$('results');out.replaceChildren(el('h2','Finite example comparison'),el('p',f.boundary));out.append(el('p',`State: ${f.status}. ${f.minimalCueSets.length} inclusion-minimal combinations.`));for(const set of f.minimalCueSets)out.append(el('p',set.map(id=>study.cues.find(c=>c.id===id).label).join(' + ')));for(const group of f.necessityWitnesses)for(const witness of group.witnesses)out.append(el('p',`Within combination ${group.cueIds.join(' + ')}, removing ${witness.cueId} leaves examples ${witness.a+1} and ${witness.b+1} without a known distinction.`));for(const p of f.pairs)out.append(el('p',`Examples ${p.a+1} and ${p.b+1}: ${p.status}; known distinguishing cues: ${p.distinguishingCueIds.join(', ')||'none'}; unknown cues: ${p.unknownCueIds.join(', ')||'none'}.`));for(const p of f.unknownDecisions)out.append(el('p',`Examples ${p.a+1} and ${p.b+1}: decision label unavailable.`));$('error').textContent='';}catch(e){$('error').textContent=e.message;}};
-$('save').onclick=async()=>{try{const accepted=importCueStudy(study),rev=revision,comparison=JSON.parse(await(await makeComparison(accepted.comparison,sources)).text());if(rev!==revision)throw Error('Inputs changed during export; retry');const blob=new Blob([JSON.stringify({format:'skill-translator.cue-bundle/v1',study:accepted,comparison,questionReadings:questionView.readings()})],{type:'application/json'});if(blob.size>48*1024*1024)throw Error('Complete study exceeds 48 MB');const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='cue-study.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){$('error').textContent=e.message;}};
+$('save').onclick=async()=>{try{if(loading)throw Error('Source import is pending');const accepted=importCueStudy(study),questionPlan=questionView.plan(),questionReadings=questionView.readings(),rev=revision,comparison=JSON.parse(await(await makeComparison(accepted.comparison,sources)).text());if(rev!==revision)throw Error('Inputs changed during export; retry');const blob=new Blob([JSON.stringify({format:questionPlan?'skill-translator.cue-bundle/v2':'skill-translator.cue-bundle/v1',study:accepted,comparison,questionReadings,...(questionPlan?{questionPlan}:{})})],{type:'application/json'});if(blob.size>48*1024*1024)throw Error('Complete study exceeds 48 MB');const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='cue-study.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){$('error').textContent=e.message;}};
 window.addEventListener('beforeunload',()=>{controller?.abort();release(sources);});
 
 $('support').onclick=()=>{if(loading){$('status').textContent='Source import is pending; wait or edit to cancel it.';return;}try{
@@ -51,4 +51,5 @@ $('support').onclick=()=>{if(loading){$('status').textContent='Source import is 
  $('error').textContent='';
  }catch(e){$('error').textContent=e.message;}};
 
-const questionView=createCueQuestionsView({anchor:$('editor'),getStudy:()=>study,isLoading:()=>loading,onError:message=>$('error').textContent=message});
+const questionView=createCueQuestionsView({anchor:$('editor'),getStudy:()=>study,isLoading:()=>loading,onError:message=>$('error').textContent=message,onChange:()=>{revision++;controller?.abort();loading=false;}});
+
