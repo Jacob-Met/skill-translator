@@ -8,6 +8,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/reviewed-point-paths.mjs":["src/reviewed-point-paths.mjs","text/javascript; charset=utf-8"],
+  "/web/reviewed-point-paths-input.mjs":["web/reviewed-point-paths-input.mjs","text/javascript; charset=utf-8"],
+  "/web/reviewed-point-paths-view.mjs":["web/reviewed-point-paths-view.mjs","text/javascript; charset=utf-8"],
   '/src/path-occurrences.mjs':['src/path-occurrences.mjs','text/javascript; charset=utf-8'],
   '/web/path-occurrences-view.mjs':['web/path-occurrences-view.mjs','text/javascript; charset=utf-8'],
   "/src/path-reference-prediction.mjs":["src/path-reference-prediction.mjs","text/javascript; charset=utf-8"],

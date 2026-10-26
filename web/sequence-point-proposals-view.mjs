@@ -1,10 +1,10 @@
 import {proposeSequencePointChoices,reviewSequencePointChoice} from '/src/sequence-point-proposals.mjs';
 const $=id=>document.getElementById(id),el=(tag,text)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
 export function installPointProposals({getSource,getAssets,onChange}){
- const generated=new Map();let pending=null;
+ const generated=new Map(),reviewedRecords=new Map();let pending=null;
  const rowFor=id=>[...$('samples').children].find(row=>row.dataset.moment===id);
- function retire(row){const basis=row.querySelector('.basis'),old=generated.get(row);if(old!==undefined&&basis.value===old)basis.value='';generated.delete(row);}
- function clear(){for(const row of generated.keys())retire(row);pending=null;$('point-proposals').replaceChildren();}
+ function retire(row){const basis=row.querySelector('.basis'),old=generated.get(row);if(old!==undefined&&basis.value===old)basis.value='';generated.delete(row);reviewedRecords.delete(row.dataset.moment);}
+ function clear(){for(const row of generated.keys())retire(row);reviewedRecords.clear();pending=null;$('point-proposals').replaceChildren();}
  function query(){return {anchorMomentId:$('point-anchor-moment').value,anchorMarkId:$('point-anchor-mark').value,momentIds:[...$('samples').children].filter(row=>row.querySelector('.include').checked).map(row=>row.dataset.moment),deviationMm:Number($('point-pair-bound').value),maxStates:Number($('point-search-budget').value)};}
  function populateMarks(){const moment=getSource()?.moments.find(m=>m.id===$('point-anchor-moment').value);$('point-anchor-mark').replaceChildren();for(const mark of moment?.calibratedTask?.landmarks??[]){const option=el('option',`${mark.label} (${mark.id})`);option.value=mark.id;$('point-anchor-mark').append(option);}}
  function reset(){clear();$('point-anchor-moment').replaceChildren();for(const moment of getSource()?.moments??[]){const option=el('option',`${moment.label} · ${moment.origin.mediaTimeSeconds} s`);option.value=moment.id;$('point-anchor-moment').append(option);}populateMarks();$('point-pair-bound').value='1';$('point-search-budget').value='20000';}
@@ -41,12 +41,12 @@ export function installPointProposals({getSource,getAssets,onChange}){
        select.value=sample.markId;select.dispatchEvent(new Event('change'));
        if(!preserveAnchor){basis.value=sample.basis;generated.set(row,sample.basis);}
       }
-      onChange();feedback.textContent='Converted to editable authored point choices. Inspect and accept the selected samples in the ordinary form below.';
+      reviewedRecords.set(row.momentId,choice);onChange();feedback.textContent='Converted to editable authored point choices. Inspect and accept the selected samples in the ordinary form below.';
      }catch(error){feedback.textContent=error.message;}
     });
     card.append(label,use,feedback);target.append(card);
    }
   }catch(error){$('point-proposals').append(el('p',`Proposal unavailable: ${error.message}`));}
  });
- return {reset,accept(){generated.clear();pending=null;$('point-proposals').replaceChildren();}};
+ return {reset,accept(){const retained=[...reviewedRecords.values()];generated.clear();reviewedRecords.clear();pending=null;$('point-proposals').replaceChildren();return retained;}};
 }
