@@ -11,7 +11,7 @@ full-resolution capture remain available. The original scan is unchanged.
 
 `compareTranslatedSamples(before, after, {radius})` enumerates integer shifts on
 the original sampled RGB raster. The default radius is four sampled pixels; the
-core admits radii one through six. Every candidate uses exactly the same inset
+core admits radii one through sixteen. Every candidate uses exactly the same inset
 reference pixels. It fits the same lower-median additive brightness shift as
 the existing RGB L1 score, and retains every exact minimum of the integer
 residual. The displayed zero-shift comparison uses that same interior support.
@@ -40,7 +40,7 @@ Run the affected native checks from the repository root:
 node --test test/visual-translation.test.mjs test/visual-scan.test.mjs test/visual-span.test.mjs
 ```
 
-The 21 passing groups include an independent sorted-delta exhaustive oracle on
+The affected groups include an independent sorted-delta exhaustive oracle on
 24 varied small rasters, exact ties, periodic and flat rasters, search-edge
 minima, source/time gaps, input immutability and an excluded-border control.
 
@@ -74,3 +74,41 @@ without weakening that policy.
 
 The shift fitting does not change saved sequence schema, retained images,
 source provenance, manual state selection or existing transition ownership.
+
+## Wider shifts with the narrow evidence retained
+
+**Largest change · wider shift** compares all 1,089 integer shifts within ±16
+sampled pixels. It keeps the existing ±4 comparison beside the wider result,
+as well as the original whole-image measurements. The smaller common interior
+of the wider search can omit a change visible in those other accounts. Each
+result retains its own support dimensions and excluded-pixel count; scores
+across the two supports are not interpreted as measurements on the same pixels.
+For a 160 × 120 sample, narrow support is 152 × 112 and wide support is 128 × 88.
+Samples without sufficient common interior have no fitted score.
+
+An independent four-case prototype with shifts (12, −8), (−11, 7), (15, 2) and
+(0, −13) recovers the exact displacement with zero wide residual, while the
+narrow result retains roughly 63 channel levels. A separate border-only change
+is visible in the narrow result but excluded from the wide score. These
+controls require keeping both accounts; they do not establish camera motion.
+The maintained native suite also compares wider results against the independent
+sorted-delta exhaustive oracle and checks all 1,089 flat-image ties, a search-edge
+minimum and insufficient common support.
+
+The worker computes the narrow account first and then the wide account, with
+progress and one active job. Results are cached only within the current source
+scan. A narrow computation failure withholds the wider comparison. Clearing or
+replacing the source retires both. An opened alternatives page and keyboard
+focus are retained when another comparison completes for the same scan.
+
+All tied alternatives remain in the result. Closed details create no list
+items; opening them exposes pages of at most 50 alternatives with native
+Previous/Next controls, explicit counts and keyboard access. A wide flat-image
+result therefore has 22 inspectable pages without eagerly building 1,089 rows
+for every scan interval.
+
+`tools/browser-visual-wide-translation.mjs` receives authored large-shift,
+local-change, border-only and flat original videos through the maintained page,
+including full-resolution capture and source-only reopening. Run it with the
+same Playwright, Chrome and receipt-directory variables shown above. Browser
+execution results belong with the exact reviewed source revision.

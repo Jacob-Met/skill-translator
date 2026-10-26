@@ -98,5 +98,32 @@ test('scan preserves gaps, duplicate presentation, source/time admission and ins
   assert.equal(report.intervals[1].comparison, undefined);
   assert.equal(compareTranslatedSamples(image(5, 5), image(5, 5)).status, 'insufficient-common-support');
   assert.throws(() => inspectTranslatedScan(plan, [{...sample(0, 0), requestedSeconds: 1}]), /different requested time/);
-  for (const radius of [0, 1.5, 7, NaN]) assert.throws(() => compareTranslatedSamples(image(), image(), {radius}), /radius/);
+  for (const radius of [0, 1.5, 17, NaN]) assert.throws(() => compareTranslatedSamples(image(), image(), {radius}), /radius/);
+});
+
+test('wider exact search recovers changed large shifts, with independent exhaustive oracle', () => {
+  for (const [seed, dx, dy, light] of [[51,12,-8,11],[77,-11,7,0],[131,15,2,17],[213,0,-13,7]]) {
+    const a=image(45,43,seed),b=shift(a,dx,dy,light),narrow=compareTranslatedSamples(a,b);
+    const wide=compareTranslatedSamples(a,b,{radius:16}),expected=oracle(a,b,16);
+    assert.ok(narrow.meanAdjustedChange>0.1);assert.equal(wide.meanAdjustedChange,0);
+    assert.deepEqual(wide.alternatives.map(x=>[x.dx,x.dy,x.uniformBrightnessShift]),expected.map(x=>[x.dx,x.dy,x.light]));
+    assert.equal(wide.candidateCount,1089);assert.equal(wide.support.pixelCount,13*11);
+  }
+});
+
+test('narrow evidence preserves a border change excluded from the wider common interior', () => {
+  const a=image(64,56,811),b=structuredClone(a);
+  for(let y=24;y<31;y++)for(let x=5;x<13;x++)b.rgba.set([240,0,100,255],4*(y*64+x));
+  const original=compareSamplePixels(a,b),narrow=compareTranslatedSamples(a,b),wide=compareTranslatedSamples(a,b,{radius:16});
+  assert.ok(original.meanAdjustedChange>0);assert.ok(narrow.meanAdjustedChange>0);assert.equal(wide.meanAdjustedChange,0);
+  assert.equal(narrow.support.pixelCount,56*48);assert.equal(wide.support.pixelCount,32*24);
+});
+
+test('wide flat ties, edge minima and inadequate interior never gain false uniqueness or a zero fallback', () => {
+  const flat=image(40,40);flat.rgba.fill(90);const ties=compareTranslatedSamples(flat,flat,{radius:16});
+  assert.equal(ties.status,'ambiguous');assert.equal(ties.alternatives.length,1089);
+  assert.equal(new Set(ties.alternatives.map(x=>`${x.dx},${x.dy}`)).size,1089);
+  const a=image(48,45,919),b=shift(a,16,-4);assert.equal(compareTranslatedSamples(a,b,{radius:16}).status,'search-boundary');
+  const unavailable=compareTranslatedSamples(image(34,40),image(34,40),{radius:16});
+  assert.equal(unavailable.status,'insufficient-common-support');assert.equal(unavailable.meanAdjustedChange,undefined);
 });
