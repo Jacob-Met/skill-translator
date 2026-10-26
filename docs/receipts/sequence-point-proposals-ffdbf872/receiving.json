@@ -1,0 +1,366 @@
+{
+  "issue": 340,
+  "base": "2bbeb4fac1489843710d2465bba4650b2808922f",
+  "base_tree": "b47d3b5e6c91383fc4b17fe66a6e660393ff7496",
+  "native": {
+    "new_groups": 6,
+    "retained_fixed_matcher_groups": 6,
+    "concurrent_dwell_groups": 7,
+    "current_axis_composition_groups": {
+      "point_choices": 6,
+      "fixed_matcher": 6
+    }
+  },
+  "browser": {
+    "passed": true,
+    "groups": 18,
+    "coverage": [
+      "authored-anchor-basis-survives-later-target-adoption",
+      "edited-mark-retires-generated-basis",
+      "selected-moment-change-retires-proposals",
+      "one-anchor-shuffled-original-identities",
+      "separate-semantic-reviews",
+      "common-frame-never-inferred",
+      "exact-original-preview-bytes-and-pixels",
+      "review-withdrawal-retires-basis",
+      "bound-change-retires-generated-basis",
+      "manual-basis-preserved",
+      "failed-source-preserves-pending-evidence",
+      "ordinary-path-acceptance",
+      "raw-ids-and-png-save-reopen",
+      "accepted-author-basis-preserved-on-new-query",
+      "budget-unresolved-nonwin",
+      "symmetric-constellation-nonwin",
+      "missing-calibration-remains-unfilled",
+      "390px-original-review"
+    ],
+    "browser": "156.0.8078.47",
+    "source": "2bbeb4fac1489843710d2465bba4650b2808922f-plus-349-anchor-fix",
+    "pageErrors": [],
+    "responses": [
+      {
+        "path": "/sampled-path",
+        "bytes": 5860,
+        "sha256": "ffd46d8b89c5c6001cedf24b3d393a86ae8466591ce6f2a557401097818ea35b"
+      },
+      {
+        "path": "/web/sampled-path.css",
+        "bytes": 1496,
+        "sha256": "5f656635563fd20ba8ccaf56098ee1666101b3f8e2e223085ed2de336c4b7ce6"
+      },
+      {
+        "path": "/web/sampled-path.mjs",
+        "bytes": 13666,
+        "sha256": "2e6b2d474b9f633f7130d829ed38ff1ac84023d4c9bf01e2b629032caa22a386"
+      },
+      {
+        "path": "/web/sequence-point-proposals-view.mjs",
+        "bytes": 6922,
+        "sha256": "0e2834b71157a032497c6c6c50769a8fa08182f716c5288e3a9a77fe99c8b454"
+      },
+      {
+        "path": "/web/path-dwell.mjs",
+        "bytes": 3014,
+        "sha256": "3f70e0981dd6d9ef140311daa9b317fa3495ec6ebd61b3e498f97b6f26042bf4"
+      },
+      {
+        "path": "/web/path-axis-view.mjs",
+        "bytes": 2783,
+        "sha256": "19dcf2503ee4536b9b9ab594a8fb15cd072786996e2ddc2e83a7d7bc37630f53"
+      },
+      {
+        "path": "/src/path-summary.mjs",
+        "bytes": 3779,
+        "sha256": "655826477c54752433b17750c3bd8820490d7a6a8423e67aab5e48fab90d30af"
+      },
+      {
+        "path": "/web/path-returns-view.mjs",
+        "bytes": 2488,
+        "sha256": "5d18f64865d1529d19f8afac8b684bda871cb1ae8d9f7d43474dd390d1bdf166"
+      },
+      {
+        "path": "/web/path-circle-view.mjs",
+        "bytes": 4325,
+        "sha256": "693083b9f01aa685c8fa73e1b443c2cfc2df75ce27c3f3303b57b30cc253d192"
+      },
+      {
+        "path": "/src/sequence-path.mjs",
+        "bytes": 8079,
+        "sha256": "45d8e5fbd143a9c25d51796c0cccb99d815569e42fb801b5fc83ec859183bda4"
+      },
+      {
+        "path": "/web/sequence-input.mjs",
+        "bytes": 4361,
+        "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+      },
+      {
+        "path": "/web/sampled-path-input.mjs",
+        "bytes": 1803,
+        "sha256": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3"
+      },
+      {
+        "path": "/src/sequence-point-proposals.mjs",
+        "bytes": 2967,
+        "sha256": "6978a2537e3d557daef0be49f721b6fa074f1bbad011dc632ee4f7f9f7f901ef"
+      },
+      {
+        "path": "/src/path-dwell.mjs",
+        "bytes": 2520,
+        "sha256": "26bbb9a009b07ca7843ff796761412c8b2336b704a3cee7e9b9382a5a933e83d"
+      },
+      {
+        "path": "/src/path-axis.mjs",
+        "bytes": 3585,
+        "sha256": "3e2049139c8c03175361b83fa57c916e8b19009c14a3d67c374f690709e7c23a"
+      },
+      {
+        "path": "/src/geometry.mjs",
+        "bytes": 7305,
+        "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8"
+      },
+      {
+        "path": "/src/path-returns.mjs",
+        "bytes": 2901,
+        "sha256": "dc596ea72f181aa9ad7146c247a8050f6cbfe00983b8dace23a6277ff989b6ce"
+      },
+      {
+        "path": "/src/path-circle.mjs",
+        "bytes": 4765,
+        "sha256": "5da3052896393e11573ead2d6668697c6ae6438c34eeccbee09981e9b22bd10b"
+      },
+      {
+        "path": "/src/demonstration-sequence.mjs",
+        "bytes": 10025,
+        "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52"
+      },
+      {
+        "path": "/src/capture.mjs",
+        "bytes": 6096,
+        "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c"
+      },
+      {
+        "path": "/web/image-input.mjs",
+        "bytes": 1511,
+        "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138"
+      },
+      {
+        "path": "/src/spatial-correspondence.mjs",
+        "bytes": 9238,
+        "sha256": "aa273ce5f0d4b45accf2142be7ab5fb4bf0700d98c2718c79d48e137af7d8ad3"
+      },
+      {
+        "path": "/vendor/materialtruth/photometric.mjs",
+        "bytes": 14687,
+        "sha256": "dd005dfe4dda481e01666085b225b5b3140b4fe757dcc4fa583b01202b3192a2"
+      },
+      {
+        "path": "/src/frame-origin.mjs",
+        "bytes": 3292,
+        "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf"
+      },
+      {
+        "path": "/src/sequence-capture.mjs",
+        "bytes": 1672,
+        "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb"
+      },
+      {
+        "path": "/src/authoring.mjs",
+        "bytes": 1825,
+        "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e"
+      },
+      {
+        "path": "/src/capture-editing.mjs",
+        "bytes": 3930,
+        "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06"
+      },
+      {
+        "path": "/src/spatial-source-geometry.mjs",
+        "bytes": 421,
+        "sha256": "8f6ba07370ff22ff66d9cc07d13b18dab31d3d9dc7aa3bde0b2bb467439b564e"
+      },
+      {
+        "path": "/src/axis-spatial-correspondence.mjs",
+        "bytes": 4000,
+        "sha256": "de9b7a417b9ff2fbbf8f46836869e9512539fd457c8849a42ca4050017556a97"
+      },
+      {
+        "path": "/src/axis-distance-support.mjs",
+        "bytes": 7330,
+        "sha256": "4b08fa9dd775472b18d74b915cf5e9d70d7556260629bf44e5223b7cf645c11e"
+      },
+      {
+        "path": "/vendor/chronos/exact-halfplanes.mjs",
+        "bytes": 3863,
+        "sha256": "3f2020d8adac92ac1b82331dd5b30964a889a85d249e81cd16bb9dbba99b1150"
+      },
+      {
+        "path": "/sampled-path",
+        "bytes": 5860,
+        "sha256": "ffd46d8b89c5c6001cedf24b3d393a86ae8466591ce6f2a557401097818ea35b"
+      },
+      {
+        "path": "/web/sampled-path.css",
+        "bytes": 1496,
+        "sha256": "5f656635563fd20ba8ccaf56098ee1666101b3f8e2e223085ed2de336c4b7ce6"
+      },
+      {
+        "path": "/web/sampled-path.mjs",
+        "bytes": 13666,
+        "sha256": "2e6b2d474b9f633f7130d829ed38ff1ac84023d4c9bf01e2b629032caa22a386"
+      },
+      {
+        "path": "/web/sequence-point-proposals-view.mjs",
+        "bytes": 6922,
+        "sha256": "0e2834b71157a032497c6c6c50769a8fa08182f716c5288e3a9a77fe99c8b454"
+      },
+      {
+        "path": "/web/path-dwell.mjs",
+        "bytes": 3014,
+        "sha256": "3f70e0981dd6d9ef140311daa9b317fa3495ec6ebd61b3e498f97b6f26042bf4"
+      },
+      {
+        "path": "/web/path-axis-view.mjs",
+        "bytes": 2783,
+        "sha256": "19dcf2503ee4536b9b9ab594a8fb15cd072786996e2ddc2e83a7d7bc37630f53"
+      },
+      {
+        "path": "/web/path-returns-view.mjs",
+        "bytes": 2488,
+        "sha256": "5d18f64865d1529d19f8afac8b684bda871cb1ae8d9f7d43474dd390d1bdf166"
+      },
+      {
+        "path": "/src/path-summary.mjs",
+        "bytes": 3779,
+        "sha256": "655826477c54752433b17750c3bd8820490d7a6a8423e67aab5e48fab90d30af"
+      },
+      {
+        "path": "/web/path-circle-view.mjs",
+        "bytes": 4325,
+        "sha256": "693083b9f01aa685c8fa73e1b443c2cfc2df75ce27c3f3303b57b30cc253d192"
+      },
+      {
+        "path": "/src/sequence-path.mjs",
+        "bytes": 8079,
+        "sha256": "45d8e5fbd143a9c25d51796c0cccb99d815569e42fb801b5fc83ec859183bda4"
+      },
+      {
+        "path": "/web/sampled-path-input.mjs",
+        "bytes": 1803,
+        "sha256": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3"
+      },
+      {
+        "path": "/src/sequence-point-proposals.mjs",
+        "bytes": 2967,
+        "sha256": "6978a2537e3d557daef0be49f721b6fa074f1bbad011dc632ee4f7f9f7f901ef"
+      },
+      {
+        "path": "/web/sequence-input.mjs",
+        "bytes": 4361,
+        "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+      },
+      {
+        "path": "/src/path-dwell.mjs",
+        "bytes": 2520,
+        "sha256": "26bbb9a009b07ca7843ff796761412c8b2336b704a3cee7e9b9382a5a933e83d"
+      },
+      {
+        "path": "/src/path-axis.mjs",
+        "bytes": 3585,
+        "sha256": "3e2049139c8c03175361b83fa57c916e8b19009c14a3d67c374f690709e7c23a"
+      },
+      {
+        "path": "/src/path-returns.mjs",
+        "bytes": 2901,
+        "sha256": "dc596ea72f181aa9ad7146c247a8050f6cbfe00983b8dace23a6277ff989b6ce"
+      },
+      {
+        "path": "/src/path-circle.mjs",
+        "bytes": 4765,
+        "sha256": "5da3052896393e11573ead2d6668697c6ae6438c34eeccbee09981e9b22bd10b"
+      },
+      {
+        "path": "/src/capture.mjs",
+        "bytes": 6096,
+        "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c"
+      },
+      {
+        "path": "/src/demonstration-sequence.mjs",
+        "bytes": 10025,
+        "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52"
+      },
+      {
+        "path": "/src/geometry.mjs",
+        "bytes": 7305,
+        "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8"
+      },
+      {
+        "path": "/src/spatial-correspondence.mjs",
+        "bytes": 9238,
+        "sha256": "aa273ce5f0d4b45accf2142be7ab5fb4bf0700d98c2718c79d48e137af7d8ad3"
+      },
+      {
+        "path": "/web/image-input.mjs",
+        "bytes": 1511,
+        "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138"
+      },
+      {
+        "path": "/src/authoring.mjs",
+        "bytes": 1825,
+        "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e"
+      },
+      {
+        "path": "/vendor/materialtruth/photometric.mjs",
+        "bytes": 14687,
+        "sha256": "dd005dfe4dda481e01666085b225b5b3140b4fe757dcc4fa583b01202b3192a2"
+      },
+      {
+        "path": "/src/sequence-capture.mjs",
+        "bytes": 1672,
+        "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb"
+      },
+      {
+        "path": "/src/capture-editing.mjs",
+        "bytes": 3930,
+        "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06"
+      },
+      {
+        "path": "/src/spatial-source-geometry.mjs",
+        "bytes": 421,
+        "sha256": "8f6ba07370ff22ff66d9cc07d13b18dab31d3d9dc7aa3bde0b2bb467439b564e"
+      },
+      {
+        "path": "/src/frame-origin.mjs",
+        "bytes": 3292,
+        "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf"
+      },
+      {
+        "path": "/src/axis-spatial-correspondence.mjs",
+        "bytes": 4000,
+        "sha256": "de9b7a417b9ff2fbbf8f46836869e9512539fd457c8849a42ca4050017556a97"
+      },
+      {
+        "path": "/src/axis-distance-support.mjs",
+        "bytes": 7330,
+        "sha256": "4b08fa9dd775472b18d74b915cf5e9d70d7556260629bf44e5223b7cf645c11e"
+      },
+      {
+        "path": "/vendor/chronos/exact-halfplanes.mjs",
+        "bytes": 3863,
+        "sha256": "3f2020d8adac92ac1b82331dd5b30964a889a85d249e81cd16bb9dbba99b1150"
+      }
+    ]
+  },
+  "independent_review": "Microverse reviewed complete source/lifecycle including acceptance-sealing fix and native controls; root inspected actual desktop and390px original point-map previews.",
+  "human_input": {
+    "existing_annotations": 16,
+    "frames": 4,
+    "baseline_local_mark_choices": 4,
+    "candidate_anchor_choices": 1,
+    "candidate_full_mapping_reviews": 3,
+    "common_frame_assertion": "separate and never inferred",
+    "qualification": "No reduction in total human actions or annotation work claimed."
+  },
+  "scope": "Existing3–7point constellations; reuse maintained exact matcher; unique complete source-bound mapping only; explicit semantic review and independently authored frame; no pixel acquisition, semantic recognition or frame inference.",
+  "integration": "Current2bb axis-correspondence refactor and shared original source geometry composed; all current routes retained. The sole server conflict was independent additive routes, and removing the two point-choice routes reproduces current server bytes exactly.",
+  "correction": "Preserve manually changed anchor basis between successive target adoptions; ordinary18-group browser covers save/reopen of this authored text."
+}

@@ -1,3 +1,4 @@
+import {installPointProposals} from '/web/sequence-point-proposals-view.mjs';
 import {mountDwellProposals} from '/web/path-dwell.mjs';
 import {showPathCircle,clearPathCircle} from '/web/path-circle-view.mjs';
 import {showPathAxis} from '/web/path-axis-view.mjs';
@@ -10,6 +11,7 @@ const $=id=>document.getElementById(id),el=(tag,value)=>{const n=document.create
 let source=null,accepted=null,revision=0,assets=new Map();
 const status=message=>{$('status').textContent=message;};
 function invalidate(){dwell.clear();revision++;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;status('Declarations changed. Inspect selected samples to recompute.');}
+const pointProposals=installPointProposals({getSource:()=>source,getAssets:()=>assets,onChange:invalidate});
 function sourceForm(sequence,study=null){
  dwell.clear();
  source=sequence;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;$('editor').hidden=false;$('source-name').textContent=sequence.title;
@@ -29,6 +31,7 @@ function sourceForm(sequence,study=null){
   const highlight=()=>{view.querySelector('circle')?.remove();const mark=moment.calibratedTask?.landmarks.find(m=>m.id===choice.value);if(!mark)return;const circle=document.createElementNS(ns,'circle');for(const[k,v]of Object.entries({cx:mark.sourcePx.x,cy:mark.sourcePx.y,r:Math.max(moment.image.widthPx,moment.image.heightPx)/50,fill:'none',stroke:'#137b72','stroke-width':3}))circle.setAttribute(k,v);view.append(circle);};highlight();choice.addEventListener('change',highlight);row.append(view);
   const details=el('details');details.append(el('summary','Inspect original moment account'),el('pre',JSON.stringify(moment,null,2)));row.append(details);$('samples').append(row);
  }
+ pointProposals.reset();
 }
 function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const mm=x=>x===null?'Unavailable':`${x!==0&&Math.abs(x)<.0005?x.toExponential(6):x.toFixed(3)} mm`;
@@ -41,7 +44,7 @@ function show(study){
   row?.scrollIntoView({block:'center'});row?.querySelector('.mark').focus({preventScroll:true});
  });
  returnSection.dataset.pathReturns='true';
- const findings=inspectSequencePath(study);accepted=study;clearPathCircle($('circle-result'));$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
+ const findings=inspectSequencePath(study);pointProposals.accept();accepted=study;clearPathCircle($('circle-result'));$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
  $('summary').textContent=`Endpoint distance: ${mm(findings.endpointDistanceMm)}. Complete sampled-path sum: ${mm(findings.sampledPathDistanceMm)}. Observed adjacent chords: ${findings.observedSegmentCount} of ${findings.segments.length}; their covered sum is ${mm(findings.coveredChordDistanceMm)}.`;
  $('segments').replaceChildren();
  for(const s of findings.segments){const row=el('tr');for(const value of [`${s.fromMomentId} → ${s.toMomentId}`,`${s.elapsedSeconds} s`,s.distanceMm===null?'Missing observation':mm(s.distanceMm),s.delta?`${mm(s.delta.xMm)}, ${mm(s.delta.yMm)}`:'Unavailable'])row.append(el('td',value));$('segments').append(row);}

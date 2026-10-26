@@ -1,0 +1,551 @@
+{
+  "format": "skill-translator.demonstration-sequence/v2",
+  "title": "An authored intermediate excursion",
+  "context": "Analytic controls, not measured physical motion",
+  "clip": {
+    "name": "authored.webm",
+    "mimeType": "video/webm",
+    "sizeBytes": 1000,
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "durationSeconds": 200
+  },
+  "moments": [
+    {
+      "id": "moment-0",
+      "label": "Sample 1",
+      "visibleState": "Authored point annotation",
+      "image": {
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "widthPx": 640,
+        "heightPx": 420,
+        "mimeType": "image/png",
+        "name": "moment-0.png",
+        "pixelCoordinates": "browser-oriented"
+      },
+      "origin": {
+        "kind": "local-video-frame",
+        "timing": "requestVideoFrameCallback",
+        "clip": {
+          "name": "authored.webm",
+          "mimeType": "video/webm",
+          "sizeBytes": 1000,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "durationSeconds": 200
+        },
+        "requestedTimeSeconds": 0,
+        "mediaTimeSeconds": 0,
+        "frameSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "widthPx": 640,
+        "heightPx": 420,
+        "decodedWidthPx": 640,
+        "decodedHeightPx": 420
+      },
+      "calibratedTask": {
+        "title": "Locally annotated demonstration",
+        "provenance": "User-selected local image; human-authored calibration and relationships.",
+        "evidenceClass": "human-annotated-local-image",
+        "source": {
+          "widthMm": 100,
+          "heightMm": 100,
+          "corners": [
+            {
+              "x": 10,
+              "y": 10
+            },
+            {
+              "x": 610,
+              "y": 15
+            },
+            {
+              "x": 600,
+              "y": 400
+            },
+            {
+              "x": 20,
+              "y": 390
+            }
+          ],
+          "image": {
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+            "widthPx": 640,
+            "heightPx": 420,
+            "mimeType": "image/png",
+            "name": "moment-0.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 1000,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "durationSeconds": 200
+            },
+            "requestedTimeSeconds": 0,
+            "mediaTimeSeconds": 0,
+            "frameSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+            "widthPx": 640,
+            "heightPx": 420,
+            "decodedWidthPx": 640,
+            "decodedHeightPx": 420
+          }
+        },
+        "landmarks": [
+          {
+            "id": "local-0-0",
+            "label": "Visible annotation 11",
+            "sourcePx": {
+              "x": 129.91484998439662,
+              "y": 89.26574829477065
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-0-1",
+            "label": "Visible annotation 12",
+            "sourcePx": {
+              "x": 201.0580927208449,
+              "y": 101.6557931011409
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-0-2",
+            "label": "Visible annotation 13",
+            "sourcePx": {
+              "x": 189.9237352015253,
+              "y": 167.18551855628962
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-0-3",
+            "label": "Visible annotation 14",
+            "sourcePx": {
+              "x": 296.1109269497313,
+              "y": 156.89856168726433
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          }
+        ],
+        "unknowns": [
+          "Source dimensions and relationship meanings were supplied by the annotator.",
+          "A still image does not establish contact pressure, material resistance, or physical task success."
+        ]
+      }
+    },
+    {
+      "id": "moment-1",
+      "label": "Sample 2",
+      "visibleState": "Authored point annotation",
+      "image": {
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "widthPx": 640,
+        "heightPx": 420,
+        "mimeType": "image/png",
+        "name": "moment-1.png",
+        "pixelCoordinates": "browser-oriented"
+      },
+      "origin": {
+        "kind": "local-video-frame",
+        "timing": "requestVideoFrameCallback",
+        "clip": {
+          "name": "authored.webm",
+          "mimeType": "video/webm",
+          "sizeBytes": 1000,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "durationSeconds": 200
+        },
+        "requestedTimeSeconds": 1,
+        "mediaTimeSeconds": 1,
+        "frameSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "widthPx": 640,
+        "heightPx": 420,
+        "decodedWidthPx": 640,
+        "decodedHeightPx": 420
+      },
+      "calibratedTask": {
+        "title": "Locally annotated demonstration",
+        "provenance": "User-selected local image; human-authored calibration and relationships.",
+        "evidenceClass": "human-annotated-local-image",
+        "source": {
+          "widthMm": 100,
+          "heightMm": 100,
+          "corners": [
+            {
+              "x": 11,
+              "y": 10
+            },
+            {
+              "x": 610,
+              "y": 16
+            },
+            {
+              "x": 599,
+              "y": 400
+            },
+            {
+              "x": 20,
+              "y": 389
+            }
+          ],
+          "image": {
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+            "widthPx": 640,
+            "heightPx": 420,
+            "mimeType": "image/png",
+            "name": "moment-1.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 1000,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "durationSeconds": 200
+            },
+            "requestedTimeSeconds": 1,
+            "mediaTimeSeconds": 1,
+            "frameSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+            "widthPx": 640,
+            "heightPx": 420,
+            "decodedWidthPx": 640,
+            "decodedHeightPx": 420
+          }
+        },
+        "landmarks": [
+          {
+            "id": "local-1-0",
+            "label": "Visible annotation 18",
+            "sourcePx": {
+              "x": 266.6336504258513,
+              "y": 106.40904813710667
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-1-1",
+            "label": "Visible annotation 19",
+            "sourcePx": {
+              "x": 361.32977033254576,
+              "y": 161.7241794738781
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-1-2",
+            "label": "Visible annotation 20",
+            "sourcePx": {
+              "x": 195.51741994131586,
+              "y": 93.9122521320743
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-1-3",
+            "label": "Visible annotation 21",
+            "sourcePx": {
+              "x": 254.93988554033976,
+              "y": 171.79686285838858
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          }
+        ],
+        "unknowns": [
+          "Source dimensions and relationship meanings were supplied by the annotator.",
+          "A still image does not establish contact pressure, material resistance, or physical task success."
+        ]
+      }
+    },
+    {
+      "id": "moment-2",
+      "label": "Sample 3",
+      "visibleState": "Authored point annotation",
+      "image": {
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "widthPx": 640,
+        "heightPx": 420,
+        "mimeType": "image/png",
+        "name": "moment-2.png",
+        "pixelCoordinates": "browser-oriented"
+      },
+      "origin": {
+        "kind": "local-video-frame",
+        "timing": "requestVideoFrameCallback",
+        "clip": {
+          "name": "authored.webm",
+          "mimeType": "video/webm",
+          "sizeBytes": 1000,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "durationSeconds": 200
+        },
+        "requestedTimeSeconds": 3,
+        "mediaTimeSeconds": 3,
+        "frameSha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "widthPx": 640,
+        "heightPx": 420,
+        "decodedWidthPx": 640,
+        "decodedHeightPx": 420
+      },
+      "calibratedTask": {
+        "title": "Locally annotated demonstration",
+        "provenance": "User-selected local image; human-authored calibration and relationships.",
+        "evidenceClass": "human-annotated-local-image",
+        "source": {
+          "widthMm": 100,
+          "heightMm": 100,
+          "corners": [
+            {
+              "x": 12,
+              "y": 10
+            },
+            {
+              "x": 610,
+              "y": 17
+            },
+            {
+              "x": 598,
+              "y": 400
+            },
+            {
+              "x": 20,
+              "y": 388
+            }
+          ],
+          "image": {
+            "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+            "widthPx": 640,
+            "heightPx": 420,
+            "mimeType": "image/png",
+            "name": "moment-2.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 1000,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "durationSeconds": 200
+            },
+            "requestedTimeSeconds": 3,
+            "mediaTimeSeconds": 3,
+            "frameSha256": "3333333333333333333333333333333333333333333333333333333333333333",
+            "widthPx": 640,
+            "heightPx": 420,
+            "decodedWidthPx": 640,
+            "decodedHeightPx": 420
+          }
+        },
+        "landmarks": [
+          {
+            "id": "local-2-0",
+            "label": "Visible annotation 25",
+            "sourcePx": {
+              "x": 155.1879403747962,
+              "y": 151.14037622794882
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-2-1",
+            "label": "Visible annotation 26",
+            "sourcePx": {
+              "x": 214.16784848724888,
+              "y": 228.14563352377155
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-2-2",
+            "label": "Visible annotation 27",
+            "sourcePx": {
+              "x": 319.61827880156346,
+              "y": 218.54218518889024
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-2-3",
+            "label": "Visible annotation 28",
+            "sourcePx": {
+              "x": 225.6928838012278,
+              "y": 163.6875493384528
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          }
+        ],
+        "unknowns": [
+          "Source dimensions and relationship meanings were supplied by the annotator.",
+          "A still image does not establish contact pressure, material resistance, or physical task success."
+        ]
+      }
+    },
+    {
+      "id": "moment-3",
+      "label": "Sample 4",
+      "visibleState": "Authored point annotation",
+      "image": {
+        "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "widthPx": 640,
+        "heightPx": 420,
+        "mimeType": "image/png",
+        "name": "moment-3.png",
+        "pixelCoordinates": "browser-oriented"
+      },
+      "origin": {
+        "kind": "local-video-frame",
+        "timing": "requestVideoFrameCallback",
+        "clip": {
+          "name": "authored.webm",
+          "mimeType": "video/webm",
+          "sizeBytes": 1000,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "durationSeconds": 200
+        },
+        "requestedTimeSeconds": 7,
+        "mediaTimeSeconds": 7,
+        "frameSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "widthPx": 640,
+        "heightPx": 420,
+        "decodedWidthPx": 640,
+        "decodedHeightPx": 420
+      },
+      "calibratedTask": {
+        "title": "Locally annotated demonstration",
+        "provenance": "User-selected local image; human-authored calibration and relationships.",
+        "evidenceClass": "human-annotated-local-image",
+        "source": {
+          "widthMm": 100,
+          "heightMm": 100,
+          "corners": [
+            {
+              "x": 13,
+              "y": 10
+            },
+            {
+              "x": 610,
+              "y": 18
+            },
+            {
+              "x": 597,
+              "y": 400
+            },
+            {
+              "x": 20,
+              "y": 387
+            }
+          ],
+          "image": {
+            "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+            "widthPx": 640,
+            "heightPx": 420,
+            "mimeType": "image/png",
+            "name": "moment-3.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 1000,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "durationSeconds": 200
+            },
+            "requestedTimeSeconds": 7,
+            "mediaTimeSeconds": 7,
+            "frameSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+            "widthPx": 640,
+            "heightPx": 420,
+            "decodedWidthPx": 640,
+            "decodedHeightPx": 420
+          }
+        },
+        "landmarks": [
+          {
+            "id": "local-3-0",
+            "label": "Visible annotation 32",
+            "sourcePx": {
+              "x": 307.504746703833,
+              "y": 259.7993788040212
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-3-1",
+            "label": "Visible annotation 33",
+            "sourcePx": {
+              "x": 249.35764733357883,
+              "y": 183.10247392862595
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-3-2",
+            "label": "Visible annotation 34",
+            "sourcePx": {
+              "x": 319.7401556394528,
+              "y": 195.7546064105154
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          },
+          {
+            "id": "local-3-3",
+            "label": "Visible annotation 35",
+            "sourcePx": {
+              "x": 413.0865448502377,
+              "y": 250.52326407778176
+            },
+            "kind": "fraction",
+            "toleranceMm": 2,
+            "why": "Human-authored relationship; review against the demonstration."
+          }
+        ],
+        "unknowns": [
+          "Source dimensions and relationship meanings were supplied by the annotator.",
+          "A still image does not establish contact pressure, material resistance, or physical task success."
+        ]
+      }
+    }
+  ],
+  "steps": []
+}
