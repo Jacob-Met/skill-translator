@@ -416,6 +416,7 @@ const routes=Object.freeze({
   "/src/audio-activity.mjs":["src/audio-activity.mjs","text/javascript; charset=utf-8"],
   "/web/audio-activity.mjs":["web/audio-activity.mjs","text/javascript; charset=utf-8"],
   "/web/sequence-input.mjs":["web/sequence-input.mjs","text/javascript; charset=utf-8"],
+  "/web/printable-lesson.mjs":["web/printable-lesson.mjs","text/javascript; charset=utf-8"],
   "/src/demonstration-sequence.mjs":["src/demonstration-sequence.mjs","text/javascript; charset=utf-8"],
   "/practice-review":["web/practice-review.html","text/html; charset=utf-8"],
   "/web/practice-review.mjs":["web/practice-review.mjs","text/javascript; charset=utf-8"],
