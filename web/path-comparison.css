@@ -1,3 +1,5 @@
 #frames figure{margin:0;min-width:0}#frames img{display:block;width:100%;height:auto}#frames figcaption{overflow-wrap:anywhere}#diagram svg{max-width:100%;height:auto}#first-name,#second-name{display:block;overflow-wrap:anywhere}#coupling button{margin:0}#coupling tr[data-selected=true]{background:#254c4b}#frames pre{white-space:pre-wrap;overflow-wrap:anywhere}input[type=file]{max-width:100%;box-sizing:border-box}
 
 #coupling-alternatives{border-top:1px solid #657f88;margin-top:1.2rem;padding-top:1rem}#alternative-partners{display:flex;flex-wrap:wrap;gap:.4rem}#alternative-partners button{margin:0;white-space:normal}#alternative-first{max-width:100%}
+
+#occurrence-witness figure{margin:0;min-width:0}#occurrence-witness figcaption,#occurrence-results p{overflow-wrap:anywhere}#occurrence-results button{white-space:normal;overflow-wrap:anywhere}

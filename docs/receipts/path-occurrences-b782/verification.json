@@ -1,0 +1,93 @@
+{
+  "format": "skill-translator-path-occurrences-receiving/v1",
+  "base": "60a29dcf449c597ab20e25fa25d9cffa4d344118",
+  "scope": "Find the complete first sampled path in every eligible contiguous span of at least two selected samples in the second source",
+  "files": [
+    {
+      "path": "src/path-occurrences.mjs",
+      "sha256": "0ad2b3c87d5d726f8ded3923df9bc243214c1628f70e6d5dd0c47fc4d4e0dae2"
+    },
+    {
+      "path": "web/path-occurrences-view.mjs",
+      "sha256": "137a1b3d821de2e7ff2f3f73733413fdf2986b34bbcc7ba3a0ad245d4df3754a"
+    },
+    {
+      "path": "web/path-comparison.mjs",
+      "sha256": "50924e135488522401a1f4f8a7f9ed5250db2b95492af5e4bdbe9db1d912f3c5"
+    },
+    {
+      "path": "web/path-comparison.html",
+      "sha256": "403164e4f170b5ab06af1e5017e2e1688cc98b72c5f9c0524a764034531990bd"
+    },
+    {
+      "path": "web/path-comparison.css",
+      "sha256": "4c6d22cc4298e34232aca7fb9004eae8af31225c33bc7270c3eaee43cfdec1d2"
+    },
+    {
+      "path": "server.mjs",
+      "sha256": "8247c789f56e41f19fe20877b0b9688cf661a255b918a149a904a090da8523ad"
+    },
+    {
+      "path": "test/path-occurrences.test.mjs",
+      "sha256": "5131d28c34d74cbc0b3dda9aab77f8ffc72f02feabf70cc95de4e948795e8ba1"
+    },
+    {
+      "path": "tools/browser-path-comparison.mjs",
+      "sha256": "3b52ec3aab20948e056caf1fe6ee33407b93b19bc1304011159defd5c9379c8a"
+    },
+    {
+      "path": "docs/PATH_OCCURRENCES.md",
+      "sha256": "184a2fd00218eb64288607bb62e9ffbecf7c21f22489b3d863a22f00199c988a"
+    }
+  ],
+  "environment": {
+    "node": "22.23.4",
+    "chrome": "156.0.8078.47",
+    "playwright": "installed Node Playwright; explicit Chromium sandbox",
+    "device": "authorized dedicated Linux RDC host"
+  },
+  "native": {
+    "command": "node --test test/path-occurrences.test.mjs test/path-comparison.test.mjs test/audio-contrast.test.mjs",
+    "passed": 22,
+    "failed": 0,
+    "controls": [
+      "160 held-back all-interval exhaustive comparisons",
+      "12 by 12 capacity: all 66 intervals and decimal counts without enumerating every pairing",
+      "source gaps, reversed paths, missing query source, exact raw replay",
+      "existing whole-path comparison and concurrent audio contrast regression"
+    ]
+  },
+  "browser": {
+    "record": "browser.json",
+    "groups": 16,
+    "errors": 0,
+    "originalFrames": "Actual browser-generated original PNGs included in the source bundles; exact bytes verified on intake/export/reopen",
+    "sourceChanged": "Removing a middle observation splits target coverage and retires the prior occurrence"
+  },
+  "observedBenefit": {
+    "input": "Authored pattern [13,17], [24,31], [39,22] embedded in a longer six-sample source with a dwell",
+    "wholePathDistanceMm": 81.40024569987486,
+    "qualifiedOriginalTargetIndices": [
+      1,
+      4
+    ],
+    "candidateIntervals": 15,
+    "maximumPairedDistanceMm": 7.32410687763558e-15,
+    "requiredInput": "Corresponding point and common calibrated reference declaration, nominal bound0.001mm; target endpoints inferred"
+  },
+  "independentReview": {
+    "reviewer": "direct CHRONOS worker",
+    "finding": "No blocker after explicitly stating and testing minimum-two-sample candidate spans; original source, complete pairing and epoch lifecycle reviewed"
+  },
+  "rendered": "Actual desktop and 390px original-frame pairing inspected; native keyboard selection and zero page overflow",
+  "receivingCorrections": [
+    "Node22 test runner uses --test without Node24-only --test-isolation option",
+    "Replaced Playwright CSP-incompatible waitForFunction helper with bounded direct function polling; application CSP unchanged"
+  ],
+  "limits": [
+    "Authored nominal geometry, not measured action recognition, physical skill or identity inference",
+    "Missing second-source observations split coverage; entire first pattern required",
+    "Overlapping spans remain alternatives rather than independent repetitions",
+    "No source cropping, coordinate registration or automatic tolerance inference"
+  ]
+}
