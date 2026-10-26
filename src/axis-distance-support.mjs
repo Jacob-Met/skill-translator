@@ -28,8 +28,8 @@ function intervalClip(interval,coefficient,low,high,work){
 }
 const serializedInterval=interval=>({lower:serial(interval.lower),lowerInclusive:cmp(interval.lower,zero)>0,upper:interval.upper?serial(interval.upper):null});
 const intervalWitness=interval=>interval.upper?div(add(interval.lower,interval.upper),q(2)):add(interval.lower,q(1));
-export function exactAxisCandidates(reference,observation,{deviationMm=.001,maxWork=200000,maxStates=20000}={}){
- if(!Array.isArray(reference)||!Array.isArray(observation)||reference.length!==observation.length||reference.length<3||reference.length>7)throw Error('Use equal 3–7 point sets');
+function axisCandidates(reference,observation,{deviationMm=.001,maxWork=200000,maxStates=20000}={},allowExtras=false){
+ if(!Array.isArray(reference)||!Array.isArray(observation)||(allowExtras?reference.length>observation.length:reference.length!==observation.length)||reference.length<3||reference.length>7||observation.length>7)throw Error(allowExtras?'Use3–7 reference points with at least as many observation points, up to7':'Use equal 3–7 point sets');
  if(![...reference,...observation].every(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)))throw Error('Use finite original point coordinates');
  if(!Number.isFinite(deviationMm)||deviationMm<0||deviationMm>1000)throw Error('Invalid discrepancy');
  if(!Number.isSafeInteger(maxStates)||maxStates<1||maxStates>20000)throw Error('Invalid finite state budget');
@@ -57,7 +57,7 @@ export function exactAxisCandidates(reference,observation,{deviationMm=.001,maxW
  function visit(prefix,support){
   if(states>=maxStates){complete=false;return;}states++;
   if(prefix.length===n){count++;const witnessed=hasWitness(support);if(witnessed)innerCount++;prefix.forEach((j,i)=>possibilities[i].add(j));if(mappings.length<8)mappings.push({mapping:prefix,...encode(support,witnessed),hasConservativeWitness:witnessed});return;}
-  for(let j=0;j<n;j++)if(!prefix.includes(j)){
+  for(let j=0;j<observation.length;j++)if(!prefix.includes(j)){
    const next=extend(support,prefix,j);if(next)visit([...prefix,j],next);if(!complete)return;
   }
  }
@@ -65,3 +65,6 @@ export function exactAxisCandidates(reference,observation,{deviationMm=.001,maxW
  return {status:!complete?'budget-unresolved':count===0?'incompatible':count===1&&innerCount===1?'unique-with-conservative-witness':count===1?'boundary-unresolved':'ambiguous',complete,states,work:work.count,count:complete?count:null,foundMappingCount:count,conservativeWitnessCount:complete?innerCount:null,foundConservativeWitnessCount:innerCount,mappings,forced:complete&&count&&innerCount?possibilities.flatMap((s,i)=>s.size===1?[[i,[...s][0]]]:[]):[],possibleMatches:complete&&count?possibilities.map(s=>[...s].sort((a,b)=>a-b)):[],numericalSlackMm:1e-9,
   qualification:'Exact CHRONOS clipping and one-dimensional interval intersection over mapped binary64 coordinate differences. Adjacent certified norm enclosures give outer support and inner witnesses; no orientation, sign, certified transform, calibration or semantic identity is inferred. Polygon correlation is retained. Axes absent from the reference geometry remain positive and unbounded; witness values are not inferred scales.'};
 }
+
+export const exactAxisCandidates=(reference,observation,options)=>axisCandidates(reference,observation,options,false);
+export const exactAxisInjections=(reference,observation,options)=>axisCandidates(reference,observation,options,true);
