@@ -1,3 +1,4 @@
+import {openDecisionPractice} from '/web/decision-handoff.mjs';
 import {createNarrationNavigator} from '/web/narration-moments.mjs';
 import {createAudioActivityNavigator} from '/web/audio-activity.mjs';
 import {createSequence,validateSequence,appendMoment,editMoment,removeMoment,upsertStep,removeStep,sequenceFindings,assertSequenceClip,MAX_MOMENTS,attachMomentCalibration,removeMomentCalibration,momentTask} from '/src/demonstration-sequence.mjs';
@@ -42,6 +43,7 @@ function syncButtons(){
   $('use-playhead').disabled=busy||seeking||!clip||Boolean(editingMoment);
   $('save-step').disabled=busy||!sequence||sequence.moments.length<2;
   $('export-sequence').disabled=busy||!sequence?.steps.length||stepDirty||Boolean(editingMoment);
+  $('practice-decisions').disabled=$('export-sequence').disabled;
   $('draft-status').textContent=stepDirty?'Unsaved step draft. Save or clear it before exporting.':editingStep?'Editing the selected step. Its retained frame identities stay unchanged.':sequence?.moments.length>=2?'Choose the evidence, then describe the intended change.':'Retain two moments to explain a change.';
   for(const button of document.querySelectorAll('.moment-actions button,.detail-heading button'))button.disabled=busy;
   const moment=calibrationMoment(),task=moment?.calibratedTask;
@@ -228,6 +230,16 @@ $('export-sequence').addEventListener('click',async()=>{
     status('Saved the authored account with its exact retained PNG frames. Keep the original video separately.');
   }catch(error){reportFailure(request,error);}finally{endIO(request);}
 });
+$('practice-decisions').addEventListener('click',async()=>{
+  if(!sequence||!sequence.steps.length||stepDirty||editingMoment)return;
+  let next;try{next=validateSequence({...sequence,title:$('sequence-title').value,context:$('sequence-context').value});commit(next);}catch(error){status(error.message);return;}
+  const request=beginIO(),version=revision,snapshot=new Map(assets);
+  try{
+    status('Preparing this demonstration and its original frames for decision practice…');
+    await openDecisionPractice(()=>makeSequenceBundle(next,snapshot,{signal:request.signal}),{signal:request.signal,isCurrent:()=>current(request)&&version===revision});
+    if(current(request))status('Decision practice received this demonstration and its original frames in a new tab. This studio remains here; later edits do not change the practice snapshot.');
+  }catch(error){reportFailure(request,error);}finally{endIO(request);}
+});
 $('clear-sequence').addEventListener('click',()=>{
   controller?.abort();generation++;controller=null;busy=false;releaseVideo(clip);clip=null;releaseSequenceAssets(assets);assets=new Map();sequence=null;selectedStep=null;revision++;
   visualScanner.clear();
@@ -251,3 +263,4 @@ const audioHost=document.createElement('details');
 document.getElementById('narration-moments').after(audioHost);
 audioNavigator=createAudioActivityNavigator({host:audioHost,getClip:()=>clip,isBusy:()=>busy,canSelect:()=>!editingMoment,onSelect:previewRequestedMoment});
 render();
+

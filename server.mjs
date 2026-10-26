@@ -8,6 +8,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/web/decision-handoff.mjs':['web/decision-handoff.mjs','text/javascript; charset=utf-8'],
+  '/web/decision-practice-input.mjs':['web/decision-practice-input.mjs','text/javascript; charset=utf-8'],
   '/src/regional-translation.mjs':['src/regional-translation.mjs','text/javascript; charset=utf-8'],
   '/web/regional-translation-view.mjs':['web/regional-translation-view.mjs','text/javascript; charset=utf-8'],
   '/web/regional-translation-worker.mjs':['web/regional-translation-worker.mjs','text/javascript; charset=utf-8'],
@@ -513,6 +515,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
 
 
 
