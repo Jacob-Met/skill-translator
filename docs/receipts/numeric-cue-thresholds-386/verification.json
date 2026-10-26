@@ -1,0 +1,102 @@
+{
+  "browser": "156.0.8078.47",
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "ef662d33e2bdd322845891a89a78d89eb55b39799cc3608cd38be7b329308b5c",
+    "startedAt": "2026-10-26T04:59:06.357Z",
+    "completedAt": "2026-10-26T04:59:06.459Z",
+    "durationMs": 102.47224399999993,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "3E2391FBB5833BCD4BC950BFFAEA3DA8",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "225C61DB43148F2CF9383B855407401A"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  },
+  "checks": [
+    "Maintained comparison link, four complete original PNG sources, supplied numeric ranges and entire threshold family with original witnesses.",
+    "Unfamiliar target agrees only when every retained threshold/range agrees; interior ambiguity and beyond-support extrapolation remain visible, edits retire findings.",
+    "Actual full-source download and fresh reopen preserve originals, decisions, ranges and separate target; substituted PNG refusal preserves accepted inputs.",
+    "Contradictory alternating demonstrated labels eliminate the family instead of choosing a convenient threshold.",
+    "Late original-source admission cannot overwrite a newer numeric draft."
+  ],
+  "errors": [],
+  "hashes": {
+    "src/numeric-cue-thresholds.mjs": "6dbc3686840f39cd5f8a19ffa075cdc0dd075defb19365b623cb70256229cdf2",
+    "web/numeric-cue-thresholds.mjs": "9c53c1d736bd6010cc72383f05d5b3e7c4303126e270f786b81e19466fa28070",
+    "web/numeric-cue-thresholds.html": "586a4c9e867503574b5ad00476718c6721f9a5864be049ab01561b8d5bc63c90",
+    "web/numeric-cue-thresholds.css": "5d6fcd380eadd7b6cc9d27ccaf6a5f8a1c620d3b5448683010ed6f9deb2b011c"
+  },
+  "limits": "Authored numeric and PNG controls; no extracted measurements, physical outcomes or independent population validation.",
+  "base": "7757e19d8cb20fe2689cecd50c8740f8faf4b1f9",
+  "native": {
+    "focusedPassed": 6,
+    "failed": 0,
+    "independentOracleCourses": 1000,
+    "adjacentFeedbackPassed": 15,
+    "scope": "Focused and adjacent checks, not full repository suite"
+  },
+  "review": "Engine worker independently approved mathematical/source core after6 passing groups and separately reviewed consumer admission/export lifecycle. Final wording explicitly states robust agreement for every source-range value; no algorithm change.",
+  "sourceSha256": {
+    "src/numeric-cue-thresholds.mjs": "6dbc3686840f39cd5f8a19ffa075cdc0dd075defb19365b623cb70256229cdf2",
+    "web/numeric-cue-thresholds.mjs": "9c53c1d736bd6010cc72383f05d5b3e7c4303126e270f786b81e19466fa28070",
+    "web/numeric-cue-thresholds.html": "586a4c9e867503574b5ad00476718c6721f9a5864be049ab01561b8d5bc63c90",
+    "web/numeric-cue-thresholds.css": "5d6fcd380eadd7b6cc9d27ccaf6a5f8a1c620d3b5448683010ed6f9deb2b011c",
+    "web/decision-comparison.html": "11f347b87c56b9cd68ec4625706e313271ae6a25bb6eb3631c727b6f293c73e4",
+    "web/workbenches.html": "7c5888403ad8cf3532d47b643e72adeacece9a2b406582607cca84246b308336",
+    "server.mjs": "a53708aa7d9940224052e793bef0493b1348c05ad63821dd737a81d6012f61a2",
+    "test/numeric-cue-thresholds.test.mjs": "8e9fbfa0b98291d2da1321bfaedfefcee2dc5a303e41f2ad1a2c1494febdb5e2",
+    "test/numeric-cue-gap-probe.mjs": "4630cb4ea7353c08ec926883310ba35be913806dcd3d993031f471417b5f4495",
+    "test/helpers/numeric-cue-fixture.mjs": "5629f0e4553fe5a72ec30e6d4f89c64c6443a511a7b232ed25b55b51d534900c",
+    "tools/browser-numeric-cue-thresholds.mjs": "fd7f44f7d8539675878935d24fd9b9afe1da58c77edcc457abfede55265f09e9",
+    "docs/NUMERIC_CUE_THRESHOLDS.md": "9d6e94f90f4ebad557c4f1262c7f09f92790c750c9da4a33c58901247be60b9a"
+  },
+  "screenshotsSha256": {
+    "desktop.png": "bf2cecd05940b3b115387efd17c2c993fcd8c3296ec4fd91f5aa898afd591ecc",
+    "narrow.png": "2984bd7a40eae4ada2b16cfa01c74fda8bc5fa8347df391a04b3137a09c10377"
+  },
+  "browserBase": "d546113f39188c2c7199e4e06b94b8a794f8c819",
+  "composition": {
+    "nativePassed": 41,
+    "liveRoutes": 10,
+    "directoryLinks": 74,
+    "negative404": true,
+    "note": "Received shared-motion runtime and transitive dependencies, preserved every upstream route and added four numeric routes. Numeric browser assets unchanged; prior actual browser proof retained. Native checks include numeric6, feedback15, practice9 and upstream shared-motion11. Receipt-only/binary upstream artifacts remain in the parent tree; candidate changes only its13 declared paths."
+  }
+}
