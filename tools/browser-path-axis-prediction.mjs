@@ -11,7 +11,8 @@ assert.ok(process.env.RECEIPT_DIR);assert.ok(process.env.CHROME_BINARY);
 const out=resolve(process.env.RECEIPT_DIR);await mkdir(out,{recursive:true});
 const receipt={result:'FAIL',groups:[],errors:[]},hash=x=>createHash('sha256').update(x).digest('hex');
 const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;let browser,page;
-const status=async s=>page.waitForFunction(s=>document.querySelector('#status').textContent.includes(s),s);
+// Read locator text from Node; the product CSP intentionally forbids dynamic evaluation.
+const status=async expected=>{const deadline=Date.now()+10000;let actual='';while(Date.now()<deadline){actual=await page.locator('#status').textContent();if(actual.includes(expected))return;await new Promise(resolve=>setTimeout(resolve,40));}throw Error(`Expected status containing ${expected}; received ${actual}`);};
 const put=async(id,value)=>page.locator('#'+id).setInputFiles({name:'input.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(value))});
 const declare=async()=>{await page.locator('#confirm').check();await page.locator('#basis').fill('Authored corresponding point in the same fixed sheet coordinates.');await page.locator('#compare').click();await status('Ordered samples compared');};
 async function bundle(points,tag){
@@ -39,4 +40,5 @@ try{
  await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.locator('#predict-axis').focus();await page.keyboard.press('Enter');await status('unchanged first-source axis');await page.locator('#result').screenshot({path:resolve(out,'prediction-narrow.png')});receipt.groups.push('declaration edits retire predictions;390px keyboard recomputes original-frame overlays');
  assert.deepEqual(await page.evaluate(()=>window.__csp),[]);assert.deepEqual(receipt.errors,[]);receipt.result='PASS';
 }finally{await writeFile(resolve(out,'browser-receipt.json'),JSON.stringify(receipt,null,2));await browser?.close();await new Promise(r=>server.close(r));console.log(JSON.stringify(receipt,null,2));}
+
 
