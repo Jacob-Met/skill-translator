@@ -8,6 +8,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/workbenches": ["web/workbenches.html", "text/html; charset=utf-8"],
+  "/web/workbenches.mjs": ["web/workbenches.mjs", "text/javascript; charset=utf-8"],
+  "/web/workbenches.css": ["web/workbenches.css", "text/css; charset=utf-8"],
   "/web/reviewed-forced-point-paths-view.mjs": ["web/reviewed-forced-point-paths-view.mjs", "text/javascript; charset=utf-8"],
   "/web/reviewed-forced-point-paths-input.mjs": ["web/reviewed-forced-point-paths-input.mjs", "text/javascript; charset=utf-8"],
   "/src/reviewed-forced-point-paths.mjs": ["src/reviewed-forced-point-paths.mjs", "text/javascript; charset=utf-8"],
