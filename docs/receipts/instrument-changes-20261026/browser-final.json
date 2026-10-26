@@ -1,0 +1,63 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Maintained instrument link \u2192 original presented PNGs \u2192 raw observation upload paired with open demonstration \u219247unaltered samples and six competing models, matching independent CLI output",
+    "Keyboard playback inspects the exact original clip context with original audio initially muted",
+    "Raw observations with an incompatible preexisting source are refused without rebinding or discarding accepted evidence",
+    "Failed clock keeps inquiry but forbids playback; malformed intake preserves accepted evidence",
+    "Fresh390px source/study replay recomputes forged derived findings and preserves every original sample",
+    "Flat-signal negative control cannot become an inspectable preferred change",
+    "Source replacement retires an actual4096sample worker inquiry without publishing a late result"
+  ],
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-26T00:36:32.802Z",
+    "completedAt": "2026-10-26T00:36:32.872Z",
+    "durationMs": 70.40178800000012,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "03698117677E1E2C1099488918D65044",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "05E8AC59377B10EB59D99E3E9BCD39FA"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  },
+  "sourceBase": "72ff5841bb9affa2a6c848d57bf8eb1887135d5d",
+  "nativeTestGroups": 22
+}

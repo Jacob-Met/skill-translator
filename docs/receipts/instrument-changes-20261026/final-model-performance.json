@@ -1,0 +1,50 @@
+{
+  "runtime": "v24.22.1",
+  "modelSHA256": "cd400e5bcf29f46ad5cf9c1cb4ca3e1a819911a4fb57635a00b45e54d51a703c",
+  "sampleCount": 4096,
+  "course": "Authored regular timestamps, signed oscillatory residuals and a level change at index 2048; single cold process run.",
+  "elapsedMilliseconds": 586.458187,
+  "processRSSBytes": 83058688,
+  "result": {
+    "constant": {
+      "score": -29711.01716908185,
+      "rho": 0.99,
+      "mean": 5.000958009338602
+    },
+    "step": {
+      "score": -34467.871592282885,
+      "rho": 0,
+      "split": 2048,
+      "left": 3.000005188252339,
+      "right": 7.000068315803846
+    },
+    "proposed": true,
+    "alternatives": {
+      "constant": {
+        "score": -29711.01716908185,
+        "rho": 0.99,
+        "mean": 5.000958009338602
+      },
+      "linear": {
+        "score": -29814.516762060754,
+        "rho": 0.99
+      },
+      "spike": {
+        "score": -30478.0999678438,
+        "rho": 0.99,
+        "index": 2047
+      },
+      "periodic": {
+        "score": -29818.033161225696,
+        "rho": 0.99,
+        "frequency": 0.75
+      },
+      "decaying": {
+        "score": -31335.916077848527,
+        "rho": 0.99,
+        "index": 2048
+      }
+    },
+    "improvement": 3131.9555144343576
+  }
+}

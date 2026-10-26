@@ -1,0 +1,2 @@
+import {inspectInstrumentChangeStudy,instrumentChangePlaybackRange} from '/src/instrument-change-study.mjs';
+self.onmessage=event=>{const {source,study,revision,selection}=event.data;try{self.postMessage({revision,...(selection?{range:instrumentChangePlaybackRange(source,study,selection)}:{report:inspectInstrumentChangeStudy(source,study)})});}catch(error){self.postMessage({revision,error:String(error.message)});}};

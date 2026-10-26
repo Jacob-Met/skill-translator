@@ -1,0 +1,222 @@
+{
+  "seed": 92851763,
+  "evidence": "Authored held-back synthetic courses only; no physical measurement or calibrated probability claim.",
+  "cases": [
+    {
+      "rho": 0,
+      "kind": "flat",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0,
+      "kind": "step",
+      "total": 100,
+      "preferred": 92,
+      "weaklySeparated": 5,
+      "alternativePreferred": 3,
+      "preferredExactBoundary": 72
+    },
+    {
+      "rho": 0,
+      "kind": "ramp",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0,
+      "kind": "spike",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0,
+      "kind": "sine",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0,
+      "kind": "curve",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.4,
+      "kind": "flat",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 2,
+      "alternativePreferred": 98,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.4,
+      "kind": "step",
+      "total": 100,
+      "preferred": 67,
+      "weaklySeparated": 22,
+      "alternativePreferred": 11,
+      "preferredExactBoundary": 59
+    },
+    {
+      "rho": 0.4,
+      "kind": "ramp",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.4,
+      "kind": "spike",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.4,
+      "kind": "sine",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.4,
+      "kind": "curve",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 1,
+      "alternativePreferred": 99,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.83,
+      "kind": "flat",
+      "total": 100,
+      "preferred": 2,
+      "weaklySeparated": 6,
+      "alternativePreferred": 92,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.83,
+      "kind": "step",
+      "total": 100,
+      "preferred": 71,
+      "weaklySeparated": 23,
+      "alternativePreferred": 6,
+      "preferredExactBoundary": 71
+    },
+    {
+      "rho": 0.83,
+      "kind": "ramp",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 1,
+      "alternativePreferred": 99,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.83,
+      "kind": "spike",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.83,
+      "kind": "sine",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.83,
+      "kind": "curve",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.95,
+      "kind": "flat",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 4,
+      "alternativePreferred": 96,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.95,
+      "kind": "step",
+      "total": 100,
+      "preferred": 41,
+      "weaklySeparated": 47,
+      "alternativePreferred": 12,
+      "preferredExactBoundary": 41
+    },
+    {
+      "rho": 0.95,
+      "kind": "ramp",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.95,
+      "kind": "spike",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.95,
+      "kind": "sine",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    },
+    {
+      "rho": 0.95,
+      "kind": "curve",
+      "total": 100,
+      "preferred": 0,
+      "weaklySeparated": 0,
+      "alternativePreferred": 100,
+      "preferredExactBoundary": 0
+    }
+  ]
+}

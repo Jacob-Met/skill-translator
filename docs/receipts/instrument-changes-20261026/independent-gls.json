@@ -1,0 +1,10 @@
+{
+  "nearCourses": 40,
+  "nearMaximumError": 0.000005591471222032851,
+  "nearMismatches": [],
+  "checkedModels": 210,
+  "exactBinaryUnitTimeChecks": 35,
+  "maximumOrdinaryScoreError": 1.4210854715202004e-14,
+  "nearSpikeResidualMismatches": [],
+  "source_sha256": "cd400e5bcf29f46ad5cf9c1cb4ca3e1a819911a4fb57635a00b45e54d51a703c"
+}
