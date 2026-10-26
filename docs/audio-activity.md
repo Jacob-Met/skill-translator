@@ -34,3 +34,41 @@ The native course freezes settings before held-back shifted, quiet, short and op
 Browser receiving measures decoded Web Audio energy against actual video.currentTime, preserving callbacks and the predeclared observation tolerance. It then exercises original playback, actual frame capture, authored step export, saved navigation, wrong-source refusal and lifecycle changes. This is not a human listening study or sample-exact audio-clock proof.
 
 The initial media are explicitly authored signal and moving-pattern controls. Permitted real task recordings, independently labeled events, physical understanding, teaching benefit and Nebius execution remain separate evidence claims. No such result follows from this implementation alone.
+
+## Compare quieter changes with segment-relative energy
+
+After pairing the native report and its explicit media origin, choose **Relative
+to this segment’s background** in **Candidate method**. The fixed full-scale
+method remains the default and its original candidates are unchanged. The
+relative method can expose a quiet burst beside a quieter background, or a
+change in one channel beside steady sound in the other. Choose its original
+interval for the same playback, onset preview and ordinary frame capture.
+
+For each contiguous decoded segment with at least 25 complete 20 ms windows,
+the background of each channel is its sorted RMS at index
+`floor(0.2 * (windowCount - 1))`. Entry requires any channel to reach the larger
+of four times its background and RMS 0.001. An open candidate continues while
+any channel reaches the larger of twice its background and RMS 0.0005. At least
+two windows are required. The selected candidate shows its per-channel
+background, entry and exit levels. Segments with fewer than 25 windows are
+explicitly unavailable for this method. Original gaps and partial tails retain
+the same treatment as fixed energy; candidates never bridge gaps.
+
+These levels are source-relative energy assumptions, not a measured noise floor
+or confidence estimate. Sustained sound can become its own background and have
+no relative candidate. Slow gain changes can produce candidates; very quiet or
+one-window events can remain absent. Quiet input is never normalized, and
+channels are never mixed. Use both methods and inspect the original context.
+
+Saved navigation still contains the complete original report and clock
+declaration, with no derived candidate authority or new source format. Fresh
+reopening recomputes both methods and initially selects fixed energy; method
+selection is a view choice. Switching methods cancels ongoing interval playback.
+
+Run `node --test --test-isolation=none test/audio-activity.test.mjs
+test/audio-contrast.test.mjs` for the original and contrast controls. Run
+`node tools/receive-audio-contrast.mjs NEW_DIRECTORY` for the independently
+seeded native-decoded sine/noise course. Its complete original WAVs, reports,
+predeclared specifications and results include adverse controls. These authored
+signals do not establish real-task event accuracy, human audibility or teaching
+benefit.

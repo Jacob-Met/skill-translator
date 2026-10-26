@@ -1,3 +1,4 @@
+import {findAudioContrasts} from './audio-contrast.mjs';
 export const AUDIO_ACTIVITY_FORMAT='skill-translator.audio-activity/v1';
 export const AUDIO_SETTINGS=Object.freeze({windowMilliseconds:20,enterRms:.05,exitRms:.025,minimumWindows:2});
 const MAX_SAMPLES=8_000_000,MAX_FRAMES=20000;
@@ -50,7 +51,7 @@ export async function analyzeAudioActivity(raw){
   finish();const remainder=s.samples-count*windowSamples;
   if(remainder)partials.push({segment:si,samples:remainder,start:point(add(s.start,q(BigInt(count*windowSamples),BigInt(rate)))),end:point(add(s.start,q(BigInt(s.samples),BigInt(rate))))});
  }
- return {format:AUDIO_ACTIVITY_FORMAT,source:structuredClone(raw.source),stream:structuredClone(raw.stream),settings:{...AUDIO_SETTINGS},decodedSamplesPerChannel:total,decodedDurationSeconds:total/rate,coverage:segments.map((s,i)=>({segment:i,start:point(s.start),end:point(add(s.start,q(BigInt(s.samples),BigInt(rate)))),samples:s.samples})),gaps,partials,windows,events,boundary:'Native decoded PCM and original integer timestamps are supplied source artifacts. Analysis recomputes their declared activity; it does not independently authenticate decoding, identify a physical event or establish browser clock alignment.'};
+ return {format:AUDIO_ACTIVITY_FORMAT,source:structuredClone(raw.source),stream:structuredClone(raw.stream),settings:{...AUDIO_SETTINGS},decodedSamplesPerChannel:total,decodedDurationSeconds:total/rate,coverage:segments.map((s,i)=>({segment:i,start:point(s.start),end:point(add(s.start,q(BigInt(s.samples),BigInt(rate)))),samples:s.samples})),gaps,partials,windows,events,contrasts:findAudioContrasts(windows,channels,segments.length),boundary:'Native decoded PCM and original integer timestamps are supplied source artifacts. Analysis recomputes their declared activity; it does not independently authenticate decoding, identify a physical event or establish browser clock alignment.'};
 }
 export function mapAudioActivity(analysis,declaration,clip){
  closed(declaration,['sourceSha256','mediaOriginSeconds','basis'],'Media origin declaration');

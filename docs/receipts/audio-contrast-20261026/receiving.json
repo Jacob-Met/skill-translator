@@ -1,0 +1,793 @@
+{
+  "seed": 4298167,
+  "summary": {
+    "burstCourses": 15,
+    "fixedHits": 3,
+    "relativeHits": 15,
+    "controls": [
+      {
+        "kind": "stationary-noise",
+        "fixed": 0,
+        "relative": 0
+      },
+      {
+        "kind": "stationary-tone",
+        "fixed": 0,
+        "relative": 0
+      },
+      {
+        "kind": "one-window",
+        "fixed": 0,
+        "relative": 0
+      },
+      {
+        "kind": "below-floor",
+        "fixed": 0,
+        "relative": 0
+      },
+      {
+        "kind": "smooth-rise",
+        "fixed": 0,
+        "relative": 1
+      }
+    ]
+  },
+  "results": [
+    {
+      "spec": {
+        "name": "burst-0.01-0",
+        "kind": "burst",
+        "gain": 0.01,
+        "start": 0.4,
+        "duration": 0.12
+      },
+      "source": {
+        "name": "burst-0.01-0.wav",
+        "sha256": "8610e08de4c1b57c374f3009cbcaf0487679c87547ead9ae143beb8a1a125883",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.4,
+          "end": 0.52
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.000057398202129528896
+          ],
+          "enterRms": [
+            0.001
+          ],
+          "exitRms": [
+            0.0005
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.01-1",
+        "kind": "burst",
+        "gain": 0.01,
+        "start": 0.54,
+        "duration": 0.16
+      },
+      "source": {
+        "name": "burst-0.01-1.wav",
+        "sha256": "5e510946d6ea56da621e555276359dc6ba92eb1873be154a18b57f17ece029df",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.54,
+          "end": 0.7
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.00005709316080892855
+          ],
+          "enterRms": [
+            0.001
+          ],
+          "exitRms": [
+            0.0005
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.01-2",
+        "kind": "burst",
+        "gain": 0.01,
+        "start": 0.62,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "burst-0.01-2.wav",
+        "sha256": "4d93f643512959c37c481d55a087213cb32177550972154b0aa4de6b5cef3cf4",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.62,
+          "end": 0.82
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.00005724588465058615
+          ],
+          "enterRms": [
+            0.001
+          ],
+          "exitRms": [
+            0.0005
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.025-0",
+        "kind": "burst",
+        "gain": 0.025,
+        "start": 0.52,
+        "duration": 0.12
+      },
+      "source": {
+        "name": "burst-0.025-0.wav",
+        "sha256": "4e064d392d29d9c0c358311a1746a16e0432d9828e09d628a19062897b16a764",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.52,
+          "end": 0.64
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.00014171998235320215
+          ],
+          "enterRms": [
+            0.001
+          ],
+          "exitRms": [
+            0.0005
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.025-1",
+        "kind": "burst",
+        "gain": 0.025,
+        "start": 0.8600000000000001,
+        "duration": 0.16
+      },
+      "source": {
+        "name": "burst-0.025-1.wav",
+        "sha256": "b0b110db152d12a9fd15cb0aa9438fe412451c774a200c56d6878c1c56183677",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.86,
+          "end": 1.02
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.00014162753952102984
+          ],
+          "enterRms": [
+            0.001
+          ],
+          "exitRms": [
+            0.0005
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.025-2",
+        "kind": "burst",
+        "gain": 0.025,
+        "start": 0.9400000000000001,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "burst-0.025-2.wav",
+        "sha256": "a9a309c86c24f0fa8c01f0a9171277de2d1bf1748f911070b154af43573ee5ff",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.94,
+          "end": 1.14
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.00014205842473679324
+          ],
+          "enterRms": [
+            0.001
+          ],
+          "exitRms": [
+            0.0005
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.06-0",
+        "kind": "burst",
+        "gain": 0.06,
+        "start": 0.74,
+        "duration": 0.12
+      },
+      "source": {
+        "name": "burst-0.06-0.wav",
+        "sha256": "8c7c5c6f7710db34c60359c9d64d8d22d9c9b50f1f19f49e9999ded448d33d85",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.74,
+          "end": 0.86
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.0003404924501723918
+          ],
+          "enterRms": [
+            0.0013619698006895671
+          ],
+          "exitRms": [
+            0.0006809849003447836
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.06-1",
+        "kind": "burst",
+        "gain": 0.06,
+        "start": 0.44,
+        "duration": 0.16
+      },
+      "source": {
+        "name": "burst-0.06-1.wav",
+        "sha256": "01b51b5eb03497943e623155d5661227db646986a4d58c9dd4839c4f7f77ca8b",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.44,
+          "end": 0.6
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.00033730639543967894
+          ],
+          "enterRms": [
+            0.0013492255817587158
+          ],
+          "exitRms": [
+            0.0006746127908793579
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.06-2",
+        "kind": "burst",
+        "gain": 0.06,
+        "start": 0.46,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "burst-0.06-2.wav",
+        "sha256": "db10415faac30dd5aecf170fff2ff143f44b32c90b29defa0fa3b2ba37e05c83",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.46,
+          "end": 0.66
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.00033966660815656246
+          ],
+          "enterRms": [
+            0.0013586664326262498
+          ],
+          "exitRms": [
+            0.0006793332163131249
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.15-0",
+        "kind": "burst",
+        "gain": 0.15,
+        "start": 0.9600000000000001,
+        "duration": 0.12
+      },
+      "source": {
+        "name": "burst-0.15-0.wav",
+        "sha256": "4f8803403cee66603e7fdae7b92d3ae283ee98ceb476339f314ca5af983970c8",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.96,
+          "end": 1.08
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.0008517186247031765
+          ],
+          "enterRms": [
+            0.003406874498812706
+          ],
+          "exitRms": [
+            0.001703437249406353
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.15-1",
+        "kind": "burst",
+        "gain": 0.15,
+        "start": 0.68,
+        "duration": 0.16
+      },
+      "source": {
+        "name": "burst-0.15-1.wav",
+        "sha256": "25bb1d480c9173441fbd841fac9a6650dac3f0bcc498809acea19c5f64c23c29",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.68,
+          "end": 0.84
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.0008491211069116926
+          ],
+          "enterRms": [
+            0.0033964844276467704
+          ],
+          "exitRms": [
+            0.0016982422138233852
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.15-2",
+        "kind": "burst",
+        "gain": 0.15,
+        "start": 0.9600000000000001,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "burst-0.15-2.wav",
+        "sha256": "881ca12a96f3e04c0a9c76d534bc1f5be3082fa6103afb2ad0d0545648135e75",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.96,
+          "end": 1.16
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.0008467614053056133
+          ],
+          "enterRms": [
+            0.0033870456212224532
+          ],
+          "exitRms": [
+            0.0016935228106112266
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.4-0",
+        "kind": "burst",
+        "gain": 0.4,
+        "start": 0.64,
+        "duration": 0.12
+      },
+      "source": {
+        "name": "burst-0.4-0.wav",
+        "sha256": "2d0c90ff92996ad5e0358ae3d23708fdfc814005f740da2496e2f621511f0f5c",
+        "sizeBytes": 64044
+      },
+      "fixed": [
+        {
+          "start": 0.64,
+          "end": 0.76
+        }
+      ],
+      "relative": [
+        {
+          "start": 0.64,
+          "end": 0.76
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.0022609405296686986
+          ],
+          "enterRms": [
+            0.009043762118674794
+          ],
+          "exitRms": [
+            0.004521881059337397
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.4-1",
+        "kind": "burst",
+        "gain": 0.4,
+        "start": 1.08,
+        "duration": 0.16
+      },
+      "source": {
+        "name": "burst-0.4-1.wav",
+        "sha256": "3ea227695401f8bf3c0ad1f823a428634d84aae9697822366f19af4dca4fc185",
+        "sizeBytes": 64044
+      },
+      "fixed": [
+        {
+          "start": 1.08,
+          "end": 1.24
+        }
+      ],
+      "relative": [
+        {
+          "start": 1.08,
+          "end": 1.24
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.0022578709425259223
+          ],
+          "enterRms": [
+            0.009031483770103689
+          ],
+          "exitRms": [
+            0.0045157418850518445
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "burst-0.4-2",
+        "kind": "burst",
+        "gain": 0.4,
+        "start": 0.54,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "burst-0.4-2.wav",
+        "sha256": "a6ae36f680d8da291b393a4bc5afd26abd338602df79af265556fc7084aadb7e",
+        "sizeBytes": 64044
+      },
+      "fixed": [
+        {
+          "start": 0.54,
+          "end": 0.74
+        }
+      ],
+      "relative": [
+        {
+          "start": 0.54,
+          "end": 0.74
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.002267768063135163
+          ],
+          "enterRms": [
+            0.009071072252540653
+          ],
+          "exitRms": [
+            0.004535536126270326
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "stationary-noise",
+        "kind": "stationary-noise",
+        "gain": 1,
+        "start": 0.62,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "stationary-noise.wav",
+        "sha256": "9793e274d567f9d640f013687ebd3245cfc9399f759a086d6a313eb596f17b7f",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.017071034093768023
+          ],
+          "enterRms": [
+            0.0682841363750721
+          ],
+          "exitRms": [
+            0.03414206818753605
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "stationary-tone",
+        "kind": "stationary-tone",
+        "gain": 1,
+        "start": 0.62,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "stationary-tone.wav",
+        "sha256": "f034ea0e954a98028d793ad661b7e85adf52f09bbcdbd25e0cca958cc4f380d8",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.02111312524956689
+          ],
+          "enterRms": [
+            0.08445250099826757
+          ],
+          "exitRms": [
+            0.04222625049913378
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "one-window",
+        "kind": "one-window",
+        "gain": 1,
+        "start": 0.62,
+        "duration": 0.02
+      },
+      "source": {
+        "name": "one-window.wav",
+        "sha256": "e39e0ecdd05721a99bb75e2c8a87197a1ce9767d3a5cafc1c28e62e176c2fce3",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.005631588103148086
+          ],
+          "enterRms": [
+            0.022526352412592345
+          ],
+          "exitRms": [
+            0.011263176206296173
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "below-floor",
+        "kind": "below-floor",
+        "gain": 1,
+        "start": 0.62,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "below-floor.wav",
+        "sha256": "860bb840877c617353f2a503694393e8a6a7c27048c41e1121ef15293f5dc4ef",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0
+          ],
+          "enterRms": [
+            0.001
+          ],
+          "exitRms": [
+            0.0005
+          ]
+        }
+      ]
+    },
+    {
+      "spec": {
+        "name": "smooth-rise",
+        "kind": "smooth-rise",
+        "gain": 1,
+        "start": 0.62,
+        "duration": 0.2
+      },
+      "source": {
+        "name": "smooth-rise.wav",
+        "sha256": "d296dd40dea7c126158f391e6485d550ec771fcd740b98a3dcbd5befa3c56542",
+        "sizeBytes": 64044
+      },
+      "fixed": [],
+      "relative": [
+        {
+          "start": 0.78,
+          "end": 2
+        }
+      ],
+      "background": [
+        {
+          "segment": 0,
+          "windows": 100,
+          "status": "available",
+          "backgroundRank": 19,
+          "backgroundRms": [
+            0.001676889024787193
+          ],
+          "enterRms": [
+            0.006707556099148772
+          ],
+          "exitRms": [
+            0.003353778049574386
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Authored sine/noise originals decoded through maintained FFmpeg producer. This is energy-transition coverage, not real task, physical event, human audibility or learning evidence. Smooth-rise proposals remain a retained limitation."
+}
