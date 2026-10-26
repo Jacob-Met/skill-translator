@@ -11,23 +11,23 @@ export function createRegionalAppearanceView(before,after,{result,state={},reque
   const start=node('button','Compare eight regions'),stop=node('button','Cancel regional comparison');
   for(const button of [start,stop]){button.type='button';button.dataset.regionalControl='true';}
   start.dataset.regionalAction='start';stop.dataset.regionalAction='cancel';actions.append(start,stop);
-  details.append(summary,node('p','Inspect whether different parts of these small images prefer the same shift. The complete common interior is split into four columns and two rows; no point or image region is selected by hand.'),status,actions,output);element.append(details);
+  details.append(summary,node('p','Eight fixed regions cover the complete search interior. Compare their preferred image shifts without selecting points or regions by hand.'),status,actions,output);element.append(details);
   let running=false,value=result,initialized=false;
   const tileViews=new Map();
   function sync(){start.disabled=running||!current()||busy();stop.disabled=!running;start.hidden=Boolean(value);stop.hidden=!running;}
   function draw(sample,which,account){
     const figure=node('figure'),canvas=node('canvas'),scale=3;canvas.width=sample.widthPx*scale;canvas.height=sample.heightPx*scale;
     const original=document.createElement('canvas');original.width=sample.widthPx;original.height=sample.heightPx;original.getContext('2d').putImageData(new ImageData(sample.rgba,sample.widthPx,sample.heightPx),0,0);
-    const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.drawImage(original,0,0,canvas.width,canvas.height);ctx.font='bold 12px monospace';ctx.textBaseline='top';ctx.lineWidth=1;
+    const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.drawImage(original,0,0,canvas.width,canvas.height);ctx.font='bold 24px system-ui';ctx.textBaseline='top';ctx.lineWidth=2;
     for(const tile of account.tiles){const c=tile.comparison,a=c.alternatives,unique=a.length===1,s=c.support;
       if(which==='later'&&!unique)continue;
       const dx=which==='later'?a[0].dx:0,dy=which==='later'?a[0].dy:0,x=(s.left+dx)*scale,y=(s.top+dy)*scale;
       const color=!unique?'#ffc96b':a[0].searchBoundary?'#ffb0a6':'#78f0d3';ctx.strokeStyle=color;ctx.strokeRect(x+.5,y+.5,s.width*scale-1,s.height*scale-1);
-      const label=which==='later'?`R${tile.index+1}`:`R${tile.index+1} ${unique?`${signed(a[0].dx)},${signed(a[0].dy)}`:`${a.length} fits`}`;
-      const w=Math.min(s.width*scale-2,ctx.measureText(label).width+4);ctx.fillStyle='#10251f';ctx.fillRect(x+1,y+1,w,16);ctx.fillStyle=color;ctx.fillText(label,x+3,y+3,Math.max(1,w-4));
+      const label=`R${tile.index+1}`;
+      const w=Math.min(s.width*scale-2,ctx.measureText(label).width+4);ctx.fillStyle='#10251f';ctx.fillRect(x+1,y+1,w,30);ctx.fillStyle=color;ctx.fillText(label,x+3,y+3,Math.max(1,w-4));
     }
-    canvas.setAttribute('role','img');canvas.setAttribute('aria-label',`${which==='earlier'?'Earlier reference regions and their preferred image shifts':'Later sample with regions placed by unique image-shift fits only'}. Detailed alternatives are listed below.`);
-    figure.append(canvas,node('figcaption',`${which==='earlier'?'Earlier':'Later'} original sample, ${sample.widthPx} × ${sample.heightPx} pixels. Display enlargement adds no detail. ${which==='earlier'?'Labels are sample-pixel shifts; amber means tied alternatives, pink means a search-edge fit.':'Only unique appearance fits are drawn; overlapping boxes can occur. No physical point mapping is established.'}`));return figure;
+    canvas.setAttribute('role','img');canvas.setAttribute('aria-label',`${which==='earlier'?'Earlier fixed reference regions; preferred shifts are listed by region below':'Later sample with regions placed by unique image-shift fits only'}. Detailed alternatives are listed below.`);
+    figure.append(canvas,node('figcaption',`${which==='earlier'?'Earlier':'Later'} original sample, ${sample.widthPx} × ${sample.heightPx} pixels. Display enlargement adds no detail. ${which==='earlier'?'Labels match the eight regional summaries below. Amber means tied alternatives; pink means a search-edge fit.':'Only unique appearance fits are drawn; overlapping boxes can occur. No physical point mapping is established.'}`));return figure;
   }
   function populate(){
     if(!details.open||!value||initialized)return;initialized=true;output.replaceChildren();tileViews.clear();
