@@ -88,3 +88,9 @@ raw inputs, source PNG reattachment/wrong-image refusal, real download/fresh
 reopen, explicit practice handoff and actual placements, invalid imports, size
 drafts, late-read retirement, 390px keyboard inspection and unresolved controls.
 All images in this course are authored geometric controls generated at runtime.
+
+## Return the actual attempt
+
+Export the actual practice session and open it with the complete task in the
+existing demonstrated-relationship feedback page. [Complete-task feedback](RAW_TASK_PRACTICE.md)
+compares every examined mark without rewriting original scores or actual rounds.

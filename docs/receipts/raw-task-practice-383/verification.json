@@ -1,0 +1,91 @@
+{
+  "browser": "156.0.8078.47",
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "ef662d33e2bdd322845891a89a78d89eb55b39799cc3608cd38be7b329308b5c",
+    "startedAt": "2026-10-26T04:39:21.468Z",
+    "completedAt": "2026-10-26T04:39:21.613Z",
+    "durationMs": 144.4220499999999,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "D379B6883BCC0309C17197872B66A912",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "13605F6F340F5DC5085BFCDEB5A5FDD6"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  },
+  "checks": [
+    "Original maintained link, multi-file raw admission and three-mark mixed-rule targets.",
+    "Actual authored PNG reattachment binds original source pixels; wrong original image cannot replace accepted pixels.",
+    "Actual retained download, explicit acceptance, empty maintained practice and three real placements pass unchanged evaluator.",
+    "Actual complete-task practice download returns through existing feedback link; all three raw accounts, completed historical round and empty new round remain source-bound, original PNGs inspect, actual comparison download/fresh reopen and foreign-session refusal pass at390px.",
+    "Fresh raw-only replay; duplicate refusal retains work; draft target retires acceptance and recomputes positions.",
+    "A late file read cannot replace a newer target draft; saving and practice remain retired until recomputed.",
+    "390px keyboard inspection, no-fit negative control and explicit unresolved/unexamined original rules."
+  ],
+  "errors": [],
+  "compositionBase": "ad218f4d4f390e1d817b132e4c06c45ab2d9628b",
+  "browserBase": "ad218f4d4f390e1d817b132e4c06c45ab2d9628b",
+  "compositionNote": "Current ad218f4 adds independent translated-region modules/routes. Server was refreshed preserving those routes and adding the feedback module. All48 affected native tests, current5-route HTTP/history replay, and full actual7-group sandboxed browser receiving pass on this composition.",
+  "native": {
+    "passed": 48,
+    "failed": 0,
+    "skipped": 0,
+    "command": "node --test --test-isolation=none test/raw-task-practice.test.mjs test/demonstration-practice.test.mjs test/raw-task-proposals.test.mjs test/raw-rule-proposals.test.mjs test/response-demonstrations.test.mjs test/practice.test.mjs",
+    "scope": "Affected tests, not full repository suite"
+  },
+  "reviewCorrection": "Independent review exposed planned-size admission vetoing valid actual-size practice. Candidate source now reconstructs at actual session dimensions while raw declared target remains unchanged. Positive planned10/actual300, actual10 refusal and exact replay pass; browser also checks a nonfitting planned10mm target alongside actual273mm practice.",
+  "changedSourceSha256": {
+    "src/raw-task-practice.mjs": "dec42cb3ccb743a5333e115194466e8c39a3d7ad59c15929a3747a7c7d530eda",
+    "src/demonstration-practice.mjs": "fcc0290f145dfa4ed3907c27892f4cd270dcdd615db06043b340721ccb0d80d0",
+    "web/demonstration-practice.mjs": "2cfc8ebaea9454fb0495e468b247df39997761b7d54434601719f5c6d24e38b0",
+    "web/demonstration-practice.html": "a59e55248c268ae225900fa003d952e3b1e6214097dcc9db20104f0ffe31d63b",
+    "web/raw-task-proposals.html": "3767ffe6560cef676d906ce0c4b68388d875dcb37c93480fc7dec3e74b0a1eb2",
+    "server.mjs": "1d5e96df2e01660b5444479e7cf0d3eadde08110f58013cfeb92970e8a03337e",
+    "test/raw-task-practice.test.mjs": "edd755fcaa524906ce1b78bceade0e78ef706145d85a94a87792f4cef972fcea",
+    "tools/browser-raw-task-proposals.mjs": "ca209ebdc382a1e013ee2916846bc93449d5e5956f3938cbbd50b2e76992f07d",
+    "docs/RAW_TASK_PRACTICE.md": "32cf4c4e2988f727ed26af584ca9dab67b4ee89a75cc4db1d957e81b24cc9246",
+    "docs/RAW_TASK_PROPOSALS.md": "29e096a72e53249b26caec40680f77ef0800e4388960256e751a0e95f2041d38"
+  },
+  "screenshotsSha256": {
+    "narrow.png": "9a3b45a046a70584366e039abb5516f6c011f5318e46ea003b3e8648d42e6f04",
+    "feedback-narrow.png": "82226d218c0823f41ad2c1a84dcc4c2219e1595b1981e82ee3b3315bd2b1b9a2",
+    "desktop.png": "9f4fbfb896821bb89706b08199bc6a2f742dc5b178a3a6150ea175ec8b90c627"
+  },
+  "limits": "Authored geometric/PNG controls; conditional per-mark agreement is not physical feasibility, expert intention or learning validation."
+}
