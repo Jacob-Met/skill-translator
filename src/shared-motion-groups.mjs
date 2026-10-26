@@ -6,7 +6,7 @@ export const MAX_MOTION_GROUP_POINTS=12;
 export const MOTION_FIT_SLACK_MM=1e-9;
 const count=mask=>{let n=0;for(;mask;mask&=mask-1)n++;return n;};
 const boundary='Groups pass a least-squares proper-rotation and translation fit between every supplied source pair. Every fitted point residual must be within the exploratory threshold plus 1e-9 mm numerical slack. This is complete enumeration of that fitted-model test, not a search over all threshold-feasible transformations. Overlapping maximal groups are alternatives, not an object partition. Calibrations and point identities remain supplied; fitted agreement does not establish physical object identity, rigidity, contact, causal necessity, continuous motion or skill. Degenerate fits stay unresolved; missing points are never imputed.';
-export function inspectSharedMotionGroups(raw){
+export function sharedMotionInputs(raw){
   const study=importRelationshipDiscovery(raw);
   const rows=study.demonstrations.map(row=>{
     const d=derive(row.annotation),original=new Map(d.landmarks.map(m=>[m.id,{id:m.id,label:m.label,xMm:m.uv.u*d.source.widthMm,yMm:m.uv.v*d.source.heightMm}]));
@@ -15,6 +15,10 @@ export function inspectSharedMotionGroups(raw){
   }).sort((a,b)=>a.id.localeCompare(b.id));
   const referenceIds=study.demonstrations[0].annotation.landmarks.map(m=>m.id).sort();
   const missing=referenceIds.map(id=>({id,sourceIds:rows.filter(row=>!row.points.has(id)).map(row=>row.id)})).filter(x=>x.sourceIds.length);
+  return {study,rows,referenceIds,missing};
+}
+export function inspectSharedMotionGroups(raw){
+  const {study,rows,referenceIds,missing}=sharedMotionInputs(raw);
   const ids=referenceIds.filter(id=>!missing.some(m=>m.id===id)),n=ids.length;
   const common={thresholdMm:study.deviationMm,numericalSlackMm:MOTION_FIT_SLACK_MM,completePointIds:ids,missing,sourceIds:rows.map(r=>r.id),
     selectionConditioned:study.demonstrations.some(r=>r.spatialMapping),boundary};

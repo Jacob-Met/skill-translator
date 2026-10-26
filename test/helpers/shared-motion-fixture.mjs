@@ -18,7 +18,7 @@ export function motionStudy(frames=groupedFrames(),deviationMm=.01){
  return {format:'skill-translator.relationship-discovery/v1',deviationMm,demonstrations:frames.map((points,i)=>({id:'source-'+i,annotation:annotation(points),evidenceClass:'authored-example',correspondenceConfirmed:true}))};
 }
 export function motionSequence({frames=groupedFrames(),images=null}={}){
- const clip={name:'authored-groups.webm',mimeType:'video/webm',sizeBytes:1000,sha256:'a'.repeat(64),durationSeconds:12};
+ const clip={name:'authored-groups.webm',mimeType:'video/webm',sizeBytes:1000,sha256:'a'.repeat(64),durationSeconds:Math.max(12,frames.length+1)};
  let sequence=createSequence(clip,{title:'Two independently moving patterns',context:'Authored sampled geometry and rendered PNGs; no physical motion or object identity claim'});
  for(let i=0;i<frames.length;i++){
   const id='moment-'+i,image=images?.[i]??{name:id+'.png',mimeType:'image/png',sha256:(i+1).toString(16).repeat(64),widthPx:600,heightPx:400,pixelCoordinates:'browser-oriented'};

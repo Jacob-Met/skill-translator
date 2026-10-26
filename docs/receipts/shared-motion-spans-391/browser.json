@@ -1,0 +1,63 @@
+{
+  "result": "PASS",
+  "tests": [
+    "Four original PNGs automatically produce four maximal time/point alternatives, including the earlier triple absent from whole-course groups; zero group labels, manual interval splits or task steps supplied.",
+    "Selecting longer or overlapping short alternatives changes the original-frame highlights, retained timeline and all-pair fits; the two-sample alternative remains explicitly two samples.",
+    "Real download and fresh-page reopen preserve every original PNG and declaration, recomputing the same span alternatives without stored verdicts or synthesized authored steps.",
+    "A changed middle source PNG and point geometry removes the earlier triple while retaining the unaffected full-course triple.",
+    "An uncalibrated retained original moment breaks inferred contiguity instead of being skipped; the timeline retains and names the gap.",
+    "An incorrect original PNG is rejected without replacing the accepted span account.",
+    "At390px, keyboard span selection updates original frames and timeline without page-wide horizontal overflow.",
+    "Unordered demonstration comparisons retain whole-course groups and do not receive an invented temporal interpretation."
+  ],
+  "errors": [],
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-26T05:46:15.093Z",
+    "completedAt": "2026-10-26T05:46:15.170Z",
+    "durationMs": 76.14595299999996,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "E00D940BCEBA12CA18539E1E5F2D6ACF",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "B57899C618529048AF09972FA5843BC1"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  }
+}

@@ -19,11 +19,23 @@ export function renderSharedMotionGroups(study,evidence){
   const group=result.groups.find(g=>g.ids.join(':')===select.value);$('motionSources').replaceChildren();$('motionFits').replaceChildren();
   $('motionDetail').textContent=group?'All '+group.motions.length+' source-pair fits retain this group. Largest fitted point residual: '+number(group.maxResidualMm)+' mm, against '+number(result.thresholdMm)+' mm. No accepted larger point set contains this group.':'No multi-point group passed the declared fitted-motion test.';
   if(!group)return;
+  renderMotionSourceCards($('motionSources'),study,evidence,group.ids);
+  renderMotionFits($('motionFits'),group.motions);
+ };
+ select.onchange=render;render();
+ for(const s of result.subsets){const o=node('option',s.ids.join(' / ')+' · '+(s.status==='supported'?'passes fitted test':s.status==='unresolved-orientation'?'unresolved orientation':'outside fitted threshold'));o.value=s.ids.join(':');$('motionSubset').append(o);}
+ $('motionSubset').disabled=false;
+ $('motionSubset').onchange=()=>{const s=result.subsets.find(s=>s.ids.join(':')===$('motionSubset').value);$('motionSubsetDetail').textContent=s.status==='supported'?'Largest residual across all supplied source pairs: '+number(s.maxResidualMm)+' mm. Supported subsets contained in a larger supported group are omitted from the main group selector.':s.status==='unresolved-orientation'?s.witness.fromSourceId+' → '+s.witness.toSourceId+': '+s.witness.reason:s.witness.fromSourceId+' → '+s.witness.toSourceId+': fitted maximum residual '+number(s.witness.maxResidualMm)+' mm exceeds '+number(result.thresholdMm)+' mm. This rejects this least-squares fit, not every possible transformation.';};
+ $('motionSubset').onchange();
+}
+
+export function renderMotionSourceCards(container,study,evidence,ids,momentIds=null){
   for(const row of study.demonstrations){
-   const d=derive(row.annotation),card=node('article');card.className='motion-source-card';card.append(node('h3',evidence?.sources[study.demonstrations.indexOf(row)]?.label||row.annotation.title||row.id),node('p',row.id+' · '+row.evidenceClass));
-   const originalIds=group.ids.map(id=>row.spatialMapping?row.spatialMapping.pairs.find(p=>p.referenceId===id)?.observationId:id);
-   const marks=d.landmarks.filter(m=>originalIds.includes(m.id));
+   if(momentIds&&!momentIds.includes(evidence.sources.find(s=>s.demonstrationId===row.id)?.momentId))continue;
    const index=study.demonstrations.indexOf(row),source=evidence?.sources[index],moment=source&&evidence.account.sequence.moments.find(m=>m.id===source.momentId),asset=moment&&evidence.assets.get(moment.id);
+   const d=derive(row.annotation),card=node('article');card.className='motion-source-card';card.append(node('h3',evidence?.sources[study.demonstrations.indexOf(row)]?.label||row.annotation.title||row.id),node('p','Source '+row.id+(source?' · original '+source.momentId:'')+' · '+row.evidenceClass));
+   const originalIds=ids.map(id=>row.spatialMapping?row.spatialMapping.pairs.find(p=>p.referenceId===id)?.observationId:id);
+   const marks=d.landmarks.filter(m=>originalIds.includes(m.id));
    const width=moment?.image.widthPx??300,height=moment?.image.heightPx??200;
    const plot=svg('svg',{viewBox:'0 0 '+width+' '+height,role:'img','aria-label':row.id+': selected shared-motion group on '+(asset?'the original retained frame':'the calibrated point diagram')});
    if(asset)plot.append(svg('image',{href:asset.media.url,width,height}));else plot.append(svg('rect',{x:0,y:0,width,height,fill:'#f3f7f2',stroke:'#b8cebf'}));
@@ -33,13 +45,10 @@ export function renderSharedMotionGroups(study,evidence){
    card.append(plot,node('p','Group points: '+originalIds.join(', ')));
    if(asset)card.append(node('p',source.label+' · presented '+source.presentedSeconds+' s. Original PNG identity verified; geometry remains supplied.'));
    else card.append(node('p','Diagram of supplied calibrated annotations. Original image pixels are not verified here.'));
-   $('motionSources').append(card);
+   container.append(card);
   }
-  for(const f of group.motions){const tr=node('tr');for(const text of [f.fromSourceId+' → '+f.toSourceId,number(f.angleDegrees)+'°','('+number(f.centroidDxMm)+', '+number(f.centroidDyMm)+')',number(f.remainingRmsMm),number(f.maxResidualMm)])tr.append(node('td',text));$('motionFits').append(tr);}
- };
- select.onchange=render;render();
- for(const s of result.subsets){const o=node('option',s.ids.join(' / ')+' · '+(s.status==='supported'?'passes fitted test':s.status==='unresolved-orientation'?'unresolved orientation':'outside fitted threshold'));o.value=s.ids.join(':');$('motionSubset').append(o);}
- $('motionSubset').disabled=false;
- $('motionSubset').onchange=()=>{const s=result.subsets.find(s=>s.ids.join(':')===$('motionSubset').value);$('motionSubsetDetail').textContent=s.status==='supported'?'Largest residual across all supplied source pairs: '+number(s.maxResidualMm)+' mm. Supported subsets contained in a larger supported group are omitted from the main group selector.':s.status==='unresolved-orientation'?s.witness.fromSourceId+' → '+s.witness.toSourceId+': '+s.witness.reason:s.witness.fromSourceId+' → '+s.witness.toSourceId+': fitted maximum residual '+number(s.witness.maxResidualMm)+' mm exceeds '+number(result.thresholdMm)+' mm. This rejects this least-squares fit, not every possible transformation.';};
- $('motionSubset').onchange();
+}
+
+export function renderMotionFits(container,motions){
+  for(const f of motions){const tr=node('tr');for(const text of [(f.fromMomentId??f.fromSourceId)+' → '+(f.toMomentId??f.toSourceId),number(f.angleDegrees)+'°','('+number(f.centroidDxMm)+', '+number(f.centroidDyMm)+')',number(f.remainingRmsMm),number(f.maxResidualMm)])tr.append(node('td',text));container.append(tr);}
 }

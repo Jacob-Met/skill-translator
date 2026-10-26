@@ -1,3 +1,4 @@
+import {renderSharedMotionSpans} from '/web/shared-motion-spans-view.mjs';
 import {renderSharedMotionGroups} from '/web/shared-motion-groups-view.mjs';
 import {createSequenceDiscovery,sequenceDiscoveryInputs} from '/src/sequence-discovery.mjs';
 import {readSequenceDiscoveryBundle,makeSequenceDiscoveryBundle,SEQUENCE_DISCOVERY_BUNDLE_FORMAT,MAX_DISCOVERY_BUNDLE_BYTES} from '/web/sequence-discovery-input.mjs';
@@ -10,7 +11,7 @@ function invalidate(){pending?.abort();pending=null;return ++revision;}
 const ns='http://www.w3.org/2000/svg';
 function node(tag,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;}
 function svg(tag,attrs){const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);return e;}
-function accept(raw,evidence=null){const checked=importRelationshipDiscovery(raw),computed=discoverRelationships(checked);if(sequenceEvidence?.assets!==evidence?.assets&&sequenceEvidence)releaseSequenceAssets(sequenceEvidence.assets);sequenceEvidence=evidence;study=checked;result=computed;invalidate();$('deviation').value=study.deviationMm;$('save').disabled=false;$('error').textContent='';$('transfer').textContent='';render();renderSharedMotionGroups(study,sequenceEvidence);}
+function accept(raw,evidence=null){const checked=importRelationshipDiscovery(raw),computed=discoverRelationships(checked);if(sequenceEvidence?.assets!==evidence?.assets&&sequenceEvidence)releaseSequenceAssets(sequenceEvidence.assets);sequenceEvidence=evidence;study=checked;result=computed;invalidate();$('deviation').value=study.deviationMm;$('save').disabled=false;$('error').textContent='';$('transfer').textContent='';render();renderSharedMotionGroups(study,sequenceEvidence);renderSharedMotionSpans(study,sequenceEvidence);}
 function render(){
  $('sequenceContext').textContent=sequenceEvidence?`Original demonstration: ${sequenceEvidence.account.sequence.title}. ${sequenceEvidence.sources.length} calibrated moments analyzed; ${sequenceEvidence.uncalibratedMoments.length} uncalibrated moments retained but not analyzed${sequenceEvidence.uncalibratedMoments.length?': '+sequenceEvidence.uncalibratedMoments.map(m=>m.label).join(', '):''}. Common-plane / identity basis: ${sequenceEvidence.account.declarations.basis}. These are sampled moments from one clip, not independent successful executions.`:'';
  $('summary').textContent=`${study.demonstrations.length} sources; ${result.candidates.length} automatically enumerated pair relationships: ${result.counts.repeatable} repeatable, ${result.counts.contradicted} contradicted, ${result.counts.incomplete} incomplete. Accepted maximum observed range: ${study.deviationMm} mm. No pair or relation type was supplied.`;
