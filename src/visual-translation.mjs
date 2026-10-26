@@ -1,5 +1,6 @@
 // A finite image comparison, not camera-motion or physical correspondence evidence.
 import {compareSamplePixels, inspectVisualScan} from './visual-scan.mjs';
+import {locateTranslatedChanges} from './translated-change-regions.mjs';
 
 export const TRANSLATION_RADIUS = 4;
 export const WIDE_TRANSLATION_RADIUS = 16;
@@ -9,16 +10,18 @@ export const MAX_TRANSLATION_RADIUS = WIDE_TRANSLATION_RADIUS;
  * Every candidate uses exactly the same reference pixels; neither wrapping nor
  * a smaller overlap can earn a lower score. Keep every exact minimizer.
  */
-export function compareTranslatedSamples(before, after, {radius = TRANSLATION_RADIUS} = {}) {
+export function compareTranslatedSamples(before, after, {radius = TRANSLATION_RADIUS, includeChangeRegions = false} = {}) {
   // Reuse source-raster admission without changing the incumbent metric.
   compareSamplePixels(before, after);
   if (!Number.isInteger(radius) || radius < 1 || radius > MAX_TRANSLATION_RADIUS)
     throw Error(`Translation radius must be an integer from 1 to ${MAX_TRANSLATION_RADIUS}.`);
+  if (typeof includeChangeRegions !== 'boolean') throw Error('Change-region analysis must be explicitly enabled or disabled.');
   const {widthPx: width, heightPx: height} = before;
   const support = {left: radius, top: radius, width: width - 2 * radius,
     height: height - 2 * radius};
   if (support.width < 3 || support.height < 3)
-    return {status: 'insufficient-common-support', radius, alternatives: []};
+    return {status: 'insufficient-common-support', radius, alternatives: [],
+      ...(includeChangeRegions ? {changeRegions: {status: 'unavailable', reason: 'There is insufficient common interior support.'}} : {})};
   const pixelCount = support.width * support.height, channelCount = pixelCount * 3;
   const histogram = new Uint32Array(511), rank = Math.floor((channelCount - 1) / 2);
   let minimum = Infinity, zero = null, alternatives = [];
@@ -46,11 +49,13 @@ export function compareTranslatedSamples(before, after, {radius = TRANSLATION_RA
       else if (absoluteResidual === minimum) alternatives.push(candidate);
     }
   }
-  return {status: alternatives.length > 1 ? 'ambiguous' : alternatives[0].searchBoundary ? 'search-boundary' : 'unique',
+  const result = {status: alternatives.length > 1 ? 'ambiguous' : alternatives[0].searchBoundary ? 'search-boundary' : 'unique',
     radius, support: {...support, pixelCount, omittedPixels: width * height - pixelCount},
     candidateCount: (2 * radius + 1) ** 2, zero,
     meanAdjustedChange: minimum / (channelCount * 255), alternatives,
     boundary: 'Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.'};
+  if (includeChangeRegions) result.changeRegions = locateTranslatedChanges(before, after, result);
+  return result;
 }
 
 /** Retain the existing scan's source/time refusals; never join across a gap. */

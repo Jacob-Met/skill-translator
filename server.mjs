@@ -8,6 +8,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/src/translated-change-regions.mjs':['src/translated-change-regions.mjs','text/javascript; charset=utf-8'],
+  '/web/translated-change-regions.mjs':['web/translated-change-regions.mjs','text/javascript; charset=utf-8'],
   '/raw-task-proposals':['web/raw-task-proposals.html','text/html; charset=utf-8'],
   '/src/raw-task-proposals.mjs':['src/raw-task-proposals.mjs','text/javascript; charset=utf-8'],
   '/web/raw-task-proposals.mjs':['web/raw-task-proposals.mjs','text/javascript; charset=utf-8'],

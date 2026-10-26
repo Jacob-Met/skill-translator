@@ -73,8 +73,8 @@ try {
   assert.match(moved,/128 × 88 interior/);assert.match(borderNarrow,/152 × 112 interior/);
   record('wide fit ranks central local change above large pan; both original narrow/wide scores and different interior supports remain; border-only change remains visible in narrow score');
 
-  await page.locator('.scan-interval[data-index="1"] .scan-translation[data-radius="16"] summary').focus(); await page.keyboard.press('Enter');
-  assert.equal(await page.locator('.scan-interval[data-index="1"] .scan-translation[data-radius="16"] details').evaluate(d => d.open), true);
+  await page.locator('.scan-interval[data-index="1"] .scan-translation[data-radius="16"] details[data-total-alternatives] > summary').focus(); await page.keyboard.press('Enter');
+  assert.equal(await page.locator('.scan-interval[data-index="1"] .scan-translation[data-radius="16"] details[data-total-alternatives]').evaluate(d => d.open), true);
   await page.locator('#visual-scan').screenshot({path: out + '/translation-desktop.png'});
   await page.setViewportSize({width: 390, height: 844}); assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   await page.locator('#visual-scan').screenshot({path: out + '/translation-narrow.png'});
@@ -99,13 +99,13 @@ try {
   await page.route('**/web/visual-translation-worker.mjs',holdWide);
   await page.locator('#scan-order').selectOption('wideTranslationAdjustedChange');
   const narrowPending=page.locator('.scan-interval[data-index="0"] .scan-translation[data-radius="4"]');
-  await narrowPending.locator('summary').waitFor();await narrowPending.locator('summary').click();
+  await narrowPending.locator('details[data-total-alternatives] > summary').waitFor();await narrowPending.locator('details[data-total-alternatives] > summary').click();
   await narrowPending.locator('li[data-translation-alternative="0"]').waitFor();
   await narrowPending.locator('button[data-translation-page="next"]').click();
   await narrowPending.locator('button[data-translation-page="previous"]').focus();
   assert.equal(await narrowPending.getAttribute('data-page'),'1');
   releaseWide();await waitText(page,'scan-translation-summary','Image-shift comparison ready');
-  assert.equal(await narrowPending.getAttribute('data-page'),'1');assert.equal(await narrowPending.locator('details').evaluate(e=>e.open),true);
+  assert.equal(await narrowPending.getAttribute('data-page'),'1');assert.equal(await narrowPending.locator('details[data-total-alternatives]').evaluate(e=>e.open),true);
   assert.equal(await narrowPending.locator('button[data-translation-page="previous"]').evaluate(e=>e===document.activeElement),true);
   await page.unroute('**/web/visual-translation-worker.mjs',holdWide);
   record('holding only the wide worker script request lets real narrow details/page2/focus survive actual later wide completion');

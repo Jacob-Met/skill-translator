@@ -67,8 +67,8 @@ try {
   assert.ok(Number(changed.match(/· ([\d.]+) levels remain/)[1]) > 2, changed);
   record('actual decoded image shift stops leading the scan; independent local change becomes first while original scores and every interval remain');
 
-  await page.locator('.scan-interval[data-index="1"] .scan-translation summary').focus(); await page.keyboard.press('Enter');
-  assert.equal(await page.locator('.scan-interval[data-index="1"] .scan-translation details').evaluate(d => d.open), true);
+  await page.locator('.scan-interval[data-index="1"] .scan-translation details[data-total-alternatives] > summary').focus(); await page.keyboard.press('Enter');
+  assert.equal(await page.locator('.scan-interval[data-index="1"] .scan-translation details[data-total-alternatives]').evaluate(d => d.open), true);
   await page.locator('#visual-scan').screenshot({path: out + '/translation-desktop.png'});
   await page.setViewportSize({width: 390, height: 844}); assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   await page.locator('#visual-scan').screenshot({path: out + '/translation-narrow.png'});
