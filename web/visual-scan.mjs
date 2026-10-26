@@ -1,6 +1,7 @@
 import {renderChangeRegions} from '/web/scan-change-regions.mjs';
 import {renderTranslationComparison} from '/web/visual-translation-view.mjs';
 import {renderTranslatedChangeRegions} from '/web/translated-change-regions.mjs';
+import {createRegionalAppearanceView} from '/web/regional-translation-view.mjs';
 import {createVisualSpanView} from '/web/visual-span-view.mjs';
 import {createVisualScanPlan, inspectVisualScan, MAX_SCAN_SAMPLES} from '/src/visual-scan.mjs';
 import {samplePresentedFrame} from '/web/video-input.mjs';
@@ -26,12 +27,42 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
   let translationWorker = null, translationOwner = null;
   let translationRadius = null;
   let renderedReport = null;
+  let regionalActive = null;
+  const regionalViews = new Map();
   const spanView=createVisualSpanView({host:$('scan-results'),isBusy,canSelect,onSelect:selectFrame});
   const say = text => { $('scan-status').textContent = text; };
 
   function stopTranslation() {
     translationWorker?.terminate(); translationWorker = null; translationOwner = null;
     translationRadius = null;
+  }
+
+  function stopRegional(message) {
+    if (!regionalActive) return;
+    const {worker, view} = regionalActive; regionalActive = null;
+    worker.terminate(); view.cancelled(message);
+  }
+
+  function compareRegions(owner, interval, view) {
+    if (report !== owner || isBusy() || !canSelect() || !view.element.isConnected
+      || getClip()?.identity.sha256 !== owner.plan.clip.sha256) return;
+    stopRegional('Another regional comparison was requested.');
+    try {
+      const worker = new Worker('/web/regional-translation-worker.mjs', {type: 'module'});
+      regionalActive = {worker, view}; view.pending();
+      const current = () => regionalActive?.worker === worker && report === owner
+        && view.element.isConnected && getClip()?.identity.sha256 === owner.plan.clip.sha256;
+      const finish = () => { worker.terminate(); regionalActive = null; };
+      worker.onmessage = ({data}) => {
+        if (!current()) return;
+        if (data.type === 'result') { owner.regionalResults ??= {}; owner.regionalResults[interval.index] = data.result; finish(); view.receive(data.result); }
+        else if (data.type === 'error') { finish(); view.fail(data.message); }
+      };
+      worker.onerror = event => { event.preventDefault(); if (!current()) return; finish(); view.fail(event.message || 'Regional worker failed.'); };
+      const plan = createVisualScanPlan(owner.plan.clip, {startSeconds: interval.before.requestedSeconds, endSeconds: interval.after.requestedSeconds, sampleCount: 2});
+      // Copy accepted samples; transfer never detaches the scanner's originals.
+      worker.postMessage({plan, samples: [owner.samples[interval.before.index], owner.samples[interval.after.index]]});
+    } catch (error) { stopRegional(); view.fail(String(error.message || error)); }
   }
 
   function compareTranslations(radius) {
@@ -61,12 +92,23 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
           const comparison = focused?.closest('.scan-translation');
           const paging = focused?.dataset.translationPage;
           const regionPaging = focused?.dataset.residualPage;
+          const regional = focused?.closest('.regional-appearance');
+          const tile = focused?.closest('details[data-regional-tile]')?.dataset.regionalTile;
+          const regionalTarget = regional ? '.regional-appearance'
+            + (tile === undefined ? '' : ` details[data-regional-tile="${tile}"]`) : null;
+          const regionalControl = !regional ? null
+            : focused?.dataset.regionalAction ? `button[data-regional-action="${focused.dataset.regionalAction}"]`
+            : paging ? `button[data-translation-page="${paging}"]`
+            : focused?.tagName === 'SUMMARY' && focused.closest('details[data-total-alternatives]') ? 'details[data-total-alternatives] > summary'
+            : focused?.tagName === 'SUMMARY' ? (tile === undefined ? '> details > summary' : '> summary') : null;
           const comparisonControl = regionPaging ? `button[data-residual-page="${regionPaging}"]`
             : focused?.tagName === 'SUMMARY' && focused.closest('details[data-shift-regions]') ? 'details[data-shift-regions] summary'
             : paging ? `button[data-translation-page="${paging}"]`
             : focused?.tagName === 'SUMMARY' && comparison ? 'summary' : null;
           renderReport();
-          if (sample !== undefined && interval !== undefined)
+          if (regionalControl && interval !== undefined)
+            $('scan-intervals').querySelector(`.scan-interval[data-index="${interval}"] ${regionalTarget} ${regionalControl}`)?.focus({preventScroll: true});
+          else if (sample !== undefined && interval !== undefined)
             $('scan-intervals').querySelector(`.scan-interval[data-index="${interval}"] button[data-sample="${sample}"]`)?.focus({preventScroll: true});
           else if (comparisonControl && interval !== undefined)
             $('scan-intervals').querySelector(`.scan-interval[data-index="${interval}"] .scan-translation[data-radius="${comparison.dataset.radius}"] ${comparisonControl}`)?.focus({preventScroll: true});
@@ -83,10 +125,11 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
   function sync() {
     const busy = isBusy();
     spanView.sync();
+    for (const view of regionalViews.values()) view.sync();
     $('scan-start').disabled = busy || !getClip();
     $('scan-cancel').disabled = !active || !isCurrent(active);
     for (const id of ['scan-from', 'scan-until', 'scan-count', 'scan-order']) $(id).disabled = busy;
-    for (const button of $('scan-intervals').querySelectorAll('button:not([data-translation-page]):not([data-residual-page])')) button.disabled = busy || !canSelect();
+    for (const button of $('scan-intervals').querySelectorAll('button:not([data-translation-page]):not([data-residual-page]):not([data-regional-control])')) button.disabled = busy || !canSelect();
   }
 
   function preview(frame) {
@@ -110,7 +153,10 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
 
   function renderReport() {
     const viewStates = new Map();
-    if (report && renderedReport === report) for (const view of $('scan-intervals').querySelectorAll('.scan-translation')) {
+    const regionalStates = new Map();
+    if (report && renderedReport === report) for (const [index, view] of regionalViews) regionalStates.set(index, view.getState());
+    stopRegional('The displayed scan was replaced.'); regionalViews.clear();
+    if (report && renderedReport === report) for (const view of $('scan-intervals').querySelectorAll('.scan-translation:not([data-regional-tile-comparison])')) {
       const interval = view.closest('.scan-interval').dataset.index;
       const regions = view.querySelector('.translated-change-regions');
       viewStates.set(`${interval}/${view.dataset.radius}`, {expanded: view.querySelector('details')?.open === true, page: Number(view.dataset.page) || 0,
@@ -173,6 +219,15 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
           }
         }
         item.append(renderChangeRegions(report.samples[interval.before.index], report.samples[interval.after.index]));
+        const owner = report;
+        const regional = createRegionalAppearanceView(owner.samples[interval.before.index], owner.samples[interval.after.index], {
+          result: owner.regionalResults?.[interval.index], state: regionalStates.get(interval.index),
+          current: () => report === owner && getClip()?.identity.sha256 === owner.plan.clip.sha256,
+          busy: () => isBusy() || !canSelect(),
+          request: view => compareRegions(owner, interval, view),
+          cancel: view => { if (regionalActive?.view === view) stopRegional(); }
+        });
+        regionalViews.set(interval.index, regional); item.append(regional.element);
       } else item.append(node('p', statusLabels[interval.status], 'note'));
       for (const frame of [interval.before, interval.after]) {
         if (frame.status === 'failed') item.append(node('p', `Frame request failed: ${frame.error}`, 'note'));
@@ -184,7 +239,7 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
         button.type = 'button'; button.dataset.sample = String(frame.index);
         button.addEventListener('click', () => selectFrame(frame)); actions.append(button);
       }
-      const comparisonHost = item.querySelector('.scan-translation');
+      const comparisonHost = item.querySelector('.scan-translation:not([data-regional-tile-comparison])');
       const comparisonDetails = comparisonHost?.querySelector('details');
       if (comparisonDetails) comparisonHost.insertBefore(actions, comparisonDetails);
       else item.append(actions);
@@ -249,6 +304,7 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
 
   function clear() {
     stopTranslation();
+    stopRegional('The original source was replaced.');
     active = null; report = null; pairedHash = null;
     $('scan-progress').hidden = true; renderReport();
     say('Pair the original clip to scan its image changes.'); sync();
@@ -266,3 +322,4 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
   }
   return {sync, clear, receiveClip};
 }
+

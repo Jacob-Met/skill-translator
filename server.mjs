@@ -8,6 +8,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/src/regional-translation.mjs':['src/regional-translation.mjs','text/javascript; charset=utf-8'],
+  '/web/regional-translation-view.mjs':['web/regional-translation-view.mjs','text/javascript; charset=utf-8'],
+  '/web/regional-translation-worker.mjs':['web/regional-translation-worker.mjs','text/javascript; charset=utf-8'],
+
   '/numeric-cue-thresholds':['web/numeric-cue-thresholds.html','text/html; charset=utf-8'],
   '/src/numeric-cue-thresholds.mjs':['src/numeric-cue-thresholds.mjs','text/javascript; charset=utf-8'],
   '/web/numeric-cue-thresholds.mjs':['web/numeric-cue-thresholds.mjs','text/javascript; charset=utf-8'],

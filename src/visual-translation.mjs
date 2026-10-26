@@ -19,6 +19,27 @@ export function compareTranslatedSamples(before, after, {radius = TRANSLATION_RA
   const {widthPx: width, heightPx: height} = before;
   const support = {left: radius, top: radius, width: width - 2 * radius,
     height: height - 2 * radius};
+  return fitSupportedSamples(before, after, radius, support, includeChangeRegions);
+}
+
+/** The same finite comparison on an explicit subset of the original common
+ * interior. This is a sample-space appearance measurement, not an original ROI
+ * or a calibrated point correspondence. Every shift uses identical pixels. */
+export function compareSupportedTranslations(before, after, referenceSupport,
+    {radius = TRANSLATION_RADIUS} = {}) {
+  compareSamplePixels(before, after);
+  if (!Number.isInteger(radius) || radius < 1 || radius > MAX_TRANSLATION_RADIUS)
+    throw Error(`Translation radius must be an integer from 1 to ${MAX_TRANSLATION_RADIUS}.`);
+  const {left, top, width, height} = referenceSupport ?? {};
+  if (![left, top, width, height].every(Number.isInteger) || width < 3 || height < 3
+      || left < radius || top < radius
+      || left + width > before.widthPx - radius || top + height > before.heightPx - radius)
+    throw Error('Use an integer reference rectangle at least 3 × 3 inside the complete search interior.');
+  return fitSupportedSamples(before, after, radius, {left, top, width, height}, false);
+}
+
+function fitSupportedSamples(before, after, radius, support, includeChangeRegions) {
+  const {widthPx: width, heightPx: height} = before;
   if (support.width < 3 || support.height < 3)
     return {status: 'insufficient-common-support', radius, alternatives: [],
       ...(includeChangeRegions ? {changeRegions: {status: 'unavailable', reason: 'There is insufficient common interior support.'}} : {})};
@@ -28,9 +49,9 @@ export function compareTranslatedSamples(before, after, {radius = TRANSLATION_RA
   for (let dy = -radius; dy <= radius; dy++) {
     for (let dx = -radius; dx <= radius; dx++) {
       histogram.fill(0);
-      for (let y = radius; y < height - radius; y++) {
-        let a = 4 * (y * width + radius), b = 4 * ((y + dy) * width + radius + dx);
-        for (let x = radius; x < width - radius; x++, a += 4, b += 4) {
+      for (let y = support.top; y < support.top + support.height; y++) {
+        let a = 4 * (y * width + support.left), b = 4 * ((y + dy) * width + support.left + dx);
+        for (let x = support.left; x < support.left + support.width; x++, a += 4, b += 4) {
           for (let c = 0; c < 3; c++) histogram[after.rgba[b + c] - before.rgba[a + c] + 255]++;
         }
       }
