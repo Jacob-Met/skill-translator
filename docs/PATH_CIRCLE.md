@@ -76,3 +76,7 @@ are exercised by tools/browser-path-circle.mjs. Use PLAYWRIGHT_PATH for the
 installed Playwright package, CHROME_BINARY for Chrome, and RECEIPT_DIR for output.
 The exact maintained QR supplier is pinned in vendor/materialtruth/source.json.
 The receipt and inspected views are in receipts/path-circle-20261026.
+
+## Concurrent return-excursion composition
+
+The current-main combination at `9e60f804d15511ba06206d10d417ee75bf2c064e` preserves the newly merged return-excursion controls and their guarded original-witness navigation. Circle clearing joins the shared accepted-study lifecycle. The composed source passes 34 affected native groups, nine circle browser groups and all nine unchanged return-excursion browser groups. A new combined journey finds one return at an 18 mm radius, focuses its farthest original sample, then finds no returns at 100 mm while preserving the circle report and source. Both browser receipts retain exact source hashes; the earlier receipts remain historical.
