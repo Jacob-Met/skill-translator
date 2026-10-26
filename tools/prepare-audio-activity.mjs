@@ -1,3 +1,4 @@
+import {OPUS_CLOCK_PROFILE,verifyOpusClock} from '../src/audio-decoder-clock.mjs';
 import {audioInputProfile} from './audio-input-profile.mjs';
 import {readFile,writeFile,mkdir,stat} from 'node:fs/promises';
 import {resolve,basename,join} from 'node:path';
@@ -10,7 +11,8 @@ const execute=promisify(execFile),hash=b=>createHash('sha256').update(b).digest(
 async function command(executable,args,signal){const r=await execute(executable,args,{encoding:'buffer',maxBuffer:64*1024*1024,timeout:60000,signal});return {stdout:r.stdout,stderr:r.stderr};}
 function check(test,message){if(!test)throw Error(message);}
 function exactInteger(x,label){const s=String(x);check(/^-?(0|[1-9][0-9]{0,15})$/.test(s)&&Number.isSafeInteger(Number(s)),label+' must be an exact bounded integer');return s;}
-export async function prepareAudioActivity(path,index,{signal,selfContained=false}={}){
+export async function prepareAudioActivity(path,index,{signal,selfContained=false,clockProfile='strict'}={}){
+ check(clockProfile==='strict'||clockProfile===OPUS_CLOCK_PROFILE,'Unsupported decoder clock profile');
  signal?.throwIfAborted();path=resolve(path);check(Number.isSafeInteger(index)&&index>=0&&index<=100,'Declare an absolute audio stream index0..100');
  const info=await stat(path);check(info.isFile()&&info.size>0&&info.size<=128*1024*1024,'Original file must be1..128MiB');const original=await readFile(path);check(original.length===info.size,'Original file changed during admission');
  const profile=selfContained?audioInputProfile(original):null;
@@ -35,7 +37,7 @@ export async function prepareAudioActivity(path,index,{signal,selfContained=fals
   // original rational PTS; never use rounded pts_time as source authority.
   check(Number.isFinite(a.ptsTime)&&Math.abs(Number(a.pts)/rate-a.ptsTime)<=Math.max(1e-6,Math.abs(a.ptsTime)*1e-5),'Unexpected audio-filter time base');
   const errorNumerator=BigInt(a.pts)*td-BigInt(f.pts)*tn*BigInt(rate),absolute=errorNumerator<0n?-errorNumerator:errorNumerator;
-  check(absolute*2n<=td,'Filter timestamp differs by more than half a sample from original PTS');
+  if(clockProfile==='strict')check(absolute*2n<=td,'Filter timestamp differs by more than half a sample from original PTS');
   rescaling.push({frame:i,errorSamplesNumerator:String(errorNumerator),errorSamplesDenominator:String(td)});
  }
  // Bind the actual bytes after both native reads as well; a changing source
@@ -43,6 +45,7 @@ export async function prepareAudioActivity(path,index,{signal,selfContained=fals
  check(hash(await readFile(path))===hash(original),'Original source changed during decoding');
  const [ffmpegVersion,ffprobeVersion]=await Promise.all([command('ffmpeg',['-version'],signal),command('ffprobe',['-version'],signal)]);
  const report={format:AUDIO_ACTIVITY_FORMAT,source:{name:basename(path),sha256:hash(original),sizeBytes:original.length},stream:{index,timeBase:stream.time_base,sampleRate:rate,channels,codec:stream.codec_name},decoder:{ffmpeg:ffmpegVersion.stdout.toString().split('\n')[0],ffprobe:ffprobeVersion.stdout.toString().split('\n')[0],probeArgs,decodeArgs:args,originalProbe:metadata,filterFrames:observed,rescaling,layout:{stream:declaredLayout,decodedFrames:frameLayoutState,filter:observed[0].layout,qualification:'null means original layout unreported; filter layout is not evidence that original metadata was known'},stderrSha256:hash(decoded.stderr),policy:'Original decoded frame PTS authoritative; packed-float conversion only; no resampling, mixing, gain, silence fill or browser-origin inference.'},frames,pcm:{encoding:'f32le-interleaved',sha256:hash(decoded.stdout),base64:decoded.stdout.toString('base64')},settings:{...AUDIO_SETTINGS}};
+ if(clockProfile!== 'strict'){report.decoder.clockProfile=clockProfile;report.decoder.clockEvidence=verifyOpusClock(report);}
  const analysis=await analyzeAudioActivity(report);return {report,analysis,stderr};
 }
 async function main(){const args=process.argv.slice(2);check(args.length===5&&args[1]==='--stream'&&args[3]==='--out','Usage: node tools/prepare-audio-activity.mjs source --stream INDEX --out NEW_DIRECTORY');const result=await prepareAudioActivity(args[0],Number(args[2])),out=resolve(args[4]);await mkdir(out);const reportBytes=Buffer.from(JSON.stringify(result.report,null,2)+'\n');await writeFile(join(out,'audio-activity.json'),reportBytes,{flag:'wx'});await writeFile(join(out,'analysis.json'),JSON.stringify(result.analysis,null,2)+'\n',{flag:'wx'});await writeFile(join(out,'decode.log'),result.stderr,{flag:'wx'});console.log(JSON.stringify({out,sourceSha256:result.report.source.sha256,reportSha256:hash(reportBytes),events:result.analysis.events.length,windows:result.analysis.windows.length,gaps:result.analysis.gaps.length}));}
