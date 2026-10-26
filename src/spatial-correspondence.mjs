@@ -1,20 +1,21 @@
 /** Complete bounded pair-distance correspondence proposals; never semantic identity. */
 import {GeometryError} from './geometry.mjs';
 import {spatialSourcePoints as points} from './spatial-source-geometry.mjs';
-import {AXIS_SPATIAL_CORRESPONDENCE_FORMAT,importAxisSpatialCorrespondence,inspectAxisSpatialCorrespondence} from './axis-spatial-correspondence.mjs';
-export {AXIS_SPATIAL_CORRESPONDENCE_FORMAT,AXIS_SCALE_MODEL} from './axis-spatial-correspondence.mjs';
+import {INJECTIVE_SPATIAL_CORRESPONDENCE_FORMAT,AXIS_SPATIAL_CORRESPONDENCE_FORMAT,importAxisSpatialCorrespondence,inspectAxisSpatialCorrespondence} from './axis-spatial-correspondence.mjs';
+export {INJECTIVE_SPATIAL_CORRESPONDENCE_FORMAT,INJECTIVE_AXIS_MODEL,AXIS_SPATIAL_CORRESPONDENCE_FORMAT,AXIS_SCALE_MODEL} from './axis-spatial-correspondence.mjs';
 export const SPATIAL_CORRESPONDENCE_FORMAT='skill-translator.spatial-correspondence/v1';
 export const REVIEWED_SPATIAL_MAPPING_FORMAT='skill-translator.reviewed-spatial-mapping/v1';
 export const SCALED_SPATIAL_CORRESPONDENCE_FORMAT='skill-translator.spatial-correspondence/v2';
 export const REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT='skill-translator.reviewed-spatial-mapping/v2';
 export const REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT='skill-translator.reviewed-spatial-mapping/v3';
+export const REVIEWED_INJECTIVE_SPATIAL_MAPPING_FORMAT='skill-translator.reviewed-spatial-mapping/v4';
 export const COMMON_SCALE_MODEL='common-positive-pair-distance-scale';
 const numericalSlackMm=1e-9;
 const check=(ok,message)=>{if(!ok)throw new GeometryError(message);};
 const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
 const same=(a,b)=>JSON.stringify(canonical(a))===JSON.stringify(canonical(b));
 export function importSpatialCorrespondence(raw){
- if(raw?.format===AXIS_SPATIAL_CORRESPONDENCE_FORMAT)return importAxisSpatialCorrespondence(raw);
+ if([AXIS_SPATIAL_CORRESPONDENCE_FORMAT,INJECTIVE_SPATIAL_CORRESPONDENCE_FORMAT].includes(raw?.format))return importAxisSpatialCorrespondence(raw);
  const scaled=raw?.format===SCALED_SPATIAL_CORRESPONDENCE_FORMAT;
  check(scaled||raw?.format===SPATIAL_CORRESPONDENCE_FORMAT,'Unsupported spatial correspondence study');
  check(scaled?raw.model===COMMON_SCALE_MODEL:raw.model===undefined,'A scale model requires its explicit v2 study format; fixed v1 cannot ignore it');
@@ -26,7 +27,7 @@ export function importSpatialCorrespondence(raw){
  return {format:raw.format,...(scaled?{model:COMMON_SCALE_MODEL}:{}),reference:structuredClone(raw.reference),observation:structuredClone(raw.observation),deviationMm:raw.deviationMm,maxStates};
 }
 export function inspectSpatialCorrespondence(raw){
- if(raw?.format===AXIS_SPATIAL_CORRESPONDENCE_FORMAT)return inspectAxisSpatialCorrespondence(raw);
+ if([AXIS_SPATIAL_CORRESPONDENCE_FORMAT,INJECTIVE_SPATIAL_CORRESPONDENCE_FORMAT].includes(raw?.format))return inspectAxisSpatialCorrespondence(raw);
  const study=importSpatialCorrespondence(raw),a=points(study.reference),b=points(study.observation),possible=a.map(()=>new Set()),examples=[];
  const scaled=study.format===SCALED_SPATIAL_CORRESPONDENCE_FORMAT,scaleIntervals=[],bound=study.deviationMm+numericalSlackMm;
  let states=0,found=0,exhausted=false;
@@ -61,17 +62,19 @@ export function createReviewedSpatialMapping(raw,{semanticCorrespondenceConfirme
  check(semanticCorrespondenceConfirmed===true,'Review whether the proposed complete mapping represents the same task points');
  check(sourceEvidenceClass===null||['authored-example','reported-demonstration'].includes(sourceEvidenceClass),'Use an explicit source evidence category');
  const result=inspectSpatialCorrespondence(raw);check(result.complete&&result.status==='unique','A complete uniquely compatible mapping is required; ambiguity or incomplete search cannot be promoted');
- const scaled=result.study.format===SCALED_SPATIAL_CORRESPONDENCE_FORMAT,axis=result.study.format===AXIS_SPATIAL_CORRESPONDENCE_FORMAT;
- const reviewed={format:axis?REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT:scaled?REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT:REVIEWED_SPATIAL_MAPPING_FORMAT,study:result.study,pairs:result.witnessMappings[0],...(axis?{axisSupport:result.witnessAxisSupports[0]}:scaled?{scaleInterval:result.witnessScaleIntervals[0]}:{}),semanticCorrespondenceConfirmed:true,sourceEvidenceClass};
+ const scaled=result.study.format===SCALED_SPATIAL_CORRESPONDENCE_FORMAT,extras=result.study.format===INJECTIVE_SPATIAL_CORRESPONDENCE_FORMAT,axis=extras||result.study.format===AXIS_SPATIAL_CORRESPONDENCE_FORMAT;
+ const reviewed={format:extras?REVIEWED_INJECTIVE_SPATIAL_MAPPING_FORMAT:axis?REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT:scaled?REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT:REVIEWED_SPATIAL_MAPPING_FORMAT,study:result.study,pairs:result.witnessMappings[0],...(axis?{axisSupport:result.witnessAxisSupports[0]}:scaled?{scaleInterval:result.witnessScaleIntervals[0]}:{}),...(extras?{unmatchedObservationIds:result.witnessUnmatchedObservationIds[0]}:{}),semanticCorrespondenceConfirmed:true,sourceEvidenceClass};
  check(new TextEncoder().encode(JSON.stringify(reviewed)).length<=2_000_000,'Complete reviewed mapping exceeds 2 MB; no original source is discarded');return reviewed;
 }
 export function importReviewedSpatialMapping(raw){
- const scaled=raw?.format===REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT,axis=raw?.format===REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT;
+ const scaled=raw?.format===REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT,extras=raw?.format===REVIEWED_INJECTIVE_SPATIAL_MAPPING_FORMAT,axis=extras||raw?.format===REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT;
  check(axis||scaled||raw?.format===REVIEWED_SPATIAL_MAPPING_FORMAT,'Unsupported reviewed spatial mapping');
- check(axis?raw.study?.format===AXIS_SPATIAL_CORRESPONDENCE_FORMAT&&raw.scaleInterval===undefined:raw.axisSupport===undefined&&(scaled?raw.study?.format===SCALED_SPATIAL_CORRESPONDENCE_FORMAT:raw.study?.format===SPATIAL_CORRESPONDENCE_FORMAT&&raw.scaleInterval===undefined),'Reviewed model format cannot ignore scale provenance');
+ check(axis?raw.study?.format===(extras?INJECTIVE_SPATIAL_CORRESPONDENCE_FORMAT:AXIS_SPATIAL_CORRESPONDENCE_FORMAT)&&raw.scaleInterval===undefined:raw.axisSupport===undefined&&(scaled?raw.study?.format===SCALED_SPATIAL_CORRESPONDENCE_FORMAT:raw.study?.format===SPATIAL_CORRESPONDENCE_FORMAT&&raw.scaleInterval===undefined),'Reviewed model format cannot ignore scale provenance');
+ check(extras||raw.unmatchedObservationIds===undefined,'Old reviewed formats cannot hide extra-observation provenance');
  const checked=createReviewedSpatialMapping(raw.study,{semanticCorrespondenceConfirmed:raw.semanticCorrespondenceConfirmed,sourceEvidenceClass:raw.sourceEvidenceClass??null});
  check(same(raw.pairs,checked.pairs),'Reviewed pairs differ from the complete recomputed geometric proposal');
  if(scaled)check(same(raw.scaleInterval,checked.scaleInterval),'Reviewed scale interval differs from the complete recomputed geometric proposal');
+ if(extras)check(same(raw.unmatchedObservationIds,checked.unmatchedObservationIds),'Unmatched observed points differ from complete recomputed evidence');
  if(axis)check(same(raw.axisSupport,checked.axisSupport),'Reviewed axis support differs from the complete recomputed geometric proposal');return checked;
 }
 export function reviewedSpatialMappingForSources(raw,reference,observation){

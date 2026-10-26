@@ -1,6 +1,6 @@
-import {inspectSpatialCorrespondence,createReviewedSpatialMapping,importReviewedSpatialMapping,REVIEWED_SPATIAL_MAPPING_FORMAT,REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT,REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT} from '../src/spatial-correspondence.mjs';
+import {inspectSpatialCorrespondence,createReviewedSpatialMapping,importReviewedSpatialMapping,REVIEWED_SPATIAL_MAPPING_FORMAT,REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT,REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT,REVIEWED_INJECTIVE_SPATIAL_MAPPING_FORMAT} from '../src/spatial-correspondence.mjs';
 import {discoveryFromReviewedSpatialMapping} from '../src/relationship-discovery.mjs';
-const reviewedFormats=[REVIEWED_SPATIAL_MAPPING_FORMAT,REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT,REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT];
+const reviewedFormats=[REVIEWED_SPATIAL_MAPPING_FORMAT,REVIEWED_SCALED_SPATIAL_MAPPING_FORMAT,REVIEWED_AXIS_SPATIAL_MAPPING_FORMAT,REVIEWED_INJECTIVE_SPATIAL_MAPPING_FORMAT];
 self.onmessage=({data})=>{
  try{
   let value;
