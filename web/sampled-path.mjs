@@ -1,3 +1,4 @@
+import {mountDwellProposals} from '/web/path-dwell.mjs';
 import {showPathCircle,clearPathCircle} from '/web/path-circle-view.mjs';
 import {showPathAxis} from '/web/path-axis-view.mjs';
 import {proposePathSummary} from '/src/path-summary.mjs';
@@ -8,8 +9,9 @@ import {releaseSequenceAssets,makeSequenceBundle} from '/web/sequence-input.mjs'
 const $=id=>document.getElementById(id),el=(tag,value)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=value;return n;};
 let source=null,accepted=null,revision=0,assets=new Map();
 const status=message=>{$('status').textContent=message;};
-function invalidate(){revision++;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;status('Declarations changed. Inspect selected samples to recompute.');}
+function invalidate(){dwell.clear();revision++;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;status('Declarations changed. Inspect selected samples to recompute.');}
 function sourceForm(sequence,study=null){
+ dwell.clear();
  source=sequence;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;$('editor').hidden=false;$('source-name').textContent=sequence.title;
  $('point-label').value=study?.label??'';$('reference-label').value=study?.reference.label??'';$('reference-basis').value=study?.reference.basis??'';$('reference-confirm').checked=study?.reference.samePlaneAndCorners??false;
  $('samples').replaceChildren();
@@ -31,6 +33,7 @@ function sourceForm(sequence,study=null){
 function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const mm=x=>x===null?'Unavailable':`${x!==0&&Math.abs(x)<.0005?x.toExponential(6):x.toFixed(3)} mm`;
 function show(study){
+ dwell.clear();
  $('result').querySelector('[data-path-returns]')?.remove();
  const returnSection=mountPathReturns($('result'),study,id=>{
   if(accepted!==study)return;
@@ -95,3 +98,8 @@ $('infer-axis').addEventListener('click',()=>{if(!accepted)return;try{showPathAx
 
 
 $('infer-circle').addEventListener('click',()=>{if(!accepted)return;try{showPathCircle($('circle-result'),accepted,assets);status('Circular reference recomputed from original selected samples. Inspect residuals and held-out sensitivity; this is not a physical rotation claim.');}catch(error){clearPathCircle($('circle-result'));status(error.message);}});
+
+const dwell=mountDwellProposals($('result'),()=>accepted,id=>{
+ const row=[...$('samples').children].find(r=>r.dataset.moment===id);
+ if(row){row.scrollIntoView({block:'center'});row.querySelector('.mark').focus({preventScroll:true});}
+});
