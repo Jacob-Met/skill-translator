@@ -1,0 +1,66 @@
+{
+  "result": "PASS",
+  "tests": [
+    "One producer sequence and3 original PNGs reaches automatic pair inference:25mm repeatable distance,2 component contradictions, no per-frame annotation export or pair entry",
+    "Portable export retains complete original sequence+PNG bytes and declarations; no derived answers",
+    "New original annotation changes the received hypothesis to contradicted without accepting saved derived state",
+    "Fresh complete replay recomputes result; wrong original PNG refuses without replacing accepted source",
+    "Uncalibrated moment is named as excluded from inference while its original PNG remains in portable source",
+    "Later declaration edit retires an unfinished source import",
+    "Exploratory range edits preserve original source and update saved declarations",
+    "Maximum-length uninterrupted reference basis wraps without390px horizontal overflow",
+    "390px keyboard receiving has no horizontal overflow",
+    "Discovered source pair reaches maintained comparison; required original PNG pairing succeeds and all actual placements remain empty",
+    "Ordinary Practice UI retains incomplete first round then two independent actual placements; ordinary pair intake compares fixed/adapted disagreement while keeping failed point scores and missing historical round"
+  ],
+  "errors": [],
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-26T05:22:07.796Z",
+    "completedAt": "2026-10-26T05:22:07.879Z",
+    "durationMs": 82.35323600000004,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "343A5C98C6F07D1F8275873C80494D49",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "03340458CC613DB35652399BDE8D0E8C"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  }
+}

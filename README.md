@@ -457,3 +457,7 @@ Open **Audit omitted demonstrations** from Workpiece Response, or visit `/respon
 Save the original study and reopen it to recompute the audit. Invalid or late imports preserve accepted work. The authored three-size control shows independent width, height and mixed changes; it is not a physical measurement. This is retrospective model sensitivity, not an independent validation study, bad-measurement detector or learning score. Repeated and correlated evidence can appear reassuring, and the original source point is never held out. No measurements are removed or ranked.
 
 Verification: `node --test --test-isolation=none test/response-holdout.test.mjs`. The consumer uses the maintained response-family and pinned CHRONOS exact arithmetic; it does not replace either solver.
+
+## Discover points that move together
+
+Relationship Discovery now proposes complete multi-point shared-motion groups from the retained original annotations, highlighting each alternative in the original sequence frames. No group labels are required. The existing source-only save/reopen path recomputes the groups; overlapping, missing and unsupported geometry stays visible. See [shared motion groups](docs/SHARED_MOTION_GROUPS.md) for the fitted-model meaning, receiving and limits.

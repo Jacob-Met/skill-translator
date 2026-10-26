@@ -3,3 +3,11 @@
 textarea{width:100%}
 
 #sequenceContext{overflow-wrap:anywhere}
+
+#motionSources{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.motion-source-card{border:1px solid #cad7ce;padding:14px;border-radius:8px;min-width:0;overflow-wrap:anywhere}
+.motion-source-card svg{width:100%;height:190px;background:#f7faf7}.motion-source-card h3{font-size:1rem}.motion-source-card p{margin:6px 0}
+#motionGroup,#motionSubset{width:100%}#motionSection p,#motionSection td{overflow-wrap:anywhere}
+.motion-table{overflow-x:auto;margin:16px 0}.motion-table table{border-collapse:collapse;min-width:540px;width:100%}
+.motion-table th,.motion-table td{padding:8px;text-align:left;border-bottom:1px solid #cad7ce}.motion-table caption{text-align:left;font-size:.9rem}
+#motionLimits{font-size:.9rem;color:#3b5c4b}

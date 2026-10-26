@@ -1,0 +1,62 @@
+{
+  "result": "PASS",
+  "tests": [
+    "Ordinary sequence navigation + three original PNGs + retained annotations infer two full moving groups from57 point sets; zero group labels supplied; selected groups highlight all original frames and expose all source-pair fits.",
+    "Real browser download retains every original PNG, declaration and annotation; a fresh page recomputes identical groups without stored verdicts.",
+    "Changed original geometry and PNG removes the first three-point motion explanation while retaining the unaffected second group.",
+    "Wrong original PNG is rejected without replacing accepted groups or source evidence.",
+    "Grouping capacity refuses the whole calculation while all234 ordinary pair relationships remain available.",
+    "An explicitly looser original threshold recomputes a six-point explanation; it does not conceal the fitted residuals.",
+    "390px source inspection and keyboard group selection preserve original frames without page-wide horizontal overflow."
+  ],
+  "errors": [],
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-26T05:23:16.871Z",
+    "completedAt": "2026-10-26T05:23:16.964Z",
+    "durationMs": 92.59444300000001,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "6AFA43A8360165586C10D844A31C5FBE",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "54D606B5EA428BD581BDBFD1014DE0B4"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  }
+}
