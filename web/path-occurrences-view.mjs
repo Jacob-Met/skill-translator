@@ -1,23 +1,28 @@
 import {importPathComparison} from '/src/path-comparison.mjs';
-import {inspectPathOccurrences,createPathOccurrenceStudy,importPathOccurrenceStudy,MAX_OCCURRENCE_BYTES} from '/src/path-occurrences.mjs';
+import {inspectClosestPathOccurrences,createClosestPathStudy,importClosestPathStudy,PATH_CLOSEST_FORMAT,inspectPathOccurrences,createPathOccurrenceStudy,importPathOccurrenceStudy,MAX_OCCURRENCE_BYTES} from '/src/path-occurrences.mjs';
 import {makePathComparisonBundle,readPathComparisonBundle,MAX_COMPARISON_BUNDLE_BYTES} from '/web/path-comparison-input.mjs';
 import {releaseSequenceAssets} from '/web/sequence-input.mjs';
 const $=id=>document.getElementById(id),el=(tag,text)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
 const maxBundleBytes=MAX_COMPARISON_BUNDLE_BYTES+MAX_OCCURRENCE_BYTES+1024;
 const bundleFormat='skill-translator.path-occurrences-bundle/v1';
 export function mountPathOccurrences({context,receive,status}){
- let accepted=null,epoch=0;
- const clear=()=>{epoch++;accepted=null;$('occurrence-results').replaceChildren();$('occurrence-save').disabled=true;};
+ let accepted=null,closestAccepted=null,epoch=0;
+ const clearBound=()=>{epoch++;accepted=null;$('occurrence-results').replaceChildren();$('occurrence-save').disabled=true;};
+ const clearClosest=()=>{epoch++;closestAccepted=null;$('closest-results').replaceChildren();$('closest-save').disabled=true;};
+ const clear=()=>{clearBound();clearClosest();};
+ const inspect=study=>study.format===PATH_CLOSEST_FORMAT?inspectClosestPathOccurrences(study.comparison):inspectPathOccurrences(study.comparison,study.maxDistanceMm);
  function render(study,sources){
-  const finding=inspectPathOccurrences(study.comparison,study.maxDistanceMm),target=$('occurrence-results');
-  accepted={study,sources,finding};target.replaceChildren();target.dataset.status=finding.status;$('occurrence-save').disabled=false;
-  target.append(el('p',`${finding.occurrences.length} qualifying intervals among ${finding.candidateCount} complete candidate spans. ${finding.status.replaceAll('-',' ')}.`),el('p',finding.boundary));
+  const closest=study.format===PATH_CLOSEST_FORMAT,finding=inspect(study),target=$(closest?'closest-results':'occurrence-results'),intervals=closest?finding.closestIntervals:finding.occurrences;
+  if(closest)closestAccepted={study,sources,finding};else accepted={study,sources,finding};target.replaceChildren();target.dataset.status=finding.status;$(closest?'closest-save':'occurrence-save').disabled=false;
+  target.append(el('p',closest?`${intervals.length} equally closest intervals among ${finding.candidateCount} candidates; minimum largest paired separation: ${finding.minimumDistanceMm===null?'unavailable ('+finding.status.replaceAll('-',' ')+')':finding.minimumDistanceMm.toPrecision(6)+' mm'}. Nearest-only comparison: no acceptance or action match is established.`:`${intervals.length} qualifying intervals among ${finding.candidateCount} complete candidate spans. ${finding.status.replaceAll('-',' ')}.`));
+  if(closest){const limits=el('details');limits.append(el('summary','Scope and limits'),el('p',finding.boundary));target.append(limits);}else target.append(el('p',finding.boundary));
+  if(closest&&finding.intervalScores.length){const details=el('details'),list=el('ol');details.append(el('summary','Every original candidate span and its minimum discrepancy'));for(const row of finding.intervalScores)list.append(el('li',`B${row.startIndex+1}–B${row.endIndex+1}: ${row.minimumDistanceMm.toPrecision(6)} mm; ${row.alignmentCount} minimizing pairings`));details.append(list);target.append(details);}
   if(finding.missingSecondMomentIds.length)target.append(el('p',`Missing second-source samples split coverage: ${finding.missingSecondMomentIds.join(', ')}.`));
-  const choices=el('div'),witness=el('div');witness.id='occurrence-witness';target.append(choices,witness);
-  for(const occurrence of finding.occurrences){
+  const choices=el('div'),witness=el('div');witness.id=closest?'closest-witness':'occurrence-witness';target.append(choices,witness);
+  for(const occurrence of intervals){
    const button=el('button',`B${occurrence.startIndex+1}–B${occurrence.endIndex+1} · ${occurrence.startSeconds}–${occurrence.endSeconds} s · ${occurrence.alignmentCount} pairings`);button.type='button';
    button.addEventListener('click',()=>{
-    witness.replaceChildren();witness.append(el('p','One complete allowed pairing. This inspection does not adopt an action or alter either source.'));
+    witness.replaceChildren();witness.append(el('p',closest?'One complete minimizing pairing, shown on the original frames.':'One complete allowed pairing. This inspection does not adopt an action or alter either source.'));
     const pairs=el('div'),frames=el('div');frames.className='grid';witness.append(pairs,frames);
     for(const pair of occurrence.coupling){
      const inspect=el('button',`A${pair.firstIndex+1} ↔ B${pair.secondIndex+1} · ${pair.distanceMm.toPrecision(5)} mm`);inspect.type='button';
@@ -35,25 +40,28 @@ export function mountPathOccurrences({context,receive,status}){
    });choices.append(button);
   }
  }
- $('occurrence-bound').addEventListener('input',clear);
- $('occurrence-search').addEventListener('click',()=>{clear();try{const {comparison,sources}=context();const value=$('occurrence-bound').value;if(!value.trim())throw Error('Supply a nominal separation bound.');render(createPathOccurrenceStudy(comparison,Number(value)),sources);status('All complete candidate spans inspected. Select an interval to inspect its original paired frames.');}catch(error){status(error.message);}});
- $('occurrence-save').addEventListener('click',async()=>{
-  if(!accepted)return;const current=accepted,token=epoch,revision=context().revision;
-  try{const blob=await makePathComparisonBundle(current.study.comparison,current.sources);if(token!==epoch||revision!==context().revision||accepted!==current)return;
-   const raw={format:bundleFormat,study:current.study,comparisonBundle:JSON.parse(await blob.text())};if(token!==epoch||revision!==context().revision||accepted!==current)return;
-   const output=new Blob([JSON.stringify(raw)],{type:'application/json'});if(output.size>maxBundleBytes)throw Error('The complete occurrence bundle exceeds its source budget.');const url=URL.createObjectURL(output),a=el('a');a.href=url;a.download='demonstrated-path-occurrences.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ $('occurrence-bound').addEventListener('input',clearBound);
+ $('occurrence-search').addEventListener('click',()=>{clearBound();try{const {comparison,sources}=context();const value=$('occurrence-bound').value;if(!value.trim())throw Error('Supply a nominal separation bound.');render(createPathOccurrenceStudy(comparison,Number(value)),sources);status('All complete candidate spans inspected. Select an interval to inspect its original paired frames.');}catch(error){status(error.message);}});
+ $('closest-search').addEventListener('click',()=>{clearClosest();try{const {comparison,sources}=context();render(createClosestPathStudy(comparison),sources);status('Closest sampled spans inspected without a bound. The separate explicit-bound result is unchanged.');}catch(error){status(error.message);}});
+ async function save(closest){
+  const current=closest?closestAccepted:accepted;if(!current)return;const token=epoch,revision=context().revision;const live=()=>token===epoch&&revision===context().revision&&(closest?closestAccepted:accepted)===current;
+  try{const blob=await makePathComparisonBundle(current.study.comparison,current.sources);if(!live())return;
+   const raw={format:bundleFormat,study:current.study,comparisonBundle:JSON.parse(await blob.text())};if(!live())return;
+   const output=new Blob([JSON.stringify(raw)],{type:'application/json'});if(output.size>maxBundleBytes)throw Error('The complete occurrence bundle exceeds its source budget.');const url=URL.createObjectURL(output),a=el('a');a.href=url;a.download=closest?'demonstrated-path-closest.json':'demonstrated-path-occurrences.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }catch(error){if(token===epoch)status(`Cannot save occurrences: ${error.message}`);}
- });
+ }
+ $('occurrence-save').addEventListener('click',()=>save(false));
+ $('closest-save').addEventListener('click',()=>save(true));
  $('occurrence-open').addEventListener('change',async()=>{
   const file=$('occurrence-open').files[0];$('occurrence-open').value='';if(!file)return;const token=++epoch,revision=context(false).revision;let received;
   status('Reading occurrence query. Previous accepted work is retained until both original sources pass admission.');
-  try{if(file.size>maxBundleBytes)throw Error('Keep the complete original-source occurrence bundle within its source budget.');const raw=JSON.parse(await file.text());if(raw.format!==bundleFormat)throw Error('Open a complete occurrence bundle.');const study=importPathOccurrenceStudy(raw.study);
+  try{if(file.size>maxBundleBytes)throw Error('Keep the complete original-source occurrence bundle within its source budget.');const raw=JSON.parse(await file.text());if(raw.format!==bundleFormat)throw Error('Open a complete occurrence bundle.');const study=raw.study?.format===PATH_CLOSEST_FORMAT?importClosestPathStudy(raw.study):importPathOccurrenceStudy(raw.study);
    received=await readPathComparisonBundle(new File([JSON.stringify(raw.comparisonBundle)],'comparison.json',{type:'application/json'}));
    importPathComparison(received.study,study.comparison.paths);
    if(received.study.declaration.basis!==study.comparison.declaration.basis)throw Error('The occurrence query must match the original cross-demonstration declaration.');
-   inspectPathOccurrences(study.comparison,study.maxDistanceMm);
+   inspect(study);
    if(token!==epoch||revision!==context(false).revision){for(const source of received.sources)releaseSequenceAssets(source.assets);return;}
-   receive(received);$('occurrence-bound').value=String(study.maxDistanceMm);render(study,received.sources);received=null;status('Original occurrence sources reopened and every finding recomputed.');
+   receive(received);if(study.format!==PATH_CLOSEST_FORMAT)$('occurrence-bound').value=String(study.maxDistanceMm);render(study,received.sources);received=null;status(study.format===PATH_CLOSEST_FORMAT?'Original closest-span sources reopened; nearest-only findings recomputed without an acceptance bound.':'Original occurrence sources reopened and every finding recomputed.');
   }catch(error){if(received)for(const source of received.sources)releaseSequenceAssets(source.assets);if(token===epoch)status(`Occurrence input refused: ${error.message} Previous accepted work is unchanged.`);}
  });
  return clear;
