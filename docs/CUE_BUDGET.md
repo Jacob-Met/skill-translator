@@ -59,6 +59,26 @@ Memoization keys retain the compatible examples, previously asked cues and
 remaining budget. No probabilities, average-case gain, answer likelihood,
 physical measurements or provider qualification are inferred.
 
+## Reusing analysis within one report
+
+Each budget report prepares a question-inspector session with a normalized study
+and, when supplied, normalized effort and availability declarations. Recursive
+budget states reuse that session's existing complete-plan memo. The maintained
+branch-admission and complete-plan solver remain the source of those results;
+the partial-budget objective and policy reconstruction are unchanged.
+
+The session belongs to one report. Separate calls re-admit their source and
+conditions, with no cross-request cache. Session reports are detached from the
+memo and admitted plan, so changing a returned report cannot affect subsequent
+inspections. Rejected readings do not alter the session's admitted evidence.
+
+This preserves the complete output contract, including normalization and
+refusals, unknown-compatible branches, tied choices, branch continuations and
+`statesExamined`. The reuse tests exercise session isolation and recovery after
+invalid readings. See the [qualification receipt](receipts/cue-budget-reuse-20261026/README.md)
+for exact-output comparisons, measured API and CLI results, tested inputs and
+the limits of those measurements.
+
 ## Verification
 
 `node --test test/cue-budget.test.mjs test/cue-questions.test.mjs` compares the
@@ -109,3 +129,4 @@ sparse-threshold checks, portable v2 replay and actual CLI continuation/refusals
 These remain authored software evidence, not measurements of human effort or
 physical skill. The CLI continues to analyze source metadata; original PNG
 admission belongs to the browser's existing complete-bundle reader.
+

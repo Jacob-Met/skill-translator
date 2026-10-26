@@ -1,0 +1,177 @@
+{
+  "baseline": {
+    "commit": "17e649cbf6aa3e8b73b6a763be558ea8291ea192",
+    "tree": "9e9da8be4ea6fd84785d1e5f9c69cf14f0180a44",
+    "files": [
+      {
+        "path": "src/cue-budget.mjs",
+        "sha": "c3cbaaef6de7c695164b3cfa213f2888a8e2f330"
+      },
+      {
+        "path": "src/cue-questions.mjs",
+        "sha": "a9a5b255478187572a14b5074c741fbcc6eb769f"
+      },
+      {
+        "path": "src/cue-sufficiency.mjs",
+        "sha": "10d2d727734f89e3d36ba7cb7f3f379d484cf1a5"
+      },
+      {
+        "path": "src/decision-comparison.mjs",
+        "sha": "c9b3df510934428cc1e72bf18207e3cbde438b20"
+      },
+      {
+        "path": "src/decision-practice.mjs",
+        "sha": "5e7d040eb72a9bab753beccc0ff151187daaeb99"
+      },
+      {
+        "path": "src/demonstration-sequence.mjs",
+        "sha": "3030edd3ad809cab11fc220365aacb34e2d01b42"
+      },
+      {
+        "path": "src/frame-origin.mjs",
+        "sha": "9154d9e63255de95152e3137d5790de5e9f00e42"
+      },
+      {
+        "path": "src/geometry.mjs",
+        "sha": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061"
+      },
+      {
+        "path": "src/capture.mjs",
+        "sha": "763d09298e03c4275b802c83df92c773de62cd67"
+      },
+      {
+        "path": "src/sequence-capture.mjs",
+        "sha": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b"
+      },
+      {
+        "path": "src/capture-editing.mjs",
+        "sha": "570ee1ac63928e5837920288243e8ea7621936c9"
+      },
+      {
+        "path": "src/authoring.mjs",
+        "sha": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5"
+      },
+      {
+        "path": "test/cue-budget-fixture.mjs",
+        "sha": "80abda4255e479bb1a0ef51f09c6d47d7ea9bd9a"
+      },
+      {
+        "path": "test/cue-budget.test.mjs",
+        "sha": "a39dda6685ad4dc6fdf912bdf36d12b496448c8c"
+      },
+      {
+        "path": "test/cue-budget-effort.test.mjs",
+        "sha": "513097dd94733a0717264aa387bfffe8503957a6"
+      },
+      {
+        "path": "test/cue-questions.test.mjs",
+        "sha": "c1532e94b24349c783a223875c023486af02976a"
+      },
+      {
+        "path": "tools/inspect-cue-budget.mjs",
+        "sha": "35a1daacf5f0e8369ae164ee44f022733b668848"
+      },
+      {
+        "path": "package.json",
+        "sha": "606f8d32d75315976559fbe14469b9405cd91175"
+      }
+    ]
+  },
+  "candidate": [
+    {
+      "path": "src/cue-budget.mjs",
+      "gitBlob": "db872c7aad8734f3cb830ef912788c7f5618e5eb",
+      "sha256": "323aaa273253bcd45c3a14de7eeb12decc79ef769d43f601434e1ad9ce8901e9"
+    },
+    {
+      "path": "src/cue-questions.mjs",
+      "gitBlob": "03b1000459c83847e64f905f8cfb413012cad25d",
+      "sha256": "91fd2a46b52bc312fe9f8b8b22cc1677c6e61a8fbc3e088608591019a461dc79"
+    },
+    {
+      "path": "src/cue-sufficiency.mjs",
+      "gitBlob": "10d2d727734f89e3d36ba7cb7f3f379d484cf1a5",
+      "sha256": "d5e14e92cbbbfd7e7e8ec38cda1d80582988e8919bbe4868f078a20771cbc4df"
+    },
+    {
+      "path": "src/decision-comparison.mjs",
+      "gitBlob": "c9b3df510934428cc1e72bf18207e3cbde438b20",
+      "sha256": "203bd02df56190dc4cf70191e82d45db87eac2f475358c60ea25e0a77036d23c"
+    },
+    {
+      "path": "src/decision-practice.mjs",
+      "gitBlob": "5e7d040eb72a9bab753beccc0ff151187daaeb99",
+      "sha256": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f"
+    },
+    {
+      "path": "src/demonstration-sequence.mjs",
+      "gitBlob": "3030edd3ad809cab11fc220365aacb34e2d01b42",
+      "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52"
+    },
+    {
+      "path": "src/frame-origin.mjs",
+      "gitBlob": "9154d9e63255de95152e3137d5790de5e9f00e42",
+      "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf"
+    },
+    {
+      "path": "src/geometry.mjs",
+      "gitBlob": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061",
+      "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8"
+    },
+    {
+      "path": "src/capture.mjs",
+      "gitBlob": "763d09298e03c4275b802c83df92c773de62cd67",
+      "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c"
+    },
+    {
+      "path": "src/sequence-capture.mjs",
+      "gitBlob": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b",
+      "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb"
+    },
+    {
+      "path": "src/capture-editing.mjs",
+      "gitBlob": "570ee1ac63928e5837920288243e8ea7621936c9",
+      "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06"
+    },
+    {
+      "path": "src/authoring.mjs",
+      "gitBlob": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5",
+      "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e"
+    },
+    {
+      "path": "test/cue-budget-fixture.mjs",
+      "gitBlob": "80abda4255e479bb1a0ef51f09c6d47d7ea9bd9a",
+      "sha256": "a14cba391d6bde13a68bbd61a17f55a91f10e533fca0a60b198a41781b222354"
+    },
+    {
+      "path": "test/cue-budget.test.mjs",
+      "gitBlob": "a39dda6685ad4dc6fdf912bdf36d12b496448c8c",
+      "sha256": "9caf227dbf8ef710e8144f5373ca8f37867786e1487368075947c4fae453e3ef"
+    },
+    {
+      "path": "test/cue-budget-effort.test.mjs",
+      "gitBlob": "513097dd94733a0717264aa387bfffe8503957a6",
+      "sha256": "881389d3bf7c183ba3cd1c4c8a93dd9a0d1f59e959cf9defbf005f1bb6e8f65c"
+    },
+    {
+      "path": "test/cue-questions.test.mjs",
+      "gitBlob": "c1532e94b24349c783a223875c023486af02976a",
+      "sha256": "edc4034059b423a62bd5adfa4932657c1b77ab23daddddb8ec1f52c67b715305"
+    },
+    {
+      "path": "tools/inspect-cue-budget.mjs",
+      "gitBlob": "35a1daacf5f0e8369ae164ee44f022733b668848",
+      "sha256": "efc0df2177fa2037b7b52972d70fc64794be86f67cdad16443e411f8e1e00883"
+    },
+    {
+      "path": "package.json",
+      "gitBlob": "606f8d32d75315976559fbe14469b9405cd91175",
+      "sha256": "1ae464b0142254deedca00d691d201f44945f5bf57d9b7951ab9aa7386261aa5"
+    },
+    {
+      "path": "test/cue-question-session.test.mjs",
+      "gitBlob": "09c5fa2f2586fae919e17b37960dfa7c408127de",
+      "sha256": "e68ac128fdcc239a7eb7bef665de6a5cb30e075df66ce9a3a2d71bfc3fd5802b"
+    }
+  ]
+}

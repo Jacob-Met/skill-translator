@@ -1,0 +1,260 @@
+{
+  "node": "v22.23.4",
+  "platform": "linux",
+  "arch": "x64",
+  "repo": "/home/ubuntu/hamon-work/hamon-8d9f7f-20261026/candidate-v1",
+  "repeats": 1,
+  "timeoutMs": 15000,
+  "reference": "/home/ubuntu/hamon-work/hamon-8d9f7f-20261026/baseline-final",
+  "sourceSha256": {
+    "src/cue-budget.mjs": "323aaa273253bcd45c3a14de7eeb12decc79ef769d43f601434e1ad9ce8901e9",
+    "src/cue-questions.mjs": "91fd2a46b52bc312fe9f8b8b22cc1677c6e61a8fbc3e088608591019a461dc79",
+    "src/cue-sufficiency.mjs": "d5e14e92cbbbfd7e7e8ec38cda1d80582988e8919bbe4868f078a20771cbc4df",
+    "test/cue-budget-fixture.mjs": "a14cba391d6bde13a68bbd61a17f55a91f10e533fca0a60b198a41781b222354",
+    "tools/inspect-cue-budget.mjs": "efc0df2177fa2037b7b52972d70fc64794be86f67cdad16443e411f8e1e00883"
+  },
+  "caseInputSha256": {
+    "known-6x8-unit8": "2a524fc115f48a09bb6f60ae3f78e0600f4a99c3605037a8f90c9987574773cc",
+    "overlap-6x8-unit8": "f3bcc53df3fee27aa0e4ab81d4405ea6137f34dd3b9314b9b514125229be94d5",
+    "overlap-6x8-effort8000": "a15c798320f962311e3e94f26551ce46fc621d06ec668a24a17a07b7ad25f5a2",
+    "changed-effort-partial": "510a6e5aa858f00a1e36193bdaaeec5630097fbc632615fed2c76423d9c24fd5",
+    "unavailable-historical": "f719feef0407e64f3188554d0d194472e5c88bf020bccb755dc77b409cae20e8",
+    "unknown-decision": "ee006a4b78d3019064a198181cfe6cb379c2718eafe52dc54bc31a90be911631",
+    "outside-evidence": "6759972f1b70bfbf6fb9e6d8fdc3d1626bf73ee04c130031d90e5c96821b39ee",
+    "unit-grid": "c67f640e882e1655d091721423323c36eb4cca36cfe64018ffd2af214a94fe53",
+    "effort-grid": "187a62d2bd8eeeab322b2c44c4b9861b9a84bc53d2cd5b087f50e2ce08c6935f"
+  },
+  "checks": [
+    {
+      "name": "known-6x8-unit8.api.0",
+      "wallMs": 72.077932,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 31.389573,
+      "cpuUsed": {
+        "user": 39514,
+        "system": 2902
+      },
+      "maxRSSKiB": 66840,
+      "outputSha256": "f4f570c00cce26617c7de2d905a8a936341186f44e9af53ed34af8ca5ec09527",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "f4f570c00cce26617c7de2d905a8a936341186f44e9af53ed34af8ca5ec09527"
+    },
+    {
+      "name": "overlap-6x8-unit8.api.0",
+      "wallMs": 98.024414,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 48.678557,
+      "cpuUsed": {
+        "user": 81959,
+        "system": 8204
+      },
+      "maxRSSKiB": 76472,
+      "outputSha256": "aae2035b1a9ea20a3a801417ae33ef03946553663fa24f1548cb1b4d3a6791d5",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "aae2035b1a9ea20a3a801417ae33ef03946553663fa24f1548cb1b4d3a6791d5"
+    },
+    {
+      "name": "overlap-6x8-effort8000.api.0",
+      "wallMs": 198.518524,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 163.49715899999998,
+      "cpuUsed": {
+        "user": 277132,
+        "system": 32684
+      },
+      "maxRSSKiB": 108460,
+      "outputSha256": "cf1529e4aae82d92098746bebcf7e6b116dae34ed7c4dbdc909f21e74ad13837",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "cf1529e4aae82d92098746bebcf7e6b116dae34ed7c4dbdc909f21e74ad13837"
+    },
+    {
+      "name": "changed-effort-partial.api.0",
+      "wallMs": 60.637906999999984,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 25.245625,
+      "cpuUsed": {
+        "user": 37715,
+        "system": 8727
+      },
+      "maxRSSKiB": 69832,
+      "outputSha256": "da98a30454274d37cde1bab4ccfe8170e98471871afb206ba6fbef029ecc14f8",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "da98a30454274d37cde1bab4ccfe8170e98471871afb206ba6fbef029ecc14f8"
+    },
+    {
+      "name": "unavailable-historical.api.0",
+      "wallMs": 45.207115999999985,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 10.479758000000004,
+      "cpuUsed": {
+        "user": 11648,
+        "system": 0
+      },
+      "maxRSSKiB": 59364,
+      "outputSha256": "19eb41b847bc166adb19152a5713a80f96f99d3fb091c287e00a3dfde72a5b1d",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "19eb41b847bc166adb19152a5713a80f96f99d3fb091c287e00a3dfde72a5b1d"
+    },
+    {
+      "name": "unknown-decision.api.0",
+      "wallMs": 37.29562699999997,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 2.203443,
+      "cpuUsed": {
+        "user": 1224,
+        "system": 979
+      },
+      "maxRSSKiB": 56524,
+      "outputSha256": "977213d74c414c2e918307ef452f7aae48038745af8f895984b6ae3df9598ea7",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "977213d74c414c2e918307ef452f7aae48038745af8f895984b6ae3df9598ea7"
+    },
+    {
+      "name": "outside-evidence.api.0",
+      "wallMs": 33.137848000000076,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 1.7691909999999993,
+      "cpuUsed": {
+        "user": 1377,
+        "system": 394
+      },
+      "maxRSSKiB": 56168,
+      "outputSha256": "dc50fd3685c335d1756ecd49c6b71490ce665ccaafa65338cec45a975ba13ad5",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "dc50fd3685c335d1756ecd49c6b71490ce665ccaafa65338cec45a975ba13ad5"
+    },
+    {
+      "name": "unit-grid.api.0",
+      "wallMs": 35.32827899999995,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 2.915809999999997,
+      "cpuUsed": {
+        "user": 2916,
+        "system": 0
+      },
+      "maxRSSKiB": 56524,
+      "outputSha256": "ad651137215d0af80a8a72d5f1f50cf3d2c0b372ddb384a7c64b0b2d45bf5a95",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "ad651137215d0af80a8a72d5f1f50cf3d2c0b372ddb384a7c64b0b2d45bf5a95"
+    },
+    {
+      "name": "unit-grid.cli-create",
+      "wallMs": 31.841205999999943,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "apiParity": "exact-raw-equality",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "ad651137215d0af80a8a72d5f1f50cf3d2c0b372ddb384a7c64b0b2d45bf5a95"
+    },
+    {
+      "name": "unit-grid.cli-reopen",
+      "wallMs": 29.59866599999998,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true
+    },
+    {
+      "name": "unit-grid.cli-continue",
+      "wallMs": 31.07027199999993,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "facb7c8555ff15e6eeb24aec053afdd47dbbff35fc0017f774363f66222bc588"
+    },
+    {
+      "name": "unit-grid.cli-refuse-changed",
+      "wallMs": 31.21227799999997,
+      "exitCode": 1,
+      "signal": null,
+      "error": null,
+      "completed": true
+    },
+    {
+      "name": "effort-grid.api.0",
+      "wallMs": 34.30374999999992,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "elapsedMs": 3.2962290000000003,
+      "cpuUsed": {
+        "user": 3297,
+        "system": 0
+      },
+      "maxRSSKiB": 56680,
+      "outputSha256": "83578c274e1091253a9cd552c225b9bc3bad9d2f910f8476ac87e5e687f6fed2",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "83578c274e1091253a9cd552c225b9bc3bad9d2f910f8476ac87e5e687f6fed2"
+    },
+    {
+      "name": "effort-grid.cli-create",
+      "wallMs": 30.11454200000003,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "apiParity": "exact-raw-equality",
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "83578c274e1091253a9cd552c225b9bc3bad9d2f910f8476ac87e5e687f6fed2"
+    },
+    {
+      "name": "effort-grid.cli-reopen",
+      "wallMs": 30.12089900000001,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true
+    },
+    {
+      "name": "effort-grid.cli-continue",
+      "wallMs": 32.69235800000001,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "completed": true,
+      "referenceStatus": "exact-raw-equality",
+      "referenceSha256": "3cded29fce2ab63b02d2eb87da4e6c0c8f0e6968182d3be7c913f347700545f0"
+    },
+    {
+      "name": "effort-grid.cli-refuse-changed",
+      "wallMs": 31.407444000000055,
+      "exitCode": 1,
+      "signal": null,
+      "error": null,
+      "completed": true
+    }
+  ],
+  "startedAt": "2026-10-26T22:09:16.279Z",
+  "finishedAt": "2026-10-26T22:09:17.164Z",
+  "completed": true,
+  "exactReferenceParity": true
+}
