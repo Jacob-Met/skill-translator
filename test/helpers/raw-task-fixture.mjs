@@ -1,0 +1,6 @@
+import {createRawTask} from '../../src/raw-task-proposals.mjs';
+import {RESPONSE_SCHEMA} from '../../src/response-family.mjs';
+import {DEMONSTRATION_RESPONSE_SCHEMA} from '../../src/response-demonstrations.mjs';
+export const source=()=>({title:'Authored three-mark task',provenance:'Analytic authored control; no physical skill evidence',source:{widthMm:100,heightMm:80,corners:[{x:0,y:0},{x:100,y:0},{x:100,y:80},{x:0,y:80}]},landmarks:[['guide',20,30],['index',35,25],['center',50,40]].map(([id,x,y])=>({id,label:id,kind:'fraction',sourcePx:{x,y},toleranceMm:1}))});
+export const rawAccount=(id,x,y)=>({schema:DEMONSTRATION_RESPONSE_SCHEMA,referenceStudy:{schema:RESPONSE_SCHEMA,source:source(),landmarkId:id,coefficientLimit:2,observations:[],target:{widthMm:273,heightMm:119}},demonstrations:[{id:'separate',label:'Independently authored second workpiece',evidenceClass:'authored-example',annotation:{...source(),source:{widthMm:200,heightMm:160,corners:[{x:0,y:0},{x:200,y:0},{x:200,y:160},{x:0,y:160}]},landmarks:[{id:'observed',label:'Observed',kind:'fraction',sourcePx:{x,y},toleranceMm:1}]},landmarkId:'observed',correspondenceConfirmed:true,xBoundMm:.1,yBoundMm:.1}]});
+export const mixed=()=>createRawTask([rawAccount('guide',20,60),rawAccount('index',70,25),rawAccount('center',100,80)],{widthMm:273,heightMm:119});
