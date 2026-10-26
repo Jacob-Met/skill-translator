@@ -114,3 +114,48 @@ seeded native-decoded sine/noise course. Its complete original WAVs, reports,
 predeclared specifications and results include adverse controls. These authored
 signals do not establish real-task event accuracy, human audibility or teaching
 benefit.
+
+
+## Optional Opus decoder clock profile
+
+The native preparation control defaults to the existing strict timestamp check.
+An explicit **Opus 1ms · exact decoder replay** choice admits only original
+48kHz mono/stereo Opus with `1/1000` time base under FFmpeg and FFprobe
+`6.1.1-3ubuntu5`. The profile identifier is
+`ffmpeg-6.1.1-opus-millisecond/v1`. Other versions and formats remain unavailable
+under this profile. The native API receives this choice in `x-audio-clock`;
+programmatic `prepareAudioActivity` accepts `clockProfile` with that identifier.
+The existing CLI and omitted option retain strict preparation.
+
+FFmpeg applies stateful `av_rescale_delta` before audio reaches filters. An
+original frame declared at14ms can have a decoder sample position648 at48kHz
+(13.5ms). The profile replays that exact bounded integer operation for every
+frame, including its forward-gap reset, and requires exact sample position,
+count, rate, channel and frame-order agreement. It also binds the retained
+original probe's selected stream and every original frame to the report.
+A larger timestamp tolerance is not used.
+
+Original frame PTS, original gaps and the existing source-window calculation
+remain unchanged. The filter sample clock stays in `decoder.filterFrames`;
+`decoder.clockEvidence` is a receipt, and the browser recomputes the profile
+from retained original and decoder ledgers. The visible clock notice identifies
+1ms source ticks and explicitly withholds sub-tick physical timing and browser
+alignment. A fresh browser still requires the original clip and an explicit
+origin declaration; saved navigation retains the complete raw report and
+recomputes the same clock check on reopening. A saved profile does not change
+the next preparation selector's default.
+
+The model is derived from FFmpeg tag n6.1.1:
+
+- `fftools/ffmpeg_dec.c`, `audio_ts_process` and `audio_samplerate_update`, blob
+  `fcee8b65acc53d4b91c612f5dda37ca9dbf02803`.
+- `libavutil/mathematics.c`, `av_rescale_delta`, blob
+  `61aeb7c0292865b6a46bf3f22f688415812ba128`.
+- `fftools/ffprobe.c`, original frame timestamp output, blob
+  `71f6cc3a74e956887c1ceed7b97984ed406dd185`.
+
+`test/audio-decoder-clock.test.mjs` uses authored original WAV→Opus files to
+exercise default refusal, explicit native preparation, exact raw reopening,
+a retained real gap, negative origin arithmetic and adverse ledger edits.
+It does not authenticate a supplied report's decoding independently, establish
+physical event meaning, or infer an origin from the first audio sample.

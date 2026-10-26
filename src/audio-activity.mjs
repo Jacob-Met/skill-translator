@@ -1,3 +1,4 @@
+import {OPUS_CLOCK_PROFILE,verifyOpusClock} from './audio-decoder-clock.mjs';
 import {findAudioContrasts} from './audio-contrast.mjs';
 export const AUDIO_ACTIVITY_FORMAT='skill-translator.audio-activity/v1';
 export const AUDIO_SETTINGS=Object.freeze({windowMilliseconds:20,enterRms:.05,exitRms:.025,minimumWindows:2});
@@ -28,6 +29,7 @@ export async function analyzeAudioActivity(raw){
  if(!raw.decoder||typeof raw.decoder!=='object'||Array.isArray(raw.decoder)||JSON.stringify(raw.decoder).length>2_000_000)fail('Retain bounded native decoder provenance.');
  closed(raw.pcm,['encoding','sha256','base64'],'PCM');if(raw.pcm.encoding!=='f32le-interleaved'||!hash(raw.pcm.sha256))fail('Retain packed little-endian float PCM identity.');const bytes=pcmBytes(raw.pcm.base64);if(bytes.length>MAX_SAMPLES*4||bytes.length%(4*channels)||!bytes.length)fail('PCM byte count is outside the complete work bound.');if(await digest(bytes)!==raw.pcm.sha256)fail('PCM hash mismatch.');
  if(!Array.isArray(raw.frames)||!raw.frames.length||raw.frames.length>MAX_FRAMES)fail('Retain1..20000 complete decoded frames.');
+ const clock=raw.decoder.clockProfile===undefined?null:(raw.decoder.clockProfile===OPUS_CLOCK_PROFILE?verifyOpusClock(raw):fail('Unsupported decoder clock profile.'));
  const segments=[],gaps=[];let total=0,previousEnd=null,segment=null;
  for(const f of raw.frames){closed(f,['pts','samples'],'Decoded frame');const pts=signedInteger(f.pts,'Frame PTS'),samples=integer(f.samples,1,1000000,'Frame samples'),start=q(pts*tb[0],tb[1]),end=add(start,q(BigInt(samples),BigInt(rate)));if(Math.abs(seconds(start))>86400||Math.abs(seconds(end))>86400)fail('Decoded timestamps exceed the bounded profile.');
   const order=previousEnd===null?1:cmp(start,previousEnd);if(order<0)fail('Decoded frame intervals overlap or run backwards; this timestamp profile is unavailable.');
@@ -51,7 +53,7 @@ export async function analyzeAudioActivity(raw){
   finish();const remainder=s.samples-count*windowSamples;
   if(remainder)partials.push({segment:si,samples:remainder,start:point(add(s.start,q(BigInt(count*windowSamples),BigInt(rate)))),end:point(add(s.start,q(BigInt(s.samples),BigInt(rate))))});
  }
- return {format:AUDIO_ACTIVITY_FORMAT,source:structuredClone(raw.source),stream:structuredClone(raw.stream),settings:{...AUDIO_SETTINGS},decodedSamplesPerChannel:total,decodedDurationSeconds:total/rate,coverage:segments.map((s,i)=>({segment:i,start:point(s.start),end:point(add(s.start,q(BigInt(s.samples),BigInt(rate)))),samples:s.samples})),gaps,partials,windows,events,contrasts:findAudioContrasts(windows,channels,segments.length),boundary:'Native decoded PCM and original integer timestamps are supplied source artifacts. Analysis recomputes their declared activity; it does not independently authenticate decoding, identify a physical event or establish browser clock alignment.'};
+ return {clock,format:AUDIO_ACTIVITY_FORMAT,source:structuredClone(raw.source),stream:structuredClone(raw.stream),settings:{...AUDIO_SETTINGS},decodedSamplesPerChannel:total,decodedDurationSeconds:total/rate,coverage:segments.map((s,i)=>({segment:i,start:point(s.start),end:point(add(s.start,q(BigInt(s.samples),BigInt(rate)))),samples:s.samples})),gaps,partials,windows,events,contrasts:findAudioContrasts(windows,channels,segments.length),boundary:'Native decoded PCM and original integer timestamps are supplied source artifacts. Analysis recomputes their declared activity; it does not independently authenticate decoding, identify a physical event or establish browser clock alignment.'};
 }
 export function mapAudioActivity(analysis,declaration,clip){
  closed(declaration,['sourceSha256','mediaOriginSeconds','basis'],'Media origin declaration');
