@@ -1,0 +1,278 @@
+{
+  "schema": "skill-translator-axis-correspondence-receiving/v1",
+  "baseCommit": "de5104b78ee433a357a945cd978a5bafd121f7cd",
+  "baseTree": "13506e818782fdf20178ea29e80a42afae93b145",
+  "sourceComposition": "Only the four new static routes transplanted onto current server; existing calibration, instrument, path and return-support routes retained.",
+  "independentReview": {
+    "agent": "Forge, distinct agent within team06e8c8f97eae; shared GitHub connector identity",
+    "scope": "Frozen 13-path mechanism review and 33 focused native tests",
+    "result": "No blocker"
+  },
+  "rootNative": {
+    "runtime": "Node22.23.4",
+    "tests": 45,
+    "failed": 0
+  },
+  "browser": {
+    "tests": [
+      "Actual original annotations with different IDs, inferred unequal scales, translation and order yield one complete mapping; semantic use remains unavailable until review",
+      "One semantic review flows into native discovery/v2 with all original IDs and mapping provenance, visible mapped diagrams and selection-conditioned distance support",
+      "Unequally stretched original IDs reach width-proportional hypothesis and source-only family review; fresh replay retains provenance without invented practice",
+      "Original actual placements and unchanged partial point scores survive the axis-mapped family consumer and fresh raw reopen",
+      "Reviewed raw replay recomputes mapping and preserves source category; malformed receiving retains accepted original work",
+      "Symmetry, finite state budget, unwitnessed numerical boundary and common-unique to axis-ambiguous inputs cannot authorize semantic adoption",
+      "Fresh straight-point source keeps unused reference-axis scale explicitly unbounded while resolving its asymmetric spacing",
+      "Actual heavy search runs off the UI thread; input retirement cancels it and an actual old reply cannot revive review",
+      "Unavailable worker refuses new admission and retains accepted source proposal without main-thread inference fallback",
+      "Fresh390px reload/reopen and keyboard review retain original IDs without horizontal overflow"
+    ],
+    "result": "PASS",
+    "sandbox": {
+      "schema": "hamon-chromium-sandbox/v1",
+      "qualification": "Linux Chromium status in the supplied isolated CDP page",
+      "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "startedAt": "2026-10-26T01:03:54.578Z",
+      "completedAt": "2026-10-26T01:03:54.646Z",
+      "durationMs": 68.537849,
+      "admitted": true,
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "target": {
+        "targetId": "013B96B9B0B9C0BB534A92EC425D1CAF",
+        "type": "page",
+        "title": "about:blank",
+        "url": "about:blank",
+        "attached": true,
+        "canAccessOpener": false,
+        "browserContextId": "E1D8BC307BDE8ED0E1A1FE4281372A20"
+      },
+      "url": "chrome://sandbox/",
+      "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+      "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+      "observation": {
+        "rows": {
+          "layer1": "Namespace",
+          "pid": "Yes",
+          "network": "Yes",
+          "seccomp": "Yes",
+          "tsync": "Yes"
+        },
+        "checks": {
+          "adequate": true,
+          "layer1": true,
+          "pid": true,
+          "network": true,
+          "seccomp": true,
+          "tsync": true
+        },
+        "populated": true,
+        "duplicates": [],
+        "active": true
+      },
+      "failure": null
+    }
+  },
+  "visualInspection": [
+    "desktop original-source proposal and exact mapping",
+    "actual family/practice fresh reopen",
+    "390px keyboard/review flow"
+  ],
+  "adverseReceiving": {
+    "initialDriverReport": {
+      "tests": [
+        "Actual original annotations with different IDs, inferred unequal scales, translation and order yield one complete mapping; semantic use remains unavailable until review",
+        "One semantic review flows into native discovery/v2 with all original IDs and mapping provenance, visible mapped diagrams and selection-conditioned distance support",
+        "Unequally stretched original IDs reach width-proportional hypothesis and source-only family review; fresh replay retains provenance without invented practice"
+      ],
+      "result": "FAIL",
+      "sandbox": {
+        "schema": "hamon-chromium-sandbox/v1",
+        "qualification": "Linux Chromium status in the supplied isolated CDP page",
+        "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "startedAt": "2026-10-26T00:58:39.030Z",
+        "completedAt": "2026-10-26T00:58:39.106Z",
+        "durationMs": 75.492322,
+        "admitted": true,
+        "browser": {
+          "protocolVersion": "1.3",
+          "product": "Chrome/156.0.8078.47",
+          "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "jsVersion": "15.6.75.19"
+        },
+        "target": {
+          "targetId": "E49D84303FC50EF94BB4F4DEA130BEFD",
+          "type": "page",
+          "title": "about:blank",
+          "url": "about:blank",
+          "attached": true,
+          "canAccessOpener": false,
+          "browserContextId": "43618BCF6EA2CEF1DED9C59D44A17431"
+        },
+        "url": "chrome://sandbox/",
+        "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+        "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+        "observation": {
+          "rows": {
+            "layer1": "Namespace",
+            "pid": "Yes",
+            "network": "Yes",
+            "seccomp": "Yes",
+            "tsync": "Yes"
+          },
+          "checks": {
+            "adequate": true,
+            "layer1": true,
+            "pid": true,
+            "network": true,
+            "seccomp": true,
+            "tsync": true
+          },
+          "populated": true,
+          "duplicates": [],
+          "active": true
+        },
+        "failure": null
+      }
+    },
+    "cause": "Page reload retired the download interception hook. Practice save succeeded but the driver waited for an uninstalled interception. Driver reinstalls the hook before save; production unchanged.",
+    "repairedDriverSha256": "203ea96da13c429364db9539ae415902305850117651fb77717d9c32f020ce61"
+  },
+  "limits": [
+    "Authored annotation originals qualify the mechanism and consumer, not physical calibration or semantic identity.",
+    "Positive reference-axis magnitudes inferred jointly with complete point bijection; signs and orientation are not inferred.",
+    "Complete outer possibility alone cannot authorize adoption: unique correspondence additionally requires a conservative inner witness.",
+    "Scale projections are correlated through a retained exact polygon, not an independent rectangle; an unused axis stays unbounded.",
+    "Selected pair distances are not independent validation of subsequently compared relationship families. Original actual-practice scores remain unchanged."
+  ],
+  "initialReceivedBase": "f6cd8f4106bfe262a03295eccf6403629ce7b277",
+  "concurrentDelta": "Composed current sampled return-support alternative modules; no overlap with candidate paths or correspondence consumer dependencies.",
+  "previousBrowserJourneys": {
+    "fixed": {
+      "tests": [
+        "Actual original annotations with different IDs, rotation, translation and order yield one complete mapping; semantic use remains unavailable until review",
+        "One semantic review flows into native discovery/v2 with all original IDs and mapping provenance, visible mapped diagrams and selection-conditioned distance support",
+        "Mapped originals immediately reach maintained competing-family consumer without source rewriting",
+        "Reviewed raw replay recomputes mapping and preserves source category; malformed receiving retains accepted original work",
+        "Symmetry, incomplete budget and scaled geometry cannot become asserted correspondences or downstream success",
+        "Fresh390px reload/reopen and keyboard review retain original IDs without horizontal overflow"
+      ],
+      "result": "PASS",
+      "sandbox": {
+        "schema": "hamon-chromium-sandbox/v1",
+        "qualification": "Linux Chromium status in the supplied isolated CDP page",
+        "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "startedAt": "2026-10-26T01:03:44.181Z",
+        "completedAt": "2026-10-26T01:03:44.259Z",
+        "durationMs": 78.537622,
+        "admitted": true,
+        "browser": {
+          "protocolVersion": "1.3",
+          "product": "Chrome/156.0.8078.47",
+          "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "jsVersion": "15.6.75.19"
+        },
+        "target": {
+          "targetId": "6F1C04422367A520DE8ADABC39038B87",
+          "type": "page",
+          "title": "about:blank",
+          "url": "about:blank",
+          "attached": true,
+          "canAccessOpener": false,
+          "browserContextId": "FDCEC8ADFCADD1FB487CE96D488C1A34"
+        },
+        "url": "chrome://sandbox/",
+        "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+        "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+        "observation": {
+          "rows": {
+            "layer1": "Namespace",
+            "pid": "Yes",
+            "network": "Yes",
+            "seccomp": "Yes",
+            "tsync": "Yes"
+          },
+          "checks": {
+            "adequate": true,
+            "layer1": true,
+            "pid": true,
+            "network": true,
+            "seccomp": true,
+            "tsync": true
+          },
+          "populated": true,
+          "duplicates": [],
+          "active": true
+        },
+        "failure": null
+      }
+    },
+    "scaled": {
+      "tests": [
+        "Actual original annotations with different IDs, inferred scale, rotation, translation and order yield one complete mapping; semantic use remains unavailable until review",
+        "One semantic review flows into native discovery/v2 with all original IDs and mapping provenance, visible mapped diagrams and selection-conditioned distance support",
+        "Scaled original IDs reach width-proportional hypothesis and source-only family review; fresh replay retains provenance without invented practice",
+        "Reviewed raw replay recomputes mapping and preserves source category; malformed receiving retains accepted original work",
+        "Symmetry, incomplete budget, distorted geometry and fixed-unique→scale-ambiguous evidence cannot become asserted correspondence",
+        "Saved v1 fixed model still refuses scaled evidence; no silent migration or normalization",
+        "Fresh390px reload/reopen and keyboard review retain original IDs without horizontal overflow"
+      ],
+      "result": "PASS",
+      "sandbox": {
+        "schema": "hamon-chromium-sandbox/v1",
+        "qualification": "Linux Chromium status in the supplied isolated CDP page",
+        "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "startedAt": "2026-10-26T01:03:48.921Z",
+        "completedAt": "2026-10-26T01:03:48.999Z",
+        "durationMs": 77.256621,
+        "admitted": true,
+        "browser": {
+          "protocolVersion": "1.3",
+          "product": "Chrome/156.0.8078.47",
+          "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "jsVersion": "15.6.75.19"
+        },
+        "target": {
+          "targetId": "CA87CD8D286488E906ECCE08DF5C4825",
+          "type": "page",
+          "title": "about:blank",
+          "url": "about:blank",
+          "attached": true,
+          "canAccessOpener": false,
+          "browserContextId": "69A66EB8B1A4398B6E819B438BBA6C53"
+        },
+        "url": "chrome://sandbox/",
+        "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+        "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+        "observation": {
+          "rows": {
+            "layer1": "Namespace",
+            "pid": "Yes",
+            "network": "Yes",
+            "seccomp": "Yes",
+            "tsync": "Yes"
+          },
+          "checks": {
+            "adequate": true,
+            "layer1": true,
+            "pid": true,
+            "network": true,
+            "seccomp": true,
+            "tsync": true
+          },
+          "populated": true,
+          "duplicates": [],
+          "active": true
+        },
+        "failure": null
+      }
+    }
+  }
+}

@@ -8,6 +8,10 @@ import {fileURLToPath} from "node:url";
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
   "/src/path-reference-prediction.mjs":["src/path-reference-prediction.mjs","text/javascript; charset=utf-8"],
+  "/src/spatial-source-geometry.mjs":["src/spatial-source-geometry.mjs","text/javascript; charset=utf-8"],
+  "/src/axis-spatial-correspondence.mjs":["src/axis-spatial-correspondence.mjs","text/javascript; charset=utf-8"],
+  "/src/axis-distance-support.mjs":["src/axis-distance-support.mjs","text/javascript; charset=utf-8"],
+  "/web/spatial-correspondence-worker.mjs":["web/spatial-correspondence-worker.mjs","text/javascript; charset=utf-8"],
   "/demonstration-practice":["web/demonstration-practice.html","text/html; charset=utf-8"],
   "/src/demonstration-practice.mjs":["src/demonstration-practice.mjs","text/javascript; charset=utf-8"],
   "/web/demonstration-practice.mjs":["web/demonstration-practice.mjs","text/javascript; charset=utf-8"],
@@ -27,6 +31,8 @@ const routes=Object.freeze({
   "/web/spatial-correspondence.mjs":["web/spatial-correspondence.mjs","text/javascript; charset=utf-8"],
   '/src/path-axis.mjs':['src/path-axis.mjs','text/javascript; charset=utf-8'],
   '/src/path-returns.mjs':['src/path-returns.mjs','text/javascript; charset=utf-8'],
+  '/src/path-return-support.mjs':['src/path-return-support.mjs','text/javascript; charset=utf-8'],
+  '/web/path-return-support-view.mjs':['web/path-return-support-view.mjs','text/javascript; charset=utf-8'],
   '/web/path-returns-view.mjs':['web/path-returns-view.mjs','text/javascript; charset=utf-8'],
   '/web/path-axis-view.mjs':['web/path-axis-view.mjs','text/javascript; charset=utf-8'],
   "/relationship-families":["web/relationship-families.html","text/html; charset=utf-8"],
@@ -159,6 +165,8 @@ const routes=Object.freeze({
   "/web/sampled-path.css":["web/sampled-path.css","text/css; charset=utf-8"],
   "/src/path-summary.mjs":["src/path-summary.mjs","text/javascript; charset=utf-8"],
   "/src/sequence-path.mjs":["src/sequence-path.mjs","text/javascript; charset=utf-8"],
+  "/src/path-dwell.mjs":["src/path-dwell.mjs","text/javascript; charset=utf-8"],
+  "/web/path-dwell.mjs":["web/path-dwell.mjs","text/javascript; charset=utf-8"],
   "/ordered-tool-access":["web/ordered-tool-access.html","text/html; charset=utf-8"],
   "/web/ordered-tool-access.mjs":["web/ordered-tool-access.mjs","text/javascript; charset=utf-8"],
   "/src/ordered-tool-access.mjs":["src/ordered-tool-access.mjs","text/javascript; charset=utf-8"],
@@ -456,7 +464,6 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
-
 
 
 
