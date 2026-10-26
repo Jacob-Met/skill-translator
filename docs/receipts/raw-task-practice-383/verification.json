@@ -59,9 +59,9 @@
     "390px keyboard inspection, no-fit negative control and explicit unresolved/unexamined original rules."
   ],
   "errors": [],
-  "compositionBase": "ad218f4d4f390e1d817b132e4c06c45ab2d9628b",
+  "compositionBase": "4a0f752d90c115857bff7c6c19a4b8f468cfa244",
   "browserBase": "ad218f4d4f390e1d817b132e4c06c45ab2d9628b",
-  "compositionNote": "Current ad218f4 adds independent translated-region modules/routes. Server was refreshed preserving those routes and adding the feedback module. All48 affected native tests, current5-route HTTP/history replay, and full actual7-group sandboxed browser receiving pass on this composition.",
+  "compositionNote": "Received all six workbench-directory changes from current main. Preserved all upstream routes and added raw-task-practice. All48 affected native checks pass; actual loopback seven relevant routes200/nonempty/nosniff, negative404 and all73 directory links exactly match maintained HTML route map. Browser assets unchanged from qualified ad218f4 course.",
   "native": {
     "passed": 48,
     "failed": 0,
@@ -76,7 +76,7 @@
     "web/demonstration-practice.mjs": "2cfc8ebaea9454fb0495e468b247df39997761b7d54434601719f5c6d24e38b0",
     "web/demonstration-practice.html": "a59e55248c268ae225900fa003d952e3b1e6214097dcc9db20104f0ffe31d63b",
     "web/raw-task-proposals.html": "3767ffe6560cef676d906ce0c4b68388d875dcb37c93480fc7dec3e74b0a1eb2",
-    "server.mjs": "1d5e96df2e01660b5444479e7cf0d3eadde08110f58013cfeb92970e8a03337e",
+    "server.mjs": "7f912554ce68e8c6e08165176b7565b97d6cfd43fd497cf640706fd2898bc0af",
     "test/raw-task-practice.test.mjs": "edd755fcaa524906ce1b78bceade0e78ef706145d85a94a87792f4cef972fcea",
     "tools/browser-raw-task-proposals.mjs": "ca209ebdc382a1e013ee2916846bc93449d5e5956f3938cbbd50b2e76992f07d",
     "docs/RAW_TASK_PRACTICE.md": "32cf4c4e2988f727ed26af584ca9dab67b4ee89a75cc4db1d957e81b24cc9246",
@@ -87,5 +87,6 @@
     "feedback-narrow.png": "82226d218c0823f41ad2c1a84dcc4c2219e1595b1981e82ee3b3315bd2b1b9a2",
     "desktop.png": "9f4fbfb896821bb89706b08199bc6a2f742dc5b178a3a6150ea175ec8b90c627"
   },
-  "limits": "Authored geometric/PNG controls; conditional per-mark agreement is not physical feasibility, expert intention or learning validation."
+  "limits": "Authored geometric/PNG controls; conditional per-mark agreement is not physical feasibility, expert intention or learning validation.",
+  "compositionLimit": "Full upstream workbench-directory test cannot pass in this partial source copy: unrelated /annotation-bound HTML is absent (500). Targeted relevant routes and full73-link route-map consistency pass; no full-repository suite claim."
 }
