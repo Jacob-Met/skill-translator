@@ -1,5 +1,6 @@
 import {renderChangeRegions} from '/web/scan-change-regions.mjs';
 import {renderTranslationComparison} from '/web/visual-translation-view.mjs';
+import {renderTranslatedChangeRegions} from '/web/translated-change-regions.mjs';
 import {createVisualSpanView} from '/web/visual-span-view.mjs';
 import {createVisualScanPlan, inspectVisualScan, MAX_SCAN_SAMPLES} from '/src/visual-scan.mjs';
 import {samplePresentedFrame} from '/web/video-input.mjs';
@@ -59,7 +60,10 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
           const interval = focused?.closest('.scan-interval')?.dataset.index;
           const comparison = focused?.closest('.scan-translation');
           const paging = focused?.dataset.translationPage;
-          const comparisonControl = paging ? `button[data-translation-page="${paging}"]`
+          const regionPaging = focused?.dataset.residualPage;
+          const comparisonControl = regionPaging ? `button[data-residual-page="${regionPaging}"]`
+            : focused?.tagName === 'SUMMARY' && focused.closest('details[data-shift-regions]') ? 'details[data-shift-regions] summary'
+            : paging ? `button[data-translation-page="${paging}"]`
             : focused?.tagName === 'SUMMARY' && comparison ? 'summary' : null;
           renderReport();
           if (sample !== undefined && interval !== undefined)
@@ -82,7 +86,7 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
     $('scan-start').disabled = busy || !getClip();
     $('scan-cancel').disabled = !active || !isCurrent(active);
     for (const id of ['scan-from', 'scan-until', 'scan-count', 'scan-order']) $(id).disabled = busy;
-    for (const button of $('scan-intervals').querySelectorAll('button:not([data-translation-page])')) button.disabled = busy || !canSelect();
+    for (const button of $('scan-intervals').querySelectorAll('button:not([data-translation-page]):not([data-residual-page])')) button.disabled = busy || !canSelect();
   }
 
   function preview(frame) {
@@ -108,7 +112,9 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
     const viewStates = new Map();
     if (report && renderedReport === report) for (const view of $('scan-intervals').querySelectorAll('.scan-translation')) {
       const interval = view.closest('.scan-interval').dataset.index;
-      viewStates.set(`${interval}/${view.dataset.radius}`, {expanded: view.querySelector('details')?.open === true, page: Number(view.dataset.page) || 0});
+      const regions = view.querySelector('.translated-change-regions');
+      viewStates.set(`${interval}/${view.dataset.radius}`, {expanded: view.querySelector('details')?.open === true, page: Number(view.dataset.page) || 0,
+        regionsExpanded: regions?.querySelector('details')?.open === true, regionsPage: Number(regions?.dataset.page) || 0});
     }
     $('scan-intervals').replaceChildren();
     $('scan-results').hidden = !report;
@@ -157,9 +163,14 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
         item.append(node('p', `Presented interval ${seconds(interval.before.presentedSeconds)} → ${seconds(interval.after.presentedSeconds)}`, 'note'));
         for (const shownRadius of wide ? [16, 4] : [4]) {
           const translated = report.translations?.[shownRadius]?.intervals[interval.index]?.comparison;
-          if (translated) item.append(renderTranslationComparison(translated, {
-            ...(wide ? {heading: shownRadius === 16 ? 'Wider search · ±16 sampled pixels' : 'Retained narrow search · ±4 sampled pixels'} : {}),
-            ...viewStates.get(`${interval.index}/${shownRadius}`)}));
+          if (translated) {
+            const state = viewStates.get(`${interval.index}/${shownRadius}`);
+            const view = renderTranslationComparison(translated, {
+              ...(wide ? {heading: shownRadius === 16 ? 'Wider search · ±16 sampled pixels' : 'Retained narrow search · ±4 sampled pixels'} : {}), ...state});
+            view.append(renderTranslatedChangeRegions(report.samples[interval.before.index], report.samples[interval.after.index], translated.changeRegions,
+              {expanded: state?.regionsExpanded, page: state?.regionsPage}));
+            item.append(view);
+          }
         }
         item.append(renderChangeRegions(report.samples[interval.before.index], report.samples[interval.after.index]));
       } else item.append(node('p', statusLabels[interval.status], 'note'));
