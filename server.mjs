@@ -8,6 +8,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/src/raw-task-practice.mjs':['src/raw-task-practice.mjs','text/javascript; charset=utf-8'],
   "/workbenches": ["web/workbenches.html", "text/html; charset=utf-8"],
   "/web/workbenches.mjs": ["web/workbenches.mjs", "text/javascript; charset=utf-8"],
   "/web/workbenches.css": ["web/workbenches.css", "text/css; charset=utf-8"],
@@ -496,6 +497,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
 
 
 
