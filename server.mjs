@@ -8,6 +8,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/numeric-cue-thresholds':['web/numeric-cue-thresholds.html','text/html; charset=utf-8'],
+  '/src/numeric-cue-thresholds.mjs':['src/numeric-cue-thresholds.mjs','text/javascript; charset=utf-8'],
+  '/web/numeric-cue-thresholds.mjs':['web/numeric-cue-thresholds.mjs','text/javascript; charset=utf-8'],
+  '/web/numeric-cue-thresholds.css':['web/numeric-cue-thresholds.css','text/css; charset=utf-8'],
   '/src/point-pattern-fit.mjs':['src/point-pattern-fit.mjs','text/javascript; charset=utf-8'],
   '/src/shared-motion-groups.mjs':['src/shared-motion-groups.mjs','text/javascript; charset=utf-8'],
   '/web/shared-motion-groups-view.mjs':['web/shared-motion-groups-view.mjs','text/javascript; charset=utf-8'],
@@ -500,6 +504,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
+
 
 
 
