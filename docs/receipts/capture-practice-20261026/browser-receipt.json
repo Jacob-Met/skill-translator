@@ -1,0 +1,73 @@
+{
+  "course": "accepted Source Studio annotations -> separate complete-task practice",
+  "fixture": "Authored PNG and analytic geometry; no physical skill or learning claim",
+  "serving": "caller-supplied BASE_URL",
+  "tests": [
+    "fresh, photo-only and zero-mark calibration states cannot enter practice",
+    "real local PNG calibration and two distinct accepted source rules retain image identity",
+    "dirty and rejected calibration, unsaved mark edits, coordinate drafts and actual numeric badInput do not enter practice",
+    "malformed replacement preserves accepted marks, available practice action and original pixels",
+    "separate practice receives exact accepted source with hidden standard view; original studio pixels and prior parent key survive",
+    "changed-size analytic placements fail, retain a complete prior round, then pass and recompute identically after actual export/reopen",
+    "already-open independent practice source, placement and handoff key remain unchanged",
+    "blocked popup reports failure and restores exact previous parent handoff without losing source pixels",
+    "storage quota refusal opens no receiver and leaves prior handoff and accepted source intact",
+    "post-open restoration failure reports the unrestored setup and closes only its own new child while preserving independent rounds",
+    "390px keyboard action opens exact source, restores absent parent key and permits an incomplete keyboard placement",
+    "removing the last mark disables practice; reopening matching saved source restores a usable exact handoff",
+    "no observed product page exceptions or offsite requests"
+  ],
+  "errors": [],
+  "offsite": [],
+  "browser": "Chrome/156.0.8078.47",
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-26T22:25:22.225Z",
+    "completedAt": "2026-10-26T22:25:22.345Z",
+    "durationMs": 119.87244300000009,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "5E483C2F3F1C083AAE95AC5D05A98C1F",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "F2F8AD882C4F2D0E62F0418D32801638"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  },
+  "result": "PASS"
+}

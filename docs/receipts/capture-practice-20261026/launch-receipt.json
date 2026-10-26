@@ -1,0 +1,50 @@
+{
+  "label": "capture-practice-composed-v2",
+  "repo": "/home/ubuntu/work/estate-900127a2/skill-translator",
+  "launch": [
+    "npm",
+    "start"
+  ],
+  "url": "http://127.0.0.1:48503",
+  "node": "v22.23.4",
+  "source_sha256": {
+    "web/capture.mjs": "9003c5633eab2a37f20bba1aef6e7751928a2e9e87b49df713a650ebbdd6d4d7",
+    "web/capture.html": "80a6ebbff726e17f914f9245fb86c92f8bc23c8286e4cbd46f08e10b10031eff",
+    "tools/browser-capture-practice.mjs": "41cf560d394d0157fcd485faccebfcf2f1422901af49316afc1fddb532b61eff"
+  },
+  "owned_server_pid": 84826,
+  "served_assets": [
+    {
+      "route": "/capture",
+      "path": "web/capture.html",
+      "bytes": 9649,
+      "sha256": "80a6ebbff726e17f914f9245fb86c92f8bc23c8286e4cbd46f08e10b10031eff"
+    },
+    {
+      "route": "/web/capture.mjs",
+      "path": "web/capture.mjs",
+      "bytes": 20524,
+      "sha256": "9003c5633eab2a37f20bba1aef6e7751928a2e9e87b49df713a650ebbdd6d4d7"
+    },
+    {
+      "route": "/practice",
+      "path": "web/practice.html",
+      "bytes": 5743,
+      "sha256": "4f781a972498ec710e7612d9c3048698fdd73d7c120cfbb5cc8071e9d951b1b8"
+    },
+    {
+      "route": "/web/practice.mjs",
+      "path": "web/practice.mjs",
+      "bytes": 17111,
+      "sha256": "6bcdaca3f5978714abb3087d202adf776688cd5f83c4c9bb1def3bc8e9842ccd"
+    },
+    {
+      "route": "/web/printable-lesson.mjs",
+      "path": "web/printable-lesson.mjs",
+      "bytes": 9027,
+      "sha256": "2f954dfeea0ef9046f08200e4cd7b34eddfc220d4dc85915e0cf8d3daba74405"
+    }
+  ],
+  "exit_code": 0,
+  "owned_server_stopped": true
+}

@@ -1,0 +1,101 @@
+{
+  "schema": "skill-translator-capture-practice-receiving/v1",
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/415",
+  "canonical_prompt": "2026-10-26.8",
+  "team": "estate-900127a2-20261026",
+  "baseline": {
+    "head": "17e649cbf6aa3e8b73b6a763be558ea8291ea192",
+    "verified_blobs": 1552
+  },
+  "composition": {
+    "head": "0ec57fa8f1c6584ea78ae3e29361cc9e9ce681e2",
+    "tree": "2ba3e584cbf6e3150feea721947bb826be2b4a46",
+    "preceding_composition": "870bc4ae7c67f8d46cf0450a061bc2b0c269fcf7",
+    "incoming_files": [
+      "server.mjs",
+      "test/printable-lesson.test.mjs",
+      "test/server.test.mjs",
+      "web/printable-lesson.mjs",
+      "web/sequence.html",
+      "web/sequence.mjs"
+    ],
+    "published_blobs": 1565,
+    "unchanged_published_blobs_verified": 1562,
+    "excluded_own_files": [
+      "README.md",
+      "docs/CAPTURE_PRACTICE.md",
+      "tools/browser-capture-practice.mjs",
+      "web/capture.html",
+      "web/capture.mjs"
+    ],
+    "mismatches": []
+  },
+  "execution": {
+    "owner": "node-1e63ba250e07e82326fe4593b03206d3",
+    "command_id": "hamon-900127a2-capture-browser-composed-v2",
+    "entry": [
+      "npm",
+      "start"
+    ],
+    "node": "v22.23.4",
+    "chrome": "156.0.8078.47",
+    "qa_dependency": "puppeteer-core@25.16.0",
+    "production_dependencies_added": 0
+  },
+  "reviewed_sha256": {
+    "web/capture.mjs": "9003c5633eab2a37f20bba1aef6e7751928a2e9e87b49df713a650ebbdd6d4d7",
+    "web/capture.html": "80a6ebbff726e17f914f9245fb86c92f8bc23c8286e4cbd46f08e10b10031eff",
+    "tools/browser-capture-practice.mjs": "41cf560d394d0157fcd485faccebfcf2f1422901af49316afc1fddb532b61eff",
+    "docs/CAPTURE_PRACTICE.md": "6be934eaaaccb5d5bcf966e47a5c02683a847f6db9ae8d825489907538b1f435",
+    "README.md": "a800be3b398884cbf04cb71a051ea418bf304cd20081b2e6c388c4176895cb4a"
+  },
+  "native": {
+    "command": "node --test --test-concurrency=2 test/capture-editing.test.mjs test/capture.test.mjs test/practice.test.mjs",
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0
+  },
+  "independent_review": {
+    "source": "clear",
+    "candidate_receiving": "clear",
+    "composed_receiving": "clear",
+    "screenshots_390px": "clear",
+    "reviewer": "/root/implementation_review"
+  },
+  "limits": [
+    "Authored PNG and analytic software controls; no physical skill or learning claim.",
+    "No observed page exceptions or offsite requests; telemetry begins when a target becomes available.",
+    "This is a pre-publication receiving record; published-source receiving is recorded in the associated PR discussion."
+  ],
+  "previous_composition": {
+    "head": "870bc4ae7c67f8d46cf0450a061bc2b0c269fcf7",
+    "tree": "3c4b7d098e95815cbc26cdaf393e8f833305d1e3",
+    "incoming_files": [
+      "docs/CUE_BUDGET.md",
+      "docs/receipts/cue-budget-reuse-20261026/README.md",
+      "docs/receipts/cue-budget-reuse-20261026/baseline-qualification.json",
+      "docs/receipts/cue-budget-reuse-20261026/benchmark.json",
+      "docs/receipts/cue-budget-reuse-20261026/benchmark.mjs",
+      "docs/receipts/cue-budget-reuse-20261026/candidate-qualification.json",
+      "docs/receipts/cue-budget-reuse-20261026/differential.mjs",
+      "docs/receipts/cue-budget-reuse-20261026/execution.json",
+      "docs/receipts/cue-budget-reuse-20261026/independent-parity.mjs",
+      "docs/receipts/cue-budget-reuse-20261026/qualification.mjs",
+      "docs/receipts/cue-budget-reuse-20261026/source-provenance.json",
+      "src/cue-budget.mjs",
+      "src/cue-questions.mjs",
+      "test/cue-question-session.test.mjs"
+    ],
+    "removed_files": [],
+    "published_blobs": 1563,
+    "unchanged_published_blobs_verified": 1560,
+    "excluded_own_files": [
+      "README.md",
+      "docs/CAPTURE_PRACTICE.md",
+      "tools/browser-capture-practice.mjs",
+      "web/capture.html",
+      "web/capture.mjs"
+    ],
+    "mismatches": []
+  }
+}

@@ -6,6 +6,7 @@ import {frameOrigin,requestedFrameTime} from "/src/frame-origin.mjs";
 import {reopenCapture,exportCapture,reviseCaptureMark,removeCaptureMark,reviseCaptureCalibration,MAX_ANNOTATION_BYTES} from "/src/capture-editing.mjs";
 const $ = id => document.getElementById(id), ns = "http://www.w3.org/2000/svg";
 const labels = ["TOP LEFT","TOP RIGHT","BOTTOM RIGHT","BOTTOM LEFT"];
+const PRACTICE_INPUT_KEY = "skill-translator-practice-input/v1";
 let media = null, corners = [null,null,null,null], activeCorner = 0, demo = null, loadVersion = 0, calibrationDirty = false;
 let clip=null,sourceOrigin=null,sourceFrameFile=null,frameController=null,frameBusy=false;
 let editingMarkId=null, calibrationDraftEvidence=null;
@@ -27,6 +28,15 @@ function el(parent,tag,attrs={},text="") {
 function number(id) { const value=$(id).value.trim(); return value ? Number(value) : NaN; }
 function capturePoint() { return {x:number("markX"),y:number("markY")}; }
 function clearDraft() { $("markX").value=""; $("markY").value=""; editingMarkId=null; }
+function hasMarkDraft() {
+  return editingMarkId!==null||["markX","markY"].some(id=>$(id).value.trim()!==""||$(id).validity.badInput);
+}
+function practiceUnavailable() {
+  if(!demo?.landmarks.length)return "Add at least one source mark before practicing.";
+  if(calibrationDirty)return "Apply or revert calibration edits before practicing.";
+  if(hasMarkDraft())return "Save or discard the current mark draft before practicing.";
+  return "";
+}
 function syncCorners() {
   corners.forEach((p,i)=>{ $("cornerX"+i).value=p ? p.x.toFixed(2) : ""; $("cornerY"+i).value=p ? p.y.toFixed(2) : ""; });
 }
@@ -36,9 +46,13 @@ function render() {
   $("applyCalibration").disabled=!media;
   $("addCaptureMark").disabled=!demo||calibrationDirty;
   $("downloadCapture").disabled=!demo?.landmarks.length||calibrationDirty;
+  const practiceProblem=practiceUnavailable();
+  $("practiceCapture").disabled=Boolean(practiceProblem);
+  $("capturePracticeStatus").textContent=practiceProblem||"Practice opens in a new tab at the accepted source dimensions, with target marks hidden. Source Studio and its original image stay open. You can change the workpiece size in practice setup.";
   $("revertCalibration").disabled=!demo||!calibrationDirty;
   $("addCaptureMark").textContent=editingMarkId?"Save mark changes":"Add source mark";
-  $("cancelMarkEdit").hidden=!editingMarkId;
+  $("cancelMarkEdit").hidden=!hasMarkDraft();
+  $("cancelMarkEdit").textContent=editingMarkId?"Cancel mark edit":"Discard mark draft";
   $("markEditStatus").textContent=editingMarkId?"Editing "+editingMarkId+". Existing source identity is retained.":"Adding a new source mark.";
   $("markCount").textContent=demo?.landmarks.length ? demo.landmarks.length+" source mark"+(demo.landmarks.length===1?"":"s")+" ready" : "No marks yet";
   $("capturedMarks").replaceChildren();
@@ -121,6 +135,44 @@ $("downloadCapture").addEventListener("click",()=>{
   try{if(calibrationDirty)throw Error("Apply or revert calibration edits before exporting.");const encoded=exportCapture(demo);const url=URL.createObjectURL(new Blob([encoded],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download="skill-photo-annotations.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
   catch(error){problem(error.message);}
 });
+$("practiceCapture").addEventListener("click",()=>{
+  try{
+    const unavailable=practiceUnavailable();if(unavailable)throw Error(unavailable);
+    // Use the same admitted source snapshot as Download annotations. The image
+    // stays in this studio; no object URL or image bytes enter the practice setup.
+    const accepted=JSON.parse(exportCapture(demo));
+    const input=JSON.stringify({demo:accepted,widthMm:accepted.source.widthMm,
+      heightMm:accepted.source.heightMm,mirrored:false,showGoals:false});
+    const previous=sessionStorage.getItem(PRACTICE_INPUT_KEY);
+    let staged=false,practicePage=null,launchError=null,restoreError=null;
+    try{
+      sessionStorage.setItem(PRACTICE_INPUT_KEY,input);staged=true;
+      // A new same-origin tab copies this session storage at creation. Detach
+      // its opener afterwards; it keeps an independent copy of the staged setup.
+      practicePage=window.open("/practice","_blank");
+      if(!practicePage)throw Error("The practice tab was blocked. Allow a new tab and try again, or download the annotations.");
+      practicePage.opener=null;
+    }catch(error){launchError=error;}
+    finally{
+      if(staged)try{
+        if(previous===null)sessionStorage.removeItem(PRACTICE_INPUT_KEY);
+        else sessionStorage.setItem(PRACTICE_INPUT_KEY,previous);
+      }catch(error){restoreError=error;}
+    }
+    if(launchError||restoreError){
+      const messages=[];
+      if(launchError)messages.push(launchError.message);
+      if(restoreError)messages.push("The previous browser practice setup could not be restored: "+restoreError.message);
+      if(practicePage)try{practicePage.close();}catch(error){messages.push("The opened practice tab could not be closed: "+error.message);}
+      throw Error(messages.join(" "));
+    }
+    problem();
+    $("capturePracticeStatus").textContent="Practice opened in a new tab with all accepted marks at "+accepted.source.widthMm+" × "+accepted.source.heightMm+" mm and target marks hidden. Your source image and annotations remain here. Download annotations to keep a separate copy.";
+  }catch(error){
+    problem("Practice handoff did not complete. "+error.message);
+    $("capturePracticeStatus").textContent="Your current work remains in Source Studio. You can download accepted annotations and open them in practice.";
+  }
+});
 function videoControls(){
   $("captureFrame").disabled=!clip||frameBusy||clip.video.seeking||clip.video.readyState<2;
   $("videoTime").disabled=!clip||frameBusy;
@@ -174,3 +226,4 @@ $("downloadFrame").addEventListener("click",()=>{
 });
 window.addEventListener("pagehide",event=>{cancelFrame();clip?.video.pause();if(!event.persisted){releaseImage(media);releaseVideo(clip);}});
 render();
+

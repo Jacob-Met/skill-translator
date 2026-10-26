@@ -63,6 +63,8 @@ You can load your **own local annotated geometry JSON** (≤256 KB) without uplo
 
 Open **Annotate your own source photo** or visit `/capture`. Choose a local PNG or JPEG, enter the measured width and height of a flat workpiece, and select its four corners in top-left, top-right, bottom-right, bottom-left order. You can click the photo or use numeric coordinates. Apply the calibration, then click an observed mark and explicitly give it a proportional or physical-edge meaning and a positional tolerance.
 
+Choose **Practice these marks in a new tab** to use the accepted annotations directly in geometric placement practice. The original studio and image stay open; practice starts at the accepted source dimensions with target marks hidden. Apply or revert calibration edits and save or discard mark drafts first. See [Source Studio to practice](docs/CAPTURE_PRACTICE.md) for changed-size practice, saved rounds and recovery when a browser blocks the handoff.
+
 Download the annotations and import that JSON into Task Space. Use **Pair the original photo** to display the original pixels under the annotations. The application checks the complete file digest, decoded dimensions and pixel orientation; a different image cannot silently inherit the annotations. Renaming the original file is fine. Existing authored JSON still works without a photo. Invalid replacement files preserve the accepted source and marks.
 
 The photo remains in browser memory and is not embedded in the annotation JSON or uploaded. Select it again after reopening the workbench. Supported images are bounded at 12 MB, 24 megapixels and 8192 pixels per side. JPEG coordinates use the browser-oriented image, including EXIF rotation. Calibration is a planar model based on the supplied dimensions; a successful import does not establish those measurements, expert intent, contact, or physical task success.
@@ -163,6 +165,7 @@ An optional real-browser QA course uses separately installed Puppeteer and Chrom
     PUPPETEER_PATH=/path/to/puppeteer node tools/browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/capture-editing-browser.mjs
+    PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-capture-practice.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/mark-inspector-browser.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/video-browser-smoke.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-evidence.mjs
@@ -461,3 +464,4 @@ Verification: `node --test --test-isolation=none test/response-holdout.test.mjs`
 ## Discover points that move together
 
 Relationship Discovery now proposes complete multi-point shared-motion groups from the retained original annotations, highlighting each alternative in the original sequence frames. No group labels are required. The existing source-only save/reopen path recomputes the groups; overlapping, missing and unsupported geometry stays visible. See [shared motion groups](docs/SHARED_MOTION_GROUPS.md) for the fitted-model meaning, receiving and limits. Original sequence accounts also infer [contiguous shared-motion spans](docs/SHARED_MOTION_SPANS.md), exposing groups that move together for only part of a recording without manual interval boundaries.
+
