@@ -1,10 +1,14 @@
 import {createDecisionPractice,importDecisionPractice,recordDecisionAction,decisionPracticeFindings,decisionEvidence} from '/src/decision-practice.mjs';
 import {readSequenceBundle,releaseSequenceAssets} from '/web/sequence-input.mjs';
+import {makeDecisionPracticeBundle,readDecisionPracticeBundle} from '/web/decision-practice-input.mjs';
+import {receiveDecisionHandoff} from '/web/decision-handoff.mjs';
 const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+let cancelHandoff=()=>{};
 let source=null,assets=new Map(),session=null,revision=0,generation=0,controller=null,busy=false,predictionDirty=false,reflectionDirty=false;
 const error=message=>{$('error').hidden=!message;$('error').textContent=message;};
 function sync(){
   $('restart').disabled=!source||busy;$('sessionFile').disabled=!source||busy;
+  $('saveComplete').disabled=!session||busy||predictionDirty||reflectionDirty;
   if(!session)return;
   const findings=decisionPracticeFindings(source,session),step=findings.steps[findings.currentIndex];
   $('submitPrediction').disabled=busy||!!step.response;$('reveal').disabled=busy||step.revealed;
@@ -47,15 +51,27 @@ function act(type,fields={}){try{
 }catch(e){error(e.message);}}
 function begin(){controller?.abort();controller=new AbortController();const request={token:++generation,revision,signal:controller.signal};busy=true;sync();return request;}
 const current=request=>request.token===generation&&!request.signal.aborted;
-function finish(request){if(current(request)){busy=false;controller=null;sync();}}
-$('sourceFile').addEventListener('change',async event=>{
-  const file=event.target.files[0];if(!file)return;const request=begin(),familiarity=$('familiarity').value;let loaded;
-  try{loaded=await readSequenceBundle(file,{signal:request.signal});if(!current(request)||request.revision!==revision){releaseSequenceAssets(loaded.assets);loaded=null;if(current(request))$('status').textContent='The exercise changed while reading; the accepted work remains.';return;}
-    const next=createDecisionPractice(loaded.sequence,undefined,familiarity),old=assets;source=loaded.sequence;assets=loaded.assets;loaded=null;session=next;predictionDirty=reflectionDirty=false;revision++;error('');render();releaseSequenceAssets(old);$('status').textContent='Retained source frames verified. Describe the first situation before revealing the account.';
-  }catch(e){if(loaded)releaseSequenceAssets(loaded.assets);if(current(request))error('Source refused; accepted exercise retained. '+e.message);}finally{finish(request);}
+function finish(request){if(request.token===generation){busy=false;controller=null;sync();}}
+async function acceptSource(file,{complete=false,externalSignal}={}){
+  const request=begin(),familiarity=$('familiarity').value;let loaded;
+  const abort=()=>controller?.abort();externalSignal?.addEventListener('abort',abort,{once:true});
+  try{
+    if(externalSignal?.aborted)throw Error('The source handoff was canceled.');
+    loaded=await (complete?readDecisionPracticeBundle:readSequenceBundle)(file,{signal:request.signal});
+    if(!current(request)||request.revision!==revision)throw Error('The exercise changed while reading; accepted work remains.');
+    const next=complete?loaded.session:createDecisionPractice(loaded.sequence,undefined,familiarity),old=assets;
+    source=loaded.sequence;assets=loaded.assets;loaded=null;session=next;predictionDirty=reflectionDirty=false;revision++;
+    $('familiarity').value=session.priorFamiliarity;error('');render();releaseSequenceAssets(old);
+    $('status').textContent=complete?'Complete practice reopened: every original PNG was verified and retained actions were replayed.':'Retained source frames verified. Describe the first situation before revealing the account.';
+  }catch(e){if(loaded)releaseSequenceAssets(loaded.assets);e.stale=!current(request);throw e;}
+  finally{externalSignal?.removeEventListener('abort',abort);finish(request);}
+}
+for(const [id,complete]of [['sourceFile',false],['completeFile',true]])$(id).addEventListener('change',async event=>{
+  const file=event.target.files[0];if(!file)return;cancelHandoff();
+  try{await acceptSource(file,{complete});}catch(e){if(!e.stale)error('Source refused; accepted exercise retained. '+e.message);}
 });
 $('sessionFile').addEventListener('change',async event=>{
-  const file=event.target.files[0];if(!file||!source)return;const request=begin();
+  const file=event.target.files[0];if(!file||!source)return;cancelHandoff();const request=begin();
   try{if(file.size<1||file.size>1024*1024)throw Error('Choose decision practice up to 1 MiB');const value=JSON.parse(await file.text());if(!current(request)||request.revision!==revision)return;const next=importDecisionPractice(source,value);session=next;predictionDirty=reflectionDirty=false;revision++;$('familiarity').value=session.priorFamiliarity;error('');render();$('status').textContent='Practice reopened by replaying source-bound actions. Saved verdicts are not trusted.';}catch(e){if(current(request))error('Practice refused; accepted exercise retained. '+e.message);}finally{finish(request);}
 });
 $('restart').addEventListener('click',()=>{if(!source)return;session=createDecisionPractice(source,undefined,$('familiarity').value);predictionDirty=reflectionDirty=false;revision++;error('');render();$('status').textContent='A new empty exercise has begun on the same accepted source.';});
@@ -67,4 +83,17 @@ $('reveal').addEventListener('click',()=>act('reveal'));
 $('reflectionForm').addEventListener('submit',event=>{event.preventDefault();const anchors=[...$('evidenceChoices').querySelectorAll('input:checked')].map(input=>input.value),judgment=$('revisedJudgment').value,question=$('remainingQuestion').value;act('reflect',{comparison:$('comparison').value,note:$('reflection').value,...(anchors.length||judgment.trim()||question.trim()?{reconsideration:{anchors,judgment,question}}:{})});});
 $('advance').addEventListener('click',()=>act('advance'));
 $('saveSession').addEventListener('click',()=>{try{if(predictionDirty||reflectionDirty)throw Error('Retain your draft before exporting');const accepted=importDecisionPractice(source,session),blob=new Blob([JSON.stringify(accepted,null,2)],{type:'application/json'});if(blob.size>1024*1024)throw Error('Practice exceeds the 1 MiB export limit');const url=URL.createObjectURL(blob),link=node('a');link.href=url;link.download='decision-practice.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){error(e.message);}});
-window.addEventListener('beforeunload',()=>{controller?.abort();releaseSequenceAssets(assets);});
+$('saveComplete').addEventListener('click',async()=>{
+  if(!session||predictionDirty||reflectionDirty)return;
+  const request=begin();
+  try{
+    const blob=await makeDecisionPracticeBundle(source,assets,session,{signal:request.signal});
+    if(!current(request)||request.revision!==revision)throw Error('The exercise changed while saving. Save again to include the current work.');
+    const url=URL.createObjectURL(blob),link=node('a');link.href=url;link.download='complete-decision-practice.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    error('');$('status').textContent='Saved the complete practice, including every original frame and retained response. Reopen this one file to continue.';
+  }catch(e){if(current(request))error(e.message);}finally{finish(request);}
+});
+cancelHandoff=receiveDecisionHandoff({accept:(file,signal)=>acceptSource(file,{externalSignal:signal}),onStatus:message=>{$('status').textContent=message;},onError:error});
+window.addEventListener('beforeunload',()=>{cancelHandoff();controller?.abort();releaseSequenceAssets(assets);});
+
+
