@@ -1,3 +1,4 @@
+import {importPathComparison} from '/src/path-comparison.mjs';
 import {inspectPathOccurrences,createPathOccurrenceStudy,importPathOccurrenceStudy,MAX_OCCURRENCE_BYTES} from '/src/path-occurrences.mjs';
 import {makePathComparisonBundle,readPathComparisonBundle,MAX_COMPARISON_BUNDLE_BYTES} from '/web/path-comparison-input.mjs';
 import {releaseSequenceAssets} from '/web/sequence-input.mjs';
@@ -45,9 +46,11 @@ export function mountPathOccurrences({context,receive,status}){
  });
  $('occurrence-open').addEventListener('change',async()=>{
   const file=$('occurrence-open').files[0];$('occurrence-open').value='';if(!file)return;const token=++epoch,revision=context(false).revision;let received;
+  status('Reading occurrence query. Previous accepted work is retained until both original sources pass admission.');
   try{if(file.size>maxBundleBytes)throw Error('Keep the complete original-source occurrence bundle within its source budget.');const raw=JSON.parse(await file.text());if(raw.format!==bundleFormat)throw Error('Open a complete occurrence bundle.');const study=importPathOccurrenceStudy(raw.study);
    received=await readPathComparisonBundle(new File([JSON.stringify(raw.comparisonBundle)],'comparison.json',{type:'application/json'}));
-   if(JSON.stringify(received.study)!==JSON.stringify(study.comparison))throw Error('The occurrence query must match both complete original sources.');
+   importPathComparison(received.study,study.comparison.paths);
+   if(received.study.declaration.basis!==study.comparison.declaration.basis)throw Error('The occurrence query must match the original cross-demonstration declaration.');
    inspectPathOccurrences(study.comparison,study.maxDistanceMm);
    if(token!==epoch||revision!==context(false).revision){for(const source of received.sources)releaseSequenceAssets(source.assets);return;}
    receive(received);$('occurrence-bound').value=String(study.maxDistanceMm);render(study,received.sources);received=null;status('Original occurrence sources reopened and every finding recomputed.');
