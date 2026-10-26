@@ -1,0 +1,262 @@
+{
+  "schema": "skill-translator-observation-import-qualification/v1",
+  "issue": 407,
+  "team": "hamon-01065",
+  "baselineCommit": "c8f7aedeee5beaa2ef828a85eda47c5a1e5b6724",
+  "sourceBlobs": {
+    "native/audio-intake.mjs": "ef4f31d7ec3b2efe844b77ec6d6f09f208d095e1",
+    "native/calibration-translation.mjs": "4d9dc2699071de09550f369f0c42cc6a4d4a1da2",
+    "native/sequence-edge.mjs": "f672b6422e7ac41d762b47cd31b8d207807a0622",
+    "server.mjs": "dd0630d5bac30a793962dce10727a0dfa91a90c3",
+    "src/audio-activity.mjs": "143bef51e2eaf0fa3451bfe384118d889a003f6d",
+    "src/audio-contrast.mjs": "47bb0a0aa936f814c29e6ee208a7b491d5571c98",
+    "src/audio-decoder-clock.mjs": "44063b32b8201055df38fb3cbf37131d29401945",
+    "src/authoring.mjs": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5",
+    "src/calibration-draft.mjs": "75a792fc6421bb0e08b048e92955ecda45f5c3ad",
+    "src/capture-editing.mjs": "570ee1ac63928e5837920288243e8ea7621936c9",
+    "src/capture.mjs": "763d09298e03c4275b802c83df92c773de62cd67",
+    "src/demo.mjs": "553193f32c562d16a71a65c877bcac4bf66d5967",
+    "src/demonstration-sequence.mjs": "3030edd3ad809cab11fc220365aacb34e2d01b42",
+    "src/evidence-conflict-alternatives.mjs": "c3756f5289d0ca85fa9802d5680510ba18fc65cf",
+    "src/evidence-conflicts.mjs": "0b053e223a6926b44a9241f1dc2d3067343c4106",
+    "src/evidence.mjs": "0a1f69ed0e2807d7ae2be92765cd02b5bed0c86c",
+    "src/frame-origin.mjs": "9154d9e63255de95152e3137d5790de5e9f00e42",
+    "src/geometry.mjs": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061",
+    "src/hypotheses.mjs": "3e219b1568380b88cc049a875194410ef5df7ea5",
+    "src/sequence-capture.mjs": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b",
+    "src/sequence-edge-field.mjs": "1515280bd71fe4066633b015b9bd8937dbb6263e",
+    "src/sequence-edge.mjs": "ca6d46f12e5ad15c54a4d9c1acc430149071b818",
+    "test/evidence.test.mjs": "8f1f4e0d8cc8391d676fd8d17ba41ab363b73ade",
+    "tools/audio-input-profile.mjs": "5168e38deb1d8e59f869fd8b74d48b29981c127e",
+    "tools/browser-evidence.mjs": "f6ce5f56d447d466512a42c9220b630a143fcd55",
+    "tools/prepare-audio-activity.mjs": "c8714a5c617fe01818449d0fb74819c16d571b2c",
+    "web/app.mjs": "ad3f36a704db3e93c5545542650c0709342ab18b",
+    "web/evidence-conflicts.mjs": "fda898b66dab6934a82b53853753e24ab34d5cc8",
+    "web/image-input.mjs": "954e74a63557cfd2adf53c7be028f134b287e59f",
+    "web/index.html": "a2d30e8bf647a165708a266687784c43e9d90a47",
+    "web/styles.css": "f541f3fd091191bf223a75a55b47ded7d61b64fc"
+  },
+  "candidateSha256": {
+    "web/app.mjs": "0d1a50d5a076d7a336b73f392121c646feb060b1bd65990606588573c663662e",
+    "tools/browser-observation-import-races.mjs": "848ec2ca976c3804e00d49573c2d70ee97182a6595efaa17957f11fe64328802"
+  },
+  "execution": {
+    "transport": "Renpō",
+    "owner": "node-10dbc406f84a45113b2f175af35500f5",
+    "baselineCommand": "hamon-01065-skill-race-baseline-030",
+    "candidateCommand": "hamon-01065-skill-race-candidate-031",
+    "baselineExit": 1,
+    "candidateExit": 0,
+    "node": "22.23.4",
+    "browser": "Chrome/156.0.8078.47"
+  },
+  "baseline": {
+    "course": "accepted source and evidence survive stale asynchronous observation imports",
+    "evidence": "authored analytic fixtures; actual browser file inputs and downloaded blobs",
+    "tests": [
+      {
+        "name": "source replacement retains new source evidence after an old-source read completes",
+        "result": "FAIL",
+        "error": "TimeoutError: Waiting failed: 2500ms exceeded",
+        "state": {
+          "source": "Analytic source B · 1 source marks",
+          "evidenceStatus": "Observation retained in this session. Export observations to keep the evidence.",
+          "error": "Observation import refused; previous evidence retained. Observation source reference differs from the current annotation; reobserve or restore that source",
+          "rows": "Accepted for source BAuthored example200.0 mm × 160.0 mm20.0 mm / 60.0 mm±0.5 mmRemove",
+          "selectedFile": null
+        },
+        "pageErrors": [
+          "GeometryError: Observation source reference differs from the current annotation; reobserve or restore that source\nrequireThat (http://127.0.0.1:39117/src/evidence.mjs:9:47)"
+        ]
+      },
+      {
+        "name": "newer selected evidence wins when reads finish out of order",
+        "result": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   'Older delayed evidence'\n-   'Newer accepted evidence'\n  ]\n",
+        "state": {
+          "source": "Analytic source A · 1 source marks",
+          "evidenceStatus": "Imported 1 source-matched observations.",
+          "error": "",
+          "rows": "Older delayed evidenceAuthored example200.0 mm × 160.0 mm20.0 mm / 60.0 mm±0.5 mmRemove",
+          "selectedFile": null
+        },
+        "pageErrors": []
+      },
+      {
+        "name": "accepted observation addition survives a pending evidence import",
+        "result": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   'Older delayed evidence'\n-   'Retained baseline',\n-   'Accepted local addition'\n  ]\n",
+        "state": {
+          "source": "Analytic source A · 1 source marks",
+          "evidenceStatus": "Imported 1 source-matched observations.",
+          "error": "",
+          "rows": "Older delayed evidenceAuthored example200.0 mm × 160.0 mm20.0 mm / 60.0 mm±0.5 mmRemove",
+          "selectedFile": null
+        },
+        "pageErrors": []
+      },
+      {
+        "name": "accepted observation removal cannot be undone by a pending evidence import",
+        "result": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'Older delayed evidence'\n+ ]\n- []\n",
+        "state": {
+          "source": "Analytic source A · 1 source marks",
+          "evidenceStatus": "Imported 1 source-matched observations.",
+          "error": "",
+          "rows": "Older delayed evidenceAuthored example200.0 mm × 160.0 mm20.0 mm / 60.0 mm±0.5 mmRemove",
+          "selectedFile": null
+        },
+        "pageErrors": []
+      },
+      {
+        "name": "stale read rejection cannot replace newer accepted status or error",
+        "result": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Observation import refused; previous evidence retained. Controlled delayed read failure'\n- ''\n",
+        "state": {
+          "source": "Analytic source A · 1 source marks",
+          "evidenceStatus": "Imported 1 source-matched observations.",
+          "error": "Observation import refused; previous evidence retained. Controlled delayed read failure",
+          "rows": "Newer accepted evidenceAuthored example200.0 mm × 160.0 mm20.0 mm / 60.0 mm±0.5 mmRemove",
+          "selectedFile": null
+        },
+        "pageErrors": []
+      },
+      {
+        "name": "stale cleanup preserves the later pending file selection",
+        "result": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ null\n- 'newer-observations.json'\n",
+        "state": {
+          "source": "Analytic source A · 1 source marks",
+          "evidenceStatus": "Imported 1 source-matched observations.",
+          "error": "",
+          "rows": "Older delayed evidenceAuthored example200.0 mm × 160.0 mm20.0 mm / 60.0 mm±0.5 mmRemove",
+          "selectedFile": null
+        },
+        "pageErrors": []
+      },
+      {
+        "name": "accepted source annotation preserves existing evidence while retiring older reads",
+        "result": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   'Older delayed evidence'\n-   'Retained baseline'\n  ]\n",
+        "state": {
+          "source": "Analytic source A · 2 source marks",
+          "evidenceStatus": "Imported 1 source-matched observations.",
+          "error": "",
+          "rows": "",
+          "selectedFile": null
+        },
+        "pageErrors": []
+      },
+      {
+        "name": "latest invalid selection retains accepted evidence and retires an older valid read",
+        "result": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   'Older delayed evidence'\n-   'Retained baseline'\n  ]\n",
+        "state": {
+          "source": "Analytic source A · 1 source marks",
+          "evidenceStatus": "Imported 1 source-matched observations.",
+          "error": "",
+          "rows": "Older delayed evidenceAuthored example200.0 mm × 160.0 mm20.0 mm / 60.0 mm±0.5 mmRemove",
+          "selectedFile": null
+        },
+        "pageErrors": []
+      },
+      {
+        "name": "keyboard export and fresh 390px reopen retain exact source-bound observations",
+        "result": "PASS"
+      }
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "offsite": [],
+    "result": "FAIL"
+  },
+  "candidate": {
+    "course": "accepted source and evidence survive stale asynchronous observation imports",
+    "evidence": "authored analytic fixtures; actual browser file inputs and downloaded blobs",
+    "tests": [
+      {
+        "name": "source replacement retains new source evidence after an old-source read completes",
+        "result": "PASS"
+      },
+      {
+        "name": "newer selected evidence wins when reads finish out of order",
+        "result": "PASS"
+      },
+      {
+        "name": "accepted observation addition survives a pending evidence import",
+        "result": "PASS"
+      },
+      {
+        "name": "accepted observation removal cannot be undone by a pending evidence import",
+        "result": "PASS"
+      },
+      {
+        "name": "stale read rejection cannot replace newer accepted status or error",
+        "result": "PASS"
+      },
+      {
+        "name": "stale cleanup preserves the later pending file selection",
+        "result": "PASS"
+      },
+      {
+        "name": "accepted source annotation preserves existing evidence while retiring older reads",
+        "result": "PASS"
+      },
+      {
+        "name": "latest invalid selection retains accepted evidence and retires an older valid read",
+        "result": "PASS"
+      },
+      {
+        "name": "latest oversized selection retires an older valid read before file decoding",
+        "result": "PASS"
+      },
+      {
+        "name": "keyboard export and fresh 390px reopen retain exact source-bound observations",
+        "result": "PASS"
+      }
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "offsite": [],
+    "result": "PASS"
+  },
+  "maintainedBrowser": {
+    "course": "additional-demonstration evidence loop",
+    "evidence": "authored analytic controls",
+    "tests": [
+      "source does not automatically count as a discriminating demonstration",
+      "entered dimensions and mark select only the analytically compatible fixed-left rule",
+      "a second unfamiliar sheet tests the same rule without refitting",
+      "contradictory evidence eliminates every candidate; removing that record restores support",
+      "actual downloaded JSON retains observation origin, source anchor and measurement radius",
+      "mismatched-source evidence import is refused without damaging prior observations",
+      "same-size ambiguity remains visible and the proposed test respects measurement precision",
+      "saved evidence reopens transactionally and each source selects its visual comparison",
+      "a refused source replacement preserves the evidence attached to the prior source",
+      "malformed source-image identity is refused before replacing the current source or evidence",
+      "fresh 390px browser reopens source and evidence without document overflow",
+      "replacing the source clears prior evidence and rejects stale-source replay",
+      "no observed browser exception or offsite request"
+    ],
+    "browser": "Chrome/156.0.8078.47",
+    "result": "PASS",
+    "errors": [],
+    "offsite": []
+  },
+  "native": {
+    "command": "node --test test/evidence.test.mjs",
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0
+  },
+  "review": {
+    "reviewer": "hamon-01065/consumer_review",
+    "appSha256": "0d1a50d5a076d7a336b73f392121c646feb060b1bd65990606588573c663662e",
+    "result": "approved source; final runtime checks passed",
+    "resolvedFinding": "A same-selection read retired by an accepted edit clears only its own file selector, permitting an intentional same-file retry; a superseding selection remains untouched."
+  },
+  "scope": "Authored analytic source and observation files; controlled read completion through actual browser file inputs; actual downloads and fresh 390px/keyboard reopening. No claim of physical measurement accuracy, learning benefit, deployed release, or full-repository test coverage.",
+  "screenshot": {
+    "name": "qa/observation-races-candidate/mobile-reopened-evidence.png",
+    "sha256": "e507fea446eb385262e9e30655c3eff9a709e2dc7010a04eace56be4060a4604"
+  }
+}

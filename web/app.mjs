@@ -21,7 +21,7 @@ const mm=x=>Number(x).toFixed(1)+" mm";
 const rounded=x=>Number(x).toFixed(3);
 let demo=demonstration,derived=derive(demo),target,selected=0,attempt=null,verdict=null;
 let alternateChoice="fraction";
-let observations=[],viewObservationId=null;
+let observations=[],viewObservationId=null,observationImportVersion=0;
 const ruleNames={fraction:"Proportional position",left:"Fixed left clearance",
   right:"Fixed right clearance",top:"Fixed top clearance",bottom:"Fixed bottom clearance"};
 let box={x:80,y:50,width:560,height:320},dragging=false;
@@ -516,14 +516,31 @@ $("exportObservations").addEventListener("click",()=>{
 });
 $("observationFile").addEventListener("change",async e=>{
   const file=e.target.files[0];if(!file)return;
+  const version=++observationImportVersion,expectedDemo=demo,expectedObservations=observations;
+  // Reading a local file can finish after another import, a source replacement,
+  // or an accepted edit. Keep the entire result (including errors and cleanup)
+  // pending until its original source and evidence are still current.
+  let readResult;
   try{
     if(file.size>256*1024)throw Error("Observation file must be ≤256 KB");
-    const next=importEvidence(demo,JSON.parse(await file.text()));
+    readResult={text:await file.text()};
+  }catch(err){readResult={error:err};}
+  if(version!==observationImportVersion)return;
+  if(expectedDemo!==demo||expectedObservations!==observations){
+    // This read was cancelled by accepted work. Clear only its own selection so
+    // the same saved file can be chosen again against the new context.
+    if(e.target.files[0]===file)e.target.value="";
+    return;
+  }
+  try{
+    if("error" in readResult)throw readResult.error;
+    const next=importEvidence(expectedDemo,JSON.parse(readResult.text));
     observations=next;viewObservationId=null;error("");updateEvidence();
     $("evidenceStatus").textContent="Imported "+next.length+" source-matched observations.";
   }catch(err){error("Observation import refused; previous evidence retained. "+err.message);}
-  e.target.value="";
+  finally{e.target.value="";}
 });
 recompute();
 
 $("inspectTool").addEventListener("click",()=>{try{sessionStorage.setItem("skill-translator-tool-input/v1",JSON.stringify({demo,widthMm:target.widthMm,heightMm:target.heightMm}));location.assign("/tool-access");}catch(e){error("Could not open tool comparison. "+e.message);}});
+
