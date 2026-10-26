@@ -6,9 +6,12 @@ const node = (tag, text, className) => {
 };
 
 export function renderTranslationComparison(comparison, {heading, expanded = false, page = 0, coverageDescription} = {}) {
+  const contained = comparison.format === 'skill-translator.contained-appearance-placement/v1';
+  const edge = alternative => contained ? alternative.imageBoundary : alternative.searchBoundary;
   const host = node('div', undefined, 'scan-translation');
   host.dataset.state = comparison.status;
-  host.dataset.radius = String(comparison.radius);
+  if (contained) host.dataset.domain = 'contained';
+  else host.dataset.radius = String(comparison.radius);
   host.dataset.page = '0';
   if (heading !== undefined) host.append(node('h4', heading));
   if (comparison.status === 'insufficient-common-support') {
@@ -21,7 +24,7 @@ export function renderTranslationComparison(comparison, {heading, expanded = fal
   const best = comparison.alternatives;
   const description = best.length > 1
     ? `${best.length} equally best image shifts; no unique translation is identified.`
-    : `Best sampled shift: x ${best[0].dx >= 0 ? '+' : ''}${best[0].dx}, y ${best[0].dy >= 0 ? '+' : ''}${best[0].dy} pixels.${best[0].searchBoundary ? ' It reaches the search edge; larger shifts were not compared.' : ''}`;
+    : `Best sampled shift: x ${best[0].dx >= 0 ? '+' : ''}${best[0].dx}, y ${best[0].dy >= 0 ? '+' : ''}${best[0].dy} pixels.${edge(best[0]) ? contained ? ' The complete rectangle touches the image edge; partial visibility is unassessed.' : ' It reaches the search edge; larger shifts were not compared.' : ''}`;
   host.append(node('p', description, 'note'));
   const details = node('details');
   details.dataset.totalAlternatives = String(best.length);
@@ -52,7 +55,7 @@ export function renderTranslationComparison(comparison, {heading, expanded = fal
     const items = [];
     for (let index = offset; index < end; index++) {
       const alternative = best[index];
-      const item = node('li', `x ${alternative.dx}, y ${alternative.dy}; brightness shift ${alternative.uniformBrightnessShift >= 0 ? '+' : ''}${alternative.uniformBrightnessShift} levels${alternative.searchBoundary ? '; search edge' : ''}`);
+      const item = node('li', `x ${alternative.dx}, y ${alternative.dy}; brightness shift ${alternative.uniformBrightnessShift >= 0 ? '+' : ''}${alternative.uniformBrightnessShift} levels${edge(alternative) ? contained ? '; image edge' : '; search edge' : ''}`);
       item.dataset.translationAlternative = String(index);
       items.push(item);
     }

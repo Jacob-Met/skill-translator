@@ -43,25 +43,40 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
     worker.terminate(); view.cancelled(message);
   }
 
-  function compareRegions(owner, interval, view) {
+  function compareRegions(owner, interval, view, profile = 'window') {
     if (report !== owner || isBusy() || !canSelect() || !view.element.isConnected
       || getClip()?.identity.sha256 !== owner.plan.clip.sha256) return;
     stopRegional('Another regional comparison was requested.');
     try {
       const worker = new Worker('/web/regional-translation-worker.mjs', {type: 'module'});
-      regionalActive = {worker, view}; view.pending();
+      regionalActive = {worker, view}; view.pending(profile);
       const current = () => regionalActive?.worker === worker && report === owner
         && view.element.isConnected && getClip()?.identity.sha256 === owner.plan.clip.sha256;
       const finish = () => { worker.terminate(); regionalActive = null; };
       worker.onmessage = ({data}) => {
         if (!current()) return;
-        if (data.type === 'result') { owner.regionalResults ??= {}; owner.regionalResults[interval.index] = data.result; finish(); view.receive(data.result); }
+        if (data.type === 'result') {
+          if (profile === 'contained') {
+            owner.containedRegionalResults ??= {}; owner.containedRegionalOrder ??= [];
+            owner.containedRegionalResults[interval.index] = data.result;
+            owner.containedRegionalOrder = owner.containedRegionalOrder.filter(i => i !== interval.index);
+            owner.containedRegionalOrder.push(interval.index);
+            // Every exact minimum stays available in each retained result. Limit
+            // whole result residency rather than truncate a flat image's ties.
+            while (owner.containedRegionalOrder.length > 2) {
+              const expired = owner.containedRegionalOrder.shift();
+              delete owner.containedRegionalResults[expired];
+              regionalViews.get(expired)?.releaseContained();
+            }
+          } else { owner.regionalResults ??= {}; owner.regionalResults[interval.index] = data.result; }
+          finish(); view.receive(data.result, profile);
+        }
         else if (data.type === 'error') { finish(); view.fail(data.message); }
       };
       worker.onerror = event => { event.preventDefault(); if (!current()) return; finish(); view.fail(event.message || 'Regional worker failed.'); };
       const plan = createVisualScanPlan(owner.plan.clip, {startSeconds: interval.before.requestedSeconds, endSeconds: interval.after.requestedSeconds, sampleCount: 2});
       // Copy accepted samples; transfer never detaches the scanner's originals.
-      worker.postMessage({plan, samples: [owner.samples[interval.before.index], owner.samples[interval.after.index]]});
+      worker.postMessage({plan, profile, samples: [owner.samples[interval.before.index], owner.samples[interval.after.index]]});
     } catch (error) { stopRegional(); view.fail(String(error.message || error)); }
   }
 
@@ -222,9 +237,10 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
         const owner = report;
         const regional = createRegionalAppearanceView(owner.samples[interval.before.index], owner.samples[interval.after.index], {
           result: owner.regionalResults?.[interval.index], state: regionalStates.get(interval.index),
+          containedResult: owner.containedRegionalResults?.[interval.index],
           current: () => report === owner && getClip()?.identity.sha256 === owner.plan.clip.sha256,
           busy: () => isBusy() || !canSelect(),
-          request: view => compareRegions(owner, interval, view),
+          request: (view, profile) => compareRegions(owner, interval, view, profile),
           cancel: view => { if (regionalActive?.view === view) stopRegional(); }
         });
         regionalViews.set(interval.index, regional); item.append(regional.element);
