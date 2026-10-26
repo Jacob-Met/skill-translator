@@ -67,6 +67,12 @@ async function capturePresentedSnapshot(clip,seconds,{signal,sampleOnly=false}={
         try{
           if(!Number.isFinite(metadata.mediaTime)||metadata.mediaTime<0||metadata.mediaTime>identity.durationSeconds)
             throw Error("The browser did not report a usable frame time.");
+          // A damaged later seek can silently reset the playback clock to the opening
+          // frame while still producing a valid-looking frame callback and PNG.
+          // Check the actual seek clock, not mediaTime: sparse/VFR sources may
+          // legitimately present an earlier PTS at the requested playback position.
+          if(!Number.isFinite(video.currentTime)||Math.abs(video.currentTime-seconds)>0.5)
+            throw Error("The browser did not reach the requested video moment. Choose another moment or a source photo.");
           boundedFrameSize(video.videoWidth,video.videoHeight);
           boundedFrameSize(metadata.width,metadata.height);
           copied=true;clearTimeout(presentationTimer);video.pause();
