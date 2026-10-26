@@ -32,3 +32,11 @@ export function reviewSequencePointChoice(sequence,query,momentId,{semanticCorre
  const reviewedMapping=createReviewedSpatialMapping(row.report.study,{semanticCorrespondenceConfirmed:true});
  return {reviewedMapping,anchor:{momentId:query.anchorMomentId,markId:query.anchorMarkId,basis:'Original anchor point explicitly selected by the author.'},sample:{momentId:row.momentId,markId:row.markId,basis:'Authored point choice after review of a complete unique pair-distance mapping of the original annotations. The common fixed plane and corner meanings are independently declared.'}};
 }
+
+export function reviewSequenceForcedSubset(sequence,query,momentId,{semanticForcedPairsConfirmed=false}={}){
+ if(semanticForcedPairsConfirmed!==true)throw Error('Review every offered forced pair as the same task points, not only the selected anchor.');
+ const proposal=proposeSequencePointChoices(sequence,query),row=proposal.rows.find(r=>r.momentId===momentId);
+ if(!row?.markId||!row.report?.complete)throw Error('A completely searched forced anchor is required before retaining the reviewed subset.');
+ const choice=reviewSequencePointChoice(sequence,query,momentId,{semanticCorrespondenceConfirmed:true});
+ return {...choice,forcedSubsetQuery:{anchorMomentId:query.anchorMomentId,deviationMm:query.deviationMm,maxStates:query.maxStates??20000},forcedSubsetReview:{momentId,semanticForcedPairsConfirmed:true,pairs:row.report.forcedPairs}};
+}
