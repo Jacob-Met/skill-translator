@@ -1,3 +1,5 @@
+import {inspectPathReferencePrediction} from '/src/path-reference-prediction.mjs';
+import {appendPathCircle} from '/web/path-circle-view.mjs';
 import {inspectPathAxisPrediction} from '/src/path-axis-prediction.mjs';
 import {calibrate,toImage} from '/src/geometry.mjs';
 import {createPathComparison,inspectPathCouplingAlternatives} from '/src/path-comparison.mjs';
@@ -6,14 +8,15 @@ import {readPathComparisonBundle,makePathComparisonBundle} from '/web/path-compa
 import {releaseSequenceAssets} from '/web/sequence-input.mjs';
 const $=id=>document.getElementById(id),el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 const ns='http://www.w3.org/2000/svg',svg=(tag,attrs={})=>{const n=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);return n;};
-let axisPrediction=null;
+let axisPrediction=null,referencePrediction=null;
+function clearReferencePrediction(){referencePrediction=null;$('reference-prediction-result').replaceChildren();delete $('reference-prediction-result').dataset.status;}
 let sources=[null,null],accepted=null,findings=null,alternatives=null,activeCoupling=[],revision=0,selected=0;
 const status=s=>{$('status').textContent=s;};
 const mm=v=>`${v!==0&&Math.abs(v)<.0005?v.toExponential(4):v.toFixed(3)} mm`;
-function invalidate(){axisPrediction=null;revision++;accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status('Inputs changed. Compare again to inspect their ordered samples.');}
+function invalidate(){clearReferencePrediction();axisPrediction=null;revision++;accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status('Inputs changed. Compare again to inspect their ordered samples.');}
 function names(){for(let i=0;i<2;i++)$(i?'second-name':'first-name').textContent=sources[i]?`${sources[i].study.sequence.title} · ${sources[i].study.label} · ${sources[i].study.samples.length} selected samples`:'Not opened';}
 function show(study,analysis=inspectPathCouplingAlternatives(study)){
- axisPrediction=null;$('axis-prediction-result').replaceChildren();accepted=study;alternatives=analysis;findings=analysis.original;selected=0;$('result').hidden=false;
+ clearReferencePrediction();axisPrediction=null;$('axis-prediction-result').replaceChildren();accepted=study;alternatives=analysis;findings=analysis.original;selected=0;$('result').hidden=false;
  $('limits').textContent=findings.boundary;$('evidence').textContent=JSON.stringify(study,null,2);
  $('alternative-summary').textContent=`${BigInt(analysis.optimalCouplings).toLocaleString()} computed pairings tie for this minimum. ${analysis.pairs.length} paired sample combinations occur; ${analysis.pairs.filter(p=>p.requiredInEveryOptimalCoupling).length} occur in every minimizing pairing.`;
  $('alternative-limits').textContent=analysis.boundary;
@@ -42,11 +45,13 @@ function draw(){
  $('frames').replaceChildren();
  [pair.firstIndex,pair.secondIndex].forEach((index,side)=>{
   const sample=findings.paths[side].samples[index],figure=el('figure'),view=svg('svg',{viewBox:`0 0 ${sample.image.widthPx} ${sample.image.heightPx}`,role:'img','aria-label':`${side?'Second':'First'} original frame, ${sample.momentLabel}; declared point marked`});
+  figure.dataset.sourceSide=String(side);figure.dataset.momentId=sample.momentId;
   view.append(svg('image',{href:sources[side].assets.get(sample.momentId).media.url,width:sample.image.widthPx,height:sample.image.heightPx}),svg('circle',{cx:sample.sourcePx.x,cy:sample.sourcePx.y,r:Math.max(sample.image.widthPx,sample.image.heightPx)/45,fill:'none',stroke:side?'#c54b40':'#14756a','stroke-width':3}));
   if(axisPrediction?.axis.status==='resolved'){
    const moment=accepted.paths[side].sequence.moments.find(m=>m.id===sample.momentId),source=moment.calibratedTask.source,h=calibrate(source.corners),[a,b]=axisPrediction.axis.endpoints.map(p=>toImage(h,p.xMm/source.widthMm,p.yMm/source.heightMm));
    view.append(svg('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:'#9a4b00','stroke-width':3,'stroke-dasharray':'9 6'}));
   }
+  if(referencePrediction){const moment=accepted.paths[side].sequence.moments.find(m=>m.id===sample.momentId);appendPathCircle(view,moment.calibratedTask.source,referencePrediction.circle.circle,{stroke:'#674bb1'});}
   figure.append(view,el('figcaption',`${side?'Second':'First'}: ${sample.momentLabel} · original presented time ${sample.presentedSeconds} s · ${sample.markLabel}`),el('p',sample.basis));
   const details=el('details');details.append(el('summary','Inspect retained image identity and coordinates'),el('pre',JSON.stringify({image:sample.image,sourcePx:sample.sourcePx,position:sample.position},null,2)));figure.append(details);$('frames').append(figure);
  });
@@ -72,9 +77,10 @@ $('saved').addEventListener('change',async()=>{
  }catch(error){if(received)for(const s of received.sources)releaseSequenceAssets(s.assets);if(token===revision)status(`Input refused: ${error.message} Previous accepted work is unchanged.`);}
 });
 $('editor').addEventListener('input',invalidate);
-$('editor').addEventListener('submit',event=>{event.preventDefault();revision++;try{if(sources.some(s=>!s))throw Error('Open both declared sampled paths first.');show(createPathComparison(...sources.map(s=>s.study),{samePointAndCoordinates:$('confirm').checked,basis:$('basis').value}));}catch(error){accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status(error.message);}});
+$('editor').addEventListener('submit',event=>{event.preventDefault();revision++;try{if(sources.some(s=>!s))throw Error('Open both declared sampled paths first.');show(createPathComparison(...sources.map(s=>s.study),{samePointAndCoordinates:$('confirm').checked,basis:$('basis').value}));}catch(error){clearReferencePrediction();accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status(error.message);}});
 $('save').addEventListener('click',async()=>{if(!accepted)return;const token=revision,study=accepted,current=sources;try{const blob=await makePathComparisonBundle(study,current);if(token!==revision||study!==accepted){status('Inputs changed during saving. No older comparison was downloaded.');return;}const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='demonstrated-path-comparison.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(error){if(token===revision)status(`Cannot save: ${error.message}`);}});
 addEventListener('pagehide',()=>{
+ clearReferencePrediction();
  revision++;for(const s of sources)if(s)releaseSequenceAssets(s.assets);sources=[null,null];accepted=null;findings=null;alternatives=null;activeCoupling=[];selected=0;
  $('result').hidden=true;$('frames').replaceChildren();$('coupling').replaceChildren();$('diagram').replaceChildren();$('evidence').textContent='';
  $('alternative-first').replaceChildren();$('alternative-partners').replaceChildren();$('alternative-summary').textContent='';$('alternative-limits').textContent='';$('witness-kind').textContent='';
@@ -82,9 +88,31 @@ addEventListener('pagehide',()=>{
 });
 
 
-$('predict-axis').addEventListener('click',()=>{if(!accepted)return;try{
+$('predict-axis').addEventListener('click',()=>{if(!accepted)return;clearReferencePrediction();try{
  axisPrediction=inspectPathAxisPrediction(accepted);const r=axisPrediction,target=$('axis-prediction-result');target.replaceChildren();
  target.append(el('p',r.axis.status==='resolved'?`First-source fitted RMS residual: ${mm(r.training.rmsResidualMm)}. Second-source RMS residual: ${mm(r.rmsResidualMm)}; maximum: ${mm(r.maxResidualMm)}.`:`First-source direction ${r.axis.status.replaceAll('-',' ')}. No axis prediction is available.`));
  for(const row of r.rows)target.append(el('p',`${row.momentId} · second-source presented time ${row.presentedSeconds} s · signed perpendicular residual ${row.residualMm===null?'unresolved':mm(row.residualMm)}.`));
  target.append(el('p','Dashed amber segments on the original frame pair show the first-source fitted axis over its training extent. The mathematical reference line is unbounded. Choose any pairing row to inspect its original pixels.'),el('p',r.boundary));draw();status('Second path inspected against the unchanged first-source axis. Neither source nor the ordered comparison changed.');
 }catch(error){axisPrediction=null;$('axis-prediction-result').replaceChildren();draw();status(error.message);}});
+
+$('predict-references').addEventListener('click',()=>{
+ if(!accepted)return;
+ const study=accepted;clearReferencePrediction();
+ try{
+  const r=inspectPathReferencePrediction(study);referencePrediction=r;axisPrediction=r.axis;
+  const target=$('reference-prediction-result');target.dataset.status=r.status;
+  const value=v=>v===null?'unresolved':mm(v);
+  target.append(el('p',`${r.targetCount} original second-source samples; ${r.commonCount} have both supported first-source references. Every sample contributes once, regardless of how often it appears in the ordered pairing.`));
+  target.append(el('p',`First-source straight reference: ${r.axis.axis.status.replaceAll('-',' ')}. Second-source RMS ${value(r.axisSummary.rmsMm)}; maximum ${value(r.axisSummary.maxMm)} (${r.axisSummary.count} samples).`));
+  target.append(el('p',`First-source circular reference: ${r.circle.circle.status.replaceAll('-',' ')}. Second-source RMS ${value(r.circleSummary.rmsMm)}; maximum ${value(r.circleSummary.maxMm)} (${r.circleSummary.count} samples).`));
+  if(r.circle.circle.status==='resolved')target.append(el('p',`First-source circle center (${value(r.circle.circle.center.xMm)}, ${value(r.circle.circle.center.yMm)}); radius ${value(r.circle.circle.radiusMm)}. These parameters are unchanged by the second source.`));
+  const list=el('ol');
+  for(const [index,row]of r.rows.entries()){
+   const item=el('li');item.dataset.targetMoment=row.momentId;
+   item.append(el('span',`${row.momentId} · second-source time ${row.presentedSeconds} s: signed axis residual ${value(row.axisResidualMm)}; signed circle residual ${value(row.circleResidualMm)}. `));
+   const inspect=el('button','Inspect original target frame');inspect.type='button';inspect.addEventListener('click',()=>{if(accepted!==study||referencePrediction!==r)return;selected=activeCoupling.findIndex(pair=>pair.secondIndex===index);draw();$('frames').scrollIntoView({block:'center'});});item.append(inspect);list.append(item);
+  }
+  target.append(list,el('p','Dashed amber segments show the first-source straight reference over its training extent; dashed violet arcs and crosses show the first-source circle within the declared sheet. Both are hypotheses projected onto the original frame pair, not observed intervening motion. No model is selected automatically.'),el('p',r.boundary));
+  draw();status('Both first-source references inspected on the same original second-source samples. No reference was selected or refitted.');
+ }catch(error){clearReferencePrediction();axisPrediction=null;draw();status(error.message);}
+});

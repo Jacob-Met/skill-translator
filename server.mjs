@@ -7,6 +7,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/path-reference-prediction.mjs":["src/path-reference-prediction.mjs","text/javascript; charset=utf-8"],
   "/src/spatial-source-geometry.mjs":["src/spatial-source-geometry.mjs","text/javascript; charset=utf-8"],
   "/src/axis-spatial-correspondence.mjs":["src/axis-spatial-correspondence.mjs","text/javascript; charset=utf-8"],
   "/src/axis-distance-support.mjs":["src/axis-distance-support.mjs","text/javascript; charset=utf-8"],

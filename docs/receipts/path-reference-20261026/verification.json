@@ -1,0 +1,12 @@
+{
+  "base": "f5fc25a1b0c340c5ef1a42fe8f5b824a30e2478c",
+  "nativeGroups": 26,
+  "browserGroups": {
+    "browser": 8,
+    "circle": 9,
+    "axis": 4
+  },
+  "review": "Independent MICROVERSE source/native review plus reversed-traversal control; root composed-source review and actual rendered desktop/narrow inspection.",
+  "CSP": "Unchanged. The old axis receiver initially used waitForFunction and was refused; bounded Node locator polling fixed only the receiver.",
+  "claims": "Conditional original-reference geometry, not matching traversal, physical guide identity, task tolerance or learning benefit."
+}

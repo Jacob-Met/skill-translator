@@ -1,0 +1,71 @@
+{
+  "result": "PASS",
+  "groups": [
+    "ordinary two-source workflow scores nine original target moments exactly once and overlays unchanged first-source references on verified original pixels",
+    "real download and fresh-page source-only replay ignore injected derived findings and preserve both original PNG populations",
+    "changed held-out radius changes residual to seven millimetres while first-source radius stays twenty-three",
+    "wrong source image is refused while the accepted comparison remains intact",
+    "declaration retirement and 390px keyboard recomputation preserve source overlays without horizontal overflow",
+    "existing straight-only inspection remains callable and retires optional comparison overlay",
+    "reversing original sources changes training radius and exact target population explicitly",
+    "short first-source arc refuses circle scoring without turning missing support into zero discrepancy"
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "src/path-reference-prediction.mjs": "7abaf00bb717753ca18ef013184254091638a480cd467a3886954523151fc60d",
+    "src/path-axis-prediction.mjs": "02488c07c47f2c0b50399745ce0c02b2895ec5b39f53f216f143cf3a75e4e608",
+    "src/path-circle.mjs": "5da3052896393e11573ead2d6668697c6ae6438c34eeccbee09981e9b22bd10b",
+    "web/path-comparison.mjs": "07ded93803dc7b3c5fa9f9d3602b813c3b01a362ed664bc6eaae15282c23a873",
+    "web/path-comparison.html": "b061bcf9dcb08ec3a1a20e973e2e3de4f626d84c44816a3aae3b04e4e1a871d5",
+    "web/path-circle-view.mjs": "6b1a303bdca79255cd82476d4cba2d9d34b151532ec725e2d2e0a9048076bce7"
+  },
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-26T00:55:33.943Z",
+    "completedAt": "2026-10-26T00:55:34.034Z",
+    "durationMs": 91.099943,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "BF9907B1DBA4FC4D90D82FB22E7CC0E6",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "3FE0F9A975946765C531807BEBD3D39E"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  }
+}
