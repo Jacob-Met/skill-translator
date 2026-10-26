@@ -45,3 +45,39 @@ test('current scaled matcher support does not change the default fixed-distance 
  for(const row of r.rows.filter(r=>r.report)){assert.equal(row.report.study.format,'skill-translator.spatial-correspondence/v1');assert.equal('model' in row.report.study,false);}
  assert.throws(()=>reviewSequencePointChoice(source,query,'moment-1',{semanticCorrespondenceConfirmed:true}));
 });
+
+async function symmetricSource(){
+ const {calibrate,toImage}=await import('../src/geometry.mjs');
+ const source=original();
+ for(const [i,moment] of source.moments.entries()){
+  const task=moment.calibratedTask,h=calibrate(task.source.corners);
+  // Unequal sides distinguish the apex; the two base points may swap.
+  const points=[[50+i,20+i],[30+i,60+i],[70+i,60+i]];
+  task.landmarks=task.landmarks.slice(0,3);
+  task.landmarks.forEach((mark,j)=>{mark.sourcePx=toImage(h,points[j][0]/100,points[j][1]/100);});
+ }
+ return source;
+}
+test('a forced apex is offered without promoting the two surviving full mappings',async()=>{
+ const source=await symmetricSource(),before=JSON.stringify(source),r=proposeSequencePointChoices(source,query);
+ assert.ok(r.rows.slice(1).every(row=>row.status==='ambiguous'&&row.proposalKind==='forced-anchor'&&row.report.completeMappingCount===2));
+ assert.deepEqual(r.rows.map(row=>row.markId),source.moments.map(m=>m.calibratedTask.landmarks[0].id));
+ const reviews=r.rows.slice(1).map(row=>reviewSequencePointChoice(source,query,row.momentId,{semanticCorrespondenceConfirmed:true}));
+ assert.ok(reviews.every(r=>!r.reviewedMapping&&r.anchorOnlyReview.completeMappingCount===2));
+ const path=createSequencePath(source,{label:'Only reviewed apex',reference,samples:[reviews[0].anchor,...reviews.map(r=>r.sample)]});
+ const report=inspectSequencePath(path);assert.equal(report.samples.length,4);
+ for(let i=0;i<4;i++){assert.ok(Math.abs(report.samples[i].position.xMm-(50+i))<1e-8);assert.ok(Math.abs(report.samples[i].position.yMm-(20+i))<1e-8);}
+ const {createReviewedPointPaths}=await import('../src/reviewed-point-paths.mjs');
+ assert.throws(()=>createReviewedPointPaths(path,reviews));
+ assert.deepEqual(importSequencePath(JSON.parse(JSON.stringify(path))),path);assert.equal(JSON.stringify(source),before);
+});
+test('ambiguous base, exhausted search and changed constellation cannot inherit a forced apex',async()=>{
+ const source=await symmetricSource(),q={...query,anchorMarkId:source.moments[0].calibratedTask.landmarks[1].id};
+ assert.ok(proposeSequencePointChoices(source,q).rows.slice(1).every(r=>r.status==='ambiguous'&&r.markId===null));
+ assert.throws(()=>reviewSequencePointChoice(source,q,'moment-1',{semanticCorrespondenceConfirmed:true}));
+ assert.throws(()=>reviewSequencePointChoice(source,query,'moment-1'));
+ assert.ok(proposeSequencePointChoices(source,{...query,maxStates:1}).rows.slice(1).every(r=>r.markId===null));
+ const changed=structuredClone(source);changed.moments[1].calibratedTask.landmarks[0].sourcePx.x+=20;
+ assert.equal(proposeSequencePointChoices(changed,query).rows[1].markId,null);
+ assert.throws(()=>reviewSequencePointChoice(changed,query,'moment-1',{semanticCorrespondenceConfirmed:true}));
+});

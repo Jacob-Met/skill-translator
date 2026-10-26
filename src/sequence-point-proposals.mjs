@@ -14,14 +14,21 @@ export function proposeSequencePointChoices(sequence,{anchorMomentId,anchorMarkI
   const observation=moment.calibratedTask;
   if(!observation||observation.landmarks.length<3||observation.landmarks.length>7)return {momentId:moment.id,status:'unavailable-constellation',markId:null};
   const report=inspectSpatialCorrespondence({format:SPATIAL_CORRESPONDENCE_FORMAT,reference,observation,deviationMm,maxStates});
-  return {momentId:moment.id,status:report.status,markId:report.status==='unique'?report.forcedPairs.find(p=>p.referenceId===anchorMarkId).observationId:null,report};
+  const forced=report.complete?report.forcedPairs.find(p=>p.referenceId===anchorMarkId):null;
+  return {momentId:moment.id,status:report.status,markId:forced?.observationId??null,
+   proposalKind:forced?(report.status==='unique'?'complete-mapping':'forced-anchor'):null,report};
  });
  return {source,query:{anchorMomentId,anchorMarkId,momentIds:[...momentIds],deviationMm,maxStates},rows};
 }
 export function reviewSequencePointChoice(sequence,query,momentId,{semanticCorrespondenceConfirmed=false}={}){
- if(semanticCorrespondenceConfirmed!==true)throw Error('Review whether this complete mapping denotes the same task points.');
+ if(semanticCorrespondenceConfirmed!==true)throw Error('Review whether the offered point correspondence denotes the same task point.');
  const proposal=proposeSequencePointChoices(sequence,query),row=proposal.rows.find(r=>r.momentId===momentId);
- if(row?.status!=='unique')throw Error('A complete unique mapping for a selected non-anchor moment is required.');
+ if(!row?.markId||!row.report?.complete)throw Error('A completely searched forced point correspondence for a selected non-anchor moment is required.');
+ if(row.proposalKind==='forced-anchor')return {
+  anchorOnlyReview:{referenceId:query.anchorMarkId,observationId:row.markId,completeMappingCount:row.report.completeMappingCount},
+  anchor:{momentId:query.anchorMomentId,markId:query.anchorMarkId,basis:'Original anchor point explicitly selected by the author.'},
+  sample:{momentId:row.momentId,markId:row.markId,basis:'Authored point choice after review of the selected anchor correspondence shared by every compatible complete pair-distance mapping. Other point identities remain ambiguous; no complete mapping was reviewed. The common fixed plane and corner meanings are independently declared.'}
+ };
  const reviewedMapping=createReviewedSpatialMapping(row.report.study,{semanticCorrespondenceConfirmed:true});
  return {reviewedMapping,anchor:{momentId:query.anchorMomentId,markId:query.anchorMarkId,basis:'Original anchor point explicitly selected by the author.'},sample:{momentId:row.momentId,markId:row.markId,basis:'Authored point choice after review of a complete unique pair-distance mapping of the original annotations. The common fixed plane and corner meanings are independently declared.'}};
 }
