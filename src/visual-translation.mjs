@@ -2,7 +2,8 @@
 import {compareSamplePixels, inspectVisualScan} from './visual-scan.mjs';
 
 export const TRANSLATION_RADIUS = 4;
-export const MAX_TRANSLATION_RADIUS = 6;
+export const WIDE_TRANSLATION_RADIUS = 16;
+export const MAX_TRANSLATION_RADIUS = WIDE_TRANSLATION_RADIUS;
 
 /** Minimize the maintained median-brightness RGB L1 metric over integer shifts.
  * Every candidate uses exactly the same reference pixels; neither wrapping nor

@@ -2,7 +2,7 @@ import {inspectTranslatedScan} from '/src/visual-translation.mjs';
 
 self.onmessage = ({data}) => {
   try {
-    const result = inspectTranslatedScan(data.plan, data.samples, undefined,
+    const result = inspectTranslatedScan(data.plan, data.samples, data.options,
       (completed, total) => self.postMessage({type: 'progress', completed, total}));
     self.postMessage({type: 'result', result});
   } catch (error) {
