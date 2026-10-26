@@ -33,6 +33,20 @@ test('full workbench directory exposes every maintained HTML workbench through l
     const page = await directory.text();
     const links = [...page.matchAll(/data-workbench-link href="(\/[^"]+)"/g)].map(match => match[1]);
     assert.equal(links.length, expected.size, 'one discoverable link per maintained workbench');
+    const total = page.match(/id="workbenchCount"[^>]*>(\d+) workbenches available\./);
+    assert.ok(total, 'initial accessible count must be declared for no-script loading');
+    assert.equal(Number(total[1]), links.length, 'initial count must match actual destinations');
+    const sections = [...page.matchAll(/<section class="workbench-section"[^>]*>[\s\S]*?<\/section>/g)];
+    assert.ok(sections.length >= 3, 'all directory groups retain their labels');
+    let groupedLinks = 0;
+    for (const section of sections) {
+      const headerCount = section[0].match(/class="workbench-section-count">\((\d+)\)<\/span>/);
+      assert.ok(headerCount, 'each workbench group declares a count');
+      const actualCount = [...section[0].matchAll(/data-workbench-link href=/g)].length;
+      assert.equal(Number(headerCount[1]), actualCount, 'group count must match its links');
+      groupedLinks += actualCount;
+    }
+    assert.equal(groupedLinks, links.length, 'group accounting covers the directory');
     assert.deepEqual(new Set(links), expected, 'no maintained workbench is silently omitted or invented');
     for (const link of links) {
       const response = await fetch(base + link);
