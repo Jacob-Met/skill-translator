@@ -1,3 +1,4 @@
+import {showPathCircle,clearPathCircle} from '/web/path-circle-view.mjs';
 import {showPathAxis} from '/web/path-axis-view.mjs';
 import {proposePathSummary} from '/src/path-summary.mjs';
 import {mountPathReturns} from '/web/path-returns-view.mjs';
@@ -7,9 +8,9 @@ import {releaseSequenceAssets,makeSequenceBundle} from '/web/sequence-input.mjs'
 const $=id=>document.getElementById(id),el=(tag,value)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=value;return n;};
 let source=null,accepted=null,revision=0,assets=new Map();
 const status=message=>{$('status').textContent=message;};
-function invalidate(){revision++;accepted=null;$('result').hidden=true;status('Declarations changed. Inspect selected samples to recompute.');}
+function invalidate(){revision++;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;status('Declarations changed. Inspect selected samples to recompute.');}
 function sourceForm(sequence,study=null){
- source=sequence;accepted=null;$('result').hidden=true;$('editor').hidden=false;$('source-name').textContent=sequence.title;
+ source=sequence;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;$('editor').hidden=false;$('source-name').textContent=sequence.title;
  $('point-label').value=study?.label??'';$('reference-label').value=study?.reference.label??'';$('reference-basis').value=study?.reference.basis??'';$('reference-confirm').checked=study?.reference.samePlaneAndCorners??false;
  $('samples').replaceChildren();
  for(const moment of sequence.moments){
@@ -37,7 +38,7 @@ function show(study){
   row?.scrollIntoView({block:'center'});row?.querySelector('.mark').focus({preventScroll:true});
  });
  returnSection.dataset.pathReturns='true';
- const findings=inspectSequencePath(study);accepted=study;$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
+ const findings=inspectSequencePath(study);accepted=study;clearPathCircle($('circle-result'));$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
  $('summary').textContent=`Endpoint distance: ${mm(findings.endpointDistanceMm)}. Complete sampled-path sum: ${mm(findings.sampledPathDistanceMm)}. Observed adjacent chords: ${findings.observedSegmentCount} of ${findings.segments.length}; their covered sum is ${mm(findings.coveredChordDistanceMm)}.`;
  $('segments').replaceChildren();
  for(const s of findings.segments){const row=el('tr');for(const value of [`${s.fromMomentId} → ${s.toMomentId}`,`${s.elapsedSeconds} s`,s.distanceMm===null?'Missing observation':mm(s.distanceMm),s.delta?`${mm(s.delta.xMm)}, ${mm(s.delta.yMm)}`:'Unavailable'])row.append(el('td',value));$('segments').append(row);}
@@ -59,7 +60,7 @@ function draw(findings){
  $('diagram').append(svg,el('p','Equal scale on x and y. Labels give selected sample order; colocated drawing labels are grouped without changing coordinates. +y follows the declared sheet coordinates.'));
 }
 $('editor').addEventListener('input',invalidate);
-$('editor').addEventListener('submit',event=>{event.preventDefault();revision++;try{const samples=[...$('samples').children].filter(row=>row.querySelector('.include').checked).map(row=>({momentId:row.dataset.moment,markId:row.querySelector('.mark').value||null,basis:row.querySelector('.basis').value}));show(importSequencePath(createSequencePath(source,{label:$('point-label').value,reference:{label:$('reference-label').value,basis:$('reference-basis').value,samePlaneAndCorners:$('reference-confirm').checked},samples})));}catch(error){accepted=null;$('result').hidden=true;status(error.message);}});
+$('editor').addEventListener('submit',event=>{event.preventDefault();revision++;try{const samples=[...$('samples').children].filter(row=>row.querySelector('.include').checked).map(row=>({momentId:row.dataset.moment,markId:row.querySelector('.mark').value||null,basis:row.querySelector('.basis').value}));show(importSequencePath(createSequencePath(source,{label:$('point-label').value,reference:{label:$('reference-label').value,basis:$('reference-basis').value,samePlaneAndCorners:$('reference-confirm').checked},samples})));}catch(error){accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;status(error.message);}});
 $('input').addEventListener('change',async()=>{const token=++revision,file=$('input').files[0];$('input').value='';if(!file)return;let received;status('Reading new input; existing accepted evidence is retained until admission.');try{received=await readSampledPathBundle(file);if(token!==revision){releaseSequenceAssets(received.assets);return;}releaseSequenceAssets(assets);assets=received.assets;sourceForm(received.sequence,received.study);if(received.study)show(received.study);else status('Original sequence opened with verified PNG frames. Declare the reference and select matched or missing samples.');}catch(error){if(received)releaseSequenceAssets(received.assets);if(token===revision)status(`Input refused: ${error.message}. Previous accepted evidence is unchanged.`);}});
 async function save(original){if(!accepted)return;const token=revision,current=accepted;try{const blob=original?await makeSequenceBundle(current.sequence,assets):await makeSampledPathBundle(current,assets);if(token!==revision||accepted!==current){status('Declarations changed while saving. No older account was downloaded.');return;}download(blob,original?'original-demonstration.json':'sampled-path.json');}catch(error){if(token===revision)status(`Cannot save: ${error.message}`);}}
 $('save').addEventListener('click',()=>save(false));
@@ -92,3 +93,5 @@ $('compact-propose').addEventListener('click',()=>{
 $('infer-axis').addEventListener('click',()=>{if(!accepted)return;try{showPathAxis($('axis-result'),accepted,assets);status('Straight-axis hypothesis recomputed from original selected points; no source or criterion changed.');}catch(error){$('axis-result').replaceChildren();status(error.message);}});
 
 
+
+$('infer-circle').addEventListener('click',()=>{if(!accepted)return;try{showPathCircle($('circle-result'),accepted,assets);status('Circular reference recomputed from original selected samples. Inspect residuals and held-out sensitivity; this is not a physical rotation claim.');}catch(error){clearPathCircle($('circle-result'));status(error.message);}});

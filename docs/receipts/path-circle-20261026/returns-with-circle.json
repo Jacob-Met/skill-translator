@@ -1,0 +1,793 @@
+{
+  "result": "PASS",
+  "tests": [
+    "ordinary sequence navigation imports all exact original PNG frames",
+    "intermediate excursion yields10mm sampled chord sum despite0mm endpoints",
+    "original departure/return proposal, witness inspection and changed-radius negative control",
+    "actual complete download reopens with exact original PNG bytes and recomputed native findings",
+    "missing interior breaks chords and refuses manufactured return",
+    "wrong retained PNG refuses transactionally without replacing accepted work",
+    "a later declaration edit cancels delayed original-source receiving",
+    "390px and keyboard declarations preserve source frames and recompute accepted geometry",
+    "strict maintained CSP and actual browser have no page exceptions"
+  ],
+  "errors": [],
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "requests": [],
+  "network": [
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/sequence",
+      "resourceType": "document"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/sequence",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/sequence.css",
+      "resourceType": "stylesheet"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/narration-moments.css",
+      "resourceType": "stylesheet"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/sequence.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/sequence.css",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/narration-moments.css",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/sequence.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/narration-moments.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/audio-activity.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/demonstration-sequence.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/sequence-capture.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/practice.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/frame-origin.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/video-input.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/image-input.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/sequence-input.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/visual-scan.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/narration-moments.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/narration-clock.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/timed-narration.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/narration-moments.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/sequence-capture.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/capture-editing.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/capture.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/audio-activity.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/frame-origin.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/audio-activity.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/interval-playback.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/demonstration-sequence.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/practice.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/geometry.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/learner-observation.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/image-input.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/video-input.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/sequence-input.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/narration-clock.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/visual-scan.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/timed-narration.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/visual-scan.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/narration-clock.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/scan-change-regions.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/visual-span-view.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/subtitles.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/narration-moments.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/capture-editing.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/capture.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/audio-activity.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/geometry.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/interval-playback.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/authoring.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/learner-observation.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/visual-scan.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/scan-change-regions.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/scan-change-regions.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/narration-clock.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/authoring.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/visual-span-view.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/subtitles.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/visual-span.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/core.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/scan-change-regions.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/vendor/microverse/pixel-observations.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/visual-span.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/core.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/vendor/microverse/pixel-observations.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/cue-index.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/word-timing.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/sound-motion.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/cue-index.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/word-timing.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/vendor/captionverse/sound-motion.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/sampled-path",
+      "resourceType": "document"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/sampled-path",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/sampled-path.css",
+      "resourceType": "stylesheet"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/sampled-path.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/sampled-path.css",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/sampled-path.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/path-circle-view.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/path-axis-view.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/path-summary.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/path-returns-view.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/sequence-path.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/sampled-path-input.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/sequence-input.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/path-circle-view.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/path-summary.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/path-returns-view.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/sequence-path.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/sampled-path-input.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/path-axis-view.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/sequence-input.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/path-circle.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/geometry.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/path-returns.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/demonstration-sequence.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/capture.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/path-axis.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/web/image-input.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/path-returns.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/path-axis.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/geometry.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/demonstration-sequence.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/path-circle.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/capture.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/frame-origin.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/sequence-capture.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/capture-editing.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/vendor/materialtruth/photometric.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:40809/src/authoring.mjs",
+      "resourceType": "script"
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/web/image-input.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/frame-origin.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/sequence-capture.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/capture-editing.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/src/authoring.mjs",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:40809/vendor/materialtruth/photometric.mjs",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/27a70909-612c-4687-9a81-65053b53a664",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/27a70909-612c-4687-9a81-65053b53a664",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/5852995b-b2dd-43be-a99a-60931f70040b",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/5852995b-b2dd-43be-a99a-60931f70040b",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/a592716f-9326-4403-bc9e-0dc42a22b650",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/a592716f-9326-4403-bc9e-0dc42a22b650",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/c08b473d-5d26-4f87-935b-43bd0cf52020",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/c08b473d-5d26-4f87-935b-43bd0cf52020",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/909e68bb-35f1-44e8-ba59-a60dc98fe3ad",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/909e68bb-35f1-44e8-ba59-a60dc98fe3ad",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/941d6f21-c91c-4506-aad5-cdda138ce596",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/941d6f21-c91c-4506-aad5-cdda138ce596",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/4e03319a-77c4-4fb2-b5cb-ee2e02cdb80c",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/4e03319a-77c4-4fb2-b5cb-ee2e02cdb80c",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/34bd88a2-d2cc-4926-9a3b-e1e97c64b167",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/34bd88a2-d2cc-4926-9a3b-e1e97c64b167",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/9262d41b-fc86-4368-85c2-69e0e2e774f0",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/9262d41b-fc86-4368-85c2-69e0e2e774f0",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/a29a70bb-512d-4ca3-8de2-3a6b5c332ec1",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/a29a70bb-512d-4ca3-8de2-3a6b5c332ec1",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/47917ec8-f1d1-44c1-a493-323e2c2cf548",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/47917ec8-f1d1-44c1-a493-323e2c2cf548",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/9603c0ec-bc6c-4830-9d65-c94880b2a848",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/9603c0ec-bc6c-4830-9d65-c94880b2a848",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/906b2010-130c-40d4-8c71-2c962ab58de4",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/906b2010-130c-40d4-8c71-2c962ab58de4",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/bb10968a-c4c3-4375-ad26-4a4c9299555c",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/bb10968a-c4c3-4375-ad26-4a4c9299555c",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/366dd64e-9bd3-43e3-839b-c4575710a904",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/366dd64e-9bd3-43e3-839b-c4575710a904",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/03a28d6f-1270-465f-8475-53fee1debf5e",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/03a28d6f-1270-465f-8475-53fee1debf5e",
+      "status": 200
+    },
+    {
+      "event": "request",
+      "url": "blob:http://127.0.0.1:40809/0c9fff9f-10ef-4264-8755-4d2baf4c7f05",
+      "resourceType": "image"
+    },
+    {
+      "event": "response",
+      "url": "blob:http://127.0.0.1:40809/0c9fff9f-10ef-4264-8755-4d2baf4c7f05",
+      "status": 200
+    }
+  ],
+  "csp": [],
+  "sourceHashes": {
+    "src/path-returns.mjs": "dc596ea72f181aa9ad7146c247a8050f6cbfe00983b8dace23a6277ff989b6ce",
+    "web/path-returns-view.mjs": "5d18f64865d1529d19f8afac8b684bda871cb1ae8d9f7d43474dd390d1bdf166",
+    "tools/browser-path-returns.mjs": "2f2a866fed463467338c2d47dc7736bcf65894861108f0f8fbc805a18c183fe4",
+    "test/path-returns.test.mjs": "691d0a85ffca16e82d8bdb992de155fdfed3d46b8650d975ded1d5194df398da",
+    "docs/PATH_RETURNS.md": "ee88f256502cc411a5b0dcd24e24458dcf669a4168a882714b77f329839503d4",
+    "src/sequence-path.mjs": "45d8e5fbd143a9c25d51796c0cccb99d815569e42fb801b5fc83ec859183bda4",
+    "web/sampled-path.mjs": "d4135bd13209d878d28fb2b419f0cca8c2824a44f7cbe47602c6370a474a56ac",
+    "web/sampled-path-input.mjs": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3",
+    "web/sampled-path.html": "a54b84008a5131dd0e07ebc248ce974bed2f0ad1d9db379f30b40e4ee1d1d3dd",
+    "web/sampled-path.css": "5f656635563fd20ba8ccaf56098ee1666101b3f8e2e223085ed2de336c4b7ce6",
+    "server.mjs": "abf010b3cdf1f962f6c55db164408c4b8c914360a1822418344db150ba153eef",
+    "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+    "src/capture.mjs": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+  },
+  "browser": "156.0.8078.47",
+  "sandboxEnabled": true
+}

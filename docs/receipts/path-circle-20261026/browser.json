@@ -1,0 +1,70 @@
+{
+  "result": "PASS",
+  "tests": [
+    "eight original PNG hashes and exact original mark overlays preserved while center/radius inferred with no new anchors",
+    "actual download/source-only reopen preserves bytes and recomputes rather than admitting poisoned derived result",
+    "changed correspondence retires prior evidence and missing sample stays explicit",
+    "wrong original image rejected without discarding accepted evidence",
+    "390px keyboard inference retains original-pixel overlays without horizontal overflow",
+    "new original source shifts visible inferred center appropriately",
+    "short-arc control displays no usable circle while retaining original samples",
+    "ellipse keeps large radial disagreement visibly instead of claiming circular agreement"
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "src/path-circle.mjs": "5da3052896393e11573ead2d6668697c6ae6438c34eeccbee09981e9b22bd10b",
+    "web/path-circle-view.mjs": "693083b9f01aa685c8fa73e1b443c2cfc2df75ce27c3f3303b57b30cc253d192",
+    "web/sampled-path.mjs": "893bd51d7515ccc0b5191f64f7a1335462f9c867b65a47ce34e6a6835253a179",
+    "web/sampled-path.html": "a54b84008a5131dd0e07ebc248ce974bed2f0ad1d9db379f30b40e4ee1d1d3dd",
+    "vendor/materialtruth/photometric.mjs": "dd005dfe4dda481e01666085b225b5b3140b4fe757dcc4fa583b01202b3192a2"
+  },
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+    "startedAt": "2026-10-26T00:20:36.479Z",
+    "completedAt": "2026-10-26T00:20:36.575Z",
+    "durationMs": 96.60728899999998,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "A6CFB348FA6FE181F1F4280217E99F1F",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "7A0BB768C42D860A6BA49F497BC436D9"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  }
+}

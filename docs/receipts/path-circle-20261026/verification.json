@@ -1,0 +1,32 @@
+{
+  "kind": "Premerge current-main composition, fresh published receiving separately required",
+  "base": "9196d97972c502ca775ff80b36ae267570cb2100",
+  "environment": "Linux, Node22.23.4, Chrome156 with active namespace/seccomp sandbox",
+  "native_groups": 28,
+  "browser_groups": 8,
+  "failures_retained": [
+    "Initial waitForFunction required eval rejected by unchanged CSP",
+    "fetch of protected image URLs was rejected; receiver now observes actual native Blob custody without fetch",
+    "Receiver incorrectly assumed data URLs; actual Blob URLs retained and verified",
+    "No product CSP or sandbox relaxation"
+  ],
+  "hashes": {
+    "src/path-circle.mjs": "5da3052896393e11573ead2d6668697c6ae6438c34eeccbee09981e9b22bd10b",
+    "web/path-circle-view.mjs": "693083b9f01aa685c8fa73e1b443c2cfc2df75ce27c3f3303b57b30cc253d192",
+    "test/path-circle.test.mjs": "7110465632a009b9701cc1a79cfa4bbb49c7f717424260dd535c0617da2a8702",
+    "web/sampled-path.mjs": "893bd51d7515ccc0b5191f64f7a1335462f9c867b65a47ce34e6a6835253a179",
+    "web/sampled-path.html": "a54b84008a5131dd0e07ebc248ce974bed2f0ad1d9db379f30b40e4ee1d1d3dd",
+    "vendor/materialtruth/photometric.mjs": "dd005dfe4dda481e01666085b225b5b3140b4fe757dcc4fa583b01202b3192a2",
+    "vendor/materialtruth/README.md": "ed20f15b41dd89585e552637e6461be817e15a5b92163f8d878e6eb477d8fa17",
+    "vendor/materialtruth/source.json": "0e5e000750ade5b8b0f70f8b1513b262d33ebffe88bac88d056eb4d49de917d4",
+    "server.mjs": "77219cf6e0a1c726512ce2a3c167f546c8811bfde2c37956b47d274337cbfa03",
+    "docs/PATH_CIRCLE.md": "1525a7fade15c01b0c76b5d79ef45b4c75cad944c0b926d7e5faeed98b6751dd",
+    "tools/browser-path-circle.mjs": "1474545c1d7f044b7943c0293954c1b8a4d56f22bb7c7b0f55dc513b1e6f7399",
+    "docs/receipts/path-circle-20261026/browser.json": "7240d21cc5618b5b2ec7d1f1c613943459e729ef54ecfe79a9c31208b34c1bf0"
+  },
+  "screenshots": {
+    "desktop.png": "d0ef6e530cb7856469bc66f81ee7fb5b23719b51882a78791de27b6142e53833",
+    "narrow.png": "911d844dda90b85fba2abc2682f3cf2b962431db012a18c0a911d79e1ade1388"
+  },
+  "qualification": "Authored software/source receiving; not natural-scene accuracy, physical measurement or deployed-service verification"
+}
