@@ -37,7 +37,7 @@ export function installPointProposals({getSource,getAssets,onChange}){
       const choice=reviewSequencePointChoice(source,input,row.momentId,{semanticCorrespondenceConfirmed:confirm.checked});
       for(const sample of [choice.anchor,choice.sample]){
        const row=rowFor(sample.momentId),select=row.querySelector('.mark'),basis=row.querySelector('.basis');
-       const preserveAnchor=sample.momentId===input.anchorMomentId&&select.value===sample.markId&&basis.value&&!generated.has(row);
+       const preserveAnchor=sample.momentId===input.anchorMomentId&&select.value===sample.markId&&basis.value&&(!generated.has(row)||basis.value!==generated.get(row));
        select.value=sample.markId;select.dispatchEvent(new Event('change'));
        if(!preserveAnchor){basis.value=sample.basis;generated.set(row,sample.basis);}
       }

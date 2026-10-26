@@ -7,6 +7,10 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/spatial-source-geometry.mjs":["src/spatial-source-geometry.mjs","text/javascript; charset=utf-8"],
+  "/src/axis-spatial-correspondence.mjs":["src/axis-spatial-correspondence.mjs","text/javascript; charset=utf-8"],
+  "/src/axis-distance-support.mjs":["src/axis-distance-support.mjs","text/javascript; charset=utf-8"],
+  "/web/spatial-correspondence-worker.mjs":["web/spatial-correspondence-worker.mjs","text/javascript; charset=utf-8"],
   "/src/sequence-point-proposals.mjs":["src/sequence-point-proposals.mjs","text/javascript; charset=utf-8"],
   "/web/sequence-point-proposals-view.mjs":["web/sequence-point-proposals-view.mjs","text/javascript; charset=utf-8"],
   "/demonstration-practice":["web/demonstration-practice.html","text/html; charset=utf-8"],
