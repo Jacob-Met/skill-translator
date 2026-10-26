@@ -21,15 +21,16 @@ export function installPointProposals({getSource,getAssets,onChange}){
   try{
    if(!$('point-pair-bound').value.trim()||!$('point-search-budget').value.trim())throw Error('Supply the discrepancy and complete-search budget.');
    const input=query(),report=proposeSequencePointChoices(source,input);pending={source,input,key:JSON.stringify(input)};
-   const target=$('point-proposals'),anchor=source.moments.find(m=>m.id===input.anchorMomentId),count=report.rows.filter(r=>r.status==='unique').length;
-   target.append(el('p',`${count} selected non-anchor frames have a complete unique geometric mapping. Each offered mapping requires its own task-point review. The common reference declaration is unchanged.`));
+   const target=$('point-proposals'),anchor=source.moments.find(m=>m.id===input.anchorMomentId),count=report.rows.filter(r=>r.markId&&r.status!=='anchor').length;
+   target.append(el('p',`${count} selected non-anchor frames have a forced anchor choice after complete search. Review each offered point identity; other points can remain ambiguous. The common reference declaration is unchanged.`));
    for(const row of report.rows){
     if(row.status==='anchor')continue;
     const moment=source.moments.find(m=>m.id===row.momentId),card=el('article');card.dataset.moment=row.momentId;card.append(el('h3',moment.label));
-    if(row.status!=='unique'){card.append(el('p',`No point choice offered: ${row.status.replaceAll('-',' ')}. Keep or edit the ordinary point/missing-observation field yourself.`));target.append(card);continue;}
-    const pairs=row.report.witnessMappings[0],views=el('div');views.className='grid';views.append(picture(anchor,pairs,'referenceId'),picture(moment,pairs,'observationId'));card.append(views);
+    if(!row.markId){card.append(el('p',`No point choice offered: ${row.status.replaceAll('-',' ')}. Keep or edit the ordinary point/missing-observation field yourself.`));target.append(card);continue;}
+    const anchorOnly=row.proposalKind==='forced-anchor',pairs=anchorOnly?[{referenceId:input.anchorMarkId,observationId:row.markId}]:row.report.witnessMappings[0],views=el('div');views.className='grid';views.append(picture(anchor,pairs,'referenceId'),picture(moment,pairs,'observationId'));card.append(views);
+    if(anchorOnly)card.append(el('p',`${row.report.completeMappingCount} complete geometric mappings remain. Every one agrees on this selected anchor; the complete mapping remains ambiguous. Only this pair is highlighted and offered for review.`));
     const list=el('ol');for(const pair of pairs)list.append(el('li',`${pair.referenceId} → ${pair.observationId}`));card.append(list,el('p',`Selected anchor ${input.anchorMarkId} proposes local mark ${row.markId}. Pair-distance agreement does not establish task identity or a common coordinate frame.`));
-    const confirm=el('input');confirm.type='checkbox';confirm.className='point-semantic-confirm';const label=el('label');label.append(confirm,document.createTextNode(' I reviewed this complete mapping as the same task points.'));const use=el('button','Use reviewed point choice');use.type='button';use.disabled=true;const feedback=el('p');feedback.setAttribute('role','status');
+    const confirm=el('input');confirm.type='checkbox';confirm.className='point-semantic-confirm';const label=el('label');label.append(confirm,document.createTextNode(anchorOnly?' I reviewed this anchor pair as the same task point; the complete mapping remains ambiguous.':' I reviewed this complete mapping as the same task points.'));const use=el('button','Use reviewed point choice');use.type='button';use.disabled=true;const feedback=el('p');feedback.setAttribute('role','status');
     confirm.addEventListener('input',()=>{use.disabled=!confirm.checked;if(!confirm.checked){retire(rowFor(row.momentId));feedback.textContent='Review withdrawn; an unchanged generated basis has been retired.';onChange();}});
     use.addEventListener('click',()=>{
      try{
@@ -48,5 +49,5 @@ export function installPointProposals({getSource,getAssets,onChange}){
    }
   }catch(error){$('point-proposals').append(el('p',`Proposal unavailable: ${error.message}`));}
  });
- return {reset,accept(){const retained=[...reviewedRecords.values()];generated.clear();reviewedRecords.clear();pending=null;$('point-proposals').replaceChildren();return retained;}};
+ return {reset,accept(){const records=[...reviewedRecords.values()],retained=records.every(r=>r.reviewedMapping)?records:[];generated.clear();reviewedRecords.clear();pending=null;$('point-proposals').replaceChildren();return retained;}};
 }
