@@ -8,6 +8,7 @@ import {frameOrigin} from '/src/frame-origin.mjs';
 import {loadLocalVideo,releaseVideo as releaseLocalVideo,capturePresentedFrame} from '/web/video-input.mjs';
 import {loadLocalImage,releaseImage} from '/web/image-input.mjs';
 import {makeSequenceBundle,readSequenceBundle,releaseSequenceAssets,exportMomentFrame,MAX_FRAME_BYTES} from '/web/sequence-input.mjs';
+import {makePrintableLesson} from '/web/printable-lesson.mjs';
 import {createVisualScanner} from '/web/visual-scan.mjs';
 
 const $=id=>document.getElementById(id);
@@ -44,6 +45,7 @@ function syncButtons(){
   $('save-step').disabled=busy||!sequence||sequence.moments.length<2;
   $('export-sequence').disabled=busy||!sequence?.steps.length||stepDirty||Boolean(editingMoment);
   $('practice-decisions').disabled=$('export-sequence').disabled;
+  $('print-lesson').disabled=$('export-sequence').disabled;
   $('draft-status').textContent=stepDirty?'Unsaved step draft. Save or clear it before exporting.':editingStep?'Editing the selected step. Its retained frame identities stay unchanged.':sequence?.moments.length>=2?'Choose the evidence, then describe the intended change.':'Retain two moments to explain a change.';
   for(const button of document.querySelectorAll('.moment-actions button,.detail-heading button'))button.disabled=busy;
   const moment=calibrationMoment(),task=moment?.calibratedTask;
@@ -228,6 +230,22 @@ $('export-sequence').addEventListener('click',async()=>{
     if(version!==revision){status('Work changed while saving. Save again to include the current account.');return;}
     const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='demonstration-sequence.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
     status('Saved the authored account with its exact retained PNG frames. Keep the original video separately.');
+  }catch(error){reportFailure(request,error);}finally{endIO(request);}
+});
+$('print-lesson').addEventListener('click',async()=>{
+  if(!sequence||!sequence.steps.length||stepDirty||editingMoment)return;
+  let next;
+  try{next=validateSequence({...sequence,title:$('sequence-title').value,context:$('sequence-context').value});commit(next);}
+  catch(error){status(error.message);return;}
+  const request=beginIO(),version=revision,snapshot=new Map(assets);
+  try{
+    const sourceBundle=await makeSequenceBundle(next,snapshot,{signal:request.signal});
+    if(!current(request))return;
+    const lesson=await makePrintableLesson(sourceBundle,{signal:request.signal});
+    if(!current(request))return;
+    if(version!==revision){status('The account changed while preparing the lesson. Save again to include the current evidence.');return;}
+    download(lesson,'demonstration-lesson.html');
+    status('Saved a standalone printable lesson with every verified source PNG and authored step. Save the editable sequence JSON separately if it needs revision.');
   }catch(error){reportFailure(request,error);}finally{endIO(request);}
 });
 $('practice-decisions').addEventListener('click',async()=>{
