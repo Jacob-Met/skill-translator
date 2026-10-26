@@ -6,6 +6,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/demonstration-practice":["web/demonstration-practice.html","text/html; charset=utf-8"],
+  "/src/demonstration-practice.mjs":["src/demonstration-practice.mjs","text/javascript; charset=utf-8"],
+  "/web/demonstration-practice.mjs":["web/demonstration-practice.mjs","text/javascript; charset=utf-8"],
   "/raw-rule-proposals":["web/raw-rule-proposals.html","text/html; charset=utf-8"],
   "/src/raw-rule-proposals.mjs":["src/raw-rule-proposals.mjs","text/javascript; charset=utf-8"],
   "/web/raw-rule-proposals.mjs":["web/raw-rule-proposals.mjs","text/javascript; charset=utf-8"],

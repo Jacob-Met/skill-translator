@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "chromiumSandbox": true,
+  "uid": 65534,
+  "tests": [
+    "actual maintained practice agrees with all three unresolved demonstrated rules",
+    "changed target distinguishes surviving rules while original failed score remains",
+    "source-only saved comparison recomputes with actual placements and original pixels at390px",
+    "replacement evidence retires the actual comparison",
+    "actual wrong placement cannot report conditional agreement",
+    "fresh missing round stays unscored and original actual prior round remains selectable",
+    "foreign source session cannot supply an apparently valid comparison",
+    "existing saved raw proposal and actual inferred-source practice replay without manual unwrapping",
+    "new accepted source retires an older pending practice-file read"
+  ],
+  "errors": []
+}
