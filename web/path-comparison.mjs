@@ -1,3 +1,4 @@
+import {mountPathOccurrences} from '/web/path-occurrences-view.mjs';
 import {inspectPathReferencePrediction} from '/src/path-reference-prediction.mjs';
 import {appendPathCircle} from '/web/path-circle-view.mjs';
 import {inspectPathAxisPrediction} from '/src/path-axis-prediction.mjs';
@@ -12,11 +13,12 @@ let axisPrediction=null,referencePrediction=null;
 function clearReferencePrediction(){referencePrediction=null;$('reference-prediction-result').replaceChildren();delete $('reference-prediction-result').dataset.status;}
 let sources=[null,null],accepted=null,findings=null,alternatives=null,activeCoupling=[],revision=0,selected=0;
 const status=s=>{$('status').textContent=s;};
+const clearOccurrences=mountPathOccurrences({context:(required=true)=>{if(!required)return {revision};if(sources.some(s=>!s))throw Error('Open both declared sampled paths first.');return {revision,sources,comparison:createPathComparison(...sources.map(s=>s.study),{samePointAndCoordinates:$('confirm').checked,basis:$('basis').value})};},receive:received=>{for(const source of sources)if(source)releaseSequenceAssets(source.assets);sources=received.sources;invalidate();$('basis').value=received.study.declaration.basis;$('confirm').checked=true;names();},status});
 const mm=v=>`${v!==0&&Math.abs(v)<.0005?v.toExponential(4):v.toFixed(3)} mm`;
-function invalidate(){clearReferencePrediction();axisPrediction=null;revision++;accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status('Inputs changed. Compare again to inspect their ordered samples.');}
+function invalidate(){clearOccurrences();clearReferencePrediction();axisPrediction=null;revision++;accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status('Inputs changed. Compare again to inspect their ordered samples.');}
 function names(){for(let i=0;i<2;i++)$(i?'second-name':'first-name').textContent=sources[i]?`${sources[i].study.sequence.title} · ${sources[i].study.label} · ${sources[i].study.samples.length} selected samples`:'Not opened';}
 function show(study,analysis=inspectPathCouplingAlternatives(study)){
- clearReferencePrediction();axisPrediction=null;$('axis-prediction-result').replaceChildren();accepted=study;alternatives=analysis;findings=analysis.original;selected=0;$('result').hidden=false;
+ clearOccurrences(); clearReferencePrediction();axisPrediction=null;$('axis-prediction-result').replaceChildren();accepted=study;alternatives=analysis;findings=analysis.original;selected=0;$('result').hidden=false;
  $('limits').textContent=findings.boundary;$('evidence').textContent=JSON.stringify(study,null,2);
  $('alternative-summary').textContent=`${BigInt(analysis.optimalCouplings).toLocaleString()} computed pairings tie for this minimum. ${analysis.pairs.length} paired sample combinations occur; ${analysis.pairs.filter(p=>p.requiredInEveryOptimalCoupling).length} occur in every minimizing pairing.`;
  $('alternative-limits').textContent=analysis.boundary;
@@ -80,6 +82,7 @@ $('editor').addEventListener('input',invalidate);
 $('editor').addEventListener('submit',event=>{event.preventDefault();revision++;try{if(sources.some(s=>!s))throw Error('Open both declared sampled paths first.');show(createPathComparison(...sources.map(s=>s.study),{samePointAndCoordinates:$('confirm').checked,basis:$('basis').value}));}catch(error){clearReferencePrediction();accepted=null;findings=null;alternatives=null;activeCoupling=[];$('result').hidden=true;status(error.message);}});
 $('save').addEventListener('click',async()=>{if(!accepted)return;const token=revision,study=accepted,current=sources;try{const blob=await makePathComparisonBundle(study,current);if(token!==revision||study!==accepted){status('Inputs changed during saving. No older comparison was downloaded.');return;}const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='demonstrated-path-comparison.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(error){if(token===revision)status(`Cannot save: ${error.message}`);}});
 addEventListener('pagehide',()=>{
+ clearOccurrences();
  clearReferencePrediction();
  revision++;for(const s of sources)if(s)releaseSequenceAssets(s.assets);sources=[null,null];accepted=null;findings=null;alternatives=null;activeCoupling=[];selected=0;
  $('result').hidden=true;$('frames').replaceChildren();$('coupling').replaceChildren();$('diagram').replaceChildren();$('evidence').textContent='';

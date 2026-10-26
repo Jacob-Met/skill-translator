@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "groups": [
+    "two original-frame producer bundles expose5mm intermediate difference despite equal endpoints and inspect paired original moments",
+    "four computed optima expose possible and required pairs; keyboard choice opens a complete alternate witness with the exact selected source identities",
+    "default witness restoration and alternate reinspection leave the original minimum and raw sources unchanged",
+    "real complete download and fresh-page reopening preserve both original PNG sets and recompute the native result",
+    "invalid second original image refuses transactionally after first source receipt without replacing accepted evidence",
+    "source replacement clears cross-example declaration and missing sample refuses complete coupling",
+    "delayed complete import cannot overwrite a newer correspondence declaration",
+    "delayed source-byte export is retired by later edits without downloading an older account",
+    "390px coupled-source inspection and keyboard row selection remain usable without horizontal overflow",
+    "actual navigation and back never retain a result after original image assets are released; complete saved input reopens",
+    "embedded unfamiliar original pattern found without two manually chosen target endpoints; complete pairing inspects exact original frame identities",
+    "actual occurrence query download and fresh reopen preserve complete original PNG bytes and recompute every interval",
+    "wrong original pixels and mismatched raw query refuse transactionally without manufacturing an occurrence",
+    "changed actual input with missing middle sample splits coverage and cannot retain the previous pattern result",
+    "390px keyboard occurrence and original-frame witness selection remain visible without horizontal overflow",
+    "later bound edit retires a delayed complete occurrence import"
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "src/path-occurrences.mjs": "0ad2b3c87d5d726f8ded3923df9bc243214c1628f70e6d5dd0c47fc4d4e0dae2",
+    "web/path-occurrences-view.mjs": "137a1b3d821de2e7ff2f3f73733413fdf2986b34bbcc7ba3a0ad245d4df3754a",
+    "src/path-comparison.mjs": "68a859675f074c9aebaf1f333e5a7d504d1fe0a83e3b085114e96c9ef2c7a661",
+    "src/sequence-path.mjs": "45d8e5fbd143a9c25d51796c0cccb99d815569e42fb801b5fc83ec859183bda4",
+    "web/path-comparison.mjs": "50924e135488522401a1f4f8a7f9ed5250db2b95492af5e4bdbe9db1d912f3c5",
+    "web/path-comparison-input.mjs": "3ad05811958a2be582a56fbc0fa07508276c93a18a14ee27a2ff5dd34c778a77",
+    "web/path-comparison.html": "403164e4f170b5ab06af1e5017e2e1688cc98b72c5f9c0524a764034531990bd",
+    "web/path-comparison.css": "4c6d22cc4298e34232aca7fb9004eae8af31225c33bc7270c3eaee43cfdec1d2",
+    "server.mjs": "8247c789f56e41f19fe20877b0b9688cf661a255b918a149a904a090da8523ad",
+    "web/sampled-path.html": "ffd46d8b89c5c6001cedf24b3d393a86ae8466591ce6f2a557401097818ea35b",
+    "web/sampled-path-input.mjs": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+  },
+  "browser": "156.0.8078.47",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "csp": []
+}
