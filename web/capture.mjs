@@ -1,3 +1,4 @@
+import {installCalibrationDraft} from "/web/calibration-draft.mjs";
 import {createCapture,appendCaptureMark,validateCapturedDemo} from "/src/capture.mjs";
 import {loadLocalImage,releaseImage} from "/web/image-input.mjs";
 import {loadLocalVideo,releaseVideo,capturePresentedFrame} from "/web/video-input.mjs";
@@ -7,7 +8,16 @@ const $ = id => document.getElementById(id), ns = "http://www.w3.org/2000/svg";
 const labels = ["TOP LEFT","TOP RIGHT","BOTTOM RIGHT","BOTTOM LEFT"];
 let media = null, corners = [null,null,null,null], activeCorner = 0, demo = null, loadVersion = 0, calibrationDirty = false;
 let clip=null,sourceOrigin=null,sourceFrameFile=null,frameController=null,frameBusy=false;
-let editingMarkId=null;
+let editingMarkId=null, calibrationDraftEvidence=null;
+const calibrationTransfer=installCalibrationDraft({target:()=>media,propose:draft=>{
+  corners=structuredClone(draft.corners);calibrationDraftEvidence=structuredClone(draft.evidence);
+  $("captureWidth").value=draft.widthMm;$("captureHeight").value=draft.heightMm;
+  activeCorner=null;calibrationDirty=true;syncCorners();
+  $("calibrationStatus").textContent="Transferred corners are an editable draft. Review on the target image, then apply calibration.";render();
+}});
+// Changes during native matching retire the request before a response can alter
+// corners. Applied marks remain in their original target pixel coordinates.
+for(const id of ["cornerRows","captureWidth","captureHeight","captureTitle"])$(id).addEventListener("input",()=>calibrationTransfer.invalidate());
 function problem(message="") { $("studioError").textContent=message; $("studioError").hidden=!message; }
 function el(parent,tag,attrs={},text="") {
   const node=document.createElementNS(ns,tag);
@@ -59,7 +69,7 @@ labels.forEach((label,i)=>{
   $("cornerRows").append(row);
 });
 $("photoFile").addEventListener("change",async event=>{
-  const file=event.target.files[0];if(!file)return;const version=++loadVersion;cancelFrame();
+  const file=event.target.files[0];if(!file)return;const version=++loadVersion;calibrationTransfer.invalidate();cancelFrame();
   try{const loaded=await loadLocalImage(file);if(version!==loadVersion){releaseImage(loaded);return;}acceptSource(loaded);}
   catch(error){if(version===loadVersion)problem("Photo refused; previous work preserved. "+error.message);}
   finally{event.target.value="";}
@@ -69,7 +79,7 @@ $("reopenCaptureForm").addEventListener("submit",async event=>{
   event.preventDefault();
   const annotations=$("savedAnnotations").files[0],photo=$("savedPhoto").files[0];
   if(!annotations||!photo){problem("Choose saved annotations and their original image.");return;}
-  const version=++loadVersion;cancelFrame();let candidate=null;
+  const version=++loadVersion;calibrationTransfer.invalidate();cancelFrame();let candidate=null;
   try{
     if(annotations.size>MAX_ANNOTATION_BYTES)throw Error("Annotations must be JSON up to 256 KiB.");
     const text=await annotations.text();
@@ -78,7 +88,7 @@ $("reopenCaptureForm").addEventListener("submit",async event=>{
     if(version!==loadVersion){releaseImage(candidate);candidate=null;return;}
     const restored=reopenCapture(text,candidate.image);
     acceptSource(candidate,restored.source.origin||null,restored.source.origin?photo:null);candidate=null;
-    demo=restored;corners=structuredClone(demo.source.corners);activeCorner=null;calibrationDirty=false;
+    demo=restored;calibrationDraftEvidence=demo.source.calibrationDraftEvidence||null;corners=structuredClone(demo.source.corners);activeCorner=null;calibrationDirty=false;
     $("captureTitle").value=typeof demo.title==="string"?demo.title:"Reopened demonstration";
     $("captureWidth").value=demo.source.widthMm;$("captureHeight").value=demo.source.heightMm;
     clearDraft();syncCorners();render();
@@ -90,16 +100,16 @@ $("reopenCaptureForm").addEventListener("submit",async event=>{
 $("captureSvg").addEventListener("click",event=>{
   if(!media)return;const svg=$("captureSvg"),p=svg.createSVGPoint();p.x=event.clientX;p.y=event.clientY;const q=p.matrixTransform(svg.getScreenCTM().inverse());
   if(q.x<0||q.y<0||q.x>media.image.widthPx||q.y>media.image.heightPx)return;
-  if(activeCorner!==null){corners[activeCorner]={x:q.x,y:q.y};calibrationDirty=true;activeCorner=corners.findIndex(x=>!x);if(activeCorner===-1)activeCorner=null;syncCorners();$("calibrationStatus").textContent=demo?"Edited corners are a draft. Apply calibration before using them.":"Four corners selected. Apply calibration to begin annotating.";}
+  if(activeCorner!==null){calibrationTransfer.invalidate();corners[activeCorner]={x:q.x,y:q.y};calibrationDirty=true;activeCorner=corners.findIndex(x=>!x);if(activeCorner===-1)activeCorner=null;syncCorners();$("calibrationStatus").textContent=demo?"Edited corners are a draft. Apply calibration before using them.":"Four corners selected. Apply calibration to begin annotating.";}
   else if(demo){$("markX").value=q.x.toFixed(2);$("markY").value=q.y.toFixed(2);}
   problem();render();
 });
 $("applyCalibration").addEventListener("click",()=>{
-  try{if(!media)throw Error("Choose a source photo first.");const next=demo?reviseCaptureCalibration(demo,corners,number("captureWidth"),number("captureHeight"),$("captureTitle").value):createCapture(media.image,corners,number("captureWidth"),number("captureHeight"),{title:$("captureTitle").value,origin:sourceOrigin,provenance:sourceOrigin?"Local clip "+sourceOrigin.clip.name+" · presented frame at "+sourceOrigin.mediaTimeSeconds.toFixed(3)+" s; human-authored calibration and relationships.":undefined});demo=next;activeCorner=null;calibrationDirty=false;clearDraft();$("calibrationStatus").textContent="Calibration applied · "+demo.source.widthMm+" × "+demo.source.heightMm+" mm. Source points keep their pixel coordinates.";problem();render();}
+  try{calibrationTransfer.invalidate();if(!media)throw Error("Choose a source photo first.");const next=demo?reviseCaptureCalibration(demo,corners,number("captureWidth"),number("captureHeight"),$("captureTitle").value):createCapture(media.image,corners,number("captureWidth"),number("captureHeight"),{title:$("captureTitle").value,origin:sourceOrigin,provenance:sourceOrigin?"Local clip "+sourceOrigin.clip.name+" · presented frame at "+sourceOrigin.mediaTimeSeconds.toFixed(3)+" s; human-authored calibration and relationships.":undefined});if(calibrationDraftEvidence)next.source.calibrationDraftEvidence=structuredClone(calibrationDraftEvidence);demo=next;activeCorner=null;calibrationDirty=false;clearDraft();$("calibrationStatus").textContent="Calibration applied · "+demo.source.widthMm+" × "+demo.source.heightMm+" mm. Source points keep their pixel coordinates.";problem();render();}
   catch(error){problem("Calibration refused; previous annotations preserved. "+error.message);}
 });
 for(const id of ["captureWidth","captureHeight","captureTitle"])$(id).addEventListener("input",()=>{if(demo){calibrationDirty=true;$("calibrationStatus").textContent="Measurements changed. Apply or revert these edits before adding marks or exporting.";render();}});
-$("revertCalibration").addEventListener("click",()=>{if(!demo)return;corners=structuredClone(demo.source.corners);$("captureWidth").value=demo.source.widthMm;$("captureHeight").value=demo.source.heightMm;$("captureTitle").value=demo.title;calibrationDirty=false;activeCorner=null;syncCorners();$("calibrationStatus").textContent="Draft edits reverted. The accepted calibration is active.";problem();render();});
+$("revertCalibration").addEventListener("click",()=>{if(!demo)return;calibrationTransfer.invalidate();calibrationDraftEvidence=demo.source.calibrationDraftEvidence||null;corners=structuredClone(demo.source.corners);$("captureWidth").value=demo.source.widthMm;$("captureHeight").value=demo.source.heightMm;$("captureTitle").value=demo.title;calibrationDirty=false;activeCorner=null;syncCorners();$("calibrationStatus").textContent="Draft edits reverted. The accepted calibration is active.";problem();render();});
 $("markKind").addEventListener("change",()=>{$("markEdge").disabled=$("markKind").value!=="edge_offset_mm";});
 for(const id of ["markX","markY"])$(id).addEventListener("input",render);
 $("captureMarkForm").addEventListener("submit",event=>{
@@ -118,7 +128,7 @@ function videoControls(){
 }
 function cancelFrame(){frameController?.abort();frameController=null;frameBusy=false;videoControls();}
 function acceptSource(loaded,origin=null,frameFile=null){
-  releaseImage(media);media=loaded;sourceOrigin=origin;sourceFrameFile=frameFile;
+  calibrationTransfer.invalidate();calibrationDraftEvidence=null;releaseImage(media);media=loaded;sourceOrigin=origin;sourceFrameFile=frameFile;
   corners=[null,null,null,null];activeCorner=0;demo=null;calibrationDirty=false;clearDraft();syncCorners();
   $("photoIdentity").textContent=media.image.name+" · "+media.image.widthPx+" × "+media.image.heightPx+" px · SHA-256 "+media.image.sha256.slice(0,16)+"…"+(origin?" · source clip "+origin.clip.name+" at "+origin.mediaTimeSeconds.toFixed(3)+" s":"");
   $("sourceBadge").textContent=origin?"VIDEO FRAME":"LOCAL FILE";
@@ -126,7 +136,7 @@ function acceptSource(loaded,origin=null,frameFile=null){
 }
 $("videoSourcePanel").addEventListener("toggle",event=>document.querySelector(".studio-image-panel").classList.toggle("video-open",event.target.open));
 $("videoFile").addEventListener("change",async event=>{
-  const file=event.target.files[0];if(!file)return;const version=++loadVersion;cancelFrame();
+  const file=event.target.files[0];if(!file)return;const version=++loadVersion;calibrationTransfer.invalidate();cancelFrame();
   try{
     const candidate=await loadLocalVideo(file);
     if(version!==loadVersion){releaseVideo(candidate);return;}
@@ -147,7 +157,7 @@ $("videoTime").addEventListener("change",()=>{
   catch(error){problem(error.message);}
 });
 $("captureFrame").addEventListener("click",async()=>{
-  if(!clip||frameBusy)return;const current=clip,version=++loadVersion,controller=new AbortController();frameController=controller;frameBusy=true;videoControls();
+  if(!clip||frameBusy)return;calibrationTransfer.invalidate();const current=clip,version=++loadVersion,controller=new AbortController();frameController=controller;frameBusy=true;videoControls();
   let candidate=null;
   try{
     const result=await capturePresentedFrame(current,number("videoTime"),{signal:controller.signal});
@@ -164,4 +174,3 @@ $("downloadFrame").addEventListener("click",()=>{
 });
 window.addEventListener("pagehide",event=>{cancelFrame();clip?.video.pause();if(!event.persisted){releaseImage(media);releaseVideo(clip);}});
 render();
-

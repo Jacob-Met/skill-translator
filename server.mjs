@@ -1,3 +1,4 @@
+import {serveCalibrationTranslation} from "./native/calibration-translation.mjs";
 import {serveSequenceEdge} from "./native/sequence-edge.mjs";
 import http from "node:http";
 import {readFile} from "node:fs/promises";
@@ -9,6 +10,9 @@ const routes=Object.freeze({
   "/demonstration-practice":["web/demonstration-practice.html","text/html; charset=utf-8"],
   "/src/demonstration-practice.mjs":["src/demonstration-practice.mjs","text/javascript; charset=utf-8"],
   "/web/demonstration-practice.mjs":["web/demonstration-practice.mjs","text/javascript; charset=utf-8"],
+  "/src/calibration-draft.mjs":["src/calibration-draft.mjs","text/javascript; charset=utf-8"],
+  "/web/calibration-draft.mjs":["web/calibration-draft.mjs","text/javascript; charset=utf-8"],
+  "/web/calibration-draft.css":["web/calibration-draft.css","text/css; charset=utf-8"],
   "/raw-rule-proposals":["web/raw-rule-proposals.html","text/html; charset=utf-8"],
   "/src/raw-rule-proposals.mjs":["src/raw-rule-proposals.mjs","text/javascript; charset=utf-8"],
   "/web/raw-rule-proposals.mjs":["web/raw-rule-proposals.mjs","text/javascript; charset=utf-8"],
@@ -420,6 +424,8 @@ export function createAppServer(){
     if(path==="/edge-decision"||path==="/edge-clarification")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/sequence-edge")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/api/sequence-edge"&&req.method==="POST"){await serveSequenceEdge(req,res);return;}
+    if(path==="/capture")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' blob:; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
+    if(path==="/api/calibration-translation"&&req.method==="POST"){await serveCalibrationTranslation(req,res);return;}
     const route=Object.prototype.hasOwnProperty.call(routes,path)?routes[path]:null;
     if(req.method!=="GET"&&req.method!=="HEAD"){
       res.writeHead(405,{"Allow":"GET, HEAD"});res.end("Method not allowed");return;
