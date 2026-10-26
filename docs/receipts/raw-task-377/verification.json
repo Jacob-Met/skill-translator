@@ -1,0 +1,95 @@
+{
+  "browser": "156.0.8078.47",
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "ef662d33e2bdd322845891a89a78d89eb55b39799cc3608cd38be7b329308b5c",
+    "startedAt": "2026-10-26T04:22:35.837Z",
+    "completedAt": "2026-10-26T04:22:35.937Z",
+    "durationMs": 99.67705899999999,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "686531963CEC8B2078ACFC8874C58233",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "9E0B4176C822C0BB3016A8EFA65539C3"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  },
+  "checks": [
+    "Original maintained link, multi-file raw admission and three-mark mixed-rule targets.",
+    "Actual authored PNG reattachment binds original source pixels; wrong original image cannot replace accepted pixels.",
+    "Actual retained download, explicit acceptance, empty maintained practice and three real placements pass unchanged evaluator.",
+    "Fresh raw-only replay; duplicate refusal retains work; draft target retires acceptance and recomputes positions.",
+    "A late file read cannot replace a newer target draft; saving and practice remain retired until recomputed.",
+    "390px keyboard inspection, no-fit negative control and explicit unresolved/unexamined original rules."
+  ],
+  "errors": [],
+  "compositionBase": "bedafb7ce9fc4adc0228984fbb1beebfd60b51a9",
+  "native": {
+    "command": "node --test --test-isolation=none test/raw-task-proposals.test.mjs test/raw-rule-proposals.test.mjs test/response-demonstrations.test.mjs test/practice.test.mjs",
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Affected native checks, not full repository suite"
+  },
+  "changedSourceSha256": {
+    "src/raw-task-proposals.mjs": "419255a37558fc65388c54bf319dc313d03e37466ed96b6f227edf6c691f66ee",
+    "web/raw-task-proposals.mjs": "64f76311d0ed4b6a8f0c51008e74f2a2a4c7ae67caae33a06b4281b09c2c0c0b",
+    "web/raw-task-proposals.html": "5b4fe825df33d36ce40565b2b550817f6efb9902b0481d4ed52ad5d50d39f15f",
+    "web/raw-task-proposals.css": "9afdb62d2aec8b44185344f4fdde34d4f6bfcb00fd6b12e5ec4904fc5059d09d",
+    "server.mjs": "fc26da2d9ead59fd6f2a1f29d8d7e260271f146621303bd898fd796fe37a2996",
+    "web/raw-rule-proposals.html": "f2b192aa2dff0b91e23957442bb96b4a49f58ba89fccf39584959f6b115ccb00",
+    "test/raw-task-proposals.test.mjs": "839906e0659a498028c013390766cf74b4fb6a7eef36f62792c68f2ce1b01aee",
+    "test/helpers/raw-task-fixture.mjs": "85961c716ed4bba2a8d7a7cb42886d4262af4d3069d6d609008b3873880ca194",
+    "tools/browser-raw-task-proposals.mjs": "130d974d28eec06aacd18ecbde666ed0b0cc2cda5dc74c2fe2c9640fd89b27d0",
+    "docs/RAW_TASK_PROPOSALS.md": "538944883f3a1a56e19e18a5a10cb2a7a400ad1c0e82b91849e05eaebb5258e2"
+  },
+  "limits": "Authored geometric and PNG controls; no physical demonstration, model accuracy or learning benefit is established.",
+  "screenshotsSha256": {
+    "narrow.png": "2ee758c16fa9432a846c43bf3553bd6fc16588f1de7a18297d93c13cb0766815",
+    "desktop.png": "d68e547f7410d58cfe9c30ac7d66289eb54dc636ea821cf2cc774f1407fa54c5"
+  },
+  "browserCompositionBase": "bedafb7ce9fc4adc0228984fbb1beebfd60b51a9",
+  "currentComposition": {
+    "nativePassed": 33,
+    "nativeFailed": 0,
+    "httpRoutesPassed": 7,
+    "negativeRouteStatus": 404,
+    "browser": "All six actual sandboxed Chrome receiving groups passed on current bedafb7 composition using owned tmpfs, zero JS/resource/CSP errors."
+  },
+  "runtimeNote": "QA_TMP_ROOT/TMPDIR used owned tmpfs because workspace disk was full. First attempt refused socket-directory creation because parent directory was not writable by Chrome UID; corrected ownership on that private test directory, then complete course passed without weakening sandbox."
+}

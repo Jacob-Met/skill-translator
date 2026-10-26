@@ -8,14 +8,18 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/src/translated-change-regions.mjs':['src/translated-change-regions.mjs','text/javascript; charset=utf-8'],
+  '/web/translated-change-regions.mjs':['web/translated-change-regions.mjs','text/javascript; charset=utf-8'],
+  '/raw-task-proposals':['web/raw-task-proposals.html','text/html; charset=utf-8'],
+  '/src/raw-task-proposals.mjs':['src/raw-task-proposals.mjs','text/javascript; charset=utf-8'],
+  '/web/raw-task-proposals.mjs':['web/raw-task-proposals.mjs','text/javascript; charset=utf-8'],
+  '/web/raw-task-proposals.css':['web/raw-task-proposals.css','text/css; charset=utf-8'],
   "/web/reviewed-forced-point-paths-view.mjs": ["web/reviewed-forced-point-paths-view.mjs", "text/javascript; charset=utf-8"],
   "/web/reviewed-forced-point-paths-input.mjs": ["web/reviewed-forced-point-paths-input.mjs", "text/javascript; charset=utf-8"],
   "/src/reviewed-forced-point-paths.mjs": ["src/reviewed-forced-point-paths.mjs", "text/javascript; charset=utf-8"],
   '/src/visual-translation.mjs':['src/visual-translation.mjs','text/javascript; charset=utf-8'],
   '/web/visual-translation-worker.mjs':['web/visual-translation-worker.mjs','text/javascript; charset=utf-8'],
   '/web/visual-translation-view.mjs':['web/visual-translation-view.mjs','text/javascript; charset=utf-8'],
-  '/src/translated-change-regions.mjs':['src/translated-change-regions.mjs','text/javascript; charset=utf-8'],
-  '/web/translated-change-regions.mjs':['web/translated-change-regions.mjs','text/javascript; charset=utf-8'],
   "/src/audio-decoder-clock.mjs":["src/audio-decoder-clock.mjs","text/javascript; charset=utf-8"],
   "/src/reviewed-point-paths.mjs":["src/reviewed-point-paths.mjs","text/javascript; charset=utf-8"],
   "/web/reviewed-point-paths-input.mjs":["web/reviewed-point-paths-input.mjs","text/javascript; charset=utf-8"],
