@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark"><title>Source Studio · SKILL TRANSLATOR</title>
 <link rel="stylesheet" href="/web/styles.css"><link rel="stylesheet" href="/web/capture.css">
+<link rel="stylesheet" href="/web/calibration-draft.css">
 <script type="module" src="/web/capture.mjs"></script>
 </head>
 <body>
@@ -42,6 +43,20 @@
         <p class="input-note">Enter dimensions you measured. The photo cannot supply scale by itself.</p>
       </section>
       <section class="studio-card"><p class="eyebrow">02 / CALIBRATE FOUR CORNERS</p><p class="input-note">Select a corner below, then click its location in the photo. Use the fields for precise keyboard entry.</p>
+        <details class="video-source" id="calibrationTransferPanel"><summary>Draft corners from a calibrated reference PNG</summary>
+          <p class="input-note">For another equal-sized view of the same flat workpiece: reuse its dimensions and four corners after matching at least two patches fixed relative to that plane. Translation only; this does not identify task marks.</p>
+          <label for="referenceTask">REFERENCE ANNOTATIONS JSON<input id="referenceTask" type="file" accept=".json,application/json"></label>
+          <label for="referencePhoto">MATCHING ORIGINAL REFERENCE PNG<input id="referencePhoto" type="file" accept=".png,image/png"></label>
+          <button id="loadCalibrationReference" type="button">Load reference</button>
+          <svg id="referencePatchSvg" viewBox="0 0 400 200" role="img" aria-label="Reference original image and selected stationary patches"></svg>
+          <p class="input-note">Click two opposite corners per patch, or enter one x, y, width, height row per patch below. Use 2–8 nonoverlapping textured patches, each 7–128 pixels per side.</p>
+          <label for="patchCoordinates">PATCH RECTANGLES · ORIGINAL PIXELS<textarea id="patchCoordinates" rows="3" placeholder="24, 24, 24, 24&#10;132, 96, 24, 24"></textarea></label>
+          <button id="clearReferencePatches" type="button">Clear patches</button>
+          <label for="stationaryBasis">WHY THESE PATCHES STAY FIXED TO THE WORKPIECE<textarea id="stationaryBasis" rows="2" maxlength="800"></textarea></label>
+          <label><input id="stationaryPlane" type="checkbox"> I declare these patches stationary relative to the same calibrated workpiece plane.</label>
+          <button id="proposeCalibration" type="button">Propose editable corners</button>
+          <p id="transferStatus" role="status">Original PNGs are processed by this local server. Review proposed corners before applying. Integer translation leaves subpixel error; agreed moving patches can produce a wrong draft. Rotation, deformation and physical accuracy are not established.</p>
+        </details>
         <div class="corner-heading"><span>CORNER</span><span>X · PX</span><span>Y · PX</span></div><div id="cornerRows"></div>
         <button id="applyCalibration" class="primary" disabled>Apply calibration</button><button id="revertCalibration" type="button" disabled>Revert draft edits</button><p id="calibrationStatus" class="input-note" role="status">Four corners are needed.</p>
       </section>
@@ -61,4 +76,3 @@
   <footer><span>Human-authored measurements and meaning</span><span>Still images leave pressure, tactile cues, and physical success unmeasured.</span></footer>
 </main>
 </body></html>
-

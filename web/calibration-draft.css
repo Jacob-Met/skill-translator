@@ -1,0 +1,4 @@
+#referencePatchSvg { width:100%; height:auto; max-height:300px; background:#101820; }
+#calibrationTransferPanel textarea { width:100%; box-sizing:border-box; min-height:4rem; }
+#calibrationTransferPanel input[type=checkbox] { width:auto; }
+#transferStatus { overflow-wrap:anywhere; }
