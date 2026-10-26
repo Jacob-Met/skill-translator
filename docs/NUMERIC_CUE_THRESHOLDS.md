@@ -1,5 +1,7 @@
 # Numeric cues from original demonstrations
 
+Existing instrument exports can now supply source-bound numeric readings without retyping their values. See [Original instrument exports in numeric cue comparison](NUMERIC_TRACE_READINGS.md) for exact nominal timing, separately declared uncertainty and retained trace provenance. Manual v1 accounts remain supported.
+
 The maintained decision comparison can now open **Numeric cue thresholds**. Its complete original comparison supplies two to six retained demonstrated steps, original PNGs and source accounts. The new workbench accepts attributed decision labels and numeric closed ranges, using one explicitly declared quantity, unit and comparison basis. Each reading names an original before or after frame. No numeric measurement, physical contact or intent is inferred from the image.
 
 ## Mechanism and convention

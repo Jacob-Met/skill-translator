@@ -1,0 +1,117 @@
+{
+  "browser": "156.0.8078.47",
+  "sandbox": {
+    "schema": "hamon-chromium-sandbox/v1",
+    "qualification": "Linux Chromium status in the supplied isolated CDP page",
+    "moduleSha256": "ef662d33e2bdd322845891a89a78d89eb55b39799cc3608cd38be7b329308b5c",
+    "startedAt": "2026-10-26T05:52:11.351Z",
+    "completedAt": "2026-10-26T05:52:11.722Z",
+    "durationMs": 370.751897,
+    "admitted": true,
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/156.0.8078.47",
+      "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "jsVersion": "15.6.75.19"
+    },
+    "target": {
+      "targetId": "5A893D3A1177285973361BC210EC0C6C",
+      "type": "page",
+      "title": "about:blank",
+      "url": "about:blank",
+      "attached": true,
+      "canAccessOpener": false,
+      "browserContextId": "06AD5C8D589D6E3F4345FA57444A7F5D"
+    },
+    "url": "chrome://sandbox/",
+    "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+    "observation": {
+      "rows": {
+        "layer1": "Namespace",
+        "pid": "Yes",
+        "network": "Yes",
+        "seccomp": "Yes",
+        "tsync": "Yes"
+      },
+      "checks": {
+        "adequate": true,
+        "layer1": true,
+        "pid": true,
+        "network": true,
+        "seccomp": true,
+        "tsync": true
+      },
+      "populated": true,
+      "duplicates": [],
+      "active": true
+    },
+    "failure": null
+  },
+  "checks": [
+    "Five actual maintained CLI exports supply original samples; four verified original-PNG reference rows infer the robust family without copying numeric values.",
+    "Separate target original sample transfers conditionally; changed measurement bounds expose ambiguity, wrong nominal sample remains unavailable, and different matching original frame exposes extrapolation.",
+    "Actual provenance-bearing v2 download/fresh reopen retains every raw trace, sample order, clock, calibration and declared uncertainty; foreign trace source cannot replace accepted study.",
+    "Failed separate clock check retains trace but creates no reading; changed actual source sample recomputes target label without manual numeric editing.",
+    "A late instrument export cannot overwrite a newer retained uncertainty draft.",
+    "Existing v1 manual numeric studies still reopen and infer unchanged; original trace inspection remains contained at390px."
+  ],
+  "errors": [],
+  "hashes": {
+    "src/numeric-trace-readings.mjs": "0cca51f32523ae35eecc104f46773b5a907d5a3300fb9622f317398a90f04d09",
+    "web/numeric-trace-readings-view.mjs": "dbaf1a16939219bb4b3ac0785d1f1de3c748c119f1661f5fe21c85776724f7d5",
+    "web/numeric-trace-readings.css": "72d7f94ebecf3880410608ccaa7f6a114cc449ac3fa6acd5734324df5251ae95",
+    "web/numeric-cue-thresholds.mjs": "b944a2efeb67ead0cc82d10b33d3ddc7c551816c7480cab50a7e636bdbcbb4bf",
+    "web/numeric-cue-thresholds.html": "b4bb0c21897d287e9dd707f274f201f46b0407bdbe9aafc508de1e3df024538e"
+  },
+  "limits": "Authored original PNG and instrument records; exact nominal timing is not authenticated synchronization, and measurement uncertainty remains separately declared.",
+  "base": "17c7ed2acaac879c275294b2893e2ad7ecd5bfd8",
+  "native": {
+    "passed": 12,
+    "failed": 0,
+    "scope": "Numeric trace6 plus unchanged numeric-family6/1000 oracle courses; not full repository suite"
+  },
+  "producer": {
+    "actualCliInvocations": 5,
+    "manualValueCopiesAvoided": 5,
+    "blankQuantityUnitCopiedFromTrace": true,
+    "noUnitConversion": true,
+    "source": "existing tools/pair-instrument-trace.mjs and instrument-trace/v1 exporter",
+    "exactPublishedGitBlobs": {
+      "src/instrument-trace.mjs": "223baaf6c340b2130522fc03edbb7d3eaab1def7",
+      "src/narration-clock.mjs": "4f7a26a7c091881225d3d852b00da7c4e79a091c",
+      "tools/pair-instrument-trace.mjs": "748f1f375c7f7560304423e4ac7f1c6655f82c98"
+    },
+    "localCopyNormalization": "Three maintained dependency copies had one extra trailing newline from local intake. Removed that whitespace only and reran12 native groups plus the actual five-CLI producer probe; exact published blobs now match. No dependency behavior changed."
+  },
+  "routes": {
+    "actualLoopbackPassed": 9,
+    "nonempty": true,
+    "nosniff": true
+  },
+  "review": "Root and Engine independently approved adapter and consumer lifecycle; Engine independently reran adapter6, root reran complete12. Final blank-metadata fill and conflicting-metadata refusal were reviewed by Engine and exercised in final browser course.",
+  "sourceSha256": {
+    "src/numeric-trace-readings.mjs": "0cca51f32523ae35eecc104f46773b5a907d5a3300fb9622f317398a90f04d09",
+    "web/numeric-trace-readings-view.mjs": "dbaf1a16939219bb4b3ac0785d1f1de3c748c119f1661f5fe21c85776724f7d5",
+    "web/numeric-trace-readings.css": "72d7f94ebecf3880410608ccaa7f6a114cc449ac3fa6acd5734324df5251ae95",
+    "web/numeric-cue-thresholds.mjs": "b944a2efeb67ead0cc82d10b33d3ddc7c551816c7480cab50a7e636bdbcbb4bf",
+    "web/numeric-cue-thresholds.html": "b4bb0c21897d287e9dd707f274f201f46b0407bdbe9aafc508de1e3df024538e",
+    "server.mjs": "d59a9e5f3ee13ee7b00c3df614c996d44bb5e4819cd63193279f1329a3de2673",
+    "test/numeric-trace-readings.test.mjs": "fd5ecb0c4fdf20b51a80949186b1ccb22e50871b4091b19592c8f1ba9d6b8486",
+    "test/instrument-cue-producer-probe.mjs": "6b02e23cd51b621c1d16939026f418f725b86cea9f437afaf47f44aa4c1a58a9",
+    "tools/browser-numeric-trace-readings.mjs": "67f2df9ad9557a589382fd198942873210bbb5a3a6f98e0eefbeb31f44b5e9d1",
+    "docs/NUMERIC_TRACE_READINGS.md": "5e662917c8490228449ac59bd14b079ab087943b3574206b126b19478fa31a05",
+    "docs/NUMERIC_CUE_THRESHOLDS.md": "644d027162b93ddf07775b1547ed8c736048ce204c21ce591bfc6d0ceeae2d20"
+  },
+  "screenshotsSha256": {
+    "desktop.png": "779ad57feb1ae786b822224497ed106e606460c0de0ece2574d75bd29ffdbe72",
+    "narrow.png": "12ff3234c927bd74bf84c5a5ced9d16a98d0558c0bd528ae3bb63a6d1d1b15d6"
+  },
+  "browserBase": "e1bf2910bc1d1f3d2870486eccd573e08a42804d",
+  "composition": {
+    "nativePassed": 12,
+    "liveRoutes": 9,
+    "note": "Current main adds shared-motion spans. Received all changed runtime files, preserved their routes, added only the three trace-consumer routes. Numeric/trace browser assets and producer dependencies are unchanged; final actual browser proof remains on e1bf2910. All upstream evaluation/source artifacts remain in the fresh parent tree."
+  }
+}
