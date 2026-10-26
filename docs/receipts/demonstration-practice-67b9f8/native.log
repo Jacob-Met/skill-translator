@@ -1,0 +1,30 @@
+✔ multiple demonstrated rules agree on the actual unfamiliar target without choosing a relationship (7.954351ms)
+✔ changed target distinguishes all/some/none while preserving the original failed score (3.126826ms)
+✔ empty rounds remain missing, every actual prior round remains separate, and raw replay recomputes (4.069113ms)
+✔ actual sessions from the uniquely inferred raw source are matched without retargeting earlier original sessions (7.285048ms)
+✔ foreign source, no supported relationship and impossible alternative targets never become all-within (3.004525ms)
+✔ agreement for the selected demonstrated mark does not pass the remaining task (10.525364ms)
+✔ a complete mixed-rule task requires every observed placement, not only the selected mark (0.514666ms)
+✔ common translation is diagnosed without silently correcting or passing the actual task (0.329741ms)
+✔ opposing local errors remain after removing a zero common displacement (0.260563ms)
+✔ partial shared-displacement diagnostics never count as a complete outcome (0.290988ms)
+✔ placements reject unknown, repeated, nonfinite and out-of-sheet coordinates (0.451303ms)
+✔ editing one mark retains the rest, and a refused edit preserves the session (1.076581ms)
+✔ retry archives original incomplete or complete placements and starts an empty round (0.633112ms)
+✔ saved session binds source pixels, transfer rules, tolerances, photo identity and target dimensions (1.268563ms)
+✔ session imports recompute results and reject forged round ordering (0.478862ms)
+✔ raw annotated coordinates supply a unique inferred rule and unchanged existing practice evaluator (0.974376ms)
+✔ independent rectangular bounds reject a candidate that an enclosing circular adapter would accept (1.257578ms)
+✔ changed original annotation recomputes the inferred relationship (2.02971ms)
+✔ no evidence, unchanged-size ambiguity and unconfirmed correspondences cannot yield a source (1.189896ms)
+✔ input-only proposal replay recomputes source and refuses changed rule or evidence (2.262445ms)
+✔ exact decimal boundary comparisons admit equality and refuse a smaller original bound (1.051634ms)
+✔ the separate affine coefficient domain neither silently vetoes nor enlarges five-rule support (0.95753ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 74.878238
