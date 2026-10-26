@@ -19,17 +19,19 @@ export async function loadLocalVideo(file){
   video.controls=true;video.muted=true;video.playsInline=true;video.preload="auto";
   const url=URL.createObjectURL(new Blob([file],{type:mimeType}));
   try{
-    const metadata=new Promise((resolve,reject)=>{
+    // Browser metadata alone does not establish that an inspectable frame exists.
+    const firstFrame=new Promise((resolve,reject)=>{
       let timer;
-      const clear=()=>{clearTimeout(timer);video.removeEventListener("loadedmetadata",ready);video.removeEventListener("error",failed);};
+      const clear=()=>{clearTimeout(timer);video.removeEventListener("loadeddata",ready);video.removeEventListener("error",failed);};
       const ready=()=>{clear();resolve();};
       const failed=()=>{clear();reject(Error("This browser cannot decode the selected clip."));};
-      video.addEventListener("loadedmetadata",ready);video.addEventListener("error",failed);
+      video.addEventListener("loadeddata",ready);video.addEventListener("error",failed);
       timer=setTimeout(()=>{clear();reject(Error("The clip did not provide usable metadata in time."));},10000);
       video.src=url;video.load();
     });
     const digest=file.arrayBuffer().then(bytes=>crypto.subtle.digest("SHA-256",bytes));
-    const [,bytes]=await Promise.all([metadata,digest]);
+    const [,bytes]=await Promise.all([firstFrame,digest]);
+    if(video.error||video.readyState<2)throw Error("This browser cannot decode the selected clip.");
     boundedFrameSize(video.videoWidth,video.videoHeight);
     const sha256=Array.from(new Uint8Array(bytes),n=>n.toString(16).padStart(2,"0")).join("");
     const identity=clipIdentity({name:String(file.name||"local-clip").slice(0,180),mimeType,
