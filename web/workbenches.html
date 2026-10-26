@@ -21,7 +21,9 @@
     <input id="workbenchFilter" type="search" autocomplete="off" aria-controls="workbenchGroups" placeholder="Search calibration, feedback, path…">
     <p id="workbenchCount" role="status" aria-live="polite">74 workbenches available.</p>
     <button id="workbenchClear" class="workbench-clear" type="button" hidden>Clear search</button>
-    <p class="workbench-search-hint">Bookmark or share the page URL to return to a filtered view.</p>
+    <label class="workbench-favorite-control" for="workbenchFavoriteOnly"><input id="workbenchFavoriteOnly" type="checkbox"> Show pinned only</label>
+    <p id="workbenchFavoriteCount" class="workbench-favorite-count">0 workbenches pinned.</p>
+    <p class="workbench-search-hint">Pin workbenches you revisit; pins stay in this browser only. Bookmark or share the URL for the text search.</p>
   </div>
   <div id="workbenchGroups">
 <section class="workbench-section" data-workbench-section aria-labelledby="sources-heading">
