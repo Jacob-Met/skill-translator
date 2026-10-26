@@ -1,3 +1,4 @@
+import {installIndependentPointProposals} from '/web/sequence-independent-point-proposals-view.mjs';
 import {installReviewedForcedPointPaths} from '/web/reviewed-forced-point-paths-view.mjs';
 import {readReviewedForcedPointPathsBundle} from '/web/reviewed-forced-point-paths-input.mjs';
 import {installReviewedPointPaths} from '/web/reviewed-point-paths-view.mjs';
@@ -18,6 +19,7 @@ function invalidate(){forcedPaths.invalidate();reviewedPaths.invalidate();dwell.
 const reviewedPaths=installReviewedPointPaths({getAssets:()=>assets,getAccepted:()=>accepted});
 const forcedPaths=installReviewedForcedPointPaths({getAssets:()=>assets,getAccepted:()=>accepted});
 const pointProposals=installPointProposals({getSource:()=>source,getAssets:()=>assets,onChange:invalidate});
+const independentPointProposals=installIndependentPointProposals({getSource:()=>source,getAssets:()=>assets,onChange:invalidate,retireRigidProposals:()=>pointProposals.retire()});
 function sourceForm(sequence,study=null){
  forcedPaths.clear();reviewedPaths.clear();dwell.clear();
  source=sequence;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;$('editor').hidden=false;$('source-name').textContent=sequence.title;
@@ -37,7 +39,7 @@ function sourceForm(sequence,study=null){
   const highlight=()=>{view.querySelector('circle')?.remove();const mark=moment.calibratedTask?.landmarks.find(m=>m.id===choice.value);if(!mark)return;const circle=document.createElementNS(ns,'circle');for(const[k,v]of Object.entries({cx:mark.sourcePx.x,cy:mark.sourcePx.y,r:Math.max(moment.image.widthPx,moment.image.heightPx)/50,fill:'none',stroke:'#137b72','stroke-width':3}))circle.setAttribute(k,v);view.append(circle);};highlight();choice.addEventListener('change',highlight);row.append(view);
   const details=el('details');details.append(el('summary','Inspect original moment account'),el('pre',JSON.stringify(moment,null,2)));row.append(details);$('samples').append(row);
  }
- pointProposals.reset();
+ pointProposals.reset();independentPointProposals.reset();
 }
 function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const mm=x=>x===null?'Unavailable':`${x!==0&&Math.abs(x)<.0005?x.toExponential(6):x.toFixed(3)} mm`;
@@ -50,6 +52,7 @@ function show(study,retainedReviews=null,retainedForced=null){
   row?.scrollIntoView({block:'center'});row?.querySelector('.mark').focus({preventScroll:true});
  });
  returnSection.dataset.pathReturns='true';
+ independentPointProposals.accept();
  const findings=inspectSequencePath(study),pendingForced=pointProposals.pendingForcedReview(),pendingReviews=pointProposals.accept();accepted=study;reviewedPaths.receive(study,retainedReviews??pendingReviews);forcedPaths.receive(study,retainedForced??pendingForced);clearPathCircle($('circle-result'));$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
  $('summary').textContent=`Endpoint distance: ${mm(findings.endpointDistanceMm)}. Complete sampled-path sum: ${mm(findings.sampledPathDistanceMm)}. Observed adjacent chords: ${findings.observedSegmentCount} of ${findings.segments.length}; their covered sum is ${mm(findings.coveredChordDistanceMm)}.`;
  $('segments').replaceChildren();
