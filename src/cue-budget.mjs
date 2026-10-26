@@ -1,5 +1,5 @@
 import {importCueStudy} from './cue-sufficiency.mjs';
-import {inspectCueQuestions,inspectCueEffort,importCueQuestionPlan} from './cue-questions.mjs';
+import {createCueQuestionInspector,importCueQuestionPlan} from './cue-questions.mjs';
 
 export const CUE_BUDGET_FORMAT = 'skill-translator.cue-budget/v1';
 export const CUE_EFFORT_BUDGET_FORMAT = 'skill-translator.cue-budget/v2';
@@ -49,10 +49,11 @@ export function inspectCueEffortBudget(value,readings,budget,rawQuestionPlan) {
 function inspectBudgetCore(value,readings,budget,questionPlan) {
   const study=importCueStudy(value),weighted=questionPlan!==null;
   const costs=new Map(study.cues.map(cue=>{const declaration=questionPlan?.cues.find(c=>c.cueId===cue.id);return [cue.id,weighted?(declaration.available?declaration.effort:null):1];}));
-  const inspect=currentReadings=>weighted?inspectCueEffort(study,currentReadings,questionPlan):inspectCueQuestions(study,currentReadings);
+  const inspect=createCueQuestionInspector(study,questionPlan);
   const initial=inspect(readings);
   const scores = new Map(), reports = new Map();
   const key = currentReadings => JSON.stringify(currentReadings.map(r => [r.cueId,r.value]).sort());
+  reports.set(key(initial.readings),initial);
   const other = cueId => {
     const index = study.cues.findIndex(c => c.id === cueId);
     let answer = 'Unrecorded analysis category';
@@ -139,3 +140,4 @@ function inspectBudgetCore(value,readings,budget,questionPlan) {
     ...(weighted?{attainableThresholds:thresholds(initial.readings,budget).length}:{}),
     boundary: (weighted?'Effort and availability are supplied declarations. ':'Each question costs one unit. ')+'This partial plan minimizes the worst remaining number of distinct declared decision labels, then declared acquisition cost, within a remaining budget. It compares retained examples, not probabilities, physical actions or a decision for an unseen task. Unknown decision labels and outside-evidence readings remain unresolved. Synthetic branch categories are analysis only and are never retained observations.'};
 }
+
