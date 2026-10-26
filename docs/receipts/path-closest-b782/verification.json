@@ -1,0 +1,38 @@
+{
+  "base": "68b50c695a2a69d32524e735d5c0f19bdf1f98de",
+  "ownerIssue": 359,
+  "behavior": "Every globally closest complete target span without an acceptance-bound guess; preserve separate explicit-bound search and original source witnesses.",
+  "native": {
+    "passed": 29,
+    "failed": 0,
+    "scope": [
+      "closest complete spans",
+      "occurrence queries",
+      "whole path comparison",
+      "concurrent reviewed point paths"
+    ],
+    "independentOracle": "100 source-backed exhaustive interval/minmax/count/witness courses; prior occurrence exhaustive controls retained"
+  },
+  "browser": {
+    "passed": 22,
+    "errors": [],
+    "sandbox": "Chromium156 with native Seccomp sandbox",
+    "originalInputs": "Complete original PNG bundles, stored nominal calibration and original frame identities",
+    "benefit": "Authored shifted pattern found at original indices1–4 with minimum largest paired separation0.7071067812mm while the existing0.001mm bound remains failed",
+    "controls": [
+      "all original candidate scores and ties",
+      "unrelated positive nearest discrepancy never becomes acceptance",
+      "original source/query mismatch refusal",
+      "fresh raw-source replay",
+      "delayed import retirement",
+      "390px keyboard witness selection"
+    ]
+  },
+  "review": "Independent MICROVERSE review found no blocker; root inspected final actual desktop/narrow pixels and shortened repetitive explanatory copy.",
+  "limitations": [
+    "Nominal sampled positions only; no physical action, intent or skill identity",
+    "Point meaning and common calibrated plane remain declared",
+    "Missing observations split complete intervals; no continuous unobserved movement inferred",
+    "All ties retained at computed floating-point minimum; calibration arithmetic can affect ties"
+  ]
+}
