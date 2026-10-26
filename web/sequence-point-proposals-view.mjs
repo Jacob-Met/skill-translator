@@ -1,4 +1,4 @@
-import {proposeSequencePointChoices,reviewSequencePointChoice} from '/src/sequence-point-proposals.mjs';
+import {proposeSequencePointChoices,reviewSequencePointChoice,reviewSequenceForcedSubset} from '/src/sequence-point-proposals.mjs';
 const $=id=>document.getElementById(id),el=(tag,text)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
 export function installPointProposals({getSource,getAssets,onChange}){
  const generated=new Map(),reviewedRecords=new Map();let pending=null;
@@ -21,20 +21,25 @@ export function installPointProposals({getSource,getAssets,onChange}){
   try{
    if(!$('point-pair-bound').value.trim()||!$('point-search-budget').value.trim())throw Error('Supply the discrepancy and complete-search budget.');
    const input=query(),report=proposeSequencePointChoices(source,input);pending={source,input,key:JSON.stringify(input)};
-   const target=$('point-proposals'),anchor=source.moments.find(m=>m.id===input.anchorMomentId),count=report.rows.filter(r=>r.status==='unique').length;
-   target.append(el('p',`${count} selected non-anchor frames have a complete unique geometric mapping. Each offered mapping requires its own task-point review. The common reference declaration is unchanged.`));
+   const target=$('point-proposals'),anchor=source.moments.find(m=>m.id===input.anchorMomentId),count=report.rows.filter(r=>r.markId&&r.status!=='anchor').length;
+   target.append(el('p',`${count} selected non-anchor frames have a forced anchor choice after complete search. Review each offered point identity; other points can remain ambiguous. The common reference declaration is unchanged.`));
    for(const row of report.rows){
     if(row.status==='anchor')continue;
     const moment=source.moments.find(m=>m.id===row.momentId),card=el('article');card.dataset.moment=row.momentId;card.append(el('h3',moment.label));
-    if(row.status!=='unique'){card.append(el('p',`No point choice offered: ${row.status.replaceAll('-',' ')}. Keep or edit the ordinary point/missing-observation field yourself.`));target.append(card);continue;}
-    const pairs=row.report.witnessMappings[0],views=el('div');views.className='grid';views.append(picture(anchor,pairs,'referenceId'),picture(moment,pairs,'observationId'));card.append(views);
+    if(!row.markId){card.append(el('p',`No point choice offered: ${row.status.replaceAll('-',' ')}. Keep or edit the ordinary point/missing-observation field yourself.`));target.append(card);continue;}
+    const anchorOnly=row.proposalKind==='forced-anchor',pairs=anchorOnly?[{referenceId:input.anchorMarkId,observationId:row.markId}]:row.report.witnessMappings[0],views=el('div');views.className='grid';views.append(picture(anchor,pairs,'referenceId'),picture(moment,pairs,'observationId'));card.append(views);
+    if(anchorOnly)card.append(el('p',`${row.report.completeMappingCount} complete geometric mappings remain. Every one agrees on this selected anchor; the complete mapping remains ambiguous. Only this pair is highlighted and offered for review.`));
     const list=el('ol');for(const pair of pairs)list.append(el('li',`${pair.referenceId} → ${pair.observationId}`));card.append(list,el('p',`Selected anchor ${input.anchorMarkId} proposes local mark ${row.markId}. Pair-distance agreement does not establish task identity or a common coordinate frame.`));
-    const confirm=el('input');confirm.type='checkbox';confirm.className='point-semantic-confirm';const label=el('label');label.append(confirm,document.createTextNode(' I reviewed this complete mapping as the same task points.'));const use=el('button','Use reviewed point choice');use.type='button';use.disabled=true;const feedback=el('p');feedback.setAttribute('role','status');
+    const confirm=el('input');confirm.type='checkbox';confirm.className='point-semantic-confirm';const label=el('label');label.append(confirm,document.createTextNode(anchorOnly?' I reviewed this anchor pair as the same task point; the complete mapping remains ambiguous.':' I reviewed this complete mapping as the same task points.'));const all=el('input');all.type='checkbox';all.className='point-forced-subset-confirm';
+    if(anchorOnly&&row.report.forcedPairs.length>1){const details=el('details');details.className='forced-subset-review';details.append(el('summary',`Optionally review all ${row.report.forcedPairs.length} forced pairs for later point paths`));const pairViews=el('div');pairViews.className='grid';pairViews.append(picture(anchor,row.report.forcedPairs,'referenceId'),picture(moment,row.report.forcedPairs,'observationId'));const pairList=el('ol');for(const pair of row.report.forcedPairs)pairList.append(el('li',`${pair.referenceId} → ${pair.observationId}`));const allLabel=el('label');allLabel.append(all,document.createTextNode(' I reviewed every highlighted forced pair as the same task points. This does not resolve unforced identities.'));details.append(pairViews,pairList,allLabel);card.append(details);}
+    const use=el('button','Use reviewed point choice');use.type='button';use.disabled=true;const feedback=el('p');feedback.setAttribute('role','status');
+    all.addEventListener('input',()=>{if(reviewedRecords.has(row.momentId)){retire(rowFor(row.momentId));feedback.textContent='Subset review changed; use the reviewed choice again to retain it.';onChange();}});
     confirm.addEventListener('input',()=>{use.disabled=!confirm.checked;if(!confirm.checked){retire(rowFor(row.momentId));feedback.textContent='Review withdrawn; an unchanged generated basis has been retired.';onChange();}});
     use.addEventListener('click',()=>{
      try{
       if(!pending||getSource()!==source||pending.key!==JSON.stringify(query()))throw Error('Proposal premises changed; propose again.');
-      const choice=reviewSequencePointChoice(source,input,row.momentId,{semanticCorrespondenceConfirmed:confirm.checked});
+      if(!confirm.checked)throw Error('Review the selected point correspondence before adoption.');
+      const choice=(all.checked||!anchorOnly||row.report.forcedPairs.length===1)?reviewSequenceForcedSubset(source,input,row.momentId,{semanticForcedPairsConfirmed:true}):reviewSequencePointChoice(source,input,row.momentId,{semanticCorrespondenceConfirmed:true});
       for(const sample of [choice.anchor,choice.sample]){
        const row=rowFor(sample.momentId),select=row.querySelector('.mark'),basis=row.querySelector('.basis');
        const preserveAnchor=sample.momentId===input.anchorMomentId&&select.value===sample.markId&&basis.value&&(!generated.has(row)||basis.value!==generated.get(row));
@@ -48,5 +53,5 @@ export function installPointProposals({getSource,getAssets,onChange}){
    }
   }catch(error){$('point-proposals').append(el('p',`Proposal unavailable: ${error.message}`));}
  });
- return {reset,accept(){const retained=[...reviewedRecords.values()];generated.clear();reviewedRecords.clear();pending=null;$('point-proposals').replaceChildren();return retained;}};
+ return {reset,retire:clear,pendingForcedReview(){const records=[...reviewedRecords.values()],input=query(),targets=input.momentIds.filter(id=>id!==input.anchorMomentId);if(records.length!==targets.length||records.some(r=>!targets.includes(r.sample.momentId)))return null;if(!records.length||!records.some(r=>r.anchorOnlyReview)||!records.every(r=>r.forcedSubsetReview)||!records.some(r=>r.forcedSubsetReview.pairs.length>1))return null;return {query:records[0].forcedSubsetQuery,reviews:records.map(r=>r.forcedSubsetReview)};},accept(){const records=[...reviewedRecords.values()],retained=records.every(r=>r.reviewedMapping)?records:[];generated.clear();reviewedRecords.clear();pending=null;$('point-proposals').replaceChildren();return retained;}};
 }

@@ -8,6 +8,21 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/workbenches": ["web/workbenches.html", "text/html; charset=utf-8"],
+  "/web/workbenches.mjs": ["web/workbenches.mjs", "text/javascript; charset=utf-8"],
+  "/web/workbenches.css": ["web/workbenches.css", "text/css; charset=utf-8"],
+  '/src/translated-change-regions.mjs':['src/translated-change-regions.mjs','text/javascript; charset=utf-8'],
+  '/web/translated-change-regions.mjs':['web/translated-change-regions.mjs','text/javascript; charset=utf-8'],
+  '/raw-task-proposals':['web/raw-task-proposals.html','text/html; charset=utf-8'],
+  '/src/raw-task-proposals.mjs':['src/raw-task-proposals.mjs','text/javascript; charset=utf-8'],
+  '/web/raw-task-proposals.mjs':['web/raw-task-proposals.mjs','text/javascript; charset=utf-8'],
+  '/web/raw-task-proposals.css':['web/raw-task-proposals.css','text/css; charset=utf-8'],
+  "/web/reviewed-forced-point-paths-view.mjs": ["web/reviewed-forced-point-paths-view.mjs", "text/javascript; charset=utf-8"],
+  "/web/reviewed-forced-point-paths-input.mjs": ["web/reviewed-forced-point-paths-input.mjs", "text/javascript; charset=utf-8"],
+  "/src/reviewed-forced-point-paths.mjs": ["src/reviewed-forced-point-paths.mjs", "text/javascript; charset=utf-8"],
+  '/src/visual-translation.mjs':['src/visual-translation.mjs','text/javascript; charset=utf-8'],
+  '/web/visual-translation-worker.mjs':['web/visual-translation-worker.mjs','text/javascript; charset=utf-8'],
+  '/web/visual-translation-view.mjs':['web/visual-translation-view.mjs','text/javascript; charset=utf-8'],
   "/src/audio-decoder-clock.mjs":["src/audio-decoder-clock.mjs","text/javascript; charset=utf-8"],
   "/src/reviewed-point-paths.mjs":["src/reviewed-point-paths.mjs","text/javascript; charset=utf-8"],
   "/web/reviewed-point-paths-input.mjs":["web/reviewed-point-paths-input.mjs","text/javascript; charset=utf-8"],
@@ -19,6 +34,9 @@ const routes=Object.freeze({
   "/src/axis-spatial-correspondence.mjs":["src/axis-spatial-correspondence.mjs","text/javascript; charset=utf-8"],
   "/src/axis-distance-support.mjs":["src/axis-distance-support.mjs","text/javascript; charset=utf-8"],
   "/web/spatial-correspondence-worker.mjs":["web/spatial-correspondence-worker.mjs","text/javascript; charset=utf-8"],
+  "/src/independent-point-correspondence.mjs": ["src/independent-point-correspondence.mjs", "text/javascript; charset=utf-8"],
+  "/src/sequence-independent-point-proposals.mjs": ["src/sequence-independent-point-proposals.mjs", "text/javascript; charset=utf-8"],
+  "/web/sequence-independent-point-proposals-view.mjs": ["web/sequence-independent-point-proposals-view.mjs", "text/javascript; charset=utf-8"],
   "/src/sequence-point-proposals.mjs":["src/sequence-point-proposals.mjs","text/javascript; charset=utf-8"],
   "/web/sequence-point-proposals-view.mjs":["web/sequence-point-proposals-view.mjs","text/javascript; charset=utf-8"],
   "/demonstration-practice":["web/demonstration-practice.html","text/html; charset=utf-8"],
@@ -44,6 +62,8 @@ const routes=Object.freeze({
   '/web/path-return-support-view.mjs':['web/path-return-support-view.mjs','text/javascript; charset=utf-8'],
   '/web/path-returns-view.mjs':['web/path-returns-view.mjs','text/javascript; charset=utf-8'],
   '/web/path-axis-view.mjs':['web/path-axis-view.mjs','text/javascript; charset=utf-8'],
+  "/src/sequence-discovery.mjs":["src/sequence-discovery.mjs","text/javascript; charset=utf-8"],
+  "/web/sequence-discovery-input.mjs":["web/sequence-discovery-input.mjs","text/javascript; charset=utf-8"],
   "/relationship-families":["web/relationship-families.html","text/html; charset=utf-8"],
   "/web/relationship-families.mjs":["web/relationship-families.mjs","text/javascript; charset=utf-8"],
   "/src/relationship-families.mjs":["src/relationship-families.mjs","text/javascript; charset=utf-8"],
@@ -476,7 +496,6 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const server=createAppServer();
   server.listen(port,"127.0.0.1",()=>console.log("Task Space Lab: http://127.0.0.1:"+port));
 }
-
 
 
 

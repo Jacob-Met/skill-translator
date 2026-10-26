@@ -2,4 +2,4 @@
 
 #coupling-alternatives{border-top:1px solid #657f88;margin-top:1.2rem;padding-top:1rem}#alternative-partners{display:flex;flex-wrap:wrap;gap:.4rem}#alternative-partners button{margin:0;white-space:normal}#alternative-first{max-width:100%}
 
-#occurrence-witness figure{margin:0;min-width:0}#occurrence-witness figcaption,#occurrence-results p{overflow-wrap:anywhere}#occurrence-results button{white-space:normal;overflow-wrap:anywhere}
+#occurrence-witness figure,#closest-witness figure{margin:0;min-width:0}#occurrence-witness figcaption,#closest-witness figcaption,#occurrence-results p,#closest-results p,#closest-results li{overflow-wrap:anywhere}#occurrence-results button,#closest-results button{white-space:normal;overflow-wrap:anywhere}

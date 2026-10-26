@@ -1,4 +1,6 @@
 import {renderChangeRegions} from '/web/scan-change-regions.mjs';
+import {renderTranslationComparison} from '/web/visual-translation-view.mjs';
+import {renderTranslatedChangeRegions} from '/web/translated-change-regions.mjs';
 import {createVisualSpanView} from '/web/visual-span-view.mjs';
 import {createVisualScanPlan, inspectVisualScan, MAX_SCAN_SAMPLES} from '/src/visual-scan.mjs';
 import {samplePresentedFrame} from '/web/video-input.mjs';
@@ -21,8 +23,62 @@ const statusLabels = {
 
 export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurrent, endIO, cancelIO, onSelect}) {
   let active = null, report = null, pairedHash = null;
+  let translationWorker = null, translationOwner = null;
+  let translationRadius = null;
+  let renderedReport = null;
   const spanView=createVisualSpanView({host:$('scan-results'),isBusy,canSelect,onSelect:selectFrame});
   const say = text => { $('scan-status').textContent = text; };
+
+  function stopTranslation() {
+    translationWorker?.terminate(); translationWorker = null; translationOwner = null;
+    translationRadius = null;
+  }
+
+  function compareTranslations(radius) {
+    if (!report || report.translations?.[radius] || report.translationErrors?.[radius]
+      || (translationOwner === report && translationRadius === radius)) return;
+    stopTranslation();
+    const owner = report;
+    owner.translations ??= {}; owner.translationErrors ??= {};
+    try {
+      const worker = new Worker('/web/visual-translation-worker.mjs', {type: 'module'});
+      translationWorker = worker; translationOwner = owner; translationRadius = radius;
+      const current = () => translationWorker === worker && report === owner
+        && getClip()?.identity.sha256 === owner.plan.clip.sha256;
+      const failed = message => {
+        if (!current()) return;
+        owner.translationErrors[radius] = message; stopTranslation(); renderReport();
+      };
+      worker.onmessage = ({data}) => {
+        if (!current()) return;
+        if (data.type === 'progress') {
+          $('scan-translation-summary').textContent = `Comparing image shifts within ±${radius} sampled pixels · ${data.completed} of ${data.total} intervals. Original scores and images stay available.`;
+        } else if (data.type === 'error') failed(data.message);
+        else if (data.type === 'result') {
+          owner.translations[radius] = data.result; stopTranslation();
+          const focused = document.activeElement, sample = focused?.dataset.sample;
+          const interval = focused?.closest('.scan-interval')?.dataset.index;
+          const comparison = focused?.closest('.scan-translation');
+          const paging = focused?.dataset.translationPage;
+          const regionPaging = focused?.dataset.residualPage;
+          const comparisonControl = regionPaging ? `button[data-residual-page="${regionPaging}"]`
+            : focused?.tagName === 'SUMMARY' && focused.closest('details[data-shift-regions]') ? 'details[data-shift-regions] summary'
+            : paging ? `button[data-translation-page="${paging}"]`
+            : focused?.tagName === 'SUMMARY' && comparison ? 'summary' : null;
+          renderReport();
+          if (sample !== undefined && interval !== undefined)
+            $('scan-intervals').querySelector(`.scan-interval[data-index="${interval}"] button[data-sample="${sample}"]`)?.focus({preventScroll: true});
+          else if (comparisonControl && interval !== undefined)
+            $('scan-intervals').querySelector(`.scan-interval[data-index="${interval}"] .scan-translation[data-radius="${comparison.dataset.radius}"] ${comparisonControl}`)?.focus({preventScroll: true});
+        }
+      };
+      worker.onerror = event => { event.preventDefault(); failed(event.message || 'Image-shift comparison failed.'); };
+      // Clone into the worker. Never detach the accepted sample buffers.
+      worker.postMessage({plan: owner.plan, samples: owner.samples, options: {radius}});
+    } catch (error) {
+      owner.translationErrors[radius] = String(error.message || error); stopTranslation();
+    }
+  }
 
   function sync() {
     const busy = isBusy();
@@ -30,7 +86,7 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
     $('scan-start').disabled = busy || !getClip();
     $('scan-cancel').disabled = !active || !isCurrent(active);
     for (const id of ['scan-from', 'scan-until', 'scan-count', 'scan-order']) $(id).disabled = busy;
-    for (const button of $('scan-intervals').querySelectorAll('button')) button.disabled = busy || !canSelect();
+    for (const button of $('scan-intervals').querySelectorAll('button:not([data-translation-page]):not([data-residual-page])')) button.disabled = busy || !canSelect();
   }
 
   function preview(frame) {
@@ -53,17 +109,48 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
   }
 
   function renderReport() {
+    const viewStates = new Map();
+    if (report && renderedReport === report) for (const view of $('scan-intervals').querySelectorAll('.scan-translation')) {
+      const interval = view.closest('.scan-interval').dataset.index;
+      const regions = view.querySelector('.translated-change-regions');
+      viewStates.set(`${interval}/${view.dataset.radius}`, {expanded: view.querySelector('details')?.open === true, page: Number(view.dataset.page) || 0,
+        regionsExpanded: regions?.querySelector('details')?.open === true, regionsPage: Number(regions?.dataset.page) || 0});
+    }
     $('scan-intervals').replaceChildren();
     $('scan-results').hidden = !report;
     spanView.receive(report);
-    if (!report) { $('scan-preview').replaceChildren(); return; }
+    if (!report) { renderedReport = null; $('scan-preview').replaceChildren(); $('scan-translation-summary').textContent = ''; return; }
     const result = inspectVisualScan(report.plan, report.samples);
     const {plan} = result;
     $('scan-summary').textContent = `${result.sampledCount} of ${plan.sampleCount} requested images sampled from ${seconds(plan.startSeconds)} to ${seconds(plan.endSeconds)}; ${result.comparedCount} of ${result.intervals.length} adjacent intervals compared. Intervening frames were not inspected.`;
     const metric = $('scan-order').value;
+    const wide = metric === 'wideTranslationAdjustedChange';
+    const fitted = wide || metric === 'translationAdjustedChange';
+    const radius = wide ? 16 : 4;
+    if (fitted) {
+      // Keep the narrower search when requesting the wider search.
+      // One worker runs at a time, and each completed radius belongs to this report.
+      const needed = wide && !report.translations?.[4] && !report.translationErrors?.[4] ? 4 : radius;
+      if (!wide || !report.translationErrors?.[4]) compareTranslations(needed);
+      if (wide && report.translationErrors?.[4]) {
+        report.translationErrors[16] ??= `The narrow comparison failed; the wider comparison is withheld. ${report.translationErrors[4]}`;
+      }
+    }
+    const translatedReport = report.translations?.[radius];
+    const translationError = report.translationErrors?.[radius];
+    const fittedCount = translatedReport?.intervals.filter(interval => Number.isFinite(interval.comparison?.meanAdjustedChange)).length;
+    $('scan-translation-summary').textContent = translatedReport
+      ? `Image-shift comparison ready. ${fittedCount} of ${result.intervals.length} intervals have a fitted residual. ${wide ? 'Wide ranking uses ±16 sampled pixels; its smaller common interior can omit changes still visible in the retained ±4 comparison and whole-image scores. ' : ''}Ranking uses the remaining RGB difference on common interior pixels. A good fit can also describe real scene motion; compare the original scores and frames.`
+      : translationError ? `Image-shift comparison unavailable: ${translationError} Original scores remain; no translated score is substituted.`
+      : translationOwner === report ? `Comparing image shifts within ±${translationRadius} sampled pixels. Original scores and images stay available.` : '';
     const intervals = [...result.intervals];
     if (metric !== 'time') intervals.sort((a, b) => {
       if (a.status !== 'compared' || b.status !== 'compared') return (b.status === 'compared') - (a.status === 'compared') || a.index - b.index;
+      if (fitted) {
+        const score = interval => translatedReport?.intervals[interval.index]?.comparison?.meanAdjustedChange;
+        const aa = score(a), bb = score(b), haveA = Number.isFinite(aa), haveB = Number.isFinite(bb);
+        return Number(haveB) - Number(haveA) || (haveA && haveB ? bb - aa : 0) || a.index - b.index;
+      }
       return b[metric] - a[metric] || a.index - b.index;
     });
     for (const interval of intervals) {
@@ -74,6 +161,17 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
       if (interval.status === 'compared') {
         item.append(node('p', `Mean channel change · raw ${level(interval.meanAbsoluteChange)} · adjusted ${level(interval.meanAdjustedChange)} levels. Uniform shift ${interval.uniformBrightnessShift >= 0 ? '+' : ''}${interval.uniformBrightnessShift}; ${(interval.changedPixelFraction * 100).toFixed(1)}% of sampled pixels have a residual channel change of at least 16 levels.`, 'scan-measures'));
         item.append(node('p', `Presented interval ${seconds(interval.before.presentedSeconds)} → ${seconds(interval.after.presentedSeconds)}`, 'note'));
+        for (const shownRadius of wide ? [16, 4] : [4]) {
+          const translated = report.translations?.[shownRadius]?.intervals[interval.index]?.comparison;
+          if (translated) {
+            const state = viewStates.get(`${interval.index}/${shownRadius}`);
+            const view = renderTranslationComparison(translated, {
+              ...(wide ? {heading: shownRadius === 16 ? 'Wider search · ±16 sampled pixels' : 'Retained narrow search · ±4 sampled pixels'} : {}), ...state});
+            view.append(renderTranslatedChangeRegions(report.samples[interval.before.index], report.samples[interval.after.index], translated.changeRegions,
+              {expanded: state?.regionsExpanded, page: state?.regionsPage}));
+            item.append(view);
+          }
+        }
         item.append(renderChangeRegions(report.samples[interval.before.index], report.samples[interval.after.index]));
       } else item.append(node('p', statusLabels[interval.status], 'note'));
       for (const frame of [interval.before, interval.after]) {
@@ -86,9 +184,13 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
         button.type = 'button'; button.dataset.sample = String(frame.index);
         button.addEventListener('click', () => selectFrame(frame)); actions.append(button);
       }
-      item.append(actions); $('scan-intervals').append(item);
+      const comparisonHost = item.querySelector('.scan-translation');
+      const comparisonDetails = comparisonHost?.querySelector('details');
+      if (comparisonDetails) comparisonHost.insertBefore(actions, comparisonDetails);
+      else item.append(actions);
+      $('scan-intervals').append(item);
     }
-    sync();
+    renderedReport = report; sync();
   }
 
   async function scan() {
@@ -119,6 +221,7 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
         say(`Sampled ${samples.length} of ${plan.sampleCount} requested frames…`);
       }
       if (!isCurrent(request) || getClip() !== clip) return;
+      stopTranslation();
       report = {plan, samples};
       $('scan-preview').replaceChildren(); renderReport();
       say(samples.length === plan.sampleCount && !samples.at(-1)?.error
@@ -145,6 +248,7 @@ export function createVisualScanner({getClip, isBusy, canSelect, beginIO, isCurr
   });
 
   function clear() {
+    stopTranslation();
     active = null; report = null; pairedHash = null;
     $('scan-progress').hidden = true; renderReport();
     say('Pair the original clip to scan its image changes.'); sync();
