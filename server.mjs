@@ -12,6 +12,9 @@ const routes=Object.freeze({
   '/web/regional-translation-view.mjs':['web/regional-translation-view.mjs','text/javascript; charset=utf-8'],
   '/web/regional-translation-worker.mjs':['web/regional-translation-worker.mjs','text/javascript; charset=utf-8'],
 
+  '/src/numeric-trace-readings.mjs':['src/numeric-trace-readings.mjs','text/javascript; charset=utf-8'],
+  '/web/numeric-trace-readings-view.mjs':['web/numeric-trace-readings-view.mjs','text/javascript; charset=utf-8'],
+  '/web/numeric-trace-readings.css':['web/numeric-trace-readings.css','text/css; charset=utf-8'],
   '/numeric-cue-thresholds':['web/numeric-cue-thresholds.html','text/html; charset=utf-8'],
   '/src/numeric-cue-thresholds.mjs':['src/numeric-cue-thresholds.mjs','text/javascript; charset=utf-8'],
   '/web/numeric-cue-thresholds.mjs':['web/numeric-cue-thresholds.mjs','text/javascript; charset=utf-8'],

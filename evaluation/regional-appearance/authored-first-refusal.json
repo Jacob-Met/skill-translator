@@ -1,0 +1,25 @@
+{
+  "publishedSource": "529a2a8c2155b673c3ec9916b6d4e74880ce1a2f",
+  "receipt": {
+    "passed": false,
+    "checks": [],
+    "errors": [],
+    "sources": {
+      "split": {
+        "bytes": 18559,
+        "sha256": "50e3df735fd7624045590f022fea825ad26b7e87a5a89eec19392fefe27e242a"
+      },
+      "flat": {
+        "bytes": 602,
+        "sha256": "b2e750527bf7209fc05769b6fe2ab959b950aa19e984b66d8a229c41e8691593"
+      }
+    },
+    "limits": [
+      "Authored encoded appearance course; no physical identity or action inference.",
+      "Eight fixed regions preserve the same full search interior; outside pixels and unseen frames remain omitted.",
+      "Codec tolerance fixed before acquisition: mean normalized regional residual below0.01; pure-raster native controls require exact zero."
+    ],
+    "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+    "failure": "locator.focus: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.scan-interval[data-index=\"0\"] .regional-appearance').locator(':scope > details > summary')\u001b[22m\n\n    at /tmp/hamon-ae3ff9-skill-regional-published/tools/browser-regional-translation.mjs:34:59"
+  }
+}
