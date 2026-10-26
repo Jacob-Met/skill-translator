@@ -5,7 +5,7 @@ const node = (tag, text, className) => {
   return item;
 };
 
-export function renderTranslationComparison(comparison, {heading, expanded = false, page = 0} = {}) {
+export function renderTranslationComparison(comparison, {heading, expanded = false, page = 0, coverageDescription} = {}) {
   const host = node('div', undefined, 'scan-translation');
   host.dataset.state = comparison.status;
   host.dataset.radius = String(comparison.radius);
@@ -27,7 +27,7 @@ export function renderTranslationComparison(comparison, {heading, expanded = fal
   details.dataset.totalAlternatives = String(best.length);
   details.append(node('summary', 'Image-shift alternatives and coverage'));
   const {support} = comparison;
-  details.append(node('p', `${comparison.candidateCount} integer shifts within ±${comparison.radius} sampled pixels use the same ${support.width} × ${support.height} interior. ${support.omittedPixels} border pixels are excluded from this comparison; the original whole-image scores above retain them.`, 'note'));
+  details.append(node('p', coverageDescription ?? `${comparison.candidateCount} integer shifts within ±${comparison.radius} sampled pixels use the same ${support.width} × ${support.height} interior. ${support.omittedPixels} border pixels are excluded from this comparison; the original whole-image scores above retain them.`, 'note'));
   const list = node('ul');
   list.setAttribute('aria-label', 'Equally best image-shift alternatives');
   const progress = node('p', `${best.length} alternatives retained. Open these details to inspect them in pages of 50.`, 'note');
@@ -84,3 +84,4 @@ export function renderTranslationComparison(comparison, {heading, expanded = fal
   }
   return host;
 }
+

@@ -1,0 +1,1128 @@
+{
+  "revision": "ad218f4d4f390e1d817b132e4c06c45ab2d9628b",
+  "producerSha256": "e86003ba4cf44e3b17e7795d300cd175754e9980c8963c69abae0ed2eed8e079",
+  "cases": [
+    {
+      "seed": 3,
+      "radius": 4,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 40,
+          "height": 32,
+          "pixelCount": 1280,
+          "omittedPixels": 640
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 8,
+          "meanAdjustedChange": 0.2803125,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 3,
+      "radius": 4,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 40,
+          "height": 32,
+          "pixelCount": 1280,
+          "omittedPixels": 640
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 8,
+          "meanAdjustedChange": 0.2803125,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 4,
+              "top": 4,
+              "width": 40,
+              "height": 32,
+              "pixelCount": 1280
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 7,
+              "top": 2,
+              "width": 40,
+              "height": 32,
+              "pixelCount": 1280
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 1280
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "seed": 3,
+      "radius": 8,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 8,
+        "support": {
+          "left": 8,
+          "top": 8,
+          "width": 32,
+          "height": 24,
+          "pixelCount": 768,
+          "omittedPixels": 1152
+        },
+        "candidateCount": 289,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 8,
+          "meanAdjustedChange": 0.27989174836601305,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 3,
+      "radius": 8,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 8,
+        "support": {
+          "left": 8,
+          "top": 8,
+          "width": 32,
+          "height": 24,
+          "pixelCount": 768,
+          "omittedPixels": 1152
+        },
+        "candidateCount": 289,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 8,
+          "meanAdjustedChange": 0.27989174836601305,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 8,
+              "top": 8,
+              "width": 32,
+              "height": 24,
+              "pixelCount": 768
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 11,
+              "top": 6,
+              "width": 32,
+              "height": 24,
+              "pixelCount": 768
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 768
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "seed": 3,
+      "radius": 16,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 16,
+        "support": {
+          "left": 16,
+          "top": 16,
+          "width": 16,
+          "height": 8,
+          "pixelCount": 128,
+          "omittedPixels": 1792
+        },
+        "candidateCount": 1089,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 10,
+          "meanAdjustedChange": 0.28026960784313726,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 3,
+      "radius": 16,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 16,
+        "support": {
+          "left": 16,
+          "top": 16,
+          "width": 16,
+          "height": 8,
+          "pixelCount": 128,
+          "omittedPixels": 1792
+        },
+        "candidateCount": 1089,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 10,
+          "meanAdjustedChange": 0.28026960784313726,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 16,
+              "top": 16,
+              "width": 16,
+              "height": 8,
+              "pixelCount": 128
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 19,
+              "top": 14,
+              "width": 16,
+              "height": 8,
+              "pixelCount": 128
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 128
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "seed": 71,
+      "radius": 4,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 40,
+          "height": 32,
+          "pixelCount": 1280,
+          "omittedPixels": 640
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 12,
+          "meanAdjustedChange": 0.2714767156862745,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 71,
+      "radius": 4,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 40,
+          "height": 32,
+          "pixelCount": 1280,
+          "omittedPixels": 640
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 12,
+          "meanAdjustedChange": 0.2714767156862745,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 4,
+              "top": 4,
+              "width": 40,
+              "height": 32,
+              "pixelCount": 1280
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 7,
+              "top": 2,
+              "width": 40,
+              "height": 32,
+              "pixelCount": 1280
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 1280
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "seed": 71,
+      "radius": 8,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 8,
+        "support": {
+          "left": 8,
+          "top": 8,
+          "width": 32,
+          "height": 24,
+          "pixelCount": 768,
+          "omittedPixels": 1152
+        },
+        "candidateCount": 289,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 10,
+          "meanAdjustedChange": 0.2668879357298475,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 71,
+      "radius": 8,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 8,
+        "support": {
+          "left": 8,
+          "top": 8,
+          "width": 32,
+          "height": 24,
+          "pixelCount": 768,
+          "omittedPixels": 1152
+        },
+        "candidateCount": 289,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 10,
+          "meanAdjustedChange": 0.2668879357298475,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 8,
+              "top": 8,
+              "width": 32,
+              "height": 24,
+              "pixelCount": 768
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 11,
+              "top": 6,
+              "width": 32,
+              "height": 24,
+              "pixelCount": 768
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 768
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "seed": 71,
+      "radius": 16,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 16,
+        "support": {
+          "left": 16,
+          "top": 16,
+          "width": 16,
+          "height": 8,
+          "pixelCount": 128,
+          "omittedPixels": 1792
+        },
+        "candidateCount": 1089,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 10,
+          "meanAdjustedChange": 0.26004901960784316,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 71,
+      "radius": 16,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 16,
+        "support": {
+          "left": 16,
+          "top": 16,
+          "width": 16,
+          "height": 8,
+          "pixelCount": 128,
+          "omittedPixels": 1792
+        },
+        "candidateCount": 1089,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 10,
+          "meanAdjustedChange": 0.26004901960784316,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 16,
+              "top": 16,
+              "width": 16,
+              "height": 8,
+              "pixelCount": 128
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 19,
+              "top": 14,
+              "width": 16,
+              "height": 8,
+              "pixelCount": 128
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 128
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "seed": 223,
+      "radius": 4,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 40,
+          "height": 32,
+          "pixelCount": 1280,
+          "omittedPixels": 640
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 12,
+          "meanAdjustedChange": 0.26986315359477125,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 223,
+      "radius": 4,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 40,
+          "height": 32,
+          "pixelCount": 1280,
+          "omittedPixels": 640
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 12,
+          "meanAdjustedChange": 0.26986315359477125,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 4,
+              "top": 4,
+              "width": 40,
+              "height": 32,
+              "pixelCount": 1280
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 7,
+              "top": 2,
+              "width": 40,
+              "height": 32,
+              "pixelCount": 1280
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 1280
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "seed": 223,
+      "radius": 8,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 8,
+        "support": {
+          "left": 8,
+          "top": 8,
+          "width": 32,
+          "height": 24,
+          "pixelCount": 768,
+          "omittedPixels": 1152
+        },
+        "candidateCount": 289,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 16,
+          "meanAdjustedChange": 0.27021377995642704,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 223,
+      "radius": 8,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 8,
+        "support": {
+          "left": 8,
+          "top": 8,
+          "width": 32,
+          "height": 24,
+          "pixelCount": 768,
+          "omittedPixels": 1152
+        },
+        "candidateCount": 289,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 16,
+          "meanAdjustedChange": 0.27021377995642704,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 8,
+              "top": 8,
+              "width": 32,
+              "height": 24,
+              "pixelCount": 768
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 11,
+              "top": 6,
+              "width": 32,
+              "height": 24,
+              "pixelCount": 768
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 768
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "seed": 223,
+      "radius": 16,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "unique",
+        "radius": 16,
+        "support": {
+          "left": 16,
+          "top": 16,
+          "width": 16,
+          "height": 8,
+          "pixelCount": 128,
+          "omittedPixels": 1792
+        },
+        "candidateCount": 1089,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 14,
+          "meanAdjustedChange": 0.2752450980392157,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      }
+    },
+    {
+      "seed": 223,
+      "radius": 16,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "unique",
+        "radius": 16,
+        "support": {
+          "left": 16,
+          "top": 16,
+          "width": 16,
+          "height": 8,
+          "pixelCount": 128,
+          "omittedPixels": 1792
+        },
+        "candidateCount": 1089,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 14,
+          "meanAdjustedChange": 0.2752450980392157,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0,
+        "alternatives": [
+          {
+            "dx": 3,
+            "dy": -2,
+            "uniformBrightnessShift": 11,
+            "meanAdjustedChange": 0,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.",
+        "changeRegions": {
+          "status": "analyzed",
+          "width": 48,
+          "height": 40,
+          "alternativeCount": 1,
+          "earlier": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 16,
+              "top": 16,
+              "width": 16,
+              "height": 8,
+              "pixelCount": 128
+            }
+          },
+          "later": {
+            "every": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "some": {
+              "changedPixels": 0,
+              "regions": []
+            },
+            "fullyCompared": {
+              "left": 19,
+              "top": 14,
+              "width": 16,
+              "height": 8,
+              "pixelCount": 128
+            }
+          },
+          "profile": {
+            "channelThreshold": 16,
+            "minArea": 4,
+            "connectivity": 8
+          },
+          "work": {
+            "evaluatedPixelPairs": 0,
+            "maximumPixelPairs": 128
+          },
+          "limitation": "Conditional sampled appearance under every retained minimizing image shift and its brightness offset. Some-fit pixels changed in at least one evaluated comparison; every-fit pixels changed in all fits with full support. A pixel not evaluated by a fit remains unassessed for that fit; outside full support no every-fit conclusion is available. No object, action, contact or physical correspondence is established."
+        }
+      }
+    },
+    {
+      "small": true,
+      "radius": 4,
+      "includeChangeRegions": false,
+      "expected": {
+        "status": "insufficient-common-support",
+        "radius": 4,
+        "alternatives": []
+      }
+    },
+    {
+      "small": true,
+      "radius": 4,
+      "includeChangeRegions": true,
+      "expected": {
+        "status": "insufficient-common-support",
+        "radius": 4,
+        "alternatives": [],
+        "changeRegions": {
+          "status": "unavailable",
+          "reason": "There is insufficient common interior support."
+        }
+      }
+    }
+  ]
+}
