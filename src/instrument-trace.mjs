@@ -16,8 +16,8 @@ const clockOutput=clock=>({anchors:clock.anchors.map(p=>({instrumentSeconds:p.tr
  verification:{instrumentSeconds:clock.verification.transcriptSeconds,clipSeconds:clock.verification.clipSeconds},
  toleranceSeconds:clock.toleranceSeconds,basis:clock.basis});
 
-export function importInstrumentTrace(sequence,input){
- check(input?.format===INSTRUMENT_TRACE_FORMAT,'Open a source-bound scalar instrument trace');
+// Shared raw-observation admission; each caller retains its own format and analysis settings.
+export function importInstrumentObservations(sequence,input){
  const source=validateSequence(sequence);
  check(same(source,validateSequence(input.source)),'The original demonstrated source changed');
  check(['authored-example','reported-measurement'].includes(input.evidenceClass),'Declare authored example or reported measurement');
@@ -30,11 +30,17 @@ export function importInstrumentTrace(sequence,input){
   return {timeSeconds,value:bounded(sample.value,-1e12,1e12,'Scalar reading')};
  });
  const normalizedClock=inspectNarrationClock(clockInput(input.clock),source.clip.durationSeconds).clock;
+ return {source,instrument,evidenceClass:input.evidenceClass,samples,clock:clockOutput(normalizedClock)};
+}
+
+export function importInstrumentTrace(sequence,input){
+ check(input?.format===INSTRUMENT_TRACE_FORMAT,'Open a source-bound scalar instrument trace');
+ const observations=importInstrumentObservations(sequence,input);
  const settings={threshold:bounded(input.settings?.threshold,-1e12,1e12,'Declared threshold'),direction:input.settings?.direction,
   maximumGapSeconds:bounded(input.settings?.maximumGapSeconds,Number.MIN_VALUE,3600,'Declared maximum adjacent-sample gap'),minimumSamples:input.settings?.minimumSamples};
  check(['at-or-above','at-or-below'].includes(settings.direction),'Declare at-or-above or at-or-below threshold');
  check(Number.isSafeInteger(settings.minimumSamples)&&settings.minimumSamples>=2&&settings.minimumSamples<=4096,'Require 2–4096 consecutive qualifying samples');
- return {format:INSTRUMENT_TRACE_FORMAT,source,instrument,evidenceClass:input.evidenceClass,samples,clock:clockOutput(normalizedClock),settings};
+ return {format:INSTRUMENT_TRACE_FORMAT,...observations,settings};
 }
 
 export function inspectInstrumentTrace(sequence,input){
@@ -83,3 +89,4 @@ export function instrumentPlaybackRange(sequence,input,selection){
  return {startSeconds:candidate.navigation.startSeconds,endSeconds:candidate.navigation.endSeconds,
   candidateId:selection.candidateId,sampleIndexes:candidate.sampleIndexes};
 }
+
