@@ -1,3 +1,5 @@
+import {installReviewedForcedPointPaths} from '/web/reviewed-forced-point-paths-view.mjs';
+import {readReviewedForcedPointPathsBundle} from '/web/reviewed-forced-point-paths-input.mjs';
 import {installReviewedPointPaths} from '/web/reviewed-point-paths-view.mjs';
 import {readReviewedPointPathsBundle} from '/web/reviewed-point-paths-input.mjs';
 import {installPointProposals} from '/web/sequence-point-proposals-view.mjs';
@@ -12,11 +14,12 @@ import {releaseSequenceAssets,makeSequenceBundle} from '/web/sequence-input.mjs'
 const $=id=>document.getElementById(id),el=(tag,value)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=value;return n;};
 let source=null,accepted=null,revision=0,assets=new Map();
 const status=message=>{$('status').textContent=message;};
-function invalidate(){reviewedPaths.invalidate();dwell.clear();revision++;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;status('Declarations changed. Inspect selected samples to recompute.');}
+function invalidate(){forcedPaths.invalidate();reviewedPaths.invalidate();dwell.clear();revision++;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;status('Declarations changed. Inspect selected samples to recompute.');}
 const reviewedPaths=installReviewedPointPaths({getAssets:()=>assets,getAccepted:()=>accepted});
+const forcedPaths=installReviewedForcedPointPaths({getAssets:()=>assets,getAccepted:()=>accepted});
 const pointProposals=installPointProposals({getSource:()=>source,getAssets:()=>assets,onChange:invalidate});
 function sourceForm(sequence,study=null){
- reviewedPaths.clear();dwell.clear();
+ forcedPaths.clear();reviewedPaths.clear();dwell.clear();
  source=sequence;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;$('editor').hidden=false;$('source-name').textContent=sequence.title;
  $('point-label').value=study?.label??'';$('reference-label').value=study?.reference.label??'';$('reference-basis').value=study?.reference.basis??'';$('reference-confirm').checked=study?.reference.samePlaneAndCorners??false;
  $('samples').replaceChildren();
@@ -38,7 +41,7 @@ function sourceForm(sequence,study=null){
 }
 function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const mm=x=>x===null?'Unavailable':`${x!==0&&Math.abs(x)<.0005?x.toExponential(6):x.toFixed(3)} mm`;
-function show(study,retainedReviews=null){
+function show(study,retainedReviews=null,retainedForced=null){
  dwell.clear();
  $('result').querySelector('[data-path-returns]')?.remove();
  const returnSection=mountPathReturns($('result'),study,id=>{
@@ -47,7 +50,7 @@ function show(study,retainedReviews=null){
   row?.scrollIntoView({block:'center'});row?.querySelector('.mark').focus({preventScroll:true});
  });
  returnSection.dataset.pathReturns='true';
- const findings=inspectSequencePath(study),pendingReviews=pointProposals.accept();accepted=study;reviewedPaths.receive(study,retainedReviews??pendingReviews);clearPathCircle($('circle-result'));$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
+ const findings=inspectSequencePath(study),pendingForced=pointProposals.pendingForcedReview(),pendingReviews=pointProposals.accept();accepted=study;reviewedPaths.receive(study,retainedReviews??pendingReviews);forcedPaths.receive(study,retainedForced??pendingForced);clearPathCircle($('circle-result'));$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
  $('summary').textContent=`Endpoint distance: ${mm(findings.endpointDistanceMm)}. Complete sampled-path sum: ${mm(findings.sampledPathDistanceMm)}. Observed adjacent chords: ${findings.observedSegmentCount} of ${findings.segments.length}; their covered sum is ${mm(findings.coveredChordDistanceMm)}.`;
  $('segments').replaceChildren();
  for(const s of findings.segments){const row=el('tr');for(const value of [`${s.fromMomentId} → ${s.toMomentId}`,`${s.elapsedSeconds} s`,s.distanceMm===null?'Missing observation':mm(s.distanceMm),s.delta?`${mm(s.delta.xMm)}, ${mm(s.delta.yMm)}`:'Unavailable'])row.append(el('td',value));$('segments').append(row);}
@@ -111,3 +114,5 @@ const dwell=mountDwellProposals($('result'),()=>accepted,id=>{
 });
 
 $('reviewed-input').addEventListener('change',async()=>{const token=++revision,file=$('reviewed-input').files[0];$('reviewed-input').value='';if(!file)return;let received;status('Reading complete retained mappings and original frames; current evidence is retained until admission.');try{received=await readReviewedPointPathsBundle(file);if(token!==revision){releaseSequenceAssets(received.assets);return;}releaseSequenceAssets(assets);assets=received.assets;sourceForm(received.sequence,received.study.seed);show(received.study.seed,received.study.reviews);status('Complete original mappings reopened and additional point paths recomputed without new point choices or reviews.');}catch(error){if(received)releaseSequenceAssets(received.assets);if(token===revision)status(`Retained mappings refused: ${error.message}. Previous accepted evidence is unchanged.`);}});
+
+$('forced-reviewed-input').addEventListener('change',async()=>{const token=++revision,file=$('forced-reviewed-input').files[0];$('forced-reviewed-input').value='';if(!file)return;let received;status('Reading retained forced subsets and original frames; accepted evidence is preserved until admission.');try{received=await readReviewedForcedPointPathsBundle(file);if(token!==revision){releaseSequenceAssets(received.assets);return;}releaseSequenceAssets(assets);assets=received.assets;sourceForm(received.sequence,received.study.seed);show(received.study.seed,null,{query:received.study,reviews:received.study.reviews});status('Original forced-subset reviews reopened; only identities shared across every selected frame are reused.');}catch(error){if(received)releaseSequenceAssets(received.assets);if(token===revision)status(`Forced-subset account refused: ${error.message}. Accepted evidence is unchanged.`);}});
