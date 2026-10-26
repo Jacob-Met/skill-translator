@@ -177,6 +177,10 @@ The capture course generates an explicitly authored bitmap locally, then exercis
 
 The video course additionally uses an installed FFmpeg to generate an original changing-frame clip, then checks selected pixels against the known frames, independent clip/PNG hashes, requested versus presented times, invalid replacement rollback, cancelled delayed encoding and the exported-frame handoff. FFmpeg is a QA dependency only; source capture uses the browser's decoder.
 
+The [video orientation receiving course](docs/VIDEO_ORIENTATION_RECEIVING.md) checks the maintained decoder and frame-origin contract with authored 0°, 90° and 270° display-matrix controls. It uses separately installed Playwright, Chrome, FFmpeg and ffprobe to compare the captured PNG, bounded sample and independent orientation reference, while preserving the distinct image and callback dimension fields.
+
+    PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs CHROME_BINARY=/path/to/chrome node tools/browser-video-orientation-probe.mjs
+
 The evidence course exercises additional demonstrations, contradictory results, uncertainty-sensitive experiment proposals, actual observation downloads, source binding, transactional reimport, source replacement and fresh mobile reopening. Its inputs are analytic authored controls. It writes review screenshots and receipts to `docs/receipts/rule-evidence-20261024` (or `QA_OUTPUT`) when run.
 
 The complete-task course checks retained multi-mark attempts, incomplete/failing/passing results, shared-shift diagnosis without automatic correction, mirrored keyboard placement, archived retries, actual session downloads, source/setup mismatch refusal and fresh mobile reopening. Its authored review evidence is written to `docs/receipts/task-practice-20261024` (or `QA_OUTPUT`).
