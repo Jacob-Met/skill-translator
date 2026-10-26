@@ -8,6 +8,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/src/point-pattern-fit.mjs':['src/point-pattern-fit.mjs','text/javascript; charset=utf-8'],
+  '/src/shared-motion-groups.mjs':['src/shared-motion-groups.mjs','text/javascript; charset=utf-8'],
+  '/web/shared-motion-groups-view.mjs':['web/shared-motion-groups-view.mjs','text/javascript; charset=utf-8'],
   '/src/raw-task-practice.mjs':['src/raw-task-practice.mjs','text/javascript; charset=utf-8'],
   "/workbenches": ["web/workbenches.html", "text/html; charset=utf-8"],
   "/web/workbenches.mjs": ["web/workbenches.mjs", "text/javascript; charset=utf-8"],
