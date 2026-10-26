@@ -1,0 +1,10 @@
+{
+  "repository": "Jacob-Met/materialtruth",
+  "commit": "97ab037255ffa21faafb47f66f46413bc1829997",
+  "source_path": "app/photometric.mjs",
+  "git_blob_sha": "e2f67fea2edb168c30c32199eab8ab84ebcd195b",
+  "sha256": "dd005dfe4dda481e01666085b225b5b3140b4fe757dcc4fa583b01202b3192a2",
+  "consumer": "src/path-circle.mjs",
+  "entrypoint": "qrSolve",
+  "qualification": "Exact published supplier bytes; existing three-column entrypoint unchanged."
+}
