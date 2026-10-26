@@ -1,3 +1,4 @@
+import {serveAudioIntake} from './native/audio-intake.mjs';
 import {serveCalibrationTranslation} from "./native/calibration-translation.mjs";
 import {serveSequenceEdge} from "./native/sequence-edge.mjs";
 import http from "node:http";
@@ -449,6 +450,8 @@ export function createAppServer(){
     if(path==="/api/sequence-edge"&&req.method==="POST"){await serveSequenceEdge(req,res);return;}
     if(path==="/capture")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' blob:; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/api/calibration-translation"&&req.method==="POST"){await serveCalibrationTranslation(req,res);return;}
+    if(path==="/sequence"||path==="/web/sequence.html")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
+    if(path==="/api/audio-intake"&&req.method==="POST"){await serveAudioIntake(req,res);return;}
     const route=Object.prototype.hasOwnProperty.call(routes,path)?routes[path]:null;
     if(req.method!=="GET"&&req.method!=="HEAD"){
       res.writeHead(405,{"Allow":"GET, HEAD"});res.end("Method not allowed");return;

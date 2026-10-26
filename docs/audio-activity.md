@@ -2,6 +2,48 @@
 
 The optional studio audio navigator connects native decoded source audio to original video context and ordinary frame capture. It proposes activity intervals under fixed energy settings. It does not recognize physical contact, cutting quality, correct force, completion or expertise.
 
+## Prepare directly from the selected original
+
+Choose an original MP4/WebM in Demonstration studio, then open **Find audible
+activity in the original clip** and choose **Prepare audio from this original
+clip**. The existing native FFmpeg producer receives those exact bytes through
+the local application server. A sole audio stream is selected automatically.
+For several audio streams, choose the displayed original stream index and
+prepare again. A video without audio remains explicitly unavailable. Existing
+report-file import remains supported.
+
+The original hash is checked before and after preparation. Complete decoded PCM,
+original integer timestamps, gaps, native commands and decoder provenance are
+retained and recomputed in the browser. No browser Web Audio approximation is
+substituted. The browser media-origin declaration is still required; re-preparing
+the same original retains an already applied declaration, while a draft remains
+unpaired. Use the existing candidate, playback, preview, frame capture and full
+navigation saving workflow. Cancel native preparation without discarding an
+accepted navigation. Replacing the clip or importing another report retires late
+native responses.
+
+The local server needs FFmpeg and FFprobe. Preparation admits one request at a
+time, bounds the original at 128 MiB and the complete report at 48 MiB, and
+cancels after 90 seconds. The maintained 60-second decoded-audio, mono/stereo,
+sample-rate and timestamp limits still apply. Temporary originals are removed
+when native work completes, fails or is cancelled.
+
+Upload decoding uses explicit container profiles, never automatic playlist
+probing: signature-selected MP4/MOV, Matroska/WebM and RIFF-WAVE; the browser
+itself still chooses MP4/WebM. Every probe/decode restricts input protocols to
+local files, and MOV external data references are disabled. The admitted MP4
+structure additionally refuses external data-reference entries and compressed
+movie metadata. Unsupported containers remain unavailable, not silently
+converted. Requests require a trusted loopback Host and matching Origin. These
+are bounded input-profile controls, not a qualification of every container or
+decoder version. The earlier owned HLS negative was already refused by its
+nonstandard temporary suffix; no successful external-read exploit was observed.
+
+Native verification: `node --test --test-isolation=none
+test/audio-input-profile.test.mjs test/audio-intake.test.mjs`. The request-handler
+test is an in-process stream harness; actual HTTP, playback and desktop/390px
+receiving belong to the maintained `test/audio-activity-browser.mjs` course.
+
 ## Prepare and use
 
 Run the maintained native producer with FFmpeg and FFprobe installed:

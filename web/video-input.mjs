@@ -34,7 +34,7 @@ export async function loadLocalVideo(file){
     const sha256=Array.from(new Uint8Array(bytes),n=>n.toString(16).padStart(2,"0")).join("");
     const identity=clipIdentity({name:String(file.name||"local-clip").slice(0,180),mimeType,
       sha256,sizeBytes:file.size,durationSeconds:video.duration});
-    return {video,url,identity};
+    return {video,url,identity,file};
   }catch(error){video.pause();video.removeAttribute("src");video.load();URL.revokeObjectURL(url);throw error;}
 }
 export function releaseVideo(clip){
