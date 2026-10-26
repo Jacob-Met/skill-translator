@@ -62,6 +62,30 @@ try{
  checks.push('Existing narration preview and Use current playhead synchronously retire managed audio callbacks and timer; unrelated original playback proceeds beyond the old interval with no stale completion, while navigation remains byte-identical.');
  await p.close();
  }
+
+ {
+ const quiet=await context.newPage(),input=await pair(quiet,'heldback-quiet');
+ assert.equal(await quiet.locator('#audio-event option').count(),0);
+ const originalNavigation=await save(quiet,'#audio-save');
+ await quiet.locator('#audio-method').selectOption('contrast');
+ assert.equal(await quiet.locator('#audio-event option').count(),1);
+ assert.match(await quiet.locator('#audio-event-detail').textContent(),/Background RMS by channel/);
+ assert.match(await quiet.locator('#audio-event option').textContent(),/Relative contrast/);
+ await quiet.locator('#audio-play').click();await quiet.waitForFunction(()=>!document.querySelector('#audio-stop').disabled);
+ await quiet.locator('#audio-method').selectOption('fixed');assert.equal(await quiet.locator('#audio-stop').isDisabled(),true);assert.equal(await quiet.locator('#video-host video').evaluate(v=>v.paused),true);assert.equal(await quiet.locator('#audio-event option').count(),0);
+ await quiet.locator('#audio-method').selectOption('contrast');await quiet.locator('#audio-play').click();await quiet.waitForFunction(()=>document.querySelector('#audio-status').textContent.startsWith('Stopped:'),null,{timeout:10000});
+ await quiet.locator('#audio-preview').click();assert.ok(Math.abs(Number(await quiet.locator('#moment-time').inputValue())-.5)<=.04);
+ await quiet.locator('#moment-label').fill('Quiet original contrast');await quiet.locator('#moment-state').fill('Original frame selected from relative energy; physical meaning remains authored.');await quiet.waitForFunction(()=>!document.querySelector('#capture-moment').disabled);await quiet.locator('#capture-moment').click();await quiet.waitForFunction(()=>document.querySelector('#moment-count').textContent.includes('1 /'));
+ await quiet.locator('#moment-time').fill('0.9');await quiet.locator('#moment-label').fill('Later original contrast context');await quiet.locator('#moment-state').fill('Explicitly selected original context, not inferred completion.');await quiet.waitForFunction(()=>!document.querySelector('#capture-moment').disabled);await quiet.locator('#capture-moment').click();await quiet.waitForFunction(()=>document.querySelector('#moment-count').textContent.includes('2 /'));
+ const momentIds=await quiet.locator('#step-before option').evaluateAll(es=>es.map(e=>e.value));await quiet.locator('#step-before').selectOption(momentIds[0]);await quiet.locator('#step-after').selectOption(momentIds[1]);await quiet.locator('#step-title').fill('Inspect quiet acoustic context');await quiet.locator('#step-intent').fill('Authored comparison of original frames');await quiet.locator('#step-change').fill('Different original moving-pattern frames; no physical action inferred.');await quiet.locator('#save-step').click();
+ const bundle=JSON.parse(await save(quiet,'#export-sequence'));assert.equal(bundle.sequence.moments.length,2);assert.equal(hash(Buffer.from(bundle.frames[0].pngBase64,'base64')),bundle.sequence.moments[0].image.sha256);
+ assert.deepEqual(await save(quiet,'#audio-save'),originalNavigation);
+ await quiet.locator('#audio-activity').screenshot({path:join(out,'audio-contrast-desktop.png')});
+ const fresh=await context.newPage();await fresh.setViewportSize({width:390,height:844});await pair(fresh,'heldback-quiet');await fresh.locator('#audio-file').setInputFiles(payload('quiet-navigation.json',originalNavigation));await fresh.waitForFunction(()=>document.querySelector('#audio-status').textContent.includes('Saved audio navigation reopened'));assert.equal(await fresh.locator('#audio-method').inputValue(),'fixed');assert.equal(await fresh.locator('#audio-event option').count(),0);await fresh.locator('#audio-method').selectOption('contrast');assert.equal(await fresh.locator('#audio-event option').count(),1);await fresh.locator('#audio-preview').focus();await fresh.keyboard.press('Enter');assert.ok(Math.abs(Number(await fresh.locator('#moment-time').inputValue())-.5)<=.04);assert.deepEqual(await save(fresh,'#audio-save'),originalNavigation);assert.equal(await fresh.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);await fresh.locator('#audio-activity').screenshot({path:join(out,'audio-contrast-narrow.png')});
+ await pair(fresh,'moving-silent');await fresh.locator('#audio-method').selectOption('contrast');assert.equal(await fresh.locator('#audio-event option').count(),0);assert.equal(await fresh.locator('#audio-preview').isDisabled(),true);
+ checks.push('Quiet native-decoded original has no fixed candidate and one relative candidate; actual interval playback, method-switch cancellation, original PNG capture, byte-identical source navigation, fresh390px recomputation/keyboard preview and changed silent-source refusal pass.');
+ await quiet.close();await fresh.close();
+ }
  const p=await context.newPage(),inputs=await pair(p,'moving-voiced');const navigation=await save(p,'#audio-save');assert.equal(JSON.parse(navigation).report.source.sha256,hash(inputs.media));
  const staleNavigation=JSON.parse(navigation);staleNavigation.declaration.basis='Superseded delayed declaration must never replace the newer accepted origin.';const staleNavigationBytes=Buffer.from(JSON.stringify(staleNavigation));
  await p.locator('#audio-enabled').check();await p.locator('#audio-play').click();await p.waitForFunction(()=>document.querySelector('#audio-status').textContent.startsWith('Stopped:'),null,{timeout:10000});assert.doesNotMatch(await p.locator('#audio-status').textContent(),/not reported/);assert.match(await p.locator('#moment-count').textContent(),/^0 \/ /);
