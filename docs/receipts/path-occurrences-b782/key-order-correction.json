@@ -45,8 +45,12 @@
   "review": "Independent CHRONOS review found no blocker.",
   "limitations": "Authored original PNG receiver establishes software behavior, not physical action equivalence.",
   "currentComposition": {
-    "base": "fd635ff9d3e5d16623866ffd973f0649c3fd3fbe",
-    "native": "16 path occurrence and comparison tests passed",
+    "base": "b13b1e683485de119d183b817ea852a1c9dbe796",
+    "native": {
+      "passed": 23,
+      "failed": 0,
+      "scope": "path comparison, occurrences and concurrent reviewed point paths"
+    },
     "browser": {
       "result": "PASS",
       "groups": [
@@ -78,8 +82,8 @@
         "web/path-comparison-input.mjs": "3ad05811958a2be582a56fbc0fa07508276c93a18a14ee27a2ff5dd34c778a77",
         "web/path-comparison.html": "403164e4f170b5ab06af1e5017e2e1688cc98b72c5f9c0524a764034531990bd",
         "web/path-comparison.css": "4c6d22cc4298e34232aca7fb9004eae8af31225c33bc7270c3eaee43cfdec1d2",
-        "server.mjs": "455788b8e7344e943973efcb3bce553607a864f48c6585c773d11c23b852c60b",
-        "web/sampled-path.html": "ffd46d8b89c5c6001cedf24b3d393a86ae8466591ce6f2a557401097818ea35b",
+        "server.mjs": "b14df1fe3b3d284c76da9a81a6e85cd7cbec0542fc9c4c84b4b8c78998cb74b1",
+        "web/sampled-path.html": "707a76e9dd91362c20382f265c2f619b616fc000076c1398d279d07ef58b866a",
         "web/sampled-path-input.mjs": "90094d3188c5e916864d4b6f0a96dd0f725181fbf627f741e60beadb00f50fa3",
         "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
       },
