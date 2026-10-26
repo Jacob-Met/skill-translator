@@ -11,8 +11,12 @@ The original nominal candidates remain visible. A candidate receives a
 
 - Every position in its original endpoint region is within or on the radius of
   every position in its original start region.
-- At least one fixed interior original moment is strictly outside that radius
-  for every position in its region and every position in the same start region.
+- Either at least one fixed interior original moment is strictly outside that radius
+  for every position in its region and every position in the same start region,
+  or an interior pair always has separation strictly greater than twice the
+  radius. The latter proves that at least one of that pair must depart, without
+  identifying one fixed moment. [Alternative-pair certificates](PATH_RETURN_ALTERNATIVES.md)
+  explain the strict comparison and its limits.
 
 The maintained exact polygon-distance kernel supplies the comparisons. Squared
 rational distances are compared directly with the squared threshold. Endpoint

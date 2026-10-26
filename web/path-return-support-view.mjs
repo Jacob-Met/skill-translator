@@ -14,7 +14,15 @@ export function showPathReturnSupport(container,account,inspectOriginal) {
    article.append(el('p',p.status==='universally-supported-excursion'?
     'Every allowed shared-start position has a witnessed departure and an eventual return within this interval. First-return timing is not certified.':
     'Unresolved: these sufficient universal conditions are not established. This does not prove that a counterexample exists.'));
-   article.append(el('p',`Endpoint always within radius: ${p.endpoint.allInside?'yes':'not established'}. Interior moments always strictly outside: ${p.departureWitnesses.map(w=>w.toMomentId).join(', ')||'none certified'}.`));
+   article.append(el('p',`Endpoint always within radius: ${p.endpoint.allInside?'yes':'not established'}. Fixed interior moments always strictly outside: ${p.departureWitnesses.map(w=>w.toMomentId).join(', ')||'none certified'}.`));
+   for(const pair of p.alternativeDepartureWitnesses){
+    const group=el('section');group.className='evidence-review';group.dataset.alternativePair='true';
+    group.append(el('h5',`At least one of ${pair.fromMomentId} or ${pair.toMomentId} must depart`));
+    group.append(el('p',`Every allowed separation of this interior pair exceeds twice the ${report.thresholdMm} mm radius. Both cannot remain within that radius of the same start. This identifies an alternative pair, not one fixed departure moment.`));
+    for(const id of [pair.fromMomentId,pair.toMomentId]){const button=el('button',`Inspect pair frame ${id}`);button.type='button';button.addEventListener('click',()=>inspectOriginal(id));group.append(button);}
+    const pairDetails=el('details');pairDetails.append(el('summary','Exact pair separation and witnesses'),el('pre',JSON.stringify(pair.range,null,2)));group.append(pairDetails);article.append(group);
+   }
+   if(p.alternativePairComparisons.length&&!p.alternativeDepartureWitnesses.length)article.append(el('p','No interior pair has a certified separation strictly greater than twice the radius. Equality is insufficient.'));
    const ids=[p.nominal.fromMomentId,...p.interior.map(w=>w.toMomentId),p.nominal.toMomentId];
    for(const id of ids){const button=el('button',`Inspect original ${id}`);button.type='button';button.addEventListener('click',()=>inspectOriginal(id));article.append(button);}
    const details=el('details');details.append(el('summary','Original candidate and every exact pair witness'),el('pre',JSON.stringify(p,null,2)));article.append(details);section.append(article);

@@ -19,7 +19,7 @@ const decode=q=>[BigInt(q.numerator),BigInt(q.denominator)];
  * are not combined into a synthetic path or an attainable joint range. */
 export function inspectPathReturnSupport(raw) {
  const account=importPathRegions(raw),nominal=proposePathReturns(account.path,account.thresholdMm);
- const radius=rational(account.thresholdMm),squaredRadius=mul(radius,radius),cache=new Map();
+ const radius=rational(account.thresholdMm),squaredRadius=mul(radius,radius),fourSquaredRadius=mul(rational(4),squaredRadius),cache=new Map();
  const pair=(a,b)=>{
   const key=`${a}:${b}`;
   if(!cache.has(key)){
@@ -37,10 +37,21 @@ export function inspectPathReturnSupport(raw) {
  const proposals=nominal.proposals.map(proposal=>{
   const endpoint=pair(proposal.fromIndex,proposal.toIndex),interior=[];
   for(let i=proposal.fromIndex+1;i<proposal.toIndex;i++)interior.push(pair(proposal.fromIndex,i));
-  const departureWitnesses=interior.filter(p=>p.allOutside);
-  return {nominal:proposal,endpoint,interior,departureWitnesses,
-   status:endpoint.allInside&&departureWitnesses.length?'universally-supported-excursion':'unresolved'};
+  const departureWitnesses=interior.filter(p=>p.allOutside),alternativePairComparisons=[];
+  // Both positions cannot be within r of ONE shared start if their distance
+  // is strictly greater than 2r. This proves a disjunction, not a fixed moment.
+  // Every index is in original temporal order, so each unordered pair is
+  // cached once across all proposals (at most 66 for the admitted 12 samples).
+  for(let a=proposal.fromIndex+1;a<proposal.toIndex;a++)for(let b=a+1;b<proposal.toIndex;b++){
+   const comparison=pair(a,b);
+   alternativePairComparisons.push({fromMomentId:comparison.fromMomentId,toMomentId:comparison.toMomentId,range:comparison.range,
+    separationExceedsTwiceRadius:cmp(decode(comparison.range.minimum.squared),fourSquaredRadius)>0});
+  }
+  const alternativeDepartureWitnesses=alternativePairComparisons.filter(p=>p.separationExceedsTwiceRadius);
+  const departureSupport=departureWitnesses.length?'fixed-moment':alternativeDepartureWitnesses.length?'at-least-one-of-pair':null;
+  return {nominal:proposal,endpoint,interior,departureWitnesses,alternativePairComparisons,alternativeDepartureWitnesses,departureSupport,
+   status:endpoint.allInside&&departureSupport?'universally-supported-excursion':'unresolved'};
  });
  return {thresholdMm:account.thresholdMm,nominal,proposals,pairComparisons:cache.size,
-  boundary:'Certificates apply to every position in the supplied independent common-plane rectangles, using the same start position in both departure and return statements. Each certificate has at least one fixed interior moment always strictly outside the radius and an endpoint always inside or on it. It does not certify the first return time, exclude earlier returns, or count task cycles. Unresolved means this sufficient certificate was not established, not that a counterexample exists. Exact extrema witnesses are separate pair witnesses and need not combine into one path. Missing samples split nominal candidates; intervening motion remains unknown. Supplied regions are not inferred calibration uncertainty, verified physical accuracy, contact or skill evidence.'};
+  boundary:'Certificates apply to every position in the supplied independent common-plane rectangles, using the same start position in both departure and return statements. Each certificate has an endpoint always inside or on the radius, plus either a fixed interior moment always strictly outside it or an interior pair whose minimum separation is strictly greater than twice the radius. In the pair case at least one of those two moments must be outside for every shared-start assignment; the certificate does not identify one fixed departure moment. Equality at twice the radius is insufficient. It does not certify the first return time, exclude earlier returns, or count task cycles. Unresolved means this sufficient certificate was not established, not that a counterexample exists. Exact extrema witnesses are separate pair witnesses and need not combine into one path. Missing samples split nominal candidates; intervening motion remains unknown. Supplied regions are not inferred calibration uncertainty, verified physical accuracy, contact or skill evidence.'};
 }
