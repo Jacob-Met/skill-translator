@@ -1,0 +1,6208 @@
+{
+  "generator": "LCG seed391572,24 authored five-moment cases; held aside from native fixture geometry",
+  "cases": [
+    {
+      "name": "held-aside-span-0",
+      "frames": [
+        [
+          [
+            64.65547851810697,
+            56.6791625322774
+          ],
+          [
+            41.303304310399106,
+            50.58106749313883
+          ],
+          [
+            61.39794182677288,
+            52.02189115742222
+          ],
+          [
+            180.03360347112175,
+            66.67378650628962
+          ],
+          [
+            169.40240950046572,
+            87.22293218523264
+          ],
+          [
+            167.25616418614518,
+            35.57079040049575
+          ]
+        ],
+        [
+          [
+            65.24866716087084,
+            62.0204553565906
+          ],
+          [
+            44.53841193552725,
+            49.64227841936505
+          ],
+          [
+            63.47128724821494,
+            56.652326190964295
+          ],
+          [
+            178.73621849723506,
+            66.21742910546403
+          ],
+          [
+            174.66290438130983,
+            88.97561902646763
+          ],
+          [
+            157.3123023990226,
+            40.25112899802617
+          ]
+        ],
+        null,
+        [
+          [
+            236.76313009191074,
+            67.93715869180936
+          ],
+          [
+            248.4181111362722,
+            46.86394746159371
+          ],
+          [
+            235.5818264451268,
+            62.455270982605754
+          ],
+          [
+            123.28414323310261,
+            65.75879884675933
+          ],
+          [
+            120.6956596776339,
+            88.73718917390599
+          ],
+          [
+            151.28162600043254,
+            47.02968243976001
+          ]
+        ],
+        [
+          [
+            80,
+            80
+          ],
+          [
+            80,
+            80
+          ],
+          [
+            80,
+            80
+          ],
+          [
+            168.92995589980677,
+            64.0002851945163
+          ],
+          [
+            187.62425891452094,
+            77.64112967301426
+          ],
+          [
+            136.21213774331935,
+            71.93363671432905
+          ]
+        ]
+      ],
+      "threshold": 0.18,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.031082422920498908
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.021894142715439883
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.009109715155770515
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-6"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.009243842913293459
+          },
+          {
+            "ids": [
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.003693746652676879
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 11,
+          "maximal": 5,
+          "missingPairTests": 228,
+          "outsidePairTests": 298,
+          "unresolvedPairTests": 12
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 342,
+          "pointFits": 1116,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-1",
+      "frames": [
+        [
+          [
+            56.59150090999901,
+            55.30426940880716
+          ],
+          [
+            46.15822336636484,
+            36.93637818330899
+          ],
+          [
+            31.30153269506991,
+            80.74696775060147
+          ],
+          [
+            169.20891578309238,
+            59.35317747993395
+          ],
+          [
+            176.1318186391145,
+            99.77736033499241
+          ],
+          [
+            199.49601321481168,
+            44.488542911130935
+          ]
+        ],
+        [
+          [
+            58.51427367083943,
+            63.381853418032335
+          ],
+          [
+            56.50787838672488,
+            42.35313290683344
+          ],
+          [
+            25.029104913869453,
+            76.25262901785185
+          ],
+          [
+            164.99136043143628,
+            66.31491986952297
+          ],
+          [
+            185.8227052920257,
+            101.64332508051876
+          ],
+          [
+            188.02268191355657,
+            41.66083577601556
+          ]
+        ],
+        [
+          [
+            58.88025801209621,
+            70.24943308767635
+          ],
+          null,
+          [
+            23.01339090862467,
+            70.94314441494303
+          ],
+          [
+            163.1236782481991,
+            75.93650151334977
+          ],
+          [
+            198.59505589525676,
+            96.52345153691905
+          ],
+          [
+            171.11801349356273,
+            43.15912767578846
+          ]
+        ],
+        [
+          [
+            61.715502855806314,
+            71.72775211047787
+          ],
+          [
+            64.02146925786485,
+            50.72977060446612
+          ],
+          [
+            34.31428485776259,
+            74.53009262777364
+          ],
+          [
+            161.70465865734465,
+            79.61841109081838
+          ],
+          [
+            199.35823560295523,
+            95.87415735649643
+          ],
+          [
+            165.77385337671868,
+            46.126512278742496
+          ]
+        ],
+        [
+          [
+            56.28259354057125,
+            81.25582319123365
+          ],
+          [
+            73.4499598558844,
+            68.946711031127
+          ],
+          [
+            36.318703574978116,
+            55.78508112035697
+          ],
+          [
+            159.10684030945245,
+            79.8759791949024
+          ],
+          [
+            194.49196241141453,
+            100.61083577223022
+          ],
+          [
+            167.23794491615155,
+            47.13226575892467
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 6.355287432313019e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 1.464821375527116e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.464821375527116e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 47,
+          "maximal": 4,
+          "missingPairTests": 124,
+          "outsidePairTests": 395,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 446,
+          "pointFits": 1416,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-2",
+      "frames": [
+        [
+          [
+            37.520948154851794,
+            36.08903209445998
+          ],
+          [
+            35.148584144189954,
+            69.88115588203073
+          ],
+          [
+            47.362434109672904,
+            35.12857358204201
+          ],
+          [
+            195.32988720573485,
+            75.53374765906483
+          ],
+          [
+            187.56407576613128,
+            96.19317520176992
+          ],
+          [
+            195.95208880491555,
+            59.47367156855762
+          ]
+        ],
+        [
+          [
+            43.55910474463596,
+            38.916732269238906
+          ],
+          [
+            29.3702015211758,
+            69.67727138006839
+          ],
+          [
+            53.102660142902884,
+            41.50475790922541
+          ],
+          [
+            192.55315972546555,
+            76.73314788890691
+          ],
+          [
+            193.3675098349683,
+            98.78890921348857
+          ],
+          [
+            186.92538221634783,
+            61.678537326996874
+          ]
+        ],
+        [
+          [
+            50.319060618445604,
+            43.75006746397933
+          ],
+          [
+            23.981314954024864,
+            65.0540317521083
+          ],
+          [
+            57.73159083624418,
+            50.294662342445086
+          ],
+          [
+            190.29476376299002,
+            78.57514927013803
+          ],
+          [
+            193.45982072462692,
+            100.41781824939405
+          ],
+          [
+            183.09146728916477,
+            64.20762690986028
+          ]
+        ],
+        [
+          [
+            48.87657015067226,
+            45.18147502070366
+          ],
+          [
+            31.112987417757296,
+            74.02572695353203
+          ],
+          [
+            67.04240884028509,
+            45.89155958429703
+          ],
+          [
+            186.3800274630912,
+            80.29248071834967
+          ],
+          [
+            202.83509732095564,
+            95.00133688327833
+          ],
+          [
+            171.6309269927348,
+            73.90677682776433
+          ]
+        ],
+        [
+          [
+            58.803571897084204,
+            62.111928697749505
+          ],
+          [
+            30.31464992139652,
+            43.783888275031984
+          ],
+          [
+            63.91374459023394,
+            68.2029445857512
+          ],
+          [
+            184.45301457512727,
+            82.2785159876031
+          ],
+          [
+            200.51650441157093,
+            97.4140393674612
+          ],
+          [
+            169.87653279008347,
+            75.50803907432804
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 4.0194366942304644e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 2.0097183471152322e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 1.4210854715202004e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 59,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 511,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-3",
+      "frames": [
+        [
+          [
+            32.68997975625098,
+            56.119300429709256
+          ],
+          [
+            61.24134155921638,
+            81.31505703320727
+          ],
+          [
+            56.17084157653153,
+            58.59157946892083
+          ],
+          [
+            173.71379918418825,
+            77.2983922646381
+          ],
+          [
+            193.75613228417933,
+            84.61619408335537
+          ],
+          [
+            187.03139404766262,
+            60.38234486011788
+          ]
+        ],
+        [
+          [
+            36.46715365035532,
+            56.3608969925191
+          ],
+          [
+            60.42612197331316,
+            85.957759132382
+          ],
+          [
+            59.20888726833041,
+            62.70728080693626
+          ],
+          [
+            174.05562253820978,
+            83.63782047530138
+          ],
+          [
+            195.32494424623258,
+            81.94628459638821
+          ],
+          [
+            179.12075873158784,
+            62.71282613642174
+          ]
+        ],
+        [
+          [
+            44.817264569655556,
+            53.99477434961089
+          ],
+          [
+            54.38783721594088,
+            90.85139588290828
+          ],
+          [
+            62.89706110640245,
+            69.17976669931818
+          ],
+          [
+            175.8931215908661,
+            88.56224929905905
+          ],
+          [
+            194.623636894408,
+            78.34397468869543
+          ],
+          [
+            171.98456703075604,
+            67.39070722035687
+          ]
+        ],
+        [
+          [
+            66.88399248096476,
+            57.96658393808136
+          ],
+          [
+            39.05601687036989,
+            83.95908641557826
+          ],
+          [
+            72.16215354066424,
+            78.10026657817771
+          ],
+          [
+            172.37957019058416,
+            89.70279722695255
+          ],
+          [
+            192.4308785416391,
+            82.40962418910858
+          ],
+          [
+            171.69087678380694,
+            68.18450979205022
+          ]
+        ],
+        [
+          [
+            74.02023185635534,
+            65.92633846393852
+          ],
+          [
+            38.74016244878847,
+            80.25543872263621
+          ],
+          [
+            71.34176858685507,
+            82.8441597452626
+          ],
+          [
+            180.75629705938948,
+            92.9849288240161
+          ],
+          [
+            186.74256634640943,
+            72.50542884056186
+          ],
+          [
+            163.00246211023125,
+            80.80657354353339
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 4.0194366942304644e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 1.5888218580782548e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.2469334198890888e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 59,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 511,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-4",
+      "frames": [
+        [
+          [
+            33.58015255269129,
+            39.85034343423322
+          ],
+          [
+            31.67747516927775,
+            53.85762755260803
+          ],
+          [
+            41.410891146422365,
+            97.0040872167796
+          ],
+          [
+            194.86940511099527,
+            93.66980153820478
+          ],
+          [
+            188.7864585499512,
+            37.58168588532135
+          ],
+          [
+            203.3697510154685,
+            84.982007470401
+          ]
+        ],
+        [
+          [
+            46.16252514689557,
+            44.357026054095826
+          ],
+          [
+            38.3419780582422,
+            56.07853132037507
+          ],
+          [
+            28.18415512510252,
+            99.21423484415652
+          ],
+          [
+            198.60065238383953,
+            95.06749412046041
+          ],
+          [
+            178.02118453952514,
+            42.63829263859441
+          ],
+          [
+            204.52960551786316,
+            84.4879332555248
+          ]
+        ],
+        [
+          [
+            56.83415904683214,
+            53.109016481483366
+          ],
+          [
+            44.712627337131025,
+            60.41549997941247
+          ],
+          [
+            17.189345375513703,
+            95.1350757445299
+          ],
+          [
+            200.24587043060723,
+            95.89423178178842
+          ],
+          [
+            170.6833878051152,
+            47.853022369565366
+          ],
+          [
+            204.18681421706762,
+            84.41646153073185
+          ]
+        ],
+        [
+          [
+            65.26597395049664,
+            70.28139463902056
+          ],
+          [
+            51.29029365392157,
+            68.52778830494043
+          ],
+          [
+            15.199056913354312,
+            75.77641138662736
+          ],
+          [
+            210.02077358445925,
+            85.25940326553953
+          ],
+          [
+            154.7303702383647,
+            74.33127903830827
+          ],
+          [
+            204.24436227015192,
+            74.55296355305421
+          ]
+        ],
+        [
+          [
+            64.66769806825869,
+            64.48025170913967
+          ],
+          [
+            51.0447296102254,
+            68.22118845550662
+          ],
+          [
+            22.071567014755146,
+            91.00797285226719
+          ],
+          [
+            208.99380422313504,
+            83.48580784637011
+          ],
+          [
+            152.63258014858755,
+            82.73396538967737
+          ],
+          [
+            201.4428069509161,
+            73.93077710267158
+          ]
+        ]
+      ],
+      "threshold": 0.18,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.06383574945243765
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.034021845068966425
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 0.05370271031873486
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.04070661167094385
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-3"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.09319371479083648
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-4"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.022231766082152216
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-5"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.14141646835029906
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.0241731977696967
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 64,
+          "maximal": 8,
+          "missingPairTests": 0,
+          "outsidePairTests": 506,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-5",
+      "frames": [
+        [
+          [
+            55.865982631221414,
+            49.92067319806665
+          ],
+          [
+            64.32272623293102,
+            84.27908117650077
+          ],
+          [
+            54.50137426145375,
+            74.70730597153306
+          ],
+          [
+            204.27180572412908,
+            86.78172166692093
+          ],
+          [
+            186.90895372070372,
+            52.28134407196194
+          ],
+          [
+            173.97587734274566,
+            70.22456053411588
+          ]
+        ],
+        [
+          [
+            68.44050770997289,
+            54.55645870422098
+          ],
+          [
+            57.838757198511345,
+            88.31471098792645
+          ],
+          [
+            54.41081821712193,
+            75.03589065395303
+          ],
+          [
+            205.91161078082374,
+            84.44160012750348
+          ],
+          [
+            180.73108983883495,
+            55.155322641662686
+          ],
+          [
+            172.51393616791978,
+            75.6907035038326
+          ]
+        ],
+        null,
+        [
+          [
+            80.74287492286138,
+            67.60861343413669
+          ],
+          [
+            53.926951975730475,
+            90.69373824755537
+          ],
+          [
+            66.02025622701433,
+            74.60470866440842
+          ],
+          [
+            205.43236982138998,
+            72.46563029084362
+          ],
+          [
+            167.20149198928237,
+            66.97521463498806
+          ],
+          [
+            174.52277497690613,
+            87.84678134716711
+          ]
+        ],
+        [
+          [
+            85.83296808589239,
+            78.47416842761005
+          ],
+          [
+            51.84572737403765,
+            88.31714460110683
+          ],
+          [
+            69.01138766567612,
+            75.11574731738355
+          ],
+          [
+            196.34830631788677,
+            60.815093774754175
+          ],
+          [
+            163.03542380875007,
+            80.35982561788911
+          ],
+          [
+            181.77290666094166,
+            92.1127068803555
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.4210854715202004e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.842170943040401e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 9.532931148469529e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.4210854715202004e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 13,
+          "maximal": 4,
+          "missingPairTests": 228,
+          "outsidePairTests": 309,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 342,
+          "pointFits": 1116,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-6",
+      "frames": [
+        [
+          [
+            45.407508006319404,
+            62.148773793596774
+          ],
+          [
+            29.949664557352662,
+            50.99007532466203
+          ],
+          [
+            37.59950849227607,
+            45.26321520796046
+          ],
+          [
+            182.62366068549454,
+            89.02351778931916
+          ],
+          [
+            190.4108828958124,
+            66.35416543344036
+          ],
+          [
+            169.65385572053492,
+            81.53340624179691
+          ]
+        ],
+        [
+          [
+            45.855302985177914,
+            66.24352956701253
+          ],
+          [
+            32.32612337202118,
+            52.81137506342249
+          ],
+          [
+            40.77525469874904,
+            48.347159695784235
+          ],
+          [
+            184.85238360945183,
+            89.2512658554638
+          ],
+          [
+            181.92382650869968,
+            65.46126965337312
+          ],
+          [
+            169.91218918369034,
+            88.1985539557195
+          ]
+        ],
+        [
+          [
+            40.252362239088434,
+            70.86598826116405
+          ],
+          null,
+          [
+            47.06492963126217,
+            53.55483952148336
+          ],
+          [
+            183.67213406266094,
+            90.5950651571187
+          ],
+          [
+            178.31339002315542,
+            67.23218373579311
+          ],
+          [
+            168.70287521602552,
+            91.08384057164461
+          ]
+        ],
+        [
+          [
+            259.7476377609116,
+            70.86598826116405
+          ],
+          [
+            262.36061081440243,
+            51.98123654357186
+          ],
+          [
+            252.93507036873783,
+            53.55483952148336
+          ],
+          [
+            116.32786593733906,
+            90.5950651571187
+          ],
+          [
+            121.68660997684458,
+            67.23218373579311
+          ],
+          [
+            131.29712478397448,
+            91.08384057164461
+          ]
+        ],
+        [
+          [
+            33.6081584031203,
+            66.37278872688492
+          ],
+          [
+            51.29301248558518,
+            59.25187504286261
+          ],
+          [
+            61.05551016724266,
+            65.77740055647175
+          ],
+          [
+            182.54692223917573,
+            83.66694997087903
+          ],
+          [
+            158.9280372878656,
+            79.58177682343074
+          ],
+          [
+            177.21343977480052,
+            97.66236267024662
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 4.263256414560601e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.684341886080802e-14
+          },
+          {
+            "ids": [
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 3.1776437161565096e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 3,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-3",
+            "startSeconds": 1,
+            "endSeconds": 4,
+            "sampleCount": 4,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 6,
+            "maxResidualMm": 2.2469334198890888e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.842170943040401e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.5888218580782548e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.0097183471152322e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-5"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.0097183471152322e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-6"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 7.105427357601002e-15
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 3.1776437161565096e-14
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-5"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.5618982671915017e-14
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-6"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 3.826389734580363e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 5.684341886080802e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 49,
+          "maximal": 13,
+          "missingPairTests": 124,
+          "outsidePairTests": 388,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 446,
+          "pointFits": 1416,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-7",
+      "frames": [
+        [
+          [
+            26.063400777056813,
+            78.25936778448522
+          ],
+          [
+            43.157469844445586,
+            54.3952601426281
+          ],
+          [
+            46.98973924852908,
+            35.268737259320915
+          ],
+          [
+            168.21907038800418,
+            87.94300631387159
+          ],
+          [
+            197.5717017520219,
+            69.61494266986847
+          ],
+          [
+            179.02583449147642,
+            37.59942100616172
+          ]
+        ],
+        [
+          [
+            18.84844121959003,
+            72.32102179335234
+          ],
+          [
+            45.36882132571628,
+            59.736417316079965
+          ],
+          [
+            57.993347324725164,
+            44.86592607700193
+          ],
+          [
+            176.2846399100351,
+            93.36113137076013
+          ],
+          [
+            196.08068963891142,
+            64.9778387488249
+          ],
+          [
+            166.45127708255598,
+            42.81839987031677
+          ]
+        ],
+        [
+          [
+            23.430418095024024,
+            78.84143678985137
+          ],
+          [
+            47.43094427915342,
+            61.93943768596665
+          ],
+          [
+            57.34924749585403,
+            45.14249071061621
+          ],
+          [
+            183.77494374986458,
+            94.84224369345793
+          ],
+          [
+            192.29087477748206,
+            61.301614545163645
+          ],
+          [
+            156.75078810415587,
+            51.01351175128022
+          ]
+        ],
+        [
+          [
+            22.654396833432653,
+            77.99745536354624
+          ],
+          [
+            49.35710629695252,
+            65.80450091724211
+          ],
+          [
+            72.1991067396463,
+            48.12140890564589
+          ],
+          [
+            195.6724941483508,
+            88.38715842128083
+          ],
+          [
+            183.00190869951894,
+            56.18543254650206
+          ],
+          [
+            148.1422037836328,
+            68.58477902211891
+          ]
+        ],
+        [
+          [
+            80,
+            80
+          ],
+          [
+            80,
+            80
+          ],
+          [
+            80,
+            80
+          ],
+          [
+            197.37234952030323,
+            84.81312271932914
+          ],
+          [
+            177.04560673014913,
+            56.80743735950507
+          ],
+          [
+            146.39865038105017,
+            77.53680991106758
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.1237965343830035e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 3,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-3",
+            "startSeconds": 1,
+            "endSeconds": 4,
+            "sampleCount": 4,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 6,
+            "maxResidualMm": 1.4210854715202004e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.1316282072803006e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 55,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 499,
+          "unresolvedPairTests": 16
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-8",
+      "frames": [
+        [
+          [
+            27.964527197019198,
+            49.47757067754865
+          ],
+          [
+            55.87777850597631,
+            89.50398225351236
+          ],
+          [
+            47.39906558238435,
+            68.6607540092431
+          ],
+          [
+            192.1756595497718,
+            62.293107830779626
+          ],
+          [
+            179.25556912722533,
+            56.40471494402736
+          ],
+          [
+            201.37080726909917,
+            92.58853755141608
+          ]
+        ],
+        [
+          [
+            38.36571053070052,
+            48.08287499910167
+          ],
+          [
+            49.562373086647305,
+            95.61059134926964
+          ],
+          [
+            49.4202734293504,
+            73.12319902811866
+          ],
+          [
+            187.78841513744533,
+            64.31992460698984
+          ],
+          [
+            173.8076886423493,
+            62.28582368075522
+          ],
+          [
+            205.14010466035927,
+            90.75128320840346
+          ]
+        ],
+        [
+          [
+            55.87916409538765,
+            51.28949962222601
+          ],
+          [
+            37.216275698126374,
+            96.36636401918125
+          ],
+          [
+            50.20029428531885,
+            78.01521571653902
+          ],
+          [
+            184.67884170902119,
+            66.59492517162965
+          ],
+          [
+            170.56709987804814,
+            66.46889111979334
+          ],
+          [
+            205.6071996617855,
+            90.27661815178261
+          ]
+        ],
+        [
+          [
+            63.26072718300955,
+            56.78232457928601
+          ],
+          [
+            34.532869707741334,
+            96.37994916245691
+          ],
+          [
+            58.443258824506216,
+            78.50067463042555
+          ],
+          [
+            179.55736562246187,
+            70.31825776566502
+          ],
+          [
+            166.72067444577522,
+            76.2161260571831
+          ],
+          [
+            208.58506578166137,
+            82.83360273823047
+          ]
+        ],
+        [
+          [
+            76.58279389859716,
+            76.16673869157619
+          ],
+          [
+            28.168054580441428,
+            82.7885870446645
+          ],
+          [
+            57.60973210520526,
+            81.7451728153087
+          ],
+          [
+            175.857030032623,
+            74.35210871119898
+          ],
+          [
+            165.62524439837074,
+            84.12341396593955
+          ],
+          [
+            207.37644601545415,
+            76.97878530984364
+          ]
+        ]
+      ],
+      "threshold": 0.18,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.07986411704420861
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.06670123154213033
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 0.04313087032925078
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-5"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.1299115657606582
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 60,
+          "maximal": 4,
+          "missingPairTests": 0,
+          "outsidePairTests": 509,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-9",
+      "frames": [
+        [
+          [
+            42.44483773596585,
+            64.2096633836627
+          ],
+          [
+            46.71575962565839,
+            90.62962916912511
+          ],
+          [
+            27.361326897516847,
+            62.782313232310116
+          ],
+          [
+            199.01687952689826,
+            93.23549752822146
+          ],
+          [
+            178.45697295852005,
+            95.7043117005378
+          ],
+          [
+            201.78631133399904,
+            74.51340845087543
+          ]
+        ],
+        [
+          [
+            46.189001808341374,
+            68.20645737230483
+          ],
+          [
+            44.54407489839058,
+            94.91880622735272
+          ],
+          [
+            31.788847552409127,
+            63.49634218544038
+          ],
+          [
+            198.5544845997423,
+            92.77601453960376
+          ],
+          [
+            180.2119488743539,
+            102.38622705966392
+          ],
+          [
+            194.49373034532115,
+            74.29097608036702
+          ]
+        ],
+        [
+          [
+            51.16043898642895,
+            74.91084852821585
+          ],
+          [
+            36.25206789368326,
+            97.13686565350946
+          ],
+          [
+            41.10941737902887,
+            63.57389160337261
+          ],
+          [
+            197.11249010466173,
+            92.14318752193644
+          ],
+          [
+            182.9740307504895,
+            107.27291880204487
+          ],
+          [
+            187.17364296426612,
+            76.03711135565338
+          ]
+        ],
+        [
+          [
+            53.63788841594667,
+            83.77707335026757
+          ],
+          [
+            28.230420076636836,
+            92.18634909077151
+          ],
+          [
+            60.65361576655757,
+            65.65818334405881
+          ],
+          [
+            194.97573137799182,
+            92.30697733413929
+          ],
+          [
+            184.65415069758703,
+            110.2588511576644
+          ],
+          [
+            181.6302817438385,
+            78.887389187831
+          ]
+        ],
+        [
+          [
+            55.49526725317533,
+            81.80354621949886
+          ],
+          [
+            38.33781748825534,
+            102.34319771257698
+          ],
+          [
+            54.688839517710406,
+            66.47486185302208
+          ],
+          [
+            188.93307579773628,
+            88.76618345486416
+          ],
+          [
+            196.23615712813728,
+            108.14322669162813
+          ],
+          [
+            170.0909308935438,
+            90.54380753314243
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.859285502108464e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 2.929642751054232e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 1.5888218580782548e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 59,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 511,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-10",
+      "frames": [
+        [
+          [
+            48.5204182844609,
+            57.24244944518432
+          ],
+          [
+            48.69671610184014,
+            76.94471835158765
+          ],
+          [
+            57.405289029702544,
+            72.64293737942353
+          ],
+          [
+            183.88363272882998,
+            48.342346283607185
+          ],
+          [
+            167.64131660573184,
+            78.81954640848562
+          ],
+          [
+            187.04923246987164,
+            80.69440200924873
+          ]
+        ],
+        [
+          [
+            55.81223468672128,
+            60.07429610389571
+          ],
+          [
+            47.549248548761284,
+            77.96098224371829
+          ],
+          [
+            57.26094018052102,
+            77.79482682858149
+          ],
+          [
+            172.00902961644337,
+            50.61685741642687
+          ],
+          [
+            171.19208127437912,
+            85.14228508794083
+          ],
+          [
+            189.37307091361097,
+            78.09715219697384
+          ]
+        ],
+        null,
+        [
+          [
+            66.4953589758591,
+            69.82855044008772
+          ],
+          [
+            49.13461217205582,
+            79.14600456634314
+          ],
+          [
+            65.99245226808867,
+            81.85555016976463
+          ],
+          [
+            153.93811577670502,
+            66.68441254081014
+          ],
+          [
+            180.39157026964725,
+            88.88547796309061
+          ],
+          [
+            186.24449575808117,
+            70.2864041974408
+          ]
+        ],
+        [
+          [
+            71.15594730579801,
+            84.27845331512955
+          ],
+          [
+            54.08946654032169,
+            74.43235178902964
+          ],
+          [
+            62.37700956988389,
+            81.11930007203631
+          ],
+          [
+            151.79165261959204,
+            69.02597378090996
+          ],
+          [
+            178.62679724255324,
+            90.76413316847776
+          ],
+          [
+            184.1557319422882,
+            72.06618775195382
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.0048591735576161e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.842170943040401e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 4.0194366942304644e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.5888218580782548e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 13,
+          "maximal": 4,
+          "missingPairTests": 228,
+          "outsidePairTests": 309,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 342,
+          "pointFits": 1116,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-11",
+      "frames": [
+        [
+          [
+            59.33018253184855,
+            61.847509196959436
+          ],
+          [
+            37.67106900922954,
+            35.951123412232846
+          ],
+          [
+            52.102870838716626,
+            60.2289922721684
+          ],
+          [
+            173.43461497686803,
+            95.02277153776959
+          ],
+          [
+            204.46973794139922,
+            59.358142972923815
+          ],
+          [
+            182.40087646059692,
+            40.41660275077447
+          ]
+        ],
+        [
+          [
+            57.58697213211266,
+            67.60032723260218
+          ],
+          [
+            46.15946036369763,
+            35.833174856605
+          ],
+          [
+            51.35768988398442,
+            63.5941227921535
+          ],
+          [
+            184.41331813806315,
+            99.8428094452609
+          ],
+          [
+            198.82518812054897,
+            54.81567771671407
+          ],
+          [
+            171.06672312025202,
+            46.13903009949289
+          ]
+        ],
+        [
+          [
+            51.96118364031601,
+            71.85937081491943
+          ],
+          null,
+          [
+            49.0120978208127,
+            65.06551151591117
+          ],
+          [
+            186.37313654555533,
+            101.64672474473169
+          ],
+          [
+            195.2662317425117,
+            55.21335909125083
+          ],
+          [
+            166.6658610907971,
+            49.93743342548535
+          ]
+        ],
+        [
+          [
+            60.54124562270532,
+            74.06169224371897
+          ],
+          [
+            51.88387922802042,
+            41.430572091243846
+          ],
+          [
+            64.678997529069,
+            66.53536054639787
+          ],
+          [
+            205.89988773761246,
+            92.18392912881683
+          ],
+          [
+            180.39236361615508,
+            52.37801497921773
+          ],
+          [
+            156.01297802509657,
+            68.23557315343328
+          ]
+        ],
+        [
+          [
+            50.91355479335834,
+            76.11083602608734
+          ],
+          [
+            71.314593130548,
+            49.2121812258635
+          ],
+          [
+            60.87597445588839,
+            65.70460762940985
+          ],
+          [
+            208.96466093380923,
+            86.02451080211499
+          ],
+          [
+            173.05223999463408,
+            55.276460288635626
+          ],
+          [
+            154.28832845042086,
+            77.49654617071724
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.1237965343830035e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 1.5888218580782548e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 7.105427357601002e-15
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.5888218580782548e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 47,
+          "maximal": 4,
+          "missingPairTests": 124,
+          "outsidePairTests": 395,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 446,
+          "pointFits": 1416,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-12",
+      "frames": [
+        [
+          [
+            50.77263092875946,
+            54.30056906519458
+          ],
+          [
+            55.16123310120311,
+            86.49468286824413
+          ],
+          [
+            43.24246231655125,
+            86.28512395191937
+          ],
+          [
+            190.50301845695358,
+            69.57237157034687
+          ],
+          [
+            196.15549349535723,
+            92.94512535938993
+          ],
+          [
+            174.98626521041152,
+            96.380260132486
+          ]
+        ],
+        [
+          [
+            58.369915962678604,
+            58.37894136284535
+          ],
+          [
+            54.164086523885864,
+            90.467187423975
+          ],
+          [
+            42.76050611089984,
+            87.2455104553612
+          ],
+          [
+            181.5482176063042,
+            71.70899548386323
+          ],
+          [
+            196.06749923404462,
+            90.79898333836344
+          ],
+          [
+            178.0650956359239,
+            102.47006569101377
+          ]
+        ],
+        [
+          [
+            73.03763608677522,
+            72.42524365137103
+          ],
+          [
+            46.8533432541118,
+            91.62406407227196
+          ],
+          [
+            41.373494966416295,
+            81.11550130697741
+          ],
+          [
+            178.6766923806457,
+            73.91116089344743
+          ],
+          [
+            194.1823445466328,
+            92.19882117420093
+          ],
+          [
+            176.78410009163954,
+            104.72740922176831
+          ]
+        ],
+        [
+          [
+            226.96236391322478,
+            72.42524365137103
+          ],
+          [
+            253.1466567458882,
+            91.62406407227196
+          ],
+          [
+            258.6265050335837,
+            81.11550130697741
+          ],
+          [
+            121.3233076193543,
+            73.91116089344743
+          ],
+          [
+            105.8176554533672,
+            92.19882117420093
+          ],
+          [
+            123.21589990836046,
+            104.72740922176831
+          ]
+        ],
+        [
+          [
+            77.44877423991743,
+            96.06608529179148
+          ],
+          [
+            45.8087305801904,
+            89.12326739832163
+          ],
+          [
+            56.97949175061068,
+            74.99596745603593
+          ],
+          [
+            165.19851442924957,
+            84.60734709763304
+          ],
+          [
+            188.92219704076768,
+            88.74411166981099
+          ],
+          [
+            183.58657130783507,
+            109.50532266933826
+          ]
+        ]
+      ],
+      "threshold": 0.18,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.06457723265225886
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.05266733407344589
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.05019848346327095
+          },
+          {
+            "ids": [
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.009371708715668236
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 3,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-3",
+            "startSeconds": 1,
+            "endSeconds": 4,
+            "sampleCount": 4,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 6,
+            "maxResidualMm": 0.02118519353436688
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 3,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-3",
+            "startSeconds": 1,
+            "endSeconds": 4,
+            "sampleCount": 4,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 6,
+            "maxResidualMm": 0.03534128805673385
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-5"
+            ],
+            "startIndex": 0,
+            "endIndex": 3,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-3",
+            "startSeconds": 1,
+            "endSeconds": 4,
+            "sampleCount": 4,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 6,
+            "maxResidualMm": 0.14508615720072093
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 0.08009403271408302
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 0.06216173923684805
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.4210854715202004e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-5"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.0097183471152322e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-6"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 4.4938668397781776e-14
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.5888218580782548e-14
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-5"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.5888218580782548e-14
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-6"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.929642751054232e-14
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 3.552713678800501e-14
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-6"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.842170943040401e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 72,
+          "maximal": 17,
+          "missingPairTests": 0,
+          "outsidePairTests": 495,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-13",
+      "frames": [
+        [
+          [
+            49.09491383470595,
+            93.3268283540383
+          ],
+          [
+            30.729491589590907,
+            53.57518441742286
+          ],
+          [
+            64.49958709068596,
+            66.9228698220104
+          ],
+          [
+            186.683015441522,
+            52.42084227735177
+          ],
+          [
+            185.20684749819338,
+            54.94630503933877
+          ],
+          [
+            194.993860675022,
+            68.12206611735746
+          ]
+        ],
+        [
+          [
+            47.591201915582104,
+            96.20495410615707
+          ],
+          [
+            35.75091252905199,
+            54.04704290140165
+          ],
+          [
+            66.98187807034871,
+            72.57288558591281
+          ],
+          [
+            183.12675873546632,
+            55.26195007716138
+          ],
+          [
+            182.3875428990925,
+            58.09224933807853
+          ],
+          [
+            195.3694219801786,
+            68.13501401880806
+          ]
+        ],
+        [
+          [
+            36.5209098900783,
+            92.90511004174915
+          ],
+          [
+            53.40975490657314,
+            52.50401050332521
+          ],
+          [
+            66.39332771833139,
+            86.4157620483972
+          ],
+          [
+            179.68787378369183,
+            58.71561557569351
+          ],
+          [
+            179.86640507856566,
+            61.63540333096695
+          ],
+          [
+            195.3294447524799,
+            67.13819452738751
+          ]
+        ],
+        [
+          [
+            32.389630189396556,
+            84.22102026130686
+          ],
+          [
+            69.30761114258864,
+            60.67224933277287
+          ],
+          [
+            68.62675118299762,
+            92.93161299939183
+          ],
+          [
+            176.47662229339193,
+            64.26730568826306
+          ],
+          [
+            178.2417451582275,
+            66.59998124031239
+          ],
+          [
+            194.16535616311796,
+            62.62192650547251
+          ]
+        ],
+        [
+          [
+            39.0014790954425,
+            69.32412248387368
+          ],
+          [
+            80.88529492727935,
+            82.10019000363869
+          ],
+          [
+            56.43721849226099,
+            95.4005701059592
+          ],
+          [
+            174.47511396401705,
+            66.31496000157541
+          ],
+          [
+            176.2573293714436,
+            68.63460268971198
+          ],
+          [
+            192.1512802792767,
+            64.53965074276057
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.859285502108464e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 1.5888218580782548e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.929642751054232e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 59,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 511,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-14",
+      "frames": [
+        [
+          [
+            60.24809337221086,
+            70.85253456840292
+          ],
+          [
+            52.967316368594766,
+            78.42187543865293
+          ],
+          [
+            63.497810466215014,
+            63.289617623668164
+          ],
+          [
+            202.61197199113667,
+            95.32205672934651
+          ],
+          [
+            169.19805153273046,
+            53.15163525985554
+          ],
+          [
+            193.32327955402434,
+            61.55636957380921
+          ]
+        ],
+        [
+          [
+            62.051837807747106,
+            74.55388993372551
+          ],
+          [
+            51.89137893403685,
+            77.21278264725589
+          ],
+          [
+            68.77000346523668,
+            69.79735504974259
+          ],
+          [
+            207.6417906107087,
+            91.78761082830638
+          ],
+          [
+            162.97637596906762,
+            61.79035658386802
+          ],
+          [
+            188.51513649811514,
+            62.452094150836864
+          ]
+        ],
+        [
+          [
+            63.86442107855909,
+            77.79481992111883
+          ],
+          [
+            53.36602294092251,
+            78.09192517198282
+          ],
+          [
+            71.48277618753903,
+            74.67728253762236
+          ],
+          [
+            207.99435094367902,
+            90.9087999020822
+          ],
+          [
+            159.86247007518995,
+            66.8639133068666
+          ],
+          [
+            185.27648205902253,
+            64.25734835406249
+          ]
+        ],
+        [
+          [
+            65.39511383239333,
+            81.10555752903979
+          ],
+          [
+            55.69608826566949,
+            77.07647102680886
+          ],
+          [
+            82.62201810895782,
+            78.38199907487538
+          ],
+          [
+            211.03776454517669,
+            71.32853256992345
+          ],
+          [
+            159.96038457735082,
+            88.23816837136945
+          ],
+          [
+            176.135153955364,
+            68.46336062171838
+          ]
+        ],
+        [
+          [
+            80,
+            80
+          ],
+          [
+            80,
+            80
+          ],
+          [
+            80,
+            80
+          ],
+          [
+            204.79858652574273,
+            62.295843592370915
+          ],
+          [
+            164.68972163142945,
+            98.15826799737906
+          ],
+          [
+            171.6449949207193,
+            73.5759499732613
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 4.0194366942304644e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 3,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-3",
+            "startSeconds": 1,
+            "endSeconds": 4,
+            "sampleCount": 4,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 6,
+            "maxResidualMm": 2.0097183471152322e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.2469334198890888e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 55,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 499,
+          "unresolvedPairTests": 16
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-15",
+      "frames": [
+        [
+          [
+            32.601990746334195,
+            88.77086136490107
+          ],
+          [
+            48.604818573221564,
+            67.62725462438539
+          ],
+          [
+            44.29112204350531,
+            42.08854996133596
+          ],
+          [
+            179.75003751926124,
+            60.42225925019011
+          ],
+          [
+            181.2602098006755,
+            59.63693101890385
+          ],
+          [
+            191.4299441035837,
+            87.24657191196457
+          ]
+        ],
+        [
+          [
+            31.337732478141668,
+            90.14394549741893
+          ],
+          [
+            50.31109494465662,
+            71.61952590681305
+          ],
+          [
+            49.84910394026278,
+            45.72319454639044
+          ],
+          [
+            174.42408430900286,
+            65.18346075017678
+          ],
+          [
+            175.44502110000718,
+            63.82145898102192
+          ],
+          [
+            196.57108601451046,
+            84.30084244985983
+          ]
+        ],
+        null,
+        [
+          [
+            25.836146293390534,
+            85.7692775707261
+          ],
+          [
+            51.88047001550853,
+            80.78572398797986
+          ],
+          [
+            75.78131505416201,
+            55.93166439191644
+          ],
+          [
+            168.44011011031196,
+            75.77196057692416
+          ],
+          [
+            168.30478733131744,
+            74.07518466482132
+          ],
+          [
+            197.69529398189107,
+            75.45861693931307
+          ]
+        ],
+        [
+          [
+            39.06744763306635,
+            56.24268544649763
+          ],
+          [
+            44.238439490569796,
+            82.2504428981545
+          ],
+          [
+            76.19204423942494,
+            92.99353760597027
+          ],
+          [
+            166.56171400424893,
+            75.43012780923704
+          ],
+          [
+            166.83628621911322,
+            73.75025553753548
+          ],
+          [
+            195.0421912001583,
+            82.12537883428604
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 7.105427357601002e-15
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.842170943040401e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 3.1776437161565096e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.0097183471152322e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 13,
+          "maximal": 4,
+          "missingPairTests": 228,
+          "outsidePairTests": 309,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 342,
+          "pointFits": 1116,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-16",
+      "frames": [
+        [
+          [
+            32.80944414513651,
+            67.4455711973831
+          ],
+          [
+            51.70534151557367,
+            48.255739027960225
+          ],
+          [
+            48.916821710136716,
+            69.51415771814064
+          ],
+          [
+            195.92609018234072,
+            70.31422487036325
+          ],
+          [
+            185.20839726275298,
+            84.08578043840825
+          ],
+          [
+            183.54402183971834,
+            85.42018054178916
+          ]
+        ],
+        [
+          [
+            33.72833901440384,
+            67.3201079208196
+          ],
+          [
+            56.74461874757495,
+            53.472292911877744
+          ],
+          [
+            48.87346443133703,
+            73.46543716761325
+          ],
+          [
+            191.70278302462555,
+            70.96766067697502
+          ],
+          [
+            184.0680808572488,
+            86.64210552144078
+          ],
+          [
+            182.86202190760105,
+            88.26184446141075
+          ]
+        ],
+        [
+          [
+            35.959327875905096,
+            64.15168176937985
+          ],
+          null,
+          [
+            46.59134699975048,
+            76.51722751683272
+          ],
+          [
+            186.256316727814,
+            71.77111626726447
+          ],
+          [
+            183.53315609063654,
+            89.03663279070379
+          ],
+          [
+            182.7727387685268,
+            90.98694853760564
+          ]
+        ],
+        [
+          [
+            37.862946092172436,
+            67.68621043319153
+          ],
+          [
+            64.63756786637694,
+            64.9155642291832
+          ],
+          [
+            55.95289195471883,
+            76.63251711403464
+          ],
+          [
+            180.91950096672753,
+            73.69248340115524
+          ],
+          [
+            182.9754814559011,
+            91.04880750737696
+          ],
+          [
+            182.8422775939608,
+            93.14070671839453
+          ]
+        ],
+        [
+          [
+            41.70301787157816,
+            66.4742311052568
+          ],
+          [
+            67.72906081232429,
+            73.24152311981369
+          ],
+          [
+            54.94844032736501,
+            78.54798474450325
+          ],
+          [
+            174.64595191581537,
+            77.00559889778118
+          ],
+          [
+            182.68007660915583,
+            92.35267299706203
+          ],
+          [
+            183.38286431729458,
+            94.45288466153954
+          ]
+        ]
+      ],
+      "threshold": 0.18,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 0.10974611202403979
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 0.05237578343417832
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.09421854084688774
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.013061918212628594
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 47,
+          "maximal": 4,
+          "missingPairTests": 124,
+          "outsidePairTests": 395,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 446,
+          "pointFits": 1416,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-17",
+      "frames": [
+        [
+          [
+            43.845662297680974,
+            43.902995297685266
+          ],
+          [
+            57.97987557016313,
+            94.84248513588682
+          ],
+          [
+            32.94783399440348,
+            63.96116172429174
+          ],
+          [
+            200.731412274763,
+            97.4964742618613
+          ],
+          [
+            195.2554725576192,
+            99.84024630859494
+          ],
+          [
+            175.0499890651554,
+            79.6735196118243
+          ]
+        ],
+        [
+          [
+            54.76485455829264,
+            48.21343167317994
+          ],
+          [
+            48.84578539792911,
+            100.74506243106794
+          ],
+          [
+            37.16273190602584,
+            62.74814805361596
+          ],
+          [
+            199.89037645722917,
+            95.43496277412497
+          ],
+          [
+            195.61695441387897,
+            99.58430576214744
+          ],
+          [
+            169.52954302642945,
+            87.99097164600815
+          ]
+        ],
+        [
+          [
+            56.804709217954645,
+            51.22744923136527
+          ],
+          [
+            50.79196827424282,
+            103.74844080761088
+          ],
+          [
+            39.176694370050114,
+            65.7307521188877
+          ],
+          [
+            196.75950725683145,
+            91.23396103072827
+          ],
+          [
+            195.28774953168588,
+            97.0057122720169
+          ],
+          [
+            166.9896171090203,
+            100.77056687953541
+          ]
+        ],
+        [
+          [
+            74.53448281505564,
+            78.51942577195952
+          ],
+          [
+            22.207621193719245,
+            86.0365503997519
+          ],
+          [
+            64.03126785347271,
+            62.15066598615242
+          ],
+          [
+            195.71188864964097,
+            96.03556975195222
+          ],
+          [
+            192.82735438116285,
+            101.24696546201093
+          ],
+          [
+            164.49763086673374,
+            97.7277049683174
+          ]
+        ],
+        [
+          [
+            76.5914179047931,
+            80.62382458216308
+          ],
+          [
+            24.58680143778612,
+            90.117373756616
+          ],
+          [
+            65.59515251966837,
+            64.96544381908477
+          ],
+          [
+            190.92867408592608,
+            92.53811638230977
+          ],
+          [
+            191.1208179779847,
+            98.49145695022516
+          ],
+          [
+            164.98738183362684,
+            109.98066684974562
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.859285502108464e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 1.4210854715202004e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.842170943040401e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 59,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 511,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-18",
+      "frames": [
+        [
+          [
+            36.08603383414447,
+            83.60455964459106
+          ],
+          [
+            46.53035764582455,
+            80.50509441643953
+          ],
+          [
+            32.7710413839668,
+            70.91634516837075
+          ],
+          [
+            195.63741573132575,
+            90.02721883822232
+          ],
+          [
+            184.55760630778968,
+            57.88356287172064
+          ],
+          [
+            175.97444248385727,
+            40.392012344673276
+          ]
+        ],
+        [
+          [
+            35.62037949278138,
+            84.4878076685599
+          ],
+          [
+            46.084571825229325,
+            87.51951732043713
+          ],
+          [
+            39.68248154592513,
+            72.01867424040431
+          ],
+          [
+            204.15141756369832,
+            85.1895529645334
+          ],
+          [
+            180.58075036319266,
+            60.68648288183344
+          ],
+          [
+            165.4372965960817,
+            48.42675820824938
+          ]
+        ],
+        [
+          [
+            36.84631576472068,
+            85.68391918578386
+          ],
+          [
+            45.690227816296485,
+            92.04597893147474
+          ],
+          [
+            44.850889282918665,
+            75.29610111214275
+          ],
+          [
+            203.84296333959094,
+            85.31366327472657
+          ],
+          [
+            178.23767242025593,
+            62.94525088826252
+          ],
+          [
+            162.08882876312586,
+            52.043879891627135
+          ]
+        ],
+        [
+          [
+            263.15368423527934,
+            85.68391918578386
+          ],
+          [
+            254.3097721837035,
+            92.04597893147474
+          ],
+          [
+            255.14911071708133,
+            75.29610111214275
+          ],
+          [
+            96.15703666040906,
+            85.31366327472657
+          ],
+          [
+            121.76232757974407,
+            62.94525088826252
+          ],
+          [
+            137.91117123687414,
+            52.043879891627135
+          ]
+        ],
+        [
+          [
+            41.816147708294125,
+            86.91364151660775
+          ],
+          [
+            42.65373292705654,
+            97.77591731797915
+          ],
+          [
+            63.91755222858516,
+            83.33644039481447
+          ],
+          [
+            204.0425720899108,
+            59.03171283538868
+          ],
+          [
+            172.55913755896296,
+            71.86799523685599
+          ],
+          [
+            155.56775487409897,
+            81.40308598237155
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.859285502108464e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 3.1776437161565096e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 4.0194366942304644e-14
+          },
+          {
+            "ids": [
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 3.552713678800501e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 3,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-3",
+            "startSeconds": 1,
+            "endSeconds": 4,
+            "sampleCount": 4,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 6,
+            "maxResidualMm": 3.1776437161565096e-14
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 3,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-3",
+            "startSeconds": 1,
+            "endSeconds": 4,
+            "sampleCount": 4,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 6,
+            "maxResidualMm": 2.1316282072803006e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.929642751054232e-14
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 3.1776437161565096e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.842170943040401e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-5"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.1316282072803006e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-6"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 3.1776437161565096e-14
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 7.105427357601002e-15
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-5"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.4210854715202004e-14
+          },
+          {
+            "ids": [
+              "authored-2",
+              "authored-6"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.929642751054232e-14
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-4"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 4.4938668397781776e-14
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-5"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 3.552713678800501e-14
+          },
+          {
+            "ids": [
+              "authored-3",
+              "authored-6"
+            ],
+            "startIndex": 2,
+            "endIndex": 3,
+            "startMomentId": "moment-2",
+            "endMomentId": "moment-3",
+            "startSeconds": 3,
+            "endSeconds": 4,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-2",
+              "moment-3"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 2.929642751054232e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 67,
+          "maximal": 17,
+          "missingPairTests": 0,
+          "outsidePairTests": 500,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-19",
+      "frames": [
+        [
+          [
+            38.62370037473738,
+            98.87709031347185
+          ],
+          [
+            52.1375076752156,
+            82.78443664079532
+          ],
+          [
+            55.61165419407189,
+            88.8526729401201
+          ],
+          [
+            190.08927485905588,
+            58.85091945761815
+          ],
+          [
+            181.64899081923068,
+            85.1899106381461
+          ],
+          [
+            178.13807900063694,
+            84.38578792614862
+          ]
+        ],
+        [
+          [
+            39.30101664587816,
+            100.03750731253108
+          ],
+          [
+            55.33548551672048,
+            86.45471312233751
+          ],
+          [
+            57.736360081426234,
+            93.02197945951869
+          ],
+          [
+            180.5201422518875,
+            59.5789618837878
+          ],
+          [
+            183.44627842631624,
+            87.08202677062464
+          ],
+          [
+            179.90992400071974,
+            87.76562936750044
+          ]
+        ],
+        [
+          [
+            40.01328339811969,
+            92.1847692705101
+          ],
+          [
+            60.82695953171994,
+            95.08086591751051
+          ],
+          [
+            57.532619314185226,
+            101.24856470636666
+          ],
+          [
+            178.0071094620313,
+            61.60740805344726
+          ],
+          [
+            181.69266683750448,
+            89.01903912335902
+          ],
+          [
+            178.1765683793877,
+            89.80017084510658
+          ]
+        ],
+        [
+          [
+            41.49730025008991,
+            100.73372521785168
+          ],
+          [
+            61.68635650358079,
+            94.90290215617776
+          ],
+          [
+            71.18920549035417,
+            98.87757252035784
+          ],
+          [
+            162.54044038316158,
+            70.84715960171603
+          ],
+          [
+            185.53778078444805,
+            86.21280913397516
+          ],
+          [
+            183.79812351131386,
+            89.36664928622172
+          ]
+        ],
+        [
+          [
+            43.50212655920078,
+            100.5685414344563
+          ],
+          [
+            64.49585976710964,
+            99.64136508752269
+          ],
+          [
+            72.37487591771445,
+            103.30429337240831
+          ],
+          [
+            160.4606755830181,
+            72.95210403534102
+          ],
+          [
+            183.56645336243338,
+            88.15420534697346
+          ],
+          [
+            181.84921573347202,
+            91.32030863959841
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 8.526512829121202e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 1.5888218580782548e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 3.1776437161565096e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 59,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 511,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-20",
+      "frames": [
+        [
+          [
+            54.24915233675856,
+            85.61337289148942
+          ],
+          [
+            37.401626466563904,
+            69.72723468937912
+          ],
+          [
+            35.87002500875387,
+            76.04189262613654
+          ],
+          [
+            176.07340191423427,
+            42.640393456956375
+          ],
+          [
+            168.1452141194837,
+            98.34512965446338
+          ],
+          [
+            174.35963933372403,
+            87.71075685103423
+          ]
+        ],
+        [
+          [
+            53.64183844286734,
+            91.38698230707998
+          ],
+          [
+            41.60558575528452,
+            71.67709397362927
+          ],
+          [
+            38.420515241287355,
+            77.34856011935145
+          ],
+          [
+            163.22200043286355,
+            45.45117021066804
+          ],
+          [
+            173.36682162398762,
+            100.6558609786193
+          ],
+          [
+            175.9379727160001,
+            88.64303759950185
+          ]
+        ],
+        null,
+        [
+          [
+            40.26211578725652,
+            97.99633767741886
+          ],
+          [
+            55.85752108849165,
+            80.93859721363418
+          ],
+          [
+            56.56500800684233,
+            76.50546291862561
+          ],
+          [
+            138.88504134951467,
+            63.38884085728567
+          ],
+          [
+            183.9668466405245,
+            96.94271318604956
+          ],
+          [
+            177.71749859322478,
+            86.3517419531519
+          ]
+        ],
+        [
+          [
+            37.1375075035433,
+            94.54527300329435
+          ],
+          [
+            59.52228018156449,
+            88.71807780168258
+          ],
+          [
+            61.98586306559352,
+            81.06966414364257
+          ],
+          [
+            132.29151617366747,
+            75.62703582153185
+          ],
+          [
+            185.79351889960435,
+            92.52879181188256
+          ],
+          [
+            176.47954722744984,
+            84.57906961102783
+          ]
+        ]
+      ],
+      "threshold": 0.18,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.03637176687987114
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.0731172481971138
+          },
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.050396315579680426
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 3,
+            "endIndex": 4,
+            "startMomentId": "moment-3",
+            "endMomentId": "moment-4",
+            "startSeconds": 4,
+            "endSeconds": 5,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 0.0092021673619935
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 13,
+          "maximal": 4,
+          "missingPairTests": 228,
+          "outsidePairTests": 309,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 342,
+          "pointFits": 1116,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-21",
+      "frames": [
+        [
+          [
+            42.462282786145806,
+            60.5081584258005
+          ],
+          [
+            29.76807619445026,
+            86.13921512616798
+          ],
+          [
+            32.63218645937741,
+            58.73964790254831
+          ],
+          [
+            203.62732767127454,
+            38.30646415473893
+          ],
+          [
+            181.97943695820868,
+            78.461569477804
+          ],
+          [
+            183.01812919788063,
+            93.41195938875899
+          ]
+        ],
+        [
+          [
+            46.696517676559594,
+            66.48966671971698
+          ],
+          [
+            26.135747345695513,
+            86.37304349458995
+          ],
+          [
+            38.03028041771836,
+            61.52431124020988
+          ],
+          [
+            192.4803263415104,
+            37.67536411548009
+          ],
+          [
+            182.54357863969076,
+            82.19866925943448
+          ],
+          [
+            187.60098884616266,
+            96.30595964638736
+          ]
+        ],
+        [
+          [
+            49.60153469734714,
+            76.96722950623365
+          ],
+          null,
+          [
+            46.20021208416341,
+            67.57630688140895
+          ],
+          [
+            184.71497299475035,
+            39.332337660799624
+          ],
+          [
+            182.2925076745873,
+            84.88664939529846
+          ],
+          [
+            189.61741315802612,
+            97.96100596520382
+          ]
+        ],
+        [
+          [
+            51.77779881208337,
+            75.88439640769704
+          ],
+          [
+            25.917720152294258,
+            88.1052916400284
+          ],
+          [
+            53.167026475595854,
+            65.39733340679135
+          ],
+          [
+            157.61375623593352,
+            52.94206026993354
+          ],
+          [
+            189.2294284445562,
+            85.8284241101062
+          ],
+          [
+            203.78170914687414,
+            89.40950864126219
+          ]
+        ],
+        [
+          [
+            80,
+            80
+          ],
+          [
+            80,
+            80
+          ],
+          [
+            80,
+            80
+          ],
+          [
+            163.10813396102498,
+            48.61683360064995
+          ],
+          [
+            184.27262773052712,
+            89.02881028222292
+          ],
+          [
+            197.24413213581175,
+            96.53434913842906
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.859285502108464e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 1.5888218580782548e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 1,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-1",
+            "startSeconds": 1,
+            "endSeconds": 2,
+            "sampleCount": 2,
+            "momentIds": [
+              "moment-0",
+              "moment-1"
+            ],
+            "sourcePairCount": 1,
+            "maxResidualMm": 1.4210854715202004e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 46,
+          "maximal": 3,
+          "missingPairTests": 124,
+          "outsidePairTests": 385,
+          "unresolvedPairTests": 13
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 446,
+          "pointFits": 1416,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-22",
+      "frames": [
+        [
+          [
+            36.94981469772756,
+            58.972737558651716
+          ],
+          [
+            62.74106645025313,
+            96.8732180679217
+          ],
+          [
+            39.55318498425186,
+            83.22777494555339
+          ],
+          [
+            197.26810184307396,
+            86.45247510634363
+          ],
+          [
+            172.05895683728158,
+            66.80497944587842
+          ],
+          [
+            188.85019631125033,
+            63.368767159990966
+          ]
+        ],
+        [
+          [
+            44.079285044790446,
+            60.32956638270433
+          ],
+          [
+            60.25016470126882,
+            103.2263930827226
+          ],
+          [
+            40.91461638617328,
+            84.5177711066999
+          ],
+          [
+            200.1749621202896,
+            82.50359058296796
+          ],
+          [
+            169.07961466167632,
+            75.11410859305963
+          ],
+          [
+            182.92267820963994,
+            65.00852253618541
+          ]
+        ],
+        [
+          [
+            58.48336990626705,
+            64.39014699627599
+          ],
+          [
+            49.6861713750985,
+            109.38175052181076
+          ],
+          [
+            43.07452485086697,
+            83.30183305404006
+          ],
+          [
+            200.18432202546208,
+            76.16613961717812
+          ],
+          [
+            169.17264449904235,
+            83.89924602071478
+          ],
+          [
+            176.82028846710142,
+            68.5608360743201
+          ]
+        ],
+        [
+          [
+            55.8991531785438,
+            66.1812715806381
+          ],
+          [
+            56.60601975501047,
+            112.01941540691864
+          ],
+          [
+            53.73889319867826,
+            84.87304358457007
+          ],
+          [
+            198.114118259823,
+            76.61443631573987
+          ],
+          [
+            167.87841512445456,
+            86.9743269310378
+          ],
+          [
+            174.1847216073283,
+            71.03745846543532
+          ]
+        ],
+        [
+          [
+            70.39510012766205,
+            75.45958370545802
+          ],
+          [
+            44.185381690109296,
+            113.07189218579349
+          ],
+          [
+            57.66358431446118,
+            83.5422546808753
+          ],
+          [
+            195.66703301055847,
+            75.90918257824698
+          ],
+          [
+            167.34002937143848,
+            90.71141019710048
+          ],
+          [
+            171.1701926096089,
+            74.00562893686552
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 4.0194366942304644e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 2.1316282072803006e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.1316282072803006e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 59,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 511,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    },
+    {
+      "name": "held-aside-span-23",
+      "frames": [
+        [
+          [
+            45.20747763104737,
+            69.36312430538237
+          ],
+          [
+            55.663898354396224,
+            91.6329892189242
+          ],
+          [
+            32.21479878760874,
+            71.39132795389742
+          ],
+          [
+            171.46577189676464,
+            48.66491923807189
+          ],
+          [
+            186.56256605871022,
+            99.53133950009942
+          ],
+          [
+            194.67742844484746,
+            85.41542778955773
+          ]
+        ],
+        [
+          [
+            51.09067323025614,
+            73.83266111302096
+          ],
+          [
+            49.20867920197863,
+            98.36308540793704
+          ],
+          [
+            38.78682234081755,
+            69.191694957246
+          ],
+          [
+            162.77050763463515,
+            54.628674728881116
+          ],
+          [
+            189.74101409245384,
+            100.32219380599008
+          ],
+          [
+            194.19424467323336,
+            84.66081799285784
+          ]
+        ],
+        [
+          [
+            55.19643543661712,
+            79.03466013249653
+          ],
+          [
+            44.43022953479926,
+            101.15642380745568
+          ],
+          [
+            45.45950980163594,
+            70.19635753825176
+          ],
+          [
+            155.78984531823141,
+            61.4144820839971
+          ],
+          [
+            191.97053275317995,
+            100.2250961087187
+          ],
+          [
+            192.94538832891095,
+            83.97210833501323
+          ]
+        ],
+        [
+          [
+            57.492885601748405,
+            82.52984702956972
+          ],
+          [
+            45.18687424090983,
+            103.83350169251412
+          ],
+          [
+            58.406414930394085,
+            70.02409275612014
+          ],
+          [
+            146.37019164225165,
+            83.06620061769937
+          ],
+          [
+            198.84248758747904,
+            90.93792612598729
+          ],
+          [
+            189.4930871705916,
+            77.60755978404237
+          ]
+        ],
+        [
+          [
+            60.50522542108858,
+            89.5184547306564
+          ],
+          [
+            39.35437312222256,
+            102.08527869865382
+          ],
+          [
+            67.22657622974117,
+            73.78370804889376
+          ],
+          [
+            149.81581895378264,
+            103.70431288610047
+          ],
+          [
+            197.11961435817568,
+            79.66982007720841
+          ],
+          [
+            181.77033308836397,
+            74.23755356442017
+          ]
+        ]
+      ],
+      "threshold": 0.01,
+      "result": {
+        "spans": [
+          {
+            "ids": [
+              "authored-4",
+              "authored-5",
+              "authored-6"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 5.1237965343830035e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2"
+            ],
+            "startIndex": 0,
+            "endIndex": 4,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-4",
+            "startSeconds": 1,
+            "endSeconds": 5,
+            "sampleCount": 5,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2",
+              "moment-3",
+              "moment-4"
+            ],
+            "sourcePairCount": 10,
+            "maxResidualMm": 2.929642751054232e-14
+          },
+          {
+            "ids": [
+              "authored-1",
+              "authored-2",
+              "authored-3"
+            ],
+            "startIndex": 0,
+            "endIndex": 2,
+            "startMomentId": "moment-0",
+            "endMomentId": "moment-2",
+            "startSeconds": 1,
+            "endSeconds": 3,
+            "sampleCount": 3,
+            "momentIds": [
+              "moment-0",
+              "moment-1",
+              "moment-2"
+            ],
+            "sourcePairCount": 3,
+            "maxResidualMm": 2.0097183471152322e-14
+          }
+        ],
+        "counts": {
+          "pointSets": 57,
+          "intervals": 10,
+          "supportedPointSetIntervals": 59,
+          "maximal": 3,
+          "missingPairTests": 0,
+          "outsidePairTests": 511,
+          "unresolvedPairTests": 0
+        },
+        "work": {
+          "pointLimit": 12,
+          "momentLimit": 12,
+          "fits": 570,
+          "pointFits": 1860,
+          "maxSubsetFits": 570,
+          "maxSubsetPointFits": 1860
+        }
+      }
+    }
+  ]
+}

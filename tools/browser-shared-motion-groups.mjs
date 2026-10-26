@@ -1,10 +1,10 @@
+import {originalMotionBundle} from './support/shared-motion-browser-fixture.mjs';
 import {createRequire} from 'node:module';
-import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import assert from 'node:assert/strict';
 import {createAppServer} from '../server.mjs';
-import {motionSequence,groupedFrames,motionStudy} from '../test/helpers/shared-motion-fixture.mjs';
+import {groupedFrames,motionStudy} from '../test/helpers/shared-motion-fixture.mjs';
 import {requireChromiumSandbox} from './support/chromium-sandbox.mjs';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
 const out=resolve(process.env.QA_OUTPUT||'/tmp/skill-motion-groups');await mkdir(out,{recursive:true});
@@ -15,15 +15,8 @@ try{
  browser=await chromium.launch({executablePath:process.env.CHROME_BINARY||'/usr/bin/google-chrome',headless:true,chromiumSandbox:true});
  const preflight=await browser.newPage();try{const cdp=await preflight.context().newCDPSession(preflight);report.sandbox=await requireChromiumSandbox({send:(m,p)=>cdp.send(m,p)});}finally{await preflight.close();}
  const page=await browser.newPage({viewport:{width:1280,height:1000}});page.on('pageerror',e=>report.errors.push(e.message));await page.goto(base+'/sequence');await page.locator('a[href="/relationship-discovery"]').evaluate(a=>a.removeAttribute('target'));await page.locator('a[href="/relationship-discovery"]').click();
- async function bundle(frames=groupedFrames()){
-  const provisional=motionSequence({frames});
-  const pngs=await page.evaluate(moments=>moments.map((moment,index)=>{const c=document.createElement('canvas');c.width=600;c.height=400;const ctx=c.getContext('2d');ctx.fillStyle='#e7dfcc';ctx.fillRect(0,0,600,400);ctx.strokeStyle='#c9c1ae';ctx.lineWidth=1;for(let x=0;x<=600;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,400);ctx.stroke();}for(let y=0;y<=400;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(600,y);ctx.stroke();}
-   for(let g=0;g<2;g++){const points=moment.calibratedTask.landmarks.slice(g*3,g*3+3).map(m=>m.sourcePx);ctx.fillStyle=g?'#ad7554':'#537b6b';ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fill();}
-   for(const [i,m] of moment.calibratedTask.landmarks.entries()){ctx.fillStyle='#ffedb5';ctx.beginPath();ctx.arc(m.sourcePx.x,m.sourcePx.y,5,0,Math.PI*2);ctx.fill();ctx.fillStyle='#203b30';ctx.font='15px sans-serif';ctx.fillText('P'+(i+1),m.sourcePx.x+8,m.sourcePx.y-6);}ctx.fillStyle='#203b30';ctx.font='18px sans-serif';ctx.fillText('Authored original view '+(index+1),18,376);return c.toDataURL('image/png').split(',')[1];}),provisional.moments);
-  const images=provisional.moments.map((m,i)=>({...m.image,sha256:createHash('sha256').update(Buffer.from(pngs[i],'base64')).digest('hex')}));
-  return {format:'skill-translator.sequence-bundle/v1',sequence:motionSequence({frames,images}),frames:pngs.map((pngBase64,i)=>({momentId:'moment-'+i,pngBase64}))};
- }
- const original=await bundle();await writeFile(out+'/original.json',JSON.stringify(original));
+
+ const original=await originalMotionBundle(page,);await writeFile(out+'/original.json',JSON.stringify(original));
  const input=async value=>page.locator('#sequenceSource').setInputFiles({name:'original.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(value))});
  const run=async()=>{await page.locator('#status').evaluate(e=>e.textContent='receiving');await page.locator('#analyzeSequence').click();await until(page,()=>document.querySelector('#status').textContent!=='receiving'||document.querySelector('#error').textContent.includes('refused'));};
  await input(original);await page.locator('#sequenceIdentities').check();await page.locator('#sequencePlane').check();await page.locator('#sequenceBasis').fill('Authored original planar coordinates with matching point IDs. No group memberships supplied.');await page.locator('#evidence').selectOption('authored-example');await page.locator('#deviation').fill('0.01');await run();await until(page,()=>document.querySelector('#motionSummary').textContent.includes('2 maximal'));
@@ -34,7 +27,7 @@ try{
  await page.locator('#motionSection').screenshot({path:out+'/groups-desktop.png'});
  const download=page.waitForEvent('download');await page.locator('#save').click();await (await download).saveAs(out+'/saved.json');const saved=JSON.parse(await readFile(out+'/saved.json','utf8'));assert.deepEqual(saved.sourceBundle.sequence,original.sequence);assert.deepEqual(saved.sourceBundle.frames,original.frames);assert.equal(saved.groups,undefined);
  const fresh=await browser.newPage();fresh.on('pageerror',e=>report.errors.push(e.message));await fresh.goto(base+'/relationship-discovery');await fresh.locator('#reopen').setInputFiles(out+'/saved.json');await until(fresh,()=>document.querySelector('#motionSummary').textContent.includes('2 maximal'));assert.equal(await fresh.locator('#motionGroup').textContent(),beforeGroups);await fresh.close();report.tests.push('Real browser download retains every original PNG, declaration and annotation; a fresh page recomputes identical groups without stored verdicts.');
- const frames=groupedFrames();frames[2][2]=[frames[2][2][0]+12,frames[2][2][1]+8];const changed=await bundle(frames);await input(changed);await run();assert.ok(!(await page.locator('#motionGroup').textContent()).includes('authored-1 / authored-2 / authored-3'));assert.match(await page.locator('#motionGroup').textContent(),/authored-4.*authored-5.*authored-6/);report.tests.push('Changed original geometry and PNG removes the first three-point motion explanation while retaining the unaffected second group.');
+ const frames=groupedFrames();frames[2][2]=[frames[2][2][0]+12,frames[2][2][1]+8];const changed=await originalMotionBundle(page,frames);await input(changed);await run();assert.ok(!(await page.locator('#motionGroup').textContent()).includes('authored-1 / authored-2 / authored-3'));assert.match(await page.locator('#motionGroup').textContent(),/authored-4.*authored-5.*authored-6/);report.tests.push('Changed original geometry and PNG removes the first three-point motion explanation while retaining the unaffected second group.');
  await page.locator('#reopen').setInputFiles(out+'/saved.json');await until(page,()=>document.querySelector('#motionGroup').textContent.includes('authored-1 / authored-2 / authored-3'));
  const bad=structuredClone(saved);bad.sourceBundle.frames[1].pngBase64=bad.sourceBundle.frames[0].pngBase64;await input(bad);await run();assert.match(await page.locator('#error').textContent(),/refused/);assert.equal(await page.locator('#motionGroup').textContent(),beforeGroups);report.tests.push('Wrong original PNG is rejected without replacing accepted groups or source evidence.');
  const points=Array.from({length:13},(_,i)=>[10+i*11,20+(i%4)*17]),large=motionStudy([points,points.map(([x,y])=>[x+3,y+5])]);

@@ -4,10 +4,12 @@ textarea{width:100%}
 
 #sequenceContext{overflow-wrap:anywhere}
 
-#motionSources{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+#motionSources,#motionSpanSources{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 .motion-source-card{border:1px solid #cad7ce;padding:14px;border-radius:8px;min-width:0;overflow-wrap:anywhere}
 .motion-source-card svg{width:100%;height:190px;background:#f7faf7}.motion-source-card h3{font-size:1rem}.motion-source-card p{margin:6px 0}
-#motionGroup,#motionSubset{width:100%}#motionSection p,#motionSection td{overflow-wrap:anywhere}
+#motionGroup,#motionSubset,#motionSpan{width:100%}#motionSection p,#motionSection td,#motionSpanSection p,#motionSpanSection td{overflow-wrap:anywhere}
 .motion-table{overflow-x:auto;margin:16px 0}.motion-table table{border-collapse:collapse;min-width:540px;width:100%}
 .motion-table th,.motion-table td{padding:8px;text-align:left;border-bottom:1px solid #cad7ce}.motion-table caption{text-align:left;font-size:.9rem}
 #motionLimits{font-size:.9rem;color:#3b5c4b}
+
+#motionSpanTimeline{display:flex;flex-wrap:wrap;gap:.55rem;list-style:none;padding:0;margin:1rem 0}#motionSpanTimeline li{display:grid;gap:.25rem;min-width:7rem;flex:1;border:1px solid #cad3cd;border-radius:.4rem;padding:.65rem;background:#f3f5f2;color:#4e6056}#motionSpanTimeline li.selected{border:2px solid #277455;background:#e0efe4;color:#163e2c}#motionSpanTimeline span{font-size:.9rem}#motionSpanTimeline small{font-size:.75rem}#motionSpanSection[hidden]{display:none}

@@ -25,6 +25,15 @@
 <details><summary>Inspect every tested point set</summary><label>Point set <select id="motionSubset" disabled></select></label><p id="motionSubsetDetail"></p></details>
 <details><summary>How to interpret the fitted groups</summary><p id="motionLimits"></p></details><p>Save original inputs above to preserve the whole account. Groups are recomputed when it is reopened.</p>
 </section>
+<section id="motionSpanSection" hidden><h2>When do points move together?</h2>
+<p>Explore shared motion that lasts for part of the original demonstration. Spans may overlap in points and time. Each span covers retained samples; motion between those samples is unknown.</p>
+<p id="motionSpanSummary" role="status"></p>
+<label>Inspect inferred span <select id="motionSpan" disabled></select></label>
+<p id="motionSpanDetail"></p><ol id="motionSpanTimeline" aria-label="Retained moments and selected span"></ol>
+<p id="motionSpanBoundary"></p><div id="motionSpanSources"></div>
+<div class="motion-table"><table><caption>Fitted geometry within the selected span. Original moment IDs, rotations and millimetre residuals.</caption><thead><tr><th>Retained moments</th><th>Rotation</th><th>Centroid shift (x, y)</th><th>RMS residual</th><th>Largest residual</th></tr></thead><tbody id="motionSpanFits"></tbody></table></div>
+<details><summary>What these spans establish</summary><p id="motionSpanLimits"></p></details>
+<p>Save original inputs above to retain every frame, including gaps. Reopening recomputes all spans.</p></section>
 <section><h2>Could the relationship change with workpiece size?</h2><p>A fixed physical spacing may fail while a proportion is preserved. Compare four response hypotheses automatically, keeping all surviving alternatives.</p><button id="openFamilies">Compare fixed and proportional families</button></section>
 <section><h2>Compare an unfamiliar workpiece</h2><p>Compare the first source's existing authored transfer rules with the observed relationship range. This does not apply a new rule or revise scores.</p><label>Width (mm) <input id="width" type="number" min="1" max="10000" value="400"></label><label>Height (mm) <input id="height" type="number" min="1" max="10000" value="300"></label><button id="compare">Compare existing adaptation</button><p id="transfer" role="status"></p></section>
 <section><h2>Investigate a distance proposal in practice</h2><p>For a selected repeatable distance, open the maintained fixed-versus-adapted comparison. It begins with an empty practice session and preserves every original demonstration. Enter your own comparison tolerance; the exploratory observed range is not used as an execution tolerance.</p><label>Declared comparison tolerance (mm) <input id="reviewTolerance" type="number" min="0" max="1000" step="0.1" placeholder="Declare tolerance"></label><label>Why investigate this candidate? <textarea id="reviewBasis" rows="3" maxlength="2000"></textarea></label><button id="reviewPair">Open reviewed pair comparison</button></section>

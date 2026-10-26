@@ -1,0 +1,135 @@
+{
+  "result": "PASS",
+  "node": "v22.23.4",
+  "kind": "Single same-host native resource observation; not a latency guarantee",
+  "nativeTests": {
+    "pass": 45,
+    "fail": 0
+  },
+  "ordinary": {
+    "baselineMs": 12.732663000000002,
+    "spanMs": 7.657893999999999,
+    "wholeGroups": [
+      [
+        "authored-4",
+        "authored-5",
+        "authored-6"
+      ],
+      [
+        "authored-1",
+        "authored-2"
+      ]
+    ],
+    "spans": [
+      {
+        "ids": [
+          "authored-4",
+          "authored-5",
+          "authored-6"
+        ],
+        "startIndex": 0,
+        "endIndex": 3,
+        "startMomentId": "moment-0",
+        "endMomentId": "moment-3",
+        "startSeconds": 1,
+        "endSeconds": 4,
+        "sampleCount": 4,
+        "momentIds": [
+          "moment-0",
+          "moment-1",
+          "moment-2",
+          "moment-3"
+        ],
+        "sourcePairCount": 6,
+        "maxResidualMm": 4.0194366942304644e-14
+      },
+      {
+        "ids": [
+          "authored-1",
+          "authored-2"
+        ],
+        "startIndex": 0,
+        "endIndex": 3,
+        "startMomentId": "moment-0",
+        "endMomentId": "moment-3",
+        "startSeconds": 1,
+        "endSeconds": 4,
+        "sampleCount": 4,
+        "momentIds": [
+          "moment-0",
+          "moment-1",
+          "moment-2",
+          "moment-3"
+        ],
+        "sourcePairCount": 6,
+        "maxResidualMm": 1.0048591735576161e-14
+      },
+      {
+        "ids": [
+          "authored-1",
+          "authored-2",
+          "authored-3"
+        ],
+        "startIndex": 0,
+        "endIndex": 2,
+        "startMomentId": "moment-0",
+        "endMomentId": "moment-2",
+        "startSeconds": 1,
+        "endSeconds": 3,
+        "sampleCount": 3,
+        "momentIds": [
+          "moment-0",
+          "moment-1",
+          "moment-2"
+        ],
+        "sourcePairCount": 3,
+        "maxResidualMm": 1.5888218580782548e-14
+      },
+      {
+        "ids": [
+          "authored-1",
+          "authored-2",
+          "authored-4",
+          "authored-5",
+          "authored-6"
+        ],
+        "startIndex": 2,
+        "endIndex": 3,
+        "startMomentId": "moment-2",
+        "endMomentId": "moment-3",
+        "startSeconds": 3,
+        "endSeconds": 4,
+        "sampleCount": 2,
+        "momentIds": [
+          "moment-2",
+          "moment-3"
+        ],
+        "sourcePairCount": 1,
+        "maxResidualMm": 7.105427357601002e-15
+      }
+    ],
+    "requiredManualGroupLabels": 0,
+    "requiredManualIntervals": 0
+  },
+  "capacity": {
+    "elapsedMs": 640.757017,
+    "counts": {
+      "pointSets": 4083,
+      "intervals": 66,
+      "supportedPointSetIntervals": 269478,
+      "maximal": 1,
+      "missingPairTests": 0,
+      "outsidePairTests": 0,
+      "unresolvedPairTests": 0
+    },
+    "work": {
+      "pointLimit": 12,
+      "momentLimit": 12,
+      "fits": 269478,
+      "pointFits": 1621224,
+      "maxSubsetFits": 269478,
+      "maxSubsetPointFits": 1621224
+    },
+    "maximalSpans": 1
+  }
+}
