@@ -1,5 +1,6 @@
 import {showPathAxis} from '/web/path-axis-view.mjs';
 import {proposePathSummary} from '/src/path-summary.mjs';
+import {mountPathReturns} from '/web/path-returns-view.mjs';
 import {createSequencePath,importSequencePath,inspectSequencePath} from '/src/sequence-path.mjs';
 import {readSampledPathBundle,makeSampledPathBundle} from '/web/sampled-path-input.mjs';
 import {releaseSequenceAssets,makeSequenceBundle} from '/web/sequence-input.mjs';
@@ -29,6 +30,13 @@ function sourceForm(sequence,study=null){
 function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const mm=x=>x===null?'Unavailable':`${x!==0&&Math.abs(x)<.0005?x.toExponential(6):x.toFixed(3)} mm`;
 function show(study){
+ $('result').querySelector('[data-path-returns]')?.remove();
+ const returnSection=mountPathReturns($('result'),study,id=>{
+  if(accepted!==study)return;
+  const row=[...$('samples').children].find(r=>r.dataset.moment===id);
+  row?.scrollIntoView({block:'center'});row?.querySelector('.mark').focus({preventScroll:true});
+ });
+ returnSection.dataset.pathReturns='true';
  const findings=inspectSequencePath(study);accepted=study;$('axis-result').replaceChildren();$('compact-result').replaceChildren();$('compact-status').textContent='';$('result').hidden=false;
  $('summary').textContent=`Endpoint distance: ${mm(findings.endpointDistanceMm)}. Complete sampled-path sum: ${mm(findings.sampledPathDistanceMm)}. Observed adjacent chords: ${findings.observedSegmentCount} of ${findings.segments.length}; their covered sum is ${mm(findings.coveredChordDistanceMm)}.`;
  $('segments').replaceChildren();
@@ -82,4 +90,5 @@ $('compact-propose').addEventListener('click',()=>{
 });
 
 $('infer-axis').addEventListener('click',()=>{if(!accepted)return;try{showPathAxis($('axis-result'),accepted,assets);status('Straight-axis hypothesis recomputed from original selected points; no source or criterion changed.');}catch(error){$('axis-result').replaceChildren();status(error.message);}});
+
 
