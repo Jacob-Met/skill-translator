@@ -17,7 +17,7 @@ function sync(){
   $('draftStatus').textContent=predictionDirty||reflectionDirty?'An unsaved response draft is present. Submit it before exporting.':'Only retained responses and interface actions are exported.';
 }
 
-function historyEvidenceDetails(source,step,assets){
+function historyEvidenceDetails(source,step,assets,returnTarget){
   const details=node('details');details.className='history-evidence';
   details.append(node('summary',`Review previously disclosed evidence: ${step.title}`));
   function buildOnOpen(){
@@ -38,7 +38,8 @@ function historyEvidenceDetails(source,step,assets){
     details.append(frames,node('p','Authored account — inspect, do not treat as an automatic answer key'));
     const account=node('dl');
     for(const [label,key]of [['Intended result','intent'],['Visible change','visibleChange'],['Supplied sensory cue','sensoryCue'],['Recovery cue','recoveryCue']])account.append(node('dt',label),node('dd',step[key]||'Not supplied by the author.'));
-    details.append(account);
+    const returnLink=node('a',returnTarget.label);returnLink.href='#'+returnTarget.id;returnLink.className='history-return';
+    const returnParagraph=node('p');returnParagraph.append(returnLink);details.append(account,returnParagraph);
   }
   details.addEventListener('toggle',buildOnOpen);
   return details;
@@ -48,6 +49,7 @@ function render(){
   $('exercise').hidden=!session;if(!session){sync();return;}
   const result=decisionPracticeFindings(source,session),state=result.steps[result.currentIndex],step=source.steps.find(s=>s.id===state.id);
   const before=source.moments.find(m=>m.id===step.beforeMomentId),after=source.moments.find(m=>m.id===step.afterMomentId);
+  const returnTarget=!state.response?{id:'predictionHeading',label:'Return to your current prediction'}:state.revealed&&!state.reflection?{id:'reflectionHeading',label:'Return to your current reflection'}:{id:'stepTitle',label:'Return to your current step'};
   $('sourceContext').textContent=`Supplied demonstration context · ${source.title}${source.context?' — '+source.context:''}`;
   $('stepNumber').textContent=`STEP ${result.currentIndex+1} / ${result.steps.length}${result.complete?' · EXERCISE RETAINED':''}`;$('stepTitle').textContent=step.title;
   $('beforeImage').src=assets.get(before.id).media.url;$('beforeCaption').textContent=`Before · ${before.label} · presented ${before.origin.mediaTimeSeconds.toFixed(3)} s${before.visibleState?' · '+before.visibleState:''}`;
@@ -69,7 +71,7 @@ function render(){
   $('revisedJudgment').value=state.reflection?.reconsideration?.judgment||'';$('remainingQuestion').value=state.reflection?.reconsideration?.question||'';
   $('revisedJudgment').disabled=$('remainingQuestion').disabled=!!state.reflection;
   $('progress').textContent=`${result.answered}/${result.steps.length} responses retained · ${result.selfComparisons.length} self-comparisons · ${result.revealedBeforeAnswer.length} source reveals before response. Declared familiarity: ${result.priorFamiliarity}. No correctness or physical skill score is produced.`;
-  $('history').replaceChildren();for(const [index,entry]of result.steps.entries()){const historicalStep=source.steps.find(s=>s.id===entry.id),card=node('article');card.append(node('h3',historicalStep.title));if(entry.response){for(const [label,key]of [['Expected change','expectedChange'],['Decision cue','cue'],['Recovery judgment','recovery']])card.append(node('p',`${label}: ${entry.response[key]||'Not supplied'}`));card.append(node('p',`Uncertainty declared: ${entry.response.uncertain?'yes':'no'}. Source revealed before response: ${entry.revealedBeforeAnswer?'yes':'no'}.`));}else card.append(node('p','No response retained.'));if(entry.reflection)card.append(node('p',`Learner self-comparison: ${entry.reflection.comparison}. ${entry.reflection.note}`));if(entry.reflection?.reconsideration){const r=entry.reflection.reconsideration;card.append(node('p',`Reconsidered judgment: ${r.judgment||'Not supplied'}`),node('p',`Remaining question: ${r.question||'Not supplied'}`));for(const e of entry.evidence)card.append(node('p',`${labels[e.key]}: ${e.kind==='retained-frame'?`${e.momentId} · ${e.presentedSeconds} s · SHA-256 ${e.image.sha256}`:e.available?e.text:'Not supplied — unknown'}`));}if(index<result.currentIndex&&entry.revealed&&entry.reflection)card.append(historyEvidenceDetails(source,historicalStep,assets));$('history').append(card);}sync();
+  $('history').replaceChildren();for(const [index,entry]of result.steps.entries()){const historicalStep=source.steps.find(s=>s.id===entry.id),card=node('article');card.append(node('h3',historicalStep.title));if(entry.response){for(const [label,key]of [['Expected change','expectedChange'],['Decision cue','cue'],['Recovery judgment','recovery']])card.append(node('p',`${label}: ${entry.response[key]||'Not supplied'}`));card.append(node('p',`Uncertainty declared: ${entry.response.uncertain?'yes':'no'}. Source revealed before response: ${entry.revealedBeforeAnswer?'yes':'no'}.`));}else card.append(node('p','No response retained.'));if(entry.reflection)card.append(node('p',`Learner self-comparison: ${entry.reflection.comparison}. ${entry.reflection.note}`));if(entry.reflection?.reconsideration){const r=entry.reflection.reconsideration;card.append(node('p',`Reconsidered judgment: ${r.judgment||'Not supplied'}`),node('p',`Remaining question: ${r.question||'Not supplied'}`));for(const e of entry.evidence)card.append(node('p',`${labels[e.key]}: ${e.kind==='retained-frame'?`${e.momentId} · ${e.presentedSeconds} s · SHA-256 ${e.image.sha256}`:e.available?e.text:'Not supplied — unknown'}`));}if(index<result.currentIndex&&entry.revealed&&entry.reflection)card.append(historyEvidenceDetails(source,historicalStep,assets,returnTarget));$('history').append(card);}sync();
 }
 function act(type,fields={}){try{
   const draft=type==='reveal'&&predictionDirty?{expectedChange:$('expectedChange').value,cue:$('decisionCue').value,recovery:$('recovery').value,uncertain:$('uncertain').checked}:null;
