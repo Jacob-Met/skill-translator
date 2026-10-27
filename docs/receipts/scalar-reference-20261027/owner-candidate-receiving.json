@@ -1,0 +1,822 @@
+{
+  "scope": "Independent feasible bounds and maintained study APIs; authored metadata only",
+  "modelSha256": "4232ef2c3aeebe654f369372c2af5c8435b13bb1d76bba300f3c09c22e841922",
+  "cases": 21,
+  "failures": 0,
+  "records": [
+    {
+      "id": "exact-constant",
+      "sampleCount": 9,
+      "family": "constant",
+      "actual": {
+        "score": -526.8578574083045,
+        "rho": 0.99,
+        "mean": 7
+      },
+      "bound": {
+        "score": -526.8578574083045,
+        "rho": 0.99,
+        "sse": 0,
+        "floorActive": true,
+        "residualTerm": -497.35838008671385,
+        "logdet": -33.893926476263154,
+        "penalty": 4.394449154672439
+      },
+      "violation": false,
+      "excessScore": 0,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -520.2661836762959,
+          "constant": -526.8578574083045,
+          "linear": -524.6606328309683,
+          "spike": -520.2661836762959,
+          "periodic": -519.2445324287639,
+          "decaying": -520.2661836762959
+        },
+        "improvement": -6.591673732008644,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "exact-linear",
+      "sampleCount": 9,
+      "family": "linear",
+      "actual": {
+        "score": -524.6606328309683,
+        "rho": 0.99
+      },
+      "bound": {
+        "score": -524.6606328309683,
+        "rho": 0.99,
+        "sse": 0,
+        "floorActive": true,
+        "residualTerm": -497.35838008671385,
+        "logdet": -33.893926476263154,
+        "penalty": 6.591673732008658
+      },
+      "violation": false,
+      "excessScore": 0,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -27.670271921754196,
+          "constant": -32.24393114078767,
+          "linear": -524.6606328309683,
+          "spike": -28.520611348890302,
+          "periodic": -45.80632144006121,
+          "decaying": -95.14473668459559
+        },
+        "improvement": -496.99036090921413,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "exact-spike",
+      "sampleCount": 9,
+      "family": "spike",
+      "actual": {
+        "score": -520.2661836762959,
+        "rho": 0.99,
+        "index": 3
+      },
+      "bound": {
+        "score": -520.2661836762959,
+        "rho": 0.99,
+        "sse": 0,
+        "floorActive": true,
+        "residualTerm": -497.35838008671385,
+        "logdet": -33.893926476263154,
+        "penalty": 10.986122886681098
+      },
+      "violation": false,
+      "excessScore": 0,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -11.378036961410906,
+          "constant": -16.440619362260986,
+          "linear": -14.755387879796821,
+          "spike": -520.2661836762959,
+          "periodic": -10.536508741464583,
+          "decaying": -486.3722572000328
+        },
+        "improvement": -508.888146714885,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "retained-exact-step",
+      "sampleCount": 9,
+      "family": "step",
+      "actual": {
+        "score": -526.9089484573386,
+        "rho": 0.99,
+        "split": 3,
+        "left": 0,
+        "right": 1
+      },
+      "bound": {
+        "score": -526.9089484573386,
+        "rho": 0.99,
+        "sse": 0,
+        "floorActive": true,
+        "residualTerm": -497.35838008671385,
+        "logdet": -40.5366912573058,
+        "penalty": 10.986122886681098
+      },
+      "violation": false,
+      "excessScore": 0,
+      "study": {
+        "status": "preferred",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -526.9089484573386,
+          "constant": -9.142247416314028,
+          "linear": -14.269175578656352,
+          "spike": -17.390637797350383,
+          "periodic": -12.194465757847443,
+          "decaying": -82.70170875374936
+        },
+        "improvement": 444.20723970358927,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "endpoint-cosine",
+      "sampleCount": 6,
+      "family": "periodic",
+      "actual": {
+        "score": -337.87613312694305,
+        "rho": 0.99,
+        "frequency": 1
+      },
+      "bound": {
+        "score": -337.87613312694305,
+        "rho": 0.99,
+        "sse": 4.37935664658864e-33,
+        "floorActive": true,
+        "residualTerm": -331.57225339114257,
+        "logdet": -15.668142190048927,
+        "penalty": 9.36426245424844
+      },
+      "violation": false,
+      "excessScore": 0,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -1.324426657627491,
+          "constant": -6.699705065311655,
+          "linear": -4.9079455960836,
+          "spike": -4.156145660920231,
+          "periodic": -337.87613312694305,
+          "decaying": -4.156145660920231
+        },
+        "improvement": -336.55170646931555,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "three-cluster-base",
+      "sampleCount": 12,
+      "family": "periodic",
+      "actual": {
+        "score": -684.5663798102878,
+        "rho": 0.99,
+        "frequency": 1
+      },
+      "bound": {
+        "score": -684.5663798102878,
+        "rho": 0.99,
+        "sse": 1.548486387447022e-31,
+        "floorActive": true,
+        "residualTerm": -663.1445067822851,
+        "logdet": -35.2533199252652,
+        "penalty": 13.831446897262628
+      },
+      "violation": false,
+      "excessScore": 0,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "three-cluster-shift",
+      "sampleCount": 12,
+      "family": "periodic",
+      "actual": {
+        "score": -684.5663798102878,
+        "rho": 0.99,
+        "frequency": 1
+      },
+      "bound": {
+        "score": -684.5663798102878,
+        "rho": 0.99,
+        "sse": 1.548486387447022e-31,
+        "floorActive": true,
+        "residualTerm": -663.1445067822851,
+        "logdet": -35.2533199252652,
+        "penalty": 13.831446897262628
+      },
+      "violation": false,
+      "excessScore": 0,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "three-cluster-units",
+      "sampleCount": 12,
+      "family": "periodic",
+      "actual": {
+        "score": -684.5663798102878,
+        "rho": 0.99,
+        "frequency": 1
+      },
+      "bound": {
+        "score": -684.5663798102878,
+        "rho": 0.99,
+        "sse": 1.548486387447022e-31,
+        "floorActive": true,
+        "residualTerm": -663.1445067822851,
+        "logdet": -35.2533199252652,
+        "penalty": 13.831446897262628
+      },
+      "violation": false,
+      "excessScore": 0,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-26",
+      "sampleCount": 7,
+      "family": "step",
+      "actual": {
+        "score": -33.49156517084397,
+        "rho": 0.9,
+        "split": 3,
+        "left": 0.411175956106028,
+        "right": 0.577842623146443
+      },
+      "bound": {
+        "score": -33.491564207195054,
+        "rho": 0.9,
+        "sse": 0.8991178750649351,
+        "floorActive": false,
+        "residualTerm": -14.365758989260161,
+        "logdet": -28.85535596321146,
+        "penalty": 9.729550745276565
+      },
+      "violation": false,
+      "excessScore": -9.636489153308503e-7,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -33.49156517084397,
+          "constant": -11.488751742034612,
+          "linear": -36.40842942359173,
+          "spike": -30.590531130338935,
+          "periodic": -30.07968209943539,
+          "decaying": -32.97956037537266
+        },
+        "improvement": -2.9168642527477573,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-27",
+      "sampleCount": 7,
+      "family": "step",
+      "actual": {
+        "score": -32.88791726517543,
+        "rho": 0.7,
+        "split": 3,
+        "left": 0.23723846122889214,
+        "right": 0.7372384624589471
+      },
+      "bound": {
+        "score": -32.887917091650266,
+        "rho": 0.7,
+        "sse": 0.4067791673188083,
+        "floorActive": false,
+        "residualTerm": -19.91776483401894,
+        "logdet": -22.699703002907896,
+        "penalty": 9.729550745276565
+      },
+      "violation": false,
+      "excessScore": -1.7352516579194344e-7,
+      "study": {
+        "status": "preferred",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -32.88791726517543,
+          "constant": -6.891294988578627,
+          "linear": -15.322005085464713,
+          "spike": -26.067509133127043,
+          "periodic": -16.756717364213188,
+          "decaying": -30.645240659141
+        },
+        "improvement": 2.2426766060344328,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-41",
+      "sampleCount": 12,
+      "family": "step",
+      "actual": {
+        "score": -245.14668199976188,
+        "rho": 0.2,
+        "split": 4,
+        "left": -0.00004400863105772648,
+        "right": 0.9999785466455487
+      },
+      "bound": {
+        "score": -245.14328164389502,
+        "rho": 0.2,
+        "sse": 2.537446325173486e-8,
+        "floorActive": false,
+        "residualTerm": -239.69315042684605,
+        "logdet": -17.874664465988978,
+        "penalty": 12.424533248940001
+      },
+      "violation": false,
+      "excessScore": -0.0034003558668587175,
+      "study": {
+        "status": "preferred",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -245.14668199976188,
+          "constant": -13.08125904332783,
+          "linear": -19.13317752781999,
+          "spike": -35.26653398184023,
+          "periodic": -18.734846956810618,
+          "decaying": -119.00620238200429
+        },
+        "improvement": 126.14047961775759,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-59",
+      "sampleCount": 24,
+      "family": "step",
+      "actual": {
+        "score": -117.12140204359419,
+        "rho": 0.95,
+        "split": 8,
+        "left": 0.2825526382480571,
+        "right": 0.7825526384992171
+      },
+      "bound": {
+        "score": -117.12137560124152,
+        "rho": 0.95,
+        "sse": 1.7136747146175577,
+        "floorActive": false,
+        "residualTerm": -63.34593143087513,
+        "logdet": -69.66571332210613,
+        "penalty": 15.890269151739728
+      },
+      "violation": false,
+      "excessScore": -0.000026442352663025304,
+      "study": {
+        "status": "weakly-separated",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -117.12140204359419,
+          "constant": -30.167376780834367,
+          "linear": -54.55974686912186,
+          "spike": -100.68085145521742,
+          "periodic": -62.358977387220776,
+          "decaying": -114.86216957300114
+        },
+        "improvement": 2.259232470593048,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-91",
+      "sampleCount": 64,
+      "family": "step",
+      "actual": {
+        "score": -356.3763863996939,
+        "rho": 0.95,
+        "split": 10,
+        "left": 0.35785590278865365,
+        "right": 0.8578559031612883
+      },
+      "bound": {
+        "score": -356.3763698604344,
+        "rho": 0.95,
+        "sse": 2.4367332120386593,
+        "floorActive": false,
+        "residualTerm": -209.16638647275647,
+        "logdet": -168.00439880447632,
+        "penalty": 20.79441541679836
+      },
+      "violation": false,
+      "excessScore": -0.00001653925949085533,
+      "study": {
+        "status": "weakly-separated",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -356.3763863996939,
+          "constant": -120.68096480472622,
+          "linear": -149.19784181137547,
+          "spike": -287.04107718548414,
+          "periodic": -171.1369855148444,
+          "decaying": -353.4136068940041
+        },
+        "improvement": 2.9627795056898094,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-105",
+      "sampleCount": 65,
+      "family": "step",
+      "actual": {
+        "score": -1254.7154862823647,
+        "rho": 0.1,
+        "split": 4,
+        "left": -0.00004668994356304171,
+        "right": 1.0000089440169315
+      },
+      "bound": {
+        "score": -1254.7154789735705,
+        "rho": 0.1,
+        "sse": 2.599302535891135e-7,
+        "floorActive": false,
+        "residualTerm": -1256.9205848705953,
+        "logdet": -18.666830452453244,
+        "penalty": 20.871936349478183
+      },
+      "violation": false,
+      "excessScore": -0.000007308794238269911,
+      "study": {
+        "status": "preferred",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -1254.7154862823647,
+          "constant": -177.02325534533514,
+          "linear": -185.14030520710037,
+          "spike": -287.4444529077528,
+          "periodic": -186.97532952208292,
+          "decaying": -624.7584710921363
+        },
+        "improvement": 629.9570151902284,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      },
+      "returnedStepObjective": {
+        "score": -1254.7154862823647,
+        "reportedScore": -1254.7154862823647,
+        "absoluteDifference": 0
+      }
+    },
+    {
+      "id": "step-screen-1352761069-107",
+      "sampleCount": 65,
+      "family": "step",
+      "actual": {
+        "score": -378.835238942233,
+        "rho": 0.975,
+        "split": 11,
+        "left": 0.31674952177039556,
+        "right": 0.816749529797365
+      },
+      "bound": {
+        "score": -378.8346015879404,
+        "rho": 0.975,
+        "sse": 3.985117891376108,
+        "floorActive": false,
+        "residualTerm": -181.46832433000935,
+        "logdet": -218.23821360740928,
+        "penalty": 20.871936349478183
+      },
+      "violation": false,
+      "excessScore": -0.000637354292564396,
+      "study": {
+        "status": "weakly-separated",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -378.835238942233,
+          "constant": -118.62956824027482,
+          "linear": -152.86479593894873,
+          "spike": -330.2715509826801,
+          "periodic": -178.46231164839296,
+          "decaying": -375.88887217828636
+        },
+        "improvement": 2.946366763946628,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      },
+      "returnedStepObjective": {
+        "score": -378.835238942233,
+        "reportedScore": -378.835238942233,
+        "absoluteDifference": 0
+      }
+    },
+    {
+      "id": "step-screen-1352761069-122",
+      "sampleCount": 6,
+      "family": "step",
+      "actual": {
+        "score": -28.336803437970815,
+        "rho": 0.9,
+        "split": 3,
+        "left": 1048576.0004073088,
+        "right": 1048576.0006026141
+      },
+      "bound": {
+        "score": -28.336803413188505,
+        "rho": 0.9,
+        "sse": 0.7803266520548868,
+        "floorActive": false,
+        "residualTerm": -12.238812789039805,
+        "logdet": -25.056787970288973,
+        "penalty": 8.958797346140274
+      },
+      "violation": false,
+      "excessScore": -2.4782309537840774e-8,
+      "study": {
+        "status": "weakly-separated",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -28.336803437970815,
+          "constant": -9.307093670591563,
+          "linear": -21.883194545962255,
+          "spike": -26.09806029181091,
+          "periodic": -18.780111194415166,
+          "decaying": -27.700644564433958
+        },
+        "improvement": 0.6361588735368571,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-138",
+      "sampleCount": 7,
+      "family": "step",
+      "actual": {
+        "score": -33.33025749053019,
+        "rho": 0.9,
+        "split": 3,
+        "left": 1048576.0004013972,
+        "right": 1048576.0005641577
+      },
+      "bound": {
+        "score": -33.330257411725626,
+        "rho": 0.9,
+        "sse": 0.8234173154752173,
+        "floorActive": false,
+        "residualTerm": -14.981416027787791,
+        "logdet": -28.078392129214397,
+        "penalty": 9.729550745276565
+      },
+      "violation": false,
+      "excessScore": -7.880456109887746e-8,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -33.33025749053019,
+          "constant": -11.488752220079856,
+          "linear": -36.34841518337053,
+          "spike": -30.76422483890089,
+          "periodic": -27.938002144941525,
+          "decaying": -32.8318339442539
+        },
+        "improvement": -3.01815769284034,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-139",
+      "sampleCount": 7,
+      "family": "step",
+      "actual": {
+        "score": -32.89196257918404,
+        "rho": 0.7,
+        "split": 4,
+        "left": 1048576.0002011117,
+        "right": 1048576.000689393
+      },
+      "bound": {
+        "score": -32.89196257282936,
+        "rho": 0.7,
+        "sse": 0.37652584952523627,
+        "floorActive": false,
+        "residualTerm": -20.458751080017386,
+        "logdet": -22.16276223808854,
+        "penalty": 9.729550745276565
+      },
+      "violation": false,
+      "excessScore": -6.354682113851595e-9,
+      "study": {
+        "status": "preferred",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -32.89196257918404,
+          "constant": -7.591879198418294,
+          "linear": -13.978947247576702,
+          "spike": -24.36335859902601,
+          "periodic": -15.285460055218259,
+          "decaying": -30.64784468795686
+        },
+        "improvement": 2.24411789122718,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-154",
+      "sampleCount": 12,
+      "family": "step",
+      "actual": {
+        "score": -60.80705630191283,
+        "rho": 0.975,
+        "split": 6,
+        "left": 1048576.0004394196,
+        "right": 1048576.000528198
+      },
+      "bound": {
+        "score": -60.80705457312926,
+        "rho": 0.975,
+        "sse": 2.1786279095351686,
+        "floorActive": false,
+        "residualTerm": -20.474536445252205,
+        "logdet": -52.757051376817046,
+        "penalty": 12.424533248940001
+      },
+      "violation": false,
+      "excessScore": -0.0000017287835731849555,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -60.80705630191283,
+          "constant": -22.844416161449427,
+          "linear": -67.76570527465837,
+          "spike": -58.642152740713605,
+          "periodic": -62.28138704199407,
+          "decaying": -60.568000515705045
+        },
+        "improvement": -6.958648972745543,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-155",
+      "sampleCount": 12,
+      "family": "step",
+      "actual": {
+        "score": -55.42270304784163,
+        "rho": 0.9,
+        "split": 3,
+        "left": 1048576.000286612,
+        "right": 1048576.0007748932
+      },
+      "bound": {
+        "score": -55.42270304671434,
+        "rho": 0.9,
+        "sse": 0.8311209761826571,
+        "floorActive": false,
+        "residualTerm": -32.038638785637445,
+        "logdet": -35.80859751001689,
+        "penalty": 12.424533248940001
+      },
+      "violation": false,
+      "excessScore": -1.1272902611381141e-9,
+      "study": {
+        "status": "weakly-separated",
+        "selectable": true,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -55.42270304784163,
+          "constant": -15.229532615231822,
+          "linear": -24.808013281531036,
+          "spike": -43.310552715035904,
+          "periodic": -28.558179833265253,
+          "decaying": -53.18785629738374
+        },
+        "improvement": 2.2348467504578906,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    },
+    {
+      "id": "step-screen-1352761069-170",
+      "sampleCount": 24,
+      "family": "step",
+      "actual": {
+        "score": -147.616607747537,
+        "rho": 0.99,
+        "split": 10,
+        "left": 1048576.000466368,
+        "right": 1048576.0005088483
+      },
+      "bound": {
+        "score": -147.6165984341784,
+        "rho": 0.99,
+        "sse": 2.4138721563181944,
+        "floorActive": false,
+        "residualTerm": -55.12372004031997,
+        "logdet": -108.38314754559815,
+        "penalty": 15.890269151739728
+      },
+      "violation": false,
+      "excessScore": -0.000009313358589224663,
+      "study": {
+        "status": "alternative-preferred",
+        "selectable": false,
+        "navigationAvailable": true,
+        "scores": {
+          "step": -147.616607747537,
+          "constant": -51.28005637406479,
+          "linear": -187.7709101124631,
+          "spike": -145.70227841297142,
+          "periodic": -130.28313122321438,
+          "decaying": -147.36158574037404
+        },
+        "improvement": -40.15430236492611,
+        "originalsPreserved": true,
+        "clockCheckPassed": true
+      }
+    }
+  ]
+}

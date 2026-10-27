@@ -1,0 +1,928 @@
+{
+  "scope": "Maintained study/import/selection/playback APIs using authored metadata; no browser or media playback execution",
+  "cases": 21,
+  "statusChanges": 1,
+  "records": [
+    {
+      "id": "exact-constant",
+      "sampleCount": 9,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -520.2661836762959,
+          "constant": -526.8578574083045,
+          "linear": -524.6606328309683,
+          "spike": -520.2661836762959,
+          "periodic": -519.2445324287639,
+          "decaying": -520.2661836762959
+        },
+        "improvement": -6.591673732008644,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -520.2661836762959,
+          "constant": -526.8578574083045,
+          "linear": -524.6606328309683,
+          "spike": -520.2661836762959,
+          "periodic": -519.2445324287639,
+          "decaying": -520.2661836762959
+        },
+        "improvement": -6.591673732008644,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "exact-linear",
+      "sampleCount": 9,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -27.67027192175419,
+          "constant": -32.24393114078767,
+          "linear": -524.6606328309683,
+          "spike": -28.520611348890302,
+          "periodic": -45.80632144006121,
+          "decaying": -95.14473668459559
+        },
+        "improvement": -496.99036090921413,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -27.67027192175419,
+          "constant": -32.24393114078767,
+          "linear": -524.6606328309683,
+          "spike": -28.520611348890302,
+          "periodic": -45.80632144006121,
+          "decaying": -95.14473668459559
+        },
+        "improvement": -496.99036090921413,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "exact-spike",
+      "sampleCount": 9,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -11.378036961410906,
+          "constant": -16.440619362260982,
+          "linear": -14.755387879796821,
+          "spike": -520.2661836762959,
+          "periodic": -10.536508741464583,
+          "decaying": -486.3722572000328
+        },
+        "improvement": -508.888146714885,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -11.378036961410906,
+          "constant": -16.440619362260982,
+          "linear": -14.755387879796821,
+          "spike": -520.2661836762959,
+          "periodic": -10.536508741464583,
+          "decaying": -486.3722572000328
+        },
+        "improvement": -508.888146714885,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "retained-exact-step",
+      "sampleCount": 9,
+      "baseline": {
+        "status": "preferred",
+        "scores": {
+          "step": -519.6239750660928,
+          "constant": -9.142247416314028,
+          "linear": -14.269175578656352,
+          "spike": -17.390637797350383,
+          "periodic": -12.194465757847443,
+          "decaying": -82.70170875374936
+        },
+        "improvement": 436.9222663123435,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "preferred",
+        "scores": {
+          "step": -519.6239750660928,
+          "constant": -9.142247416314028,
+          "linear": -14.269175578656352,
+          "spike": -17.390637797350383,
+          "periodic": -12.194465757847443,
+          "decaying": -82.70170875374936
+        },
+        "improvement": 436.9222663123435,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "endpoint-cosine",
+      "sampleCount": 6,
+      "baseline": {
+        "status": "numerically-unresolved",
+        "scores": {
+          "step": -1.324426657627491,
+          "constant": -6.699705065311655,
+          "linear": -4.9079455960836,
+          "spike": -4.156145660920231,
+          "periodic": "Infinity",
+          "decaying": -4.156145660920231
+        },
+        "improvement": null,
+        "selectable": false,
+        "navigationAvailable": false,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "numerically-unresolved",
+        "scores": {
+          "step": -1.324426657627491,
+          "constant": -6.699705065311655,
+          "linear": -4.9079455960836,
+          "spike": -4.156145660920231,
+          "periodic": "Infinity",
+          "decaying": -4.156145660920231
+        },
+        "improvement": null,
+        "selectable": false,
+        "navigationAvailable": false,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "three-cluster-base",
+      "sampleCount": 12,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "three-cluster-shift",
+      "sampleCount": 12,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "three-cluster-units",
+      "sampleCount": 12,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -60.78587816838016,
+          "constant": -64.7884132483228,
+          "linear": -62.303506598534796,
+          "spike": -57.37342843460265,
+          "periodic": -684.5663798102878,
+          "decaying": -103.07275659623284
+        },
+        "improvement": -623.7805016419077,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-26",
+      "sampleCount": 7,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -32.92907958377904,
+          "constant": -11.488751742034609,
+          "linear": -36.40842942359173,
+          "spike": -30.590531130338935,
+          "periodic": -30.0796820994354,
+          "decaying": -32.97956037537266
+        },
+        "improvement": -3.4793498398126843,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -33.491564207195054,
+          "constant": -11.488751742034609,
+          "linear": -36.40842942359173,
+          "spike": -30.590531130338935,
+          "periodic": -30.0796820994354,
+          "decaying": -32.97956037537266
+        },
+        "improvement": -2.9168652163966726,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-27",
+      "sampleCount": 7,
+      "baseline": {
+        "status": "preferred",
+        "scores": {
+          "step": -32.736089861143725,
+          "constant": -6.891294988578624,
+          "linear": -15.322005085464713,
+          "spike": -26.067509133127043,
+          "periodic": -16.756717364213184,
+          "decaying": -30.645240659141
+        },
+        "improvement": 2.090849202002726,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "preferred",
+        "scores": {
+          "step": -32.887917091650266,
+          "constant": -6.891294988578624,
+          "linear": -15.322005085464713,
+          "spike": -26.067509133127043,
+          "periodic": -16.756717364213184,
+          "decaying": -30.645240659141
+        },
+        "improvement": 2.242676432509267,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-41",
+      "sampleCount": 12,
+      "baseline": {
+        "status": "preferred",
+        "scores": {
+          "step": -244.96491535910064,
+          "constant": -13.081259043327833,
+          "linear": -19.133177527819992,
+          "spike": -35.26653398184023,
+          "periodic": -18.734846956810618,
+          "decaying": -119.00620238200429
+        },
+        "improvement": 125.95871297709635,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "preferred",
+        "scores": {
+          "step": -245.1432816433288,
+          "constant": -13.081259043327833,
+          "linear": -19.133177527819992,
+          "spike": -35.26653398184023,
+          "periodic": -18.734846956810618,
+          "decaying": -119.00620238200429
+        },
+        "improvement": 126.13707926132452,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-59",
+      "sampleCount": 24,
+      "baseline": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -116.7330325346801,
+          "constant": -30.167376780834367,
+          "linear": -54.55974686912186,
+          "spike": -100.68085145521742,
+          "periodic": -62.35897738722079,
+          "decaying": -114.86216957300114
+        },
+        "improvement": 1.8708629616789665,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -117.12137560124155,
+          "constant": -30.167376780834367,
+          "linear": -54.55974686912186,
+          "spike": -100.68085145521742,
+          "periodic": -62.35897738722079,
+          "decaying": -114.86216957300114
+        },
+        "improvement": 2.2592060282404134,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-91",
+      "sampleCount": 64,
+      "baseline": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -354.038503850236,
+          "constant": -120.68096480472624,
+          "linear": -149.19784181137553,
+          "spike": -287.04107718548414,
+          "periodic": -171.13698551484444,
+          "decaying": -353.4136068940041
+        },
+        "improvement": 0.6248969562319076,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -356.37636986043447,
+          "constant": -120.68096480472624,
+          "linear": -149.19784181137553,
+          "spike": -287.04107718548414,
+          "periodic": -171.13698551484444,
+          "decaying": -353.4136068940041
+        },
+        "improvement": 2.9627629664303754,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-105",
+      "sampleCount": 65,
+      "baseline": {
+        "status": "preferred",
+        "scores": {
+          "step": -1245.109085783195,
+          "constant": -177.02325534533517,
+          "linear": -185.14030520710034,
+          "spike": -287.4444529077528,
+          "periodic": -186.97532952208292,
+          "decaying": -624.7584710921363
+        },
+        "improvement": 620.3506146910587,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "preferred",
+        "scores": {
+          "step": -1254.7154789735823,
+          "constant": -177.02325534533517,
+          "linear": -185.14030520710034,
+          "spike": -287.4444529077528,
+          "periodic": -186.97532952208292,
+          "decaying": -624.7584710921363
+        },
+        "improvement": 629.957007881446,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-107",
+      "sampleCount": 65,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -374.12352564452766,
+          "constant": -118.62956824027484,
+          "linear": -152.86479593894873,
+          "spike": -330.2715509826801,
+          "periodic": -178.46231164839293,
+          "decaying": -375.88887217828636
+        },
+        "improvement": -1.7653465337587022,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -378.8346015879404,
+          "constant": -118.62956824027484,
+          "linear": -152.86479593894873,
+          "spike": -330.2715509826801,
+          "periodic": -178.46231164839293,
+          "decaying": -375.88887217828636
+        },
+        "improvement": 2.9457294096540636,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": true
+    },
+    {
+      "id": "step-screen-1352761069-122",
+      "sampleCount": 6,
+      "baseline": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -28.158493605622105,
+          "constant": -9.307093670591563,
+          "linear": -21.883194545962255,
+          "spike": -26.09806029181091,
+          "periodic": -18.780111194415166,
+          "decaying": -27.700644564433958
+        },
+        "improvement": 0.4578490411881475,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -28.336803413188505,
+          "constant": -9.307093670591563,
+          "linear": -21.883194545962255,
+          "spike": -26.09806029181091,
+          "periodic": -18.780111194415166,
+          "decaying": -27.700644564433958
+        },
+        "improvement": 0.6361588487545475,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-138",
+      "sampleCount": 7,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -33.240259540944976,
+          "constant": -11.488752220079856,
+          "linear": -36.34841518337053,
+          "spike": -30.76422483890089,
+          "periodic": -27.938002144941525,
+          "decaying": -32.8318339442539
+        },
+        "improvement": -3.108155642425551,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -33.330257411725626,
+          "constant": -11.488752220079856,
+          "linear": -36.34841518337053,
+          "spike": -30.76422483890089,
+          "periodic": -27.938002144941525,
+          "decaying": -32.8318339442539
+        },
+        "improvement": -3.0181577716449013,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-139",
+      "sampleCount": 7,
+      "baseline": {
+        "status": "preferred",
+        "scores": {
+          "step": -32.71474114837446,
+          "constant": -7.591879198418294,
+          "linear": -13.978947247576702,
+          "spike": -24.36335859902601,
+          "periodic": -15.285460055218262,
+          "decaying": -30.64784468795686
+        },
+        "improvement": 2.066896460417599,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "preferred",
+        "scores": {
+          "step": -32.89196257282936,
+          "constant": -7.591879198418294,
+          "linear": -13.978947247576702,
+          "spike": -24.36335859902601,
+          "periodic": -15.285460055218262,
+          "decaying": -30.64784468795686
+        },
+        "improvement": 2.244117884872498,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-154",
+      "sampleCount": 12,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -59.241180495235376,
+          "constant": -22.844416161449427,
+          "linear": -67.76570527465836,
+          "spike": -58.642152740713605,
+          "periodic": -62.28138704199409,
+          "decaying": -60.568000515705045
+        },
+        "improvement": -8.524524779422983,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -60.80705457312926,
+          "constant": -22.844416161449427,
+          "linear": -67.76570527465836,
+          "spike": -58.642152740713605,
+          "periodic": -62.28138704199409,
+          "decaying": -60.568000515705045
+        },
+        "improvement": -6.958650701529102,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-155",
+      "sampleCount": 12,
+      "baseline": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -55.192986181428275,
+          "constant": -15.229532615231818,
+          "linear": -24.808013281531036,
+          "spike": -43.310552715035904,
+          "periodic": -28.558179833265253,
+          "decaying": -53.18785629738374
+        },
+        "improvement": 2.0051298840445355,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "weakly-separated",
+        "scores": {
+          "step": -55.42270304671434,
+          "constant": -15.229532615231818,
+          "linear": -24.808013281531036,
+          "spike": -43.310552715035904,
+          "periodic": -28.558179833265253,
+          "decaying": -53.18785629738374
+        },
+        "improvement": 2.2348467493306003,
+        "selectable": true,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    },
+    {
+      "id": "step-screen-1352761069-170",
+      "sampleCount": 24,
+      "baseline": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -140.81942344567065,
+          "constant": -51.28005637406479,
+          "linear": -187.7709101124631,
+          "spike": -145.70227841297142,
+          "periodic": -130.28313122321438,
+          "decaying": -147.36158574037404
+        },
+        "improvement": -46.95148666679245,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "gateOnly": {
+        "status": "alternative-preferred",
+        "scores": {
+          "step": -147.61659843417837,
+          "constant": -51.28005637406479,
+          "linear": -187.7709101124631,
+          "spike": -145.70227841297142,
+          "periodic": -130.28313122321438,
+          "decaying": -147.36158574037404
+        },
+        "improvement": -40.15431167828473,
+        "selectable": false,
+        "navigationAvailable": true,
+        "originalIndexesPreserved": true,
+        "sourceAndSamplesPreserved": true,
+        "clockCheckPassed": true
+      },
+      "statusChanged": false
+    }
+  ],
+  "explicitBounds": [
+    {
+      "id": "step-screen-1352761069-105",
+      "family": "step",
+      "actual": {
+        "score": -1245.109085783195,
+        "rho": 0.3,
+        "split": 4,
+        "left": -0.000046067532673590435,
+        "right": 1.0000095664968156
+      },
+      "bound": {
+        "score": -1254.7154789735705,
+        "rho": 0.1,
+        "sse": 2.599302535891135e-7,
+        "floorActive": false,
+        "residualTerm": -1256.9205848705953,
+        "logdet": -18.666830452453244,
+        "penalty": 20.871936349478183
+      },
+      "violation": true,
+      "excessScore": 9.606393190375456,
+      "gateOnly": {
+        "id": "step-screen-1352761069-105",
+        "family": "step",
+        "actual": {
+          "score": -1254.7154789735823,
+          "rho": 0.1,
+          "split": 4,
+          "left": -0.000046689913913427066,
+          "right": 1.0000089440118145
+        },
+        "bound": {
+          "score": -1254.7154789735705,
+          "rho": 0.1,
+          "sse": 2.599302535891135e-7,
+          "floorActive": false,
+          "residualTerm": -1256.9205848705953,
+          "logdet": -18.666830452453244,
+          "penalty": 20.871936349478183
+        },
+        "violation": false,
+        "excessScore": -1.1823431123048067e-11
+      },
+      "normalizedCandidate": {
+        "split": 4,
+        "rho": 0.1,
+        "left": 0.00001245742333581996,
+        "right": 0.9999102083959946
+      }
+    },
+    {
+      "id": "step-screen-1352761069-107",
+      "family": "step",
+      "actual": {
+        "score": -374.12352564452766,
+        "rho": 0.9,
+        "split": 11,
+        "left": 0.36810226282652053,
+        "right": 0.8681022773578435
+      },
+      "bound": {
+        "score": -378.8346015879404,
+        "rho": 0.975,
+        "sse": 3.985117891376108,
+        "floorActive": false,
+        "residualTerm": -181.46832433000935,
+        "logdet": -218.23821360740928,
+        "penalty": 20.871936349478183
+      },
+      "violation": true,
+      "excessScore": 4.711075943412766,
+      "gateOnly": {
+        "id": "step-screen-1352761069-107",
+        "family": "step",
+        "actual": {
+          "score": -378.8346015879404,
+          "rho": 0.975,
+          "split": 11,
+          "left": 0.3167497931078779,
+          "right": 0.8167496686098603
+        },
+        "bound": {
+          "score": -378.8346015879404,
+          "rho": 0.975,
+          "sse": 3.985117891376108,
+          "floorActive": false,
+          "residualTerm": -181.46832433000935,
+          "logdet": -218.23821360740928,
+          "penalty": 20.871936349478183
+        },
+        "violation": false,
+        "excessScore": 0
+      },
+      "normalizedCandidate": {
+        "split": 11,
+        "rho": 0.975,
+        "left": 0.3167497938288292,
+        "right": 0.816749662090062
+      }
+    }
+  ]
+}

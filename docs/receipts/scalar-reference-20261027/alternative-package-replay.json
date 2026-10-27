@@ -1,0 +1,34 @@
+{
+  "command": [
+    "node",
+    "tools/scalar-reference/audit-alternative-screens.mjs"
+  ],
+  "exitCode": 0,
+  "stdoutSha256": "5922fcc4a041570defb11f57511195f66232a1e4adc2f605d41e9187715f0c2d",
+  "stderr": "",
+  "summary": {
+    "candidateSha256": "4232ef2c3aeebe654f369372c2af5c8435b13bb1d76bba300f3c09c22e841922",
+    "cases": 238,
+    "corpora": {
+      "retained-224": 224,
+      "targeted-14": 14
+    },
+    "simulationMatches": {
+      "spike": 238,
+      "decaying": 238
+    },
+    "families": {
+      "spike": {
+        "strictGaps": 0,
+        "materialGaps": 0,
+        "maxGap": 0
+      },
+      "decaying": {
+        "strictGaps": 0,
+        "materialGaps": 0,
+        "maxGap": 0
+      }
+    },
+    "elapsedMs": 3154.637314
+  }
+}

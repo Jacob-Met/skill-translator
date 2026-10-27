@@ -1,0 +1,20 @@
+{
+  "repo": "Jacob-Met/skill-translator",
+  "base_commit": "3bb52f0f7147dce23c32e64c45f4e6b06e19ac73",
+  "scope": "selected-source receiving, not a full repository checkout",
+  "owner": "node-72e09d180ec675855992b3cbfb59e9e8",
+  "files": {
+    "src/instrument-change-models.mjs": {
+      "git_blob": "7ac7c9030b692bea794ee50a2b4b726ce44ef2d3",
+      "sha256": "cd400e5bcf29f46ad5cf9c1cb4ca3e1a819911a4fb57635a00b45e54d51a703c"
+    },
+    "src/instrument-change-proposals.mjs": {
+      "git_blob": "55472fedd184d87e9ce66bd0708ac12f331b6899",
+      "sha256": "664a104b1362ff188a48d3eedb41ad5ad32b901fbeda46fe24cd16b828ad7d19"
+    },
+    "package.json": {
+      "git_blob": "606f8d32d75315976559fbe14469b9405cd91175",
+      "sha256": "1ae464b0142254deedca00d691d201f44945f5bf57d9b7951ab9aa7386261aa5"
+    }
+  }
+}

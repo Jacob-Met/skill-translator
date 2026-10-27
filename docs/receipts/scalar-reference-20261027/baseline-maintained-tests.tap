@@ -1,0 +1,88 @@
+TAP version 13
+# Subtest: near-perfect spike score and covariance use direct residuals instead of cancelled sufficient statistics
+ok 1 - near-perfect spike score and covariance use direct residuals instead of cancelled sufficient statistics
+  ---
+  duration_ms: 13.558943
+  type: 'test'
+  ...
+# Subtest: independent dense covariance inverse agrees with the optimized irregular-time likelihood
+ok 2 - independent dense covariance inverse agrees with the optimized irregular-time likelihood
+  ---
+  duration_ms: 536.298328
+  type: 'test'
+  ...
+# Subtest: proposes a retained sample boundary without entered threshold, direction or run length
+ok 3 - proposes a retained sample boundary without entered threshold, direction or run length
+  ---
+  duration_ms: 33.58237
+  type: 'test'
+  ...
+# Subtest: flat trend isolated spike and oscillation alternatives remain visible rather than called changes
+ok 4 - flat trend isolated spike and oscillation alternatives remain visible rather than called changes
+  ---
+  duration_ms: 73.272234
+  type: 'test'
+  ...
+# Subtest: a changed level across an unobserved gap never becomes a sampled change boundary
+ok 5 - a changed level across an unobserved gap never becomes a sampled change boundary
+  ---
+  duration_ms: 2.423606
+  type: 'test'
+  ...
+# Subtest: unit conversion and timestamp offset preserve a clear model comparison and original indexes
+ok 6 - unit conversion and timestamp offset preserve a clear model comparison and original indexes
+  ---
+  duration_ms: 63.506339
+  type: 'test'
+  ...
+# Subtest: missing and numerically unsupported courses remain explicitly unavailable
+ok 7 - missing and numerically unsupported courses remain explicitly unavailable
+  ---
+  duration_ms: 0.604154
+  type: 'test'
+  ...
+# Subtest: malformed samples and invalid adjacency cannot silently become a preferred result
+ok 8 - malformed samples and invalid adjacency cannot silently become a preferred result
+  ---
+  duration_ms: 0.359044
+  type: 'test'
+  ...
+# Subtest: threshold-free original observations produce a source-bound clock-supported context
+ok 9 - threshold-free original observations produce a source-bound clock-supported context
+  ---
+  duration_ms: 65.417637
+  type: 'test'
+  ...
+# Subtest: raw observation pairing uses the open source and refuses a conflicting existing binding
+ok 10 - raw observation pairing uses the open source and refuses a conflicting existing binding
+  ---
+  duration_ms: 1.069562
+  type: 'test'
+  ...
+# Subtest: shared observation admission preserves the original threshold importer inputs and result
+ok 11 - shared observation admission preserves the original threshold importer inputs and result
+  ---
+  duration_ms: 0.646512
+  type: 'test'
+  ...
+# Subtest: failed clock and extrapolated context retain model inquiry but never authorize playback
+ok 12 - failed clock and extrapolated context retain model inquiry but never authorize playback
+  ---
+  duration_ms: 100.867986
+  type: 'test'
+  ...
+# Subtest: source-only replay ignores forged findings; source unit sample clock and gap mutations retire selection
+ok 13 - source-only replay ignores forged findings; source unit sample clock and gap mutations retire selection
+  ---
+  duration_ms: 71.967783
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 599.158777

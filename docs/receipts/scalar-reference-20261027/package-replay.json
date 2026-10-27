@@ -1,0 +1,81 @@
+{
+  "sourceCommit": "3bb52f0f7147dce23c32e64c45f4e6b06e19ac73",
+  "handoffBase": "9d379589c7bda181ce406c5ed3cc7202b51290d3",
+  "nodeVersion": "v22.23.4",
+  "sourceMode": "exact selected import closure, not a full checkout",
+  "packageReplay": [
+    {
+      "label": "package-audit",
+      "command": [
+        "node",
+        "tools/scalar-reference/audit-step-screen.mjs"
+      ],
+      "exitCode": 0,
+      "expectedBaselineExitCode": 0,
+      "stdoutSha256": "e8d00b1ee8587da39fe476d771d7e2895b132ba41bac736bab815b5e2677efdc",
+      "stderr": "",
+      "summary": {
+        "cases": 224,
+        "strictScreenGaps": 13,
+        "materialScreenGaps": 13,
+        "maximumScoreGap": 9.60639319038728,
+        "productionSimulationMatches": 224
+      }
+    },
+    {
+      "label": "package-prepare",
+      "command": [
+        "node",
+        "tools/scalar-reference/prepare-gate-diagnostic.mjs"
+      ],
+      "exitCode": 0,
+      "expectedBaselineExitCode": 0,
+      "stdoutSha256": "9856f0d9ed8a0ab6b38dc79edaf7c833739063500cff25857d58de78435c5b5b",
+      "stderr": ""
+    },
+    {
+      "label": "package-causal",
+      "command": [
+        "node",
+        "tools/scalar-reference/diagnose-step-gate.mjs"
+      ],
+      "exitCode": 0,
+      "expectedBaselineExitCode": 0,
+      "stdoutSha256": "62ab75387026152275039eb903bd0ca67ba5f92d864e82229d8ce35cd210c075",
+      "stderr": "",
+      "summary": {
+        "cases": 13,
+        "statusChanges": 1
+      }
+    },
+    {
+      "label": "package-study",
+      "command": [
+        "node",
+        "tools/scalar-reference/receive-study.mjs"
+      ],
+      "exitCode": 0,
+      "expectedBaselineExitCode": 0,
+      "stdoutSha256": "f998a2080b78b315ff9d18220d7f323971a33d4e2e4c60ae44c4b872433e5b95",
+      "stderr": "",
+      "summary": {
+        "cases": 21,
+        "statusChanges": 1
+      }
+    },
+    {
+      "label": "package-acceptance",
+      "command": [
+        "node",
+        "--test",
+        "tools/scalar-reference/finite-objective-witness.test.mjs",
+        "tools/scalar-reference/screening-feasible-witness.test.mjs"
+      ],
+      "exitCode": 1,
+      "expectedBaselineExitCode": 1,
+      "stdoutSha256": "a503aac057b40bbc0fb2c4cb1859adf058ff1050a368b9d96c605a932523169e",
+      "stderr": "",
+      "tapSummary": "1..10\n# tests 10\n# suites 0\n# pass 6\n# fail 4\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 115.069138\n"
+    }
+  ]
+}

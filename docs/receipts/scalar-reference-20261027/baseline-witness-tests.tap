@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: exact-constant has an admitted feasible full-grid bound
+ok 1 - exact-constant has an admitted feasible full-grid bound
+  ---
+  duration_ms: 6.341771
+  type: 'test'
+  ...
+# Subtest: exact-linear has an admitted feasible full-grid bound
+ok 2 - exact-linear has an admitted feasible full-grid bound
+  ---
+  duration_ms: 3.497188
+  type: 'test'
+  ...
+# Subtest: exact-spike has an admitted feasible full-grid bound
+ok 3 - exact-spike has an admitted feasible full-grid bound
+  ---
+  duration_ms: 3.971085
+  type: 'test'
+  ...
+# Subtest: retained-exact-step has an admitted feasible full-grid bound
+not ok 4 - retained-exact-step has an admitted feasible full-grid bound
+  ---
+  duration_ms: 2.106573
+  type: 'test'
+  location: '/workspace/hamon-estate-10dbc406-scalar-oracles-20261027/review/finite-objective-witness.test.mjs:8:38'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "id": "retained-exact-step",
+      "family": "step",
+      "actual": {
+        "score": -519.6239750660928,
+        "rho": 0.975,
+        "split": 3,
+        "left": 0,
+        "right": 1
+      },
+      "bound": {
+        "score": -526.9089484573386,
+        "rho": 0.99,
+        "sse": 0,
+        "floorActive": true,
+        "residualTerm": -497.35838008671385,
+        "logdet": -40.5366912573058,
+        "penalty": 10.986122886681098
+      },
+      "violation": true,
+      "excessScore": 7.284973391245785
+    }
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/hamon-estate-10dbc406-scalar-oracles-20261027/review/finite-objective-witness.test.mjs:19:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: endpoint-cosine has an admitted feasible full-grid bound
+not ok 5 - endpoint-cosine has an admitted feasible full-grid bound
+  ---
+  duration_ms: 1.823734
+  type: 'test'
+  location: '/workspace/hamon-estate-10dbc406-scalar-oracles-20261027/review/finite-objective-witness.test.mjs:8:38'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "id": "endpoint-cosine",
+      "family": "periodic",
+      "actual": {
+        "score": "Infinity"
+      },
+      "bound": {
+        "score": -337.87613312694305,
+        "rho": 0.99,
+        "sse": 4.37935664658864e-33,
+        "floorActive": true,
+        "residualTerm": -331.57225339114257,
+        "logdet": -15.668142190048927,
+        "penalty": 9.36426245424844
+      },
+      "violation": true,
+      "excessScore": null
+    }
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/hamon-estate-10dbc406-scalar-oracles-20261027/review/finite-objective-witness.test.mjs:19:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: three-cluster-base has an admitted feasible full-grid bound
+ok 6 - three-cluster-base has an admitted feasible full-grid bound
+  ---
+  duration_ms: 2.636465
+  type: 'test'
+  ...
+# Subtest: three-cluster-shift has an admitted feasible full-grid bound
+ok 7 - three-cluster-shift has an admitted feasible full-grid bound
+  ---
+  duration_ms: 4.359916
+  type: 'test'
+  ...
+# Subtest: three-cluster-units has an admitted feasible full-grid bound
+ok 8 - three-cluster-units has an admitted feasible full-grid bound
+  ---
+  duration_ms: 3.039605
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 6
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 83.306072
