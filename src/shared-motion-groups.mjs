@@ -46,7 +46,17 @@ export function inspectSharedMotionGroups(raw){
     const result={ids:members,...finding};subsets.push(result);
     if(finding.status==='supported')accepted.push({mask,result});
   }
-  const maximal=accepted.filter(candidate=>!accepted.some(other=>other.mask!==candidate.mask&&(other.mask&candidate.mask)===candidate.mask))
+  // Match the span receiver's upward Boolean subset transform. A rejected
+  // immediate superset may itself have a larger accepted superset: fitted
+  // maximum-residual acceptance is not hereditary.
+  const hasAcceptedSuperset=new Uint8Array(1<<n);
+  for(const {mask} of accepted)hasAcceptedSuperset[mask]=1;
+  if(accepted.length>1)for(let bit=0;bit<n;bit++)for(let mask=0;mask<hasAcceptedSuperset.length;mask++)
+    if(!(mask&(1<<bit)))hasAcceptedSuperset[mask]|=hasAcceptedSuperset[mask|(1<<bit)];
+  const maximal=accepted.filter(({mask})=>{
+    for(let bit=0;bit<n;bit++)if(!(mask&(1<<bit))&&hasAcceptedSuperset[mask|(1<<bit)])return false;
+    return true;
+  })
     .sort((a,b)=>b.result.ids.length-a.result.ids.length||a.result.ids.join('\0').localeCompare(b.result.ids.join('\0')));
   const groups=maximal.map(({result})=>({ids:result.ids,...fitSubset(result.ids,true)}));
   const represented=new Set(groups.flatMap(g=>g.ids));
