@@ -1,3 +1,4 @@
+import {isLoopbackOrigin} from './loopback-origin.mjs';
 import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {validateSequence} from '../src/demonstration-sequence.mjs';
@@ -17,6 +18,6 @@ export async function runSequenceEdge(raw){
  });}finally{clearTimeout(timer);running=false;}
 }
 export async function serveSequenceEdge(req,res){
- if(req.headers.origin!==`http://${req.headers.host}`||!String(req.headers['content-type']).startsWith('application/json')){res.writeHead(403);res.end('Same-origin JSON request required');return;}
+ if(!isLoopbackOrigin(req)||!String(req.headers['content-type']).startsWith('application/json')){res.writeHead(403);res.end('Same-origin JSON request required');return;}
  try{let bytes=0,chunks=[];for await(const chunk of req){bytes+=chunk.length;if(bytes>22*1024*1024)throw Error('Source request exceeds22MiB');chunks.push(chunk);}const report=await runSequenceEdge(JSON.parse(Buffer.concat(chunks).toString('utf8')));res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify(report));}catch(error){res.writeHead(400,{'Content-Type':'application/json'});res.end(JSON.stringify({error:error.message}));}
 }
