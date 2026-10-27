@@ -65,3 +65,16 @@ test('independent known proper transforms recover angle, centroid shift and all 
  for(const angle of [-179,-75,0,44,173]){const observed=turn(target,angle,26,31),fit=fitProperPointPattern(target.map((p,i)=>({id:'p'+i,target:{xMm:p[0],yMm:p[1]},attempt:{xMm:observed[i][0],yMm:observed[i][1]}}))).fit;
  assert.ok(fit);assert.ok(Math.abs(fit.angleDegrees-angle)<1e-10);assert.ok(Math.abs(fit.centroidDxMm-26)<1e-10);assert.ok(Math.abs(fit.centroidDyMm-31)<1e-10);assert.ok(fit.residuals.every(r=>r.errorMm<1e-10));}
 });
+
+test('maximal groups cross unsupported intermediate supersets',()=>{
+ const raw=motionStudy([[[81,134],[121,35],[97,30],[116,45]],[[68,142],[135,27],[90,24],[122,40]]],15);
+ const before=structuredClone(raw),result=inspectSharedMotionGroups(raw),subsets=new Map(result.subsets.map(s=>[s.ids.join(','),s]));
+ assert.equal(subsets.get('p0,p1').status,'supported');
+ assert.equal(subsets.get('p0,p1,p2').status,'outside-fit-threshold');
+ assert.equal(subsets.get('p0,p1,p3').status,'outside-fit-threshold');
+ assert.equal(subsets.get('p0,p1,p2,p3').status,'supported');
+ assert.deepEqual(result.groups.map(g=>g.ids),[['p0','p1','p2','p3']]);
+ assert.equal(result.counts.evaluated,11);assert.equal(result.counts.supported,9);
+ assert.equal(result.counts.outsideFitThreshold,2);assert.equal(result.counts.maximal,1);
+ assert.deepEqual(raw,before);
+});
