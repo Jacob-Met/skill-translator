@@ -61,7 +61,7 @@ try{
  downloadSession.on('Browser.downloadWillBegin',e=>downloads.push({...e,state:'started'}));
  downloadSession.on('Browser.downloadProgress',e=>{const item=downloads.find(d=>d.guid===e.guid);if(item)Object.assign(item,e);});
  await downloadSession.send('Browser.setDownloadBehavior',{behavior:'allowAndName',downloadPath:out+'/downloads',eventsEnabled:true});
- for(const [route,path] of [['/rehearsal','web/rehearsal.html'],['/feature-rehearsal','web/feature-rehearsal.html'],...['web/rehearsal.mjs','web/feature-rehearsal.mjs','src/rehearsal-judgment.mjs','src/feature-rehearsal.mjs'].map(path=>['/'+path,path])]){
+ for(const [route,path] of [['/rehearsal','web/rehearsal.html'],['/feature-rehearsal','web/feature-rehearsal.html'],['/web/feature-clearance.css','web/feature-clearance.css'],...['web/rehearsal.mjs','web/feature-rehearsal.mjs','src/rehearsal-judgment.mjs','src/feature-rehearsal.mjs'].map(path=>['/'+path,path])]){
   const response=await fetch(origin+route);assert.equal(response.status,200);
   const served=Buffer.from(await response.arrayBuffer()),local=await readFile(new URL('../'+path,import.meta.url));
   assert.deepEqual(served,local);sourceReceipt.push({path,bytes:served.length,sha256:createHash('sha256').update(served).digest('hex')});
@@ -73,6 +73,10 @@ try{
  await page.select('#judgmentChoice','adequate');await value('judgmentReason','Keep this original account');await page.click('#recordJudgment');
  const original=await study();assert.equal(original.judgments.length,1);assert.equal(original.judgments[0].reason,'Keep this original account');assert.equal(await page.$eval('#placeMark',e=>e.disabled),true);
  await file('judgments-before.json',original);await go('reviewFeatureRehearsal');await page.select('#featureRehearsalTrial','2');assert.equal(await page.$eval('#featureRehearsalTrial',e=>e.value),'2');const selectedReview=await exported('saveFeatureRehearsal');assert.equal(selectedReview.selectedTrial,2);assert.deepEqual(selectedReview.rehearsal,original.rehearsal);
+ assert.ok(await page.$('#featureJudgmentContext'),'Feature review must show the selected trial original prediction context');
+ assert.equal(await text('featureJudgmentContext'),'No prediction was recorded for this trial in the attached study.');
+ await page.select('#featureRehearsalTrial','1');assert.ok((await text('featureJudgmentContext')).includes('Keep this original account'));assert.match(await text('featureJudgmentContext'),/Center result and prediction agreement remain withheld/);assert.doesNotMatch(await text('featureJudgmentContext'),/Your prediction (agreed|differed)/);
+ await page.select('#featureRehearsalTrial','2');
  assert.ok(await page.$('#saveFeatureRehearsalJudgments'),'Feature review must offer a direct complete-judgment export');
  await page.setViewport({width:390,height:960});await page.$eval('#saveFeatureRehearsalJudgments',e=>e.scrollIntoView({block:'center'}));
  assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),false);assert.equal((await text('saveFeatureRehearsalJudgments')).trim(),'Export complete judgment study');
@@ -115,11 +119,45 @@ try{
  assert.deepEqual(await study(),continued,'Cancelled fresh navigation must retain accepted judgments');
  record('a cancelled fresh navigation leaves accepted judgments available for a subsequent real resume');
 
+
+ // A real four-sheet course separates center predictions from feature outcomes.
+ const multiComparison=structuredClone(comparison);multiComparison.workpieces=[{widthMm:100,heightMm:100},{widthMm:200,heightMm:100},{widthMm:150,heightMm:100},{widthMm:250,heightMm:100}];
+ const multiComparisonFile=await file('context-comparison.json',multiComparison),firstReason='Each center is two millimetres from its target.',thirdReason='Third sheet: <em>literal original reason</em>\n'+'λ'.repeat(1100),fourthReason='Fourth sheet remains uncommitted.';
+ await page.goto(origin+'/feature-clearance',{waitUntil:'networkidle0'});await(await page.$('#bundleFile')).uploadFile(multiComparisonFile);await page.waitForFunction(()=>!document.getElementById('results').hidden);await go('openFeatureRehearsal');await go('startFeatureRehearsal');
+ await place('a',22,50);await place('b',38,50);await page.select('#judgmentChoice','adequate');await value('judgmentReason',firstReason);await page.click('#recordJudgment');await page.click('#submitTrial');await page.click('#nextTrial');
+ await place('a',40,50);await place('b',80,50);await page.click('#submitTrial');await page.click('#nextTrial');
+ await place('a',30,50);await place('b',60,50);await page.select('#judgmentChoice','uncertain');await value('judgmentReason',thirdReason);await page.click('#recordJudgment');await page.click('#submitTrial');await page.click('#nextTrial');
+ await place('a',50,50);await place('b',100,50);await page.select('#judgmentChoice','inadequate');await value('judgmentReason',fourthReason);await page.click('#recordJudgment');
+ const multiStudy=await study();assert.equal(multiStudy.judgments.length,3);assert.deepEqual(multiStudy.judgments.map(j=>j.reason),[firstReason,thirdReason,fourthReason]);
+ await go('reviewFeatureRehearsal');const contextText=()=>text('featureJudgmentContext');
+ assert.equal(await page.$eval('#featureRehearsalTrial',e=>e.value),'1');
+ assert.match(await text('featureRehearsalSummary'),/Within all original center tolerances\. Some actual gaps fail/);
+ assert.ok((await contextText()).includes(firstReason));assert.match(await contextText(),/Recorded center prediction: Every mark is within tolerance/);assert.match(await contextText(),/Your prediction agreed with the center result/);assert.doesNotMatch(await contextText(),/Your prediction differed/);assert.match(await contextText(),/Feature clearance is assessed separately/);
+ assert.match(await text('featureRehearsalPairs'),/Fails declared gap/);const gapCells=await page.$$eval('#featureRehearsalPairs tr:first-child td',cells=>cells.map(e=>e.textContent));assert.equal(gapCells[3],'6');assert.equal(gapCells[4],'10');
+ await shots('center-prediction-feature-context');
+ record('the actual committed center-pass and feature-gap-fail case retains the original prediction and center agreement separately');
+ const multiExport=await exported('saveFeatureRehearsalJudgments');assert.deepEqual(multiExport,multiStudy);const multiDownloadPath=out+'/downloads/'+downloads.at(-1).guid;
+ await page.select('#featureRehearsalTrial','2');assert.equal(await contextText(),'No prediction was recorded for this trial in the attached study.');assert.ok(!(await contextText()).includes(firstReason));
+ await page.select('#featureRehearsalTrial','3');assert.match(await contextText(),/Recorded center prediction: I am uncertain/);assert.match(await contextText(),/Uncertainty retained; no agreement score/);assert.doesNotMatch(await contextText(),/Your prediction (agreed|differed)/);
+ assert.ok((await contextText()).includes(thirdReason));assert.equal(await page.$eval('#featureJudgmentContext',e=>e.querySelectorAll('em').length),0);
+ await page.setViewport({width:390,height:960});await page.$eval('#featureJudgmentContext',e=>e.scrollIntoView({block:'center'}));assert.ok(await page.$eval('#featureJudgmentContext',e=>e.scrollWidth<=e.clientWidth));assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await(await page.$('.feature-judgment-context')).screenshot({path:out+'/long-context-390.png'});await page.setViewport({width:1280,height:960});
+ record('sparse trial mapping preserves uncertainty and literal long reasons without stale text or narrow-page overflow');
+ await page.select('#featureRehearsalTrial','4');assert.ok((await contextText()).includes(fourthReason));assert.match(await contextText(),/Recorded center prediction: At least one mark is outside tolerance/);assert.match(await contextText(),/Center result and prediction agreement remain withheld/);assert.doesNotMatch(await contextText(),/Center result: (Within|Outside)|Your prediction (agreed|differed)/);
+ assert.match(await text('featureRehearsalSummary'),/Feedback withheld\. Feedback withheld/);assert.equal(await page.$$eval('#featureRehearsalPairs tr',rows=>rows.length),0);
+ assert.deepEqual(await exported('saveFeatureRehearsalJudgments'),multiStudy);
+ const beforeFailureContext=await contextText();for(const id of ['featureRehearsalFile','featureRehearsalReviewFile','rehearsalComparisonFile']){await upload(id,invalidFile);assert.equal(await contextText(),beforeFailureContext);}
+ const multiRawFile=await file('context-raw.json',multiStudy.rehearsal);await upload('featureRehearsalFile',multiRawFile);assert.equal(await contextText(),'Prediction history is unavailable in this raw review.');
+ await page.goto(origin+'/rehearsal',{waitUntil:'networkidle0'});await upload('openRehearsal',multiDownloadPath);await go('reviewFeatureRehearsal');assert.ok((await contextText()).includes(firstReason));assert.deepEqual(await exported('saveFeatureRehearsalJudgments'),multiStudy);
+ record('uncommitted feedback stays withheld; failed replacement retains context and actual full-study reopening restores it after raw replacement');
+ await page.select('#featureRehearsalTrial','4');await go('resumeFeatureRehearsal');await page.click('#submitTrial');const finalMultiStudy=await study();assert.deepEqual(finalMultiStudy.judgments,multiStudy.judgments);
+ await go('reviewFeatureRehearsal');await page.select('#featureRehearsalTrial','4');assert.match(await contextText(),/Center result: Within all original center tolerances/);assert.match(await contextText(),/Your prediction differed from the center result/);assert.ok((await contextText()).includes(fourthReason));assert.deepEqual(await exported('saveFeatureRehearsalJudgments'),finalMultiStudy);
+ record('actual later commitment reveals the existing center disagreement without rewriting the original prediction or reason');
+
  const invalidStudy=structuredClone(original);invalidStudy.rehearsal.events.push({type:'place',id:'a',xMm:19,yMm:50});const invalidText=JSON.stringify(invalidStudy);
  await page.evaluate(({comparisonKey,returnKey,comparison,invalidText})=>{sessionStorage.setItem(comparisonKey,JSON.stringify(comparison));sessionStorage.setItem(returnKey,invalidText);},{comparisonKey,returnKey,comparison,invalidText});await page.goto(origin+'/feature-rehearsal',{waitUntil:'networkidle0'});assert.match(await text('featureRehearsalError'),/Placements freeze/);assert.equal(await page.$eval('#featureRehearsalResults',e=>e.hidden),true);assert.equal(await page.evaluate(key=>sessionStorage.getItem(key),returnKey),invalidText);assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),true);
  record('invalid full judgment history is refused without raw fallback or consuming the recoverable handoff');
  assert.deepEqual(errors,[]);assert.deepEqual(offsite,[]);
- const receipt={ok:true,browser:await browser.version(),uid:process.getuid(),sandbox,sourceReceipt,completedDownloads:downloads.filter(d=>d.state==='completed').length,downloads,groups,errors,offsite,scope:'Authored geometric browser controls, complete judgment-study export/reopen and live navigation. The raw feature-review download retains its existing schema and excludes judgments.'};
+ const receipt={ok:true,browser:await browser.version(),uid:process.getuid(),sandbox,sourceReceipt,completedDownloads:downloads.filter(d=>d.state==='completed').length,downloads,groups,errors,offsite,scope:'Authored geometric browser controls, portable complete study, and selected original-center prediction context. Feature clearance remains separate; no learning or physical-performance claim.'};
  await writeFile(out+'/receipt.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt,null,2));
 }catch(e){await writeFile(out+'/failure.json',JSON.stringify({ok:false,groups,error:e.stack,errors,offsite,sandbox,sourceReceipt,downloads},null,2)+'\n');if(page)await page.screenshot({path:out+'/failure.png',fullPage:true}).catch(()=>{});throw e;}
 finally{await browser?.close();if(server)await new Promise(r=>server.close(r));}
