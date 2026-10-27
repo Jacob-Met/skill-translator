@@ -171,6 +171,14 @@ An optional real-browser QA course uses separately installed Puppeteer and Chrom
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-evidence.mjs
     PUPPETEER_PATH=/path/to/puppeteer CHROME_BINARY=/path/to/chrome node tools/browser-practice.mjs
 
+For delayed source/session imports in `/practice`, start the product with `npm start`, then run the focused course against that server. It compares actual downloaded source/session data, protects newer placements, rounds, setup and drafts, and checks current validation, display-only interaction, handoff/resume and 390px keyboard use. Supply an installed Puppeteer client and stock Chrome with the maintained sandbox enabled. Use a new `QA_OUTPUT` directory for each run.
+
+    BASE_URL=http://127.0.0.1:8787 QA_OUTPUT=/tmp/skill-practice-imports-run01 \
+      PUPPETEER_PATH=/path/to/puppeteer-core CHROME_BINARY=/path/to/chrome \
+      node tools/browser-practice-import-races.mjs
+
+The course retains completed downloads, screenshots, failures, sandbox admission and served-source hashes. It also runs against a freshly extracted `npm pack` consumer by pointing `BASE_URL` at that consumer and `SOURCE_ROOT` at its extracted directory. Native practice validation: `node --test test/practice.test.mjs`.
+
 The original course exercises rendered source/target geometry, a failing attempt, target resizing, contrasting physical interpretations and their counterfactual size suggestion, mirrored accurate placement, keyboard correction, hidden goals, valid/invalid local imports, mobile layout, exceptions and offsite requests. Fictional screenshots and the browser receipt are retained under [docs/receipts/task-space-20261024](docs/receipts/task-space-20261024) after running it. Do not treat browser tests as proof of physical skill, video perception or provider inference.
 
 The capture course generates an explicitly authored bitmap locally, then exercises PNG/JPEG admission, clicked and numeric calibration, annotation export, independently checked image hashes, wrong-image refusal, stale-source replacement, legacy imports and 390px layout. `RECEIPT_DIR` can direct its screenshots, input fixtures and JSON receipt outside the checkout. Production needs neither Puppeteer nor a model account.

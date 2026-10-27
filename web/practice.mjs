@@ -6,6 +6,9 @@ const $=id=>document.getElementById(id),ns="http://www.w3.org/2000/svg";
 const mm=n=>n.toFixed(1)+" mm";
 let demo=structuredClone(demonstration),widthMm=320,heightMm=190,session,target,selected,reviewed=false;
 let box={x:80,y:70,width:640,height:360};
+// Both import controls share ordering; later file choices or practice edits retire older reads.
+let importRevision=0;
+function cancelPendingImport(){importRevision++;}
 function error(message){$("practiceError").hidden=!message;$("practiceError").textContent=message;}
 function svg(parent,tag,attrs={},text=""){
   const e=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,String(v));
@@ -141,9 +144,13 @@ function render(){
   }
 }
 function place(point){
-  try{session=placePractice(demo,widthMm,heightMm,session,selected,point);reviewed=false;error("");render();}
+  try{const next=placePractice(demo,widthMm,heightMm,session,selected,point);
+    cancelPendingImport();session=next;reviewed=false;error("");render();}
   catch(e){error("Placement refused; earlier marks retained. "+e.message);}
 }
+// Retain drafts without redrawing their controls when an older file finishes.
+for(const id of ["practiceWidth","practiceHeight","placementX","placementY"])
+  $(id).addEventListener("input",cancelPendingImport);
 $("placementForm").addEventListener("submit",e=>{e.preventDefault();
   if(!$("placementX").value.trim()||!$("placementY").value.trim()){error("Enter both placement coordinates.");return;}
   place({xMm:Number($("placementX").value),yMm:Number($("placementY").value)});
@@ -164,19 +171,26 @@ $("practiceSvg").addEventListener("keydown",e=>{
 $("nextMark").addEventListener("click",()=>{const next=target.landmarks.find(m=>!session.attempts.some(a=>a.id===m.id));
   selected=next?next.id:target.landmarks[(target.landmarks.findIndex(m=>m.id===selected)+1)%target.landmarks.length].id;render();});
 $("reviewTask").addEventListener("click",()=>{reviewed=true;render();});
-$("retryTask").addEventListener("click",()=>{try{session=retryPractice(demo,widthMm,heightMm,session);selected=target.landmarks[0].id;reviewed=false;error("");render();}catch(e){error(e.message);}});
+$("retryTask").addEventListener("click",()=>{try{const next=retryPractice(demo,widthMm,heightMm,session);
+  cancelPendingImport();session=next;selected=target.landmarks[0].id;reviewed=false;error("");render();}catch(e){error(e.message);}});
 $("practiceGoals").addEventListener("change",render);$("practiceView").addEventListener("change",render);
-$("setupForm").addEventListener("submit",e=>{e.preventDefault();try{install(demo,Number($("practiceWidth").value),Number($("practiceHeight").value));}catch(e){error("Setup refused; current session retained. "+e.message);}});
-$("practiceSource").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;
-  try{if(file.size>256*1024)throw Error("Source annotations must be ≤256 KB");const next=JSON.parse(await file.text());
-    install(next,Number($("practiceWidth").value),Number($("practiceHeight").value));$("practiceStatus").textContent="Source imported; a new practice session has started.";
-  }catch(err){error("Source refused; current session retained. "+err.message);}e.target.value="";
+$("setupForm").addEventListener("submit",e=>{e.preventDefault();try{install(demo,Number($("practiceWidth").value),Number($("practiceHeight").value));cancelPendingImport();}catch(e){error("Setup refused; current session retained. "+e.message);}});
+$("practiceSource").addEventListener("change",async e=>{
+  const input=e.currentTarget,file=input.files[0];if(!file)return;
+  const revision=++importRevision;input.value="";
+  const w=Number($("practiceWidth").value),h=Number($("practiceHeight").value);
+  try{if(file.size>256*1024)throw Error("Source annotations must be ≤256 KB");
+    const text=await file.text();if(revision!==importRevision)return;
+    const next=JSON.parse(text);
+    install(next,w,h);$("practiceStatus").textContent="Source imported; a new practice session has started.";
+  }catch(err){if(revision===importRevision)error("Source refused; current session retained. "+err.message);}
 });
 $("savePractice").addEventListener("click",()=>download("skill-practice-session.json",importPractice(demo,widthMm,heightMm,session)));
 $("savePracticeSource").addEventListener("click",()=>download("skill-practice-source.json",demo));
 $("observeAttempt").addEventListener("click",()=>{
   try{
     sessionStorage.setItem("skill-translator-observation-input/v1",JSON.stringify(snapshot()));
+    cancelPendingImport();
     location.href="/observe-attempt";
   }catch(e){error("Could not preserve the practice session for photo observation. "+e.message);}
 });
@@ -184,13 +198,19 @@ $("inspectCalibration").addEventListener("click",()=>{
   try{
     sessionStorage.setItem("skill-translator-practice-resume/v1",JSON.stringify(snapshot()));
     sessionStorage.setItem("skill-translator-sensitivity-input/v1",JSON.stringify({demo,widthMm,heightMm,landmarkId:selected}));
+    cancelPendingImport();
     location.href="/sensitivity";
   }catch(e){error("Could not preserve the practice session for analysis. "+e.message);}
 });
-$("openPractice").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;
-  try{if(file.size>256*1024)throw Error("Practice session must be ≤256 KB");const next=importPractice(demo,widthMm,heightMm,JSON.parse(await file.text()));
+$("openPractice").addEventListener("change",async e=>{
+  const input=e.currentTarget,file=input.files[0];if(!file)return;
+  const revision=++importRevision;input.value="";
+  const source=demo,w=widthMm,h=heightMm;
+  try{if(file.size>256*1024)throw Error("Practice session must be ≤256 KB");
+    const text=await file.text();if(revision!==importRevision)return;
+    const next=importPractice(source,w,h,JSON.parse(text));
     session=next;selected=target.landmarks[0].id;reviewed=false;error("");render();$("practiceStatus").textContent="Session reopened. Review recomputes outcomes from the saved placements.";
-  }catch(err){error("Session refused; current placements retained. "+err.message);}e.target.value="";
+  }catch(err){if(revision===importRevision)error("Session refused; current placements retained. "+err.message);}
 });
 let startupError="";
 try{
