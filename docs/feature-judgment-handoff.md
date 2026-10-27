@@ -21,6 +21,8 @@ QA_OUTPUT=/absolute/path/to/receipts \
 node tools/browser-feature-judgment-handoff.mjs
 ```
 
+To receive an already-running maintained application, set `QA_ORIGIN=http://127.0.0.1:PORT`. The course then uses that instance; without it, the course starts and closes its own server.
+
 The course runs as an ordinary user and admits the actual Chromium sandbox before product navigation. It uses the maintained application server, compares served source bytes with the package, reads completed browser downloads, and captures desktop and 390-pixel views.
 
 Its nine groups cover exact judgment return, all three placement controls, commitment and continuation, failed and successful replacements, legacy interoperability, cancelled fresh navigation, and invalid post-judgment edits. The comparison uses authored geometric declarations; it does not establish physical performance or learning effects.

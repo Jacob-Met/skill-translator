@@ -58,9 +58,9 @@
     ],
     "sha256": {
       "web/rehearsal.mjs": "168a7dd8a2f6df99181228bf6e0760994ecfba73787c8e31c915a96634adec0c",
-      "web/feature-rehearsal.mjs": "2c2ddcc3b479cc59781b1754a6bdb6b362168ccd8abb8c3891d20d90555e6dd0",
-      "tools/browser-feature-judgment-handoff.mjs": "652e9ff6a97789769a3c4bb33edd97025800018a088addc42027dd4f737e68fe"
-    }
+      "web/feature-rehearsal.mjs": "2c2ddcc3b479cc59781b1754a6bdb6b362168ccd8abb8c3891d20d90555e6dd0"
+    },
+    "courseSha256AtReview": "652e9ff6a97789769a3c4bb33edd97025800018a088addc42027dd4f737e68fe"
   },
   "complementary": {
     "native": {
@@ -101,5 +101,9 @@
     "Candidate-42 positive-pointer harness failed after download button scrolling; corrected to the visible SVG paper screen transform with a hit-target check.",
     "Cancellation regression failed before the independent-review correction."
   ],
-  "qualification": "Authored geometric browser interactions only. No physical performance, learning-effect, deployment or public-release claim."
+  "qualification": "Authored geometric browser interactions only. No physical performance, learning-effect, deployment or public-release claim.",
+  "integrationReceiving": {
+    "courseEntry": "QA_ORIGIN optionally selects a maintained loopback application instance; assertions are unchanged.",
+    "provenance": "The candidate receipts above precede that harness entry option. Package/CLI receiving and actual merged-tree correspondence are recorded in the PR and live estate task."
+  }
 }

@@ -13,7 +13,8 @@ const comparison={schema:'skill-translator-feature-clearance/v1',assumption:'cir
 const comparisonKey='skill-translator-feature-rehearsal-comparison/v1',returnKey='skill-translator-feature-rehearsal-return/v1';
 const file=async(name,value)=>{const path=out+'/'+name;await writeFile(path,typeof value==='string'?value:JSON.stringify(value));return path;};
 const comparisonFile=await file('comparison.json',comparison),invalidFile=await file('invalid.json','{ invalid JSON');
-const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
+const server=process.env.QA_ORIGIN?null:createAppServer();if(server)await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=process.env.QA_ORIGIN||'http://127.0.0.1:'+server.address().port;
+assert.match(origin,/^http:\/\/127\.0\.0\.1:\d+$/,'QA_ORIGIN must name a loopback application instance');
 let browser,page,sandbox,downloadSession;const downloads=[],groups=[],errors=[],offsite=[],sourceReceipt=[];const record=value=>{groups.push(value);console.log('PASS '+value);};
 const text=id=>page.$eval('#'+id,e=>e.textContent);
 const value=(id,v)=>page.$eval('#'+id,(e,x)=>{e.value=String(x);e.dispatchEvent(new Event('input',{bubbles:true}));},v);
@@ -112,4 +113,4 @@ try{
  const receipt={ok:true,browser:await browser.version(),uid:process.getuid(),sandbox,sourceReceipt,completedDownloads:downloads.filter(d=>d.state==='completed').length,downloads,groups,errors,offsite,scope:'Authored geometric browser controls; live navigation preservation only. Feature exports retain their existing schema and exclude judgments.'};
  await writeFile(out+'/receipt.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt,null,2));
 }catch(e){await writeFile(out+'/failure.json',JSON.stringify({ok:false,groups,error:e.stack,errors,offsite,sandbox,sourceReceipt,downloads},null,2)+'\n');if(page)await page.screenshot({path:out+'/failure.png',fullPage:true}).catch(()=>{});throw e;}
-finally{await browser?.close();await new Promise(r=>server.close(r));}
+finally{await browser?.close();if(server)await new Promise(r=>server.close(r));}
