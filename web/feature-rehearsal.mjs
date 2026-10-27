@@ -7,7 +7,7 @@ let comparison=null,accepted=null,acceptedJudgments=null,epoch=0;
 function requireMatchingJudgments(review,study){if(study!==null&&JSON.stringify(study.rehearsal)!==JSON.stringify(review.rehearsal))throw Error('Judgments do not match the accepted rehearsal');}
 function status(message){const notice=accepted===null?'':acceptedJudgments===null?' No judgment study is attached to this review. “Save complete raw review inputs” excludes judgments.':' Choose “Export complete judgment study” to save the full study. “Save complete raw review inputs” excludes judgments.';$('featureRehearsalStatus').textContent=message+notice;}
 function error(message=''){$('featureRehearsalError').textContent=message;}
-function installComparison(raw){const next=reopenFeatureClearance(raw).bundle;comparison=next;accepted=null;acceptedJudgments=null;epoch++;$('saveFeatureRehearsalJudgments').disabled=true;$('featureRehearsalResults').hidden=true;$('startFeatureRehearsal').disabled=false;status(`Retained source ${comparison.source.title||'annotations'} with ${comparison.workpieces.length} declared sizes. Import the matching raw rehearsal or start a fresh one.`);error();}
+function installComparison(raw){const next=reopenFeatureClearance(raw).bundle;comparison=next;accepted=null;acceptedJudgments=null;epoch++;$('saveFeatureRehearsalJudgments').disabled=true;$('featureRehearsalResults').hidden=true;$('featureRehearsalDiagramContent').replaceChildren();$('startFeatureRehearsal').disabled=false;status(`Retained source ${comparison.source.title||'annotations'} with ${comparison.workpieces.length} declared sizes. Import the matching raw rehearsal or start a fresh one.`);error();}
 function install(raw,judgmentRaw=null){const next=importFeatureRehearsal(raw),nextJudgments=judgmentRaw===null?null:importJudgmentStudy(judgmentRaw);requireMatchingJudgments(next,nextJudgments);comparison=next.comparison;accepted=next;acceptedJudgments=nextJudgments;epoch++;$('startFeatureRehearsal').disabled=false;error();render();}
 function renderJudgment(trial){
  const context=$('featureJudgmentContext');context.replaceChildren();
@@ -23,12 +23,42 @@ function renderJudgment(trial){
  const agreement=judgment.prediction==='uncertain'?'Uncertainty retained; no agreement score.':judgment.agreement===true?'Your prediction agreed with the center result.':judgment.agreement===false?'Your prediction differed from the center result.':'Prediction agreement is unavailable.';
  context.append(el('p',agreement));
 }
+function renderFootprints(trial){
+ const host=$('featureRehearsalDiagramContent');host.replaceChildren();
+ if(trial.assessment===null){host.append(el('p','Commit this trial to view its declared features at the recorded centers.'));return;}
+ const practice=trial.assessment.practice,radii=new Map(accepted.comparison.features.map(f=>[f.id,f.radiusMm]));
+ const points=practice.results.map((result,index)=>({key:index+1,id:result.id,label:result.label,attempt:result.attempt,radius:radii.get(result.id)})),placed=points.filter(p=>p.attempt!==null);
+ host.append(el('p',`Placed features: ${placed.length} of ${points.length}.`));
+ if(placed.length===0)host.append(el('p','No placed features are available to draw.'));
+ else{
+  const left=Math.min(...placed.map(p=>p.attempt.xMm-p.radius)),right=Math.max(...placed.map(p=>p.attempt.xMm+p.radius)),top=Math.min(...placed.map(p=>p.attempt.yMm-p.radius)),bottom=Math.max(...placed.map(p=>p.attempt.yMm+p.radius));
+  const span=Math.max(right-left,bottom-top,1),side=span*1.16,centerX=(left+right)/2,centerY=(top+bottom)/2;
+  const svgElement=(tag,attributes={},text=null)=>{const node=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [name,value] of Object.entries(attributes))node.setAttribute(name,String(value));if(text!==null)node.textContent=text;return node;};
+  const svg=svgElement('svg',{viewBox:[centerX-side/2,centerY-side/2,side,side].join(' '),preserveAspectRatio:'xMidYMid meet',role:'img','aria-labelledby':'featureFootprintsTitle featureFootprintsDescription'});
+  svg.append(svgElement('title',{id:'featureFootprintsTitle'},'Declared circular features at committed centers'),svgElement('desc',{id:'featureFootprintsDescription'},'Declared circular footprints at recorded centers, shown at a uniform scale. Numbers identify entries in the following feature key. An asterisk marks a shared center. Dots and numbers are position annotations. The pair table supplies observed and required clearance.'));
+  for(const point of placed)svg.append(svgElement('circle',{cx:point.attempt.xMm,cy:point.attempt.yMm,r:point.radius,class:'feature-footprint-circle','data-feature-id':point.id}));
+  const centers=new Map();
+  for(const point of placed){const key=JSON.stringify([point.attempt.xMm,point.attempt.yMm]);if(!centers.has(key))centers.set(key,[]);centers.get(key).push(point);}
+  for(const group of centers.values()){
+   const point=group[0];svg.append(svgElement('circle',{cx:point.attempt.xMm,cy:point.attempt.yMm,r:span*.008,class:'feature-footprint-center'}),svgElement('text',{x:point.attempt.xMm+span*.018,y:point.attempt.yMm-span*.018,'font-size':span*.05,class:'feature-footprint-id'},group.length===1?String(point.key):'*'));
+  }
+  host.append(svg,el('p','Circle outlines show declared feature sizes at recorded centers. Dots and numbers mark positions; match the feature key to the gap results below.'),el('p','The view fits this trial at one scale; apparent sizes can change between trials. Sheet edges are not shown. Small features or nearby labels may be hard to distinguish. Their recorded values remain in the key.'));
+  for(const group of centers.values())if(group.length>1)host.append(el('p','* Shared center: '+group.map(p=>p.key+' · '+p.id).join(', ')+'. Coincident footprints may overlap completely; every feature is listed in the key.'));
+ }
+ const key=el('ol');key.className='feature-footprint-key';
+ for(const point of points){
+  const name=point.id+(point.label!==point.id?' — '+point.label:''),entry=el('li',point.attempt===null?name+': placement missing; no footprint drawn.':name+`: recorded center (${point.attempt.xMm}, ${point.attempt.yMm}) mm; declared radius ${point.radius} mm.`+(point.radius===0?' Zero radius; only the position marker is visible.':''));
+  entry.value=point.key;key.append(entry);
+ }
+ host.append(key);
+}
 function render(){$('saveFeatureRehearsalJudgments').disabled=accepted===null||acceptedJudgments===null;const review=reviewFeatureRehearsal(accepted),trial=review.trials[review.selectedTrial-1];$('featureRehearsalResults').hidden=false;status('Review recomputed from original source, complete plan and raw placement/reveal events.');$('featureRehearsalTrial').replaceChildren();for(const t of review.trials){const o=el('option',`${t.index}: ${t.widthMm} × ${t.heightMm} mm · ${t.submitted?'Committed':t.started?'Uncommitted':'Not started'}`);o.value=t.index;$('featureRehearsalTrial').append(o);}$('featureRehearsalTrial').value=review.selectedTrial;
  const center=a=>!a?'Feedback withheld':!a.practice.complete?'Incomplete':a.practice.passed?'Within all original center tolerances':'Outside original center tolerances';
  const feature=a=>!a?'Feedback withheld':!a.complete?'Unobserved pairs remain':a.meetsAll?'All actual gaps meet':'Some actual gaps fail';
  $('featureRehearsalOverview').replaceChildren();for(const t of review.trials){const row=el('tr');for(const v of [`${t.index} · ${t.widthMm} × ${t.heightMm}`,center(t.assessment),feature(t.assessment),t.reveals.length?`${t.reveals.length} target request(s)`:'No target requests in this record'])row.append(el('td',v));$('featureRehearsalOverview').append(row);}
  $('featureRehearsalSummary').textContent=`Trial ${trial.index}: ${center(trial.assessment)}. ${feature(trial.assessment)}.`;$('featureRehearsalAssistance').textContent=trial.reveals.length?`${trial.reveals.length} target request(s) retained before commitment. Their prior placements are raw observations, not a new score.`:'No target request in this record; this does not establish absence of outside assistance.';
  renderJudgment(trial);
+ renderFootprints(trial);
  $('featureRehearsalBeforeHelp').replaceChildren();for(const reveal of trial.reveals){const details=el('details'),summary=el('summary',`Before target request at action ${reveal.actionIndex}: ${reveal.priorAttempts.length} placements`);details.append(summary,el('pre',JSON.stringify(reveal.priorAttempts,null,2)));$('featureRehearsalBeforeHelp').append(details);}
  $('featureRehearsalPairs').replaceChildren();if(trial.assessment)for(const p of trial.assessment.pairs){const row=el('tr');for(const v of [`${p.from} / ${p.to}`,fmt(p.targetGapMm),fmt(p.minimumToleranceGapMm),fmt(p.observedGapMm),fmt(p.requiredGapMm),p.status==='incomplete'?'Unobserved: '+p.missing.join(', '):p.status==='meets'?'Meets declared gap':'Fails declared gap'])row.append(el('td',v));$('featureRehearsalPairs').append(row);}
 }
