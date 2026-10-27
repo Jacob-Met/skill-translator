@@ -12,6 +12,7 @@ test("actual HTTP serves interactive app assets without internet dependencies or
       ["/web/scan-change-regions.mjs","text/javascript"],["/src/scan-change-regions.mjs","text/javascript"],
       ["/vendor/microverse/pixel-observations.mjs","text/javascript"],
       ["/","text/html"],["/affine-challenge","text/html"],["/web/affine-challenge.css","text/css"],["/web/affine-challenge.mjs","text/javascript"],["/src/affine-challenge.mjs","text/javascript"],["/response-family","text/html"],["/web/response-family.css","text/css"],["/web/response-family.mjs","text/javascript"],["/src/response-family.mjs","text/javascript"],["/vendor/chronos/exact-halfplanes.mjs","text/javascript"],["/web/styles.css","text/css"],
+      ["/demonstration-practice","text/html"],["/web/demonstration-practice.css","text/css"],["/web/demonstration-practice.mjs","text/javascript"],
       ["/observe-attempt","text/html"],["/web/observe-attempt.css","text/css"],
       ["/web/observe-attempt.mjs","text/javascript"],["/src/learner-observation.mjs","text/javascript"],
       ["/rule-adoption","text/html"],["/web/rule-adoption.mjs","text/javascript"],
