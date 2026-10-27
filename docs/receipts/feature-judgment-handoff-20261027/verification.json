@@ -1,0 +1,109 @@
+{
+  "scope": "Preserve existing first-placement judgment studies through live feature review and return. Existing source, scoring, core reducers and export schemas unchanged.",
+  "baseline": {
+    "commit": "3bb52f0f7147dce23c32e64c45f4e6b06e19ac73",
+    "tree": "f2fcc0840a0323ba2c9b241eef143be45a39e63e",
+    "filesVerified": 1579,
+    "command": "estate-da449820-20261027-browser-baseline-41",
+    "result": "Expected actual-browser failure: Review and Resume emptied judgments while source, plan and events remained equal."
+  },
+  "reviewCorrection": {
+    "finding": "Fresh cleared the companion before navigation completed.",
+    "red": "Actual Navigation API cancellation reached the specific complete-study equality assertion and observed missing judgments.",
+    "change": "Remove premature companion clearing. Successful fresh payload remains raw; the current review retains its companion until the page leaves.",
+    "command": "estate-da449820-20261027-review-correction-49",
+    "terminalExit": 0
+  },
+  "final": {
+    "command": "estate-da449820-20261027-review-correction-49",
+    "finishedAt": "2026-10-27T08:10:45.474376595Z",
+    "browser": "Chrome/156.0.8078.47",
+    "sandboxAdmitted": true,
+    "ordinaryUser": true,
+    "groups": [
+      "actual feature review, trial selection and resume preserve complete judgments, source, plan, actions and prior help",
+      "recorded unsubmitted judgment still blocks coordinate, original SVG pointer and keyboard edits",
+      "commit and next sheet preserve old judgments while allowing real coordinate, pointer and keyboard placements",
+      "failed raw, review and comparison replacements preserve the companion; feature export retains its existing raw schema",
+      "successful explicit raw and saved-feature imports clear old judgments even when their rehearsal bytes match",
+      "explicit fresh start and successful comparison replacement cannot inherit earlier judgments",
+      "legacy raw handoff and subsequent actual navigation remain compatible",
+      "a cancelled fresh navigation leaves accepted judgments available for a subsequent real resume",
+      "invalid full judgment history is refused without raw fallback or consuming the recoverable handoff"
+    ],
+    "completedDownloads": 27,
+    "pageErrors": [],
+    "offsiteRequests": [],
+    "sourceReceipt": [
+      {
+        "path": "web/rehearsal.mjs",
+        "bytes": 13804,
+        "sha256": "168a7dd8a2f6df99181228bf6e0760994ecfba73787c8e31c915a96634adec0c"
+      },
+      {
+        "path": "web/feature-rehearsal.mjs",
+        "bytes": 7499,
+        "sha256": "2c2ddcc3b479cc59781b1754a6bdb6b362168ccd8abb8c3891d20d90555e6dd0"
+      },
+      {
+        "path": "src/rehearsal-judgment.mjs",
+        "bytes": 4382,
+        "sha256": "152c74b4896497efc856564224cf72beffb788ced5d5979ad98c72d8d2af9195"
+      },
+      {
+        "path": "src/feature-rehearsal.mjs",
+        "bytes": 2748,
+        "sha256": "9877f4c060b5a283eff45f3a5f7a30858cbd3c059b0ce24ec5c4bff2a6649192"
+      }
+    ],
+    "sha256": {
+      "web/rehearsal.mjs": "168a7dd8a2f6df99181228bf6e0760994ecfba73787c8e31c915a96634adec0c",
+      "web/feature-rehearsal.mjs": "2c2ddcc3b479cc59781b1754a6bdb6b362168ccd8abb8c3891d20d90555e6dd0"
+    },
+    "courseSha256AtReview": "652e9ff6a97789769a3c4bb33edd97025800018a088addc42027dd4f737e68fe"
+  },
+  "complementary": {
+    "native": {
+      "command": "node --test --test-concurrency=2 test/transfer-rehearsal.test.mjs test/rehearsal-judgment.test.mjs test/feature-rehearsal.test.mjs",
+      "passed": 22,
+      "failed": 0
+    },
+    "browser": [
+      {
+        "course": "tools/rehearsal-browser.mjs",
+        "groups": 13,
+        "exit": 0,
+        "note": "Before the one-statement Fresh correction; rehearsal source unchanged."
+      },
+      {
+        "course": "tools/browser-feature-rehearsal.mjs",
+        "groups": 7,
+        "exit": 0,
+        "note": "Rerun after the Fresh correction."
+      },
+      {
+        "course": "tools/browser-rehearsal-judgment.mjs",
+        "checks": 10,
+        "exit": 0,
+        "note": "Before the one-statement Fresh correction; rehearsal source unchanged."
+      }
+    ]
+  },
+  "review": {
+    "executor": "lead",
+    "sourceReviewer": "retained recovery_review subworker",
+    "evidenceReviewer": "retained validation subworker",
+    "mode": "Independent reasoning over brokered literal source and actual lead-executed receipts. Reviewers did not independently execute browser courses.",
+    "disposition": "Accepted for scoped source repair and verification; integration provenance remains a separate receiving step."
+  },
+  "retainedFailures": [
+    "ThinkPad Chromium sandbox startup was unavailable; no sandbox bypass used.",
+    "Candidate-42 positive-pointer harness failed after download button scrolling; corrected to the visible SVG paper screen transform with a hit-target check.",
+    "Cancellation regression failed before the independent-review correction."
+  ],
+  "qualification": "Authored geometric browser interactions only. No physical performance, learning-effect, deployment or public-release claim.",
+  "integrationReceiving": {
+    "courseEntry": "QA_ORIGIN optionally selects a maintained loopback application instance; assertions are unchanged.",
+    "provenance": "The candidate receipts above precede that harness entry option. Package/CLI receiving and actual merged-tree correspondence are recorded in the PR and live estate task."
+  }
+}
