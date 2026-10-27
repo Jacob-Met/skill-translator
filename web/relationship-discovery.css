@@ -13,3 +13,10 @@ textarea{width:100%}
 #motionLimits{font-size:.9rem;color:#3b5c4b}
 
 #motionSpanTimeline{display:flex;flex-wrap:wrap;gap:.55rem;list-style:none;padding:0;margin:1rem 0}#motionSpanTimeline li{display:grid;gap:.25rem;min-width:7rem;flex:1;border:1px solid #cad3cd;border-radius:.4rem;padding:.65rem;background:#f3f5f2;color:#4e6056}#motionSpanTimeline li.selected{border:2px solid #277455;background:#e0efe4;color:#163e2c}#motionSpanTimeline span{font-size:.9rem}#motionSpanTimeline small{font-size:.75rem}#motionSpanSection[hidden]{display:none}
+
+#motionPracticeSection p,#motionPracticeSection td,#motionPracticeSection summary{overflow-wrap:anywhere}
+#motionPracticeRound,#motionPracticeGroup{width:100%}
+#motionPracticeWitnesses details{border:1px solid #cad7ce;border-radius:8px;margin:12px 0;padding:12px}
+#motionPracticeResults[hidden]{display:none}
+#motionPracticeSection .motion-table table{min-width:780px}
+#motionPracticeSection .table-help{font-size:.9rem;color:#3b5c4b}
