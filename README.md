@@ -179,6 +179,10 @@ For delayed source/session imports in `/practice`, start the product with `npm s
 
 The course retains completed downloads, screenshots, failures, sandbox admission and served-source hashes. It also runs against a freshly extracted `npm pack` consumer by pointing `BASE_URL` at that consumer and `SOURCE_ROOT` at its extracted directory. Native practice validation: `node --test test/practice.test.mjs`.
 
+The workbench directory course uses an existing Playwright installation and Chrome. It checks rendered search and pin filters, keyboard access, empty/reset behavior, shared-query navigation, and desktop/mobile layout. Reports and screenshots go to a temporary directory unless `QA_OUTPUT` is set.
+
+    PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs CHROME_BINARY=/path/to/chrome node tools/workbenches-browser.mjs
+
 The original course exercises rendered source/target geometry, a failing attempt, target resizing, contrasting physical interpretations and their counterfactual size suggestion, mirrored accurate placement, keyboard correction, hidden goals, valid/invalid local imports, mobile layout, exceptions and offsite requests. Fictional screenshots and the browser receipt are retained under [docs/receipts/task-space-20261024](docs/receipts/task-space-20261024) after running it. Do not treat browser tests as proof of physical skill, video perception or provider inference.
 
 The capture course generates an explicitly authored bitmap locally, then exercises PNG/JPEG admission, clicked and numeric calibration, annotation export, independently checked image hashes, wrong-image refusal, stale-source replacement, legacy imports and 390px layout. `RECEIPT_DIR` can direct its screenshots, input fixtures and JSON receipt outside the checkout. Production needs neither Puppeteer nor a model account.
