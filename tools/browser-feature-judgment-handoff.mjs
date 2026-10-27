@@ -61,8 +61,8 @@ try{
  downloadSession.on('Browser.downloadWillBegin',e=>downloads.push({...e,state:'started'}));
  downloadSession.on('Browser.downloadProgress',e=>{const item=downloads.find(d=>d.guid===e.guid);if(item)Object.assign(item,e);});
  await downloadSession.send('Browser.setDownloadBehavior',{behavior:'allowAndName',downloadPath:out+'/downloads',eventsEnabled:true});
- for(const path of ['web/rehearsal.mjs','web/feature-rehearsal.mjs','src/rehearsal-judgment.mjs','src/feature-rehearsal.mjs']){
-  const response=await fetch(origin+'/'+path);assert.equal(response.status,200);
+ for(const [route,path] of [['/rehearsal','web/rehearsal.html'],['/feature-rehearsal','web/feature-rehearsal.html'],...['web/rehearsal.mjs','web/feature-rehearsal.mjs','src/rehearsal-judgment.mjs','src/feature-rehearsal.mjs'].map(path=>['/'+path,path])]){
+  const response=await fetch(origin+route);assert.equal(response.status,200);
   const served=Buffer.from(await response.arrayBuffer()),local=await readFile(new URL('../'+path,import.meta.url));
   assert.deepEqual(served,local);sourceReceipt.push({path,bytes:served.length,sha256:createHash('sha256').update(served).digest('hex')});
  }
@@ -72,7 +72,14 @@ try{
  await start();await place('a',22,50);await page.click('#requestTargets');await place('b',38,50);
  await page.select('#judgmentChoice','adequate');await value('judgmentReason','Keep this original account');await page.click('#recordJudgment');
  const original=await study();assert.equal(original.judgments.length,1);assert.equal(original.judgments[0].reason,'Keep this original account');assert.equal(await page.$eval('#placeMark',e=>e.disabled),true);
- await file('judgments-before.json',original);await go('reviewFeatureRehearsal');await page.select('#featureRehearsalTrial','2');assert.equal(await page.$eval('#featureRehearsalTrial',e=>e.value),'2');const selectedReview=await exported('saveFeatureRehearsal');assert.equal(selectedReview.selectedTrial,2);assert.deepEqual(selectedReview.rehearsal,original.rehearsal);await shots('feature-review');
+ await file('judgments-before.json',original);await go('reviewFeatureRehearsal');await page.select('#featureRehearsalTrial','2');assert.equal(await page.$eval('#featureRehearsalTrial',e=>e.value),'2');const selectedReview=await exported('saveFeatureRehearsal');assert.equal(selectedReview.selectedTrial,2);assert.deepEqual(selectedReview.rehearsal,original.rehearsal);
+ assert.ok(await page.$('#saveFeatureRehearsalJudgments'),'Feature review must offer a direct complete-judgment export');
+ await page.setViewport({width:390,height:960});await page.$eval('#saveFeatureRehearsalJudgments',e=>e.scrollIntoView({block:'center'}));
+ assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),false);assert.equal((await text('saveFeatureRehearsalJudgments')).trim(),'Export complete judgment study');
+ const directBounds=await(await page.$('#saveFeatureRehearsalJudgments')).boundingBox();assert.ok(directBounds&&directBounds.width>0&&directBounds.x>=0&&directBounds.x+directBounds.width<=390);
+ const directStudy=await exported('saveFeatureRehearsalJudgments');assert.deepEqual(directStudy,original);
+ const directDownload=downloads.at(-1),directStudyPath=out+'/downloads/'+directDownload.guid;assert.equal(directDownload.suggestedFilename,'skill-placement-judgments.json');assert.equal(await readFile(directStudyPath,'utf8'),JSON.stringify(original));
+ assert.equal(await page.$eval('#featureRehearsalTrial',e=>e.value),'2');await shots('feature-review');
  await go('resumeFeatureRehearsal');const returned=await study();await file('judgments-after.json',returned);
  assert.deepEqual(returned,original,'Review and Resume must preserve the exact first-judgment study');
  assert.match(await text('judgmentHistory'),/Keep this original account/);
@@ -80,37 +87,39 @@ try{
  const frozen=await raw();await place('a',31,51);assert.deepEqual(await raw(),frozen);
  await clickPaper();assert.deepEqual(await raw(),frozen);
  await page.$eval('#rehearsalSheet',e=>e.focus());assert.equal(await page.evaluate(()=>document.activeElement.id),'rehearsalSheet');await page.keyboard.press('ArrowRight');assert.deepEqual(await raw(),frozen);assert.equal(await page.$eval('#placeMark',e=>e.disabled),true);
- record('recorded unsubmitted judgment still blocks coordinate, original SVG pointer and keyboard edits');
+ await page.goto(origin+'/rehearsal',{waitUntil:'networkidle0'});await upload('openRehearsal',directStudyPath);
+ assert.deepEqual(await study(),original);assert.match(await text('judgmentHistory'),/Keep this original account/);assert.equal(await page.$eval('#placeMark',e=>e.disabled),true);
+ record('recorded judgment blocks coordinate, SVG pointer and keyboard edits; the direct feature export reopens the exact study with its placement lock');
  await page.click('#submitTrial');await page.click('#nextTrial');assert.equal(await page.$eval('#placeMark',e=>e.disabled),false);await place('a',41,50);let before=await raw();
  await page.$eval('#rehearsalSheet',e=>{e.scrollIntoView();e.focus();});await page.keyboard.press('ArrowRight');assert.notDeepEqual(await raw(),before);before=await raw();
  await clickPaper();assert.notDeepEqual(await raw(),before);
  const continued=await study();assert.deepEqual(continued.judgments,original.judgments);assert.ok(continued.rehearsal.events.length>original.rehearsal.events.length);const continuedFile=await file('continued-judgments.json',continued);
  await shots('resumed-rehearsal');record('commit and next sheet preserve old judgments while allowing real coordinate, pointer and keyboard placements');
  await go('reviewFeatureRehearsal');assert.match(await text('featureRehearsalStatus'),/judgments/i);const savedFeature=await exported('saveFeatureRehearsal');assert.equal(savedFeature.schema,'skill-translator-feature-rehearsal/v1');assert.deepEqual(Object.keys(savedFeature).sort(),['comparison','rehearsal','schema','selectedTrial']);assert.deepEqual(savedFeature.rehearsal,continued.rehearsal);const savedFile=await file('saved-feature-review.json',savedFeature);
- for(const id of ['featureRehearsalFile','featureRehearsalReviewFile','rehearsalComparisonFile']){await upload(id,invalidFile);assert.match(await text('featureRehearsalError'),/Input refused/);}
- await go('resumeFeatureRehearsal');assert.deepEqual(await study(),continued);
+ for(const id of ['featureRehearsalFile','featureRehearsalReviewFile','rehearsalComparisonFile']){await upload(id,invalidFile);assert.match(await text('featureRehearsalError'),/Input refused/);assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),false);}
+ assert.deepEqual(await exported('saveFeatureRehearsalJudgments'),continued);await go('resumeFeatureRehearsal');assert.deepEqual(await study(),continued);
  record('failed raw, review and comparison replacements preserve the companion; feature export retains its existing raw schema');
- await go('reviewFeatureRehearsal');const rawFile=await file('legacy-rehearsal.json',continued.rehearsal);await upload('featureRehearsalFile',rawFile);await go('resumeFeatureRehearsal');assert.deepEqual((await study()).judgments,[]);assert.deepEqual(await raw(),continued.rehearsal);
- await restore(continuedFile);await upload('featureRehearsalReviewFile',savedFile);await go('resumeFeatureRehearsal');assert.deepEqual((await study()).judgments,[]);assert.deepEqual(await raw(),continued.rehearsal);
+ await go('reviewFeatureRehearsal');const rawFile=await file('legacy-rehearsal.json',continued.rehearsal);await upload('featureRehearsalFile',rawFile);assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),true);await go('resumeFeatureRehearsal');assert.deepEqual((await study()).judgments,[]);assert.deepEqual(await raw(),continued.rehearsal);
+ await restore(continuedFile);await upload('featureRehearsalReviewFile',savedFile);assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),true);await go('resumeFeatureRehearsal');assert.deepEqual((await study()).judgments,[]);assert.deepEqual(await raw(),continued.rehearsal);
  record('successful explicit raw and saved-feature imports clear old judgments even when their rehearsal bytes match');
  await restore(continuedFile);await page.select('#featureRehearsalTrial','2');assert.match(await text('featureRehearsalStatus'),/judgments/i);await go('startFeatureRehearsal');assert.deepEqual((await study()).judgments,[]);assert.deepEqual((await raw()).events,[]);
- await restore(continuedFile);const changedComparison=structuredClone(comparison);changedComparison.source.title='A different declared comparison';const changedFile=await file('changed-comparison.json',changedComparison);await upload('rehearsalComparisonFile',changedFile);assert.equal(await page.$eval('#featureRehearsalResults',e=>e.hidden),true);await go('startFeatureRehearsal');assert.deepEqual((await study()).judgments,[]);assert.equal((await raw()).source.title,changedComparison.source.title);
+ await restore(continuedFile);const changedComparison=structuredClone(comparison);changedComparison.source.title='A different declared comparison';const changedFile=await file('changed-comparison.json',changedComparison);await upload('rehearsalComparisonFile',changedFile);assert.equal(await page.$eval('#featureRehearsalResults',e=>e.hidden),true);assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),true);await go('startFeatureRehearsal');assert.deepEqual((await study()).judgments,[]);assert.equal((await raw()).source.title,changedComparison.source.title);
  record('explicit fresh start and successful comparison replacement cannot inherit earlier judgments');
- await page.evaluate(({comparisonKey,returnKey,comparison,rehearsal})=>{sessionStorage.setItem(comparisonKey,JSON.stringify(comparison));sessionStorage.setItem(returnKey,JSON.stringify(rehearsal));},{comparisonKey,returnKey,comparison,rehearsal:continued.rehearsal});await page.goto(origin+'/feature-rehearsal',{waitUntil:'networkidle0'});await go('resumeFeatureRehearsal');assert.deepEqual(await raw(),continued.rehearsal);assert.deepEqual((await study()).judgments,[]);
- await go('reviewFeatureRehearsal');await go('resumeFeatureRehearsal');assert.deepEqual(await raw(),continued.rehearsal);assert.deepEqual((await study()).judgments,[]);
+ await page.evaluate(({comparisonKey,returnKey,comparison,rehearsal})=>{sessionStorage.setItem(comparisonKey,JSON.stringify(comparison));sessionStorage.setItem(returnKey,JSON.stringify(rehearsal));},{comparisonKey,returnKey,comparison,rehearsal:continued.rehearsal});await page.goto(origin+'/feature-rehearsal',{waitUntil:'networkidle0'});assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),true);await go('resumeFeatureRehearsal');assert.deepEqual(await raw(),continued.rehearsal);const emptyStudy=await study();assert.deepEqual(emptyStudy.judgments,[]);
+ await go('reviewFeatureRehearsal');assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),false);assert.deepEqual(await exported('saveFeatureRehearsalJudgments'),emptyStudy);await go('resumeFeatureRehearsal');assert.deepEqual(await raw(),continued.rehearsal);assert.deepEqual((await study()).judgments,[]);
  record('legacy raw handoff and subsequent actual navigation remain compatible');
  await restore(continuedFile);
  await page.evaluate(()=>{window.__freshNavigationCancelled=false;navigation.addEventListener('navigate',event=>{if(new URL(event.destination.url).pathname==='/rehearsal'){event.preventDefault();window.__freshNavigationCancelled=true;}},{once:true});});
  await page.click('#startFeatureRehearsal');await page.waitForFunction(()=>window.__freshNavigationCancelled===true);
- assert.equal(new URL(page.url()).pathname,'/feature-rehearsal');await go('resumeFeatureRehearsal');
+ assert.equal(new URL(page.url()).pathname,'/feature-rehearsal');assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),false);await go('resumeFeatureRehearsal');
  assert.deepEqual(await study(),continued,'Cancelled fresh navigation must retain accepted judgments');
  record('a cancelled fresh navigation leaves accepted judgments available for a subsequent real resume');
 
  const invalidStudy=structuredClone(original);invalidStudy.rehearsal.events.push({type:'place',id:'a',xMm:19,yMm:50});const invalidText=JSON.stringify(invalidStudy);
- await page.evaluate(({comparisonKey,returnKey,comparison,invalidText})=>{sessionStorage.setItem(comparisonKey,JSON.stringify(comparison));sessionStorage.setItem(returnKey,invalidText);},{comparisonKey,returnKey,comparison,invalidText});await page.goto(origin+'/feature-rehearsal',{waitUntil:'networkidle0'});assert.match(await text('featureRehearsalError'),/Placements freeze/);assert.equal(await page.$eval('#featureRehearsalResults',e=>e.hidden),true);assert.equal(await page.evaluate(key=>sessionStorage.getItem(key),returnKey),invalidText);
+ await page.evaluate(({comparisonKey,returnKey,comparison,invalidText})=>{sessionStorage.setItem(comparisonKey,JSON.stringify(comparison));sessionStorage.setItem(returnKey,invalidText);},{comparisonKey,returnKey,comparison,invalidText});await page.goto(origin+'/feature-rehearsal',{waitUntil:'networkidle0'});assert.match(await text('featureRehearsalError'),/Placements freeze/);assert.equal(await page.$eval('#featureRehearsalResults',e=>e.hidden),true);assert.equal(await page.evaluate(key=>sessionStorage.getItem(key),returnKey),invalidText);assert.equal(await page.$eval('#saveFeatureRehearsalJudgments',e=>e.disabled),true);
  record('invalid full judgment history is refused without raw fallback or consuming the recoverable handoff');
  assert.deepEqual(errors,[]);assert.deepEqual(offsite,[]);
- const receipt={ok:true,browser:await browser.version(),uid:process.getuid(),sandbox,sourceReceipt,completedDownloads:downloads.filter(d=>d.state==='completed').length,downloads,groups,errors,offsite,scope:'Authored geometric browser controls; live navigation preservation only. Feature exports retain their existing schema and exclude judgments.'};
+ const receipt={ok:true,browser:await browser.version(),uid:process.getuid(),sandbox,sourceReceipt,completedDownloads:downloads.filter(d=>d.state==='completed').length,downloads,groups,errors,offsite,scope:'Authored geometric browser controls, complete judgment-study export/reopen and live navigation. The raw feature-review download retains its existing schema and excludes judgments.'};
  await writeFile(out+'/receipt.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt,null,2));
 }catch(e){await writeFile(out+'/failure.json',JSON.stringify({ok:false,groups,error:e.stack,errors,offsite,sandbox,sourceReceipt,downloads},null,2)+'\n');if(page)await page.screenshot({path:out+'/failure.png',fullPage:true}).catch(()=>{});throw e;}
 finally{await browser?.close();if(server)await new Promise(r=>server.close(r));}

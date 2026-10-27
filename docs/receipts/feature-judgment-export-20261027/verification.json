@@ -1,0 +1,93 @@
+{
+  "scope": "Direct export of the existing complete judgment-study format from feature review; raw feature-review export and all core/scoring/source/event schemas unchanged.",
+  "baseline": {
+    "commit": "1aff7a6886857ce601e69cd062a9262eaeab832f",
+    "tree": "4f835503ed2f8f1ec67e7dfc2e18a013d2a22242",
+    "verifiedSourceFiles": 1584,
+    "expectedFailure": "Feature review must offer a direct complete-judgment export",
+    "observed": "Actual maintained feature page had no direct-export button."
+  },
+  "command": "estate-da449820-20261027-direct-export-red-green-81",
+  "terminal": {
+    "exitCode": 0,
+    "finishedAt": "2026-10-27T08:31:55.580819832Z"
+  },
+  "candidate": {
+    "ok": true,
+    "browser": "Chrome/156.0.8078.47",
+    "groups": [
+      "actual feature review, trial selection and resume preserve complete judgments, source, plan, actions and prior help",
+      "recorded judgment blocks coordinate, SVG pointer and keyboard edits; the direct feature export reopens the exact study with its placement lock",
+      "commit and next sheet preserve old judgments while allowing real coordinate, pointer and keyboard placements",
+      "failed raw, review and comparison replacements preserve the companion; feature export retains its existing raw schema",
+      "successful explicit raw and saved-feature imports clear old judgments even when their rehearsal bytes match",
+      "explicit fresh start and successful comparison replacement cannot inherit earlier judgments",
+      "legacy raw handoff and subsequent actual navigation remain compatible",
+      "a cancelled fresh navigation leaves accepted judgments available for a subsequent real resume",
+      "invalid full judgment history is refused without raw fallback or consuming the recoverable handoff"
+    ],
+    "completedDownloads": 31,
+    "errors": [],
+    "offsite": [],
+    "sourceReceipt": [
+      {
+        "path": "web/rehearsal.html",
+        "bytes": 6547,
+        "sha256": "e4b297b386e976cffc2bb852556d2f07d9c80f67b7197e378435418227330722"
+      },
+      {
+        "path": "web/feature-rehearsal.html",
+        "bytes": 2711,
+        "sha256": "e4036df2d4d7f2ca1f6e9629bb94c56712e0b8b6ea24f264b2457d24fc7babb0"
+      },
+      {
+        "path": "web/rehearsal.mjs",
+        "bytes": 13804,
+        "sha256": "168a7dd8a2f6df99181228bf6e0760994ecfba73787c8e31c915a96634adec0c"
+      },
+      {
+        "path": "web/feature-rehearsal.mjs",
+        "bytes": 8362,
+        "sha256": "a42ce855d21b9929b97e5505d16ea0667e31c7c3a62a4257d9d280f42a894deb"
+      },
+      {
+        "path": "src/rehearsal-judgment.mjs",
+        "bytes": 4382,
+        "sha256": "152c74b4896497efc856564224cf72beffb788ced5d5979ad98c72d8d2af9195"
+      },
+      {
+        "path": "src/feature-rehearsal.mjs",
+        "bytes": 2748,
+        "sha256": "9877f4c060b5a283eff45f3a5f7a30858cbd3c059b0ce24ec5c4bff2a6649192"
+      }
+    ],
+    "sandboxAdmitted": true,
+    "sha256": {
+      "web/feature-rehearsal.html": "e4036df2d4d7f2ca1f6e9629bb94c56712e0b8b6ea24f264b2457d24fc7babb0",
+      "web/feature-rehearsal.mjs": "a42ce855d21b9929b97e5505d16ea0667e31c7c3a62a4257d9d280f42a894deb",
+      "tools/browser-feature-judgment-handoff.mjs": "44e1cb74fdfb31e5eb4c7b2c5ad0bb62c6496e9d7e4aca50ac20484698cb5834"
+    }
+  },
+  "specificChecks": {
+    "populatedCanonicalUtf8": "Actual download text exactly equals JSON.stringify(original complete study).",
+    "filename": "skill-placement-judgments.json",
+    "reopen": "The completed feature-page download reopens through the existing rehearsal importer with exact study/history and placement lock.",
+    "availability": "Valid empty companion enables export; raw legacy/no companion disables it. Each successful same-history replacement disables it; failed imports preserve it.",
+    "selection": "Direct export preserves selected trial 2 and does not rewrite the study.",
+    "cancellation": "Cancelled Fresh preserves button availability and exact study through actual Resume. The common validated handler is unchanged; no separate fourth direct download was added for cancellation.",
+    "rawReview": "Existing exact feature-review keys, schema and rehearsal remain unchanged.",
+    "viewport": "Enabled control label and bounds checked at390px; desktop/390px screenshots inspected separately."
+  },
+  "maintainedFeature": {
+    "course": "tools/browser-feature-rehearsal.mjs",
+    "groups": 7,
+    "exitCode": 0
+  },
+  "review": {
+    "source": "Retained recovery_review independently reviewed the five literal production changes and accepted candidate evidence.",
+    "validation": "Retained validation independently assessed the brokered course and receiving coverage.",
+    "execution": "Lead executed browser tests; independent execution by reviewers is not claimed."
+  },
+  "integration": "This record covers the candidate. Full package/maintained-launch receiving and actual merged-tree correspondence are recorded with the PR and live estate task.",
+  "qualification": "Authored geometric browser interaction and portable study behavior; no measured physical performance or learning-effect claim."
+}
