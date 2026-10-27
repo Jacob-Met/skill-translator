@@ -1,3 +1,4 @@
+import {isLoopbackOrigin} from './loopback-origin.mjs';
 import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {calibrationDraftRequest,receiveCalibrationDraft} from '../src/calibration-draft.mjs';
@@ -19,7 +20,7 @@ export async function runCalibrationTranslation(raw) {
   });}finally{clearTimeout(timer);running=false;}
 }
 export async function serveCalibrationTranslation(req,res) {
-  if(req.headers.origin!==`http://${req.headers.host}`||!String(req.headers['content-type']).startsWith('application/json')){res.writeHead(403);res.end('Same-origin JSON request required');return;}
+  if(!isLoopbackOrigin(req)||!String(req.headers['content-type']).startsWith('application/json')){res.writeHead(403);res.end('Same-origin JSON request required');return;}
   try{let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>35*1024*1024)throw Error('Calibration request exceeds 35 MiB.');chunks.push(chunk);}const report=await runCalibrationTranslation(JSON.parse(Buffer.concat(chunks).toString('utf8')));res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify(report));}
   catch(error){res.writeHead(400,{'Content-Type':'application/json'});res.end(JSON.stringify({error:error.message}));}
 }
