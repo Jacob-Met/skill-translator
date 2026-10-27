@@ -2,7 +2,7 @@ import {serveAudioIntake} from './native/audio-intake.mjs';
 import {serveCalibrationTranslation} from "./native/calibration-translation.mjs";
 import {serveSequenceEdge} from "./native/sequence-edge.mjs";
 import http from "node:http";
-import {readFile} from "node:fs/promises";
+import {lstat,readFile} from "node:fs/promises";
 import {dirname,join,resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 
@@ -482,6 +482,26 @@ const routes=Object.freeze({
   "/src/evidence.mjs":["src/evidence.mjs","text/javascript; charset=utf-8"],
   "/src/authoring.mjs":["src/authoring.mjs","text/javascript; charset=utf-8"]
 });
+/** Serve only regular assets beneath actual directories. A URL allowlist alone
+ * does not prevent a linked permitted path from exposing unrelated local data.
+ * This protects existing path entries, not concurrent filesystem mutation.
+ */
+async function readBrowserAsset(relative){
+  let path=root;
+  const parts=relative.split('/');
+  for(let i=0;i<parts.length;i++){
+    path=join(path,parts[i]);
+    let entry;
+    try{entry=await lstat(path)}
+    catch(error){
+      if(error?.code==='ENOENT'||error?.code==='ENOTDIR')return null;
+      throw error;
+    }
+    if(entry.isSymbolicLink() || (i===parts.length-1?!entry.isFile():!entry.isDirectory()))return null;
+  }
+  return readFile(path);
+}
+
 export function createAppServer(){
   return http.createServer(async(req,res)=>{
     res.setHeader("X-Content-Type-Options","nosniff");
@@ -502,7 +522,8 @@ export function createAppServer(){
     }
     if(!route){res.writeHead(404);res.end("Not found");return;}
     try{
-      const body=await readFile(join(root,route[0]));
+      const body=await readBrowserAsset(route[0]);
+      if(body===null){res.writeHead(404);res.end("Not found");return;}
       res.writeHead(200,{"Content-Type":route[1],"Content-Length":body.length});
       res.end(req.method==="HEAD"?undefined:body);
     }catch{
