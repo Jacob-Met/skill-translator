@@ -24,6 +24,16 @@ Before commitment, center-result and agreement feedback remain withheld. A commi
 
 These findings describe authored geometry and the recorded prediction; they do not establish physical performance, mastery, or a learning effect.
 
+## Declared features at committed centers
+
+The selected-trial review includes a read-only diagram of declared circular features at the committed centers. It uses the accepted review's validated placement results and matching feature declarations. Before commitment, the diagram is withheld.
+
+The view fits full placed footprints at a uniform scale. Numbered annotations map to a key containing each feature's ID, label, recorded center, and declared radius. Missing placements remain listed but are not drawn. An asterisk identifies a shared center; coincident footprints may overlap completely. Zero-radius features retain a position marker.
+
+The existing pair table supplies observed clearance, required clearance, and status. The picture supplies spatial context; it does not independently establish whether a threshold is met. Dots and number labels are display annotations, not feature dimensions. Targets, tolerance envelopes, suggested corrections, and sheet edges are omitted.
+
+Framing adjusts to the selected trial's footprints, so apparent sizes are not comparable across trials. Extreme size differences can make small features difficult to distinguish, and dense labels can overlap. The exact numeric key and pair table remain available. The diagram depicts authored feature sizes at recorded coordinates; it does not establish physical measurements or learning effects.
+
 ## Browser receiving
 
 From the repository root, run:
@@ -39,7 +49,7 @@ To receive an already-running maintained application, set `QA_ORIGIN=http://127.
 
 The course runs as an ordinary user and admits the actual Chromium sandbox before product navigation. It uses the maintained application server, compares served source bytes with the package, reads completed browser downloads, and captures desktop and 390-pixel views.
 
-Its thirteen groups cover exact judgment return, direct complete-study downloads and reopening, all three placement controls, commitment and continuation, failed and successful replacements, empty-study versus raw-review availability, legacy interoperability, cancelled fresh navigation, and invalid post-judgment edits. A four-sheet course also checks separate center agreement and feature-gap failure, skipped judgments, uncertainty, safe long-reason rendering at 390 pixels, withholding before commitment, and later disclosure of the original center disagreement. The comparison uses authored geometric declarations; it does not establish physical performance or learning effects.
+Its eighteen groups cover exact judgment return, direct complete-study downloads and reopening, all three placement controls, commitment and continuation, failed and successful replacements, empty-study versus raw-review availability, legacy interoperability, cancelled fresh navigation, and invalid post-judgment edits. A four-sheet course also checks separate center agreement and feature-gap failure, skipped judgments, uncertainty, safe long-reason rendering at 390 pixels, withholding before commitment, and later disclosure of the original center disagreement. The footprint course also checks the same mixed center/gap case, actual empty and partial commitments, reversed declaration order, a missing middle mark, coincident and zero-radius features, the admitted dimension/radius extremes, different-ID replacements, and all thirty marks with a two-digit boundary annotation. Complete raw and judgment downloads remain unchanged through viewing and resizing. The comparison uses authored geometric declarations; it does not establish physical performance or learning effects.
 
 Related native tests:
 
@@ -50,4 +60,4 @@ node --test --test-concurrency=2 \
   test/feature-rehearsal.test.mjs
 ```
 
-See [the original handoff receiving record](receipts/feature-judgment-handoff-20261027/verification.json), [the direct-export receiving record](receipts/feature-judgment-export-20261027/verification.json), and [the selected-trial context receiving record](receipts/feature-judgment-context-20261027/verification.json) for reproduced baselines, exact source hashes, review, and results.
+See [the original handoff receiving record](receipts/feature-judgment-handoff-20261027/verification.json), [the direct-export receiving record](receipts/feature-judgment-export-20261027/verification.json), [the selected-trial context receiving record](receipts/feature-judgment-context-20261027/verification.json), and [the committed-footprint receiving record](receipts/feature-rehearsal-diagram-20261027/verification.json) for reproduced baselines, exact source hashes, review, and results.

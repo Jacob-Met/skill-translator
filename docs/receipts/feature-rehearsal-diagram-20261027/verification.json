@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "date": "2026-10-27",
+  "task": "skill-translator-feature-rehearsal-diagram-da449820",
+  "prompt": "2026-10-27.17",
+  "base": "b1072412ffc1bff9cc33a79503ab6762ab8ce451",
+  "integrationBase": "74004edb5ffe35d277b63e6411ad0c88e898ecd9",
+  "owner": "estate-da449820-20261027",
+  "goal": "Show declared circular footprints at actual committed centers, with existing numeric pair results and complete study custody.",
+  "implementation": {
+    "inputs": "Existing admitted assessment.practice.results attempts and ID-matched declared radii. No target, tolerance, translation or hypothetical coordinates.",
+    "geometry": "Uniform physical-mm viewBox containing full footprints. Source-order numeric keys precede filtering; an ordered textual key retains missing marks and exact recorded values. Coincident centers retain every circle and receive a shared-center explanation. Zero-radius markers are annotations.",
+    "withholding": "No SVG, key or geometric description before commitment; empty committed trials remain a distinct missing-placement state. Successful comparison replacement clears prior diagram content.",
+    "scoring": "Existing pair table remains authoritative; no core, event, score or export format change."
+  },
+  "execution": {
+    "owner": "node-778708ac1c0e22400d5539652ac58414",
+    "incarnation": "5dd48582176b41542979f780695bb021",
+    "command": "estate-da449820-20261027-diagram-candidate-160",
+    "operation": "estate-da449820-20261027-diagram-candidate-start-160",
+    "terminal": "completed exit 0 at 2026-10-27T09:14:29.92446387Z",
+    "root": "/home/ubuntu/work/jobs/estate-da449820-20261027",
+    "output": "qa/feature-diagram"
+  },
+  "baseline": {
+    "base": "b1072412ffc1bff9cc33a79503ab6762ab8ce451",
+    "expectedFailure": "Committed feature review must offer a declared-footprint view",
+    "priorGroupsPassed": 8,
+    "meaning": "The real center-pass/gap-fail study reaches feature review, whose maintained baseline has no diagram."
+  },
+  "candidate": {
+    "browser": "Chrome/156.0.8078.47",
+    "sandbox": true,
+    "groups": [
+      "actual feature review, trial selection and resume preserve complete judgments, source, plan, actions and prior help",
+      "recorded judgment blocks coordinate, SVG pointer and keyboard edits; the direct feature export reopens the exact study with its placement lock",
+      "commit and next sheet preserve old judgments while allowing real coordinate, pointer and keyboard placements",
+      "failed raw, review and comparison replacements preserve the companion; feature export retains its existing raw schema",
+      "successful explicit raw and saved-feature imports clear old judgments even when their rehearsal bytes match",
+      "explicit fresh start and successful comparison replacement cannot inherit earlier judgments",
+      "legacy raw handoff and subsequent actual navigation remain compatible",
+      "a cancelled fresh navigation leaves accepted judgments available for a subsequent real resume",
+      "actual committed footprints show the center-pass/gap6-versus-required10 case at one scale, with unchanged raw inputs and failed-import retention",
+      "the actual committed center-pass and feature-gap-fail case retains the original prediction and center agreement separately",
+      "sparse trial mapping preserves uncertainty and literal long reasons without stale text or narrow-page overflow",
+      "uncommitted feedback stays withheld; failed replacement retains context and actual full-study reopening restores it after raw replacement",
+      "actual later commitment reveals the existing center disagreement without rewriting the original prediction or reason",
+      "actual empty commitment shows missing identities without inventing geometry",
+      "real partial commitment retains missing source-order key2, coincident identities and zero radius while preserving signed overlap and unchanged downloads",
+      "accepted dimension/radius extremes retain every full footprint; different-ID committed and uncommitted replacement retire stale geometry",
+      "maximum thirty-mark source retains all exact keys; the two-digit boundary annotation fits at390px without changing declared zero radii",
+      "invalid full judgment history is refused without raw fallback or consuming the recoverable handoff"
+    ],
+    "completedDownloads": 51,
+    "errors": [],
+    "offsite": [],
+    "source": {
+      "web/feature-rehearsal.html": {
+        "bytes": 3027,
+        "sha256": "7c0878029e1b2aab5131750d230f144dc4853010f1900ce83681a8b02e57cf2c"
+      },
+      "web/feature-rehearsal.mjs": {
+        "bytes": 13847,
+        "sha256": "f07a0fb7ab6a65f17a5740e25993afebcf6b090f988aa574fa26f35cdb4bc438"
+      },
+      "web/feature-clearance.css": {
+        "bytes": 2295,
+        "sha256": "7549a2326764e37780830819b332b2d8adb50158eeabdc9d14248ba401331f70"
+      },
+      "tools/browser-feature-judgment-handoff.mjs": {
+        "bytes": 36462,
+        "sha256": "e41818e3de6149f96a5628d2903a018c49d4b7602c3575825ca0f672c7739611"
+      }
+    },
+    "served": [
+      {
+        "path": "web/rehearsal.html",
+        "bytes": 6547,
+        "sha256": "e4b297b386e976cffc2bb852556d2f07d9c80f67b7197e378435418227330722"
+      },
+      {
+        "path": "web/feature-rehearsal.html",
+        "bytes": 3027,
+        "sha256": "7c0878029e1b2aab5131750d230f144dc4853010f1900ce83681a8b02e57cf2c"
+      },
+      {
+        "path": "web/feature-clearance.css",
+        "bytes": 2295,
+        "sha256": "7549a2326764e37780830819b332b2d8adb50158eeabdc9d14248ba401331f70"
+      },
+      {
+        "path": "web/rehearsal.mjs",
+        "bytes": 13804,
+        "sha256": "168a7dd8a2f6df99181228bf6e0760994ecfba73787c8e31c915a96634adec0c"
+      },
+      {
+        "path": "web/feature-rehearsal.mjs",
+        "bytes": 13847,
+        "sha256": "f07a0fb7ab6a65f17a5740e25993afebcf6b090f988aa574fa26f35cdb4bc438"
+      },
+      {
+        "path": "src/rehearsal-judgment.mjs",
+        "bytes": 4382,
+        "sha256": "152c74b4896497efc856564224cf72beffb788ced5d5979ad98c72d8d2af9195"
+      },
+      {
+        "path": "src/feature-rehearsal.mjs",
+        "bytes": 2748,
+        "sha256": "9877f4c060b5a283eff45f3a5f7a30858cbd3c059b0ce24ec5c4bff2a6649192"
+      }
+    ]
+  },
+  "comparisons": {
+    "mixed": "Actual centers (22,50),(38,50), declared radii 5, produce the unchanged table's gap 6 against required 10 while original center tolerances pass.",
+    "minimum": "Actual 1x1 sheet; source order zero/missing/circle and reversed radius declarations. Centers (0.5,0.5), radii 0 and 0.25, missing middle key 2. Signed observed gap -0.25 and two incomplete pairs preserved. Empty commitment performed through the real enabled UI.",
+    "extreme": "Actual 1x10000 sheet; centers (0.25,1),(0.75,9999), radii 10000 and 3. Independent footprint bounds [-9999.75,10000.25,-9999,10002] include the smaller feature's extension beyond the largest.",
+    "capacity": "Thirty actual zero-radius placements across a 1x1 sheet. All source keys retained; two-digit key 30 contained at 390px. Dense labels overlap, while the complete textual key remains readable.",
+    "custody": "Exact completed raw and complete-study downloads before/after viewing and resizing. Failed imports retain the current diagram; different-ID committed replacement changes geometry, and uncommitted replacement removes it."
+  },
+  "visualReview": {
+    "executor": "Lead inspected actual desktop and 390px screenshots through Renpo.",
+    "observed": "Sparse circles, numeric keys and complete footprints are readable. Missing/coincident identities and extreme-radius values remain explicit. Long literal label text wraps safely. Dense inline labels can overlap; no claim of universal plot-label readability.",
+    "files": [
+      "committed-footprints-1280.png",
+      "committed-footprints-390.png",
+      "coincident-incomplete-390.png",
+      "maximum-radius-390.png",
+      "thirty-key-boundary-390.png"
+    ]
+  },
+  "review": {
+    "implementation": "Retained implementation worker proposed actual-only renderer and documentation.",
+    "source": "Retained recovery_review independently accepted literal renderer, ownership boundary and caption refinement.",
+    "validation": "Retained validation independently reviewed receiving design and root-executed terminal evidence. This is not independent execution."
+  },
+  "finalRefinements": "After candidate 160, clarify that fitted views can change apparent size between trials and add per-circle effective-transform assertions. Geometry is unchanged. Exact final package receiving, final source hashes and maintained-tree correspondence are recorded on the PR and live task.",
+  "concurrency": "Current main includes PR439 shared-motion practice changes. Preserve all 10 changed paths, including two additional server routes; no overlap with the three production files here.",
+  "qualification": "Authored geometry and product behavior, not physical measurement, skill acquisition, learning benefit or public deployment."
+}
