@@ -1,0 +1,100 @@
+{
+  "candidateSha256": "4232ef2c3aeebe654f369372c2af5c8435b13bb1d76bba300f3c09c22e841922",
+  "cases": 238,
+  "corpora": {
+    "retained-224": 224,
+    "targeted-14": 14
+  },
+  "simulationMatches": {
+    "spike": 238,
+    "decaying": 238
+  },
+  "baselineMatches": {
+    "spike": 238,
+    "decaying": 238
+  },
+  "families": {
+    "spike": {
+      "strictGaps": 0,
+      "materialGaps": 0,
+      "maxGap": 0
+    },
+    "decaying": {
+      "strictGaps": 0,
+      "materialGaps": 0,
+      "maxGap": 0
+    }
+  },
+  "witnesses": [],
+  "negativeControls": [
+    {
+      "id": "alt-gate-negative-constant",
+      "status": "alternative-preferred",
+      "scores": {
+        "constant": {
+          "score": -2000.1636818819713,
+          "rho": 0.99,
+          "mean": 7
+        },
+        "linear": {
+          "score": -1996.667174320505,
+          "rho": 0.99
+        },
+        "spike": {
+          "score": -1989.674159197572,
+          "rho": 0.99,
+          "index": 0
+        },
+        "periodic": {
+          "score": -1987.0816218835914,
+          "rho": 0.99,
+          "frequency": 0.5
+        },
+        "decaying": {
+          "score": -1989.674159197572,
+          "rho": 0.99,
+          "index": 0
+        }
+      },
+      "gaps": {
+        "spike": 0,
+        "decaying": 0
+      }
+    },
+    {
+      "id": "alt-gate-negative-smooth",
+      "status": "alternative-preferred",
+      "scores": {
+        "constant": {
+          "score": -266.26960769531934,
+          "rho": 0.99,
+          "mean": 0.4999996783736185
+        },
+        "linear": {
+          "score": -996.874783156716,
+          "rho": 0
+        },
+        "spike": {
+          "score": -257.2331388715506,
+          "rho": 0.99,
+          "index": 0
+        },
+        "periodic": {
+          "score": -312.1217573714757,
+          "rho": 0.975,
+          "frequency": 0.5
+        },
+        "decaying": {
+          "score": -430.62271908172204,
+          "rho": 0.99,
+          "index": 0
+        }
+      },
+      "gaps": {
+        "spike": 0,
+        "decaying": 0
+      }
+    }
+  ],
+  "elapsedMs": 4324.170704
+}

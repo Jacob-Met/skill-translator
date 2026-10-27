@@ -1,0 +1,1975 @@
+[
+  {
+    "id": "spike-gate-middle-cluster",
+    "seed": 5308417,
+    "description": "Near-clean positive impulse in clustered observations",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 0,
+        "value": -1.9915017065996743e-8
+      },
+      {
+        "timeSeconds": 1,
+        "value": -9.756948554651146e-9
+      },
+      {
+        "timeSeconds": 2,
+        "value": 2.4784463759086606e-8
+      },
+      {
+        "timeSeconds": 3,
+        "value": 1.597427790045458e-8
+      },
+      {
+        "timeSeconds": 4,
+        "value": 1.236621856304243e-8
+      },
+      {
+        "timeSeconds": 5,
+        "value": 1.3839844964502745e-8
+      },
+      {
+        "timeSeconds": 6,
+        "value": 1.4715442447910121e-8
+      },
+      {
+        "timeSeconds": 7,
+        "value": -2.5243823836840207e-8
+      },
+      {
+        "timeSeconds": 8,
+        "value": 7.4346376832679084e-9
+      },
+      {
+        "timeSeconds": 9,
+        "value": -1.1922278164711031e-8
+      },
+      {
+        "timeSeconds": 10,
+        "value": 2.878555656338211e-8
+      },
+      {
+        "timeSeconds": 11,
+        "value": 2.820881285503507e-8
+      },
+      {
+        "timeSeconds": 12,
+        "value": 2.6200887709437737e-9
+      },
+      {
+        "timeSeconds": 13,
+        "value": 1.4153566249563987e-8
+      },
+      {
+        "timeSeconds": 13.00006103515625,
+        "value": -3.901269238215654e-9
+      },
+      {
+        "timeSeconds": 13.0001220703125,
+        "value": -1.071407475239372e-8
+      },
+      {
+        "timeSeconds": 13.00018310546875,
+        "value": 0.9999999754915432
+      },
+      {
+        "timeSeconds": 13.000244140625,
+        "value": 2.9511069685184133e-8
+      },
+      {
+        "timeSeconds": 13.00030517578125,
+        "value": 2.2278273476006305e-8
+      },
+      {
+        "timeSeconds": 13.0003662109375,
+        "value": -1.8782886399004717e-8
+      },
+      {
+        "timeSeconds": 14.0003662109375,
+        "value": -1.3225348774459356e-8
+      },
+      {
+        "timeSeconds": 15.0003662109375,
+        "value": 1.4440744350308066e-8
+      },
+      {
+        "timeSeconds": 16.0003662109375,
+        "value": 2.014068442579564e-8
+      },
+      {
+        "timeSeconds": 17.0003662109375,
+        "value": 1.1522074905290225e-8
+      },
+      {
+        "timeSeconds": 18.0003662109375,
+        "value": 4.891794608274935e-9
+      },
+      {
+        "timeSeconds": 19.0003662109375,
+        "value": -1.8396386705643586e-8
+      },
+      {
+        "timeSeconds": 20.0003662109375,
+        "value": -6.479666331271616e-9
+      },
+      {
+        "timeSeconds": 21.0003662109375,
+        "value": 1.1191851972958133e-8
+      },
+      {
+        "timeSeconds": 22.0003662109375,
+        "value": 1.710895305984117e-8
+      },
+      {
+        "timeSeconds": 23.0003662109375,
+        "value": -3.3871720289679885e-9
+      },
+      {
+        "timeSeconds": 24.0003662109375,
+        "value": -2.0454942836756196e-8
+      },
+      {
+        "timeSeconds": 25.0003662109375,
+        "value": 9.538635492578607e-9
+      },
+      {
+        "timeSeconds": 26.0003662109375,
+        "value": -2.601998355666879e-8
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "spike-gate-middle-cluster-offset-control",
+    "seed": 5308417,
+    "description": "Near-clean positive impulse in clustered observations; clock shift and independently rounded value-offset control",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 8192,
+        "value": 1048575.9999998406
+      },
+      {
+        "timeSeconds": 8200,
+        "value": 1048575.999999922
+      },
+      {
+        "timeSeconds": 8208,
+        "value": 1048576.0000001984
+      },
+      {
+        "timeSeconds": 8216,
+        "value": 1048576.0000001278
+      },
+      {
+        "timeSeconds": 8224,
+        "value": 1048576.000000099
+      },
+      {
+        "timeSeconds": 8232,
+        "value": 1048576.0000001108
+      },
+      {
+        "timeSeconds": 8240,
+        "value": 1048576.0000001178
+      },
+      {
+        "timeSeconds": 8248,
+        "value": 1048575.999999798
+      },
+      {
+        "timeSeconds": 8256,
+        "value": 1048576.0000000594
+      },
+      {
+        "timeSeconds": 8264,
+        "value": 1048575.9999999047
+      },
+      {
+        "timeSeconds": 8272,
+        "value": 1048576.0000002303
+      },
+      {
+        "timeSeconds": 8280,
+        "value": 1048576.0000002256
+      },
+      {
+        "timeSeconds": 8288,
+        "value": 1048576.000000021
+      },
+      {
+        "timeSeconds": 8296,
+        "value": 1048576.0000001132
+      },
+      {
+        "timeSeconds": 8296.00048828125,
+        "value": 1048575.9999999688
+      },
+      {
+        "timeSeconds": 8296.0009765625,
+        "value": 1048575.9999999143
+      },
+      {
+        "timeSeconds": 8296.00146484375,
+        "value": 1048583.999999804
+      },
+      {
+        "timeSeconds": 8296.001953125,
+        "value": 1048576.000000236
+      },
+      {
+        "timeSeconds": 8296.00244140625,
+        "value": 1048576.000000178
+      },
+      {
+        "timeSeconds": 8296.0029296875,
+        "value": 1048575.9999998497
+      },
+      {
+        "timeSeconds": 8304.0029296875,
+        "value": 1048575.9999998942
+      },
+      {
+        "timeSeconds": 8312.0029296875,
+        "value": 1048576.0000001155
+      },
+      {
+        "timeSeconds": 8320.0029296875,
+        "value": 1048576.0000001611
+      },
+      {
+        "timeSeconds": 8328.0029296875,
+        "value": 1048576.0000000922
+      },
+      {
+        "timeSeconds": 8336.0029296875,
+        "value": 1048576.000000039
+      },
+      {
+        "timeSeconds": 8344.0029296875,
+        "value": 1048575.9999998529
+      },
+      {
+        "timeSeconds": 8352.0029296875,
+        "value": 1048575.9999999482
+      },
+      {
+        "timeSeconds": 8360.0029296875,
+        "value": 1048576.0000000896
+      },
+      {
+        "timeSeconds": 8368.0029296875,
+        "value": 1048576.000000137
+      },
+      {
+        "timeSeconds": 8376.0029296875,
+        "value": 1048575.9999999729
+      },
+      {
+        "timeSeconds": 8384.0029296875,
+        "value": 1048575.9999998363
+      },
+      {
+        "timeSeconds": 8392.0029296875,
+        "value": 1048576.0000000764
+      },
+      {
+        "timeSeconds": 8400.0029296875,
+        "value": 1048575.9999997918
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "spike-gate-early-negative",
+    "seed": 5308418,
+    "description": "Negative early impulse with continuous background",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 0,
+        "value": -3.185802248673042e-7
+      },
+      {
+        "timeSeconds": 1,
+        "value": 0.004629435982688517
+      },
+      {
+        "timeSeconds": 1.00006103515625,
+        "value": 0.004629733773295118
+      },
+      {
+        "timeSeconds": 1.0001220703125,
+        "value": -0.9953696588604327
+      },
+      {
+        "timeSeconds": 1.00018310546875,
+        "value": 0.00463075407959875
+      },
+      {
+        "timeSeconds": 1.000244140625,
+        "value": 0.004630855857676699
+      },
+      {
+        "timeSeconds": 1.00030517578125,
+        "value": 0.004630940609643682
+      },
+      {
+        "timeSeconds": 2.00030517578125,
+        "value": 0.009260425447691067
+      },
+      {
+        "timeSeconds": 3.00030517578125,
+        "value": 0.013890267432627406
+      },
+      {
+        "timeSeconds": 4.00030517578125,
+        "value": 0.018519914345195485
+      },
+      {
+        "timeSeconds": 5.00030517578125,
+        "value": 0.023148989988894246
+      },
+      {
+        "timeSeconds": 6.00030517578125,
+        "value": 0.027778754941216073
+      },
+      {
+        "timeSeconds": 7.00030517578125,
+        "value": 0.032408106609017516
+      },
+      {
+        "timeSeconds": 8.00030517578125,
+        "value": 0.03703756969232511
+      },
+      {
+        "timeSeconds": 9.00030517578125,
+        "value": 0.04166752355001074
+      },
+      {
+        "timeSeconds": 10.00030517578125,
+        "value": 0.046296776124253716
+      },
+      {
+        "timeSeconds": 11.00030517578125,
+        "value": 0.050927048780031264
+      },
+      {
+        "timeSeconds": 12.00030517578125,
+        "value": 0.05555626512157762
+      },
+      {
+        "timeSeconds": 13.00030517578125,
+        "value": 0.06018624174666743
+      },
+      {
+        "timeSeconds": 14.00030517578125,
+        "value": 0.06481585295031546
+      },
+      {
+        "timeSeconds": 15.00030517578125,
+        "value": 0.06944465444055785
+      },
+      {
+        "timeSeconds": 16.00030517578125,
+        "value": 0.07407497445746242
+      },
+      {
+        "timeSeconds": 17.00030517578125,
+        "value": 0.07870385634029138
+      },
+      {
+        "timeSeconds": 18.00030517578125,
+        "value": 0.08333401384906544
+      },
+      {
+        "timeSeconds": 19.00030517578125,
+        "value": 0.08796375108542485
+      },
+      {
+        "timeSeconds": 20.00030517578125,
+        "value": 0.09259265732594724
+      },
+      {
+        "timeSeconds": 21.00030517578125,
+        "value": 0.09722296366041129
+      },
+      {
+        "timeSeconds": 22.00030517578125,
+        "value": 0.10185184803301486
+      },
+      {
+        "timeSeconds": 23.00030517578125,
+        "value": 0.10648182253343358
+      },
+      {
+        "timeSeconds": 24.00030517578125,
+        "value": 0.11111091666368063
+      },
+      {
+        "timeSeconds": 25.00030517578125,
+        "value": 0.11574109535512275
+      },
+      {
+        "timeSeconds": 26.00030517578125,
+        "value": 0.12037085524572709
+      },
+      {
+        "timeSeconds": 27.00030517578125,
+        "value": 0.12499960375836405
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "spike-gate-early-negative-offset-control",
+    "seed": 5308418,
+    "description": "Negative early impulse with continuous background; clock shift and independently rounded value-offset control",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 8192,
+        "value": 1048575.9999974513
+      },
+      {
+        "timeSeconds": 8200,
+        "value": 1048576.0370354878
+      },
+      {
+        "timeSeconds": 8200.00048828125,
+        "value": 1048576.0370378701
+      },
+      {
+        "timeSeconds": 8200.0009765625,
+        "value": 1048568.0370427291
+      },
+      {
+        "timeSeconds": 8200.00146484375,
+        "value": 1048576.0370460327
+      },
+      {
+        "timeSeconds": 8200.001953125,
+        "value": 1048576.037046847
+      },
+      {
+        "timeSeconds": 8200.00244140625,
+        "value": 1048576.037047525
+      },
+      {
+        "timeSeconds": 8208.00244140625,
+        "value": 1048576.0740834037
+      },
+      {
+        "timeSeconds": 8216.00244140625,
+        "value": 1048576.1111221395
+      },
+      {
+        "timeSeconds": 8224.00244140625,
+        "value": 1048576.1481593146
+      },
+      {
+        "timeSeconds": 8232.00244140625,
+        "value": 1048576.18519192
+      },
+      {
+        "timeSeconds": 8240.00244140625,
+        "value": 1048576.2222300395
+      },
+      {
+        "timeSeconds": 8248.00244140625,
+        "value": 1048576.2592648529
+      },
+      {
+        "timeSeconds": 8256.00244140625,
+        "value": 1048576.2963005574
+      },
+      {
+        "timeSeconds": 8264.00244140625,
+        "value": 1048576.3333401885
+      },
+      {
+        "timeSeconds": 8272.00244140625,
+        "value": 1048576.370374209
+      },
+      {
+        "timeSeconds": 8280.00244140625,
+        "value": 1048576.4074163903
+      },
+      {
+        "timeSeconds": 8288.00244140625,
+        "value": 1048576.444450121
+      },
+      {
+        "timeSeconds": 8296.00244140625,
+        "value": 1048576.481489934
+      },
+      {
+        "timeSeconds": 8304.00244140625,
+        "value": 1048576.5185268235
+      },
+      {
+        "timeSeconds": 8312.00244140625,
+        "value": 1048576.5555572356
+      },
+      {
+        "timeSeconds": 8320.00244140625,
+        "value": 1048576.5925997957
+      },
+      {
+        "timeSeconds": 8328.00244140625,
+        "value": 1048576.6296308506
+      },
+      {
+        "timeSeconds": 8336.00244140625,
+        "value": 1048576.6666721108
+      },
+      {
+        "timeSeconds": 8344.00244140625,
+        "value": 1048576.7037100086
+      },
+      {
+        "timeSeconds": 8352.00244140625,
+        "value": 1048576.7407412587
+      },
+      {
+        "timeSeconds": 8360.00244140625,
+        "value": 1048576.7777837093
+      },
+      {
+        "timeSeconds": 8368.00244140625,
+        "value": 1048576.8148147843
+      },
+      {
+        "timeSeconds": 8376.00244140625,
+        "value": 1048576.8518545802
+      },
+      {
+        "timeSeconds": 8384.00244140625,
+        "value": 1048576.8888873332
+      },
+      {
+        "timeSeconds": 8392.00244140625,
+        "value": 1048576.9259287629
+      },
+      {
+        "timeSeconds": 8400.00244140625,
+        "value": 1048576.9629668419
+      },
+      {
+        "timeSeconds": 8408.00244140625,
+        "value": 1048576.99999683
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "spike-gate-late-small",
+    "seed": 5308419,
+    "description": "Small late impulse on larger background",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 0,
+        "value": -1.990751281877312e-8
+      },
+      {
+        "timeSeconds": 1,
+        "value": 0.037036610525406424
+      },
+      {
+        "timeSeconds": 2,
+        "value": 0.07407325265115161
+      },
+      {
+        "timeSeconds": 3,
+        "value": 0.11110986434135263
+      },
+      {
+        "timeSeconds": 4,
+        "value": 0.14814646405555082
+      },
+      {
+        "timeSeconds": 5,
+        "value": 0.1851830948043996
+      },
+      {
+        "timeSeconds": 6,
+        "value": 0.22221970097546961
+      },
+      {
+        "timeSeconds": 7,
+        "value": 0.25925631405893035
+      },
+      {
+        "timeSeconds": 8,
+        "value": 0.29629296770550295
+      },
+      {
+        "timeSeconds": 9,
+        "value": 0.33332954302806345
+      },
+      {
+        "timeSeconds": 10,
+        "value": 0.370366195970085
+      },
+      {
+        "timeSeconds": 11,
+        "value": 0.40740277427316207
+      },
+      {
+        "timeSeconds": 12,
+        "value": 0.44443942626526867
+      },
+      {
+        "timeSeconds": 13,
+        "value": 0.48147600987620126
+      },
+      {
+        "timeSeconds": 14,
+        "value": 0.5185126532361061
+      },
+      {
+        "timeSeconds": 15,
+        "value": 0.555549297658655
+      },
+      {
+        "timeSeconds": 16,
+        "value": 0.5925859230068142
+      },
+      {
+        "timeSeconds": 17,
+        "value": 0.6296225237994981
+      },
+      {
+        "timeSeconds": 18,
+        "value": 0.6666591478072762
+      },
+      {
+        "timeSeconds": 19,
+        "value": 0.7036957274461433
+      },
+      {
+        "timeSeconds": 20,
+        "value": 0.7407323687954078
+      },
+      {
+        "timeSeconds": 21,
+        "value": 0.7777689693402889
+      },
+      {
+        "timeSeconds": 22,
+        "value": 0.814805593691071
+      },
+      {
+        "timeSeconds": 23,
+        "value": 0.851842216646858
+      },
+      {
+        "timeSeconds": 24,
+        "value": 0.8888788647869886
+      },
+      {
+        "timeSeconds": 25,
+        "value": 0.9259154572383759
+      },
+      {
+        "timeSeconds": 26,
+        "value": 0.962952072331829
+      },
+      {
+        "timeSeconds": 26.00006103515625,
+        "value": 0.9629543197322843
+      },
+      {
+        "timeSeconds": 26.0001220703125,
+        "value": 0.962956606970836
+      },
+      {
+        "timeSeconds": 26.00018310546875,
+        "value": 0.9639354240840092
+      },
+      {
+        "timeSeconds": 26.000244140625,
+        "value": 0.9629611360523496
+      },
+      {
+        "timeSeconds": 26.00030517578125,
+        "value": 0.9629633665525076
+      },
+      {
+        "timeSeconds": 27.00030517578125,
+        "value": 0.9999999754521143
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "spike-gate-late-small-offset-control",
+    "seed": 5308419,
+    "description": "Small late impulse on larger background; clock shift and independently rounded value-offset control",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 8192,
+        "value": 1048575.9999998407
+      },
+      {
+        "timeSeconds": 8200,
+        "value": 1048576.2962928843
+      },
+      {
+        "timeSeconds": 8208,
+        "value": 1048576.5925860212
+      },
+      {
+        "timeSeconds": 8216,
+        "value": 1048576.8888789148
+      },
+      {
+        "timeSeconds": 8224,
+        "value": 1048577.1851717124
+      },
+      {
+        "timeSeconds": 8232,
+        "value": 1048577.4814647585
+      },
+      {
+        "timeSeconds": 8240,
+        "value": 1048577.7777576079
+      },
+      {
+        "timeSeconds": 8248,
+        "value": 1048578.0740505124
+      },
+      {
+        "timeSeconds": 8256,
+        "value": 1048578.3703437417
+      },
+      {
+        "timeSeconds": 8264,
+        "value": 1048578.6666363443
+      },
+      {
+        "timeSeconds": 8272,
+        "value": 1048578.9629295678
+      },
+      {
+        "timeSeconds": 8280,
+        "value": 1048579.259222194
+      },
+      {
+        "timeSeconds": 8288,
+        "value": 1048579.5555154101
+      },
+      {
+        "timeSeconds": 8296,
+        "value": 1048579.851808079
+      },
+      {
+        "timeSeconds": 8304,
+        "value": 1048580.148101226
+      },
+      {
+        "timeSeconds": 8312,
+        "value": 1048580.4443943813
+      },
+      {
+        "timeSeconds": 8320,
+        "value": 1048580.740687384
+      },
+      {
+        "timeSeconds": 8328,
+        "value": 1048581.0369801903
+      },
+      {
+        "timeSeconds": 8336,
+        "value": 1048581.3332731824
+      },
+      {
+        "timeSeconds": 8344,
+        "value": 1048581.6295658196
+      },
+      {
+        "timeSeconds": 8352,
+        "value": 1048581.9258589505
+      },
+      {
+        "timeSeconds": 8360,
+        "value": 1048582.2221517547
+      },
+      {
+        "timeSeconds": 8368,
+        "value": 1048582.5184447495
+      },
+      {
+        "timeSeconds": 8376,
+        "value": 1048582.8147377332
+      },
+      {
+        "timeSeconds": 8384,
+        "value": 1048583.1110309183
+      },
+      {
+        "timeSeconds": 8392,
+        "value": 1048583.407323658
+      },
+      {
+        "timeSeconds": 8400,
+        "value": 1048583.7036165786
+      },
+      {
+        "timeSeconds": 8400.00048828125,
+        "value": 1048583.7036345578
+      },
+      {
+        "timeSeconds": 8400.0009765625,
+        "value": 1048583.7036528557
+      },
+      {
+        "timeSeconds": 8400.00146484375,
+        "value": 1048583.7114833926
+      },
+      {
+        "timeSeconds": 8400.001953125,
+        "value": 1048583.7036890883
+      },
+      {
+        "timeSeconds": 8400.00244140625,
+        "value": 1048583.7037069325
+      },
+      {
+        "timeSeconds": 8408.00244140625,
+        "value": 1048583.9999998037
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "decay-gate-middle-fast",
+    "seed": 14548993,
+    "description": "Fast decay resolved within cluster",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 0,
+        "value": 2.1207873429629487e-8
+      },
+      {
+        "timeSeconds": 1,
+        "value": -1.3312177596369601e-8
+      },
+      {
+        "timeSeconds": 2,
+        "value": 4.581867871222833e-9
+      },
+      {
+        "timeSeconds": 3,
+        "value": -2.4056498973412666e-8
+      },
+      {
+        "timeSeconds": 4,
+        "value": 2.052561116905327e-8
+      },
+      {
+        "timeSeconds": 5,
+        "value": -1.16045865278247e-8
+      },
+      {
+        "timeSeconds": 6,
+        "value": 2.3699972748203457e-8
+      },
+      {
+        "timeSeconds": 7,
+        "value": 1.215934769538407e-9
+      },
+      {
+        "timeSeconds": 8,
+        "value": 7.148929365152767e-10
+      },
+      {
+        "timeSeconds": 9,
+        "value": 3.9690771502787214e-10
+      },
+      {
+        "timeSeconds": 10,
+        "value": 8.75175382164528e-9
+      },
+      {
+        "timeSeconds": 11,
+        "value": -8.058124778553832e-9
+      },
+      {
+        "timeSeconds": 12,
+        "value": -3.4936269849294987e-9
+      },
+      {
+        "timeSeconds": 13,
+        "value": -6.406676467118899e-9
+      },
+      {
+        "timeSeconds": 13.00006103515625,
+        "value": 1.1539259200943341e-8
+      },
+      {
+        "timeSeconds": 13.0001220703125,
+        "value": 0.9999999858417675
+      },
+      {
+        "timeSeconds": 13.00018310546875,
+        "value": 0.7788007721805762
+      },
+      {
+        "timeSeconds": 13.000244140625,
+        "value": 0.6065306885657347
+      },
+      {
+        "timeSeconds": 13.00030517578125,
+        "value": 0.472366538804885
+      },
+      {
+        "timeSeconds": 13.0003662109375,
+        "value": 0.3678794193616738
+      },
+      {
+        "timeSeconds": 14.0003662109375,
+        "value": 2.6321862606204505e-9
+      },
+      {
+        "timeSeconds": 15.0003662109375,
+        "value": -8.586307678748462e-9
+      },
+      {
+        "timeSeconds": 16.0003662109375,
+        "value": 1.9594085506891012e-8
+      },
+      {
+        "timeSeconds": 17.0003662109375,
+        "value": -2.274772864518937e-8
+      },
+      {
+        "timeSeconds": 18.0003662109375,
+        "value": -1.9829722266995198e-8
+      },
+      {
+        "timeSeconds": 19.0003662109375,
+        "value": -2.366120012420314e-8
+      },
+      {
+        "timeSeconds": 20.0003662109375,
+        "value": 7.71028146884234e-9
+      },
+      {
+        "timeSeconds": 21.0003662109375,
+        "value": -2.259509659929826e-8
+      },
+      {
+        "timeSeconds": 22.0003662109375,
+        "value": 2.866581981508798e-8
+      },
+      {
+        "timeSeconds": 23.0003662109375,
+        "value": 1.858575147950514e-8
+      },
+      {
+        "timeSeconds": 24.0003662109375,
+        "value": 1.062014033659242e-8
+      },
+      {
+        "timeSeconds": 25.0003662109375,
+        "value": -7.453308817351179e-9
+      },
+      {
+        "timeSeconds": 26.0003662109375,
+        "value": -2.977605212395318e-8
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "decay-gate-middle-fast-offset-control",
+    "seed": 14548993,
+    "description": "Fast decay resolved within cluster; clock shift and independently rounded value-offset control",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 8192,
+        "value": 1048576.0000001697
+      },
+      {
+        "timeSeconds": 8200,
+        "value": 1048575.9999998935
+      },
+      {
+        "timeSeconds": 8208,
+        "value": 1048576.0000000366
+      },
+      {
+        "timeSeconds": 8216,
+        "value": 1048575.9999998076
+      },
+      {
+        "timeSeconds": 8224,
+        "value": 1048576.0000001641
+      },
+      {
+        "timeSeconds": 8232,
+        "value": 1048575.9999999072
+      },
+      {
+        "timeSeconds": 8240,
+        "value": 1048576.0000001895
+      },
+      {
+        "timeSeconds": 8248,
+        "value": 1048576.0000000098
+      },
+      {
+        "timeSeconds": 8256,
+        "value": 1048576.0000000058
+      },
+      {
+        "timeSeconds": 8264,
+        "value": 1048576.0000000033
+      },
+      {
+        "timeSeconds": 8272,
+        "value": 1048576.00000007
+      },
+      {
+        "timeSeconds": 8280,
+        "value": 1048575.9999999355
+      },
+      {
+        "timeSeconds": 8288,
+        "value": 1048575.9999999721
+      },
+      {
+        "timeSeconds": 8296,
+        "value": 1048575.9999999488
+      },
+      {
+        "timeSeconds": 8296.00048828125,
+        "value": 1048576.0000000922
+      },
+      {
+        "timeSeconds": 8296.0009765625,
+        "value": 1048583.9999998868
+      },
+      {
+        "timeSeconds": 8296.00146484375,
+        "value": 1048582.2304061775
+      },
+      {
+        "timeSeconds": 8296.001953125,
+        "value": 1048580.8522455085
+      },
+      {
+        "timeSeconds": 8296.00244140625,
+        "value": 1048579.7789323104
+      },
+      {
+        "timeSeconds": 8296.0029296875,
+        "value": 1048578.9430353548
+      },
+      {
+        "timeSeconds": 8304.0029296875,
+        "value": 1048576.000000021
+      },
+      {
+        "timeSeconds": 8312.0029296875,
+        "value": 1048575.9999999313
+      },
+      {
+        "timeSeconds": 8320.0029296875,
+        "value": 1048576.0000001567
+      },
+      {
+        "timeSeconds": 8328.0029296875,
+        "value": 1048575.999999818
+      },
+      {
+        "timeSeconds": 8336.0029296875,
+        "value": 1048575.9999998413
+      },
+      {
+        "timeSeconds": 8344.0029296875,
+        "value": 1048575.9999998107
+      },
+      {
+        "timeSeconds": 8352.0029296875,
+        "value": 1048576.0000000617
+      },
+      {
+        "timeSeconds": 8360.0029296875,
+        "value": 1048575.9999998192
+      },
+      {
+        "timeSeconds": 8368.0029296875,
+        "value": 1048576.0000002293
+      },
+      {
+        "timeSeconds": 8376.0029296875,
+        "value": 1048576.0000001488
+      },
+      {
+        "timeSeconds": 8384.0029296875,
+        "value": 1048576.000000085
+      },
+      {
+        "timeSeconds": 8392.0029296875,
+        "value": 1048575.9999999404
+      },
+      {
+        "timeSeconds": 8400.0029296875,
+        "value": 1048575.9999997618
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "decay-gate-early-slow-negative",
+    "seed": 14548994,
+    "description": "Negative early decay with ordinary-time tail",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 0,
+        "value": 3.3938237042896446e-7
+      },
+      {
+        "timeSeconds": 1,
+        "value": 0.004629379331854049
+      },
+      {
+        "timeSeconds": 1.00006103515625,
+        "value": 0.004629531951149677
+      },
+      {
+        "timeSeconds": 1.0001220703125,
+        "value": -0.9953699418377718
+      },
+      {
+        "timeSeconds": 1.00018310546875,
+        "value": -0.99535411747061
+      },
+      {
+        "timeSeconds": 1.000244140625,
+        "value": -0.9953389444727954
+      },
+      {
+        "timeSeconds": 1.00030517578125,
+        "value": -0.9953235612361924
+      },
+      {
+        "timeSeconds": 2.00030517578125,
+        "value": -0.769504270335772
+      },
+      {
+        "timeSeconds": 3.00030517578125,
+        "value": -0.5926125270376756
+      },
+      {
+        "timeSeconds": 4.00030517578125,
+        "value": -0.4538252121287231
+      },
+      {
+        "timeSeconds": 5.00030517578125,
+        "value": -0.344713351360555
+      },
+      {
+        "timeSeconds": 6.00030517578125,
+        "value": -0.25871234691401196
+      },
+      {
+        "timeSeconds": 7.00030517578125,
+        "value": -0.19071115897703647
+      },
+      {
+        "timeSeconds": 8.00030517578125,
+        "value": -0.13672761245999882
+      },
+      {
+        "timeSeconds": 9.00030517578125,
+        "value": -0.09366127245343361
+      },
+      {
+        "timeSeconds": 10.00030517578125,
+        "value": -0.059097687944335384
+      },
+      {
+        "timeSeconds": 11.00030517578125,
+        "value": -0.031154436343185973
+      },
+      {
+        "timeSeconds": 12.00030517578125,
+        "value": -0.008368659310419871
+      },
+      {
+        "timeSeconds": 13.00030517578125,
+        "value": 0.010400940259956672
+      },
+      {
+        "timeSeconds": 14.00030517578125,
+        "value": 0.02604346844862869
+      },
+      {
+        "timeSeconds": 15.00030517578125,
+        "value": 0.03924932334855699
+      },
+      {
+        "timeSeconds": 16.00030517578125,
+        "value": 0.050557690540744965
+      },
+      {
+        "timeSeconds": 17.00030517578125,
+        "value": 0.06038906195290735
+      },
+      {
+        "timeSeconds": 18.00030517578125,
+        "value": 0.06906983381737873
+      },
+      {
+        "timeSeconds": 19.00030517578125,
+        "value": 0.0768547628006499
+      },
+      {
+        "timeSeconds": 20.00030517578125,
+        "value": 0.08394120362703757
+      },
+      {
+        "timeSeconds": 21.00030517578125,
+        "value": 0.09048462767798274
+      },
+      {
+        "timeSeconds": 22.00030517578125,
+        "value": 0.09660491858963742
+      },
+      {
+        "timeSeconds": 23.00030517578125,
+        "value": 0.10239517057409296
+      },
+      {
+        "timeSeconds": 24.00030517578125,
+        "value": 0.10792874860437254
+      },
+      {
+        "timeSeconds": 25.00030517578125,
+        "value": 0.11326199295152484
+      },
+      {
+        "timeSeconds": 26.00030517578125,
+        "value": 0.11843959159717164
+      },
+      {
+        "timeSeconds": 27.00030517578125,
+        "value": 0.12349617328123096
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "decay-gate-early-slow-negative-offset-control",
+    "seed": 14548994,
+    "description": "Negative early decay with ordinary-time tail; clock shift and independently rounded value-offset control",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 8192,
+        "value": 1048576.000002715
+      },
+      {
+        "timeSeconds": 8200,
+        "value": 1048576.0370350347
+      },
+      {
+        "timeSeconds": 8200.00048828125,
+        "value": 1048576.0370362557
+      },
+      {
+        "timeSeconds": 8200.0009765625,
+        "value": 1048568.0370404653
+      },
+      {
+        "timeSeconds": 8200.00146484375,
+        "value": 1048568.0371670602
+      },
+      {
+        "timeSeconds": 8200.001953125,
+        "value": 1048568.0372884442
+      },
+      {
+        "timeSeconds": 8200.00244140625,
+        "value": 1048568.0374115101
+      },
+      {
+        "timeSeconds": 8208.00244140625,
+        "value": 1048569.8439658373
+      },
+      {
+        "timeSeconds": 8216.00244140625,
+        "value": 1048571.2590997837
+      },
+      {
+        "timeSeconds": 8224.00244140625,
+        "value": 1048572.369398303
+      },
+      {
+        "timeSeconds": 8232.00244140625,
+        "value": 1048573.2422931892
+      },
+      {
+        "timeSeconds": 8240.00244140625,
+        "value": 1048573.9303012247
+      },
+      {
+        "timeSeconds": 8248.00244140625,
+        "value": 1048574.4743107281
+      },
+      {
+        "timeSeconds": 8256.00244140625,
+        "value": 1048574.9061791003
+      },
+      {
+        "timeSeconds": 8264.00244140625,
+        "value": 1048575.2507098204
+      },
+      {
+        "timeSeconds": 8272.00244140625,
+        "value": 1048575.5272184964
+      },
+      {
+        "timeSeconds": 8280.00244140625,
+        "value": 1048575.7507645092
+      },
+      {
+        "timeSeconds": 8288.00244140625,
+        "value": 1048575.9330507255
+      },
+      {
+        "timeSeconds": 8296.00244140625,
+        "value": 1048576.083207522
+      },
+      {
+        "timeSeconds": 8304.00244140625,
+        "value": 1048576.2083477476
+      },
+      {
+        "timeSeconds": 8312.00244140625,
+        "value": 1048576.3139945867
+      },
+      {
+        "timeSeconds": 8320.00244140625,
+        "value": 1048576.4044615242
+      },
+      {
+        "timeSeconds": 8328.00244140625,
+        "value": 1048576.4831124956
+      },
+      {
+        "timeSeconds": 8336.00244140625,
+        "value": 1048576.5525586705
+      },
+      {
+        "timeSeconds": 8344.00244140625,
+        "value": 1048576.6148381024
+      },
+      {
+        "timeSeconds": 8352.00244140625,
+        "value": 1048576.671529629
+      },
+      {
+        "timeSeconds": 8360.00244140625,
+        "value": 1048576.7238770213
+      },
+      {
+        "timeSeconds": 8368.00244140625,
+        "value": 1048576.7728393488
+      },
+      {
+        "timeSeconds": 8376.00244140625,
+        "value": 1048576.8191613646
+      },
+      {
+        "timeSeconds": 8384.00244140625,
+        "value": 1048576.8634299887
+      },
+      {
+        "timeSeconds": 8392.00244140625,
+        "value": 1048576.9060959436
+      },
+      {
+        "timeSeconds": 8400.00244140625,
+        "value": 1048576.9475167328
+      },
+      {
+        "timeSeconds": 8408.00244140625,
+        "value": 1048576.9879693862
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "decay-gate-late-small",
+    "seed": 14548995,
+    "description": "Small late decay with shortened tail",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 0,
+        "value": 2.121492287399107e-8
+      },
+      {
+        "timeSeconds": 1,
+        "value": 0.037036606970205804
+      },
+      {
+        "timeSeconds": 2,
+        "value": 0.0740732503910103
+      },
+      {
+        "timeSeconds": 3,
+        "value": 0.11110985414205876
+      },
+      {
+        "timeSeconds": 4,
+        "value": 0.14814645775016938
+      },
+      {
+        "timeSeconds": 5,
+        "value": 0.18518309185722193
+      },
+      {
+        "timeSeconds": 6,
+        "value": 0.22221968397300113
+      },
+      {
+        "timeSeconds": 7,
+        "value": 0.25925634912546336
+      },
+      {
+        "timeSeconds": 8,
+        "value": 0.2962929649514962
+      },
+      {
+        "timeSeconds": 9,
+        "value": 0.3333295851439581
+      },
+      {
+        "timeSeconds": 10,
+        "value": 0.3703662094857817
+      },
+      {
+        "timeSeconds": 11,
+        "value": 0.40740281054013344
+      },
+      {
+        "timeSeconds": 12,
+        "value": 0.44443941678686305
+      },
+      {
+        "timeSeconds": 13,
+        "value": 0.481476060008651
+      },
+      {
+        "timeSeconds": 14,
+        "value": 0.518512669666107
+      },
+      {
+        "timeSeconds": 15,
+        "value": 0.5555492932976429
+      },
+      {
+        "timeSeconds": 16,
+        "value": 0.5925859091586292
+      },
+      {
+        "timeSeconds": 17,
+        "value": 0.6296225225638986
+      },
+      {
+        "timeSeconds": 18,
+        "value": 0.6666591237183117
+      },
+      {
+        "timeSeconds": 19,
+        "value": 0.7036957244193719
+      },
+      {
+        "timeSeconds": 20,
+        "value": 0.7407323566850749
+      },
+      {
+        "timeSeconds": 21,
+        "value": 0.7777690058751567
+      },
+      {
+        "timeSeconds": 22,
+        "value": 0.8148055933081528
+      },
+      {
+        "timeSeconds": 23,
+        "value": 0.8518422419815564
+      },
+      {
+        "timeSeconds": 24,
+        "value": 0.8888788342190153
+      },
+      {
+        "timeSeconds": 25,
+        "value": 0.9259154512982145
+      },
+      {
+        "timeSeconds": 26,
+        "value": 0.962952087980592
+      },
+      {
+        "timeSeconds": 26.00006103515625,
+        "value": 0.9639309032691705
+      },
+      {
+        "timeSeconds": 26.0001220703125,
+        "value": 0.9639330536111327
+      },
+      {
+        "timeSeconds": 26.00018310546875,
+        "value": 0.9639351683771136
+      },
+      {
+        "timeSeconds": 26.000244140625,
+        "value": 0.9639373124325239
+      },
+      {
+        "timeSeconds": 26.00030517578125,
+        "value": 0.9639394842388134
+      },
+      {
+        "timeSeconds": 27.00030517578125,
+        "value": 1.000132070602899
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "decay-gate-late-small-offset-control",
+    "seed": 14548995,
+    "description": "Small late decay with shortened tail; clock shift and independently rounded value-offset control",
+    "maximumGapSeconds": 8,
+    "samples": [
+      {
+        "timeSeconds": 8192,
+        "value": 1048576.0000001697
+      },
+      {
+        "timeSeconds": 8200,
+        "value": 1048576.2962928559
+      },
+      {
+        "timeSeconds": 8208,
+        "value": 1048576.5925860032
+      },
+      {
+        "timeSeconds": 8216,
+        "value": 1048576.888878833
+      },
+      {
+        "timeSeconds": 8224,
+        "value": 1048577.185171662
+      },
+      {
+        "timeSeconds": 8232,
+        "value": 1048577.4814647348
+      },
+      {
+        "timeSeconds": 8240,
+        "value": 1048577.777757472
+      },
+      {
+        "timeSeconds": 8248,
+        "value": 1048578.074050793
+      },
+      {
+        "timeSeconds": 8256,
+        "value": 1048578.3703437196
+      },
+      {
+        "timeSeconds": 8264,
+        "value": 1048578.6666366812
+      },
+      {
+        "timeSeconds": 8272,
+        "value": 1048578.9629296758
+      },
+      {
+        "timeSeconds": 8280,
+        "value": 1048579.2592224844
+      },
+      {
+        "timeSeconds": 8288,
+        "value": 1048579.5555153342
+      },
+      {
+        "timeSeconds": 8296,
+        "value": 1048579.85180848
+      },
+      {
+        "timeSeconds": 8304,
+        "value": 1048580.1481013573
+      },
+      {
+        "timeSeconds": 8312,
+        "value": 1048580.4443943463
+      },
+      {
+        "timeSeconds": 8320,
+        "value": 1048580.7406872732
+      },
+      {
+        "timeSeconds": 8328,
+        "value": 1048581.0369801805
+      },
+      {
+        "timeSeconds": 8336,
+        "value": 1048581.3332729898
+      },
+      {
+        "timeSeconds": 8344,
+        "value": 1048581.6295657954
+      },
+      {
+        "timeSeconds": 8352,
+        "value": 1048581.9258588534
+      },
+      {
+        "timeSeconds": 8360,
+        "value": 1048582.222152047
+      },
+      {
+        "timeSeconds": 8368,
+        "value": 1048582.5184447465
+      },
+      {
+        "timeSeconds": 8376,
+        "value": 1048582.8147379358
+      },
+      {
+        "timeSeconds": 8384,
+        "value": 1048583.1110306738
+      },
+      {
+        "timeSeconds": 8392,
+        "value": 1048583.4073236103
+      },
+      {
+        "timeSeconds": 8400,
+        "value": 1048583.7036167039
+      },
+      {
+        "timeSeconds": 8400.00048828125,
+        "value": 1048583.7114472261
+      },
+      {
+        "timeSeconds": 8400.0009765625,
+        "value": 1048583.7114644288
+      },
+      {
+        "timeSeconds": 8400.00146484375,
+        "value": 1048583.711481347
+      },
+      {
+        "timeSeconds": 8400.001953125,
+        "value": 1048583.7114984994
+      },
+      {
+        "timeSeconds": 8400.00244140625,
+        "value": 1048583.711515874
+      },
+      {
+        "timeSeconds": 8408.00244140625,
+        "value": 1048584.0010565647
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "alt-gate-negative-constant",
+    "maximumGapSeconds": 8,
+    "description": "No inserted event; exact constant",
+    "samples": [
+      {
+        "timeSeconds": 0,
+        "value": 7
+      },
+      {
+        "timeSeconds": 1,
+        "value": 7
+      },
+      {
+        "timeSeconds": 2,
+        "value": 7
+      },
+      {
+        "timeSeconds": 3,
+        "value": 7
+      },
+      {
+        "timeSeconds": 4,
+        "value": 7
+      },
+      {
+        "timeSeconds": 5,
+        "value": 7
+      },
+      {
+        "timeSeconds": 6,
+        "value": 7
+      },
+      {
+        "timeSeconds": 7,
+        "value": 7
+      },
+      {
+        "timeSeconds": 8,
+        "value": 7
+      },
+      {
+        "timeSeconds": 9,
+        "value": 7
+      },
+      {
+        "timeSeconds": 10,
+        "value": 7
+      },
+      {
+        "timeSeconds": 11,
+        "value": 7
+      },
+      {
+        "timeSeconds": 12,
+        "value": 7
+      },
+      {
+        "timeSeconds": 13,
+        "value": 7
+      },
+      {
+        "timeSeconds": 13.00006103515625,
+        "value": 7
+      },
+      {
+        "timeSeconds": 13.0001220703125,
+        "value": 7
+      },
+      {
+        "timeSeconds": 13.00018310546875,
+        "value": 7
+      },
+      {
+        "timeSeconds": 13.000244140625,
+        "value": 7
+      },
+      {
+        "timeSeconds": 13.00030517578125,
+        "value": 7
+      },
+      {
+        "timeSeconds": 13.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 14.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 15.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 16.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 17.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 18.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 19.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 20.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 21.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 22.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 23.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 24.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 25.0003662109375,
+        "value": 7
+      },
+      {
+        "timeSeconds": 26.0003662109375,
+        "value": 7
+      }
+    ],
+    "corpus": "targeted-14"
+  },
+  {
+    "id": "alt-gate-negative-smooth",
+    "seed": 12583169,
+    "maximumGapSeconds": 8,
+    "description": "No inserted event; smooth noisy signal",
+    "samples": [
+      {
+        "timeSeconds": 0,
+        "value": -3.6921032253722785e-7
+      },
+      {
+        "timeSeconds": 1,
+        "value": 0.0384607462455215
+      },
+      {
+        "timeSeconds": 2,
+        "value": 0.07692200727970137
+      },
+      {
+        "timeSeconds": 3,
+        "value": 0.11538299850891842
+      },
+      {
+        "timeSeconds": 4,
+        "value": 0.15384388721927675
+      },
+      {
+        "timeSeconds": 5,
+        "value": 0.19230483100641374
+      },
+      {
+        "timeSeconds": 6,
+        "value": 0.23076569963576632
+      },
+      {
+        "timeSeconds": 7,
+        "value": 0.2692272038632126
+      },
+      {
+        "timeSeconds": 8,
+        "value": 0.30768802103516796
+      },
+      {
+        "timeSeconds": 9,
+        "value": 0.34614902781300205
+      },
+      {
+        "timeSeconds": 10,
+        "value": 0.3846096820798924
+      },
+      {
+        "timeSeconds": 11,
+        "value": 0.4230707057010575
+      },
+      {
+        "timeSeconds": 12,
+        "value": 0.4615322047740529
+      },
+      {
+        "timeSeconds": 13,
+        "value": 0.4999927544781663
+      },
+      {
+        "timeSeconds": 13.00006103515625,
+        "value": 0.4999950844646499
+      },
+      {
+        "timeSeconds": 13.0001220703125,
+        "value": 0.49999735281062296
+      },
+      {
+        "timeSeconds": 13.00018310546875,
+        "value": 0.4999997372852183
+      },
+      {
+        "timeSeconds": 13.000244140625,
+        "value": 0.5000026775245421
+      },
+      {
+        "timeSeconds": 13.00030517578125,
+        "value": 0.5000043998441
+      },
+      {
+        "timeSeconds": 13.0003662109375,
+        "value": 0.5000067743536161
+      },
+      {
+        "timeSeconds": 14.0003662109375,
+        "value": 0.5384681737151453
+      },
+      {
+        "timeSeconds": 15.0003662109375,
+        "value": 0.5769291420611202
+      },
+      {
+        "timeSeconds": 16.0003662109375,
+        "value": 0.6153901777939111
+      },
+      {
+        "timeSeconds": 17.0003662109375,
+        "value": 0.653851417174793
+      },
+      {
+        "timeSeconds": 18.0003662109375,
+        "value": 0.6923115750607688
+      },
+      {
+        "timeSeconds": 19.0003662109375,
+        "value": 0.7307730210778751
+      },
+      {
+        "timeSeconds": 20.0003662109375,
+        "value": 0.7692337403180565
+      },
+      {
+        "timeSeconds": 21.0003662109375,
+        "value": 0.8076946322541076
+      },
+      {
+        "timeSeconds": 22.0003662109375,
+        "value": 0.8461563579638397
+      },
+      {
+        "timeSeconds": 23.0003662109375,
+        "value": 0.8846166652941644
+      },
+      {
+        "timeSeconds": 24.0003662109375,
+        "value": 0.9230778914859422
+      },
+      {
+        "timeSeconds": 25.0003662109375,
+        "value": 0.9615391073167241
+      },
+      {
+        "timeSeconds": 26.0003662109375,
+        "value": 0.9999996587394437
+      }
+    ],
+    "corpus": "targeted-14"
+  }
+]

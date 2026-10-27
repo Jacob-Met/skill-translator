@@ -79,3 +79,17 @@ node tools/scalar-reference/receive-repair.mjs
 This runner checks feasible bounds, original samples/indexes, the maintained study status, selection and playback-range APIs, and the two returned-step objectives. It has no frozen-source guard. Against the affected baseline it reports 15 failing bounds among 21 cases and exits nonzero; against the received V3 source it reports zero failures. The reference and fixtures remain unchanged across the comparison.
 
 The candidate source is owned and published separately by the repair team. These results qualify only the exact received model in the stated source closure. They do not establish final PR-head equivalence, a full-repository test pass, browser/media behavior, deployment, or owner integration. Retained team reviews of the mathematics, screening mechanism and consumer interpretation were based on brokered source and execution evidence, not separate worker executions.
+
+## Bounded alternative-family screen audit
+
+After the step receiving, the unchanged spike and decaying-family screens were checked on 238 preserved, publicly admitted single-group inputs: the original 224 cases plus 14 targeted clustered impulse/decay controls. For each family the simulated screened score, rho and index matched actual V3 in all 238 cases. The actual family result objects also matched the affected baseline. Exhaustive scoring with the same coefficients found zero strict final winner gaps in either family; the maximum gap was zero. Inputs, original indexes and the two negative controls were retained.
+
+The targeted controls cover sign and location, weak events on larger backgrounds, clock shifts, independently rounded value offsets, and event-free constant/smooth inputs. Offset pairs are distinct stored inputs; no coefficient, score or status invariance was assumed. All 238 cases were checked through the actual public proposal admission during this audit.
+
+The additional command is:
+
+```sh
+node tools/scalar-reference/audit-alternative-screens.mjs
+```
+
+This diagnostic accepts the two recorded model hashes and consumes the stored targeted arrays. It asks whether screening loses a better candidate among the existing fitted coefficients. The negative result does not prove coefficient accuracy, global optimality, universal screening correctness, or that no temporarily better candidate was skipped before a later winner superseded it. It supplies no basis for a production spike/decay change or further corpus expansion. The original combined audit took 4.38 seconds on the observed host; that is not a production performance guarantee.
