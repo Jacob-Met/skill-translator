@@ -19,13 +19,13 @@ function showRound(){
  $('verdict').textContent=labels[r.status];$('verdict').dataset.state=r.status;
  const original=r.originalScore.results.find(m=>m.id===view.landmarkId);
  $('original-score').textContent=`Retained practice basis: ${{'original-annotation':'Original annotated task','unique-raw-proposal':'One demonstrated relationship','composed-raw-proposals':'Complete demonstrated relationships'}[result.practiceBasis]}. Original selected-mark score: ${!original.placed?'missing':original.evaluation.within?'within tolerance':'outside tolerance'}. Original complete-task score: ${!r.originalScore.complete?'incomplete':r.originalScore.passed?'within all tolerances':'needs adjustment'}. Original tolerance: ${view.toleranceMm} mm.`;
- $('alternatives').replaceChildren(...r.alternatives.map(a=>node('p',`${a.rule}: ${a.predicted?`target (${a.predicted.xMm.toFixed(3)}, ${a.predicted.yMm.toFixed(3)}) mm; ${a.evaluation?`${a.evaluation.within?'within':'outside'}, error ${a.evaluation.errorMm.toFixed(3)} mm`:'no retained placement'}`:a.reason}`)));
+ $('alternatives').replaceChildren(...r.alternatives.map((a,i)=>{const row=node('div','');row.className='alternative';const number=node('span',String(i+1));number.className='target-number';const detail=node('div','');detail.append(node('strong',a.rule),node('p',a.predicted?`Target (${a.predicted.xMm.toFixed(3)}, ${a.predicted.yMm.toFixed(3)}) mm · ${a.evaluation?`${a.evaluation.within?'Within':'Outside'} tolerance; error ${a.evaluation.errorMm.toFixed(3)} mm`:'No retained placement'}`:a.reason));row.append(number,detail);return row;}));
  $('boundary').textContent=composed()?result.boundary:view.boundary;
  const map=$('comparison-map');map.replaceChildren();const svg=(tag,attrs,text)=>{const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);if(text)e.textContent=text;map.append(e);};
  const {widthMm,heightMm}=result.session.reference.target,scale=Math.min(560/widthMm,260/heightMm),left=(640-widthMm*scale)/2,top=(360-heightMm*scale)/2,p=v=>({x:left+v.xMm*scale,y:top+v.yMm*scale});
  svg('rect',{x:left,y:top,width:widthMm*scale,height:heightMm*scale,fill:'#edf3ec',stroke:'#214e3d'});svg('text',{x:25,y:25,fill:'#17312f'},`${widthMm} × ${heightMm} mm · round ${r.round}`);
- r.alternatives.forEach((a,i)=>{if(!a.predicted)return;const q=p(a.predicted);svg('circle',{cx:q.x,cy:q.y,r:8,fill:'none',stroke:'#9c7c24','stroke-width':2});});
- if(r.actual){const q=p(r.actual);svg('circle',{cx:q.x,cy:q.y,r:5,fill:'#207a63'});}
+ r.alternatives.forEach((a,i)=>{if(!a.predicted)return;const q=p(a.predicted);if(r.actual){const actual=p(r.actual);svg('line',{x1:actual.x,y1:actual.y,x2:q.x,y2:q.y,stroke:'#a58532','stroke-width':1,'stroke-dasharray':'4 4'});}svg('circle',{cx:q.x,cy:q.y,r:10,fill:'#fffdf3',stroke:'#9c7c24','stroke-width':2});svg('text',{x:q.x,y:q.y+4,'text-anchor':'middle',fill:'#684d11',style:'font-size:11px;font-weight:700'},String(i+1));});
+ if(r.actual){const q=p(r.actual);svg('path',{d:`M ${q.x} ${q.y-15} L ${q.x+15} ${q.y} L ${q.x} ${q.y+15} L ${q.x-15} ${q.y} Z`,fill:'none',stroke:'#207a63','stroke-width':3});}
 }
 function render(){
  $('workspace').hidden=!account;$('session-file').disabled=!account;$('comparison').hidden=!result;
