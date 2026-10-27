@@ -14,6 +14,16 @@ The complete-study control is enabled for a valid attached study, including one 
 
 You can also choose **Return to the unchanged rehearsal** and export the study there. Export a file to keep a portable copy; live-page preservation does not provide durable storage across a feature-page reload.
 
+## Original center prediction in feature review
+
+For the selected trial, feature review shows the attached study’s original center prediction and recorded reason. It keeps the original wording: **Every mark is within tolerance**, **At least one mark is outside tolerance**, or **I am uncertain**.
+
+The prediction concerns original mark positions. Feature clearance is assessed separately. After commitment, agreement comes from the existing center result. For example, both centers can be within their two-millimetre tolerances while their feature gap is six millimetres against a ten-millimetre requirement. An “every mark” prediction agrees with the center result; the separate feature requirement still fails.
+
+Before commitment, center-result and agreement feedback remain withheld. A committed uncertain prediction retains **Uncertainty retained; no agreement score.** The page distinguishes a trial with no recorded prediction from a raw review without an attached study. Changing the selected trial updates its account without changing the study.
+
+These findings describe authored geometry and the recorded prediction; they do not establish physical performance, mastery, or a learning effect.
+
 ## Browser receiving
 
 From the repository root, run:
@@ -29,7 +39,7 @@ To receive an already-running maintained application, set `QA_ORIGIN=http://127.
 
 The course runs as an ordinary user and admits the actual Chromium sandbox before product navigation. It uses the maintained application server, compares served source bytes with the package, reads completed browser downloads, and captures desktop and 390-pixel views.
 
-Its nine groups cover exact judgment return, direct complete-study downloads and reopening, all three placement controls, commitment and continuation, failed and successful replacements, empty-study versus raw-review availability, legacy interoperability, cancelled fresh navigation, and invalid post-judgment edits. The comparison uses authored geometric declarations; it does not establish physical performance or learning effects.
+Its thirteen groups cover exact judgment return, direct complete-study downloads and reopening, all three placement controls, commitment and continuation, failed and successful replacements, empty-study versus raw-review availability, legacy interoperability, cancelled fresh navigation, and invalid post-judgment edits. A four-sheet course also checks separate center agreement and feature-gap failure, skipped judgments, uncertainty, safe long-reason rendering at 390 pixels, withholding before commitment, and later disclosure of the original center disagreement. The comparison uses authored geometric declarations; it does not establish physical performance or learning effects.
 
 Related native tests:
 
@@ -40,4 +50,4 @@ node --test --test-concurrency=2 \
   test/feature-rehearsal.test.mjs
 ```
 
-See [the original handoff receiving record](receipts/feature-judgment-handoff-20261027/verification.json) and [the direct-export receiving record](receipts/feature-judgment-export-20261027/verification.json) for reproduced baselines, exact source hashes, review, and results.
+See [the original handoff receiving record](receipts/feature-judgment-handoff-20261027/verification.json), [the direct-export receiving record](receipts/feature-judgment-export-20261027/verification.json), and [the selected-trial context receiving record](receipts/feature-judgment-context-20261027/verification.json) for reproduced baselines, exact source hashes, review, and results.

@@ -1,0 +1,171 @@
+{
+  "scope": "Selected original center prediction and reason in feature review, using existing validated judgment findings. Center agreement and feature clearance remain distinct; no new scoring or schema.",
+  "baseline": {
+    "commit": "56371f70c748188e50589816d6d350806939c813",
+    "tree": "eab21d527bd3e76e28f3fcb79e129ce2a550aae4",
+    "verifiedFiles": 1585,
+    "command": "estate-da449820-20261027-context-red-green-109",
+    "expectedFailure": "Feature review must show the selected trial original prediction context"
+  },
+  "preservedFailures": [
+    {
+      "command": "estate-da449820-20261027-context-red-green-109",
+      "candidate": "Test-only table-array reader used $eval instead of $$eval. Both injected plural selectors corrected; production unchanged."
+    },
+    {
+      "command": "estate-da449820-20261027-context-selector-fix-112",
+      "candidate": "Long reason overflowed at390px despite intended inline CSS. Diagnostic114 found context clientWidth306/scrollWidth9539 and ineffective wrapping."
+    }
+  ],
+  "correction": {
+    "diagnosticCommand": "estate-da449820-20261027-context-overflow-diagnostic-114",
+    "cause": "Maintained style-src 'self' blocks inline styles. Verified server policy and computed paragraph styles.",
+    "change": "Move the exact feature-page wrapping rules into existing served feature-clearance.css; remove the blocked inline block. Policy and JavaScript semantics unchanged.",
+    "verified": "Original downloaded long-reason case now has context clientWidth306/scrollWidth306, document width390, effective pre-wrap/anywhere. Full reason remains literal and readable."
+  },
+  "candidate": {
+    "command": "estate-da449820-20261027-context-served-style-fix-120",
+    "terminal": {
+      "exitCode": 0,
+      "finishedAt": "2026-10-27T08:51:56.141880393Z"
+    },
+    "ok": true,
+    "browser": "Chrome/156.0.8078.47",
+    "groups": [
+      "actual feature review, trial selection and resume preserve complete judgments, source, plan, actions and prior help",
+      "recorded judgment blocks coordinate, SVG pointer and keyboard edits; the direct feature export reopens the exact study with its placement lock",
+      "commit and next sheet preserve old judgments while allowing real coordinate, pointer and keyboard placements",
+      "failed raw, review and comparison replacements preserve the companion; feature export retains its existing raw schema",
+      "successful explicit raw and saved-feature imports clear old judgments even when their rehearsal bytes match",
+      "explicit fresh start and successful comparison replacement cannot inherit earlier judgments",
+      "legacy raw handoff and subsequent actual navigation remain compatible",
+      "a cancelled fresh navigation leaves accepted judgments available for a subsequent real resume",
+      "the actual committed center-pass and feature-gap-fail case retains the original prediction and center agreement separately",
+      "sparse trial mapping preserves uncertainty and literal long reasons without stale text or narrow-page overflow",
+      "uncommitted feedback stays withheld; failed replacement retains context and actual full-study reopening restores it after raw replacement",
+      "actual later commitment reveals the existing center disagreement without rewriting the original prediction or reason",
+      "invalid full judgment history is refused without raw fallback or consuming the recoverable handoff"
+    ],
+    "completedDownloads": 37,
+    "errors": [],
+    "offsite": [],
+    "sourceReceipt": [
+      {
+        "path": "web/rehearsal.html",
+        "bytes": 6547,
+        "sha256": "e4b297b386e976cffc2bb852556d2f07d9c80f67b7197e378435418227330722"
+      },
+      {
+        "path": "web/feature-rehearsal.html",
+        "bytes": 2800,
+        "sha256": "6f193718859e2f4e26c5823e6053cf7f10ec3252a334f4022bc0958f8d23d5d1"
+      },
+      {
+        "path": "web/feature-clearance.css",
+        "bytes": 1637,
+        "sha256": "1945a13570f2fe2f89922d010838a3a218758c8d005a8a74559b3737c4014e2b"
+      },
+      {
+        "path": "web/rehearsal.mjs",
+        "bytes": 13804,
+        "sha256": "168a7dd8a2f6df99181228bf6e0760994ecfba73787c8e31c915a96634adec0c"
+      },
+      {
+        "path": "web/feature-rehearsal.mjs",
+        "bytes": 9971,
+        "sha256": "49c486892e79ff962200ed91f5380c513dfa5c64803337ee1492cd682fd8efd1"
+      },
+      {
+        "path": "src/rehearsal-judgment.mjs",
+        "bytes": 4382,
+        "sha256": "152c74b4896497efc856564224cf72beffb788ced5d5979ad98c72d8d2af9195"
+      },
+      {
+        "path": "src/feature-rehearsal.mjs",
+        "bytes": 2748,
+        "sha256": "9877f4c060b5a283eff45f3a5f7a30858cbd3c059b0ce24ec5c4bff2a6649192"
+      }
+    ],
+    "sandboxAdmitted": true,
+    "sha256": {
+      "web/feature-rehearsal.html": "6f193718859e2f4e26c5823e6053cf7f10ec3252a334f4022bc0958f8d23d5d1",
+      "web/feature-rehearsal.mjs": "49c486892e79ff962200ed91f5380c513dfa5c64803337ee1492cd682fd8efd1",
+      "web/feature-clearance.css": "1945a13570f2fe2f89922d010838a3a218758c8d005a8a74559b3737c4014e2b",
+      "tools/browser-feature-judgment-handoff.mjs": "c5e64671ad1984f73ad67bb7c132df8fe0a99e5da7b0351fb0abd72ff8c5d94f"
+    },
+    "maintainedFeatureGroups": 7
+  },
+  "additionalReceiving": {
+    "command": "estate-da449820-20261027-context-prehelp-style-122",
+    "terminal": {
+      "exitCode": 0,
+      "finishedAt": "2026-10-27T08:52:13.938858298Z"
+    },
+    "beforeHelp": {
+      "ok": true,
+      "sourceReceipt": [
+        {
+          "path": "web/rehearsal.html",
+          "bytes": 6547,
+          "sha256": "e4b297b386e976cffc2bb852556d2f07d9c80f67b7197e378435418227330722"
+        },
+        {
+          "path": "web/feature-rehearsal.html",
+          "bytes": 2800,
+          "sha256": "6f193718859e2f4e26c5823e6053cf7f10ec3252a334f4022bc0958f8d23d5d1"
+        },
+        {
+          "path": "web/feature-clearance.css",
+          "bytes": 1637,
+          "sha256": "1945a13570f2fe2f89922d010838a3a218758c8d005a8a74559b3737c4014e2b"
+        },
+        {
+          "path": "web/rehearsal.mjs",
+          "bytes": 13804,
+          "sha256": "168a7dd8a2f6df99181228bf6e0760994ecfba73787c8e31c915a96634adec0c"
+        },
+        {
+          "path": "web/feature-rehearsal.mjs",
+          "bytes": 9971,
+          "sha256": "49c486892e79ff962200ed91f5380c513dfa5c64803337ee1492cd682fd8efd1"
+        },
+        {
+          "path": "src/rehearsal-judgment.mjs",
+          "bytes": 4382,
+          "sha256": "152c74b4896497efc856564224cf72beffb788ced5d5979ad98c72d8d2af9195"
+        },
+        {
+          "path": "src/feature-rehearsal.mjs",
+          "bytes": 2748,
+          "sha256": "9877f4c060b5a283eff45f3a5f7a30858cbd3c059b0ce24ec5c4bff2a6649192"
+        }
+      ],
+      "browser": "Chrome/156.0.8078.47",
+      "sandboxAdmitted": true,
+      "expected": "[\n  {\n    \"id\": \"a\",\n    \"xMm\": 22,\n    \"yMm\": 50\n  }\n]",
+      "observed": {
+        "text": "[\n  {\n    \"id\": \"a\",\n    \"xMm\": 22,\n    \"yMm\": 50\n  }\n]",
+        "clientWidth": 336,
+        "scrollWidth": 336,
+        "whiteSpace": "pre-wrap",
+        "overflowWrap": "anywhere"
+      },
+      "errors": [],
+      "offsite": []
+    },
+    "visual": "Lead inspected actual desktop and390px center-pass/feature-fail views, long literal reason, and opened before-help record. No clipping or horizontal page overflow in the tested cases."
+  },
+  "semantics": {
+    "mapping": "Existing inspectPlacementJudgments zero-based trialIndex matched to selected feature trial.index minus1. Skipped trial2 and later trial3/4 prove sparse mapping.",
+    "mixedOutcome": "Actual committed22/38mm centers satisfy their2mm positional tolerances; radius5 features leave6mm against required10mm. Original adequate prediction agrees with center result while feature requirement fails.",
+    "uncertainty": "Explicit uncertainty retains no agreement score. Uncommitted trial withholds center/feature/agree feedback, then actual commitment reveals existing center disagreement.",
+    "custody": "Complete actual downloads remain unchanged through selection and reopen; failed inputs preserve context; successful raw replacement distinguishes missing study from missing selected-trial prediction."
+  },
+  "review": {
+    "execution": "Lead executed all browser and native checks.",
+    "source": "Retained recovery_review independently reviewed literal production patch and scoped served-stylesheet correction.",
+    "coverage": "Retained validation reviewed disconfirming fixtures and brokered receiving evidence."
+  },
+  "integration": "This record covers the candidate. Exact package/maintained-launch receiving and actual merged-tree correspondence are recorded on the PR and live estate task.",
+  "qualification": "Authored geometric product behavior; no observed learning, mastery, physical performance or outside-assistance claim."
+}
