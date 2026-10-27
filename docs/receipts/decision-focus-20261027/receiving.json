@@ -1,0 +1,582 @@
+{
+  "schema": "skill-translator.decision-focus-receiving/v1",
+  "baseCommit": "4e9fd52abb5b0dd0d5036633cf3bd60cbf9c8e0b",
+  "baseTree": "ee2ca2524be44fb2a07eb8e2e397b0e7dbf898f4",
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/427",
+  "ownership": {
+    "actor": "estate-29a-20261027",
+    "task": "skill-translator-focused-decision-practice",
+    "claimRevision": 2,
+    "sourceReceipt": "b8865da11eeca4a0e5111dd6ca7ab931fc155932daaf281cf0847c10994ce35a",
+    "originalCommand": "estate-29a-focused-native-claim-167",
+    "recoveredTerminal": true
+  },
+  "behavior": "Choose a nonempty subset for an explicitly fresh exercise in demonstration order. Pending choices remain separate from current responses, drafts, session order, and exports.",
+  "execution": {
+    "owner": "node-824445595d172c3ede05a19b3ff70854",
+    "workspace": "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52",
+    "verifiedMaintainedFiles": 48,
+    "baselineCommand": "estate-29a-focused-baseline-181",
+    "candidateCommand": "estate-29a-focused-candidate-183",
+    "historyRegressionCommand": "estate-29a-focused-history-receiving-187"
+  },
+  "review": {
+    "sourceReviewer": "retained /root/review",
+    "executionAssessor": "retained /root/gateway",
+    "result": "Independent emitted-diff review approved; lead-brokered browser evidence assessed without remaining integration blockers.",
+    "visual": "Lead inspected actual 390 by 844 viewport: native labelled choices, keyboard focus, selected count, replacement/save-first explanation, and start button readable; measured document width 390."
+  },
+  "receivingNotes": [
+    "Reference PNGs are decoded through Blob URLs under the unchanged production CSP, then full decoded RGBA is compared with the active and historical frames.",
+    "The deferred valid session read is paused only in the owned test page; checkbox edits invalidate its revision, and completion must preserve the accepted exercise and release busy controls.",
+    "The baseline and candidate use the same portable harness. Absolute stylesheet references resolve against repository root; the race comparison snapshots current work before entering busy state.",
+    "One unattributed resource 404 was logged in both baseline and candidate. No uncaught page errors, offsite requests, or source-hash failures were observed."
+  ],
+  "limits": [
+    "Chromium receiving only; no universal browser or assistive-technology claim.",
+    "Authored software-control source and original synthetic frames; no learning, physical skill, or clinical performance claim.",
+    "Explicit start replaces current exercise; the interface says to save first. No automatic prior-session retention.",
+    "Core, session/source/export formats, familiarity semantics, media custody, and scoring are unchanged."
+  ],
+  "reproduce": {
+    "workingDirectory": "repository root",
+    "focused": "node tools/browser-decision-focus.mjs candidate",
+    "history": "node tools/browser-decision-history.mjs candidate",
+    "environment": "CHROME_BINARY selects an installed Chromium executable with active Linux sandbox; PUPPETEER_PATH optionally selects an installed Puppeteer module; RECEIPT_DIR and QA_OUTPUT select separate receiving directories."
+  },
+  "baseline": {
+    "name": "focused-baseline",
+    "sha256": "ae318e3f99a6eb12811380a7031a091133dc682e2663f2f6502f1c431595c605",
+    "report": {
+      "mode": "baseline",
+      "startedAt": "2026-10-27T05:46:50.883Z",
+      "checks": [
+        {
+          "name": "Sandbox verified before product navigation",
+          "passed": true
+        },
+        {
+          "name": "Baseline: four active steps without selected-practice controls",
+          "passed": true
+        }
+      ],
+      "sourceHashes": {
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/docs/receipts/decision-practice-20261024/source.json": "5352a2ea83942ab9a6c5f71b4145d956c55025cfd4ba9be783b8402a1405214a",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-baseline/authored-source.json": "5b3ff1402e2ffa2a349881a91b26326d36b180838a1af19f7df49eaedb3c943f",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-baseline/reversed-session.json": "07fafdb39b45e351f5fb4e00c5a5268c9e4d6f4616c1be8279c7c4617b35cb15",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-baseline/invalid-session.json": "06de88b2b846fb1adf428f898cd09bef5aae99af2937e61cbe43d8df53564897",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/web/decision-practice.html": "9d24811a4053ed5d81cf941dc6c95747e1d1d14f76dcc6596970352c0b222577",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/web/decision-practice.mjs": "7622f091abd1ccd6c7198368ebd6fbb6b852ac240b69bb61554631e27960861f",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/src/decision-practice.mjs": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/server.mjs": "b79d1a78b9f23f3aafde2b8236e7bee321dc0f488d1a7fe599edacef67957be0",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/tools/browser-decision-focus.mjs": "9c4b29a30e6f73fa40d22a85f401b6d9c8a6c0ba70f4383506b6a5f6781a02fa",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/tools/support/chromium-sandbox.mjs": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/web/decision-practice.css": "66dffa474393333f3e3c10c342de3810d2ef278d9ce118157afd2ab2e7a7bbac"
+      },
+      "downloads": [
+        {
+          "label": "initial-all",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-baseline/download-1-initial-all/decision-practice.json",
+          "sha256": "2ad11792edc28c03f2225858311f61485dfb13f16c1786019970b97033e2dcce"
+        }
+      ],
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "offsiteRequests": [],
+      "fixtureScope": "Four authored software-control steps using unchanged original retained PNG bytes; no physical demonstration or performance claim",
+      "sandbox": {
+        "schema": "hamon-chromium-sandbox/v1",
+        "qualification": "Linux Chromium status in the supplied isolated CDP page",
+        "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "startedAt": "2026-10-27T05:46:51.075Z",
+        "completedAt": "2026-10-27T05:46:51.149Z",
+        "durationMs": 73.577718,
+        "admitted": true,
+        "browser": {
+          "protocolVersion": "1.3",
+          "product": "Chrome/156.0.8078.47",
+          "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "jsVersion": "15.6.75.19"
+        },
+        "target": {
+          "targetId": "C576EE677654D0F2F28A169DC76E4DBF",
+          "type": "page",
+          "title": "about:blank",
+          "url": "about:blank",
+          "attached": true,
+          "canAccessOpener": false,
+          "browserContextId": "1337A00B24920FA7A63312E92A8D46DD"
+        },
+        "url": "chrome://sandbox/",
+        "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+        "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+        "observation": {
+          "rows": {
+            "layer1": "Namespace",
+            "pid": "Yes",
+            "network": "Yes",
+            "seccomp": "Yes",
+            "tsync": "Yes"
+          },
+          "checks": {
+            "adequate": true,
+            "layer1": true,
+            "pid": true,
+            "network": true,
+            "seccomp": true,
+            "tsync": true
+          },
+          "populated": true,
+          "duplicates": [],
+          "active": true
+        },
+        "failure": null
+      },
+      "passed": true,
+      "hashGuardFailures": [],
+      "finishedAt": "2026-10-27T05:46:52.575Z"
+    }
+  },
+  "candidate": {
+    "name": "focused-candidate",
+    "sha256": "0bd916e893fccedde647a1a618a26ebc412698609c3f97ef4f9ab9ffdb7e83ab",
+    "report": {
+      "mode": "candidate",
+      "startedAt": "2026-10-27T05:47:26.139Z",
+      "checks": [
+        {
+          "name": "Sandbox verified before product navigation",
+          "passed": true
+        },
+        {
+          "name": "Pending choices and familiarity do not mutate the actual exported practice",
+          "passed": true
+        },
+        {
+          "name": "Checkbox edits preserve prediction draft/caret; empty selection cannot start",
+          "passed": true
+        },
+        {
+          "name": "Pending choices and draft text survive ordinary reveal render",
+          "passed": true
+        },
+        {
+          "name": "390px keyboard choices D then B start an empty source-ordered B/D exercise with declared familiarity",
+          "passed": true,
+          "detail": {
+            "width": 390,
+            "scroll": 390
+          }
+        },
+        {
+          "name": "Pending choices preserve a live reflection, caret, and selected evidence",
+          "passed": true
+        },
+        {
+          "name": "Complete reopen preserves exact session, original B/D frames, and current-step return",
+          "passed": true
+        },
+        {
+          "name": "Imported D/B order and evidence remain intact until explicit fresh B/D start",
+          "passed": true
+        },
+        {
+          "name": "Failed session read preserves pending choices and active practice",
+          "passed": true
+        },
+        {
+          "name": "New choice rejects an older valid delayed import, clears busy state, and preserves exported work",
+          "passed": true
+        },
+        {
+          "name": "Successful session replacement resets pending choices",
+          "passed": true
+        },
+        {
+          "name": "Successful raw-source replacement resets selection to all",
+          "passed": true
+        },
+        {
+          "name": "Existing restart-all restores every source decision with explicit familiarity",
+          "passed": true
+        }
+      ],
+      "sourceHashes": {
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/docs/receipts/decision-practice-20261024/source.json": "5352a2ea83942ab9a6c5f71b4145d956c55025cfd4ba9be783b8402a1405214a",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/authored-source.json": "5b3ff1402e2ffa2a349881a91b26326d36b180838a1af19f7df49eaedb3c943f",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/reversed-session.json": "07fafdb39b45e351f5fb4e00c5a5268c9e4d6f4616c1be8279c7c4617b35cb15",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/invalid-session.json": "06de88b2b846fb1adf428f898cd09bef5aae99af2937e61cbe43d8df53564897",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/web/decision-practice.html": "aba0687afce8805eaacf578a3faf51cabb448c4acd1bb765532b6fddef01ed1f",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/web/decision-practice.mjs": "abce0a110784c091459026cb7db743d938f7fe5f0df49c0345b9624b4a1d438d",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/src/decision-practice.mjs": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/server.mjs": "b79d1a78b9f23f3aafde2b8236e7bee321dc0f488d1a7fe599edacef67957be0",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/tools/browser-decision-focus.mjs": "9c4b29a30e6f73fa40d22a85f401b6d9c8a6c0ba70f4383506b6a5f6781a02fa",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/tools/support/chromium-sandbox.mjs": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+        "/home/ubuntu/hamon-work/estate-29a-20261027/focused-practice-4e9fd52/web/decision-practice.css": "89e2edf19ee9ad0e32fab65a9eb7d8e69a3a22d84e42a3c799c8525167389037"
+      },
+      "downloads": [
+        {
+          "label": "initial-all",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-1-initial-all/decision-practice.json",
+          "sha256": "2ad11792edc28c03f2225858311f61485dfb13f16c1786019970b97033e2dcce"
+        },
+        {
+          "label": "pending-selection",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-2-pending-selection/decision-practice.json",
+          "sha256": "2ad11792edc28c03f2225858311f61485dfb13f16c1786019970b97033e2dcce"
+        },
+        {
+          "label": "pending-familiarity",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-3-pending-familiarity/decision-practice.json",
+          "sha256": "2ad11792edc28c03f2225858311f61485dfb13f16c1786019970b97033e2dcce"
+        },
+        {
+          "label": "selected-b-d",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-4-selected-b-d/decision-practice.json",
+          "sha256": "91c6ee36c39834753b15357537bb6e33648956a481037e9347c85f8fae045f30"
+        },
+        {
+          "label": "completed-session-before-reopen",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-5-completed-session-before-reopen/decision-practice.json",
+          "sha256": "488b1102045c9f419bb240fce63036a34332fec04c9aa408e5bd0b40f95907ce"
+        },
+        {
+          "label": "completed-b-d",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-6-completed-b-d/complete-decision-practice.json",
+          "sha256": "a7360f0ec02dd04356fb188df6b901c26e6b2122d3a0bdec3f5dd0401841ebfb"
+        },
+        {
+          "label": "reopened-b-d",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-7-reopened-b-d/decision-practice.json",
+          "sha256": "488b1102045c9f419bb240fce63036a34332fec04c9aa408e5bd0b40f95907ce"
+        },
+        {
+          "label": "imported-d-b",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-8-imported-d-b/decision-practice.json",
+          "sha256": "26e543db20b9025d8412bee74bf2f56bd4ce2cea994d301491d69db91f14756f"
+        },
+        {
+          "label": "new-b-d",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-9-new-b-d/decision-practice.json",
+          "sha256": "91c6ee36c39834753b15357537bb6e33648956a481037e9347c85f8fae045f30"
+        },
+        {
+          "label": "after-stale-read",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-10-after-stale-read/decision-practice.json",
+          "sha256": "91c6ee36c39834753b15357537bb6e33648956a481037e9347c85f8fae045f30"
+        },
+        {
+          "label": "raw-source-reset-all",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-11-raw-source-reset-all/decision-practice.json",
+          "sha256": "68c56cb9b76af1323393376666745372fc64f9a1d1d4d820b7bc9f2ada080e49"
+        },
+        {
+          "label": "restart-all",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-candidate/download-12-restart-all/decision-practice.json",
+          "sha256": "68c56cb9b76af1323393376666745372fc64f9a1d1d4d820b7bc9f2ada080e49"
+        }
+      ],
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "offsiteRequests": [],
+      "fixtureScope": "Four authored software-control steps using unchanged original retained PNG bytes; no physical demonstration or performance claim",
+      "sandbox": {
+        "schema": "hamon-chromium-sandbox/v1",
+        "qualification": "Linux Chromium status in the supplied isolated CDP page",
+        "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "startedAt": "2026-10-27T05:47:26.325Z",
+        "completedAt": "2026-10-27T05:47:26.392Z",
+        "durationMs": 66.44527199999999,
+        "admitted": true,
+        "browser": {
+          "protocolVersion": "1.3",
+          "product": "Chrome/156.0.8078.47",
+          "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "jsVersion": "15.6.75.19"
+        },
+        "target": {
+          "targetId": "9AFA41C860CA6E481436C782535DA126",
+          "type": "page",
+          "title": "about:blank",
+          "url": "about:blank",
+          "attached": true,
+          "canAccessOpener": false,
+          "browserContextId": "9850EB260B78F143800D3E08EFC5ED6F"
+        },
+        "url": "chrome://sandbox/",
+        "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+        "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+        "observation": {
+          "rows": {
+            "layer1": "Namespace",
+            "pid": "Yes",
+            "network": "Yes",
+            "seccomp": "Yes",
+            "tsync": "Yes"
+          },
+          "checks": {
+            "adequate": true,
+            "layer1": true,
+            "pid": true,
+            "network": true,
+            "seccomp": true,
+            "tsync": true
+          },
+          "populated": true,
+          "duplicates": [],
+          "active": true
+        },
+        "failure": null
+      },
+      "originalRGBA": {
+        "moment-215a122d-d762-4b62-a8e2-2b3f220f698e": {
+          "width": 160,
+          "height": 100,
+          "sha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+        },
+        "moment-44b83c6b-8209-49fb-a585-7ab5e92d76dd": {
+          "width": 160,
+          "height": 100,
+          "sha256": "1b0f8915b29a6fd03dfb01a6caf845e3789fc397971e55d2275094dd4f6e6867"
+        },
+        "moment-51ef8eaf-4265-4e7f-bb2d-a6ed376252db": {
+          "width": 160,
+          "height": 100,
+          "sha256": "7b90ba282264fd220587ec98f82f2a2fd1fb8bc177e02be8b0b5081f24015a88"
+        }
+      },
+      "passed": true,
+      "hashGuardFailures": [],
+      "finishedAt": "2026-10-27T05:47:30.632Z"
+    }
+  },
+  "historyRegression": {
+    "sha256": "cee160d110aeca4051f65dd79441ae73e705ece097cf528a66db1ec7d70368b4",
+    "report": {
+      "mode": "candidate",
+      "startedAt": "2026-10-27T05:48:11.419Z",
+      "qualification": "Authored software receiving with original PNG assets; no measured expert, physical skill or learning claim.",
+      "checks": [
+        {
+          "name": "Owned Chromium sandbox admitted before product navigation"
+        },
+        {
+          "name": "Native prediction return preserves draft, focus destination and same-document state",
+          "activation": "keyboard",
+          "historyChecked": false,
+          "target": "predictionHeading"
+        },
+        {
+          "name": "Two distinct prior original frame pairs/accounts and retained responses match; actual session download unchanged by review",
+          "reviewed": [
+            {
+              "index": 0,
+              "hashes": [
+                {
+                  "width": 160,
+                  "height": 100,
+                  "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+                },
+                {
+                  "width": 160,
+                  "height": 100,
+                  "rgbaSha256": "1b0f8915b29a6fd03dfb01a6caf845e3789fc397971e55d2275094dd4f6e6867"
+                }
+              ],
+              "account": "Intended result\nInspect the blue marker after the red state\nVisible change\nThe authored marker changes position and color\nSupplied sensory cue\nNot supplied by the author.\nRecovery cue\nPause if the marker is displaced",
+              "captions": [
+                "Before · Authored state 1 · presented 0.500 s · Authored visible state 1",
+                "After · Authored state 2 · presented 1.500 s · Authored visible state 2"
+              ]
+            },
+            {
+              "index": 1,
+              "hashes": [
+                {
+                  "width": 160,
+                  "height": 100,
+                  "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+                },
+                {
+                  "width": 160,
+                  "height": 100,
+                  "rgbaSha256": "7b90ba282264fd220587ec98f82f2a2fd1fb8bc177e02be8b0b5081f24015a88"
+                }
+              ],
+              "account": "Intended result\nInspect the green result across the longer interval\nVisible change\nThe authored frame changes from red to green\nSupplied sensory cue\nAn authored visual cue for the longer interval\nRecovery cue\nPause and inspect the original green frame",
+              "captions": [
+                "Before · Authored state 1 · presented 0.500 s · Authored visible state 1",
+                "After · Authored state 3 · presented 2.500 s · Authored visible state 3"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Switching earlier evidence preserves unsubmitted prediction, selection, uncertainty and current reveal boundary"
+        },
+        {
+          "name": "Native keyboard disclosure and 390px layout preserve the current draft",
+          "width": 390,
+          "scroll": 390
+        },
+        {
+          "name": "Native prediction return preserves draft, focus destination and same-document state",
+          "activation": "pointer",
+          "historyChecked": true,
+          "target": "predictionHeading"
+        },
+        {
+          "name": "Historical review preserves live reflection text, selection and chosen evidence"
+        },
+        {
+          "name": "Native reflection return preserves draft, focus destination and same-document state",
+          "activation": "keyboard",
+          "historyChecked": false,
+          "target": "reflectionHeading"
+        },
+        {
+          "name": "Native step return preserves draft, focus destination and same-document state",
+          "activation": "keyboard",
+          "historyChecked": false,
+          "target": "stepTitle"
+        },
+        {
+          "name": "Actual complete-practice download reopens original pixels, accounts and retained actions"
+        },
+        {
+          "name": "Restart invalidates old disclosure; original saved session restores its exact prior associations"
+        },
+        {
+          "name": "Distinct accepted source account clears previous disclosure and responses"
+        }
+      ],
+      "errors": [],
+      "offsite": [],
+      "downloads": [
+        {
+          "label": "session-before-review",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-history-regression/session-before-review.json",
+          "bytes": 7412,
+          "sha256": "d5d21fcb95944821e8b25bf5a2ed4e8d0f82ea5a70d7455dd08157f1564ef4bd"
+        },
+        {
+          "label": "session-after-review",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-history-regression/session-after-review.json",
+          "bytes": 7412,
+          "sha256": "d5d21fcb95944821e8b25bf5a2ed4e8d0f82ea5a70d7455dd08157f1564ef4bd"
+        },
+        {
+          "label": "complete-practice",
+          "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/focused-history-regression/complete-practice.json",
+          "bytes": 18728,
+          "sha256": "3b4d10de381e778a07d14babe5cbb0324d0e7a34df54162649fe179610570828"
+        }
+      ],
+      "sourceSha256": "333ba6419abc43c34037483be0eaff02a86051fbc47e83c75f399f5070131ee6",
+      "replacementScope": "Distinct title/account; original PNG assets unchanged",
+      "sourceHashes": {
+        "server.mjs": "b79d1a78b9f23f3aafde2b8236e7bee321dc0f488d1a7fe599edacef67957be0",
+        "web/decision-practice.mjs": "abce0a110784c091459026cb7db743d938f7fe5f0df49c0345b9624b4a1d438d",
+        "web/decision-practice.html": "aba0687afce8805eaacf578a3faf51cabb448c4acd1bb765532b6fddef01ed1f",
+        "web/decision-practice.css": "89e2edf19ee9ad0e32fab65a9eb7d8e69a3a22d84e42a3c799c8525167389037",
+        "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+        "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+        "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+        "web/decision-practice-input.mjs": "da8e7f702bf9d5a245b685d6c48a1de8502163be9272c3cf7fd3a856fa880a8a",
+        "web/decision-handoff.mjs": "a97389b5a27a2b33897fceab4d3c0d6183e32a6b6e2fdd0265cc7a6fc6df4f6d",
+        "src/decision-practice.mjs": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+        "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+        "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+        "tools/support/chromium-sandbox.mjs": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "tools/browser-decision-history.mjs": "dab6053e4c5177445166c642ca932992c4a21d784046c7039e29fda2c0137816"
+      },
+      "sandbox": {
+        "schema": "hamon-chromium-sandbox/v1",
+        "qualification": "Linux Chromium status in the supplied isolated CDP page",
+        "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+        "startedAt": "2026-10-27T05:48:11.663Z",
+        "completedAt": "2026-10-27T05:48:11.743Z",
+        "durationMs": 79.90699000000001,
+        "admitted": true,
+        "browser": {
+          "protocolVersion": "1.3",
+          "product": "Chrome/156.0.8078.47",
+          "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "jsVersion": "15.6.75.19"
+        },
+        "target": {
+          "targetId": "D3E4BF5D6108FDD178D8197FCA633915",
+          "type": "page",
+          "title": "about:blank",
+          "url": "about:blank",
+          "attached": true,
+          "canAccessOpener": false,
+          "browserContextId": "772976211B8CEE3584E8DA8186460740"
+        },
+        "url": "chrome://sandbox/",
+        "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+        "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+        "observation": {
+          "rows": {
+            "layer1": "Namespace",
+            "pid": "Yes",
+            "network": "Yes",
+            "seccomp": "Yes",
+            "tsync": "Yes"
+          },
+          "checks": {
+            "adequate": true,
+            "layer1": true,
+            "pid": true,
+            "network": true,
+            "seccomp": true,
+            "tsync": true
+          },
+          "populated": true,
+          "duplicates": [],
+          "active": true
+        },
+        "failure": null
+      },
+      "originals": [
+        [
+          {
+            "width": 160,
+            "height": 100,
+            "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+          },
+          {
+            "width": 160,
+            "height": 100,
+            "rgbaSha256": "1b0f8915b29a6fd03dfb01a6caf845e3789fc397971e55d2275094dd4f6e6867"
+          }
+        ],
+        [
+          {
+            "width": 160,
+            "height": 100,
+            "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+          },
+          {
+            "width": 160,
+            "height": 100,
+            "rgbaSha256": "7b90ba282264fd220587ec98f82f2a2fd1fb8bc177e02be8b0b5081f24015a88"
+          }
+        ]
+      ],
+      "result": "PASS",
+      "finishedAt": "2026-10-27T05:48:15.474Z"
+    }
+  }
+}
