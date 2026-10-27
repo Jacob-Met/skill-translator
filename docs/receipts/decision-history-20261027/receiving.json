@@ -1,0 +1,344 @@
+{
+  "schema": "skill-translator.decision-history-receiving/v1",
+  "baseCommit": "7122046769c69892d29fbe62a259b8c7ebdf5f7d",
+  "issue": "https://github.com/Jacob-Met/skill-translator/issues/422",
+  "execution": {
+    "owner": "node-824445595d172c3ede05a19b3ff70854",
+    "workspace": "/home/ubuntu/hamon-work/estate-29a-20261027/skill-translator",
+    "baselineCommand": "estate-29a-baseline-browser-087",
+    "candidateCommand": "estate-29a-candidate-browser-090",
+    "coreTestCommand": "estate-29a-decision-core-075",
+    "coreTests": {
+      "passed": 11,
+      "failed": 0
+    }
+  },
+  "review": {
+    "reviewer": "retained /root/review",
+    "scope": "Independent review of supplied product code; execution evidence supplied by lead",
+    "result": "No remaining source approval blocker",
+    "javascriptSha256": "abf6716801d7352829e5a1ec69b37d36b882de19a053f9416b53c3ab2489b50c",
+    "cssSha256": "7168bea2219cfb9f8595dacceedfe758558089ee781ca0f7ab1027faacf12232"
+  },
+  "visualReview": {
+    "reviewer": "lead",
+    "desktop": "Actual 1280px screenshot inspected; original before/after frames, captions, supplied/missing account fields and focus outline readable",
+    "mobile": "Actual 390px screenshot inspected; stacked frames and wrapping account/summary stay inside viewport"
+  },
+  "limits": [
+    "Authored software control, not measured learning or physical skill.",
+    "Source replacement uses a distinct title and account with the same original PNG assets.",
+    "Focused decision-practice receiving and maintained core tests; no full-repository qualification claimed.",
+    "No public deployment or installed-service change."
+  ],
+  "baseline": {
+    "mode": "baseline",
+    "startedAt": "2026-10-27T05:01:33.839Z",
+    "qualification": "Authored software receiving with original PNG assets; no measured expert, physical skill or learning claim.",
+    "checks": [
+      {
+        "name": "Owned Chromium sandbox admitted before product navigation"
+      },
+      {
+        "name": "Baseline gap reproduced: completed responses persist, but original prior frames cannot be reopened"
+      }
+    ],
+    "errors": [],
+    "offsite": [],
+    "downloads": [
+      {
+        "label": "session-before-review",
+        "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/baseline/session-before-review.json",
+        "bytes": 7412,
+        "sha256": "d5d21fcb95944821e8b25bf5a2ed4e8d0f82ea5a70d7455dd08157f1564ef4bd"
+      }
+    ],
+    "sourceSha256": "333ba6419abc43c34037483be0eaff02a86051fbc47e83c75f399f5070131ee6",
+    "replacementScope": "Distinct title/account; original PNG assets unchanged",
+    "sourceHashes": {
+      "server.mjs": "95a7c491d6a9a7a8e2f0253004db46dbad4c669135f78d12349c416c42f8e4ac",
+      "web/decision-practice.mjs": "c1ba684117884431e37ae9b4857d8253705e01bcc0b73ab070c0e3842c67727c",
+      "web/decision-practice.html": "d874f1e7f0b2047ffabe20094f1522fe0f20298f7f9f2d866c0de5209bcdd3ad",
+      "web/decision-practice.css": "673b7435a50850feddbbbb39672e6b57a92b6b52e1c2a50ff6bc9c6db53c9f79",
+      "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "web/decision-practice-input.mjs": "da8e7f702bf9d5a245b685d6c48a1de8502163be9272c3cf7fd3a856fa880a8a",
+      "web/decision-handoff.mjs": "a97389b5a27a2b33897fceab4d3c0d6183e32a6b6e2fdd0265cc7a6fc6df4f6d",
+      "src/decision-practice.mjs": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+      "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "tools/support/chromium-sandbox.mjs": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "tools/browser-decision-history.mjs": "50cead90ac48c41a2078cbd6ded0c00967cf145c054ea96a6660bf6cebd7fc65"
+    },
+    "sandbox": {
+      "schema": "hamon-chromium-sandbox/v1",
+      "qualification": "Linux Chromium status in the supplied isolated CDP page",
+      "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "startedAt": "2026-10-27T05:01:34.052Z",
+      "completedAt": "2026-10-27T05:01:34.125Z",
+      "durationMs": 73.129009,
+      "admitted": true,
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "target": {
+        "targetId": "781C153521E53F842946A6C55C6FA066",
+        "type": "page",
+        "title": "about:blank",
+        "url": "about:blank",
+        "attached": true,
+        "canAccessOpener": false,
+        "browserContextId": "BDA2DEFA22E914CB611D1B8F5050029C"
+      },
+      "url": "chrome://sandbox/",
+      "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+      "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+      "observation": {
+        "rows": {
+          "layer1": "Namespace",
+          "pid": "Yes",
+          "network": "Yes",
+          "seccomp": "Yes",
+          "tsync": "Yes"
+        },
+        "checks": {
+          "adequate": true,
+          "layer1": true,
+          "pid": true,
+          "network": true,
+          "seccomp": true,
+          "tsync": true
+        },
+        "populated": true,
+        "duplicates": [],
+        "active": true
+      },
+      "failure": null
+    },
+    "originals": [
+      [
+        {
+          "width": 160,
+          "height": 100,
+          "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+        },
+        {
+          "width": 160,
+          "height": 100,
+          "rgbaSha256": "1b0f8915b29a6fd03dfb01a6caf845e3789fc397971e55d2275094dd4f6e6867"
+        }
+      ],
+      [
+        {
+          "width": 160,
+          "height": 100,
+          "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+        },
+        {
+          "width": 160,
+          "height": 100,
+          "rgbaSha256": "7b90ba282264fd220587ec98f82f2a2fd1fb8bc177e02be8b0b5081f24015a88"
+        }
+      ]
+    ],
+    "result": "PASS",
+    "finishedAt": "2026-10-27T05:01:35.858Z"
+  },
+  "candidate": {
+    "mode": "candidate",
+    "startedAt": "2026-10-27T05:02:16.778Z",
+    "qualification": "Authored software receiving with original PNG assets; no measured expert, physical skill or learning claim.",
+    "checks": [
+      {
+        "name": "Owned Chromium sandbox admitted before product navigation"
+      },
+      {
+        "name": "Two distinct prior original frame pairs/accounts and retained responses match; actual session download unchanged by review",
+        "reviewed": [
+          {
+            "index": 0,
+            "hashes": [
+              {
+                "width": 160,
+                "height": 100,
+                "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+              },
+              {
+                "width": 160,
+                "height": 100,
+                "rgbaSha256": "1b0f8915b29a6fd03dfb01a6caf845e3789fc397971e55d2275094dd4f6e6867"
+              }
+            ],
+            "account": "Intended result\nInspect the blue marker after the red state\nVisible change\nThe authored marker changes position and color\nSupplied sensory cue\nNot supplied by the author.\nRecovery cue\nPause if the marker is displaced",
+            "captions": [
+              "Before · Authored state 1 · presented 0.500 s · Authored visible state 1",
+              "After · Authored state 2 · presented 1.500 s · Authored visible state 2"
+            ]
+          },
+          {
+            "index": 1,
+            "hashes": [
+              {
+                "width": 160,
+                "height": 100,
+                "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+              },
+              {
+                "width": 160,
+                "height": 100,
+                "rgbaSha256": "7b90ba282264fd220587ec98f82f2a2fd1fb8bc177e02be8b0b5081f24015a88"
+              }
+            ],
+            "account": "Intended result\nInspect the green result across the longer interval\nVisible change\nThe authored frame changes from red to green\nSupplied sensory cue\nAn authored visual cue for the longer interval\nRecovery cue\nPause and inspect the original green frame",
+            "captions": [
+              "Before · Authored state 1 · presented 0.500 s · Authored visible state 1",
+              "After · Authored state 3 · presented 2.500 s · Authored visible state 3"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Switching earlier evidence preserves unsubmitted prediction, selection, uncertainty and current reveal boundary"
+      },
+      {
+        "name": "Native keyboard disclosure and 390px layout preserve the current draft",
+        "width": 390,
+        "scroll": 390
+      },
+      {
+        "name": "Historical review preserves live reflection text, selection and chosen evidence"
+      },
+      {
+        "name": "Actual complete-practice download reopens original pixels, accounts and retained actions"
+      },
+      {
+        "name": "Restart invalidates old disclosure; original saved session restores its exact prior associations"
+      },
+      {
+        "name": "Distinct accepted source account clears previous disclosure and responses"
+      }
+    ],
+    "errors": [],
+    "offsite": [],
+    "downloads": [
+      {
+        "label": "session-before-review",
+        "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/candidate/session-before-review.json",
+        "bytes": 7412,
+        "sha256": "d5d21fcb95944821e8b25bf5a2ed4e8d0f82ea5a70d7455dd08157f1564ef4bd"
+      },
+      {
+        "label": "session-after-review",
+        "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/candidate/session-after-review.json",
+        "bytes": 7412,
+        "sha256": "d5d21fcb95944821e8b25bf5a2ed4e8d0f82ea5a70d7455dd08157f1564ef4bd"
+      },
+      {
+        "label": "complete-practice",
+        "filename": "/home/ubuntu/hamon-work/estate-29a-20261027/receipts/candidate/complete-practice.json",
+        "bytes": 18728,
+        "sha256": "3b4d10de381e778a07d14babe5cbb0324d0e7a34df54162649fe179610570828"
+      }
+    ],
+    "sourceSha256": "333ba6419abc43c34037483be0eaff02a86051fbc47e83c75f399f5070131ee6",
+    "replacementScope": "Distinct title/account; original PNG assets unchanged",
+    "sourceHashes": {
+      "server.mjs": "95a7c491d6a9a7a8e2f0253004db46dbad4c669135f78d12349c416c42f8e4ac",
+      "web/decision-practice.mjs": "abf6716801d7352829e5a1ec69b37d36b882de19a053f9416b53c3ab2489b50c",
+      "web/decision-practice.html": "d874f1e7f0b2047ffabe20094f1522fe0f20298f7f9f2d866c0de5209bcdd3ad",
+      "web/decision-practice.css": "7168bea2219cfb9f8595dacceedfe758558089ee781ca0f7ab1027faacf12232",
+      "web/styles.css": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "web/image-input.mjs": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "web/decision-practice-input.mjs": "da8e7f702bf9d5a245b685d6c48a1de8502163be9272c3cf7fd3a856fa880a8a",
+      "web/decision-handoff.mjs": "a97389b5a27a2b33897fceab4d3c0d6183e32a6b6e2fdd0265cc7a6fc6df4f6d",
+      "src/decision-practice.mjs": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+      "src/demonstration-sequence.mjs": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "src/frame-origin.mjs": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "tools/support/chromium-sandbox.mjs": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "tools/browser-decision-history.mjs": "50cead90ac48c41a2078cbd6ded0c00967cf145c054ea96a6660bf6cebd7fc65"
+    },
+    "sandbox": {
+      "schema": "hamon-chromium-sandbox/v1",
+      "qualification": "Linux Chromium status in the supplied isolated CDP page",
+      "moduleSha256": "4607c67b360596ee06b36e41a6b5d3a8a6da70defb04292d955f609dcef05ead",
+      "startedAt": "2026-10-27T05:02:17.047Z",
+      "completedAt": "2026-10-27T05:02:17.136Z",
+      "durationMs": 88.90677099999999,
+      "admitted": true,
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "target": {
+        "targetId": "D09C4E1992D16E9401FFCE30F5157785",
+        "type": "page",
+        "title": "about:blank",
+        "url": "about:blank",
+        "attached": true,
+        "canAccessOpener": false,
+        "browserContextId": "A4C7BC02EB88141FF47C8D8D76C3CD84"
+      },
+      "url": "chrome://sandbox/",
+      "text": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+      "textSha256": "ce79ff14c85761b6be5adc93e04e1af54bf0558f95d59d60d329775a9699a6b3",
+      "observation": {
+        "rows": {
+          "layer1": "Namespace",
+          "pid": "Yes",
+          "network": "Yes",
+          "seccomp": "Yes",
+          "tsync": "Yes"
+        },
+        "checks": {
+          "adequate": true,
+          "layer1": true,
+          "pid": true,
+          "network": true,
+          "seccomp": true,
+          "tsync": true
+        },
+        "populated": true,
+        "duplicates": [],
+        "active": true
+      },
+      "failure": null
+    },
+    "originals": [
+      [
+        {
+          "width": 160,
+          "height": 100,
+          "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+        },
+        {
+          "width": 160,
+          "height": 100,
+          "rgbaSha256": "1b0f8915b29a6fd03dfb01a6caf845e3789fc397971e55d2275094dd4f6e6867"
+        }
+      ],
+      [
+        {
+          "width": 160,
+          "height": 100,
+          "rgbaSha256": "d2f9e034cf207c01664277210cde4244439b0040927eb3f9e641f4136422e2ad"
+        },
+        {
+          "width": 160,
+          "height": 100,
+          "rgbaSha256": "7b90ba282264fd220587ec98f82f2a2fd1fb8bc177e02be8b0b5081f24015a88"
+        }
+      ]
+    ],
+    "result": "PASS",
+    "finishedAt": "2026-10-27T05:02:21.430Z"
+  }
+}
