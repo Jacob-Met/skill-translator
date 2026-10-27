@@ -1,0 +1,60 @@
+{
+  "src/instrument-change-study.mjs": {
+    "gitBlob": "eac031a1ddf6cca2f52983b822791dfc0b6c163f",
+    "sha256": "a6c634a8dce79f468378dec22e5ce7089379e13235848521351fdf755c513194"
+  },
+  "src/instrument-trace.mjs": {
+    "gitBlob": "223baaf6c340b2130522fc03edbb7d3eaab1def7",
+    "sha256": "28544a9bbe9d2a1b92de376057a7bb69165cbabd2e41c037789243a9d7e953ee"
+  },
+  "src/narration-clock.mjs": {
+    "gitBlob": "4f7a26a7c091881225d3d852b00da7c4e79a091c",
+    "sha256": "c8cf2b297db7a3e342b1d7a21dd3fc2786d8858cd753792e6ad96b0f8856af35"
+  },
+  "src/demonstration-sequence.mjs": {
+    "gitBlob": "3030edd3ad809cab11fc220365aacb34e2d01b42",
+    "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52"
+  },
+  "src/frame-origin.mjs": {
+    "gitBlob": "9154d9e63255de95152e3137d5790de5e9f00e42",
+    "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf"
+  },
+  "src/capture.mjs": {
+    "gitBlob": "763d09298e03c4275b802c83df92c773de62cd67",
+    "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c"
+  },
+  "src/geometry.mjs": {
+    "gitBlob": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061",
+    "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8"
+  },
+  "src/sequence-capture.mjs": {
+    "gitBlob": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b",
+    "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb"
+  },
+  "src/capture-editing.mjs": {
+    "gitBlob": "570ee1ac63928e5837920288243e8ea7621936c9",
+    "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06"
+  },
+  "src/authoring.mjs": {
+    "gitBlob": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5",
+    "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e"
+  },
+  "test/instrument-change-covariance.test.mjs": {
+    "gitBlob": "5ef08fc08987645e1112f02b5eaa076de7bc1846",
+    "sha256": "29c34f8feebd4fdf2f70b9f127ce019011bdc319b8f3dec0ed25f7f67fbfdbd1"
+  },
+  "test/instrument-change-proposals.test.mjs": {
+    "gitBlob": "2bcd04e33057621bc954b75af4cd1f98fd0c7703",
+    "sha256": "5d8d22ab22c6a4f9b2252c19d9ed4434eb724afee146f3ba22b198e18535b9ac"
+  },
+  "test/instrument-change-study.test.mjs": {
+    "gitBlob": "88a0d98f985be38c1a0872523f04ff4e081c89d6",
+    "sha256": "25f22440278f6f1261f89da102121a93aedbf5361ada05ff141d230533aa92a1"
+  },
+  "review/screening-feasible-witness.test.mjs": {
+    "sha256": "9327ba494657dfb2aff34b38616c6b99b4c29ba49f2e74383727dbe12d916663"
+  },
+  "review/receive-scalar-study.mjs": {
+    "sha256": "c31da4e184e242e43820eb2903a441988c53676d84dc09b1739bec823a44eb9d"
+  }
+}

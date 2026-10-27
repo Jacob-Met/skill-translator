@@ -1,0 +1,102 @@
+TAP version 13
+# Subtest: step-screen-1352761069-105 respects an explicit feasible step
+not ok 1 - step-screen-1352761069-105 respects an explicit feasible step
+  ---
+  duration_ms: 41.333536
+  type: 'test'
+  location: '/workspace/hamon-estate-10dbc406-scalar-oracles-20261027/review/screening-feasible-witness.test.mjs:8:31'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "id": "step-screen-1352761069-105",
+      "family": "step",
+      "actual": {
+        "score": -1245.109085783195,
+        "rho": 0.3,
+        "split": 4,
+        "left": -0.000046067532673590435,
+        "right": 1.0000095664968156
+      },
+      "bound": {
+        "score": -1254.7154789735705,
+        "rho": 0.1,
+        "sse": 2.599302535891135e-7,
+        "floorActive": false,
+        "residualTerm": -1256.9205848705953,
+        "logdet": -18.666830452453244,
+        "penalty": 20.871936349478183
+      },
+      "violation": true,
+      "excessScore": 9.606393190375456
+    }
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/hamon-estate-10dbc406-scalar-oracles-20261027/review/screening-feasible-witness.test.mjs:18:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: step-screen-1352761069-107 respects an explicit feasible step
+not ok 2 - step-screen-1352761069-107 respects an explicit feasible step
+  ---
+  duration_ms: 31.980982
+  type: 'test'
+  location: '/workspace/hamon-estate-10dbc406-scalar-oracles-20261027/review/screening-feasible-witness.test.mjs:8:31'
+  failureType: 'testCodeFailure'
+  error: |-
+    {
+      "id": "step-screen-1352761069-107",
+      "family": "step",
+      "actual": {
+        "score": -374.12352564452766,
+        "rho": 0.9,
+        "split": 11,
+        "left": 0.36810226282652053,
+        "right": 0.8681022773578435
+      },
+      "bound": {
+        "score": -378.8346015879404,
+        "rho": 0.975,
+        "sse": 3.985117891376108,
+        "floorActive": false,
+        "residualTerm": -181.46832433000935,
+        "logdet": -218.23821360740928,
+        "penalty": 20.871936349478183
+      },
+      "violation": true,
+      "excessScore": 4.711075943412766
+    }
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/hamon-estate-10dbc406-scalar-oracles-20261027/review/screening-feasible-witness.test.mjs:18:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 147.647042

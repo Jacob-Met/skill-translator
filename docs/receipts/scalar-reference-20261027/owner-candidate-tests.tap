@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: exact-constant has an admitted feasible full-grid bound
+ok 1 - exact-constant has an admitted feasible full-grid bound
+  ---
+  duration_ms: 17.04375
+  type: 'test'
+  ...
+# Subtest: exact-linear has an admitted feasible full-grid bound
+ok 2 - exact-linear has an admitted feasible full-grid bound
+  ---
+  duration_ms: 7.34542
+  type: 'test'
+  ...
+# Subtest: exact-spike has an admitted feasible full-grid bound
+ok 3 - exact-spike has an admitted feasible full-grid bound
+  ---
+  duration_ms: 10.98603
+  type: 'test'
+  ...
+# Subtest: retained-exact-step has an admitted feasible full-grid bound
+ok 4 - retained-exact-step has an admitted feasible full-grid bound
+  ---
+  duration_ms: 11.119395
+  type: 'test'
+  ...
+# Subtest: endpoint-cosine has an admitted feasible full-grid bound
+ok 5 - endpoint-cosine has an admitted feasible full-grid bound
+  ---
+  duration_ms: 1.548399
+  type: 'test'
+  ...
+# Subtest: three-cluster-base has an admitted feasible full-grid bound
+ok 6 - three-cluster-base has an admitted feasible full-grid bound
+  ---
+  duration_ms: 8.033362
+  type: 'test'
+  ...
+# Subtest: three-cluster-shift has an admitted feasible full-grid bound
+ok 7 - three-cluster-shift has an admitted feasible full-grid bound
+  ---
+  duration_ms: 15.638902
+  type: 'test'
+  ...
+# Subtest: three-cluster-units has an admitted feasible full-grid bound
+ok 8 - three-cluster-units has an admitted feasible full-grid bound
+  ---
+  duration_ms: 7.344252
+  type: 'test'
+  ...
+# Subtest: step-screen-1352761069-105 respects an explicit feasible step
+ok 9 - step-screen-1352761069-105 respects an explicit feasible step
+  ---
+  duration_ms: 154.671718
+  type: 'test'
+  ...
+# Subtest: step-screen-1352761069-107 respects an explicit feasible step
+ok 10 - step-screen-1352761069-107 respects an explicit feasible step
+  ---
+  duration_ms: 160.366014
+  type: 'test'
+  ...
+# Subtest: near-perfect spike score and covariance use direct residuals instead of cancelled sufficient statistics
+ok 11 - near-perfect spike score and covariance use direct residuals instead of cancelled sufficient statistics
+  ---
+  duration_ms: 25.912845
+  type: 'test'
+  ...
+# Subtest: independent dense covariance inverse agrees with the optimized irregular-time likelihood
+ok 12 - independent dense covariance inverse agrees with the optimized irregular-time likelihood
+  ---
+  duration_ms: 500.360706
+  type: 'test'
+  ...
+# Subtest: proposes a retained sample boundary without entered threshold, direction or run length
+ok 13 - proposes a retained sample boundary without entered threshold, direction or run length
+  ---
+  duration_ms: 67.804095
+  type: 'test'
+  ...
+# Subtest: flat trend isolated spike and oscillation alternatives remain visible rather than called changes
+ok 14 - flat trend isolated spike and oscillation alternatives remain visible rather than called changes
+  ---
+  duration_ms: 185.367628
+  type: 'test'
+  ...
+# Subtest: a changed level across an unobserved gap never becomes a sampled change boundary
+ok 15 - a changed level across an unobserved gap never becomes a sampled change boundary
+  ---
+  duration_ms: 13.468628
+  type: 'test'
+  ...
+# Subtest: unit conversion and timestamp offset preserve a clear model comparison and original indexes
+ok 16 - unit conversion and timestamp offset preserve a clear model comparison and original indexes
+  ---
+  duration_ms: 50.605264
+  type: 'test'
+  ...
+# Subtest: missing and numerically unsupported courses remain explicitly unavailable
+ok 17 - missing and numerically unsupported courses remain explicitly unavailable
+  ---
+  duration_ms: 0.541715
+  type: 'test'
+  ...
+# Subtest: malformed samples and invalid adjacency cannot silently become a preferred result
+ok 18 - malformed samples and invalid adjacency cannot silently become a preferred result
+  ---
+  duration_ms: 4.099804
+  type: 'test'
+  ...
+# Subtest: threshold-free original observations produce a source-bound clock-supported context
+ok 19 - threshold-free original observations produce a source-bound clock-supported context
+  ---
+  duration_ms: 129.623364
+  type: 'test'
+  ...
+# Subtest: raw observation pairing uses the open source and refuses a conflicting existing binding
+ok 20 - raw observation pairing uses the open source and refuses a conflicting existing binding
+  ---
+  duration_ms: 1.115513
+  type: 'test'
+  ...
+# Subtest: shared observation admission preserves the original threshold importer inputs and result
+ok 21 - shared observation admission preserves the original threshold importer inputs and result
+  ---
+  duration_ms: 0.58554
+  type: 'test'
+  ...
+# Subtest: failed clock and extrapolated context retain model inquiry but never authorize playback
+ok 22 - failed clock and extrapolated context retain model inquiry but never authorize playback
+  ---
+  duration_ms: 78.408942
+  type: 'test'
+  ...
+# Subtest: source-only replay ignores forged findings; source unit sample clock and gap mutations retire selection
+ok 23 - source-only replay ignores forged findings; source unit sample clock and gap mutations retire selection
+  ---
+  duration_ms: 70.369464
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 722.118765

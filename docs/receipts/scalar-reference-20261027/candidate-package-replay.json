@@ -1,0 +1,54 @@
+{
+  "modelSha256": "4232ef2c3aeebe654f369372c2af5c8435b13bb1d76bba300f3c09c22e841922",
+  "sourceRole": "read-only independent receiving of estate-0def V3",
+  "results": [
+    {
+      "label": "packaged-baseline-repair-receiver",
+      "command": [
+        "node",
+        "tools/scalar-reference/receive-repair.mjs"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "stdoutSha256": "b9f6c5e52aea021efd8be6710502cd4481ec334d1a62052a206fe42ac032c77f",
+      "stderr": "",
+      "summary": {
+        "scope": "Independent feasible bounds and maintained study APIs; authored metadata only",
+        "modelSha256": "cd400e5bcf29f46ad5cf9c1cb4ca3e1a819911a4fb57635a00b45e54d51a703c",
+        "cases": 21,
+        "failures": 15
+      }
+    },
+    {
+      "label": "packaged-owner-repair-receiver",
+      "command": [
+        "node",
+        "tools/scalar-reference/receive-repair.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdoutSha256": "f3aab6e20ed6f5708bf27c9a5c1cef9dd3849dc310ee1e6c168660ea30000a39",
+      "stderr": "",
+      "summary": {
+        "scope": "Independent feasible bounds and maintained study APIs; authored metadata only",
+        "modelSha256": "4232ef2c3aeebe654f369372c2af5c8435b13bb1d76bba300f3c09c22e841922",
+        "cases": 21,
+        "failures": 0
+      }
+    },
+    {
+      "label": "packaged-owner-acceptance",
+      "command": [
+        "node",
+        "--test",
+        "tools/scalar-reference/finite-objective-witness.test.mjs",
+        "tools/scalar-reference/screening-feasible-witness.test.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdoutSha256": "77a4b266a3c02f26a2d1b3f0b071695e19ab2a88074cb8555d08a6d06a94c292",
+      "stderr": "",
+      "tapSummary": "1..10\n# tests 10\n# suites 0\n# pass 10\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 202.956944\n"
+    }
+  ]
+}
