@@ -5,8 +5,32 @@ import {receiveDecisionHandoff} from '/web/decision-handoff.mjs';
 const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 let cancelHandoff=()=>{};
 let source=null,assets=new Map(),session=null,revision=0,generation=0,controller=null,busy=false,predictionDirty=false,reflectionDirty=false;
+let pendingStepIds=new Set();
 const error=message=>{$('error').hidden=!message;$('error').textContent=message;};
+function seedPendingStepIds(next){pendingStepIds=new Set(next.stepIds);}
+function selectedStepIds(){return source?source.steps.filter(step=>pendingStepIds.has(step.id)).map(step=>step.id):[];}
+function syncStepChoices(){
+  const count=selectedStepIds().length,message=source?(count?count+' of '+source.steps.length+' decisions selected for a fresh exercise.':'Choose at least one decision to start a fresh exercise.'):'';
+  if($('selectionStatus').textContent!==message)$('selectionStatus').textContent=message;
+  $('startSelected').disabled=!source||busy||count===0;
+}
+function renderStepChoices(){
+  $('selectionPanel').hidden=!source;$('practiceStepChoices').replaceChildren(node('legend','Decisions to include'));
+  if(!source){$('selectionPanel').open=false;return;}
+  const acceptedSource=source;
+  for(const step of source.steps){
+    const label=node('label'),input=node('input');label.className='practice-step-choice';input.type='checkbox';input.value=step.id;input.checked=pendingStepIds.has(step.id);
+    input.addEventListener('input',()=>{
+      if(!input.isConnected||source!==acceptedSource)return;
+      if(input.checked)pendingStepIds.add(step.id);else pendingStepIds.delete(step.id);
+      revision++;sync();
+    });
+    label.append(input,node('span',step.title));$('practiceStepChoices').append(label);
+  }
+}
+
 function sync(){
+  syncStepChoices();
   $('restart').disabled=!source||busy;$('sessionFile').disabled=!source||busy;
   $('saveComplete').disabled=!session||busy||predictionDirty||reflectionDirty;
   if(!session)return;
@@ -46,6 +70,7 @@ function historyEvidenceDetails(source,step,assets,returnTarget){
 }
 
 function render(){
+  renderStepChoices();
   $('exercise').hidden=!session;if(!session){sync();return;}
   const result=decisionPracticeFindings(source,session),state=result.steps[result.currentIndex],step=source.steps.find(s=>s.id===state.id);
   const before=source.moments.find(m=>m.id===step.beforeMomentId),after=source.moments.find(m=>m.id===step.afterMomentId);
@@ -90,7 +115,7 @@ async function acceptSource(file,{complete=false,externalSignal}={}){
     loaded=await (complete?readDecisionPracticeBundle:readSequenceBundle)(file,{signal:request.signal});
     if(!current(request)||request.revision!==revision)throw Error('The exercise changed while reading; accepted work remains.');
     const next=complete?loaded.session:createDecisionPractice(loaded.sequence,undefined,familiarity),old=assets;
-    source=loaded.sequence;assets=loaded.assets;loaded=null;session=next;predictionDirty=reflectionDirty=false;revision++;
+    source=loaded.sequence;assets=loaded.assets;loaded=null;session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;
     $('familiarity').value=session.priorFamiliarity;error('');render();releaseSequenceAssets(old);
     $('status').textContent=complete?'Complete practice reopened: every original PNG was verified and retained actions were replayed.':'Retained source frames verified. Describe the first situation before revealing the account.';
   }catch(e){if(loaded)releaseSequenceAssets(loaded.assets);e.stale=!current(request);throw e;}
@@ -102,9 +127,21 @@ for(const [id,complete]of [['sourceFile',false],['completeFile',true]])$(id).add
 });
 $('sessionFile').addEventListener('change',async event=>{
   const file=event.target.files[0];if(!file||!source)return;cancelHandoff();const request=begin();
-  try{if(file.size<1||file.size>1024*1024)throw Error('Choose decision practice up to 1 MiB');const value=JSON.parse(await file.text());if(!current(request)||request.revision!==revision)return;const next=importDecisionPractice(source,value);session=next;predictionDirty=reflectionDirty=false;revision++;$('familiarity').value=session.priorFamiliarity;error('');render();$('status').textContent='Practice reopened by replaying source-bound actions. Saved verdicts are not trusted.';}catch(e){if(current(request))error('Practice refused; accepted exercise retained. '+e.message);}finally{finish(request);}
+  try{if(file.size<1||file.size>1024*1024)throw Error('Choose decision practice up to 1 MiB');const value=JSON.parse(await file.text());if(!current(request)||request.revision!==revision)return;const next=importDecisionPractice(source,value);session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;$('familiarity').value=session.priorFamiliarity;error('');render();$('status').textContent='Practice reopened by replaying source-bound actions. Saved verdicts are not trusted.';}catch(e){if(current(request))error('Practice refused; accepted exercise retained. '+e.message);}finally{finish(request);}
 });
-$('restart').addEventListener('click',()=>{if(!source)return;session=createDecisionPractice(source,undefined,$('familiarity').value);predictionDirty=reflectionDirty=false;revision++;error('');render();$('status').textContent='A new empty exercise has begun on the same accepted source.';});
+function startFresh(stepIds){
+  if(!source||busy)return;
+  try{
+    const next=createDecisionPractice(source,stepIds,$('familiarity').value);
+    session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;error('');render();
+    $('status').textContent=stepIds?'A new empty exercise has begun on '+next.stepIds.length+' selected decisions from the same accepted source.':'A new empty exercise has begun on the same accepted source.';
+  }catch(e){error(e.message);}
+}
+$('restart').addEventListener('click',()=>startFresh());
+$('startSelected').addEventListener('click',()=>{
+  if($('startSelected').disabled)return;
+  const ids=selectedStepIds();if(ids.length)startFresh(ids);
+});
 $('familiarity').addEventListener('change',()=>{revision++;$('status').textContent='Start a new exercise to apply this familiarity declaration. The accepted exercise is unchanged.';});
 for(const id of ['expectedChange','decisionCue','recovery','uncertain'])$(id).addEventListener('input',()=>{predictionDirty=true;revision++;sync();});
 for(const id of ['comparison','reflection','revisedJudgment','remainingQuestion'])$(id).addEventListener('input',()=>{reflectionDirty=true;revision++;sync();});
