@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: three pairwise-compatible closed disks expose a joint conflict independently of all five rules
+ok 1 - three pairwise-compatible closed disks expose a joint conflict independently of all five rules
+  ---
+  duration_ms: 68.810081
+  type: 'test'
+  ...
+# Subtest: fresh explicitly widened declarations admit a point verified against every selected record
+ok 2 - fresh explicitly widened declarations admit a point verified against every selected record
+  ---
+  duration_ms: 3.646987
+  type: 'test'
+  ...
+# Subtest: tangency, zero radii, repeated centers and collinear disks retain exact closed-boundary semantics
+ok 3 - tangency, zero radii, repeated centers and collinear disks retain exact closed-boundary semantics
+  ---
+  duration_ms: 31.974745
+  type: 'test'
+  ...
+# Subtest: independent integer pair-distance oracle and certificate reconstruction match 150 controls
+ok 4 - independent integer pair-distance oracle and certificate reconstruction match 150 controls
+  ---
+  duration_ms: 250.334397
+  type: 'test'
+  ...
+# Subtest: complete sixty-record common-point check and early subset certificate retain every raw record
+ok 5 - complete sixty-record common-point check and early subset certificate retain every raw record
+  ---
+  duration_ms: 26.304703
+  type: 'test'
+  ...
+# Subtest: work exhaustion never returns a partial point or contradiction certificate
+ok 6 - work exhaustion never returns a partial point or contradiction certificate
+  ---
+  duration_ms: 4.216648
+  type: 'test'
+  ...
+# Subtest: actual task-space input and raw context replay retain original source and original five-rule results
+ok 7 - actual task-space input and raw context replay retain original source and original five-rule results
+  ---
+  duration_ms: 3.844446
+  type: 'test'
+  ...
+# Subtest: same-size declaration is explicit and source/group custody refuses changed assumptions
+ok 8 - same-size declaration is explicit and source/group custody refuses changed assumptions
+  ---
+  duration_ms: 4.101294
+  type: 'test'
+  ...
+# Subtest: exact closed-disk question remains distinct from the existing five-rule numerical guard
+ok 9 - exact closed-disk question remains distinct from the existing five-rule numerical guard
+  ---
+  duration_ms: 3.457962
+  type: 'test'
+  ...
+# Subtest: maintained CHRONOS kernel and arithmetic dependency remain byte pinned
+ok 10 - maintained CHRONOS kernel and arithmetic dependency remain byte pinned
+  ---
+  duration_ms: 8.039421
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 483.532741

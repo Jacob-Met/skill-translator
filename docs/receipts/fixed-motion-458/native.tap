@@ -1,0 +1,172 @@
+TAP version 13
+# Subtest: three pairwise-compatible closed disks expose a joint conflict independently of all five rules
+ok 1 - three pairwise-compatible closed disks expose a joint conflict independently of all five rules
+  ---
+  duration_ms: 13.898609
+  type: 'test'
+  ...
+# Subtest: fresh explicitly widened declarations admit a point verified against every selected record
+ok 2 - fresh explicitly widened declarations admit a point verified against every selected record
+  ---
+  duration_ms: 1.149574
+  type: 'test'
+  ...
+# Subtest: tangency, zero radii, repeated centers and collinear disks retain exact closed-boundary semantics
+ok 3 - tangency, zero radii, repeated centers and collinear disks retain exact closed-boundary semantics
+  ---
+  duration_ms: 3.856938
+  type: 'test'
+  ...
+# Subtest: independent integer pair-distance oracle and certificate reconstruction match 150 controls
+ok 4 - independent integer pair-distance oracle and certificate reconstruction match 150 controls
+  ---
+  duration_ms: 115.3443
+  type: 'test'
+  ...
+# Subtest: complete sixty-record common-point check and early subset certificate retain every raw record
+ok 5 - complete sixty-record common-point check and early subset certificate retain every raw record
+  ---
+  duration_ms: 43.069179
+  type: 'test'
+  ...
+# Subtest: work exhaustion never returns a partial point or contradiction certificate
+ok 6 - work exhaustion never returns a partial point or contradiction certificate
+  ---
+  duration_ms: 2.848167
+  type: 'test'
+  ...
+# Subtest: actual task-space input and raw context replay retain original source and original five-rule results
+ok 7 - actual task-space input and raw context replay retain original source and original five-rule results
+  ---
+  duration_ms: 2.211897
+  type: 'test'
+  ...
+# Subtest: same-size declaration is explicit and source/group custody refuses changed assumptions
+ok 8 - same-size declaration is explicit and source/group custody refuses changed assumptions
+  ---
+  duration_ms: 3.008078
+  type: 'test'
+  ...
+# Subtest: exact closed-disk question remains distinct from the existing five-rule numerical guard
+ok 9 - exact closed-disk question remains distinct from the existing five-rule numerical guard
+  ---
+  duration_ms: 2.494753
+  type: 'test'
+  ...
+# Subtest: maintained CHRONOS kernel and arithmetic dependency remain byte pinned
+ok 10 - maintained CHRONOS kernel and arithmetic dependency remain byte pinned
+  ---
+  duration_ms: 6.293064
+  type: 'test'
+  ...
+# Subtest: explicit fixed orientation certifies the feasible translation rejected by the separate LS maximum
+ok 11 - explicit fixed orientation certifies the feasible translation rejected by the separate LS maximum
+  ---
+  duration_ms: 8.025568
+  type: 'test'
+  ...
+# Subtest: orientation is exactly proper and has an explicit half-turn
+ok 12 - orientation is exactly proper and has an explicit half-turn
+  ---
+  duration_ms: 0.476349
+  type: 'test'
+  ...
+# Subtest: fixed-orientation incompatibility is not promoted to all-motion impossibility
+ok 13 - fixed-orientation incompatibility is not promoted to all-motion impossibility
+  ---
+  duration_ms: 0.770623
+  type: 'test'
+  ...
+# Subtest: budget refusal has no partial certificate and source/point admission stays explicit
+ok 14 - budget refusal has no partial certificate and source/point admission stays explicit
+  ---
+  duration_ms: 1.903983
+  type: 'test'
+  ...
+# Subtest: non-cardinal exact orientation, repeated points and true missing observations retain their distinct meanings
+ok 15 - non-cardinal exact orientation, repeated points and true missing observations retain their distinct meanings
+  ---
+  duration_ms: 0.980108
+  type: 'test'
+  ...
+# Subtest: discovers two complete independently moving groups without any supplied group labels
+ok 16 - discovers two complete independently moving groups without any supplied group labels
+  ---
+  duration_ms: 2.441483
+  type: 'test'
+  ...
+# Subtest: a changed source point removes its old group without accepting forged conclusions
+ok 17 - a changed source point removes its old group without accepting forged conclusions
+  ---
+  duration_ms: 1.547434
+  type: 'test'
+  ...
+# Subtest: all source pairs matter: two individually near-reference fits do not certify their difference
+ok 18 - all source pairs matter: two individually near-reference fits do not certify their difference
+  ---
+  duration_ms: 0.44381
+  type: 'test'
+  ...
+# Subtest: reflections may retain two-point alternatives but cannot become one proper-motion group
+ok 19 - reflections may retain two-point alternatives but cannot become one proper-motion group
+  ---
+  duration_ms: 0.392983
+  type: 'test'
+  ...
+# Subtest: collapsed configurations remain unresolved and cannot be reported as a fitted group
+ok 20 - collapsed configurations remain unresolved and cannot be reported as a fitted group
+  ---
+  duration_ms: 0.235215
+  type: 'test'
+  ...
+# Subtest: missing point observations remain explicit while independently complete groups survive
+ok 21 - missing point observations remain explicit while independently complete groups survive
+  ---
+  duration_ms: 1.147902
+  type: 'test'
+  ...
+# Subtest: thirteen fully observed points refuse grouping while the original all-pair consumer still works
+ok 22 - thirteen fully observed points refuse grouping while the original all-pair consumer still works
+  ---
+  duration_ms: 1.825754
+  type: 'test'
+  ...
+# Subtest: enumerates every admitted subset at capacity with bounded reported work
+ok 23 - enumerates every admitted subset at capacity with bounded reported work
+  ---
+  duration_ms: 23.923884
+  type: 'test'
+  ...
+# Subtest: source and mark ordering do not alter complete groups, and a uniform coordinate transform preserves them
+ok 24 - source and mark ordering do not alter complete groups, and a uniform coordinate transform preserves them
+  ---
+  duration_ms: 2.688676
+  type: 'test'
+  ...
+# Subtest: threshold changes recompute from the same sources and invalid inputs are refused
+ok 25 - threshold changes recompute from the same sources and invalid inputs are refused
+  ---
+  duration_ms: 2.390767
+  type: 'test'
+  ...
+# Subtest: independent known proper transforms recover angle, centroid shift and all nominal residuals
+ok 26 - independent known proper transforms recover angle, centroid shift and all nominal residuals
+  ---
+  duration_ms: 0.685354
+  type: 'test'
+  ...
+# Subtest: maximal groups cross unsupported intermediate supersets
+ok 27 - maximal groups cross unsupported intermediate supersets
+  ---
+  duration_ms: 0.520305
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 284.883714

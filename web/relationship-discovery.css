@@ -20,3 +20,5 @@ textarea{width:100%}
 #motionPracticeResults[hidden]{display:none}
 #motionPracticeSection .motion-table table{min-width:780px}
 #motionPracticeSection .table-help{font-size:.9rem;color:#3b5c4b}
+
+#fixedMotionHost p,#fixedMotionHost li{overflow-wrap:anywhere}#fixedMotionHost fieldset{min-width:0}#fixedMotionHost button[aria-disabled=true]{opacity:.6}
