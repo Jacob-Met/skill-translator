@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "Actual default getUserMedia call under browser-enforced microphone=() Permissions-Policy; permission already denied before explicit click. A browser-authored fake device avoids absent-hardware precedence; policy rejects before any stream. No real device permission or capture.",
+  "browser": "156.0.8078.73",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "policy": "microphone=()",
+  "before": {
+    "state": "denied",
+    "allowed": false
+  },
+  "result": {
+    "state": "error",
+    "error": "Capture unavailable: Permission denied",
+    "pending": null,
+    "accepted": null,
+    "text": "Record a separate explanation\n\nRecord only when you choose Start. This is a separately supplied account, not sound from the original demonstration or verified speaker identity. Preview your recording, then choose Keep to attach it. Your previous kept recording stays available if the new attachment is refused.\n\nCapture stop target: 30 s. Decoded audio limit: 30 s. Audio size limit: 5 MiB.\n\nStart recordingStop recordingDiscard new recordingKeep checked recording\n\nCapture unavailable: Permission denied\n\nNo recording has been kept here."
+  },
+  "sourceHashes": {
+    "recorder.mjs": "ed779143c86a36fc22cfddb6b3142f3fd3d69b6eb70f07d2496474d4b801da07",
+    "recorder-browser.mjs": "be683f82779022623c86f886d42c05feda984ad1348703c8f2f354c9033a7281"
+  }
+}
