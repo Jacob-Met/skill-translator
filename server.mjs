@@ -8,6 +8,9 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/joint-challenge.mjs":["src/joint-challenge.mjs","text/javascript; charset=utf-8"],
+  "/web/joint-challenge.mjs":["web/joint-challenge.mjs","text/javascript; charset=utf-8"],
+  "/web/joint-challenge.css":["web/joint-challenge.css","text/css; charset=utf-8"],
   '/src/joint-producer-input.mjs':['src/joint-producer-input.mjs','text/javascript; charset=utf-8'],
   '/web/joint-producer-images.mjs':['web/joint-producer-images.mjs','text/javascript; charset=utf-8'],
   '/web/joint-numeric-cues.css':['web/joint-numeric-cues.css','text/css; charset=utf-8'],

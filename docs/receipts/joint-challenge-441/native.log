@@ -1,0 +1,222 @@
+TAP version 13
+# Subtest: individually supported marks cannot silently switch global source readings
+ok 1 - individually supported marks cannot silently switch global source readings
+  ---
+  duration_ms: 10.692571
+  type: 'test'
+  ...
+# Subtest: one coherent wide reading retains left clearance for both original marks
+ok 2 - one coherent wide reading retains left clearance for both original marks
+  ---
+  duration_ms: 3.711892
+  type: 'test'
+  ...
+# Subtest: nominal scoring preserves maintained evidence residuals, including impossible clearances
+ok 3 - nominal scoring preserves maintained evidence residuals, including impossible clearances
+  ---
+  duration_ms: 7.36145
+  type: 'test'
+  ...
+# Subtest: factorized counts agree with independent small Cartesian geometry
+ok 4 - factorized counts agree with independent small Cartesian geometry
+  ---
+  duration_ms: 24.759078
+  type: 'test'
+  ...
+# Subtest: a mark keeps one rule across every row rather than changing rules per observation
+ok 5 - a mark keeps one rule across every row rather than changing rules per observation
+  ---
+  duration_ms: 2.082224
+  type: 'test'
+  ...
+# Subtest: missing marks stay untested, while a decisive contradiction outranks partial evidence
+ok 6 - missing marks stay untested, while a decisive contradiction outranks partial evidence
+  ---
+  duration_ms: 1.467014
+  type: 'test'
+  ...
+# Subtest: every original mark must remain explicit and inside the page even when unselected
+ok 7 - every original mark must remain explicit and inside the page even when unselected
+  ---
+  duration_ms: 19.884936
+  type: 'test'
+  ...
+# Subtest: global photo readings cannot move corners or any mark beyond original image bounds
+ok 8 - global photo readings cannot move corners or any mark beyond original image bounds
+  ---
+  duration_ms: 3.01344
+  type: 'test'
+  ...
+# Subtest: source, observation and hypothesis anchors each reject source drift
+ok 9 - source, observation and hypothesis anchors each reject source drift
+  ---
+  duration_ms: 10.424932
+  type: 'test'
+  ...
+# Subtest: saved arrays must be explicit; missing or null cannot default to a different investigation
+ok 10 - saved arrays must be explicit; missing or null cannot default to a different investigation
+  ---
+  duration_ms: 18.933469
+  type: 'test'
+  ...
+# Subtest: forged saved verdicts are discarded and coherent evidence is recomputed
+ok 11 - forged saved verdicts are discarded and coherent evidence is recomputed
+  ---
+  duration_ms: 9.507147
+  type: 'test'
+  ...
+# Subtest: selection, evidence and hypothesis input ordering do not change scientific outcomes
+ok 12 - selection, evidence and hypothesis input ordering do not change scientific outcomes
+  ---
+  duration_ms: 32.159775
+  type: 'test'
+  ...
+# Subtest: 12 marks and 24 alternatives stay factorized with exact finite counts, never probabilities
+ok 13 - 12 marks and 24 alternatives stay factorized with exact finite counts, never probabilities
+  ---
+  duration_ms: 28.824866
+  type: 'test'
+  ...
+# Subtest: invalid selections and duplicate global identities refuse transactionally
+ok 14 - invalid selections and duplicate global identities refuse transactionally
+  ---
+  duration_ms: 3.781164
+  type: 'test'
+  ...
+# Subtest: future cross-mark source switching trap and coherent wide positive
+ok 15 - future cross-mark source switching trap and coherent wide positive
+  ---
+  duration_ms: 64.272531
+  type: 'test'
+  ...
+# Subtest: a mark cannot switch its rule across future sheets
+ok 16 - a mark cannot switch its rule across future sheets
+  ---
+  duration_ms: 23.255964
+  type: 'test'
+  ...
+# Subtest: small independent Cartesian geometry agrees with factored counts
+ok 17 - small independent Cartesian geometry agrees with factored counts
+  ---
+  duration_ms: 11.026243
+  type: 'test'
+  ...
+# Subtest: known qualified contradiction dominates missing and imprecise outcomes
+ok 18 - known qualified contradiction dominates missing and imprecise outcomes
+  ---
+  duration_ms: 23.461595
+  type: 'test'
+  ...
+# Subtest: no training survivor can be trimmed to fit an impossible future sheet
+ok 19 - no training survivor can be trimmed to fit an impossible future sheet
+  ---
+  duration_ms: 1.117111
+  type: 'test'
+  ...
+# Subtest: every selected mark trained and all original training dimensions excluded
+ok 20 - every selected mark trained and all original training dimensions excluded
+  ---
+  duration_ms: 6.291052
+  type: 'test'
+  ...
+# Subtest: plans are deeply frozen snapshots; cached predictions are ignored on reopen
+ok 21 - plans are deeply frozen snapshots; cached predictions are ignored on reopen
+  ---
+  duration_ms: 8.833232
+  type: 'test'
+  ...
+# Subtest: source anchors, declarations, trial identity and duplicate slots refuse
+ok 22 - source anchors, declarations, trial identity and duplicate slots refuse
+  ---
+  duration_ms: 26.037208
+  type: 'test'
+  ...
+# Subtest: source-only round trip recomputes verdict and rejects missing saved arrays
+ok 23 - source-only round trip recomputes verdict and rejects missing saved arrays
+  ---
+  duration_ms: 19.731606
+  type: 'test'
+  ...
+# Subtest: selection and outcome ordering preserve conclusions
+ok 24 - selection and outcome ordering preserve conclusions
+  ---
+  duration_ms: 30.838196
+  type: 'test'
+  ...
+# Subtest: 12 marks ×6 trials admit72 outcomes without a Cartesian expansion or60-row gate
+ok 25 - 12 marks ×6 trials admit72 outcomes without a Cartesian expansion or60-row gate
+  ---
+  duration_ms: 2179.075001
+  type: 'test'
+  ...
+# Subtest: exact UTF8 limit includes empty envelope and complete future results
+ok 26 - exact UTF8 limit includes empty envelope and complete future results
+  ---
+  duration_ms: 290.557919
+  type: 'test'
+  ...
+# Subtest: creator refuses explicitly supplied malformed anchors instead of rebinding them
+ok 27 - creator refuses explicitly supplied malformed anchors instead of rebinding them
+  ---
+  duration_ms: 7.167257
+  type: 'test'
+  ...
+# Subtest: native POST handlers reject foreign Host headers even with a matching forged Origin
+    # Subtest: /api/sequence-edge
+    ok 1 - /api/sequence-edge
+      ---
+      duration_ms: 34.471232
+      type: 'test'
+      ...
+    # Subtest: /api/calibration-translation
+    ok 2 - /api/calibration-translation
+      ---
+      duration_ms: 10.04674
+      type: 'test'
+      ...
+    # Subtest: /api/audio-intake
+    ok 3 - /api/audio-intake
+      ---
+      duration_ms: 9.449383
+      type: 'test'
+      ...
+    1..3
+ok 28 - native POST handlers reject foreign Host headers even with a matching forged Origin
+  ---
+  duration_ms: 64.134037
+  type: 'test'
+  ...
+# Subtest: actual loopback server rejects linked browser assets without exposing adjacent files
+    # Subtest: final asset symlink cannot serve a synthetic private file
+    ok 1 - final asset symlink cannot serve a synthetic private file
+      ---
+      duration_ms: 9.011597
+      type: 'test'
+      ...
+    # Subtest: linked intermediate directory cannot serve assets outside the app
+    ok 2 - linked intermediate directory cannot serve assets outside the app
+      ---
+      duration_ms: 5.532769
+      type: 'test'
+      ...
+    1..2
+ok 29 - actual loopback server rejects linked browser assets without exposing adjacent files
+  ---
+  duration_ms: 164.953099
+  type: 'test'
+  ...
+# Subtest: actual HTTP serves interactive app assets without internet dependencies or traversal
+ok 30 - actual HTTP serves interactive app assets without internet dependencies or traversal
+  ---
+  duration_ms: 182.599575
+  type: 'test'
+  ...
+1..30
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2791.966508

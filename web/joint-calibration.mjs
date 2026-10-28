@@ -1,3 +1,4 @@
+import {mountJointChallenge} from '/web/joint-challenge.mjs';
 import {derive} from '/src/geometry.mjs';
 import {createObservation,importEvidence} from '/src/evidence.mjs';
 import {CALIBRATION_SCHEMA,importCalibrationInvestigation} from '/src/calibration-evidence.mjs';
@@ -5,9 +6,9 @@ import {JOINT_CALIBRATION_SCHEMA,jointSourceReading,createJointCalibrationHypoth
 const $=id=>document.getElementById(id),names={fraction:'proportional',left:'left clearance',right:'right clearance',top:'top clearance',bottom:'bottom clearance'};
 const clone=x=>JSON.parse(JSON.stringify(x)),fmt=x=>Number(x.toFixed(4)).toLocaleString('en-US',{maximumFractionDigits:4});
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
-let study=null,revision=0,serial=0;
+let study=null,revision=0,serial=0,challenge=null;
 function error(message){$('error').textContent=message;$('error').hidden=!message;}
-function action(fn){try{fn();error('');}catch(e){error(e.message);}}
+function action(fn){revision++;challenge?.invalidatePending();try{fn();error('');}catch(e){error(e.message);}}
 function nextId(prefix){const ids=new Set([...(study?.observations??[]).map(o=>o.id),...(study?.hypotheses??[]).map(h=>h.id)]);let id;do{id=prefix+'-'+(++serial);}while(ids.has(id));return id;}
 function number(id){if(!$(id).value.trim())throw Error('Complete every numerical field.');return Number($(id).value);}
 function defaultIds(source){derive(source);if(source.landmarks.length<2)throw Error('Shared-source comparison needs at least two original source marks; no marks are invented.');return source.landmarks.slice(0,12).map(m=>m.id);}
@@ -27,7 +28,7 @@ function openStudy(value){if(value?.schema===JOINT_CALIBRATION_SCHEMA)return imp
 function commit(candidate,reset=false){
  const next=importJointCalibration(candidate);analyzeJointCalibration(next.source,next.landmarkIds,next.observations,next.hypotheses);
  const changed=!study||JSON.stringify(next.sourceReference)!==JSON.stringify(study.sourceReference);
- study=next;revision++;render();if(changed||reset){resetReading();$('observedWidth').value=Math.min(10000,next.source.source.widthMm*2);$('observedHeight').value=Math.min(10000,next.source.source.heightMm*2);$('observedX').value='';$('observedY').value='';$('observationLabel').value='';}
+ study=next;revision++;render();challenge?.trainingChanged();if(changed||reset){resetReading();$('observedWidth').value=Math.min(10000,next.source.source.widthMm*2);$('observedHeight').value=Math.min(10000,next.source.source.heightMm*2);$('observedX').value='';$('observedY').value='';$('observationLabel').value='';}
 }
 function update({ids=study.landmarkIds,observations=study.observations,hypotheses=study.hypotheses}={}){commit(exportJointCalibration(study.source,ids,observations,hypotheses));}
 function select(id,items){const n=$(id),old=n.value;n.replaceChildren(...items.map(item=>{const o=el('option',item.label);o.value=item.id;return o;}));if(items.some(i=>i.id===old))n.value=old;}
@@ -75,12 +76,12 @@ $('observationForm').onsubmit=e=>{e.preventDefault();action(()=>{
 });};
 $('resetReading').onclick=()=>action(()=>{revision++;resetReading();});$('drawingReading').onchange=()=>action(()=>draw(analyzeJointCalibration(study.source,study.landmarkIds,study.observations,study.hypotheses)));
 $('exportJoint').onclick=()=>action(()=>{if(!study)throw Error('Open a study first.');const saved=exportJointCalibration(study.source,study.landmarkIds,study.observations,study.hypotheses),url=URL.createObjectURL(new Blob([JSON.stringify(saved,null,2)+'\n'],{type:'application/json'}));const a=el('a');a.href=url;a.download='skill-translator-shared-source.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
-async function load(input,kind){const file=input.files?.[0];if(!file)return;const own=++revision;try{
+async function load(input,kind){const file=input.files?.[0];if(!file)return;const own=++revision;challenge?.invalidatePending();try{
  if(file.size>4*1024*1024)throw Error('Use local JSON no larger than 4 MB.');const text=await file.text();if(own!==revision)return;const raw=JSON.parse(text);let next;
  if(kind==='study')next=openStudy(raw);else if(kind==='source')next=exportJointCalibration(raw,defaultIds(raw),[],[]);else{if(!study)throw Error('Open the original source before observations.');next=exportJointCalibration(study.source,study.landmarkIds,importEvidence(study.source,raw),study.hypotheses);}
  if(own!==revision)return;commit(next,true);error('');$('notice').textContent='Validated input accepted; joint conclusions recomputed. Original annotations remain unchanged.';
  }catch(e){if(own===revision)error('Import refused: '+e.message);}finally{if(input.files?.[0]===file)input.value='';}}
-$('studyFile').onchange=e=>load(e.target,'study');$('sourceFile').onchange=e=>load(e.target,'source');$('observationsFile').onchange=e=>load(e.target,'observations');document.addEventListener('input',()=>{revision++;});
+$('studyFile').onchange=e=>load(e.target,'study');$('sourceFile').onchange=e=>load(e.target,'source');$('observationsFile').onchange=e=>load(e.target,'observations');document.addEventListener('input',()=>{revision++;challenge?.invalidatePending();});
 function example(coherent){
  const source={title:'One original page, two task marks',provenance:'Authored analytic comparison only; no physical measurement',source:{widthMm:100,heightMm:80,corners:[{x:0,y:0},{x:100,y:0},{x:100,y:80},{x:0,y:80}]},landmarks:[['guide',20,30],['index',60,50]].map(([id,x,y])=>({id,label:id==='guide'?'Guide mark':'Index mark',kind:'edge_offset_mm',edge:'left',sourcePx:{x,y},toleranceMm:1}))};
  const rows=[['guide',coherent?30:20,60],['index',90,100]].map(([mark,x,y])=>createObservation(source,{id:'authored-'+mark,landmarkId:mark,label:'Authored '+mark+' observation',evidenceClass:'authored-example',widthMm:200,heightMm:160,xMm:x,yMm:y,uncertaintyMm:.01}));
@@ -88,5 +89,6 @@ function example(coherent){
  commit(exportJointCalibration(source,['guide','index'],rows,[h]),true);$('observationClass').value='authored-example';$('notice').textContent=coherent?'Authored coherent control: one shared wide reading supports both marks.':'Authored source-switch trap: individual fits require incompatible shared page readings.';
 }
 $('incoherentExample').onclick=()=>action(()=>example(false));$('coherentExample').onclick=()=>action(()=>example(true));
+challenge=mountJointChallenge({root:$('jointChallenge'),getInvestigation:()=>study,restoreInvestigation:restored=>commit(restored,true),onActivity:()=>{revision++;}});
 render();
 try{const saved=sessionStorage.getItem('skill-translator.joint-calibration-training');if(saved){const next=openStudy(JSON.parse(saved));commit(next,true);sessionStorage.removeItem('skill-translator.joint-calibration-training');$('notice').textContent='Single-mark investigation promoted to explicit full-source readings. Other marks remain untested until evidence is supplied.';}}catch(e){error('Shared-source handoff refused: '+e.message);}
