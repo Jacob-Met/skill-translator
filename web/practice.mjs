@@ -157,7 +157,9 @@ $("placementForm").addEventListener("submit",e=>{e.preventDefault();
 });
 $("practiceSvg").addEventListener("pointerdown",e=>{
   const s=$("practiceSvg"),p=s.createSVGPoint();p.x=e.clientX;p.y=e.clientY;
-  const physical=fromDisplay(p.matrixTransform(s.getScreenCTM().inverse()),target,box,mirrored());
+  const local=p.matrixTransform(s.getScreenCTM().inverse());
+  if(local.x<box.x||local.x>box.x+box.width||local.y<box.y||local.y>box.y+box.height)return;
+  const physical=fromDisplay(local,target,box,mirrored());
   place({xMm:Math.max(0,Math.min(widthMm,physical.xMm)),yMm:Math.max(0,Math.min(heightMm,physical.yMm))});s.focus();
 });
 $("practiceSvg").addEventListener("keydown",e=>{
