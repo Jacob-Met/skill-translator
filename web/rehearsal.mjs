@@ -1,3 +1,4 @@
+import {createRehearsalSource} from '/web/rehearsal-source.mjs';
 import {JUDGMENT_SCHEMA,createJudgmentStudy,importJudgmentStudy,replaceJudgmentRehearsal,recordPlacementJudgment,inspectPlacementJudgments} from '/src/rehearsal-judgment.mjs';
 import {derive,adapt,toDisplay,fromDisplay} from '/src/geometry.mjs';
 import {demonstration} from '/src/demo.mjs';
@@ -7,6 +8,7 @@ let session=createRehearsal(demonstration,[{widthMm:320,heightMm:190},{widthMm:2
 let judgmentStudy=createJudgmentStudy(session),judgmentFindings=[];
 let selected=session.source.landmarks[0].id,showTargets=false,generation=0,state,target,box;
 let comparisonMark=session.source.landmarks[0].id;
+const originalSource=createRehearsalSource(()=>session.source);
 const mirrored=()=>$('view').value==='mirrored';
 function error(message=''){$('rehearsalError').textContent=message;$('rehearsalError').hidden=!message;}
 function element(parent,tag,text){const e=document.createElement(tag);e.textContent=text;parent.append(e);return e;}
@@ -88,7 +90,7 @@ function render(){
  if(state.complete)for(const [i,t]of state.trials.entries()){const row=element($('sessionRows'),'div','');element(row,'strong',`Sheet ${i+1} · ${t.widthMm} × ${t.heightMm} mm`);element(row,'span',`${t.reveals.length?'Targets requested':'No targets requested in record'} · ${!t.result.complete?'Incomplete':t.result.passed?'Within all tolerances':'Outside tolerance'}${t.result.rmsErrorMm===null?'':' · RMS '+mm(t.result.rmsErrorMm)}`);}
 }
 function change(operation){try{const next=operation(session);generation++;retain(next);error();render();}catch(e){error(e.message);}}
-function install(next){judgmentStudy=next?.schema===JUDGMENT_SCHEMA?importJudgmentStudy(next):createJudgmentStudy(importRehearsal(next));session=judgmentStudy.rehearsal;$('judgmentChoice').value='uncertain';$('judgmentReason').value='';generation++;selected=session.source.landmarks[0].id;comparisonMark=selected;showTargets=false;$('planSizes').value=session.plan.map(p=>`${p.widthMm},${p.heightMm}`).join('\n');error();render();}
+function install(next){judgmentStudy=next?.schema===JUDGMENT_SCHEMA?importJudgmentStudy(next):createJudgmentStudy(importRehearsal(next));session=judgmentStudy.rehearsal;$('judgmentChoice').value='uncertain';$('judgmentReason').value='';generation++;selected=session.source.landmarks[0].id;comparisonMark=selected;showTargets=false;originalSource.install();$('planSizes').value=session.plan.map(p=>`${p.widthMm},${p.heightMm}`).join('\n');error();render();}
 function parsePlan(){return $('planSizes').value.trim().split('\n').map(line=>{const parts=line.trim().split(/[,x×]/i).map(s=>s.trim());if(parts.length!==2||parts.some(p=>p===''))throw Error('Use width,height on each line.');return {widthMm:Number(parts[0]),heightMm:Number(parts[1])};});}
 function place(point){change(s=>placeRehearsal(s,selected,point));}
 function download(){const content=JSON.stringify(importRehearsal(session),null,2),url=URL.createObjectURL(new Blob([content],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='skill-transfer-rehearsal.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
@@ -110,7 +112,7 @@ $('rehearsalSheet').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'
 $('reviewFeatureRehearsal').addEventListener('click',()=>{try{sessionStorage.setItem('skill-translator-feature-rehearsal-return/v1',JSON.stringify(importJudgmentStudy(judgmentStudy)));location.assign('/feature-rehearsal');}catch(e){error(e.message);}});
 try{const raw=sessionStorage.getItem('skill-translator-rehearsal-input/v1');if(raw){install(JSON.parse(raw));sessionStorage.removeItem('skill-translator-rehearsal-input/v1');}}catch(e){error('Incoming rehearsal refused; accepted work retained. '+e.message);}
 render();
-
+originalSource.install();
 
 $('recordJudgment').addEventListener('click',()=>{try{judgmentStudy=recordPlacementJudgment(judgmentStudy,$('judgmentChoice').value,$('judgmentReason').value);generation++;error();render();}catch(e){error(e.message);}});
 for(const id of ['judgmentChoice','judgmentReason'])$(id).addEventListener('input',()=>generation++);

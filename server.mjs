@@ -405,6 +405,7 @@ const routes=Object.freeze({
   "/src/decision-practice.mjs":["src/decision-practice.mjs","text/javascript; charset=utf-8"],
   "/rehearsal":["web/rehearsal.html","text/html; charset=utf-8"],
   "/web/rehearsal.mjs":["web/rehearsal.mjs","text/javascript; charset=utf-8"],
+  "/web/rehearsal-source.mjs":["web/rehearsal-source.mjs","text/javascript; charset=utf-8"],
   "/web/rehearsal.css":["web/rehearsal.css","text/css; charset=utf-8"],
   "/src/transfer-rehearsal.mjs":["src/transfer-rehearsal.mjs","text/javascript; charset=utf-8"],
   "/mark-inspector":["web/mark-inspector.html","text/html; charset=utf-8"],
