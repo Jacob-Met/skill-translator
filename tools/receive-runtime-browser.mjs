@@ -2,23 +2,33 @@
 import {createRequire} from "node:module";
 import {mkdir,writeFile,readFile} from "node:fs/promises";
 import {resolve,join} from "node:path";
-import {pathToFileURL} from "node:url";
+import {pathToFileURL,fileURLToPath} from "node:url";
+import {execFile} from "node:child_process";
+import {promisify} from "node:util";
+import {createHash} from "node:crypto";
 import {setTimeout as delay} from "node:timers/promises";
 import assert from "node:assert/strict";
 assert(process.argv[2],"Supply clean extracted runtime directory");
 const runtime=resolve(process.argv[2]);
-const {createAppServer}=await import(pathToFileURL(join(runtime,"server.mjs")));
-const {demonstration}=await import(pathToFileURL(join(runtime,"src/demo.mjs")));
+function loopbackOrigin(value){
+  assert(/^http:\/\/127\.0\.0\.1(?::[0-9]{1,5})?\/?$/.test(value),
+    'External receiving requires an HTTP 127.0.0.1 origin without credentials, path, query or fragment');
+  const url=new URL(value);
+  const port=Number(url.port||80);
+  assert(Number.isInteger(port)&&port>=1&&port<=65535,'Invalid receiving port');
+  return url.origin;
+}
+const externalURL=process.env.SKILL_RECEIVE_BASE_URL;
 const require=createRequire(import.meta.url);
-const puppeteer=require(process.env.PUPPETEER_PATH||"puppeteer");
-const server=createAppServer();
+let server;
 let url;
 const out=resolve(process.argv[3]||"runtime-browser-receipt");
 await mkdir(out,{recursive:false}); // Fresh evidence directory prevents stale downloads passing.
 let browser;
 const pageErrors=[],offsite=[];
 const report={course:"actual Chrome task-space interaction",
-  tests:[],result:"FAIL",source:"authored synthetic 2D geometry",runtime,source_commit:JSON.parse(await readFile(join(runtime,"MANIFEST.json"),"utf8")).source_commit,browser:null};
+  tests:[],result:"FAIL",source:"authored synthetic 2D geometry",runtime,
+  receiver_sha256:createHash("sha256").update(await readFile(fileURLToPath(import.meta.url))).digest("hex"),source_commit:JSON.parse(await readFile(join(runtime,"MANIFEST.json"),"utf8")).source_commit,browser:null};
 function record(name){report.tests.push(name);}
 function watch(page){
   page.on("pageerror",e=>pageErrors.push(String(e)));
@@ -27,8 +37,32 @@ function watch(page){
 try{
   assert(/^[a-f0-9]{40}$/.test(process.argv[4]||""),"Supply independently expected full commit as fourth argument");
   assert.equal(report.source_commit,process.argv[4]);
-  await new Promise((ok,fail)=>{server.once("error",fail);server.listen(0,"127.0.0.1",ok)});
-  url="http://127.0.0.1:"+server.address().port;
+  if(externalURL!==undefined){
+    url=loopbackOrigin(externalURL);
+    report.hosting="external";
+    report.base_url=url;
+    const {stdout}=await promisify(execFile)(process.execPath,
+      [fileURLToPath(new URL("./receive-runtime.mjs",import.meta.url)),runtime,process.argv[4]],
+      {env:{...process.env,SKILL_RECEIVE_BASE_URL:url},timeout:120000,maxBuffer:1024*1024});
+    const verification=JSON.parse(stdout);
+    assert.equal(verification.result,"passed","External static receiving must pass");
+    assert.equal(verification.hosting,"external","Static receiver must verify the supplied server");
+    assert.equal(verification.base_url,url,"Static and browser receiving must use the same origin");
+    assert.equal(verification.source_commit,report.source_commit);
+    assert(Number.isInteger(verification.served_routes)&&verification.served_routes>0);
+    report.external_static_receiving=verification;
+    await writeFile(join(out,"external-static-receipt.json"),JSON.stringify(verification,null,2)+"\n");
+    record("Externally launched server serves the verified package's maintained route bytes");
+  }else{
+    const {createAppServer}=await import(pathToFileURL(join(runtime,"server.mjs")));
+    server=createAppServer();
+    await new Promise((ok,fail)=>{server.once("error",fail);server.listen(0,"127.0.0.1",ok)});
+    url="http://127.0.0.1:"+server.address().port;
+    report.hosting="receiver self-hosted";
+    report.base_url=url;
+  }
+  const {demonstration}=await import(pathToFileURL(join(runtime,"src/demo.mjs")));
+  const puppeteer=require(process.env.PUPPETEER_PATH||"puppeteer");
   browser=await puppeteer.launch({
     executablePath:process.env.CHROME_BINARY||"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     headless:true,args:["--no-first-run","--disable-extensions","--no-default-browser-check"]
@@ -82,8 +116,36 @@ try{
   assert.equal(receipt.target.widthMm,420);
   assert.equal(receipt.target.heightMm,90);
   assert.equal(receipt.target.workspaceView,"mirrored");
-  assert(receipt.evaluation,"Placement receipt must retain evaluated result");
-  record("Actual browser download retains evaluated placement receipt; receipt is not asserted to be importable");
+  assert.equal(receipt.evidenceClass,"authored-planar-annotations-not-verified-physical-action");
+  assert.equal(receipt.selectedMark,"center-registration");
+  assert.equal(receipt.source.title,demonstration.title);
+  assert.deepEqual(receipt.source.source,demonstration.source);
+  assert.deepEqual(receipt.source.landmarks,demonstration.landmarks);
+  assert(Array.isArray(receipt.inferredLandmarks));
+  const exportedMarks=receipt.inferredLandmarks.filter(mark=>mark.id===receipt.selectedMark);
+  assert.equal(exportedMarks.length,1,"Exactly one exported selected mark");
+  const exportedMark=exportedMarks[0];
+  assert.equal(exportedMark.toleranceMm,5);
+  assert(Number.isFinite(exportedMark.targetMm.x)&&Number.isFinite(exportedMark.targetMm.y));
+  const evaluation=receipt.evaluation;
+  assert(evaluation && typeof evaluation==="object" && !Array.isArray(evaluation));
+  assert.equal(evaluation.within,true,"Receipt must retain the accepted result shown in the UI");
+  for(const field of ["errorMm","toleranceMm","dxMm","dyMm"]){
+    assert(Number.isFinite(evaluation[field]),"Finite exported evaluation field: "+field);
+  }
+  assert.equal(evaluation.toleranceMm,exportedMark.toleranceMm);
+  assert(evaluation.errorMm>=0 && evaluation.errorMm<=evaluation.toleranceMm+1e-9);
+  assert(receipt.learnerAttempt && Number.isFinite(receipt.learnerAttempt.xMm) &&
+    Number.isFinite(receipt.learnerAttempt.yMm),"Accepted receipt must retain the learner placement");
+  const expectedDx=receipt.learnerAttempt.xMm-exportedMark.targetMm.x;
+  const expectedDy=receipt.learnerAttempt.yMm-exportedMark.targetMm.y;
+  const expectedError=Math.hypot(expectedDx,expectedDy);
+  assert.equal(evaluation.dxMm,expectedDx,"Receipt displacement must match learner and target coordinates");
+  assert.equal(evaluation.dyMm,expectedDy,"Receipt displacement must match learner and target coordinates");
+  assert(Math.abs(evaluation.errorMm-expectedError)<=1e-9,"Receipt error must match Euclidean displacement");
+  assert.equal(evaluation.within,expectedError<=exportedMark.toleranceMm+1e-9,
+    "Receipt acceptance must match the evaluator's tolerance rule");
+  record("Downloaded receipt retains the selected source, mirrored target and coherent accepted placement evaluation");
 
   await page.evaluate(()=>document.querySelector("#targetSvg").focus());
   await page.keyboard.down("Shift");
@@ -182,7 +244,7 @@ try{
     await writeFile(out+"/browser-receipt.json",JSON.stringify(report,null,2)+"\n");
   }finally{
     try{if(browser)await browser.close();}
-    finally{if(server.listening)await new Promise(ok=>server.close(ok));}
+    finally{if(server?.listening)await new Promise(ok=>server.close(ok));}
   }
 }
 

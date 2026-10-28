@@ -5,6 +5,17 @@ import {resolve,join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import net from 'node:net';
+import {fileURLToPath} from 'node:url';
+function loopbackOrigin(value){
+  assert(/^http:\/\/127\.0\.0\.1(?::[0-9]{1,5})?\/?$/.test(value),
+    'External receiving requires an HTTP 127.0.0.1 origin without credentials, path, query or fragment');
+  const url=new URL(value);
+  const port=Number(url.port||80);
+  assert(Number.isInteger(port)&&port>=1&&port<=65535,'Invalid receiving port');
+  return url.origin;
+}
+const externalURL=process.env.SKILL_RECEIVE_BASE_URL;
+const externalOrigin=externalURL===undefined?null:loopbackOrigin(externalURL);
 const root=resolve(process.argv[2]??'');
 assert(process.argv[2] && /^[a-f0-9]{40}$/.test(process.argv[3]??''), 'Supply clean runtime directory and independently expected full commit');
 const manifest=JSON.parse(await readFile(join(root,'MANIFEST.json'),'utf8'));
@@ -34,31 +45,45 @@ for(const file of manifest.files){
   assert.equal(bytes.length,file.bytes,file.path+' bytes');
   assert.equal(createHash('sha256').update(bytes).digest('hex'),file.sha256,file.path+' digest');
 }
-const probe=net.createServer();
-await new Promise((ok,fail)=>{probe.once('error',fail);probe.listen(0,'127.0.0.1',ok)});
-const port=probe.address().port;
-await new Promise(ok=>probe.close(ok));
-const child=spawn(process.execPath,['launch.mjs'],{cwd:root,env:{...process.env,PORT:String(port)},stdio:['ignore','pipe','pipe']});
+let child;
+let baseURL=externalOrigin;
 let output='';
 try {
-  await new Promise((ok,fail)=>{
-    const timer=setTimeout(()=>fail(Error('Launch timeout: '+output)),15000);
-    const finish=()=>{clearTimeout(timer);ok()};
-    child.stdout.on('data',b=>{output+=b;if(output.includes('http://127.0.0.1:'+port))finish()});
-    child.stderr.on('data',b=>{output+=b});
-    child.once('error',e=>{clearTimeout(timer);fail(e)});
-    child.once('exit',code=>{clearTimeout(timer);fail(Error('Launch exited '+code+': '+output))});
-  });
+  if(externalOrigin===null){
+    const probe=net.createServer();
+    await new Promise((ok,fail)=>{probe.once('error',fail);probe.listen(0,'127.0.0.1',ok)});
+    const port=probe.address().port;
+    await new Promise(ok=>probe.close(ok));
+    baseURL='http://127.0.0.1:'+port;
+    child=spawn(process.execPath,['launch.mjs'],{cwd:root,env:{...process.env,PORT:String(port)},stdio:['ignore','pipe','pipe']});
+    await new Promise((ok,fail)=>{
+      const timer=setTimeout(()=>fail(Error('Launch timeout: '+output)),15000);
+      const finish=()=>{clearTimeout(timer);ok()};
+      child.stdout.on('data',b=>{output+=b;if(output.includes(baseURL))finish()});
+      child.stderr.on('data',b=>{output+=b});
+      child.once('error',e=>{clearTimeout(timer);fail(e)});
+      child.once('exit',code=>{clearTimeout(timer);fail(Error('Launch exited '+code+': '+output))});
+    });
+  }
   const source=await readFile(join(root,'server.mjs'),'utf8');
   const entries=[...source.matchAll(/["'](\/[^"']*)["']\s*:\s*\[\s*["']([^"']+)["']\s*,\s*["']([^"']+)["']/g)];
   assert(entries.length>0,'No route manifest found');
   for(const [,route,file,mime] of entries){
-    const response=await fetch('http://127.0.0.1:'+port+route,{signal:AbortSignal.timeout(10000)});
+    const response=await fetch(baseURL+route,{redirect:'error',signal:AbortSignal.timeout(10000)});
     assert.equal(response.status,200,route);
     assert.equal(response.headers.get('content-type'),mime,route+' MIME');
     assert.deepEqual(Buffer.from(await response.arrayBuffer()),await readFile(join(root,file)),route+' actual served asset');
   }
-  console.log(JSON.stringify({source_commit:manifest.source_commit,node:process.version,platform:process.platform,manifest_files:manifest.files.length,served_routes:entries.length,launch:'launch.mjs',result:'passed',scope:'Clean extracted launch and exact static route bytes only; browser interactions and optional native operations not exercised'},null,2));
+  console.log(JSON.stringify({source_commit:manifest.source_commit,receiver_sha256:createHash('sha256').update(await readFile(fileURLToPath(import.meta.url))).digest('hex'),node:process.version,platform:process.platform,
+    manifest_files:manifest.files.length,served_routes:entries.length,hosting:externalOrigin===null?'receiver self-hosted':'external',
+    base_url:baseURL,launch:externalOrigin===null?'launch.mjs':null,result:'passed',
+    scope:'Clean extracted inventory and exact served static route bytes; browser interactions and optional native operations not exercised'},null,2));
 } finally {
-  child.kill('SIGTERM');
+  if(child?.pid && child.exitCode===null && child.signalCode===null){
+    await new Promise(ok=>{
+      const timer=setTimeout(()=>child.kill('SIGKILL'),2000);
+      child.once('close',()=>{clearTimeout(timer);ok()});
+      child.kill('SIGTERM');
+    });
+  }
 }

@@ -77,6 +77,52 @@ native-feature test. Use the separately maintained browser receiver for actual
 placement, source export and fresh reopen, retaining its screenshots and result.
 Consult that receiver's documented CLI for evidence destination and browser setup.
 
+### Receive a separately launched application
+
+To exercise the maintained Unix launcher, extract into a fresh directory whose
+path contains spaces. From a different working directory, start the application
+in one terminal, choosing an available port:
+
+```sh
+PORT=18787 sh "/path with spaces/skill-translator-COMMIT_PREFIX/start.sh"
+```
+
+In another terminal, point the receivers at that exact loopback origin. Keep the
+receiving tools and new evidence directory outside the extraction:
+
+```sh
+SKILL_RECEIVE_BASE_URL=http://127.0.0.1:18787 \
+node tools/receive-runtime.mjs "/path with spaces/skill-translator-COMMIT_PREFIX" \
+  EXACT_40_CHARACTER_COMMIT_SHA
+
+SKILL_RECEIVE_BASE_URL=http://127.0.0.1:18787 \
+PUPPETEER_PATH=/absolute/path/to/an/existing/puppeteer/installation \
+node tools/receive-runtime-browser.mjs \
+  "/path with spaces/skill-translator-COMMIT_PREFIX" \
+  /path/to/new-receiving-evidence EXACT_40_CHARACTER_COMMIT_SHA
+```
+
+Set `CHROME_BINARY` if Chrome is not at the receiver's default macOS location.
+The external URL must be an HTTP origin using literal `127.0.0.1`, with an
+optional port and trailing slash. Credentials, other hosts, paths, queries and
+fragments are rejected. Static verification rejects redirects and checks the
+complete extracted inventory and exact maintained route bytes. The external
+browser course requires that verification on the same origin before opening
+Chrome, then checks placement, the downloaded accepted-placement receipt and
+source export/reopen. Its evidence includes `external-static-receipt.json`. Both receipts record the
+executing receiver's `receiver_sha256` separately from the application's
+`source_commit`; the receiving tools can be newer than the frozen package.
+
+An external-server failure cannot fall back to a server started by the receiver.
+The receivers do not stop the external application; stop the terminal that
+launched it with Ctrl+C after receiving. With `SKILL_RECEIVE_BASE_URL` unset,
+the existing self-hosted modes remain available.
+
+Retain the launch command, working directory, extracted path, process receipt,
+archive digest and actual platform with the results. Route-byte checks identify
+what was served at verification time; the URL alone does not identify the
+launching process. A Unix launcher result does not establish Windows support.
+
 Before publishing a versioned private GitHub Release, record actual checks and
 their platform/runtime versions, including failures and untested optional paths.
 After upload, download the asset through the intended account, verify its SHA-256,
