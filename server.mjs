@@ -8,6 +8,11 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/spoken-explanations':['web/spoken-explanations.html','text/html; charset=utf-8'],
+  '/web/spoken-explanations.mjs':['web/spoken-explanations.mjs','text/javascript; charset=utf-8'],
+  '/web/spoken-explanations.css':['web/spoken-explanations.css','text/css; charset=utf-8'],
+  '/web/spoken-explanation-input.mjs':['web/spoken-explanation-input.mjs','text/javascript; charset=utf-8'],
+  '/src/spoken-explanations.mjs':['src/spoken-explanations.mjs','text/javascript; charset=utf-8'],
   '/src/motion-distance-invariant.mjs':['src/motion-distance-invariant.mjs','text/javascript; charset=utf-8'],
 "/target-alternatives":["web/target-alternatives.html", "text/html; charset=utf-8"],
 "/web/target-alternatives.css":["web/target-alternatives.css", "text/css; charset=utf-8"],

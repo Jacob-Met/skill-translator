@@ -1,0 +1,9 @@
+PASS actual opaque color originals, exact translation and pinned kernel
+PASS changed original bytes, dimensions, overlapping patches refuse
+PASS full-source alpha outside patches and 16-bit samples refuse
+PASS EXIF and animation refuse before native/browser coordinate disagreement
+PASS search exhaustion, rotation and single-patch occlusion never fall back to zero
+PASS textureless reference refused
+PASS known limit preserved: true quarter-pixel movement accepted as zero
+PASS known limit preserved: two moving patches accepted despite stationary background
+8 native groups passed

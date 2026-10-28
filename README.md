@@ -468,6 +468,17 @@ The observation evidence panel can navigate every equally small conflict group w
 
 Open **Inspect supplied narration** from the demonstration studio to pair an author-supplied WebVTT transcript with the original retained sequence. Inspect overlapping words beside before/after frames, explicitly select attributed quotations, and save a separate narrated account without replacing original notes. No transcription, sensory inference or learning result is claimed. [Input contract and workflow](docs/TIMED_NARRATION.md).
 
+## Keep a separately spoken explanation
+
+Open **Keep a spoken explanation** from Demonstration studio or visit
+`/spoken-explanations`. Attach a supplied audio explanation to an explicit
+original step, retain its attribution and optional written description, and
+listen beside the checked before/after frames and original notes. Download the
+complete notebook to keep every retained PNG and audio file; fresh reopening
+checks their identities. These are separately supplied accounts, with no
+inferred clip synchronization, transcription or learner score. [Workflow,
+media bounds and receiving](docs/SPOKEN_EXPLANATIONS.md).
+
 
 [Find original moments from narration](docs/narration-moment-discovery.md) explains literal cue search and explicit preview in the existing sequence studio before retaining a source frame.
 

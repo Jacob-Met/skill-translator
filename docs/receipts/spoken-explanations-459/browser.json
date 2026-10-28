@@ -1,0 +1,93 @@
+{
+  "startedAt": "2026-10-28T22:30:09.190Z",
+  "state": "completed",
+  "fixtureClass": "Authored PNG and tone software controls",
+  "groups": [
+    {
+      "name": "checked source and separately attributed real audio playback",
+      "passed": true,
+      "seconds": 0.544051111,
+      "audioSha256": "e7359d98457e4968c44d259586709e6d290758d7a95c371674353f569bdf96bf",
+      "playback": {
+        "durationSeconds": 2,
+        "currentTimeSeconds": 0.11553,
+        "paused": false,
+        "decodedAudioBytes": 8192
+      }
+    },
+    {
+      "name": "complete raw download retains original frames, account and audio bytes",
+      "passed": true,
+      "seconds": 0.6627613920000001,
+      "downloadBytes": 86025,
+      "downloadSha256": "d1f131ab38874a7004b20b3cb30df66c11c9829b8598f1dba42dd5494b0f51f3"
+    },
+    {
+      "name": "fresh narrow reopen, keyboard step selection and shared recording custody",
+      "passed": true,
+      "seconds": 0.36823242200000006,
+      "width": 390,
+      "explanations": 2,
+      "distinctRetainedRecordings": 1
+    },
+    {
+      "name": "malformed, oversized and over-duration audio preserve accepted work",
+      "passed": true,
+      "seconds": 0.4723483589999996,
+      "refused": [
+        "unsupported container",
+        "301-second audio",
+        "4 MiB plus one byte"
+      ],
+      "acceptedDownloadUnchanged": true
+    },
+    {
+      "name": "complete import checks source, original PNG and every audio byte",
+      "passed": true,
+      "seconds": 0.253910613,
+      "refusedReplacements": 5,
+      "acceptedDownloadUnchanged": true
+    },
+    {
+      "name": "late source import cannot overwrite a new authored draft",
+      "passed": true,
+      "seconds": 0.07902854999999999,
+      "newDraftRetained": true,
+      "originalNotebookRetained": true
+    },
+    {
+      "name": "late audio and active playback retire on source replacement",
+      "passed": true,
+      "seconds": 0.2746512480000001,
+      "oldPlaybackPaused": true,
+      "lateAudioNotAttached": true
+    },
+    {
+      "name": "changed draft retires an in-flight complete export",
+      "passed": true,
+      "seconds": 0.34487684499999977,
+      "staleDownloads": 0,
+      "acceptedNotebookUnchanged": true
+    },
+    {
+      "name": "retired media events cannot interrupt current playback",
+      "passed": true,
+      "seconds": 0.6271329830000004,
+      "retiredCardIgnored": true,
+      "emptyDraftIgnored": true,
+      "currentDraftRetained": true,
+      "retiredDraftIgnored": true
+    },
+    {
+      "name": "fresh complete two-step reopen and explicit removal keep source intact",
+      "passed": true,
+      "seconds": 0.44155759699999997,
+      "remainingExplanations": 1,
+      "originalSourceUnchanged": true
+    }
+  ],
+  "pageErrors": [],
+  "externalRequests": [],
+  "allPassed": true,
+  "finishedAt": "2026-10-28T22:30:14.428Z"
+}

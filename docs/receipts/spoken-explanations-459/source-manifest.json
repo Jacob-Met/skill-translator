@@ -1,0 +1,96 @@
+{
+  "base_commit": "a07553d62c28e5a2b29b9080d0c30a30852147d2",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 66768,
+      "git_blob": "e5d8a09c1a7ee7d6b7d9faadbf33aef8e7801fbe",
+      "sha256": "89a884549d3963c72d552611d74991b24bfb5ad9a047684eb6b67d691c33d6bc",
+      "executed_sha256": "89a884549d3963c72d552611d74991b24bfb5ad9a047684eb6b67d691c33d6bc"
+    },
+    {
+      "path": "docs/SPOKEN_EXPLANATIONS.md",
+      "bytes": 6167,
+      "git_blob": "edf8488ca7313c4f474ac83e00a77de0a7de05c1",
+      "sha256": "d2678d0759de81ed9b32d9a780a220e16a8f868b2e45590617a007b02be61c5e",
+      "executed_sha256": "7ddd0f2ff6901955ba5a425e037c779985eec71a54872943e85c696613f9fae1"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 52100,
+      "git_blob": "40d6f2cf18c5d3c9ad147b7204e727413acf843e",
+      "sha256": "88b386e085e1975d668859d1c93fd13925703ee044d2d7e00572f98451e891ef",
+      "executed_sha256": "88b386e085e1975d668859d1c93fd13925703ee044d2d7e00572f98451e891ef"
+    },
+    {
+      "path": "src/spoken-explanations.mjs",
+      "bytes": 4770,
+      "git_blob": "bc99366b5a82c0745b272eaf31cd283898ca81cb",
+      "sha256": "ef4e86bc0482f8e412f7a829370b09de01ecd7b1e0873ed0d8b21bbed38e0e7a",
+      "executed_sha256": "ef4e86bc0482f8e412f7a829370b09de01ecd7b1e0873ed0d8b21bbed38e0e7a"
+    },
+    {
+      "path": "test/spoken-explanations.test.mjs",
+      "bytes": 6897,
+      "git_blob": "7543a9a4e4d1244b08318a503caa4fb9970f720d",
+      "sha256": "d2e06ef5235ee56634a70b87aae9e0916b83f1751abfc4422b05a98b69c36500",
+      "executed_sha256": "d2e06ef5235ee56634a70b87aae9e0916b83f1751abfc4422b05a98b69c36500"
+    },
+    {
+      "path": "test/workbenches-filter.test.mjs",
+      "bytes": 11327,
+      "git_blob": "d55764a570655a75af4c433800ee9448b8a58cf2",
+      "sha256": "5e789359a5b2517aacd7e8edaa19c1542f8feff015bb355c7505562d7f8cadd7",
+      "executed_sha256": "5e789359a5b2517aacd7e8edaa19c1542f8feff015bb355c7505562d7f8cadd7"
+    },
+    {
+      "path": "tools/browser-spoken-explanations.mjs",
+      "bytes": 23978,
+      "git_blob": "b567ad51dba9c772ddd31244e8ce03fd9d5b3766",
+      "sha256": "d07c7148b8a8132c2652e9a817a676714b740f341b0d0837753919a44ffe6430",
+      "executed_sha256": "d07c7148b8a8132c2652e9a817a676714b740f341b0d0837753919a44ffe6430"
+    },
+    {
+      "path": "web/sequence.html",
+      "bytes": 13964,
+      "git_blob": "6df4a7e895bd98c9ed1a2beb9b693edf5bdc1b65",
+      "sha256": "855bd48f332498cf566bc88004c7349df56635f204c784d0aa0b2789ea95703f",
+      "executed_sha256": "855bd48f332498cf566bc88004c7349df56635f204c784d0aa0b2789ea95703f"
+    },
+    {
+      "path": "web/spoken-explanation-input.mjs",
+      "bytes": 8201,
+      "git_blob": "dc1c236755031f9cd6eec9c7b04781ca7fb8e316",
+      "sha256": "293ac30d5f902386fcfc57ffd1349a05f142fbfefa062119c52b8cbef4d6dba0",
+      "executed_sha256": "293ac30d5f902386fcfc57ffd1349a05f142fbfefa062119c52b8cbef4d6dba0"
+    },
+    {
+      "path": "web/spoken-explanations.css",
+      "bytes": 6865,
+      "git_blob": "66ba8a625fef22358f15cc00a2cfecc910e761ed",
+      "sha256": "6c874d218e16c39122184fbb5490af4c2b6e4dbfcaf55ae761ab8fe92bd4af92",
+      "executed_sha256": "6c874d218e16c39122184fbb5490af4c2b6e4dbfcaf55ae761ab8fe92bd4af92"
+    },
+    {
+      "path": "web/spoken-explanations.html",
+      "bytes": 5016,
+      "git_blob": "0288d2e7cdb7fd40bbd3d31056ec5c60914ca584",
+      "sha256": "9db811b8f1dd079147be93452d1d27ece23eb8ef4fa92c07099b62ef2878b46a",
+      "executed_sha256": "9db811b8f1dd079147be93452d1d27ece23eb8ef4fa92c07099b62ef2878b46a"
+    },
+    {
+      "path": "web/spoken-explanations.mjs",
+      "bytes": 14168,
+      "git_blob": "09c06fc6bab49e646f23e87876a23739f29e6001",
+      "sha256": "01bbac5f54312dff2c519593b332eb690e02960f31f9421f4e401dc5568cb5ae",
+      "executed_sha256": "01bbac5f54312dff2c519593b332eb690e02960f31f9421f4e401dc5568cb5ae"
+    },
+    {
+      "path": "web/workbenches.html",
+      "bytes": 19319,
+      "git_blob": "4b0bbf2c00360e8da790e68ab663d02d9fa57418",
+      "sha256": "23ed6e3e31e6e08ce2bef91a9c76b14d82ea9ef6d05287c3821420157cc32c84",
+      "executed_sha256": "23ed6e3e31e6e08ce2bef91a9c76b14d82ea9ef6d05287c3821420157cc32c84"
+    }
+  ]
+}

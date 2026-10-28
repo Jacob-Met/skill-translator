@@ -1,0 +1,66 @@
+{
+  "initial": {
+    "schema": "hamon.bounded-source-review/v1",
+    "time": "2026-10-28T20:24:23.343645+00:00",
+    "reviewer": "hamon-366053231788/estate_log_recovery",
+    "scope": "SKILL TRANSLATOR459 spoken explanation model/input/lifecycle and native/browser receiving contract",
+    "files": [
+      {
+        "path": "src/spoken-explanations.mjs",
+        "bytes": 4770,
+        "git_blob": "bc99366b5a82c0745b272eaf31cd283898ca81cb",
+        "sha256": "ef4e86bc0482f8e412f7a829370b09de01ecd7b1e0873ed0d8b21bbed38e0e7a"
+      },
+      {
+        "path": "web/spoken-explanation-input.mjs",
+        "bytes": 8201,
+        "git_blob": "dc1c236755031f9cd6eec9c7b04781ca7fb8e316",
+        "sha256": "293ac30d5f902386fcfc57ffd1349a05f142fbfefa062119c52b8cbef4d6dba0"
+      },
+      {
+        "path": "web/spoken-explanations.mjs",
+        "bytes": 13790,
+        "git_blob": "c80e0d9ca9c9804b188075b6d1bd3f54e16b127c",
+        "sha256": "a6bb12a5e842da0b40d2c4a9f00c1d1d9f31853d97c5bf0b87d062ab110a02d0"
+      },
+      {
+        "path": "test/spoken-explanations.test.mjs",
+        "bytes": 6897,
+        "git_blob": "7543a9a4e4d1244b08318a503caa4fb9970f720d",
+        "sha256": "d2e06ef5235ee56634a70b87aae9e0916b83f1751abfc4422b05a98b69c36500"
+      },
+      {
+        "path": "tools/browser-spoken-explanations.mjs",
+        "bytes": 21840,
+        "git_blob": "530f0351965377100c353ddfe279a7d4eb127376",
+        "sha256": "f912bcfc23f006bf518045cc8b8ffd9f568e5e6ddcaf1729d3ca3ff095db5293"
+      }
+    ],
+    "native_execution_by_reviewer": false,
+    "findings": [
+      {
+        "severity": "bounded lifecycle correction requested",
+        "path": "web/spoken-explanations.mjs",
+        "detail": "Retained-card play listener unconditionally pauses all current players even if the originating card was retired. Guard current connected card, source generation and retained explanation identity, plus active playback. Draft listener should require the current draft and current media source. Browser retired-player event control should assert current playback remains active."
+      }
+    ],
+    "reviewed_boundaries": [
+      "Original sequence and source fields normalized by maintained validator; explicit step association and attribution remain authored accounts.",
+      "Distinct audio budget, SHA256/size/MIME match, raw export and fresh replay admission preserve retained bytes.",
+      "Partial read failures release accepted source and audio object URLs; replaced input/export operations bind generation and controller identity.",
+      "Literal input rendered with textContent; explicit attach and source-preserving removal; no automatic narration, recording, transcription or expertise claim.",
+      "Browser course exercises actual decoded authored tones, original raw PNG/audio bytes, tampered input refusals and asynchronous source/export replacement; generated tone is not expert speech evidence."
+    ],
+    "status": "Source review completed; requested play-event lifecycle guard awaiting owner correction and actual browser receiving."
+  },
+  "correction": {
+    "schema": "hamon.bounded-source-review/v1",
+    "scope": "SKILL459 current play-listener correction",
+    "path": "web/spoken-explanations.mjs",
+    "sha256": "01bbac5f54312dff2c519593b332eb690e02960f31f9421f4e401dc5568cb5ae",
+    "git_blob": "09c06fc6bab49e646f23e87876a23739f29e6001",
+    "finding": "No blocker in correction: retained-card play/error bound to connected card, source generation, no pending import, current explanation/audio identity and src; play also requires active playback/currentSrc. Shared draft element requires current draft, no pending source/audio replacement, active playback and exact current media URL. Retired events cannot pause the current accepted player under these guards.",
+    "native_execution_by_reviewer": false
+  },
+  "correction_received": "The final ten-group browser course passed with actual active-player assertions for retired-card, empty-draft and discarded-draft play events."
+}

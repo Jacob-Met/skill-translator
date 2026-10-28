@@ -1,0 +1,118 @@
+{
+  "schema": "skill-translator.spoken-explanation-receiving/v1",
+  "base_commit": "a07553d62c28e5a2b29b9080d0c30a30852147d2",
+  "base_tree": "620226ecc509b5077d566db5e781240208981831",
+  "received_source_files": 1058,
+  "source_files_unchanged_after_full_receiving": 1058,
+  "source_manifest": "source-manifest.json",
+  "documentation_after_receiving": {
+    "path": "docs/SPOKEN_EXPLANATIONS.md",
+    "change": "Replace the stale unreserved-recorder statement with the merged PR471 adapter and existing integration ownership."
+  },
+  "targeted": {
+    "tests": 36,
+    "pass": 36,
+    "fail": 0,
+    "skip": 0,
+    "command": [
+      "runuser",
+      "-u",
+      "oai",
+      "--",
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--test",
+      "--test-isolation=none",
+      "test/spoken-explanations.test.mjs",
+      "test/demonstration-sequence.test.mjs",
+      "test/timed-narration.test.mjs",
+      "test/server.test.mjs",
+      "test/workbenches-directory.test.mjs",
+      "test/workbenches-filter.test.mjs",
+      "test/server-static-symlink-boundary.test.mjs"
+    ],
+    "log_sha256": "afffdd000b87c0bb0090bd2ed00755785884efc09247c881bc78727c3ea6c037"
+  },
+  "native_generator": {
+    "command": "PYTHONPATH=/tmp/hamon-python-runtime-20261028 PYTHONDONTWRITEBYTECODE=1 python3 test/calibration-translation-native.py",
+    "groups": 8,
+    "exit_code": 0,
+    "runtime": "OpenCV 5.0.0; NumPy 2.3.5",
+    "log_sha256": "c6150122d040fc7638bf79f324620d82517f989a4e24c7633d44f93541c46da7",
+    "generated_fixtures": [
+      {
+        "path": "test/calibration-fixtures/native-report.json",
+        "bytes": 2140,
+        "sha256": "21e846be676f9125c78a82d31f8d0e7ef5f57871d4688994ec2b22fb31aa7eac"
+      },
+      {
+        "path": "test/calibration-fixtures/native-request.json",
+        "bytes": 215650,
+        "sha256": "c48dbfa76c44fbde03528605ba9046c5bcb697c6b385a3b61c31578719c0e4d2"
+      },
+      {
+        "path": "test/calibration-fixtures/reference-task.json",
+        "bytes": 884,
+        "sha256": "fa2481b0de07f9016728d1f55c3ca82d0765df4e620cb5f1f0d044d66a8c75b7"
+      },
+      {
+        "path": "test/calibration-fixtures/reference.png",
+        "bytes": 83301,
+        "sha256": "87f0e2da9a83809c2af1fcb8e8326f086368e13ec797baf9bf433c8f771c4e35"
+      },
+      {
+        "path": "test/calibration-fixtures/target.png",
+        "bytes": 78043,
+        "sha256": "d3235b26834b819eccd72a9b09b9caa342e10f1e4a0b0a009d63f1aa1b09777a"
+      }
+    ]
+  },
+  "full_node_suite": {
+    "command": "node --test --test-concurrency=2 test/*.test.mjs",
+    "runtime": "Node v24.22.1",
+    "tests": 1330,
+    "pass": 1330,
+    "fail": 0,
+    "skip": 0,
+    "seconds": 37.83090888700099,
+    "log_sha256": "c20cbc5b9b00cdc595cf59436972e40036494d783b02e69b362dcc6fb20fde26",
+    "original_receipt_sha256": "d8d21c2b69492d28b653cd8e13ea151b7d14d2204c7196c6815e9692b318fe44"
+  },
+  "browser": {
+    "command": "node tools/browser-spoken-explanations.mjs",
+    "groups": 10,
+    "all_passed": true,
+    "page_errors": [],
+    "external_requests": [],
+    "receipt_sha256": "523a1ab46d949ad2153d1f830242e975bdd65f5543bd9317ce6ae881e06ad022",
+    "sandbox_enabled": true
+  },
+  "visual_review": {
+    "reviewer": "hamon-366053231788/root",
+    "reviewed": [
+      "desktop-step-first.png",
+      "desktop-wide-source-alternative.png",
+      "narrow-reopened.png"
+    ],
+    "decision": "Keep the original step and spoken account side by side on desktop; the wide-source alternative separates them vertically. The 390px layout stacks intact controls and exposes full original frames through links.",
+    "images": "Local QA artifacts; no image upload is included in this change."
+  },
+  "retained_failures": [
+    {
+      "course": "01",
+      "result": "First browser layout comparison used an inline style, blocked by unchanged CSP. Replaced only the scoped test alternative with a same-origin stylesheet response."
+    },
+    {
+      "course": "02",
+      "result": "Directory tests exposed an existing missing joint-numeric route. Current composition also restores appearance and target-alternative routes omitted by intervening main changes; completeness assertions remain unchanged."
+    },
+    {
+      "course": "04",
+      "result": "1289 tests passed; the calibration-draft file failed before its groups because the maintained native generator had not materialized its fixtures. Course06 ran the unchanged actual generator and the complete suite passed."
+    }
+  ],
+  "limits": [
+    "Authored PNGs and tone files qualify software behavior, not expert speech, human listening or learning.",
+    "No microphone request, transcription, speaker authentication, clock synchronization or installed service rollout is claimed.",
+    "Original source clip remains external; the complete notebook retains the original sequence metadata, PNGs and attached audio bytes."
+  ]
+}
