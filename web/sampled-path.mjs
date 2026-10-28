@@ -1,3 +1,4 @@
+import {installTemporalPoints} from '/web/temporal-point-view.mjs';
 import {installIndependentPointProposals} from '/web/sequence-independent-point-proposals-view.mjs';
 import {installReviewedForcedPointPaths} from '/web/reviewed-forced-point-paths-view.mjs';
 import {readReviewedForcedPointPathsBundle} from '/web/reviewed-forced-point-paths-input.mjs';
@@ -21,6 +22,7 @@ const forcedPaths=installReviewedForcedPointPaths({getAssets:()=>assets,getAccep
 const pointProposals=installPointProposals({getSource:()=>source,getAssets:()=>assets,onChange:invalidate});
 const independentPointProposals=installIndependentPointProposals({getSource:()=>source,getAssets:()=>assets,onChange:invalidate,retireRigidProposals:()=>pointProposals.retire()});
 function sourceForm(sequence,study=null){
+ temporal.reset();
  forcedPaths.clear();reviewedPaths.clear();dwell.clear();
  source=sequence;accepted=null;clearPathCircle($('circle-result'));$('result').hidden=true;$('editor').hidden=false;$('source-name').textContent=sequence.title;
  $('point-label').value=study?.label??'';$('reference-label').value=study?.reference.label??'';$('reference-basis').value=study?.reference.basis??'';$('reference-confirm').checked=study?.reference.samePlaneAndCorners??false;
@@ -119,3 +121,7 @@ const dwell=mountDwellProposals($('result'),()=>accepted,id=>{
 $('reviewed-input').addEventListener('change',async()=>{const token=++revision,file=$('reviewed-input').files[0];$('reviewed-input').value='';if(!file)return;let received;status('Reading complete retained mappings and original frames; current evidence is retained until admission.');try{received=await readReviewedPointPathsBundle(file);if(token!==revision){releaseSequenceAssets(received.assets);return;}releaseSequenceAssets(assets);assets=received.assets;sourceForm(received.sequence,received.study.seed);show(received.study.seed,received.study.reviews);status('Complete original mappings reopened and additional point paths recomputed without new point choices or reviews.');}catch(error){if(received)releaseSequenceAssets(received.assets);if(token===revision)status(`Retained mappings refused: ${error.message}. Previous accepted evidence is unchanged.`);}});
 
 $('forced-reviewed-input').addEventListener('change',async()=>{const token=++revision,file=$('forced-reviewed-input').files[0];$('forced-reviewed-input').value='';if(!file)return;let received;status('Reading retained forced subsets and original frames; accepted evidence is preserved until admission.');try{received=await readReviewedForcedPointPathsBundle(file);if(token!==revision){releaseSequenceAssets(received.assets);return;}releaseSequenceAssets(assets);assets=received.assets;sourceForm(received.sequence,received.study.seed);show(received.study.seed,null,{query:received.study,reviews:received.study.reviews});status('Original forced-subset reviews reopened; only identities shared across every selected frame are reused.');}catch(error){if(received)releaseSequenceAssets(received.assets);if(token===revision)status(`Forced-subset account refused: ${error.message}. Accepted evidence is unchanged.`);}});
+
+
+const temporal=installTemporalPoints({getSource:()=>source,getAssets:()=>assets,getRevision:()=>revision,onEdit:()=>{revision++;},getSelected:()=>[...$('samples').children].filter(r=>r.querySelector('.include').checked).map(r=>r.dataset.moment),getReference:()=>({label:$('reference-label').value,basis:$('reference-basis').value,samePlaneAndCorners:$('reference-confirm').checked}),onSource:received=>{revision++;releaseSequenceAssets(assets);assets=received.assets;sourceForm(received.sequence);},onAccept:study=>{revision++;sourceForm(study.sequence,study);show(study);}});
+$('samples').addEventListener('change',()=>temporal.retire());
