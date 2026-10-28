@@ -1,0 +1,9 @@
+{
+  "src/motion-distance-invariant.mjs": "f15e7c041730911afb29abfb5b65b780dbdbd1cdeee82ed566ab522f5e8177fd",
+  "web/fixed-motion-worker.mjs": "3062ab59444e4f17f3def7fbab6943f7dcb3831bd0afdb8548927a3bc6cd911e",
+  "web/fixed-motion-view.mjs": "626d5d12564dae973cfc9c9cc6e4c25240ec4a8849399e3af171e267ff9fcd59",
+  "server.mjs": "593252fc18f30fcf22435b394e713f958d34f8cca5141ff93bd83df792d9db18",
+  "test/motion-distance-invariant.test.mjs": "bc8ff86fa53d6a6ff8aed5793114756a49792e8ea691ed3b5abbbccb3fc7c8f1",
+  "tools/browser-fixed-motion.mjs": "84a990a226c27b5cfd68fd8eba178e331b63fb69d2294d8bc35488968f65487c",
+  "docs/MOTION_DISTANCE_INVARIANT.md": "47b55a496305f82f396b1c6b8e15fdfb0761b82b14384c83fb7473099974aa8e"
+}

@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: explicit fixed orientation certifies the feasible translation rejected by the separate LS maximum
+ok 1 - explicit fixed orientation certifies the feasible translation rejected by the separate LS maximum
+  ---
+  duration_ms: 11.580413
+  type: 'test'
+  ...
+# Subtest: orientation is exactly proper and has an explicit half-turn
+ok 2 - orientation is exactly proper and has an explicit half-turn
+  ---
+  duration_ms: 0.507246
+  type: 'test'
+  ...
+# Subtest: fixed-orientation incompatibility is not promoted to all-motion impossibility
+ok 3 - fixed-orientation incompatibility is not promoted to all-motion impossibility
+  ---
+  duration_ms: 1.491933
+  type: 'test'
+  ...
+# Subtest: budget refusal has no partial certificate and source/point admission stays explicit
+ok 4 - budget refusal has no partial certificate and source/point admission stays explicit
+  ---
+  duration_ms: 2.006439
+  type: 'test'
+  ...
+# Subtest: non-cardinal exact orientation, repeated points and true missing observations retain their distinct meanings
+ok 5 - non-cardinal exact orientation, repeated points and true missing observations retain their distinct meanings
+  ---
+  duration_ms: 1.414946
+  type: 'test'
+  ...
+# Subtest: new-only arithmetic exhaustion preserves the completed original fixed result
+ok 6 - new-only arithmetic exhaustion preserves the completed original fixed result
+  ---
+  duration_ms: 1.709221
+  type: 'test'
+  ...
+# Subtest: strict invariant contradiction retains all selected pairs and admits exact tangency
+ok 7 - strict invariant contradiction retains all selected pairs and admits exact tangency
+  ---
+  duration_ms: 1.169235
+  type: 'test'
+  ...
+# Subtest: rotations and reflections are both inconclusive, never proper-motion certificates
+ok 8 - rotations and reflections are both inconclusive, never proper-motion certificates
+  ---
+  duration_ms: 0.522238
+  type: 'test'
+  ...
+# Subtest: pair capacity, missing observations and separate source admission stay bounded
+ok 9 - pair capacity, missing observations and separate source admission stay bounded
+  ---
+  duration_ms: 2.41076
+  type: 'test'
+  ...
+# Subtest: independent direct-distance oracle agrees away from boundaries over 200 authored pairs
+ok 10 - independent direct-distance oracle agrees away from boundaries over 200 authored pairs
+  ---
+  duration_ms: 23.320217
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 68.879479

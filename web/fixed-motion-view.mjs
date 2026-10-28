@@ -23,6 +23,15 @@ export function createFixedMotionView(host){
  const approx=v=>((v.lower+v.upper)/2).toPrecision(6);
  function show(r){
   output.replaceChildren();output.dataset.status=r.status;
+  if(r.distanceInvariant?.status==='unavailable'){const p=n('p',r.distanceInvariant.reason);p.id='motionDistanceInvariant';p.dataset.status='unavailable';output.append(p);}
+  else if(r.distanceInvariant){
+   const inv=r.distanceInvariant,box=n('section');box.id='motionDistanceInvariant';box.dataset.excluded=String(inv.excluded);
+   box.append(n('h3','Distance check independent of orientation'),n('p',inv.excluded?'At least one selected pair rules out every rigid translation/rotation under the declared per-point bound. Changing only the orientation cannot resolve this contradiction.':'No selected pair rules out rigid motion. This is inconclusive: a proper rotation/translation or jointly feasible placement has not been established.'));
+   box.append(n('p',inv.pairCount+' selected pairs retained; each endpoint has the same '+inv.perPointBoundMm+' mm bound. Reflections also preserve pair distances, so this check cannot establish properness.'));
+   const table=n('details');table.append(n('summary','Inspect every selected pair and exact comparison'));const list=n('ul'),rat=v=>v.numerator+'/'+v.denominator;
+   for(const pair of inv.pairs)list.append(n('li',pair.ids.join(' ↔ ')+': '+(pair.excluded?'contradiction':'not excluded')+'. Original squared distances '+rat(pair.fromSquaredMm)+' and '+rat(pair.toSquaredMm)+' mm²; D='+rat(pair.D)+', D²−4AB='+rat(pair.squaredComparisonGap)+'.'));
+   table.append(list);box.append(table,n('p',inv.limitation));output.append(box);
+  }
   output.append(n('p','Declared cosine '+exact(r.orientation.cosine)+', sine '+exact(r.orientation.sine)+'. Exact closed residual bound: '+r.thresholdMm+' mm.'));
   if(r.status==='common-position'){
    output.append(n('p','A common translation is admitted: x ≈ '+approx(r.point.xMm)+' mm, y ≈ '+approx(r.point.yMm)+' mm. Every selected point meets the declared bound.'));
@@ -30,11 +39,11 @@ export function createFixedMotionView(host){
    const details=n('details');details.append(n('summary','Inspect the exact translation and certificate'),n('p','Translation x = '+exact(r.point.xMm)+' mm; y = '+exact(r.point.yMm)+' mm.'));
    for(const x of r.checks)details.append(n('p',x.observationId+': exact squared margin '+exact(x.squaredMargin)+' mm².'));output.append(details);
   }else if(r.status==='incompatible'){
-   output.append(n('p','No common translation exists at this declared orientation. Another orientation has not been ruled out.'));
-   output.append(n('p','Certificate support: '+r.certificate.support.map(x=>x.observationId+' (weight '+exact(x.weight)+')').join(', ')+'. Positive weighted squared-residual lower bound: '+exact(r.certificate.weightedSquaredResidualLowerBound)+' mm².'));
+   output.append(n('p',r.distanceInvariant?.excluded?'No common translation exists at this declared orientation. The separate distance contradiction above also rules out other orientations under the same bound.':'No common translation exists at this declared orientation. Another orientation has not been ruled out.'));
+   const proof=n('details');proof.append(n('summary','Inspect the fixed-orientation contradiction certificate'),n('p','Certificate support: '+r.certificate.support.map(x=>x.observationId+' (weight '+exact(x.weight)+')').join(', ')+'. Positive weighted squared-residual lower bound: '+exact(r.certificate.weightedSquaredResidualLowerBound)+' mm².'));output.append(proof);
   }else output.append(n('p','Unresolved: the bounded calculation produced no complete certificate.'));
   const fit=r.leastSquares.fit;output.append(n('p',fit?'Separate least-squares fit: largest residual '+Math.max(...fit.residuals.map(x=>x.errorMm)).toPrecision(6)+' mm. Its fitted angle is not this declaration.':'Separate least-squares orientation unavailable: '+r.leastSquares.unavailable));
-  output.append(n('p',r.limitation));status.textContent='Completed for '+r.selectedIds.length+' points, '+r.fromSourceId+' → '+r.toSourceId+'. Work '+r.work+' / '+r.workLimit+'.';
+  output.append(n('p','Fixed-orientation calculation alone: '+r.limitation));status.textContent='Completed for '+r.selectedIds.length+' points, '+r.fromSourceId+' → '+r.toSourceId+'. Work '+r.work+' / '+r.workLimit+'.';
  }
  run.onclick=()=>{
   if(!study||worker)return;
