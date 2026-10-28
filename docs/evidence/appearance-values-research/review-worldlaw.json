@@ -1,0 +1,27 @@
+{
+  "packetSHA256": "299cdb27f782e5d1d2997585a6e015d4807f6565c201e47eea6516469aafcc98",
+  "result": "No blocker for the stated descriptive research scope; no owner inference API or ordinary-consumer integration approval implied",
+  "actualChecks": [
+    "All packet content SHA256s verified",
+    "node --test appearance-values.test.mjs passed one file containing four named authored groups",
+    "Browser receipt's four maintained source hashes match included source copies",
+    "All three receipt pairs match retained original frame hashes and presented times, one clip hash and the original bundle hash",
+    "All pairs preserve identical160x90 sampling, radius4,152x82 support and scalar/full-comparison equality"
+  ],
+  "sourceReview": [
+    "Canonical request admission preserves both original frame identities and sequence source; common width/height/radius/support/sampler/brightness settings enforced before computation",
+    "Bounded two-to-six references and optional target reserve the complete finite search population before image comparisons; samples cannot omit a pair",
+    "All finite minimizing shifts and boundary status remain alongside the scalar; no physical correspondence or unique causal explanation promoted",
+    "Identical reference pair as target is refused; shared frames and same-clip pairs may remain and are not claimed independent",
+    "All three actual pairs are from one clip and labels remain unknown; source grouping is retained for future whole-clip omission rather than fabricated independent examples",
+    "inference remains null; proposed source-neutral numeric API is explicitly unimplemented and owned elsewhere"
+  ],
+  "limits": [
+    "I did not rerun browser decoding or access original private media; actual PNG computation is attributed to the retained browser receipt and source-reviewed harness",
+    "The actual browser harness executes the maintained pair reader/kernel directly, not the new multi-reference inspector; native authored controls separately exercise that inspector",
+    "Packet reproduction still uses recorded absolute pair-ui paths and requires permitted matching media plus external browser/server environment; it is not a standalone executable distribution",
+    "Whole-clip numerical omission/inference is only a proposed interface boundary and has not been implemented or received"
+  ],
+  "productEdits": false,
+  "browserRerun": false
+}

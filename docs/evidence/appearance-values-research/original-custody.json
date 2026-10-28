@@ -1,0 +1,40 @@
+{
+  "scope": "Native original PNG digest/header and complete canonical pair-source admission only; no image decoding, browser resampling or numeric inference",
+  "bundleSHA256": "4a77e8160865a2b417382c9ead748f7a261d8a7511aa69e5c8e66d5a033a524f",
+  "clipSHA256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+  "frames": [
+    {
+      "sha256": "1f45c0bd38aafc7fe19ddf80b6274e5c16d1a9a39a782c5a940068120caed04e",
+      "presentedSeconds": 0.112,
+      "widthPx": 1920,
+      "heightPx": 1080
+    },
+    {
+      "sha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+      "presentedSeconds": 0.712,
+      "widthPx": 1920,
+      "heightPx": 1080
+    },
+    {
+      "sha256": "f26568141642695dfc61ffbe933f37b5e080f6c97bfcbf0f041fa9feeda71b5d",
+      "presentedSeconds": 1.312,
+      "widthPx": 1920,
+      "heightPx": 1080
+    },
+    {
+      "sha256": "c926ca70091b7ea1ba99fdb780a1aaef2f658978a9e9188dacc86b79edbc1e75",
+      "presentedSeconds": 1.912,
+      "widthPx": 1920,
+      "heightPx": 1080
+    }
+  ],
+  "sourceUnchanged": true,
+  "referenceDecisions": [
+    null,
+    null
+  ],
+  "sharedOriginalClip": true,
+  "unknownTarget": true,
+  "forgedPairIdentityRefused": true,
+  "reusedReferencePairAsTargetRefused": true
+}

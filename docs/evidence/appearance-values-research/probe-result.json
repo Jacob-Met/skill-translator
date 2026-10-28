@@ -1,0 +1,11 @@
+{
+  "scope": "Authored sampled-image experiment only; no PNG decoding or decision inference",
+  "same": 0,
+  "uniformBrightness": 0,
+  "changedTexture": 0.18011764705882352,
+  "flat": {
+    "residual": 0,
+    "retainedMinima": 25
+  },
+  "finding": "Equal scalar values can retain different appearance explanations and ambiguity. The scalar producer must retain the complete pair comparison; a zero residual is not physical correspondence or an identical image."
+}
