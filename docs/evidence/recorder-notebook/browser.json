@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "checks": [
+    "actual authored MediaRecorder → unchanged notebook admission → explicit association → complete download and fresh original/audio identity replay",
+    "manual-file parity: unchanged admission and draft retained on step change",
+    "recorded draft retires on step change; already attached notebook entry survives",
+    "old recorded draft retired while real newer manual-file read survives step change",
+    "live capture stops on step retirement; persisted lifecycle remounts idle controls without losing notebook",
+    "new original source retires capture and source-specific associations",
+    "delayed actual Keep file read cannot adopt after selected-step retirement"
+  ],
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "browser": "156.0.8078.73",
+  "audioSHA256": "7211a3187f7d39e502cc674880f51bca4740c2843cb9fca36a4ca8f57934fe49",
+  "limits": "Authored oscillator only; no human speech, physical microphone or expertise claim."
+}

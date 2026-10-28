@@ -1,0 +1,19 @@
+{
+  "reviewer": "retained SKILL worker / recorder author",
+  "scope": "Independent source/lifecycle review only; no notebook browser/native run by this reviewer",
+  "status": "no remaining blocker found",
+  "hashes": {
+    "web/spoken-explanations.mjs": "55f79801e82650d069cfc6c5145b83737a7edf92a7fb16b772e4d8b7a7557d0f",
+    "web/spoken-explanations.html": "aa6e6f653619847fcb932c4be8ec566e5c2680b9e036ff077f200fac096c66cf",
+    "web/explanation-recorder.mjs": "5c0094318806916ce1a49dfdeca56a0fc42d2ae3dedb89e7f1465e2277d86a65"
+  },
+  "findings": [
+    "Recorder ordinary File enters the exact owner loadExplanationAudio admission; original source/audio generations, callback signal/isCurrent and selected-step identity fence adoption.",
+    "Keep creates an unattached preview only; attribution plus explicit Attach still required. Existing notebook source/schema/audio bounds unchanged.",
+    "Step switching retires recorded context; repaired mixed old recorded preview/new manual intake preserves the pending manual controller/generation while releasing the old recorded preview.",
+    "Source import retires recorder work; malformed replacement preserves notebook; existing transactional audio admission and source-only export remain in place.",
+    "Persisted pagehide originally removed controls without restore; repaired pageshow remounts controls for retained context without resuming capture.",
+    "Recorder and notebook own separate preview assets; disposal cannot revoke notebook-admitted audio identity or bytes."
+  ],
+  "limits": "No real microphone/speech, attachment/export/reopen browser or bfcache browser behavior claim from this source review."
+}

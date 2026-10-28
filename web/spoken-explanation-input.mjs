@@ -1,3 +1,4 @@
+import {inspectDecodedAudio} from './audio-decoded-duration.mjs';
 import {audioIdentity, sameAudio, validateSpokenExplanations,
   MAX_AUDIO_BYTES, MAX_AUDIO_SECONDS, MAX_EXPLANATIONS} from '/src/spoken-explanations.mjs';
 import {readSequenceBundle, makeSequenceBundle, releaseSequenceAssets} from '/web/sequence-input.mjs';
@@ -60,7 +61,9 @@ function inspectMedia(url, signal) {
     function aborted() { finish(Error('The audio selection was replaced.')); }
     function failed() { finish(Error('This browser cannot decode the supplied audio file.')); }
     function loaded() {
-      if (!Number.isFinite(player.duration) || player.duration <= 0 || player.duration > MAX_AUDIO_SECONDS) {
+      if (!Number.isFinite(player.duration)) {
+        const error = Error('Audio duration metadata is unavailable.'); error.code = 'unknown-duration'; finish(error);
+      } else if (player.duration <= 0 || player.duration > MAX_AUDIO_SECONDS) {
         finish(Error('Choose audio with a known duration of at most five minutes.'));
       } else finish();
     }
@@ -89,7 +92,14 @@ export async function loadExplanationAudio(file, {signal} = {}) {
   const retained = new File([bytes], identity.name, {type: identity.mimeType});
   const url = URL.createObjectURL(retained);
   try {
-    const durationSeconds = await inspectMedia(url, signal); current(signal);
+    let durationSeconds;
+    try { durationSeconds = await inspectMedia(url, signal); }
+    catch (error) {
+      if (error.code !== 'unknown-duration') throw error;
+      ({durationSeconds} = await inspectDecodedAudio(retained, {signal}));
+      if (!Number.isFinite(durationSeconds) || durationSeconds <= 0 || durationSeconds > MAX_AUDIO_SECONDS) throw Error('Choose audio with a known decoded duration of at most five minutes.');
+    }
+    current(signal);
     return {file: retained, identity, durationSeconds, url};
   } catch (error) { URL.revokeObjectURL(url); throw error; }
 }
