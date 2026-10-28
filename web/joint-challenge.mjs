@@ -1,11 +1,12 @@
 import {freezeJointChallengePlan,createJointChallengeResult,analyzeJointChallenge,exportJointChallengeStudy,importJointChallengeStudy,MAX_JOINT_CHALLENGE_BYTES} from '/src/joint-challenge.mjs';
 import {analyzeJointChallengeConflicts} from '/src/joint-challenge-conflicts.mjs';
+import {mountJointChallengeSequence} from '/web/joint-challenge-sequence.mjs';
 const names={fraction:'Proportional',left:'Left clearance',right:'Right clearance',top:'Top clearance',bottom:'Bottom clearance'};
 const titles={'awaiting-results':'Frozen — awaiting outcomes','none-compatible':'No shared explanation survives','incomplete':'More outcomes are needed','insufficient-precision':'Reported precision is insufficient','one-joint-explanation':'One offered joint explanation remains','unresolved':'Several offered explanations remain'};
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const fmt=n=>Number(n.toFixed(5)).toLocaleString('en-US',{maximumFractionDigits:5});
 export function mountJointChallenge({root,getInvestigation,restoreInvestigation,onActivity=()=>{}}){
- let plan=null,results=[],epoch=0,serial=0,trialSerial=0;
+ let plan=null,results=[],epoch=0,serial=0,trialSerial=0,sequence=null;
  const q={},field=(into,key,title,{type='text',value='',options,min,max}={})=>{
   const label=el('label',title),n=el(options?'select':'input');n.id='jc-'+key;q[key]=n;
   if(options)for(const [value,text]of options){const o=el('option',text);o.value=value;n.append(o);}
@@ -43,7 +44,7 @@ export function mountJointChallenge({root,getInvestigation,restoreInvestigation,
  const conflicts=el('section',undefined,'jc-conflicts');conflicts.id='jc-conflicts';conflicts.setAttribute('aria-labelledby','jc-conflicts-heading');root.append(conflicts);
  const slots=el('div',undefined,'jc-slots');slots.id='jc-slots';root.append(slots,el('h3','Retained predictions and outcome residuals'));
  const readings=el('div',undefined,'jc-readings');readings.id='jc-readings';root.append(readings,el('p','Finite explanation counts are not probabilities. Acquisition origin and prospective timing are reported declarations, not authenticated measurements. Conclusions apply to the retained source readings and rules; they do not establish expert intent or physical safety.','small boundary'));
- function invalidatePending(){epoch++;}
+ function invalidatePending(){epoch++;sequence?.parentActivity();}
  function touch(){invalidatePending();onActivity();}
  function action(fn){touch();try{fn();showError('');}catch(e){showError(e.message);}}
  function showError(text){error.textContent=text;error.hidden=!text;}
@@ -109,6 +110,7 @@ export function mountJointChallenge({root,getInvestigation,restoreInvestigation,
   conflicts.replaceChildren(heading,summary,scope,list,el('p','Minimality is over whole workpieces, not individual observations. These groups do not identify faulty measurements or recommend removing evidence.','small boundary'));
  }
  function render(){
+  sequence?.parentChanged();
   q.planFields.disabled=!getInvestigation();q.resultFields.disabled=!plan;q.export.disabled=!plan;q.freeze.textContent=plan?'Freeze a replacement plan':'Freeze predictions';
   root.dataset.planId=plan?.id??'';stale.hidden=true;switching.hidden=true;
   if(!plan){summary.dataset.status='no-plan';summary.textContent='No frozen challenge yet.';count.textContent='The current shared-source investigation supplies the training. Open a complete challenge to restore its own training and outcomes.';slots.replaceChildren();readings.replaceChildren();conflicts.hidden=true;conflicts.replaceChildren();sheetHint();return;}
@@ -164,5 +166,7 @@ export function mountJointChallenge({root,getInvestigation,restoreInvestigation,
   finally{if(file.files?.[0]===sourceFile)file.value='';}
  };
  root.addEventListener('input',touch);addTrial();render();
+ const continuation=el('section');root.append(continuation);
+ sequence=mountJointChallengeSequence({root:continuation,getInitial:()=>plan?exportJointChallengeStudy(plan,results):null,getInvestigation,onActivity:()=>{invalidatePending();onActivity();}});
  return {invalidatePending,trainingChanged(){invalidatePending();render();}};
 }

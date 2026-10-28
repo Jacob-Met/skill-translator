@@ -1,0 +1,56 @@
+{
+  "schema": "hamon-receiving-history/v1",
+  "claim": "https://github.com/Jacob-Met/skill-translator/issues/461",
+  "frozenControlsSha256": "18d02bb04e8128d795cde0b37ed1ff7f4413d90fbf87bdf32b55c0694835439e",
+  "records": [
+    {
+      "operation": "hamon-de5a-skill461-receive-20261028-144",
+      "outcome": "failed",
+      "receipt": "receiving144.json",
+      "receiptSha256": "f3165db507bf74c788d0e09f748fd04cb6e24a3da99e59604f6fc611b5c134fc",
+      "nativePassed": 56,
+      "maintainedBrowserGroupsPassed": 9,
+      "sequenceGroupsPassed": 1,
+      "cause": "New harness waitForFunction attempted eval under maintained script-src self CSP.",
+      "repair": "Harness changed to bounded page.evaluate polling; product/CSP unchanged."
+    },
+    {
+      "operation": "hamon-de5a-skill461-browser-receive-20261028-147",
+      "outcome": "failed",
+      "receipt": "receiving147.json",
+      "receiptSha256": "cae86ba5bd5576c27701837cf39993df60cdbb801d924df5f2601f0ac0df669c",
+      "sequenceGroupsPassed": 1,
+      "cause": "Real UI context notice compared admitted source objects using key-order-sensitive JSON.stringify after canonical export/reopen.",
+      "repair": "Existing canonical comparator now compares admitted context; regression proves key-order equality while changed source values remain distinct."
+    },
+    {
+      "operation": "hamon-de5a-skill461-receive-20261028-150",
+      "outcome": "passed",
+      "receipt": "receiving150.json",
+      "receiptSha256": "ba3d36129345fa72ac4c7ce67054a2e1dca7ed114e55ea3d10e7d5bee9c99dec",
+      "nativePassed": 57,
+      "maintainedBrowserGroupsPassed": 9,
+      "sequenceBrowserGroupsPassed": 8,
+      "exactHttpResources": 12
+    },
+    {
+      "operation": "hamon-de5a-skill461-current-receive-20261028-155",
+      "outcome": "passed",
+      "receipt": "current-integration155.json",
+      "receiptSha256": "ef1f6b263ceb7bf29b32943d370821593c90f73564073603aebc76ca432b080a",
+      "base": "bc18592a7097c3c8911f3d4c7fd9adfaa644b520",
+      "baseTree": "068c3f116abe359a6ce9899d47e1a12da6300f71",
+      "nativePassed": 57,
+      "maintainedBrowserGroupsPassed": 9,
+      "sequenceBrowserGroupsPassed": 8,
+      "exactHttpResources": 12,
+      "composition": "Preserved current server routes and all97 unchanged existing dependency blobs; inserted only the two continuation allowlist routes."
+    }
+  ],
+  "heldOperation": {
+    "operation": "hamon-de5a-micro-worker-20261028-skill450-merged-124",
+    "status": "unknown; never replayed",
+    "scope": "Earlier PR456 actual merged receiving remains unresolved. Distinct461 source qualification does not resolve124."
+  },
+  "postReceivingChanges": "Only documentation/evidence files added or extended; all8 candidate runtime/test/harness paths remain exact to155."
+}

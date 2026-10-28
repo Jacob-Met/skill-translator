@@ -1,0 +1,59 @@
+{
+  "schema": "hamon-skill-sequential-joint-grounding/v1",
+  "authored": true,
+  "sourceFiles": [
+    {
+      "path": "src/joint-challenge.mjs",
+      "sha256": "dd3516be427f3169449a2bf0aa62ffe7785d4186ec3a817c1c9fb48029760f5f"
+    },
+    {
+      "path": "src/joint-calibration.mjs",
+      "sha256": "39bf81c7bbb7d10c0e8aeadc40baa6237ce3e7110809f40b04c41d867154b73d"
+    },
+    {
+      "path": "test/support/joint-challenge-conflict-fixtures.mjs",
+      "sha256": "a9e3a9eac6cbaf37823829b73a8bbfdfde1077ea89360a36c594fa53f8ee3ef8"
+    }
+  ],
+  "originalTrainingCombinations": 25,
+  "afterFirstActualCombinations": 1,
+  "newTrainingOnlyPlanCombinations": 25,
+  "conditionedNextCombinations": 1,
+  "conditionedNextPredictions": [
+    {
+      "id": "nominal",
+      "marks": [
+        {
+          "landmarkId": "guide",
+          "predictions": [
+            {
+              "rule": "left",
+              "trialId": "next-workpiece",
+              "xMm": 20,
+              "yMm": 90
+            }
+          ]
+        },
+        {
+          "landmarkId": "index",
+          "predictions": [
+            {
+              "rule": "left",
+              "trialId": "next-workpiece",
+              "xMm": 60,
+              "yMm": 150
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "matchingSecondCourseCombinations": 1,
+  "contradictingSecondCourseCombinations": 0,
+  "originalSourceUnchanged": true,
+  "limits": [
+    "This is an analytic authored probe, not a new source-only sequence format or received consumer.",
+    "A new training-only plan correctly describes original training; a sequential consumer must explicitly condition on prior actuals rather than relabel those results as training.",
+    "The proposed first increment retains the existing whole-original-family on-sheet admission for every future workpiece. It will refuse a new sheet that would require silently trimming originally supported predictions."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "base": "bc18592a7097c3c8911f3d4c7fd9adfaa644b520",
+  "baseTree": "068c3f116abe359a6ce9899d47e1a12da6300f71",
+  "changedDependency": "server.mjs",
+  "currentServerBlob": "0835158a43439106f8ef346aabec82588785ffb8",
+  "currentServerSha256": "26ea23c6b79bea3f88a4cefb6cb84def5c6d4c48e42277f1a8416a875ce02d7e",
+  "composedServerSha256": "3d211195c3033b5e25116072b870a45de6bcf8cdfb169d23ec3f3be21cd210ce",
+  "change": "Add only two exact continuation routes; every current route/handler/header byte retained",
+  "additionalRoutes": [
+    "  \"/src/joint-challenge-sequence.mjs\":[\"src/joint-challenge-sequence.mjs\",\"text/javascript; charset=utf-8\"],",
+    "  \"/web/joint-challenge-sequence.mjs\":[\"web/joint-challenge-sequence.mjs\",\"text/javascript; charset=utf-8\"],"
+  ],
+  "otherExistingClosurePathsUnchanged": true
+}

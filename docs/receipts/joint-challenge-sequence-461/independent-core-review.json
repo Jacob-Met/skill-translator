@@ -1,0 +1,38 @@
+{
+  "reviewer": "retained MICROVERSE worker",
+  "scope": "SKILL461 core, fixtures, native controls and frozen contract; consumer not reviewed",
+  "status": "accepted",
+  "files": [
+    {
+      "path": "src/joint-challenge-sequence.mjs",
+      "sha256": "abc2ec0a5286cf320471c2ede8bcbc8b4973214c1303afc79835a7da457c75f6"
+    },
+    {
+      "path": "test/joint-challenge-sequence.test.mjs",
+      "sha256": "905309548edfb397a224384efebfc146a92a6447004d6aa7f50000b43c42ccbe"
+    },
+    {
+      "path": "test/support/joint-challenge-sequence-fixtures.mjs",
+      "sha256": "8912b58ed3c8bd92fe6a952b1f0ab9d38a853d61173a7bf4dcf14f83d7cbab8c"
+    }
+  ],
+  "actualNative": {
+    "tests": 12,
+    "pass": 12,
+    "fail": 0,
+    "log": "/tmp/de5a-micro-skill461-review.tap",
+    "sha256": "998981a5d66aa44ea64760381427409bd7168526dba3e73ec43c08a4c5bcebb8"
+  },
+  "findings": [
+    "Complete canonical normalized initial study and prior bare rounds bind each next prefix; property order does not create false mismatch. Derived cache fields normalize away.",
+    "All rounds rebuild one combined plan from original investigation, preserving global reading and fixed-rule constraints. Prior-only predictions recompute before newest results.",
+    "Sealing retains missing/imprecise records without promoting them; next round requires surviving combinations, latest result replacement does not mutate prior rounds.",
+    "Exact active request binds prefix and trial; old requests cannot target new rounds.",
+    "Input UTF8 and normalized canonical output plus LF are bounded; full72outcome and exact4MB cases passed."
+  ],
+  "limits": [
+    "Prospective acquisition/source provenance remain declarations, not authenticated timestamps.",
+    "A completely rewritten coherent source account is a new account; prefix binding is consistency validation, not cryptographic tamper authentication.",
+    "UI/races/browser not covered."
+  ]
+}

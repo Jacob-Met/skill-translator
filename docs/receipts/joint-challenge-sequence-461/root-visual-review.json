@@ -1,0 +1,45 @@
+{
+  "schema": "hamon-root-visual-review/v1",
+  "reviewer": "root implementer; independent code reviews are separate",
+  "result": "accepted",
+  "sourceSha256": {
+    "server.mjs": "3d211195c3033b5e25116072b870a45de6bcf8cdfb169d23ec3f3be21cd210ce",
+    "src/joint-challenge-sequence.mjs": "9760e43d9bb87a61c1e57863e73fc1ba3b2d060635c677ec857e50e89165741e",
+    "test/joint-challenge-sequence.test.mjs": "9e1a3d547a6e631f85e25eebfd3d3506596bb8697ad20d91db5b420440fbf8b3",
+    "test/support/joint-challenge-sequence-fixtures.mjs": "8912b58ed3c8bd92fe6a952b1f0ab9d38a853d61173a7bf4dcf14f83d7cbab8c",
+    "tools/browser-joint-challenge-sequence.mjs": "515c9c77b949890d37d6a647ddaa8394724c506cc8590cdaf05fe230ee42a982",
+    "web/joint-challenge-sequence.mjs": "16d39b1850584fa4d9de1586aa5612439d527dbc96cc9db77d4978f6f23b47c2",
+    "web/joint-challenge.css": "0f4e9ffed890ab0f23f174afaffcde23a8d313b36c610d647418b266623f1d6b",
+    "web/joint-challenge.mjs": "9419b325e78f4abe9140341799428e45fbf90d28c231cea73880ee03c3924b9b"
+  },
+  "actualImages": [
+    {
+      "path": "sequence-1440-overview.png",
+      "bytes": 148121,
+      "sha256": "bb1eb657a398854cecb0a82ba6b95a9821562d1950e9d11bb222dc53eb762849"
+    },
+    {
+      "path": "sequence-390-details.png",
+      "bytes": 79118,
+      "sha256": "620a881b5c8b7ca9132afae277531c739118e86d2c0951e2b3b8c2999ac009e8"
+    },
+    {
+      "path": "sequence-320-overview.png",
+      "bytes": 78274,
+      "sha256": "35ae7d9dffb8caf536cf3217455df0ce9af5c8a789c7ec7ed8cf127d35403451"
+    }
+  ],
+  "imageOperation": "hamon-de5a-skill461-receive-20261028-150",
+  "currentCompositionOperation": "hamon-de5a-skill461-current-receive-20261028-155",
+  "findings": [
+    "Actual1440px overview,390px retained-evidence view and320px overview were inspected from received PNG bytes.",
+    "Actions, original source/outcome roles, prior-evidence sealing declarations and before/after counts are readable; narrow layouts stack without clipping.",
+    "390px retained round has visible trusted keyboard focus, original marks and reported coordinates; prior-prefix predictions remain distinct from current outcomes.",
+    "Current155 reruns57 native,9 maintained browser,8 sequence browser and12 exact HTTP checks after preserving all current-main server routes.",
+    "The sole runtime difference between150 pixels and155 is server.mjs: two continuation routes inserted into current main; UI/core/test/harness bytes are identical."
+  ],
+  "limits": [
+    "Root authored the implementation; these visual observations are not an independent code review.",
+    "Authored controls do not establish physical acquisition, learning benefit or calibrated uncertainty."
+  ]
+}

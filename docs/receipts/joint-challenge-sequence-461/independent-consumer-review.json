@@ -1,0 +1,27 @@
+{
+  "reviewer": "retained MICROVERSE worker",
+  "status": "accepted",
+  "scope": "Source-only consumer review; actual17browser receiving not claimed here",
+  "sourcePins": [
+    {
+      "path": "web/joint-challenge-sequence.mjs",
+      "sha256": "db8b67a6aa3c7ea284cf6d3e50348185990232de7aa10153839e63a48170b8bb"
+    },
+    {
+      "path": "web/joint-challenge.mjs",
+      "sha256": "9419b325e78f4abe9140341799428e45fbf90d28c231cea73880ee03c3924b9b"
+    }
+  ],
+  "findings": [
+    "Outer training invalidatePending now propagates to sequence.parentActivity, retiring pending sequence file reads without discarding retained evidence. Child activity increments parent epoch and outer revision; parentActivity only increments child epoch, so no recursive callback loop.",
+    "Child file capture takes epoch after touch callbacks; guarded File identity finally allows retry and does not clear newer selection.",
+    "All candidate start/freeze/outcome/import admissions complete core analysis and capacity validation before sequence replacement. Invalid input preserves accepted sequence/export.",
+    "Parent commit updates stale-context disclosure while retained original training/initial course stay independent.",
+    "Only current round exposes editing; prior rounds render sealed. Frozen predictions derive from prior-only evidence; missing/imprecise labels remain explicit.",
+    "DOM source strings use textContent, exact limits and reported-origin qualifications remain visible."
+  ],
+  "limitations": [
+    "No actual browser run by this reviewer; root receiving remains required.",
+    "Visual acceptance is separate."
+  ]
+}
