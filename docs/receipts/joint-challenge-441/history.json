@@ -1,0 +1,50 @@
+{
+  "schema": "hamon-skill-joint-challenge-receiving-history/v1",
+  "earlierAttempts": [
+    {
+      "name": "history/initial-browser.stderr",
+      "bytes": 539,
+      "sha256": "a13a743da5a60ab5b4a03dd752fdfd6ae8ae9e809cbdadfb66ef1d268f160a42",
+      "stderr": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nlocator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#jc-plan-form') to be visible\n\n    at open (/home/ubuntu/hamon-work/hamon-de5a-20261027/skill-integration-039/scripts/joint-challenge-browser.mjs:22:90)\n    at /home/ubuntu/hamon-work/hamon-de5a-20261027/skill-integration-039/async file:/home/ubuntu/hamon-work/hamon-de5a-20261027/skill-integration-039/scripts/joint-challenge-browser.mjs:27:2 {\n  name: 'TimeoutError'\n}\n\nNode.js v22.23.4\n"
+    },
+    {
+      "name": "history/canonical-browser.stderr",
+      "bytes": 259,
+      "sha256": "6e5bb3d19a3c7ecd3b312b769ae29c41f49443dd4f3da6e1c4f3b68250abf696",
+      "stderr": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nReferenceError: study is not defined\n    at file:///home/ubuntu/hamon-work/hamon-de5a-20261027/skill-integration-039/scripts/joint-challenge-browser-canonical.mjs:27:15\n\nNode.js v22.23.4\n"
+    },
+    {
+      "name": "history/browser-v3.stderr",
+      "bytes": 768,
+      "sha256": "e95d24a9f5828af7e0ec1056ba0b01cee207c4cc4ab89fe5e691464efa5cd2b2",
+      "stderr": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\npage.waitForFunction: EvalError: Evaluating a string as JavaScript violates the following Content Security Policy directive because 'unsafe-eval' is not an allowed source of script: script-src 'self'\".\n\n    at eval (<anonymous>)\n    at predicate (eval at evaluate (:234:30), <anonymous>:11:37)\n    at next (eval at evaluate (:234:30), <anonymous>:32:31)\n    at upload (/home/ubuntu/hamon-work/hamon-de5a-20261027/skill-integration-039/scripts/joint-challenge-browser-v3.mjs:30:209)\n    at /home/ubuntu/hamon-work/hamon-de5a-20261027/skill-integration-039/async file:/home/ubuntu/hamon-work/hamon-de5a-20261027/skill-integration-039/scripts/joint-challenge-browser-v3.mjs:41:109\n\nNode.js v22.23.4\n"
+    },
+    {
+      "name": "history/browser-v4.stderr",
+      "bytes": 272,
+      "sha256": "6d06418c35a37677f33111a6fce0ae76f4485fa96affcc9419d15bf4264798c1",
+      "stderr": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\npage.evaluate: Target page, context or browser has been closed\n    at /home/ubuntu/hamon-work/hamon-de5a-20261027/skill-integration-039/scripts/joint-challenge-browser-v4.mjs:46:206\n\nNode.js v22.23.4\n"
+    }
+  ],
+  "completedOriginalCourse": {
+    "status": "passed",
+    "startedAt": "2026-10-27T23:16:39.850Z",
+    "completedAt": "2026-10-27T23:16:43.845Z",
+    "checks": [
+      "actual parent import, freeze, cross-mark trap and coherent wide outcome",
+      "compact Blob download, fresh reopen, derived-cache recomputation, forged-anchor refusal",
+      "both delayed import directions retired by trusted typing, draft retention, frozen training after parent commit",
+      "failed replacement retains account; fixed rule across sheets; contradiction dominates missing and imprecise",
+      "exact 4000000 UTF8 complete-envelope outcome refusal retains account",
+      "six-sheet freeze; 1440/390/320 overflow, keyboard, focus and screenshots"
+    ],
+    "receiptSha256": "80365340dfc4f097af24ee5b57cb540f27c4d63994ba2874473a65694dbeda31",
+    "harnessSha256": "d4dc67d8a8a2c3a77cee47aa336fbc77fd3e3d06cbc8c3cb4b641276a32d2f22"
+  },
+  "currentCourse": {
+    "operationId": "hamon-de5a-skill-current-receive-20261028-073",
+    "status": "passed",
+    "base": "e9a29b3ead307ea2e79aaeb0ffdf1f8a47da6cfd",
+    "fullReceiptSha256": "74681729ccaba998629870ce318d255342d95f3d18bb31a71bac5e32f7650f92"
+  }
+}
