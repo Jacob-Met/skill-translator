@@ -1,0 +1,79 @@
+{
+  "reviewer": "retained WORLDLAW worker",
+  "kind": "independent source review",
+  "base": "e9a29b3ead307ea2e79aaeb0ffdf1f8a47da6cfd",
+  "files": [
+    {
+      "path": "web/appearance-pair-app.mjs",
+      "sha256": "0526474b3233058f47cea8795fb6b0ad6e4a61a4e570cdeaa1af29a39a16a471"
+    },
+    {
+      "path": "src/appearance-pair.mjs",
+      "sha256": "a615ad0a00b42000e8e50ea6985dcf669f65feda00ebf9115edac6e539952394"
+    },
+    {
+      "path": "web/appearance-pair-input.mjs",
+      "sha256": "f22182185d724c77fbe263287a13dc153fe042fc64099e9ce506762e75d458a0"
+    },
+    {
+      "path": "web/appearance-pair-worker.mjs",
+      "sha256": "0fc0f19a925a7558274133a1060668f7dc998ee982f78cbfbecbbf72a5b1e8d5"
+    },
+    {
+      "path": "web/appearance-pair-view.mjs",
+      "sha256": "f3b0cec8787a4c276d51c1a4c0a28f02cdacd2583ccf821f6f30df9a2bda5640"
+    },
+    {
+      "path": "web/sequence-input.mjs",
+      "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+    },
+    {
+      "path": "web/image-input.mjs",
+      "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138"
+    },
+    {
+      "path": "src/visual-translation.mjs",
+      "sha256": "ac3d90a283a7dc12f2ccd4f46ac07c8c29fc6096b023780d4405ff1a80929361"
+    },
+    {
+      "path": "web/visual-translation-view.mjs",
+      "sha256": "594d3a741730ae8c9c7e1fa41522f8a8cdabbaada04e70264f8139f32da62651"
+    }
+  ],
+  "finding": "No blocking source, request, sampling, worker lifecycle or export custody issue identified.",
+  "checks": [
+    "Request binds clip SHA and exactly two distinct chronological original moment IDs, frame SHA and presented times to validated sequence.",
+    "Sample dimensions are bounded and preserve common original raster aspect ratio; support is exact radius inset and sampler/brightness conventions are explicit.",
+    "The input reader verifies the complete original sequence PNGs through maintained admission before admitting the request; partial/failed reads release assets.",
+    "Sampling uses only admitted original frame URLs with declared full-frame canvas dimensions; abort checks retire replacement work. No derived categorical/physical inference is introduced.",
+    "Worker recomputes maintained finite comparison; app gates responses by revision, worker identity and exact source/settings equality.",
+    "Export revalidates original PNG hashes and serializes original sequence plus canonical request; comparison output is excluded and saved requests recompute on reopen.",
+    "Source/settings changes, cancel and page exit retire results and pending work; source replacements release old assets.",
+    "Previous cancel-during-loading wording finding corrected by branching on loaded.",
+    "Presenter uses textContent, labels sampled-pixel and shared RGB-offset units, retains all minima via maintained pagination, and exposes finite-comparison limitations."
+  ],
+  "actualExecution": {
+    "presenterSyntaxCheck": "node --check passed in previous completed turn",
+    "nativeBehaviorTests": "Not run by this reviewer",
+    "DOMTests": "Not run by this reviewer",
+    "browserTests": "Not run by this reviewer"
+  },
+  "limitations": [
+    "Review of source mechanisms is not browser qualification.",
+    "PNG hashes bind retained bytes to supplied source identities; they do not independently authenticate clip provenance.",
+    "Browser resampling may vary; finite image-shift minima do not establish physical correspondence.",
+    "Pending source changes require review against refreshed hashes."
+  ],
+  "presentationRevision": {
+    "reason": "Root reported desktop/narrow visual finding: full metadata delayed residual/shift on narrow result.",
+    "change": "Entire metadata dl is inside a closed details with summary Source identities and sampling settings, after maintained comparison. Units explanation follows comparison. No metadata, source or numerical comparison changed.",
+    "verification": "Revised presenter node --check passed and source order/disclosure reviewed by WORLDLAW. SECOND GROUND subsequently reported all seven browser groups passing on view f3b0cec8787a4c276d51c1a4c0a28f02cdacd2583ccf821f6f30df9a2bda5640; root visually reviewed final1440/390 and changed-frame boundary1440 captures, reporting readable hierarchy without overflow. These browser and visual checks were performed by peers, not this reviewer.",
+    "externalEvidence": {
+      "browserReviewer": "SECOND GROUND",
+      "receipt": "tools/appearance-pair-browser-receipt.json",
+      "sha256": "cdce055fa0c17f7e394cfe40295c34a90f4d1192f266b06b7fa2e9ba3120546f",
+      "visualReviewer": "root",
+      "changedFrameBoundary": "Root observed shift +16/+16, shared RGB offset -10, displayed residual 20.48 levels; previous values not reused."
+    }
+  }
+}

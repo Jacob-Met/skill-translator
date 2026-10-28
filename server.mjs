@@ -8,6 +8,23 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+"/target-alternatives":["web/target-alternatives.html", "text/html; charset=utf-8"],
+"/web/target-alternatives.css":["web/target-alternatives.css", "text/css; charset=utf-8"],
+"/src/target-cue-alternatives.mjs":["src/target-cue-alternatives.mjs", "text/javascript; charset=utf-8"],
+"/web/target-alternatives-input.mjs":["web/target-alternatives-input.mjs", "text/javascript; charset=utf-8"],
+"/web/target-alternatives.mjs":["web/target-alternatives.mjs", "text/javascript; charset=utf-8"],
+"/src/target-window-cues.mjs":["src/target-window-cues.mjs", "text/javascript; charset=utf-8"],
+"/web/target-window-input.mjs":["web/target-window-input.mjs", "text/javascript; charset=utf-8"],
+"/src/target-cue-hypotheses.mjs":["src/target-cue-hypotheses.mjs", "text/javascript; charset=utf-8"],
+"/web/target-hypotheses-input.mjs":["web/target-hypotheses-input.mjs", "text/javascript; charset=utf-8"],
+"/appearance-pair":["web/appearance-pair.html", "text/html; charset=utf-8"],
+"/web/appearance-pair.html":["web/appearance-pair.html", "text/html; charset=utf-8"],
+"/web/appearance-pair.css":["web/appearance-pair.css", "text/css; charset=utf-8"],
+"/web/appearance-pair-app.mjs":["web/appearance-pair-app.mjs", "text/javascript; charset=utf-8"],
+"/web/appearance-pair-input.mjs":["web/appearance-pair-input.mjs", "text/javascript; charset=utf-8"],
+"/web/appearance-pair-worker.mjs":["web/appearance-pair-worker.mjs", "text/javascript; charset=utf-8"],
+"/web/appearance-pair-view.mjs":["web/appearance-pair-view.mjs", "text/javascript; charset=utf-8"],
+"/src/appearance-pair.mjs":["src/appearance-pair.mjs", "text/javascript; charset=utf-8"],
   "/src/joint-challenge-conflicts.mjs":["src/joint-challenge-conflicts.mjs","text/javascript; charset=utf-8"],
   '/src/temporal-point-proposals.mjs':['src/temporal-point-proposals.mjs','text/javascript; charset=utf-8'],
   '/src/temporal-choice-state.mjs':['src/temporal-choice-state.mjs','text/javascript; charset=utf-8'],

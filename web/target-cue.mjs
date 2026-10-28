@@ -1,6 +1,10 @@
-import {importTargetCueStudy,inspectTargetCueStudy} from '/src/target-cue-study.mjs';
+import {importTargetWindowCues,inspectTargetWindowCues,TARGET_WINDOW_FORMAT} from '/src/target-window-cues.mjs';
+import {readWindowOrTargetBundle as readTargetCueBundle,makeWindowOrTargetBundle as makeTargetCueBundle} from '/web/target-window-input.mjs';
+const importTargetCueStudy=s=>s.format===TARGET_WINDOW_FORMAT?importTargetWindowCues(s):importEndpointStudy(s);
+const inspectTargetCueStudy=s=>s.format===TARGET_WINDOW_FORMAT?inspectTargetWindowCues(s):inspectEndpointStudy(s);
+import {importTargetCueStudy as importEndpointStudy,inspectTargetCueStudy as inspectEndpointStudy,TARGET_CUE_FORMAT} from '/src/target-cue-study.mjs';
 import {validateSequence} from '/src/demonstration-sequence.mjs';
-import {readTargetCueInputs,readTargetCueBundle,makeTargetCueBundle,releaseTargetCueBundle} from '/web/target-cue-input.mjs';
+import {readTargetCueInputs,releaseTargetCueBundle} from '/web/target-cue-input.mjs';
 const $=id=>document.getElementById(id),el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 let accepted=null,revision=0,controller=null,loading=false,draft=false;
 function buttons(){for(const id of ['inspect','save'])$(id).disabled=!accepted||loading||draft;$('retain').disabled=!accepted||loading;}
@@ -13,7 +17,11 @@ function render(){
  frames($('target-evidence'),study.target.source,study.target.stepId,targetSource.assets);
  $('reference-evidence').replaceChildren();study.reference.comparison.examples.forEach((example,i)=>{const article=el('article');frames(article,example.source,example.stepId,referenceSources[i].assets);const row=study.reference.rows[i];article.append(el('p','Declared reference decision: '+(row.decision??'unknown')+'; basis: '+row.basis));study.reference.cues.forEach((cue,j)=>article.append(el('p',cue.label+': '+(row.values[j]??'unknown')+'; cue basis: '+cue.basis)));$('reference-evidence').append(article);});
  options($('cue'),study.reference.cues.map(c=>[c.id,c.label]));const step=study.target.source.steps.find(s=>s.id===study.target.stepId);
- options($('moment'),[step.beforeMomentId,step.afterMomentId].map(id=>[id,study.target.source.moments.find(m=>m.id===id).label]));
+ $('window-mode').checked=study.format===TARGET_WINDOW_FORMAT;
+ const before=study.target.source.moments.find(m=>m.id===step.beforeMomentId),after=study.target.source.moments.find(m=>m.id===step.afterMomentId);
+ const moments=study.target.source.moments.filter(m=>study.format===TARGET_WINDOW_FORMAT?m.origin.mediaTimeSeconds>=before.origin.mediaTimeSeconds&&m.origin.mediaTimeSeconds<=after.origin.mediaTimeSeconds:[step.beforeMomentId,step.afterMomentId].includes(m.id));
+ options($('moment'),moments.map(m=>[m.id,m.label+' · '+m.origin.mediaTimeSeconds+' seconds']));
+ if(study.format===TARGET_WINDOW_FORMAT)for(const m of moments.filter(m=>![before.id,after.id].includes(m.id))){const figure=el('figure'),img=el('img');img.src=targetSource.assets.get(m.id).media.url;img.alt=m.label;figure.append(img,el('figcaption','Retained intermediate frame: '+m.label+' · '+m.origin.mediaTimeSeconds+' seconds'));$('target-evidence').append(figure);}
  $('readings').replaceChildren();study.readings.forEach((row,i)=>{const p=el('p',`${study.reference.cues.find(c=>c.id===row.cueId).label}: ${row.value}; ${row.momentId}; ${row.basisKind}; ${row.basis}`),remove=el('button','Remove reading');remove.onclick=()=>{invalidate();accepted.study=importTargetCueStudy({...accepted.study,readings:accepted.study.readings.filter((_,j)=>j!==i)});clearDraft();render();};p.append(remove);$('readings').append(p);});buttons();
 }
 async function receive(work){invalidate();loading=true;$('error').textContent='';$('status').textContent='Checking the complete original sources…';buttons();const rev=revision;controller=new AbortController();let incoming;
@@ -25,8 +33,10 @@ $('target-file').onchange=async()=>{invalidate();const rev=revision,file=$('targ
 $('pair').onclick=()=>{const reference=$('reference-file').files[0],target=$('target-file').files[0],stepId=$('target-step').value;receive(signal=>readTargetCueInputs(reference,target,stepId,{signal}));};
 $('open').onchange=()=>{const file=$('open').files[0];if(file)receive(signal=>readTargetCueBundle(file,{signal}));};
 for(const id of ['cue','moment','category','basis-kind','basis'])$(id).oninput=()=>{invalidate();draft=true;buttons();};
-$('discard').onclick=()=>{invalidate();clearDraft();};
+$('discard').onclick=()=>{invalidate();clearDraft();$('error').textContent='';};
 $('retain').onclick=()=>{if(loading||!accepted)return;try{const row={cueId:$('cue').value,value:$('category').value,momentId:$('moment').value,basisKind:$('basis-kind').value,basis:$('basis').value};const next=importTargetCueStudy({...accepted.study,readings:[...accepted.study.readings.filter(r=>r.cueId!==row.cueId),row]});invalidate();accepted.study=next;clearDraft();render();$('error').textContent='';}catch(e){$('error').textContent=e.message;}};
 $('inspect').onclick=()=>{if(loading||draft||!accepted)return;try{const f=inspectTargetCueStudy(accepted.study),out=$('results');out.replaceChildren(el('h2','Unchanged reference comparison'),el('p',f.boundary),el('p',`State: ${f.report.status}; compatible reference examples: ${f.report.compatibleExampleIndexes.map(i=>i+1).join(', ')||'none'}; worst remaining questions: ${f.report.worstCaseQuestions??'unresolved'}.`));for(const q of f.report.questions){out.append(el('h3',accepted.study.reference.cues.find(c=>c.id===q.cueId).label),el('p',`Worst question count: ${q.cost??'unresolved'}`));for(const b of q.outcomes)out.append(el('p',`${b.kind==='other-category'?'Unrecorded category':b.answer}: reference examples ${b.exampleIndexes.map(i=>i+1).join(', ')}; remaining ${b.remainingQuestions??'unresolved'}.`));}$('error').textContent='';}catch(e){$('error').textContent=e.message;}};
-$('save').onclick=async()=>{if(loading||draft||!accepted)return;const rev=revision;try{const blob=await makeTargetCueBundle(accepted.study,accepted.referenceSources,accepted.targetSource);if(rev!==revision)throw Error('Inputs changed during export; retry');const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='target-cue-study.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){$('error').textContent=e.message;}};
+$('save').onclick=async()=>{if(loading||draft||!accepted)return;const rev=revision;try{const blob=await makeTargetCueBundle(accepted.study,accepted.referenceSources,accepted.targetSource);if(rev!==revision)throw Error('Inputs changed during export; retry');const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='target-cue-study.json';a.click();$('error').textContent='';setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){$('error').textContent=e.message;}};
 window.addEventListener('beforeunload',()=>{controller?.abort();releaseTargetCueBundle(accepted);});buttons();
+
+$('window-mode').onchange=()=>{if(!accepted)return;const previous=accepted.study.format===TARGET_WINDOW_FORMAT;if(loading||draft){$('window-mode').checked=previous;$('error').textContent='Finish or discard the reading draft and wait for source admission before changing scope.';return;}try{const next=$('window-mode').checked?importTargetWindowCues({...accepted.study,format:TARGET_WINDOW_FORMAT,windowDeclaration:'retained-moments-within-step'}):importEndpointStudy({...accepted.study,format:TARGET_CUE_FORMAT});invalidate();accepted.study=next;clearDraft();render();$('error').textContent='';}catch(e){$('window-mode').checked=previous;$('error').textContent=e.message;}};

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "kind": "Targeted producer visual visit followed by root visual inspection",
+  "browser": "156.0.8078.73",
+  "sandbox": {
+    "namespace": true,
+    "seccomp": true,
+    "nonRoot": true
+  },
+  "widthPx": 390,
+  "originalSequenceMoments": 2,
+  "originalSteps": 0,
+  "unsavedDraftPreserved": true,
+  "ordinaryExportDisabled": true,
+  "appearanceEnabled": true,
+  "noHorizontalOverflow": true,
+  "producerScreenshotSHA256": "53c1edc7e11151d6fcb66d90bb537f125d63ddeb8464aa6e0b3581579f371159",
+  "receiverScreenshotSHA256": "b6d4aa0e4b4f10fe757cb80876dab8cfe8e86665a17f181e533c3d207136fe83",
+  "rootInspected": [
+    "producer 390 px",
+    "receiver 390 px"
+  ],
+  "scope": "Reused already captured original source; no recapture or repeated four-group course. Private images and source payload are excluded."
+}

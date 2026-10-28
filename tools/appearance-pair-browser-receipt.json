@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "groups": [
+    "ordinary source upload and contained pair preserve original bytes, identities, times and settings",
+    "settings edits retire results and a second original pair preserves search-boundary outcome",
+    "fresh-page canonical source reopening ignores forged answers and recomputes exact source-bound result",
+    "cancel retires a real delayed worker response without restoring output",
+    "new source retires old worker and original object URLs; late output cannot replace new input",
+    "deliberate worker-load failure retires export and permits successful retry",
+    "390px layout fits, keyboard setting edit retires findings and sequence navigation opens pair page"
+  ],
+  "errors": [],
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "browser": "156.0.8078.73",
+  "sourceSHA256": "4a77e8160865a2b417382c9ead748f7a261d8a7511aa69e5c8e66d5a033a524f",
+  "contained": [
+    0,
+    1
+  ],
+  "boundary": [
+    2,
+    3
+  ],
+  "captures": [
+    {
+      "name": "appearance-pair1440.png",
+      "sha256": "a18928a6d2bfc16c2c0ff84637c81a274a058ac399cd6683aa3f9287d7b78f55"
+    },
+    {
+      "name": "appearance-pair-boundary1440.png",
+      "sha256": "f863018a97d146c8c1a24910303441c6e16eb2662b73715adbb5bf033904dad4"
+    },
+    {
+      "name": "appearance-pair390.png",
+      "sha256": "b1f1eeff8ce25cec43533b0d266e60a175af1a0e9b9c67379263ae710c38d11f"
+    }
+  ],
+  "expectedFailures": [
+    "http://127.0.0.1:46173/web/appearance-pair-worker.mjs"
+  ],
+  "scope": "Actual ordinary image-pair UI on explicitly supplied retained source. No cross-browser bit-identity, physical correspondence or action inference. Private image payloads excluded from receipt.",
+  "nativeHost": "d6e95b27be65",
+  "processExitCode": 0,
+  "freshPresentedSeconds": [
+    0.112,
+    0.712,
+    1.312,
+    1.912
+  ],
+  "sourceDetails": "Closed by default; expanded to assert visible original frame hashes/times, then closed before result capture and fresh-reopen comparison.",
+  "postRunSourceSHA256": {
+    "web/appearance-pair.html": "6cdf304df96e7fb5363838a7995c73614ff999b75d156a7746592f6b7efa809b",
+    "web/appearance-pair.css": "fa679e49c9d68cc40e38b157b8416073cc66279fccd1b1c02253e5b371be65e7",
+    "web/appearance-pair-app.mjs": "0526474b3233058f47cea8795fb6b0ad6e4a61a4e570cdeaa1af29a39a16a471",
+    "web/appearance-pair-input.mjs": "f22182185d724c77fbe263287a13dc153fe042fc64099e9ce506762e75d458a0",
+    "web/appearance-pair-worker.mjs": "0fc0f19a925a7558274133a1060668f7dc998ee982f78cbfbecbbf72a5b1e8d5",
+    "web/appearance-pair-view.mjs": "f3b0cec8787a4c276d51c1a4c0a28f02cdacd2583ccf821f6f30df9a2bda5640",
+    "src/appearance-pair.mjs": "a615ad0a00b42000e8e50ea6985dcf669f65feda00ebf9115edac6e539952394",
+    "src/visual-translation.mjs": "ac3d90a283a7dc12f2ccd4f46ac07c8c29fc6096b023780d4405ff1a80929361",
+    "src/visual-scan.mjs": "984d964b6bd3f5b6d5dc9c31e10b0c058e4b2aba2d4e87edddf8e7905e41d3c2",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+    "web/sequence.html": "e54386bf9be6019ee84a57255983569fa72e53e69c354f29eda018315dd5c45f",
+    "tools/browser-appearance-pair.mjs": "19c309d0c1993a1fcf587310ed2662489ea718fef788b71fa8682a011141647b",
+    "tools/appearance-browser-helpers.mjs": "5cb2006ca9d895a312f0319f448489bcc2a9d0c78897b2183ca8dafd2db55950"
+  },
+  "privatePayloadIncluded": false,
+  "servedByteCapture": false
+}

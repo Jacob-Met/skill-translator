@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "groups": [
+    "two ordinary original captures with no step: old export disabled, direct popup verifies PNGs and source-only save/reopen retains steps[]",
+    "ordinary manual source replacement retires a held actual handoff; late source cannot overwrite replacement",
+    "popup-block failure preserves original frames and unsaved draft, then actual retry receives successfully",
+    "legacy four-frame one-step direct decision handoff retains original source through shared transport"
+  ],
+  "errors": [],
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "browser": "156.0.8078.73",
+  "clipSHA256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+  "legacySHA256": "4a77e8160865a2b417382c9ead748f7a261d8a7511aa69e5c8e66d5a033a524f",
+  "newFrames": [
+    {
+      "id": "moment-7f978e54-39d0-41cf-8265-6f34203c1ed6",
+      "sha256": "1f45c0bd38aafc7fe19ddf80b6274e5c16d1a9a39a782c5a940068120caed04e",
+      "presentedSeconds": 0.112
+    },
+    {
+      "id": "moment-122e8204-e669-4043-b400-548513f0e176",
+      "sha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+      "presentedSeconds": 0.712
+    }
+  ],
+  "captures": [
+    {
+      "name": "handoff-two-frame390.png",
+      "sha256": "b6d4aa0e4b4f10fe757cb80876dab8cfe8e86665a17f181e533c3d207136fe83"
+    }
+  ],
+  "scope": "Actual ordinary no-step source handoff, private licensed clip, no fabricated image observations or physical-action inference. Private PNG payload omitted.",
+  "host": "d6e95b27be65",
+  "exitCode": 0,
+  "unsavedDraft": "Real unsaved step-title survived successful zero-step handoff and popup-block retry.",
+  "postRunSourceSHA256": {
+    "web/sequence.mjs": "ca758898d2df10d62bbc8a712b66effca50d936d23a08b1017c012fc5efdc83e",
+    "web/sequence.html": "4ad532cb1833d5b5112c9603bc3d83bf7be45427e6b2774e6091f666c9ee0833",
+    "web/decision-handoff.mjs": "2176c134f61de7100be5153a8cf5de924b7c9b18eab9fbe564db00475427d714",
+    "web/appearance-pair-app.mjs": "ae2cec9fd17f2028e3e78488217b8fd014fab32cfc4e0117203252beeb0ce207",
+    "web/decision-practice.mjs": "abce0a110784c091459026cb7db743d938f7fe5f0df49c0345b9624b4a1d438d",
+    "tools/browser-appearance-handoff.mjs": "c5cd9a2a9d16868143dc9896f58b47a15098063f2856a2708618ddd51282438e",
+    "tools/appearance-browser-helpers.mjs": "5cb2006ca9d895a312f0319f448489bcc2a9d0c78897b2183ca8dafd2db55950"
+  },
+  "networkByteCapture": false,
+  "privatePayloadIncluded": false
+}

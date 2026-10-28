@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Compare retained frames · Skill Translator</title>
+  <link rel="stylesheet" href="/web/appearance-pair.css">
+  <script type="module" src="/web/appearance-pair-app.mjs"></script>
+</head>
+<body>
+<main>
+  <nav><a href="/sequence">← Original sequence</a></nav>
+  <header>
+    <p class="eyebrow">Skill Translator · Retained image evidence</p>
+    <h1>Compare two retained frames.</h1>
+    <p class="intro">Inspect a bounded image-appearance difference while keeping both original frames, their times and the comparison settings together.</p>
+  </header>
+  <section class="card intake" aria-labelledby="open-title">
+    <h2 id="open-title">Open original evidence</h2>
+    <label for="source-file">Original sequence or saved comparison</label>
+    <input id="source-file" type="file" accept=".json,application/json">
+    <p id="source-name" class="muted">Choose a complete exported sequence with original PNGs.</p>
+    <p id="status" role="status" aria-live="polite" data-state="empty">Open source to begin.</p>
+  </section>
+  <section id="selection" class="card" aria-labelledby="choose-title">
+    <h2 id="choose-title">Choose the comparison</h2>
+    <fieldset id="settings" disabled>
+      <legend class="visually-hidden">Original frame pair and sampling settings</legend>
+      <div class="choice-grid">
+        <label>First original frame<select id="before"></select></label>
+        <label>Later original frame<select id="after"></select></label>
+        <label>Sample width · pixels<input id="width" type="number" min="3" max="160" step="1" value="160" inputmode="numeric"></label>
+        <label>Search radius · sampled pixels<input id="radius" type="number" min="1" max="16" step="1" value="16" inputmode="numeric"></label>
+      </div>
+    </fieldset>
+    <p id="sample-details" class="muted">The sample preserves the whole-frame aspect ratio. Settings belong to the measurement.</p>
+    <div class="frames">
+      <figure><div class="frame"><img id="before-image" alt="" hidden></div><figcaption id="before-caption">First original frame</figcaption></figure>
+      <figure><div class="frame"><img id="after-image" alt="" hidden></div><figcaption id="after-caption">Later original frame</figcaption></figure>
+    </div>
+    <div class="actions">
+      <button id="compute" type="button" disabled>Compare these frames</button>
+      <button id="cancel" class="secondary" type="button" disabled>Cancel</button>
+    </div>
+    <p class="scope">This compares sampled RGB appearance across a finite set of shifts and one fitted shared brightness offset. It does not identify object motion, contact, an action, or skill quality.</p>
+  </section>
+  <div id="result" aria-live="polite"></div>
+  <section class="card save-card" aria-labelledby="save-title">
+    <h2 id="save-title">Keep the source and question</h2>
+    <p>Save both original frames within their complete sequence, along with the declared settings. Reopening recomputes the comparison from those PNGs.</p>
+    <button id="save" class="secondary" type="button" disabled>Save source and comparison settings</button>
+  </section>
+  <details class="card provenance">
+    <summary>Inspect original clip identity and attribution</summary>
+    <pre id="source-details">No source open.</pre>
+  </details>
+</main>
+</body>
+</html>

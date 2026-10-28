@@ -1,4 +1,4 @@
-import {openDecisionPractice} from '/web/decision-handoff.mjs';
+import {openDecisionPractice,openAppearanceComparison} from '/web/decision-handoff.mjs';
 import {createNarrationNavigator} from '/web/narration-moments.mjs';
 import {createAudioActivityNavigator} from '/web/audio-activity.mjs';
 import {createSequence,validateSequence,appendMoment,editMoment,removeMoment,upsertStep,removeStep,sequenceFindings,assertSequenceClip,MAX_MOMENTS,attachMomentCalibration,removeMomentCalibration,momentTask} from '/src/demonstration-sequence.mjs';
@@ -45,6 +45,7 @@ function syncButtons(){
   $('save-step').disabled=busy||!sequence||sequence.moments.length<2;
   $('export-sequence').disabled=busy||!sequence?.steps.length||stepDirty||Boolean(editingMoment);
   $('practice-decisions').disabled=$('export-sequence').disabled;
+  $('compare-appearance').disabled=busy||!sequence||sequence.moments.length<2||Boolean(editingMoment);
   $('print-lesson').disabled=$('export-sequence').disabled;
   $('draft-status').textContent=stepDirty?'Unsaved step draft. Save or clear it before exporting.':editingStep?'Editing the selected step. Its retained frame identities stay unchanged.':sequence?.moments.length>=2?'Choose the evidence, then describe the intended change.':'Retain two moments to explain a change.';
   for(const button of document.querySelectorAll('.moment-actions button,.detail-heading button'))button.disabled=busy;
@@ -246,6 +247,16 @@ $('print-lesson').addEventListener('click',async()=>{
     if(version!==revision){status('The account changed while preparing the lesson. Save again to include the current evidence.');return;}
     download(lesson,'demonstration-lesson.html');
     status('Saved a standalone printable lesson with every verified source PNG and authored step. Save the editable sequence JSON separately if it needs revision.');
+  }catch(error){reportFailure(request,error);}finally{endIO(request);}
+});
+$('compare-appearance').addEventListener('click',async()=>{
+  if(busy||!sequence||sequence.moments.length<2||editingMoment)return;
+  let next;try{next=validateSequence({...sequence,title:$('sequence-title').value,context:$('sequence-context').value});}catch(error){status(error.message);return;}
+  const request=beginIO(),version=revision,snapshot=new Map(assets);
+  try{
+    status('Preparing original retained frames for appearance comparison. Your step draft stays in this studio…');
+    await openAppearanceComparison(()=>makeSequenceBundle(next,snapshot,{signal:request.signal}),{signal:request.signal,isCurrent:()=>current(request)&&version===revision});
+    if(current(request))status(version===revision?'Appearance comparison received the original frames in a new tab. Your step draft stays unchanged in this studio; no authored step was required or saved.':'Comparison received the retained snapshot. Later edits remain in this studio; compare again to send current originals.');
   }catch(error){reportFailure(request,error);}finally{endIO(request);}
 });
 $('practice-decisions').addEventListener('click',async()=>{
