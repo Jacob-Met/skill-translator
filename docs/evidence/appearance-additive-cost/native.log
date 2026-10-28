@@ -1,0 +1,12 @@
+✔ test/appearance-additive-cost.test.mjs (962.594867ms)
+✔ test/regional-translation.test.mjs (1186.737368ms)
+✔ test/translated-change-regions.test.mjs (410.174071ms)
+✔ test/visual-translation.test.mjs (512.528896ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1202.023574

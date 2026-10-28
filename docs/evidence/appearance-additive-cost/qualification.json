@@ -1,0 +1,30 @@
+{
+  "native": {
+    "command": "node --test test/appearance-additive-cost.test.mjs test/visual-translation.test.mjs test/translated-change-regions.test.mjs test/regional-translation.test.mjs",
+    "definedNewBodies": 9,
+    "definedMaintainedBodies": 20,
+    "fileGroups": 4,
+    "result": "passed"
+  },
+  "browser": {
+    "historicalSixGroups": "Exact default-support consumer before explicit-support normalization and copy-only fixes",
+    "finalTwoGroups": "Real DOM copy/precision; authored tiny-positive display fixture only",
+    "sourceBundleSHA256": "4a77e8160865a2b417382c9ead748f7a261d8a7511aa69e5c8e66d5a033a524f"
+  },
+  "closureFailures": [
+    "Initial isolated native receiver lacked vendor module, then regional module; restored exact maintained dependencies.",
+    "Initial isolated server lacked native audio-intake; restored unchanged server dependency closure."
+  ],
+  "limits": "No physical-motion, global brightness, original microphone or numeric inference claim; no media/PNG/downloads/screens in packet.",
+  "finalAccountingCorrection": {
+    "scope": "Only explicit full-frame admission traversal reservation and200m preflight; source/scoring loops unchanged",
+    "receiving": "Focused direct native control passed; no repeated browser lifecycle course",
+    "sourceSHA256": "7955d08365d48a08a9bec9777434240c6917049e5e9b4030e27ee9ef9377beea",
+    "values": {
+      "searchOnlyChannelVisits": 126000,
+      "admissionChannelVisits": 13824,
+      "totalRGBChannelVisits": 139824
+    },
+    "review": "Root-approved; WORLDLAW read final source addition and acknowledged no scoring/lifecycle change or new blocker, source-only review without repeated tests/browser."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "Focused direct native accounting control; search-only incumbent field retained; explicit pixel traversals counted, not total instructions",
+  "work": {
+    "histogramSearches": 3,
+    "channelComparisons": 126000,
+    "fullFrameAdmissionCalls": 3,
+    "fullFrameRGBTraversals": 6,
+    "admissionChannelVisits": 13824,
+    "totalRGBChannelVisits": 139824,
+    "independentMinimaPairVisits": 625,
+    "additivePairVisits": 1250,
+    "totalAlgebraPairVisits": 1875
+  },
+  "sourceSHA256": "7955d08365d48a08a9bec9777434240c6917049e5e9b4030e27ee9ef9377beea",
+  "independentReview": {
+    "reviewer": "retained WORLDLAW worker",
+    "scope": "Final source-only acknowledgment, no repeat test/browser claim",
+    "finding": "Six full-frame RGB traversals included in totalRGBChannelVisits and200m guard; search-only incumbent channelComparisons unchanged; no scoring/lifecycle change or new blocker"
+  }
+}

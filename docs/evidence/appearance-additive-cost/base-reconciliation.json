@@ -1,0 +1,16 @@
+{
+  "baseCommit": "8335ec09a14f62db335fb08824af3881d31c27e3",
+  "baseTree": "ec0b6f161648aed3a53ea3d6e5cc69f17ba4ad6b",
+  "unchangedRelevantPaths": [
+    "src/visual-translation.mjs",
+    "src/appearance-triplet.mjs",
+    "src/appearance-pair.mjs",
+    "web/appearance-pair-app.mjs",
+    "web/appearance-pair.html",
+    "web/appearance-triplet-worker.mjs",
+    "web/appearance-triplet-view.mjs",
+    "web/appearance-triplet-input.mjs"
+  ],
+  "server": "Exact current server preserving spoken-explanations routes plus one additive-cost module route",
+  "qualification": "No consumer/kernel overlap; original6browser groups remain relevant. Partial checkout excludes unrelated new notebook closure."
+}

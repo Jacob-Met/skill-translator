@@ -35,6 +35,7 @@ const routes=Object.freeze({
 "/web/appearance-pair-view.mjs":["web/appearance-pair-view.mjs", "text/javascript; charset=utf-8"],
 "/src/appearance-pair.mjs":["src/appearance-pair.mjs", "text/javascript; charset=utf-8"],
 "/src/appearance-triplet.mjs":["src/appearance-triplet.mjs", "text/javascript; charset=utf-8"],
+"/src/appearance-additive-cost.mjs":["src/appearance-additive-cost.mjs", "text/javascript; charset=utf-8"],
 "/web/appearance-triplet-input.mjs":["web/appearance-triplet-input.mjs", "text/javascript; charset=utf-8"],
 "/web/appearance-triplet-worker.mjs":["web/appearance-triplet-worker.mjs", "text/javascript; charset=utf-8"],
 "/web/appearance-triplet-view.mjs":["web/appearance-triplet-view.mjs", "text/javascript; charset=utf-8"],

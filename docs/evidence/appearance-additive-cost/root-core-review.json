@@ -1,0 +1,18 @@
+{
+  "status": "accepted for consumer integration",
+  "reviewedAt": "2026-10-28T22:35:15.171199+00:00",
+  "reviewer": "root",
+  "sourceSHA256": {
+    "receiver/src/visual-translation.mjs": "afec0daff3e7f7897aa2c77669d19fc8390a01047bacac9047a56ccb18d82c78",
+    "receiver/src/appearance-additive-cost.mjs": "5c78b722ab63a4a5ea017c1a7ee4aed3f31ee368971e5f8a7edb0c8f08c94ebd"
+  },
+  "scope": "Source/algorithm review; actual native receiving independently rerun by WORLD; no consumer receiving yet",
+  "findings": [
+    "A single finiteCostProfile contains the incumbent histogram loop; old comparison reduction preserves candidate order, result shape and optional region call.",
+    "Complete grid cardinality plus unique bounded shifts implies every integer shift is retained. Raster/support/channel and brightness/cost bounds are checked structurally.",
+    "The exact integer sum is at most3*76800*255 and remains a safe integer. Independent minima form a lower bound; nonnegative excess is zero exactly when one additive triple attains each separate minimum.",
+    "Two complete AB-by-BC passes are reserved before enumeration; all optimum participation/witnesses and a bounded page are retained. No pixel work occurs in the reducer.",
+    "Per-pair reference/brightness semantics remain descriptive; coordinate additivity alone gives no identity or physical-motion result."
+  ],
+  "consumerGate": "Account for every histogram query. If three incumbent reports and three complete profiles both compute independently, the reservation must include six scans. Prefer explicit additional inquiry or exact shared reduction without reintroducing a comparator. Retain source/revision/cancel fences, all original reports, and source-only replay."
+}

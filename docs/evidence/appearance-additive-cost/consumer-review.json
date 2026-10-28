@@ -1,0 +1,18 @@
+{
+  "scope": "Independent source review of ordinary consumer/profile custody; no native or browser execution in this review",
+  "status": "No blocker found in final consumer source",
+  "files": {
+    "web/appearance-pair-app.mjs": "d6571649fae50a5298e7ac78d0fa9ed42aa44d1a3ec36a774aac78e00c7be213",
+    "web/appearance-triplet-worker.mjs": "fec01e357c67b883326588a6359ccfb96c777036f990fde0dfdab2cef6ba988c",
+    "web/appearance-triplet-view.mjs": "55f87c7cceca2149eb9e2ac9a02f868b382aaca268e2323ae8e38816ee60477b",
+    "src/appearance-additive-cost.mjs": "6dbb418374d10ad530edc6dc62115db2ed71cf6e4f7562af274d739e9a373f56",
+    "web/appearance-pair.html": "2d8daf8410843bcc8fa4c2107036bcb75bc09e33862d4bee20c2757450d7f93c"
+  },
+  "findings": [
+    "Three profiles retained only inside current worker; accepted report source checked before cost paging. Failed compute sets report null, preventing previous profile reuse.",
+    "App gates concurrent page requests; messages require current worker, revision and exact source. Edit, import, cancellation and pagehide retire worker and result.",
+    "Pair reports reuse maintained comparison envelope; independent-minima table and complete additive-cost pages remain separate. All exact optimum accounts are reachable.",
+    "Source-only triplet/v1 export retains original PNGs/settings and reopening recomputes; no cached profile/result trust.",
+    "Final presenter preserves exact zero as 0.000 and displays positive values below 0.001 as <0.001; each directed pair explicitly fits its own uniform brightness offset. Work reservation label describes bounds, not observed execution."
+  ]
+}
