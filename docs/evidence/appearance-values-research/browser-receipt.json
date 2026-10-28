@@ -1,0 +1,236 @@
+{
+  "status": "passed",
+  "scope": "Actual original PNG browser admission, frozen whole-frame sampling, finite appearance computation and source-only fresh reopening; no new UI or decision inference",
+  "createdUtc": "2026-10-28T20:42:06.336Z",
+  "browser": "156.0.8078.73",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "settings": {
+    "widthPx": 160,
+    "radius": 4
+  },
+  "pairIndexes": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "bundleSHA256": "4a77e8160865a2b417382c9ead748f7a261d8a7511aa69e5c8e66d5a033a524f",
+  "sourceHashes": {
+    "src/appearance-pair.mjs": "a615ad0a00b42000e8e50ea6985dcf669f65feda00ebf9115edac6e539952394",
+    "src/visual-translation.mjs": "ac3d90a283a7dc12f2ccd4f46ac07c8c29fc6096b023780d4405ff1a80929361",
+    "web/appearance-pair-input.mjs": "f22182185d724c77fbe263287a13dc153fe042fc64099e9ce506762e75d458a0",
+    "web/sequence-input.mjs": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+  },
+  "errors": [],
+  "pairs": [
+    {
+      "source": {
+        "format": "skill-translator.appearance-pair/v1",
+        "request": {
+          "clipSha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+          "frames": [
+            {
+              "momentId": "moment-d6a29ca7-73ae-4edc-b2f1-8a8b154117f6",
+              "sha256": "1f45c0bd38aafc7fe19ddf80b6274e5c16d1a9a39a782c5a940068120caed04e",
+              "presentedSeconds": 0.112
+            },
+            {
+              "momentId": "moment-70a19e87-19dc-49f1-ad47-421655bfcdcd",
+              "sha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+              "presentedSeconds": 0.712
+            }
+          ],
+          "widthPx": 160,
+          "heightPx": 90,
+          "radius": 4,
+          "support": {
+            "left": 4,
+            "top": 4,
+            "width": 152,
+            "height": 82
+          },
+          "sampler": "canvas2d-drawImage-full-frame-default-smoothing",
+          "brightnessConvention": "rgb-l1-lower-median-shared-channel-offset-div255"
+        }
+      },
+      "comparison": {
+        "status": "unique",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 152,
+          "height": 82,
+          "pixelCount": 12464,
+          "omittedPixels": 1936
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 0,
+          "meanAdjustedChange": 0.004268397560136592,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0.004268397560136592,
+        "alternatives": [
+          {
+            "dx": 0,
+            "dy": 0,
+            "uniformBrightnessShift": 0,
+            "meanAdjustedChange": 0.004268397560136592,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      },
+      "scalar": 0.004268397560136592,
+      "sourceOnlyReopenRecomputed": true,
+      "forgedStoredFindingsIgnored": true
+    },
+    {
+      "source": {
+        "format": "skill-translator.appearance-pair/v1",
+        "request": {
+          "clipSha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+          "frames": [
+            {
+              "momentId": "moment-70a19e87-19dc-49f1-ad47-421655bfcdcd",
+              "sha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+              "presentedSeconds": 0.712
+            },
+            {
+              "momentId": "moment-579c3545-40ca-4565-83a4-0d5123de6d16",
+              "sha256": "f26568141642695dfc61ffbe933f37b5e080f6c97bfcbf0f041fa9feeda71b5d",
+              "presentedSeconds": 1.312
+            }
+          ],
+          "widthPx": 160,
+          "heightPx": 90,
+          "radius": 4,
+          "support": {
+            "left": 4,
+            "top": 4,
+            "width": 152,
+            "height": 82
+          },
+          "sampler": "canvas2d-drawImage-full-frame-default-smoothing",
+          "brightnessConvention": "rgb-l1-lower-median-shared-channel-offset-div255"
+        }
+      },
+      "comparison": {
+        "status": "unique",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 152,
+          "height": 82,
+          "pixelCount": 12464,
+          "omittedPixels": 1936
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 0,
+          "meanAdjustedChange": 0.001681496304127128,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0.001681496304127128,
+        "alternatives": [
+          {
+            "dx": 0,
+            "dy": 0,
+            "uniformBrightnessShift": 0,
+            "meanAdjustedChange": 0.001681496304127128,
+            "searchBoundary": false
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      },
+      "scalar": 0.001681496304127128,
+      "sourceOnlyReopenRecomputed": true,
+      "forgedStoredFindingsIgnored": true
+    },
+    {
+      "source": {
+        "format": "skill-translator.appearance-pair/v1",
+        "request": {
+          "clipSha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+          "frames": [
+            {
+              "momentId": "moment-579c3545-40ca-4565-83a4-0d5123de6d16",
+              "sha256": "f26568141642695dfc61ffbe933f37b5e080f6c97bfcbf0f041fa9feeda71b5d",
+              "presentedSeconds": 1.312
+            },
+            {
+              "momentId": "moment-a8e3ebae-1de2-4fad-88e1-50114c58f68f",
+              "sha256": "c926ca70091b7ea1ba99fdb780a1aaef2f658978a9e9188dacc86b79edbc1e75",
+              "presentedSeconds": 1.912
+            }
+          ],
+          "widthPx": 160,
+          "heightPx": 90,
+          "radius": 4,
+          "support": {
+            "left": 4,
+            "top": 4,
+            "width": 152,
+            "height": 82
+          },
+          "sampler": "canvas2d-drawImage-full-frame-default-smoothing",
+          "brightnessConvention": "rgb-l1-lower-median-shared-channel-offset-div255"
+        }
+      },
+      "comparison": {
+        "status": "search-boundary",
+        "radius": 4,
+        "support": {
+          "left": 4,
+          "top": 4,
+          "width": 152,
+          "height": 82,
+          "pixelCount": 12464,
+          "omittedPixels": 1936
+        },
+        "candidateCount": 81,
+        "zero": {
+          "dx": 0,
+          "dy": 0,
+          "uniformBrightnessShift": 0,
+          "meanAdjustedChange": 0.11108845763380235,
+          "searchBoundary": false
+        },
+        "meanAdjustedChange": 0.10651916735885625,
+        "alternatives": [
+          {
+            "dx": 4,
+            "dy": 4,
+            "uniformBrightnessShift": -2,
+            "meanAdjustedChange": 0.10651916735885625,
+            "searchBoundary": true
+          }
+        ],
+        "boundary": "Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established."
+      },
+      "scalar": 0.10651916735885625,
+      "sourceOnlyReopenRecomputed": true,
+      "forgedStoredFindingsIgnored": true
+    }
+  ],
+  "inference": null,
+  "limits": [
+    "All three pairs come from the same original scissors recording; no independent-recording claim.",
+    "Finite-image residual and minimizing shifts do not establish physical correspondence, contact, action or skill.",
+    "No numerical threshold fitter or owner schema was edited."
+  ]
+}
