@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "kind": "authored probe setup expectation",
+  "actual": "GeometryError: No original joint explanation remains; another round cannot be frozen",
+  "expected": "complete original prior-source prefix refusal",
+  "reason": "structuredClone preserves shared object identity between the frozen initial source and its embedded prefix; mutation unintentionally changed both.",
+  "correction": "Use a JSON source round trip before altering only the embedded prefix; keep the strict prefix error assertion.",
+  "productionChanged": false
+}

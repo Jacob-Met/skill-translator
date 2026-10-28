@@ -1,0 +1,41 @@
+{
+  "schema": "hamon-root-visual-review/v1",
+  "reviewer": "root implementer; independent MICRO source reviews and MATERIAL receipt review are separate",
+  "reviewedAt": "2026-10-28T21:51:36.375122+00:00",
+  "result": "accepted",
+  "sourceSha256": {
+    "docs/JOINT_CHALLENGE_SEQUENCE_CONFLICTS.md": "92be7da9174cb6bbdbc01d945127f1a7c2e34450046481a694f85c0ae04a833e",
+    "docs/JOINT_CHALLENGE_SEQUENCE_CONFLICT_CONTROLS.md": "8002f5b75d93432f6a363d53de08248c0cd1dbfa252194ad98a71ccffaee04ab",
+    "src/joint-challenge-sequence.mjs": "c0d4b91a3e0b4ed4e8f27ea511dee3440b839b2860617a5114472345ccb063fa",
+    "test/joint-challenge-sequence-conflicts.test.mjs": "a2f7ecf2d8dae7470b160a2a9ba98d8becc6471311556bfa67b8dde79b099023",
+    "test/support/joint-challenge-sequence-conflicts-cases.json": "5bae9e8bc325015fe66b181b6f74b674832b9f633eff279e30c6bb6c5329118d",
+    "tools/browser-joint-challenge-sequence.mjs": "bf38fc15ad709dfb2d9d2001c5d3e131bcb33e97b7b4e4e75b163116f3227bb1",
+    "web/joint-challenge-sequence.mjs": "eae5e72e2ac05579fbc55405afac389f8e0709e924fdfeee0261f975fa65a89f",
+    "web/joint-challenge.css": "a5ff4e339af0f0c19818a5e04944912af9ebb33c47a68106d0d0865c1d53a453"
+  },
+  "receivingOperation": "hamon-de5a-skill470-sequence-conflicts-receive-20261028-178",
+  "receivingSha256": "cf93e2359371480f4be45cb3874c55648ff7465d499ceb56da50ba8c0857c080",
+  "actualImagesPersonallyViewed": [
+    {
+      "name": "sequence-conflicts-1440.png",
+      "sha256": "01a3223fa1499dbb580e8abc3ad96529d829bd52e8624e28160549c86be1f853",
+      "bytes": 226713
+    },
+    {
+      "name": "sequence-conflicts-320.png",
+      "sha256": "3049944ee4a4b6906109e32d02cb8b15273c288d016a65f07ae1aeea5d1997f2",
+      "bytes": 239827
+    }
+  ],
+  "findings": [
+    "Actual1440 and320 conflict sections show complete baseline/current/subset counts and all five inclusion-minimal alternative groups. The first group is expanded and the other four remain accessible.",
+    "Each original workpiece retains explicit initial/later location, sealed/current role, label and ID, with readable keyboard-operable original-outcome links. Narrow layouts wrap group names, original coordinates and radii without clipping.",
+    "Immediate-smaller-group counts explain minimality without changing source. Original rejecting outcomes are complete in the expanded group; raw complete counts remain optional.",
+    "The actual qualification binds66 native controls,9 maintained browser groups,11 sequence browser groups and12 exact HTTP resources to these exact source bytes.",
+    "Missing/imprecise outcomes remain nonconstraining; the view states finite possibilities are not probabilities and does not recommend discarding evidence."
+  ],
+  "limits": [
+    "Root authored the implementation; this is an actual pixel/source-binding review, not an independent code review.",
+    "No new physical observation, skill outcome or prospective acquisition declaration is represented."
+  ]
+}

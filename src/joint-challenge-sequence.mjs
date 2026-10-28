@@ -1,5 +1,6 @@
 // Ordered, source-bound continuation of the maintained finite joint challenge.
 import {GeometryError} from './geometry.mjs';
+import {analyzeJointChallengeConflicts} from './joint-challenge-conflicts.mjs';
 import {
   freezeJointChallengePlan, createJointChallengeResult, analyzeJointChallenge,
   exportJointChallengeStudy, importJointChallengeStudy,
@@ -181,6 +182,33 @@ export function analyzeJointChallengeSequence(raw) {
       'Every originally training-supported prediction must fit each proposed sheet; a prior exclusion does not relax that conservative admission.',
       'The latest unsealed outcome can be corrected; an older sealed outcome cannot be changed through current intake.',
       'Finite counts are not probabilities. Prospective timing and measurement origin remain declarations, not authenticated acquisition.'
+    ]
+  });
+}
+
+// Retrospective grouping over the admitted original family. Each round's
+// prospective predictions remain owned by analyzeJointChallengeSequence.
+export function analyzeJointChallengeSequenceConflicts(raw) {
+  const state = admission(raw);
+  const diagnostic = analyzeJointChallengeConflicts(state.latestPlan, state.results);
+  const workpieces = state.initial.plan.trials.map(trial => ({
+    trialId: trial.id, label: trial.label, origin: 'initial', roundIndex: 0,
+    roundId: state.initial.plan.id, roundLabel: state.initial.plan.label, sealed: true
+  }));
+  for (const [index, round] of state.rounds.entries()) {
+    workpieces.push({
+      trialId: round.source.trial.id, label: round.source.trial.label,
+      origin: 'later-round', roundIndex: index + 1,
+      roundId: round.source.id, roundLabel: round.source.label,
+      sealed: index < state.rounds.length - 1
+    });
+  }
+  return freeze({
+    ...diagnostic, workpieces,
+    interpretation: 'retrospective-workpiece-groups',
+    limitations: [...diagnostic.limitations,
+      'This retrospective diagnosis uses the original training-supported family across the complete admitted sequence. Earlier predictions remain bound to their own prior-source prefixes.',
+      'Initial workpieces stay separate groups. Original round locations and sealed/current state are retained; no acquisition declaration or evidence removal is created.'
     ]
   });
 }

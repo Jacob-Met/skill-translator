@@ -1,0 +1,28 @@
+{
+  "verdict": "accepted; no material receipt/source-binding discrepancy",
+  "payloadSha256": "4e3c538c3230db4db7730f3e8892485512b806e31a789f777846ab3913d95448",
+  "receiptSha256": "cf93e2359371480f4be45cb3874c55648ff7465d499ceb56da50ba8c0857c080",
+  "base": "9bbfb5d148e5a3a0452c93d1345b6aecbc0d42ef",
+  "baseTree": "8373d4c42692baa5645bdd226edf3cb4604507fc",
+  "verifiedLocalSourceFiles": 125,
+  "embeddedCandidateFiles": 8,
+  "nativeTests": 66,
+  "browserGroups": {
+    "maintained": 9,
+    "sequence": 11
+  },
+  "servedExact": 12,
+  "locallyAvailableScreenshotHashesVerified": 2,
+  "checks": [
+    "All125 current source files match submitted byte count/SHA256/Gitblob and receipt source manifest; all8embedded candidates match final local bytes.",
+    "Native TAP/stdout/stderr, both browser stdout/stderr and standalone browser receipt hashes match complete receiving receipt.",
+    "Both actual browser source manifests match submitted files; both sandbox admissions passed.",
+    "Saved native status reports completed exit0 for exact178 command.",
+    "Receiving script stages verified bytes, launches maintained server, checks exactHTTP bodies and records terminal cleanup."
+  ],
+  "limits": [
+    "No duplicate execution performed.",
+    "Only locally exported screenshots rehashed; this is not an independent pixel review.",
+    "Core and lifecycle correctness rely on prior independent reviews; this audit concerns executed receiving and byte custody."
+  ]
+}
