@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "paths": [
+    "src/appearance-triplet.mjs",
+    "web/appearance-triplet-input.mjs",
+    "web/appearance-triplet-worker.mjs",
+    "web/appearance-triplet-view.mjs",
+    "web/appearance-pair-app.mjs",
+    "web/appearance-pair.html",
+    "web/decision-handoff.mjs"
+  ],
+  "serverSHA256": "04a76abfd4dbd2eddcb97c8800a1b3a7bfa5b9dcd7eed3c1e77aaff63248f885",
+  "scope": "Exact current server startup and seven changed/preserved route bytes; partial checkout, no unrelated application claim"
+}
