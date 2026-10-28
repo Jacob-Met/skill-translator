@@ -1,0 +1,11 @@
+import {inspectJointProducerStudy,JOINT_PRODUCER_FORMAT} from '../src/joint-producer-input.mjs';
+import {writeFile} from 'node:fs/promises';
+import {readBoundedJson} from './read-bounded-json.mjs';
+import {importJointNumericStudy,JOINT_NUMERIC_FORMAT} from '../src/joint-numeric-cues.mjs';
+const [first,second,directionFirst,directionSecond,basis,output]=process.argv.slice(2);
+if(!output)throw Error('Usage: node tools/pair-numeric-cues.mjs FIRST.json SECOND.json below|above below|above "pairing basis" OUTPUT.json');
+const cues=await Promise.all([readBoundedJson(first,4*1024*1024),readBoundedJson(second,4*1024*1024)]);
+const raw=cues.every(c=>c?.format==='skill-translator.numeric-cue-thresholds/v1')?{format:JOINT_NUMERIC_FORMAT,cues,directions:[directionFirst,directionSecond],basis}:{format:JOINT_PRODUCER_FORMAT,producer_exports:cues,directions:[directionFirst,directionSecond],basis};
+const study=(await inspectJointProducerStudy(raw)).study;
+const json=JSON.stringify(study,null,2)+'\n';if(Buffer.byteLength(json)>8*1024*1024)throw Error('Paired study exceeds receiver capacity');
+await writeFile(output,json,{flag:'wx'});console.log('Saved paired original numeric studies; open in the joint numeric receiver.');

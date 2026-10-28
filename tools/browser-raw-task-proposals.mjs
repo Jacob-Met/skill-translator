@@ -5,10 +5,22 @@ import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+function loopbackOrigin(value){
+  assert(/^http:\/\/127\.0\.0\.1(?::[0-9]{1,5})?\/?$/.test(value),
+    'External receiving requires an HTTP 127.0.0.1 origin without credentials, path, query or fragment');
+  const url=new URL(value);
+  const port=Number(url.port||80);
+  assert(Number.isInteger(port)&&port>=1&&port<=65535,'Invalid receiving port');
+  return url.origin;
+}
+const externalURL=process.env.SKILL_RECEIVE_BASE_URL;
+const externalOrigin=externalURL===undefined?null:loopbackOrigin(externalURL);
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE);
 const output=process.env.QA_OUTPUT||'/tmp/skill-raw-task-receiving';await fs.mkdir(output,{recursive:true});
 const profile=await fs.mkdtemp((process.env.QA_TMP_ROOT||'/tmp')+'/st-');if(process.getuid()===0)await fs.chown(profile,65534,65534);await fs.chmod(profile,0o700);
-const server=createAppServer();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+server.address().port;
+let server=null,base=externalOrigin;
+if(externalOrigin===null){server=createAppServer();await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});base='http://127.0.0.1:'+server.address().port;}
+const hosting=externalOrigin===null?'receiver self-hosted':'external';
 const chrome=spawn(process.env.CHROME_BINARY,['--headless=new','--remote-debugging-port=0','--user-data-dir='+profile,'--no-first-run','--no-default-browser-check','about:blank'],{...(process.getuid()===0?{uid:65534,gid:65534}:{}),cwd:'/tmp',env:{...process.env,XDG_CONFIG_HOME:profile,XDG_CACHE_HOME:profile},stdio:['ignore','ignore','pipe']});
 let stderr='',browser;chrome.stderr.on('data',chunk=>stderr+=chunk);const errors=[],checks=[];
 const file=(raw,name='account.json')=>({name,mimeType:'application/json',buffer:Buffer.from(JSON.stringify(raw))});
@@ -55,5 +67,5 @@ try{
  checks.push('A late file read cannot replace a newer target draft; saving and practice remain retired until recomputed.');
  const bad=rawAccount('guide',1,1);await fresh.locator('#accounts').setInputFiles(file(bad));await fresh.waitForFunction(()=>document.getElementById('summary').textContent.startsWith('0 uniquely'));assert.equal(await fresh.locator('#practice').isDisabled(),true);assert.match(await fresh.locator('#mark-status').innerText(),/none-compatible/);
  const partial={...saved,accounts:[saved.accounts[0],{...saved.accounts[1],demonstrations:[]}]};await fresh.locator('#accounts').setInputFiles(file(partial));await fresh.waitForFunction(()=>document.getElementById('summary').textContent.startsWith('1 uniquely'));assert.match(await fresh.locator('#summary').innerText(),/1 examined but unresolved; 1 unexamined/);assert.match(await fresh.locator('#mark-list').innerText(),/Unchanged fraction · no-evidence/);checks.push('390px keyboard inspection, no-fit negative control and explicit unresolved/unexamined original rules.');
- assert.deepEqual(errors,[]);await fs.writeFile(output+'/receipt.json',JSON.stringify({browser:await browser.version(),sandbox,checks,errors},null,2));console.log(JSON.stringify({checks,errors}));
-}finally{if(browser)await browser.close();chrome.kill('SIGTERM');if(chrome.exitCode===null)await new Promise(resolve=>{chrome.once('exit',resolve);setTimeout(resolve,3000);});await new Promise(resolve=>server.close(resolve));await fs.rm(profile,{recursive:true,force:true,maxRetries:3,retryDelay:100});}
+ assert.deepEqual(errors,[]);await fs.writeFile(output+'/receipt.json',JSON.stringify({browser:await browser.version(),sandbox,hosting,base_url:base,checks,errors},null,2));console.log(JSON.stringify({hosting,base_url:base,checks,errors}));
+}finally{if(browser)await browser.close();chrome.kill('SIGTERM');if(chrome.exitCode===null)await new Promise(resolve=>{chrome.once('exit',resolve);setTimeout(resolve,3000);});if(server)await new Promise(resolve=>server.close(resolve));await fs.rm(profile,{recursive:true,force:true,maxRetries:3,retryDelay:100});}

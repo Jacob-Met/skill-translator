@@ -8,6 +8,13 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/src/joint-producer-input.mjs':['src/joint-producer-input.mjs','text/javascript; charset=utf-8'],
+  '/web/joint-producer-images.mjs':['web/joint-producer-images.mjs','text/javascript; charset=utf-8'],
+  '/web/joint-numeric-cues.css':['web/joint-numeric-cues.css','text/css; charset=utf-8'],
+  '/joint-numeric-cues':['web/joint-numeric-cues.html','text/html; charset=utf-8'],
+  '/web/joint-numeric-cues.html':['web/joint-numeric-cues.html','text/html; charset=utf-8'],
+  '/web/joint-numeric-cues.mjs':['web/joint-numeric-cues.mjs','text/javascript; charset=utf-8'],
+  '/src/joint-numeric-cues.mjs':['src/joint-numeric-cues.mjs','text/javascript; charset=utf-8'],
   '/web/decision-handoff.mjs':['web/decision-handoff.mjs','text/javascript; charset=utf-8'],
   '/web/decision-practice-input.mjs':['web/decision-practice-input.mjs','text/javascript; charset=utf-8'],
   '/src/regional-translation.mjs':['src/regional-translation.mjs','text/javascript; charset=utf-8'],
