@@ -121,7 +121,11 @@ Export the full source, declared plan and ordered actions. Reopening recomputes 
 
 The final comparison describes positional results and target requests for each size. It does not estimate a learning effect or establish independent performance: source explanations remain visible, outside help is unknown, and local JSON can be edited. Different workpieces may have different difficulty. Diagram success is not evidence of physical skill, expert equivalence or safe tool use.
 
+After committing two sheets, **One mark across changed workpieces** compares a selected mark's target, retained placement, signed horizontal/vertical difference and existing tolerance result for each committed size. Its selector leaves the current placement selection and unfinished input drafts intact. Missing placements remain missing, and uncommitted sheets reveal no targets or results. Coordinates use physical left/top in either view; positive differences mean right/down. The original rehearsal export retains all inputs needed to reopen this comparison.
+
 Verification: `node test/transfer-rehearsal.test.mjs` and `node tools/rehearsal-browser.mjs` (the latter requires existing Puppeteer and Chrome as described below).
+
+Focused comparison receiving: `node tools/rehearsal-comparison-browser.mjs`, using `PUPPETEER_PATH`, `CHROME_BINARY` and optional `RECEIPT_DIR`. For an already running extracted package, set `SKILL_RECEIVE_BASE_URL` to its HTTP `127.0.0.1` origin, `SKILL_RECEIVE_ROOT` to its extracted directory and `SKILL_RECEIVE_COMMIT` to the expected full source commit. This mode verifies the exact package inventory and served routes on that origin before the UI course; it never starts a replacement server. Receipts include whole-page and comparison-section desktop/390px screenshots. See [runnable release receiving](docs/RUNNABLE_RELEASE.md) for the maintained launcher.
 
 ## Challenge the original calibration
 

@@ -6,6 +6,7 @@ const $=id=>document.getElementById(id),ns='http://www.w3.org/2000/svg',mm=n=>Nu
 let session=createRehearsal(demonstration,[{widthMm:320,heightMm:190},{widthMm:220,heightMm:180},{widthMm:380,heightMm:150}]);
 let judgmentStudy=createJudgmentStudy(session),judgmentFindings=[];
 let selected=session.source.landmarks[0].id,showTargets=false,generation=0,state,target,box;
+let comparisonMark=session.source.landmarks[0].id;
 const mirrored=()=>$('view').value==='mirrored';
 function error(message=''){$('rehearsalError').textContent=message;$('rehearsalError').hidden=!message;}
 function element(parent,tag,text){const e=document.createElement(tag);e.textContent=text;parent.append(e);return e;}
@@ -24,6 +25,33 @@ function draw(trial){
 }
 function retain(next){judgmentStudy=replaceJudgmentRehearsal(judgmentStudy,next);session=judgmentStudy.rehearsal;}
 function currentJudgment(){return judgmentFindings.find(j=>j.trialIndex===state.index);}
+function renderComparison(){
+ const section=$('markComparison');
+ section.hidden=state.trials.filter(t=>t.submitted).length<2;
+ $('comparisonRows').replaceChildren();
+ if(section.hidden)return;
+ if(!session.source.landmarks.some(m=>m.id===comparisonMark))comparisonMark=session.source.landmarks[0].id;
+ const chooser=$('comparisonMark');
+ chooser.replaceChildren();
+ session.source.landmarks.forEach((m,i)=>{const option=element(chooser,'option',`${i+1}. ${m.label}`);option.value=m.id;});
+ chooser.value=comparisonMark;
+ const mark=session.source.landmarks.find(m=>m.id===comparisonMark);
+ $('comparisonMeaning').textContent=`${mark.why||'Relationship supplied by the source author.'} Tolerance: ${mm(target.landmarks.find(m=>m.id===comparisonMark).toleranceMm)}. Displayed coordinates are rounded; tolerance findings use the original values.`;
+ for(const [i,trial] of state.trials.entries()){
+  const row=element($('comparisonRows'),'article','');row.dataset.comparisonTrial=i;
+  element(row,'h3',`Sheet ${i+1} · ${trial.widthMm} × ${trial.heightMm} mm`);
+  if(!trial.submitted){element(row,'p',trial.started?'Not committed · targets and results withheld.':'Not started · targets and results withheld.');continue;}
+  const result=trial.result.results.find(r=>r.id===comparisonMark);
+  element(row,'p',`Target: ${mm(result.target.xMm)} from left, ${mm(result.target.yMm)} from top.`);
+  if(!result.placed)element(row,'p','Missing placement · no error result.');
+  else{
+   element(row,'p',`Retained placement: ${mm(result.attempt.xMm)} from left, ${mm(result.attempt.yMm)} from top.`);
+   element(row,'p',`Placement minus target: horizontal ${mm(result.evaluation.dxMm)}, vertical ${mm(result.evaluation.dyMm)}.`);
+   element(row,'p',`${result.evaluation.within?'Within tolerance':'Outside tolerance'} · distance ${mm(result.evaluation.errorMm)}.`);
+  }
+  element(row,'p',`${trial.reveals.length} target request(s) recorded. Outside help is not measured.`);
+ }
+}
 function render(){
  judgmentFindings=inspectPlacementJudgments(judgmentStudy);
  state=inspectRehearsal(session);const trial=state.trials[state.index];target=adapt(derive(session.source),trial.widthMm,trial.heightMm);
@@ -55,11 +83,12 @@ function render(){
  $('trialReview').hidden=!trial.submitted;$('resultRows').replaceChildren();
  if(trial.submitted)for(const r of trial.result.results){const row=element($('resultRows'),'div','');element(row,'strong',r.label);element(row,'span',!r.placed?'Missing placement':`${r.evaluation.within?'Within tolerance':'Outside tolerance'} · error ${mm(r.evaluation.errorMm)}`);}
  $('beforeHelp').textContent=trial.reveals.length?'Before the first target request, '+trial.reveals[0].priorAttempts.length+' mark(s) had placements. Their exact coordinates remain in the exported action record.':'No pre-commit target reveal was recorded. This does not establish absence of outside assistance.';
+ renderComparison();
  $('sessionReview').hidden=!state.complete;$('sessionRows').replaceChildren();
  if(state.complete)for(const [i,t]of state.trials.entries()){const row=element($('sessionRows'),'div','');element(row,'strong',`Sheet ${i+1} · ${t.widthMm} × ${t.heightMm} mm`);element(row,'span',`${t.reveals.length?'Targets requested':'No targets requested in record'} · ${!t.result.complete?'Incomplete':t.result.passed?'Within all tolerances':'Outside tolerance'}${t.result.rmsErrorMm===null?'':' · RMS '+mm(t.result.rmsErrorMm)}`);}
 }
 function change(operation){try{const next=operation(session);generation++;retain(next);error();render();}catch(e){error(e.message);}}
-function install(next){judgmentStudy=next?.schema===JUDGMENT_SCHEMA?importJudgmentStudy(next):createJudgmentStudy(importRehearsal(next));session=judgmentStudy.rehearsal;$('judgmentChoice').value='uncertain';$('judgmentReason').value='';generation++;selected=session.source.landmarks[0].id;showTargets=false;$('planSizes').value=session.plan.map(p=>`${p.widthMm},${p.heightMm}`).join('\n');error();render();}
+function install(next){judgmentStudy=next?.schema===JUDGMENT_SCHEMA?importJudgmentStudy(next):createJudgmentStudy(importRehearsal(next));session=judgmentStudy.rehearsal;$('judgmentChoice').value='uncertain';$('judgmentReason').value='';generation++;selected=session.source.landmarks[0].id;comparisonMark=selected;showTargets=false;$('planSizes').value=session.plan.map(p=>`${p.widthMm},${p.heightMm}`).join('\n');error();render();}
 function parsePlan(){return $('planSizes').value.trim().split('\n').map(line=>{const parts=line.trim().split(/[,x×]/i).map(s=>s.trim());if(parts.length!==2||parts.some(p=>p===''))throw Error('Use width,height on each line.');return {widthMm:Number(parts[0]),heightMm:Number(parts[1])};});}
 function place(point){change(s=>placeRehearsal(s,selected,point));}
 function download(){const content=JSON.stringify(importRehearsal(session),null,2),url=URL.createObjectURL(new Blob([content],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='skill-transfer-rehearsal.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
@@ -67,6 +96,7 @@ async function openFile(input,limit,receive){const file=input.files?.[0];if(!fil
 document.querySelector('#planForm').addEventListener('submit',e=>{e.preventDefault();try{install(createRehearsal(session.source,parsePlan()));}catch(e){error('Plan refused; accepted work retained. '+e.message);}});
 for(const id of ['planSizes','placeX','placeY'])$(id).addEventListener('input',()=>generation++);
 document.querySelector('#placementForm').addEventListener('submit',e=>{e.preventDefault();if(!$('placeX').value.trim()||!$('placeY').value.trim())return;place({xMm:Number($('placeX').value),yMm:Number($('placeY').value)});});
+$('comparisonMark').addEventListener('change',()=>{comparisonMark=$('comparisonMark').value;renderComparison();});
 $('markChoice').addEventListener('change',()=>{selected=$('markChoice').value;render();});$('view').addEventListener('change',render);
 $('requestTargets').addEventListener('click',()=>{try{const next=revealRehearsal(session);retain(next);generation++;showTargets=true;error();render();}catch(e){error(e.message);}});
 $('hideTargets').addEventListener('click',()=>{showTargets=false;render();});
