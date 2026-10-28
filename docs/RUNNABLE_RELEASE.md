@@ -123,6 +123,31 @@ archive digest and actual platform with the results. Route-byte checks identify
 what was served at verification time; the URL alone does not identify the
 launching process. A Unix launcher result does not establish Windows support.
 
+
+### Receive complete-task practice
+
+The maintained practice browser course exercises saved whole-task rounds,
+standard and mirrored pointer placement, the four SVG margins and inclusive
+sheet edges, retained photo-annotation lineage, keyboard adjustment and a
+390 px viewport. Its inputs are authored software controls.
+
+To run this course against the same separately launched package:
+
+```sh
+SKILL_RECEIVE_BASE_URL=http://127.0.0.1:18787 \
+SKILL_RECEIVE_ROOT="/path with spaces/skill-translator-COMMIT_PREFIX" \
+SKILL_RECEIVE_COMMIT=EXACT_40_CHARACTER_COMMIT_SHA \
+QA_OUTPUT=/path/to/new-practice-evidence \
+PUPPETEER_PATH=/absolute/path/to/an/existing/puppeteer/installation \
+CHROME_BINARY=/absolute/path/to/chrome \
+node tools/browser-practice.mjs
+```
+
+The course first runs the maintained manifest and route-byte receiver on that
+exact origin. It neither starts a fallback application nor stops the external
+launcher. With the external URL unset, it starts its usual isolated source
+server. Keep the receiver source and evidence outside the extracted package.
+
 Before publishing a versioned private GitHub Release, record actual checks and
 their platform/runtime versions, including failures and untested optional paths.
 After upload, download the asset through the intended account, verify its SHA-256,
