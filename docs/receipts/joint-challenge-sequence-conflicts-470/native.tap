@@ -1,0 +1,408 @@
+TAP version 13
+# Subtest: individually supported marks cannot silently switch global source readings
+ok 1 - individually supported marks cannot silently switch global source readings
+  ---
+  duration_ms: 14.570786
+  type: 'test'
+  ...
+# Subtest: one coherent wide reading retains left clearance for both original marks
+ok 2 - one coherent wide reading retains left clearance for both original marks
+  ---
+  duration_ms: 6.428367
+  type: 'test'
+  ...
+# Subtest: nominal scoring preserves maintained evidence residuals, including impossible clearances
+ok 3 - nominal scoring preserves maintained evidence residuals, including impossible clearances
+  ---
+  duration_ms: 4.71338
+  type: 'test'
+  ...
+# Subtest: factorized counts agree with independent small Cartesian geometry
+ok 4 - factorized counts agree with independent small Cartesian geometry
+  ---
+  duration_ms: 18.216054
+  type: 'test'
+  ...
+# Subtest: a mark keeps one rule across every row rather than changing rules per observation
+ok 5 - a mark keeps one rule across every row rather than changing rules per observation
+  ---
+  duration_ms: 1.821185
+  type: 'test'
+  ...
+# Subtest: missing marks stay untested, while a decisive contradiction outranks partial evidence
+ok 6 - missing marks stay untested, while a decisive contradiction outranks partial evidence
+  ---
+  duration_ms: 3.823389
+  type: 'test'
+  ...
+# Subtest: every original mark must remain explicit and inside the page even when unselected
+ok 7 - every original mark must remain explicit and inside the page even when unselected
+  ---
+  duration_ms: 24.292452
+  type: 'test'
+  ...
+# Subtest: global photo readings cannot move corners or any mark beyond original image bounds
+ok 8 - global photo readings cannot move corners or any mark beyond original image bounds
+  ---
+  duration_ms: 5.520615
+  type: 'test'
+  ...
+# Subtest: source, observation and hypothesis anchors each reject source drift
+ok 9 - source, observation and hypothesis anchors each reject source drift
+  ---
+  duration_ms: 37.225323
+  type: 'test'
+  ...
+# Subtest: saved arrays must be explicit; missing or null cannot default to a different investigation
+ok 10 - saved arrays must be explicit; missing or null cannot default to a different investigation
+  ---
+  duration_ms: 20.863006
+  type: 'test'
+  ...
+# Subtest: forged saved verdicts are discarded and coherent evidence is recomputed
+ok 11 - forged saved verdicts are discarded and coherent evidence is recomputed
+  ---
+  duration_ms: 1.673609
+  type: 'test'
+  ...
+# Subtest: selection, evidence and hypothesis input ordering do not change scientific outcomes
+ok 12 - selection, evidence and hypothesis input ordering do not change scientific outcomes
+  ---
+  duration_ms: 44.415504
+  type: 'test'
+  ...
+# Subtest: 12 marks and 24 alternatives stay factorized with exact finite counts, never probabilities
+ok 13 - 12 marks and 24 alternatives stay factorized with exact finite counts, never probabilities
+  ---
+  duration_ms: 97.060633
+  type: 'test'
+  ...
+# Subtest: invalid selections and duplicate global identities refuse transactionally
+ok 14 - invalid selections and duplicate global identities refuse transactionally
+  ---
+  duration_ms: 6.853812
+  type: 'test'
+  ...
+# Subtest: all workpiece subsets retain the family when no qualified outcomes exist
+ok 15 - all workpiece subsets retain the family when no qualified outcomes exist
+  ---
+  duration_ms: 45.763241
+  type: 'test'
+  ...
+# Subtest: one contradictory workpiece remains diagnostic with missing and imprecise marks
+ok 16 - one contradictory workpiece remains diagnostic with missing and imprecise marks
+  ---
+  duration_ms: 52.039282
+  type: 'test'
+  ...
+# Subtest: individually compatible workpieces can contradict one fixed rule jointly
+ok 17 - individually compatible workpieces can contradict one fixed rule jointly
+  ---
+  duration_ms: 16.483727
+  type: 'test'
+  ...
+# Subtest: returns every minimal group including alternatives of different sizes
+ok 18 - returns every minimal group including alternatives of different sizes
+  ---
+  duration_ms: 20.028343
+  type: 'test'
+  ...
+# Subtest: cross-mark source switching is a conflict even though each mark has support somewhere
+ok 19 - cross-mark source switching is a conflict even though each mark has support somewhere
+  ---
+  duration_ms: 11.240578
+  type: 'test'
+  ...
+# Subtest: every subset count and all minimal groups match an independent small Cartesian oracle
+ok 20 - every subset count and all minimal groups match an independent small Cartesian oracle
+  ---
+  duration_ms: 60.489525
+  type: 'test'
+  ...
+# Subtest: trial and outcome ordering cannot change the source-identified conflict groups
+ok 21 - trial and outcome ordering cannot change the source-identified conflict groups
+  ---
+  duration_ms: 12.948811
+  type: 'test'
+  ...
+# Subtest: six workpieces and 72 outcomes remain factored while all 63 subsets are inspected
+ok 22 - six workpieces and 72 outcomes remain factored while all 63 subsets are inspected
+  ---
+  duration_ms: 2677.736217
+  type: 'test'
+  ...
+# Subtest: source-only replay recomputes diagnostics without changing exports or accepting forged anchors
+ok 23 - source-only replay recomputes diagnostics without changing exports or accepting forged anchors
+  ---
+  duration_ms: 11.135408
+  type: 'test'
+  ...
+# Subtest: retrospective cross-round conflict uses original family and original round locations
+ok 24 - retrospective cross-round conflict uses original family and original round locations
+  ---
+  duration_ms: 120.761441
+  type: 'test'
+  ...
+# Subtest: all five alternative minimal groups survive complete six-workpiece enumeration
+ok 25 - all five alternative minimal groups survive complete six-workpiece enumeration
+  ---
+  duration_ms: 52.425817
+  type: 'test'
+  ...
+# Subtest: sealed missing and imprecise outcomes do not eliminate original explanations
+ok 26 - sealed missing and imprecise outcomes do not eliminate original explanations
+  ---
+  duration_ms: 24.331692
+  type: 'test'
+  ...
+# Subtest: a single source reading is shared across all retained rounds
+ok 27 - a single source reading is shared across all retained rounds
+  ---
+  duration_ms: 8.929098
+  type: 'test'
+  ...
+# Subtest: multiple initial workpieces remain separate groups within one retained initial course
+ok 28 - multiple initial workpieces remain separate groups within one retained initial course
+  ---
+  duration_ms: 4.86794
+  type: 'test'
+  ...
+# Subtest: current-round correction recomputes diagnosis without changing the earlier prediction
+ok 29 - current-round correction recomputes diagnosis without changing the earlier prediction
+  ---
+  duration_ms: 33.963274
+  type: 'test'
+  ...
+# Subtest: complete prefix admission and byte bound precede retrospective diagnostics
+ok 30 - complete prefix admission and byte bound precede retrospective diagnostics
+  ---
+  duration_ms: 10.005841
+  type: 'test'
+  ...
+# Subtest: derived conflict caches are ignored and a consistent initial-only course remains inspectable
+ok 31 - derived conflict caches are ignored and a consistent initial-only course remains inspectable
+  ---
+  duration_ms: 26.722717
+  type: 'test'
+  ...
+# Subtest: a valid later round named initial retains its distinct source location
+ok 32 - a valid later round named initial retains its distinct source location
+  ---
+  duration_ms: 25.754994
+  type: 'test'
+  ...
+# Subtest: a later workpiece retains the one shared explanation instead of restarting from 25
+ok 33 - a later workpiece retains the one shared explanation instead of restarting from 25
+  ---
+  duration_ms: 225.61809
+  type: 'test'
+  ...
+# Subtest: later actuals cannot rewrite frozen predictions or restore a rule excluded by retained prior evidence
+ok 34 - later actuals cannot rewrite frozen predictions or restore a rule excluded by retained prior evidence
+  ---
+  duration_ms: 252.322762
+  type: 'test'
+  ...
+# Subtest: cross-mark source switching is not a shared explanation and an empty initial family cannot continue
+ok 35 - cross-mark source switching is not a shared explanation and an empty initial family cannot continue
+  ---
+  duration_ms: 25.158914
+  type: 'test'
+  ...
+# Subtest: missing and imprecise prior outcomes are explicitly sealed, retained, and nonconstraining
+ok 36 - missing and imprecise prior outcomes are explicitly sealed, retained, and nonconstraining
+  ---
+  duration_ms: 60.859539
+  type: 'test'
+  ...
+# Subtest: complete prior-source prefixes reject earlier result, precision, identity and declaration changes
+ok 37 - complete prior-source prefixes reject earlier result, precision, identity and declaration changes
+  ---
+  duration_ms: 222.856572
+  type: 'test'
+  ...
+# Subtest: current intake binds the exact request and supplied anchors and preserves caller state on refusal
+ok 38 - current intake binds the exact request and supplied anchors and preserves caller state on refusal
+  ---
+  duration_ms: 170.83276
+  type: 'test'
+  ...
+# Subtest: only the latest unsealed slot can be corrected and global observation identities remain distinct
+ok 39 - only the latest unsealed slot can be corrected and global observation identities remain distinct
+  ---
+  duration_ms: 112.998383
+  type: 'test'
+  ...
+# Subtest: source-only replay ignores derived caches and preserves original roles
+ok 40 - source-only replay ignores derived caches and preserves original roles
+  ---
+  duration_ms: 46.06103
+  type: 'test'
+  ...
+# Subtest: reopened context matches identical admitted sources regardless of JSON key order
+ok 41 - reopened context matches identical admitted sources regardless of JSON key order
+  ---
+  duration_ms: 19.325769
+  type: 'test'
+  ...
+# Subtest: the complete course enforces distinct dimensions, round IDs and conservative original-family sheet admission
+ok 42 - the complete course enforces distinct dimensions, round IDs and conservative original-family sheet admission
+  ---
+  duration_ms: 109.105907
+  type: 'test'
+  ...
+# Subtest: six workpieces span five ordered rounds and a seventh is refused
+ok 43 - six workpieces span five ordered rounds and a seventh is refused
+  ---
+  duration_ms: 105.963569
+  type: 'test'
+  ...
+# Subtest: 12 marks and six workpieces retain all 72 outcomes with factored joint counts
+ok 44 - 12 marks and six workpieces retain all 72 outcomes with factored joint counts
+  ---
+  duration_ms: 4574.450257
+  type: 'test'
+  ...
+# Subtest: canonical UTF-8 export counts its final newline and the exact maximum reopens
+ok 45 - canonical UTF-8 export counts its final newline and the exact maximum reopens
+  ---
+  duration_ms: 1591.456584
+  type: 'test'
+  ...
+# Subtest: future cross-mark source switching trap and coherent wide positive
+ok 46 - future cross-mark source switching trap and coherent wide positive
+  ---
+  duration_ms: 46.730837
+  type: 'test'
+  ...
+# Subtest: a mark cannot switch its rule across future sheets
+ok 47 - a mark cannot switch its rule across future sheets
+  ---
+  duration_ms: 18.47323
+  type: 'test'
+  ...
+# Subtest: small independent Cartesian geometry agrees with factored counts
+ok 48 - small independent Cartesian geometry agrees with factored counts
+  ---
+  duration_ms: 11.438019
+  type: 'test'
+  ...
+# Subtest: known qualified contradiction dominates missing and imprecise outcomes
+ok 49 - known qualified contradiction dominates missing and imprecise outcomes
+  ---
+  duration_ms: 21.849952
+  type: 'test'
+  ...
+# Subtest: no training survivor can be trimmed to fit an impossible future sheet
+ok 50 - no training survivor can be trimmed to fit an impossible future sheet
+  ---
+  duration_ms: 1.26468
+  type: 'test'
+  ...
+# Subtest: every selected mark trained and all original training dimensions excluded
+ok 51 - every selected mark trained and all original training dimensions excluded
+  ---
+  duration_ms: 6.957158
+  type: 'test'
+  ...
+# Subtest: plans are deeply frozen snapshots; cached predictions are ignored on reopen
+ok 52 - plans are deeply frozen snapshots; cached predictions are ignored on reopen
+  ---
+  duration_ms: 10.896513
+  type: 'test'
+  ...
+# Subtest: source anchors, declarations, trial identity and duplicate slots refuse
+ok 53 - source anchors, declarations, trial identity and duplicate slots refuse
+  ---
+  duration_ms: 31.827777
+  type: 'test'
+  ...
+# Subtest: source-only round trip recomputes verdict and rejects missing saved arrays
+ok 54 - source-only round trip recomputes verdict and rejects missing saved arrays
+  ---
+  duration_ms: 26.644158
+  type: 'test'
+  ...
+# Subtest: selection and outcome ordering preserve conclusions
+ok 55 - selection and outcome ordering preserve conclusions
+  ---
+  duration_ms: 18.074867
+  type: 'test'
+  ...
+# Subtest: 12 marks ×6 trials admit72 outcomes without a Cartesian expansion or60-row gate
+ok 56 - 12 marks ×6 trials admit72 outcomes without a Cartesian expansion or60-row gate
+  ---
+  duration_ms: 2542.582518
+  type: 'test'
+  ...
+# Subtest: exact UTF8 limit includes empty envelope and complete future results
+ok 57 - exact UTF8 limit includes empty envelope and complete future results
+  ---
+  duration_ms: 338.751003
+  type: 'test'
+  ...
+# Subtest: creator refuses explicitly supplied malformed anchors instead of rebinding them
+ok 58 - creator refuses explicitly supplied malformed anchors instead of rebinding them
+  ---
+  duration_ms: 28.965959
+  type: 'test'
+  ...
+# Subtest: native POST handlers reject foreign Host headers even with a matching forged Origin
+    # Subtest: /api/sequence-edge
+    ok 1 - /api/sequence-edge
+      ---
+      duration_ms: 28.444602
+      type: 'test'
+      ...
+    # Subtest: /api/calibration-translation
+    ok 2 - /api/calibration-translation
+      ---
+      duration_ms: 8.512176
+      type: 'test'
+      ...
+    # Subtest: /api/audio-intake
+    ok 3 - /api/audio-intake
+      ---
+      duration_ms: 7.497477
+      type: 'test'
+      ...
+    1..3
+ok 59 - native POST handlers reject foreign Host headers even with a matching forged Origin
+  ---
+  duration_ms: 59.688831
+  type: 'test'
+  ...
+# Subtest: actual loopback server rejects linked browser assets without exposing adjacent files
+    # Subtest: final asset symlink cannot serve a synthetic private file
+    ok 1 - final asset symlink cannot serve a synthetic private file
+      ---
+      duration_ms: 4.301656
+      type: 'test'
+      ...
+    # Subtest: linked intermediate directory cannot serve assets outside the app
+    ok 2 - linked intermediate directory cannot serve assets outside the app
+      ---
+      duration_ms: 2.071623
+      type: 'test'
+      ...
+    1..2
+ok 60 - actual loopback server rejects linked browser assets without exposing adjacent files
+  ---
+  duration_ms: 115.954786
+  type: 'test'
+  ...
+# Subtest: actual HTTP serves interactive app assets without internet dependencies or traversal
+ok 61 - actual HTTP serves interactive app assets without internet dependencies or traversal
+  ---
+  duration_ms: 129.863603
+  type: 'test'
+  ...
+1..61
+# tests 66
+# suites 0
+# pass 66
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7992.944378

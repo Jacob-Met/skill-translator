@@ -1,0 +1,23 @@
+{
+  "result": "accepted",
+  "scope": "Read-only probe and mathematical/source contract; no production/browser acceptance",
+  "files": {
+    "CONTRACT.md": "8002f5b75d93432f6a363d53de08248c0cd1dbfa252194ad98a71ccffaee04ab",
+    "probe.mjs": "ec51702580e80630a838094739bd9253e8924352c8dee8856ad10c2f80c322c2",
+    "results.json": "ce34229caad5c6ab8b0de4c4fa46199919d9455728382386dcc8b1387bf076fd"
+  },
+  "findings": [
+    "Whole sequence admission precedes reconstruction, so sealed prefix tampering remains refused.",
+    "Rebuilt plan uses original investigation and complete trial/outcome set, not earlier survivor counts; plan candidates include contradicted candidates, so Cartesian baseline remains the original family.",
+    "Each Cartesian member fixes one reading and one rule per mark across every selected workpiece; null missing/imprecise compatibility cannot eliminate.",
+    "Retrospective subset membership changes neither prospective predictions nor sequence source. JSON source roundtrip in tamper setup avoids shared-object aliasing and does not change production logic."
+  ],
+  "productionRequirements": [
+    "Keep reconstruction explicitly retrospective; prospectiveDeclaration used by the maintained plan constructor must not become a claim that all rounds were jointly declared before collection.",
+    "Carry original initial/later location and sealed/current status in consumer, as contract specifies.",
+    "Preserve full admitted sequence/export byte bounds when constructing diagnostic views."
+  ],
+  "limitations": [
+    "Source review plus existing executed87subset evidence inspected; no additional test run claimed."
+  ]
+}

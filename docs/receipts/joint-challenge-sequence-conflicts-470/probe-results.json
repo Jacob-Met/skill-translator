@@ -1,0 +1,548 @@
+{
+  "scope": "Read-only source-bound probe; no production edits or claim",
+  "contractSha256": "8002f5b75d93432f6a363d53de08248c0cd1dbfa252194ad98a71ccffaee04ab",
+  "cases": [
+    {
+      "name": "consistent-initial",
+      "workpieces": 1,
+      "baseline": 25,
+      "current": 1,
+      "subsetsChecked": 1,
+      "minimalGroups": [],
+      "rounds": [],
+      "missing": 0,
+      "imprecise": 0,
+      "oracle": [
+        {
+          "mask": 1,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "name": "cross-round-pair",
+      "workpieces": 2,
+      "baseline": 25,
+      "current": 0,
+      "subsetsChecked": 3,
+      "minimalGroups": [
+        [
+          "first-workpiece",
+          "later-workpiece"
+        ]
+      ],
+      "rounds": [
+        {
+          "id": "later",
+          "before": 1,
+          "after": 0
+        }
+      ],
+      "missing": 0,
+      "imprecise": 0,
+      "oracle": [
+        {
+          "mask": 1,
+          "count": 1
+        },
+        {
+          "mask": 2,
+          "count": 1
+        },
+        {
+          "mask": 3,
+          "count": 0
+        }
+      ]
+    },
+    {
+      "name": "current-round-correction",
+      "workpieces": 2,
+      "baseline": 25,
+      "current": 1,
+      "subsetsChecked": 3,
+      "minimalGroups": [],
+      "rounds": [
+        {
+          "id": "later",
+          "before": 1,
+          "after": 1
+        }
+      ],
+      "missing": 0,
+      "imprecise": 0,
+      "oracle": [
+        {
+          "mask": 1,
+          "count": 1
+        },
+        {
+          "mask": 2,
+          "count": 1
+        },
+        {
+          "mask": 3,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "name": "six-workpieces-five-alternative-conflicts",
+      "workpieces": 6,
+      "baseline": 25,
+      "current": 0,
+      "subsetsChecked": 63,
+      "minimalGroups": [
+        [
+          "first-workpiece",
+          "round-6-workpiece"
+        ],
+        [
+          "round-2-workpiece",
+          "round-6-workpiece"
+        ],
+        [
+          "round-3-workpiece",
+          "round-6-workpiece"
+        ],
+        [
+          "round-4-workpiece",
+          "round-6-workpiece"
+        ],
+        [
+          "round-5-workpiece",
+          "round-6-workpiece"
+        ]
+      ],
+      "rounds": [
+        {
+          "id": "round-2",
+          "before": 1,
+          "after": 1
+        },
+        {
+          "id": "round-3",
+          "before": 1,
+          "after": 1
+        },
+        {
+          "id": "round-4",
+          "before": 1,
+          "after": 1
+        },
+        {
+          "id": "round-5",
+          "before": 1,
+          "after": 1
+        },
+        {
+          "id": "round-6",
+          "before": 1,
+          "after": 0
+        }
+      ],
+      "missing": 0,
+      "imprecise": 0,
+      "oracle": [
+        {
+          "mask": 1,
+          "count": 1
+        },
+        {
+          "mask": 2,
+          "count": 1
+        },
+        {
+          "mask": 3,
+          "count": 1
+        },
+        {
+          "mask": 4,
+          "count": 1
+        },
+        {
+          "mask": 5,
+          "count": 1
+        },
+        {
+          "mask": 6,
+          "count": 1
+        },
+        {
+          "mask": 7,
+          "count": 1
+        },
+        {
+          "mask": 8,
+          "count": 1
+        },
+        {
+          "mask": 9,
+          "count": 1
+        },
+        {
+          "mask": 10,
+          "count": 1
+        },
+        {
+          "mask": 11,
+          "count": 1
+        },
+        {
+          "mask": 12,
+          "count": 1
+        },
+        {
+          "mask": 13,
+          "count": 1
+        },
+        {
+          "mask": 14,
+          "count": 1
+        },
+        {
+          "mask": 15,
+          "count": 1
+        },
+        {
+          "mask": 16,
+          "count": 1
+        },
+        {
+          "mask": 17,
+          "count": 1
+        },
+        {
+          "mask": 18,
+          "count": 1
+        },
+        {
+          "mask": 19,
+          "count": 1
+        },
+        {
+          "mask": 20,
+          "count": 1
+        },
+        {
+          "mask": 21,
+          "count": 1
+        },
+        {
+          "mask": 22,
+          "count": 1
+        },
+        {
+          "mask": 23,
+          "count": 1
+        },
+        {
+          "mask": 24,
+          "count": 1
+        },
+        {
+          "mask": 25,
+          "count": 1
+        },
+        {
+          "mask": 26,
+          "count": 1
+        },
+        {
+          "mask": 27,
+          "count": 1
+        },
+        {
+          "mask": 28,
+          "count": 1
+        },
+        {
+          "mask": 29,
+          "count": 1
+        },
+        {
+          "mask": 30,
+          "count": 1
+        },
+        {
+          "mask": 31,
+          "count": 1
+        },
+        {
+          "mask": 32,
+          "count": 1
+        },
+        {
+          "mask": 33,
+          "count": 0
+        },
+        {
+          "mask": 34,
+          "count": 0
+        },
+        {
+          "mask": 35,
+          "count": 0
+        },
+        {
+          "mask": 36,
+          "count": 0
+        },
+        {
+          "mask": 37,
+          "count": 0
+        },
+        {
+          "mask": 38,
+          "count": 0
+        },
+        {
+          "mask": 39,
+          "count": 0
+        },
+        {
+          "mask": 40,
+          "count": 0
+        },
+        {
+          "mask": 41,
+          "count": 0
+        },
+        {
+          "mask": 42,
+          "count": 0
+        },
+        {
+          "mask": 43,
+          "count": 0
+        },
+        {
+          "mask": 44,
+          "count": 0
+        },
+        {
+          "mask": 45,
+          "count": 0
+        },
+        {
+          "mask": 46,
+          "count": 0
+        },
+        {
+          "mask": 47,
+          "count": 0
+        },
+        {
+          "mask": 48,
+          "count": 0
+        },
+        {
+          "mask": 49,
+          "count": 0
+        },
+        {
+          "mask": 50,
+          "count": 0
+        },
+        {
+          "mask": 51,
+          "count": 0
+        },
+        {
+          "mask": 52,
+          "count": 0
+        },
+        {
+          "mask": 53,
+          "count": 0
+        },
+        {
+          "mask": 54,
+          "count": 0
+        },
+        {
+          "mask": 55,
+          "count": 0
+        },
+        {
+          "mask": 56,
+          "count": 0
+        },
+        {
+          "mask": 57,
+          "count": 0
+        },
+        {
+          "mask": 58,
+          "count": 0
+        },
+        {
+          "mask": 59,
+          "count": 0
+        },
+        {
+          "mask": 60,
+          "count": 0
+        },
+        {
+          "mask": 61,
+          "count": 0
+        },
+        {
+          "mask": 62,
+          "count": 0
+        },
+        {
+          "mask": 63,
+          "count": 0
+        }
+      ]
+    },
+    {
+      "name": "sealed-missing-and-imprecise",
+      "workpieces": 3,
+      "baseline": 25,
+      "current": 25,
+      "subsetsChecked": 7,
+      "minimalGroups": [],
+      "rounds": [
+        {
+          "id": "imprecise",
+          "before": 25,
+          "after": 25
+        },
+        {
+          "id": "missing",
+          "before": 25,
+          "after": 25
+        }
+      ],
+      "missing": 5,
+      "imprecise": 1,
+      "oracle": [
+        {
+          "mask": 1,
+          "count": 25
+        },
+        {
+          "mask": 2,
+          "count": 25
+        },
+        {
+          "mask": 3,
+          "count": 25
+        },
+        {
+          "mask": 4,
+          "count": 25
+        },
+        {
+          "mask": 5,
+          "count": 25
+        },
+        {
+          "mask": 6,
+          "count": 25
+        },
+        {
+          "mask": 7,
+          "count": 25
+        }
+      ]
+    },
+    {
+      "name": "one-global-source-reading",
+      "workpieces": 2,
+      "baseline": 45,
+      "current": 0,
+      "subsetsChecked": 3,
+      "minimalGroups": [
+        [
+          "first-workpiece",
+          "different-reading-workpiece"
+        ]
+      ],
+      "rounds": [
+        {
+          "id": "different-reading",
+          "before": 1,
+          "after": 0
+        }
+      ],
+      "missing": 0,
+      "imprecise": 0,
+      "oracle": [
+        {
+          "mask": 1,
+          "count": 1
+        },
+        {
+          "mask": 2,
+          "count": 1
+        },
+        {
+          "mask": 3,
+          "count": 0
+        }
+      ]
+    },
+    {
+      "name": "multiple-initial-workpieces-stay-separate",
+      "workpieces": 3,
+      "baseline": 25,
+      "current": 0,
+      "subsetsChecked": 7,
+      "minimalGroups": [
+        [
+          "initial-a",
+          "later-after-two-workpiece"
+        ],
+        [
+          "initial-b",
+          "later-after-two-workpiece"
+        ]
+      ],
+      "rounds": [
+        {
+          "id": "later-after-two",
+          "before": 5,
+          "after": 0
+        }
+      ],
+      "missing": 2,
+      "imprecise": 0,
+      "oracle": [
+        {
+          "mask": 1,
+          "count": 5
+        },
+        {
+          "mask": 2,
+          "count": 5
+        },
+        {
+          "mask": 3,
+          "count": 5
+        },
+        {
+          "mask": 4,
+          "count": 1
+        },
+        {
+          "mask": 5,
+          "count": 0
+        },
+        {
+          "mask": 6,
+          "count": 0
+        },
+        {
+          "mask": 7,
+          "count": 0
+        }
+      ]
+    }
+  ],
+  "tamperedPrefixRefused": true,
+  "allOriginalSourcesUnchanged": true
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "hamon-scoped-qualification-history/v1",
+  "claim": "https://github.com/Jacob-Met/skill-translator/issues/470",
+  "probe": {
+    "frozenContract": "frozen-contract.md",
+    "finalResults": "probe-results.json",
+    "authoredCourses": 7,
+    "independentlyEnumeratedSubsets": 87,
+    "initialFailure": "probe-v1-failure.json",
+    "cause": "The first prefix-tamper control used structuredClone, which preserved shared initial/prefix aliases and changed both sides.",
+    "repair": "Use a JSON source roundtrip and change only the embedded prefix; preserve the strict expected prefix refusal. No product change.",
+    "originalSources": {
+      "path": "test/support/joint-challenge-sequence-conflicts-cases.json",
+      "sha256": "5bae9e8bc325015fe66b181b6f74b674832b9f633eff279e30c6bb6c5329118d",
+      "note": "Exact frozen probe-source bytes are already published once as the maintained native/browser fixture."
+    }
+  },
+  "reviews": {
+    "probe": "independent-probe-review.json",
+    "core": "independent-core-review.json",
+    "consumer": "independent-consumer-review.json",
+    "receivingBytes": "independent-receipt-review.json",
+    "actualPixels": "root-visual-review.json",
+    "coreReviewScope": "Independent core review covers the then-eight focused controls; final native qualification adds a ninth control for a valid later round named initial. Core bytes are unchanged."
+  },
+  "qualification": {
+    "operation": "hamon-de5a-skill470-sequence-conflicts-receive-20261028-178",
+    "result": "passed",
+    "receipt": "receiving178.json",
+    "receiptSha256": "cf93e2359371480f4be45cb3874c55648ff7465d499ceb56da50ba8c0857c080",
+    "native": 66,
+    "maintainedBrowserGroups": 9,
+    "sequenceBrowserGroups": 11,
+    "exactHttpResources": 12,
+    "productQualificationFailures": 0
+  },
+  "postReceivingChanges": "Only method documentation and additive evidence; all six runtime/test/fixture/harness/style paths remain exact to178."
+}

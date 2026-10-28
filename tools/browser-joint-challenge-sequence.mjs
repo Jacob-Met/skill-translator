@@ -11,6 +11,7 @@ const base=process.env.BASE_URL;if(!base)throw Error('BASE_URL must identify the
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_PATH||'/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright');
 const out=new URL('../receipts/joint-challenge-sequence-browser/',import.meta.url);await mkdir(out,{recursive:true});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+const diagnosticCases=JSON.parse(await readFile(new URL('../test/support/joint-challenge-sequence-conflicts-cases.json',import.meta.url),'utf8'));
 const receipt={startedAt:new Date().toISOString(),base,authoredExamples:true,checks:[],files:[],screenshots:[]};
 async function manifest(dir){for(const entry of await readdir(new URL('../'+dir,import.meta.url),{withFileTypes:true}).catch(()=>[])){const path=dir+entry.name;if(entry.isDirectory()){if(!['node_modules','.git','receipts'].includes(entry.name))await manifest(path+'/');}else if(/\.(mjs|js|html|css|json)$/.test(path)){const bytes=await readFile(new URL('../'+path,import.meta.url));receipt.files.push({path,bytes:bytes.length,sha256:sha(bytes)});}}}
 for(const dir of ['src/','web/','native/','tools/','scripts/','test/'])await manifest(dir);
@@ -113,10 +114,57 @@ try{
     assert.match(await round.innerText(),/Authored example/);assert.match(await round.innerText(),/Left clearance: \(20, 90\) mm/);
   }
   receipt.checks.push('actual 1440/390/320 overview and original-evidence layouts, no overflow, trusted keyboard disclosure and visible focus');
+
+  await upload('#jcs-file',diagnosticCases['cross-round-pair']);await combinations(0);
+  const crossRound=await exported(),conflicts=page.locator('#jcs-conflicts');
+  assert.equal(await conflicts.getAttribute('data-groups'),'1');assert.equal(await conflicts.getAttribute('data-subsets'),'3');
+  assert.match(await conflicts.innerText(),/25 original combinations/);assert.match(await conflicts.innerText(),/Earlier predictions keep their own prior-source prefixes/);
+  const group=conflicts.locator('[data-conflict-group]').first();await group.locator(':scope > summary').focus();await page.keyboard.press('Enter');
+  assert.equal(await group.evaluate(node=>node.open),true);
+  assert.match(await group.innerText(),/Initial course · retained/);assert.match(await group.innerText(),/Round 1 · current/);
+  assert.match(await group.innerText(),/first-workpiece-guide/);assert.match(await group.innerText(),/later-workpiece-guide/);
+  for(const id of ['first-workpiece','later-workpiece']){
+    await group.locator('[data-jcs-inspect="'+id+'"]').focus();await page.keyboard.press('Enter');
+    assert.equal(await page.evaluate(()=>document.activeElement.dataset.workpiece),id);
+    const original=page.locator('#jcs-history [data-workpiece="'+id+'"]');
+    assert.match(await original.innerText(),/Authored/);
+    assert.equal(await original.locator('button').count(),id==='first-workpiece'?0:2);
+  }
+  assert.equal(await exported(),crossRound);
+  const namedInitial=JSON.parse(crossRound);namedInitial.rounds[0].id='initial';await upload('#jcs-file',namedInitial);await combinations(0);
+  await conflicts.locator('[data-jcs-inspect="later-workpiece"]').focus();await page.keyboard.press('Enter');
+  assert.equal(await page.evaluate(()=>document.activeElement.dataset.workpiece),'later-workpiece');
+  assert.equal(await page.locator('#jcs-history [data-workpiece="later-workpiece"] button').count(),2);
+  receipt.checks.push('retrospective cross-round minimal group, original rejecting observations, trusted source navigation and sealed/current custody');
+
+  await upload('#jcs-file',diagnosticCases['six-workpieces-five-alternative-conflicts']);await combinations(0);
+  assert.equal(await conflicts.getAttribute('data-groups'),'5');assert.equal(await conflicts.getAttribute('data-subsets'),'63');
+  assert.equal(await conflicts.locator('[data-conflict-group]').count(),5);
+  const capacity=await exported(),expanded=conflicts.locator('[data-conflict-group]').first();
+  await expanded.locator(':scope > summary').focus();await page.keyboard.press('Enter');assert.equal(await expanded.evaluate(node=>node.open),true);
+  for(const width of [1440,390,320]){
+    await page.setViewportSize({width,height:1000});await conflicts.scrollIntoViewIfNeeded();
+    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'retrospective conflict overflow '+width);
+    const path=new URL('sequence-conflicts-'+width+'.png',out);await conflicts.screenshot({path:path.pathname});const bytes=await readFile(path);receipt.screenshots.push({path:path.pathname,width,kind:'retrospective-conflicts',bytes:bytes.length,sha256:sha(bytes)});
+  }
+  assert.equal(await exported(),capacity);
+  receipt.checks.push('all five alternative minimal pairs at63-subset capacity, actual1440/390/320 source-linked conflict layouts');
+
+  const prior=JSON.parse(capacity);await receive('guide',20,210,{keyboard:true});await combinations(1);
+  assert.equal(await conflicts.getAttribute('data-groups'),'0');const correctedCapacity=JSON.parse(await exported());
+  assert.deepEqual(correctedCapacity.initial,prior.initial);assert.deepEqual(correctedCapacity.rounds.slice(0,-1),prior.rounds.slice(0,-1));assert.deepEqual(correctedCapacity.rounds.at(-1).prefix,prior.rounds.at(-1).prefix);
+  await upload('#jcs-file',diagnosticCases['sealed-missing-and-imprecise']);await combinations(25);
+  assert.equal(await conflicts.getAttribute('data-groups'),'0');assert.match(await conflicts.innerText(),/No qualified outcomes can constrain/);
+  const sourceOnly=await exported(),cached=JSON.parse(sourceOnly);cached.minimalGroups=[['invented']];cached.workpieces=[];await upload('#jcs-file',cached);assert.equal(await exported(),sourceOnly);
+  const broken=JSON.parse(sourceOnly);broken.rounds[0].prefix.initial.plan.label='Forged prior';await upload('#jcs-file',broken);assert.equal(await page.locator('#jcs-error').isVisible(),true);assert.equal(await exported(),sourceOnly);
+  await upload('#jcs-file',good);
+  receipt.checks.push('current-only correction clears conflicts without altering sealed source, missing/imprecise non-elimination and refused cached/prefix replacement');
   for(const path of ['src/joint-challenge-sequence.mjs','web/joint-challenge-sequence.mjs','web/joint-challenge.mjs','web/joint-challenge.css']){
     const response=await page.request.get(base+'/'+path);assert.equal(response.status(),200);assert.equal(sha(await response.body()),sha(await readFile(new URL('../'+path,import.meta.url))));
   }
   assert.equal((await page.request.get(base+'/test/support/joint-challenge-sequence-fixtures.mjs')).status(),404);
+  assert.equal((await page.request.get(base+'/test/support/joint-challenge-sequence-conflicts-cases.json')).status(),404);
   assert.equal((await page.request.get(base+'/tools/browser-joint-challenge-sequence.mjs')).status(),404);
   assert.deepEqual(errors,[]);receipt.checks.push('exact served continuation and parent source, private harness/fixtures, no browser exceptions');
   receipt.status='passed';receipt.browserVersion=await browser.version();

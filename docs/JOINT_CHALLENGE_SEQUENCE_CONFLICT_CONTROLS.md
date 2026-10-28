@@ -1,0 +1,9 @@
+# Retrospective conflicts across retained workpiece rounds — frozen probe
+
+Question: when a retained sequential joint challenge no longer has one original explanation, which complete workpiece groups are inclusion-minimal contradictions across its initial study and later rounds?
+
+Admit the whole ordered source sequence first, including each sealed prefix and original investigation. Reconstruct the same complete frozen trial set and all original outcomes, then reuse the maintained joint workpiece-conflict analyzer. The retrospective diagnostic must use the original training-supported family, not treat prior surviving counts as a new training baseline. It must never rewrite earlier prospective predictions or suggest deleting a workpiece.
+
+Keep the maintained grouping unit: one complete workpiece, including every supplied selected-mark outcome. Every explanation has one original reading and one fixed rule per mark across all selected workpieces. Enumerate all nonempty subsets within the existing global six-workpiece bound. Missing and imprecise outcomes remain visible and nonconstraining. Preserve each workpiece's initial/later round location and sealed/current status. No new source format or cached diagnostic evidence is needed.
+
+Executed controls will cover a consistent initial study; a cross-round pair conflict; five alternative minimal pairs at six-workpiece capacity; missing/imprecise sealed outcomes; two source-reading alternatives; correction of only the current round; multi-workpiece initial grouping; and refusal of a tampered complete prior prefix. Compare every subset count with a separately enumerated Cartesian family over original reading/mark candidates. This is a software probe over authored source records, with no physical observations, probabilities or fault attribution.

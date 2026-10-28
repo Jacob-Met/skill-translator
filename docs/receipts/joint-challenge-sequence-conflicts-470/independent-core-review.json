@@ -1,0 +1,24 @@
+{
+  "status": "accepted",
+  "scope": "470 core/admitted retrospective diagnostic; no consumer/browser acceptance",
+  "sources": {
+    "src/joint-challenge-sequence.mjs": "c0d4b91a3e0b4ed4e8f27ea511dee3440b839b2860617a5114472345ccb063fa",
+    "test/joint-challenge-sequence-conflicts.test.mjs": "109762ac1c7cfe58557ac5fef66fdccdfd75659bfb210357d5a0dc74f93ba5ce",
+    "test/support/joint-challenge-sequence-conflicts-cases.json": "5bae9e8bc325015fe66b181b6f74b674832b9f633eff279e30c6bb6c5329118d"
+  },
+  "findings": [
+    "Uses private complete admission latestPlan/results, preserving original training family and all source-prefix/byte gates without a new diagnostic prospective declaration.",
+    "Maintained conflict analyzer retains one source reading and fixed rules; missing/imprecise results remain nonconstraining.",
+    "Workpiece metadata preserves separate initial trials and later round location; initial source retained sealed, only last later round current.",
+    "Return is deeply frozen, fresh diagnostic caches do not become trusted source, and source and prospective predictions remain unchanged."
+  ],
+  "executed": [
+    "8 focused maintained tests passed independently",
+    "JSON-string vs object input equality",
+    "Reordered object keys preserve full diagnosis",
+    "Outcome assigned to previous workpiece refuses before diagnosis"
+  ],
+  "limitations": [
+    "No new product edits or browser run; consumer rendering and actual receiving still required."
+  ]
+}
