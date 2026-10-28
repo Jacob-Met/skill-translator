@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "groups": [
+    "Three actual original PNGs sampled with common settings; complete pair reports and source-only export preserve original bytes",
+    "Fresh page reopens complete original source, ignores forged derived answers and recomputes",
+    "Changed common settings retire stale result and bind a new saved question",
+    "Duplicate original frame refuses computation and export",
+    "Incumbent two-frame mode and source-only pair format remain usable",
+    "Three-frame consumer fits 390 pixel viewport",
+    "Cancellation retires actual computed but delayed worker response",
+    "New original source retires delayed triplet reply and resets source-only question mode"
+  ],
+  "browser": "156.0.8078.73",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "errors": [],
+  "sourceSHA256": "4a77e8160865a2b417382c9ead748f7a261d8a7511aa69e5c8e66d5a033a524f",
+  "frames": [
+    {
+      "momentId": "moment-d6a29ca7-73ae-4edc-b2f1-8a8b154117f6",
+      "sha256": "1f45c0bd38aafc7fe19ddf80b6274e5c16d1a9a39a782c5a940068120caed04e",
+      "presentedSeconds": 0.112
+    },
+    {
+      "momentId": "moment-70a19e87-19dc-49f1-ad47-421655bfcdcd",
+      "sha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+      "presentedSeconds": 0.712
+    },
+    {
+      "momentId": "moment-579c3545-40ca-4565-83a4-0d5123de6d16",
+      "sha256": "f26568141642695dfc61ffbe933f37b5e080f6c97bfcbf0f041fa9feeda71b5d",
+      "presentedSeconds": 1.312
+    }
+  ],
+  "settings": {
+    "clipSha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+    "frames": [
+      {
+        "momentId": "moment-d6a29ca7-73ae-4edc-b2f1-8a8b154117f6",
+        "sha256": "1f45c0bd38aafc7fe19ddf80b6274e5c16d1a9a39a782c5a940068120caed04e",
+        "presentedSeconds": 0.112
+      },
+      {
+        "momentId": "moment-70a19e87-19dc-49f1-ad47-421655bfcdcd",
+        "sha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+        "presentedSeconds": 0.712
+      },
+      {
+        "momentId": "moment-579c3545-40ca-4565-83a4-0d5123de6d16",
+        "sha256": "f26568141642695dfc61ffbe933f37b5e080f6c97bfcbf0f041fa9feeda71b5d",
+        "presentedSeconds": 1.312
+      }
+    ],
+    "widthPx": 160,
+    "heightPx": 90,
+    "radius": 4,
+    "support": {
+      "left": 4,
+      "top": 4,
+      "width": 152,
+      "height": 82
+    },
+    "sampler": "canvas2d-drawImage-full-frame-default-smoothing",
+    "brightnessConvention": "rgb-l1-lower-median-shared-channel-offset-div255"
+  },
+  "scope": "Actual retained original PNG receiving, no physical correspondence or higher-residual joint fitting claim"
+}

@@ -1,0 +1,40 @@
+{
+  "baseCommit": "4dc4535b4be7a03ee60f44b930ffd0c78c9b9c4e",
+  "baseTree": "942e8019c4ff7cfb3f4c5acfccc22e28b4efbb4e",
+  "server": "Exact current server plus four additive routes; every existing route retained",
+  "unchangedDependencies": [
+    {
+      "path": "src/appearance-pair.mjs",
+      "gitBlob": "6528193f80e5ef69bf3083f9038b148f06e8335f"
+    },
+    {
+      "path": "src/visual-translation.mjs",
+      "gitBlob": "a088a6befb0a1e1d7d8d97e9be4cf25f9f971bbb"
+    },
+    {
+      "path": "src/demonstration-sequence.mjs",
+      "gitBlob": "3030edd3ad809cab11fc220365aacb34e2d01b42"
+    },
+    {
+      "path": "src/frame-origin.mjs",
+      "gitBlob": "9154d9e63255de95152e3137d5790de5e9f00e42"
+    },
+    {
+      "path": "web/appearance-pair-worker.mjs",
+      "gitBlob": "6c5fe06fce1d60f238ee55958cb17e4411fbc0cc"
+    },
+    {
+      "path": "web/appearance-pair-view.mjs",
+      "gitBlob": "e1bab690ca1705093932e43afbbabae3e8481e52"
+    },
+    {
+      "path": "web/sequence-input.mjs",
+      "gitBlob": "bf4ece2d96b15bdb8ee88ff537d92f39032c5d6a"
+    },
+    {
+      "path": "web/decision-handoff.mjs",
+      "gitBlob": "9206753a27369ca3587313fe82320f6bc95094ae"
+    }
+  ],
+  "browser": "Eight groups executed before current server recomposition; consumer and executed dependency bytes unchanged"
+}

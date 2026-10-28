@@ -1,0 +1,13 @@
+{
+  "reviewer": "WORLDLAW retained teammate",
+  "files": {
+    "src/appearance-triplet.mjs": "01499106c6347805554568ac5549fd933a838e259dd2ed9a52757c94980b58d3",
+    "web/appearance-triplet-input.mjs": "049e11b8fed6fd6b488786429986be7c9ab2524757e43489e5d644a504dd2689",
+    "web/appearance-triplet-worker.mjs": "081eedef40ec03176e95f76b0dc3dcc06c24d84c957776c9036c83ed12d0a028",
+    "web/appearance-pair-input.mjs": "af50024d1cc86ed1cfcbaf9dfb7f00af5c2fb2d71b46cf7a74faccad1b793f7a"
+  },
+  "scope": "Source review of core/source reader/worker and shared sampler extraction plus actual existing five-body native test-file execution. No UI/browser qualification.",
+  "result": "No blocker found. Pair admissions independently preserve full sequence identities and chronological frame order; all three pairs share canonical settings; input-only bundle embeds full original sequence and rejects nested derived wrapper; failed/aborted original admission releases assets. Complete triple-comparison work is reserved before kernel comparison, join retains every alternative participation and bounded pages; worker source equality prevents paging another report. Directed kernel comparisons are retained without reversal or brightness-additivity assumption.",
+  "actualTest": "node --test receiver/test/appearance-triplet.test.mjs passed (five named bodies, file-level runner report).",
+  "limits": "Browser abort timing, actual PNG decode, worker cancellation and eventual UI pagination/source retirement remain browser receiving gates."
+}

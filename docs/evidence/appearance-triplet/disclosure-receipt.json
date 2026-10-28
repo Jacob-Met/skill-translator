@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "scope": "Targeted presentation receiving after native disclosure change; no core or eight-group lifecycle rerun",
+  "browser": "156.0.8078.73",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "groups": [
+    "All three complete maintained pair reports keyboard-open/close; alternatives and original source/settings reachable",
+    "1440px and 390px complete layout fits with concise pair summaries"
+  ],
+  "summaries": [
+    "A \u2192 B \u00b7 residual 1.09 levels \u00b7 1 minimum \u00b7 0 at the search boundary",
+    "B \u2192 C \u00b7 residual 0.43 levels \u00b7 1 minimum \u00b7 0 at the search boundary",
+    "A \u2192 C \u00b7 residual 1.06 levels \u00b7 1 minimum \u00b7 0 at the search boundary"
+  ],
+  "presenterSHA256": "7b408b8508d2507250bd86069dca4772cfa1110c0b8d0c9a64a991feefe5133f"
+}

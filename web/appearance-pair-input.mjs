@@ -14,7 +14,13 @@ export async function readAppearanceInput(file,{signal}={}){
  }finally{if(loaded)releaseAppearanceInput(loaded);}
 }
 export async function makeAppearanceSamples(loaded,raw,{signal}={}){
- check(signal);const source=admitAppearanceRequest(raw,loaded.sequence),q=source.request,samples=[];
+ check(signal);const source=admitAppearanceRequest(raw,loaded.sequence);
+ const samples=await sampleAppearanceFrames(loaded,source.request,{signal});
+ return {source,before:samples[0],after:samples[1]};
+}
+/** Call only with a canonically admitted pair or triplet request. */
+export async function sampleAppearanceFrames(loaded,q,{signal}={}){
+ check(signal);const samples=[];
  for(const frame of q.frames){
   const asset=loaded.assets.get(frame.momentId);if(!asset)throw Error('Original admitted image unavailable');
   const image=new Image();image.src=asset.media.url;await image.decode();check(signal);
@@ -22,7 +28,7 @@ export async function makeAppearanceSamples(loaded,raw,{signal}={}){
   const ctx=canvas.getContext('2d');if(!ctx)throw Error('Image sampling context unavailable');
   ctx.drawImage(image,0,0,q.widthPx,q.heightPx);samples.push({widthPx:q.widthPx,heightPx:q.heightPx,rgba:ctx.getImageData(0,0,q.widthPx,q.heightPx).data});
  }
- check(signal);return {source,before:samples[0],after:samples[1]};
+ check(signal);return samples;
 }
 export async function makeAppearanceBundle(loaded,raw,{signal}={}){
  check(signal);const source=admitAppearanceRequest(raw,loaded.sequence);

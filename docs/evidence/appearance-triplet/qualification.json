@@ -1,0 +1,22 @@
+{
+  "native": {
+    "command": "node --test test/appearance-triplet.test.mjs",
+    "definedTestBodies": 6,
+    "executedFileGroups": 1,
+    "result": "passed",
+    "enumeratedSetCases": 256,
+    "scope": "Authored sample arrays and original source metadata; no PNG decoding in native controls"
+  },
+  "browser": {
+    "groups": 8,
+    "result": "passed",
+    "source": "Same freshly retained original Commons scissors recording; original PNG bytes privately supplied",
+    "caption": "Actual source images are uncalibrated retained image appearance. No contact, action, object identity or physical correspondence inferred.",
+    "url": "https://commons.wikimedia.org/wiki/File:Aerra%27s_Films_of_the_Ordinary_IV_--_Scissors_Cutting_Card_Stock.webm",
+    "author": "Aerra Carnicom / Aerrapc",
+    "license": "CC BY-SA 4.0",
+    "initialFailure": "Isolated checkout still held pre-merge decision-handoff, so first browser stopped at startup before any groups. Restored exact merged module; no product repair.",
+    "privacy": "No original media, PNG/base64, saved bundle or screenshots included."
+  },
+  "scope": "Three directed finite pairwise minima and exact additive join only. Empty join does not exclude higher-residual coherent fits or physical motion."
+}

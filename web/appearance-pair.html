@@ -12,8 +12,8 @@
   <nav><a href="/sequence">← Original sequence</a></nav>
   <header>
     <p class="eyebrow">Skill Translator · Retained image evidence</p>
-    <h1>Compare two retained frames.</h1>
-    <p class="intro">Inspect a bounded image-appearance difference while keeping both original frames, their times and the comparison settings together.</p>
+    <h1>Compare retained frame appearance.</h1>
+    <p class="intro">Inspect a bounded image-appearance difference while keeping the original frames, their times and the comparison settings together.</p>
   </header>
   <section class="card intake" aria-labelledby="open-title">
     <h2 id="open-title">Open original evidence</h2>
@@ -26,8 +26,10 @@
     <h2 id="choose-title">Choose the comparison</h2>
     <fieldset id="settings" disabled>
       <legend class="visually-hidden">Original frame pair and sampling settings</legend>
+      <label>Question<select id="comparison-mode"><option value="pair">Two-frame difference</option><option value="triplet">Three-frame additive composition</option></select></label>
       <div class="choice-grid">
         <label>First original frame<select id="before"></select></label>
+        <label id="middle-choice" hidden>Middle original frame<select id="middle"></select></label>
         <label>Later original frame<select id="after"></select></label>
         <label>Sample width · pixels<input id="width" type="number" min="3" max="160" step="1" value="160" inputmode="numeric"></label>
         <label>Search radius · sampled pixels<input id="radius" type="number" min="1" max="16" step="1" value="16" inputmode="numeric"></label>
@@ -36,6 +38,7 @@
     <p id="sample-details" class="muted">The sample preserves the whole-frame aspect ratio. Settings belong to the measurement.</p>
     <div class="frames">
       <figure><div class="frame"><img id="before-image" alt="" hidden></div><figcaption id="before-caption">First original frame</figcaption></figure>
+      <figure id="middle-figure" hidden><div class="frame"><img id="middle-image" alt="" hidden></div><figcaption id="middle-caption">Middle original frame</figcaption></figure>
       <figure><div class="frame"><img id="after-image" alt="" hidden></div><figcaption id="after-caption">Later original frame</figcaption></figure>
     </div>
     <div class="actions">
@@ -47,7 +50,7 @@
   <div id="result" aria-live="polite"></div>
   <section class="card save-card" aria-labelledby="save-title">
     <h2 id="save-title">Keep the source and question</h2>
-    <p>Save both original frames within their complete sequence, along with the declared settings. Reopening recomputes the comparison from those PNGs.</p>
+    <p>Save all selected original frames within their complete sequence, along with the declared settings. Reopening recomputes the comparison from those PNGs.</p>
     <button id="save" class="secondary" type="button" disabled>Save source and comparison settings</button>
   </section>
   <details class="card provenance">
