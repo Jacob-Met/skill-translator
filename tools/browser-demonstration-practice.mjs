@@ -70,7 +70,7 @@ async function captureTargets(name,height,expectedY,coincident,expectedXByRule={
     leaders:[...svg.querySelectorAll('.target-leader')].map(el=>({x1:+el.getAttribute('x1'),y1:+el.getAttribute('y1'),x2:+el.getAttribute('x2'),y2:+el.getAttribute('y2')})),
     badges:[...svg.querySelectorAll('.target-map-badge')].map(el=>({x:+el.getAttribute('x'),y:+el.getAttribute('y'),width:+el.getAttribute('width'),height:+el.getAttribute('height'),box:box(el)})),
     labelScale:Math.hypot(svg.getScreenCTM().c,svg.getScreenCTM().d),
-    actual:[...svg.querySelectorAll('path')].map(el=>{const b=el.getBBox();return{d:el.getAttribute('d'),box:box(el),center:{x:b.x+b.width/2,y:b.y+b.height/2}};})};
+    actual:[...svg.querySelectorAll('path')].map(el=>{const b=el.getBBox();return{d:el.getAttribute('d'),box:box(el),bbox:{x:b.x,y:b.y,width:b.width,height:b.height},center:{x:b.x+b.width/2,y:b.y+b.height/2}};})};
   });
   assert.equal(drawing.rect.length,1);assert.equal(drawing.actual.length,1,'Actual placement remains drawn');
   assert.equal(drawing.circles.length,coincident?1:expectedRules.length,'Only mathematically identical predictions share a circle');
@@ -80,8 +80,17 @@ async function captureTargets(name,height,expectedY,coincident,expectedXByRule={
   assert.equal(drawing.leaders.length,labels.length,'One explicit leader per annotation');
   assert.equal(drawing.badges.length,labels.length,'Every annotation retains its readable badge');
   const surface=drawing.rect[0];
-  assert(Math.abs(drawing.actual[0].center.x-(surface.x+surface.width*(54.6/273)))<1e-7,'Actual marker retains independently authored X');
-  assert(Math.abs(drawing.actual[0].center.y-(surface.y+surface.height*(30/height)))<1e-7,'Actual marker retains independently authored Y');
+  // getBBox reports rendering geometry with observed float32-scale rounding.
+  // Limit this allowance to bounding-box centres; numeric target/leader checks stay stricter.
+  const viewBox=drawing.viewBox.trim().split(/\s+/).map(Number);
+  assert(viewBox.length===4&&viewBox.every(Number.isFinite)&&viewBox[2]>0&&viewBox[3]>0);
+  const centreRoundoffBound=Math.max(viewBox[2],viewBox[3])*2**-23;
+  const expectedActual={x:surface.x+surface.width*(54.6/273),y:surface.y+surface.height*(30/height)};
+  drawing.actualCentreCheck={expected:expectedActual,observed:drawing.actual[0].center,
+   delta:{x:drawing.actual[0].center.x-expectedActual.x,y:drawing.actual[0].center.y-expectedActual.y},
+   boundSvgUnits:centreRoundoffBound,basis:'viewBox maximum extent times 2^-23; bounding-box rendering roundoff only'};
+  assert(Math.abs(drawing.actualCentreCheck.delta.x)<=centreRoundoffBound,'Actual marker retains independently authored X within rendering roundoff');
+  assert(Math.abs(drawing.actualCentreCheck.delta.y)<=centreRoundoffBound,'Actual marker retains independently authored Y within rendering roundoff');
   for(const label of labels){
    const related=label.text.split(',').map(n=>rows.find(r=>r.number===n));
    const expectedX=surface.x+surface.width*((expectedXByRule[related[0].rule]??54.6)/273);
