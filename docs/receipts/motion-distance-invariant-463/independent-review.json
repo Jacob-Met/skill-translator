@@ -1,0 +1,17 @@
+{
+  "reviewer": "worldlaw",
+  "status": "accepted-source-with-prose-clarification",
+  "files": {
+    "src/motion-distance-invariant.mjs": "f15e7c041730911afb29abfb5b65b780dbdbd1cdeee82ed566ab522f5e8177fd",
+    "web/fixed-motion-worker.mjs": "3062ab59444e4f17f3def7fbab6943f7dcb3831bd0afdb8548927a3bc6cd911e",
+    "web/fixed-motion-view.mjs": "626d5d12564dae973cfc9c9cc6e4c25240ec4a8849399e3af171e267ff9fcd59"
+  },
+  "findings": [
+    "Strict D>0 and D\u00b2>4AB is equivalent to absolute pair-distance gap greater than2r, preserving tangency.",
+    "All selected pair identities remain explicit; passing necessary conditions does not establish a proper motion or joint feasibility.",
+    "New exact-capacity failure is isolated from completed fixed-orientation result; only recognized capacity error receives unavailable status, malformed inputs are not broadly swallowed.",
+    "Worker and view preserve separate fixed and invariant outcomes."
+  ],
+  "requestedProseClarification": "Replace ambiguous No violated pair is inconclusive with Absence of a violated pair is inconclusive. Main visible no-exclusion sentence already states this correctly.",
+  "qualification": "Source-only independent review. Author separately executed admitted1e-310 baseline/fix and browser controls; reviewer did not rerun."
+}

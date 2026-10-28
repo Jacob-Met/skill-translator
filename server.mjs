@@ -8,6 +8,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  '/src/motion-distance-invariant.mjs':['src/motion-distance-invariant.mjs','text/javascript; charset=utf-8'],
 "/target-alternatives":["web/target-alternatives.html", "text/html; charset=utf-8"],
 "/web/target-alternatives.css":["web/target-alternatives.css", "text/css; charset=utf-8"],
 "/src/target-cue-alternatives.mjs":["src/target-cue-alternatives.mjs", "text/javascript; charset=utf-8"],
