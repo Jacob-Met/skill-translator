@@ -1,0 +1,13 @@
+# Explicitly ambiguous target cue interpretations
+
+The separate-target investigation accepts one attributed category per cue. A person who can narrow a retained image to either dry or damp otherwise has to overcommit to one reading or omit the useful partial evidence. This additive consumer accepts two to four alternatives for each of one to three cues, anchored to original target frames and supplied attribution. Fixed readings remain fixed. The user must explicitly declare that all combinations remain possible; correlated alternatives need a different contract and are not inferred here.
+
+Every complete interpretation is admitted and evaluated through the maintained target/question modules. At most64 combinations retain their exact compatible original reference indices, declared labels and evidence states. The consumer shows the union, intersection, excluded rows and unsupported interpretations. An unknown reference cue remains compatible with every reading: intersection membership is not evidence of correctness or likelihood. There are no probabilities, pixel-derived uncertainty estimates or target-action predictions.
+
+The authored dry/damp/wet/unknown control retains all four rows when unrecorded. Dry-or-damp excludes only wet; the unknown row remains compatible under every interpretation. Native controls cover64 combinations against independent row filtering, source/attribution/declaration admission, novel unsupported readings and source-only replay.
+
+Open an existing complete target study, leaving uncertain cues without fixed readings. The consumer shows original target and reference PNGs and source accounts, retains alternative inputs, and exposes all complete interpretation witnesses. Its new versioned portable wrapper includes the original target bundle and raw alternative declarations; derived findings are recomputed. It reuses maintained original-PNG admission and combined byte/pixel budgets. Old readers refuse the new format rather than silently discarding alternatives.
+
+Draft edits and source operations retire findings and fence export. Delayed incoming reads cannot replace newer edits. Recovered original core/test/input; reconstructed presentation differs from frozen56c419 packet. Node test file passed on restored runtime. Current browser validation pending. Historical documentation/browser claims refer to original receiver only.
+
+Fresh qualification: original Node test file passed; eight actual sandboxed Chrome browser groups passed with no page errors. Desktop1440 and narrow390 screenshots visually inspected; complete frames, fieldsets, labels and160-character wrapping pass. Harness-only Playwright adapter repaired download capture before green run. This remains distinct from earlier56c419 candidate.

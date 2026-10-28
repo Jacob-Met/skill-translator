@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {readFile,mkdir,chmod} from 'node:fs/promises';
+import {requireSandbox,installProbe,downloadJSON,uploadJSON,capture,markLiveURLs,assertRevoked,delayedReply,writeReceipt,assertOriginalCustody,assertRetired,sha256} from './appearance-browser-helpers.mjs';
+const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_PATH);
+const url=process.env.APPEARANCE_PAIR_URL,sourcePath=process.env.APPEARANCE_PAIR_SOURCE,out=process.env.APPEARANCE_PAIR_OUTPUT;
+assert.ok(url&&sourcePath&&out,'Declare APPEARANCE_PAIR_URL, APPEARANCE_PAIR_SOURCE and APPEARANCE_PAIR_OUTPUT.');
+const bytes=await readFile(sourcePath),original=JSON.parse(bytes),moments=original.sequence.moments;
+// Explicit fixture indices: fresh capture must independently establish these cases.
+const contained=JSON.parse(process.env.APPEARANCE_CONTAINED_PAIR??'[0,1]');
+const boundary=JSON.parse(process.env.APPEARANCE_BOUNDARY_PAIR??'[2,3]');
+for(const pair of [contained,boundary])assert.ok(pair.length===2&&pair.every(i=>Number.isInteger(i)&&moments[i])&&pair[0]<pair[1]);
+await mkdir(out,{recursive:true,mode:0o700});await chmod(out,0o700);
+const browser=await chromium.launch({executablePath:process.env.CHROME_BINARY,headless:true,chromiumSandbox:true});
+const groups=[],errors=[],captures=[],expectedFailures=[];let page,sandbox;
+const state=async value=>page.waitForFunction(value=>document.querySelector('#status')?.dataset.state===value,value);
+const choose=async pair=>{await page.selectOption('#before',moments[pair[0]].id);await page.selectOption('#after',moments[pair[1]].id);};
+const compute=async()=>{await page.click('#compute');await state('complete');};
+const readState=()=>page.locator('#result .appearance-pair-result').getAttribute('data-state');
+try{
+ sandbox=await requireSandbox(browser);page=await browser.newPage({viewport:{width:1440,height:900}});await installProbe(page);
+ page.on('pageerror',e=>errors.push(String(e)));
+ await page.goto(url);await page.setInputFiles('#source-file',sourcePath);await state('ready');
+ await choose(contained);await page.fill('#width','160');await page.fill('#radius','16');await compute();assert.equal(await readState(),'unique');
+ const details=page.locator('#result details.appearance-pair-source-details');assert.equal(await details.evaluate(e=>e.open),false);await details.locator('summary').click();const visibleSource=await details.innerText();const first=await downloadJSON(page,'#save',out,'appearance-pair-source.json');assertOriginalCustody(first.value,original);
+ assert.deepEqual(first.value.request.frames.map(f=>f.momentId),contained.map(i=>moments[i].id));
+ for(const f of first.value.request.frames){assert.ok(visibleSource.includes(f.sha256));assert.ok(visibleSource.includes(String(f.presentedSeconds)));}
+ await details.locator('summary').click();assert.equal(await details.evaluate(e=>e.open),false);const initialText=await page.locator('#result').innerText();
+ groups.push('ordinary source upload and contained pair preserve original bytes, identities, times and settings');
+ captures.push(await capture(page,out,'appearance-pair1440.png',1440));
+ await page.fill('#radius','4');await assertRetired(page,'#save','#result');await compute();
+ const changed=await downloadJSON(page,'#save',out,'appearance-pair-radius4.json');assertOriginalCustody(changed.value,original);assert.equal(changed.value.request.radius,4);assert.equal(changed.value.request.support.left,4);
+ await page.fill('#width','144');await assertRetired(page,'#save','#result');await page.fill('#width','160');
+ await choose(boundary);await page.fill('#radius','16');await compute();assert.equal(await readState(),'search-boundary');captures.push(await capture(page,out,'appearance-pair-boundary1440.png',1440));
+ groups.push('settings edits retire results and a second original pair preserves search-boundary outcome');
+ await page.reload();await uploadJSON(page,'#source-file',{...first.value,value:999,comparison:{meanAdjustedChange:-1}});await state('complete');
+ assert.equal(await page.locator('#result').innerText(),initialText);
+ const reopened=await downloadJSON(page,'#save',out,'appearance-pair-reopened.json');assert.deepEqual(reopened.value,first.value);
+ groups.push('fresh-page canonical source reopening ignores forged answers and recomputes exact source-bound result');
+ await delayedReply(page,'#compute');await page.click('#cancel');await state('cancelled');await page.waitForTimeout(900);await assertRetired(page,'#save','#result');
+ assert.ok(await page.evaluate(()=>window.__pairProbe.workers.at(-1).terminated));
+ groups.push('cancel retires a real delayed worker response without restoring output');
+ await delayedReply(page,'#compute');const oldURLs=await markLiveURLs(page);
+ await page.setInputFiles('#source-file',sourcePath);await state('ready');await assertRevoked(page,oldURLs);await page.waitForTimeout(900);await assertRetired(page,'#save','#result');
+ assert.ok(await page.evaluate(()=>window.__pairProbe.workers.at(-1).terminated));
+ for(const id of ['before-image','after-image'])await page.waitForFunction(id=>{const img=document.getElementById(id);return img.complete&&img.naturalWidth>0;},id);
+ groups.push('new source retires old worker and original object URLs; late output cannot replace new input');
+ await choose(contained);await page.fill('#width','160');await page.fill('#radius','16');
+ let aborted=false;const worker='**/web/appearance-pair-worker.mjs';await page.route(worker,route=>{if(!aborted){aborted=true;expectedFailures.push(route.request().url());return route.abort('failed');}return route.continue();});
+ await page.click('#compute');await state('error');await assertRetired(page,'#save','#result');assert.ok((await page.locator('#status').innerText()).trim().length>10);
+ await page.unroute(worker);await compute();assert.equal(await readState(),'unique');assert.equal(expectedFailures.length,1);
+ groups.push('deliberate worker-load failure retires export and permits successful retry');
+ captures.push(await capture(page,out,'appearance-pair390.png',390));await page.focus('#radius');await page.keyboard.press('ArrowDown');await assertRetired(page,'#save','#result');
+ await page.goto(new URL('/sequence',url).href);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));const entry=page.locator('nav a[href="/appearance-pair"]');await entry.focus();await page.keyboard.press('Enter');await page.waitForURL('**/appearance-pair');assert.ok(await page.locator('#source-file').isVisible());
+ groups.push('390px layout fits, keyboard setting edit retires findings and sequence navigation opens pair page');
+ assert.deepEqual(errors,[]);await writeReceipt(out,{status:'passed',groups,errors,sandbox,browser:await browser.version(),sourceSHA256:sha256(bytes),contained,boundary,captures,expectedFailures,scope:'Actual ordinary image-pair UI on explicitly supplied retained source. No cross-browser bit-identity, physical correspondence or action inference. Private image payloads excluded from receipt.'});
+ console.log(JSON.stringify({passed:groups.length,out}));
+}catch(error){await writeReceipt(out,{status:'failed',groups,errors,error:String(error),sandbox,captures,sourceSHA256:sha256(bytes)});throw error;}finally{await browser.close();}
