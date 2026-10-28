@@ -1,0 +1,156 @@
+{
+  "schema": "hamon-skill-joint-workpiece-conflicts-review/v1",
+  "issue": 450,
+  "recordedAt": "2026-10-28T19:06:12.776535+00:00",
+  "decision": "accepted-scoped-source-and-actual-visual-review",
+  "coreReview": {
+    "reviewer": "worldlaw",
+    "reviewedAt": "2026-10-28T18:46:03.658262+00:00",
+    "decision": "accepted-scoped-core-review",
+    "files": {
+      "src/joint-challenge-conflicts.mjs": "40e204644d7d7ea3c2d5d1ed045583ff76385e6e30312658f22119f1306086b8",
+      "test/joint-challenge-conflicts.test.mjs": "449e4b2efe7c784142e9afe726663f5f143f956c5d35866c4238991813f4d6ee",
+      "test/support/joint-challenge-conflict-fixtures.mjs": "a9e3a9eac6cbaf37823829b73a8bbfdfde1077ea89360a36c594fa53f8ee3ef8",
+      "src/joint-challenge.mjs": "dd3516be427f3169449a2bf0aa62ffe7785d4186ec3a817c1c9fb48029760f5f",
+      "src/joint-calibration.mjs": "39bf81c7bbb7d10c0e8aeadc40baa6237ce3e7110809f40b04c41d867154b73d",
+      "src/evidence.mjs": "4b38bb0babc7a8798919d80edeb732a92cec00d5c91ef97af1d9bd12206d53b0"
+    },
+    "findings": [],
+    "reasoning": [
+      "Each subset retains one existential global reading and independently selects one fixed surviving rule per mark; product then sum implements this quantifier correctly.",
+      "Rejection masks contain only maintained compatible===false residuals, so missing/imprecise outcomes never eliminate candidates. Source anchors and trial admission are reconstructed by maintained analysis.",
+      "All 2^n subsets including empty baseline are enumerated, n<=6. Monotonic conjunction makes positive support at every single removal sufficient for inclusion-minimality; all minimal groups of differing cardinalities are retained.",
+      "Every eliminated reading has at least one blocked mark whose every original candidate has a qualified rejecting observation within the subset. Witnesses retain those actual IDs.",
+      "At maximum 25 readings, 12 marks and 5 rules, count is at most 6,103,515,625, safely exactly representable as a JavaScript integer. No Cartesian product is enumerated in production.",
+      "Independent test oracle derives rectangular predictions from original source points and compares every proper subset, separately from production residual masks."
+    ],
+    "test": {
+      "command": "node --test --test-isolation=none test/joint-challenge-conflicts.test.mjs",
+      "exitCode": 0,
+      "passed": 9,
+      "failed": 0,
+      "durationMs": 2396.554857,
+      "capacityCaseMs": 2246.142424
+    },
+    "limits": [
+      "Core and focused analytic controls only; no consumer/browser acceptance in this review.",
+      "Finite declared-family workpiece-group conflicts do not establish faulty observations, causal attribution, or probabilities."
+    ]
+  },
+  "consumerReview": {
+    "decision": "accepted-scoped-consumer-source-review",
+    "files": {
+      "web/joint-challenge.mjs": "9c756e7c020f393aad0c7de445a782f02164fa62f8788ec8ec2028a9a262ce0b",
+      "web/joint-challenge.css": "7510aef5615718170068288c3315c0f0c413872c8674c02e458d895a9bc4873b",
+      "server.mjs": "47114f029246f81c65588b270282ed617139b90aebc9642015f02d4d7fbb846b",
+      "tools/browser-joint-challenge.mjs": "8d794d6dc445cdbd6e612cb9a674c4dea243632cbf27feadc03731418e312f66"
+    },
+    "blockers": [],
+    "findings": [
+      "Compared all four files against source-bundle.json baseline. Additive route only; maintained exports and import admission unchanged.",
+      "Conflict labels correctly qualify whole-workpiece minimality, currently qualified outcomes, and no faulty-measurement/removal recommendation.",
+      "Lazy disclosure retains original outcome IDs and all reading/rule eliminations. Details are textContent-created, wrapping is scoped, and native details/summary remains keyboard operable.",
+      "Disclosure opening invokes touch/onActivity to invalidate pending child and parent reads; frozen plan and outcomes remain unchanged on training edits.",
+      "Browser additions meaningfully exercise different-sized groups, source-only fresh reopen, forged-cache recomputation, failed-source retention, keyboard/delayed-parent race, viewport captures and route privacy."
+    ],
+    "qualification": "No browser execution or pixel acceptance asserted by this source review."
+  },
+  "receiving": {
+    "operationId": "hamon-de5a-skill450-current-receive-20261028-111",
+    "sha256": "fce7d4f70263e2324457ffc0402c533da0b48f079df91362596863232317606c",
+    "native": {
+      "tests": 44,
+      "pass": 44,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "browserGroups": 9,
+    "exactHttpSources": 10,
+    "sourceFileCount": 99
+  },
+  "actualVisualReview": {
+    "reviewer": "root",
+    "decision": "accepted",
+    "screenshots": [
+      {
+        "file": "/home/ubuntu/hamon-work/hamon-de5a-20261028/skill-conflicts-450-v1-106/receipts/joint-challenge-conflicts-browser/conflicts-1440-overview.png",
+        "sha256": "eb86c5d6c786ba4c1b147ac63dafb8d525bf5350ba1fd51b479719a612825b64",
+        "bytes": 104967,
+        "width": 1440,
+        "kind": "conflict-overview",
+        "localFile": "conflicts-1440-overview.png"
+      },
+      {
+        "file": "/home/ubuntu/hamon-work/hamon-de5a-20261028/skill-conflicts-450-v1-106/receipts/joint-challenge-conflicts-browser/conflicts-390-details.png",
+        "sha256": "2ae398afa422056298b813097c423cfeb468b605b60b46c3c4015bd83ba66a79",
+        "bytes": 96614,
+        "width": 390,
+        "kind": "conflict-details",
+        "localFile": "conflicts-390-details.png"
+      }
+    ],
+    "findings": [
+      "The desktop overview presents both inclusion-minimal groups of different sizes together and retains original outcome cards below them.",
+      "The 390-pixel open disclosure wraps original identities, source reading and rejected-rule witnesses inside the viewport. Its keyboard focus indicator is visible. Vertical continuation uses normal document scrolling.",
+      "The actual browser course separately checked horizontal bounds and keyboard behavior at 1440, 390 and 320 pixels. Root pixel inspection is limited to the two listed captures."
+    ],
+    "unchangedVisualSourcesInCurrentIntegration": {
+      "src/joint-challenge-conflicts.mjs": "40e204644d7d7ea3c2d5d1ed045583ff76385e6e30312658f22119f1306086b8",
+      "src/joint-challenge.mjs": "dd3516be427f3169449a2bf0aa62ffe7785d4186ec3a817c1c9fb48029760f5f",
+      "web/joint-challenge.mjs": "9c756e7c020f393aad0c7de445a782f02164fa62f8788ec8ec2028a9a262ce0b",
+      "web/joint-challenge.css": "7510aef5615718170068288c3315c0f0c413872c8674c02e458d895a9bc4873b",
+      "web/joint-calibration.mjs": "323fd2e13978a1641c4ef79069e95293a6cab3f8cd101131145246042c5a796b",
+      "web/joint-calibration.html": "18c7052de922d80723645aa98604c146580b4da30963a98b036e40c144a8e4af",
+      "web/joint-calibration.css": "bc8ee8eede90256fef4e144e9b3e3290c06f2a89698112d3d73292ff2f6661d3"
+    }
+  },
+  "postReceivingChanges": [
+    "docs/JOINT_WORKPIECE_CONFLICTS.md: final actual current-integration evidence description",
+    "docs/receipts/joint-workpiece-conflicts-450/review.json: current integration/composition review and visual-source identity",
+    "docs/receipts/joint-workpiece-conflicts-450/current-integration.json: exact current receiving record",
+    "docs/receipts/joint-workpiece-conflicts-450/native-current.tap: exact current native stdout"
+  ],
+  "limits": [
+    "The first local default Node 24 invocation exposed only three file-level wrappers; it is not used as evidence of individual test-case counts. The explicit no-isolation local run reported 36 named core cases; the actual Node 22 receiving run reported 44 named cases including maintained server controls.",
+    "No physical observation, probability, faulty-measurement attribution or certified interval arithmetic is claimed."
+  ],
+  "initialReceiving": {
+    "operationId": "hamon-de5a-skill450-receive-20261028-106",
+    "sha256": "d2895ea2dd6e08b803c2c4e91ffadd7840f7b33b38308715ea5cafd7b5bd5aba",
+    "native": {
+      "tests": 44,
+      "pass": 44,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "browserGroups": 9,
+    "exactHttpSources": 6,
+    "sourceFileCount": 92
+  },
+  "compositionReview": {
+    "status": "accepted-source-composition",
+    "base": "992feca83b9186ceecb54edad1fc9cbdf80b7a70",
+    "baseTree": "d92e8996bc7fe7120e8c16dbf410939fc93e51b3",
+    "candidatePathsVerified": 12,
+    "dependencyPathsVerified": 87,
+    "priorDependenciesUnchanged": 83,
+    "newResourcesVerified": 4,
+    "serverWithoutSingleCandidateRouteMatchesExactMain": true,
+    "unchangedPriorCandidateFiles": [
+      "docs/JOINT_CHALLENGE.md",
+      "src/joint-challenge-conflicts.mjs",
+      "test/joint-challenge-conflicts.test.mjs",
+      "test/support/joint-challenge-conflict-fixtures.mjs",
+      "tools/browser-joint-challenge.mjs",
+      "web/joint-challenge.css",
+      "web/joint-challenge.mjs"
+    ],
+    "preservation": "Only12explicit candidate paths are submitted; all other base tree entries must be retained by publication. Server preserves all current native/security handlers and other routes byte-for-byte.",
+    "limitation": "Evidence prose/files still describe106. Finalize them against111 before publication; no new run claimed by this source review."
+  },
+  "finalizedAt": "2026-10-28T19:15:37.629372+00:00"
+}

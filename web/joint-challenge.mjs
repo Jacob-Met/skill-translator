@@ -1,4 +1,5 @@
 import {freezeJointChallengePlan,createJointChallengeResult,analyzeJointChallenge,exportJointChallengeStudy,importJointChallengeStudy,MAX_JOINT_CHALLENGE_BYTES} from '/src/joint-challenge.mjs';
+import {analyzeJointChallengeConflicts} from '/src/joint-challenge-conflicts.mjs';
 const names={fraction:'Proportional',left:'Left clearance',right:'Right clearance',top:'Top clearance',bottom:'Bottom clearance'};
 const titles={'awaiting-results':'Frozen — awaiting outcomes','none-compatible':'No shared explanation survives','incomplete':'More outcomes are needed','insufficient-precision':'Reported precision is insufficient','one-joint-explanation':'One offered joint explanation remains','unresolved':'Several offered explanations remain'};
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
@@ -39,6 +40,7 @@ export function mountJointChallenge({root,getInvestigation,restoreInvestigation,
  const stale=el('p',undefined,'jc-stale');stale.id='jc-stale';stale.hidden=true;root.append(stale);
  const summary=el('p',undefined,'jc-summary');summary.id='jc-summary';summary.setAttribute('role','status');summary.setAttribute('aria-live','polite');root.append(summary);
  const count=el('p',undefined,'small');count.id='jc-counts';const switching=el('p',undefined,'jc-stale');switching.id='jc-switching';switching.hidden=true;root.append(count,switching);
+ const conflicts=el('section',undefined,'jc-conflicts');conflicts.id='jc-conflicts';conflicts.setAttribute('aria-labelledby','jc-conflicts-heading');root.append(conflicts);
  const slots=el('div',undefined,'jc-slots');slots.id='jc-slots';root.append(slots,el('h3','Retained predictions and outcome residuals'));
  const readings=el('div',undefined,'jc-readings');readings.id='jc-readings';root.append(readings,el('p','Finite explanation counts are not probabilities. Acquisition origin and prospective timing are reported declarations, not authenticated measurements. Conclusions apply to the retained source readings and rules; they do not establish expert intent or physical safety.','small boundary'));
  function invalidatePending(){epoch++;}
@@ -61,11 +63,57 @@ export function mountJointChallenge({root,getInvestigation,restoreInvestigation,
  function options(select,items){const old=select.value;select.replaceChildren(...items.map(({id,label})=>{const o=el('option',label);o.value=id;return o;}));if(items.some(x=>x.id===old))select.value=old;}
  function sheetHint(){const t=plan?.trials.find(t=>t.id===q.trial.value);sheet.textContent=t?fmt(t.widthMm)+' × '+fmt(t.heightMm)+' mm · planned radius at most '+fmt(t.uncertaintyMm)+' mm. Saving replaces an existing outcome in this exact slot.':'Freeze a plan to choose its workpieces.';}
  function setOutcomeDraft(trialId,landmarkId,focus=true){q.trial.value=trialId;q.mark.value=landmarkId;const r=results.find(r=>r.trialId===trialId&&r.observation.landmarkId===landmarkId)?.observation;q['outcome-label'].value=r?.label??'';q.x.value=r?.xMm??'';q.y.value=r?.yMm??'';q.radius.value=r?.uncertaintyMm??plan.trials.find(t=>t.id===trialId).uncertaintyMm;q.class.value=r?.evidenceClass??'reported-measurement';q.collected.checked=false;sheetHint();if(focus)q.x.focus();}
+ function renderConflicts(report){
+  const trialNames=new Map(plan.trials.map(trial=>[trial.id,trial.label]));
+  const markNames=new Map(plan.investigation.source.landmarks.map(mark=>[mark.id,mark.label]));
+  const outcomesById=new Map(results.map(result=>[result.observation.id,result]));
+  const trialName=id=>trialNames.get(id)||id,markName=id=>markNames.get(id)||id;
+  const outcomeName=id=>{const result=outcomesById.get(id);return result?result.observation.label+' ['+id+'] on '+trialName(result.trialId):id;};
+  conflicts.hidden=false;conflicts.dataset.groupCount=String(report.minimalGroups.length);
+  conflicts.dataset.state=report.minimalGroups.length?'contradictory':report.analysis.qualifiedCount?'no-conflicts':'untested';
+  const heading=el('h3','Contradictory workpiece groups');heading.id='jc-conflicts-heading';
+  const summary=el('p');summary.id='jc-conflict-summary';
+  summary.textContent=report.minimalGroups.length
+   ?report.minimalGroups.length+' inclusion-minimal '+(report.minimalGroups.length===1?'group':'groups')+' found. Each group contradicts the frozen joint explanations; omitting any one of its workpieces restores an original explanation. All alternatives are shown, including different sizes.'
+   :report.analysis.qualifiedCount?'No workpiece group contradicts all frozen joint explanations among the qualified outcomes currently present.':'No qualified outcomes yet. The workpiece diagnostic retains every original explanation.';
+  const scope=el('p','All '+report.evaluatedNonemptySubsets+' nonempty subsets of the planned workpieces were checked using currently qualified outcomes. Each workpiece contains all its supplied selected-mark outcomes; missing and imprecise slots remain visible.','small');
+  const list=el('div',undefined,'jc-conflict-groups');
+  for(const [index,group]of report.minimalGroups.entries()){
+   const detail=el('details',undefined,'jc-conflict-group');detail.dataset.trials=group.trialIds.join(',');
+   detail.append(el('summary','Group '+(index+1)+' · '+group.trialIds.map(trialName).join(' + ')));
+   detail.append(el('p',group.trialIds.length+' workpiece'+(group.trialIds.length===1?'':'s')+' · '+group.qualifiedObservationIds.length+' qualified outcome'+(group.qualifiedObservationIds.length===1?'':'s')+' · '+group.missingSlots.length+' missing · '+group.impreciseObservationIds.length+' above planned radius','small'));
+   let populated=false;detail.ontoggle=()=>{
+    if(!detail.open||!detail.isConnected)return;touch();if(populated)return;populated=true;
+    const evidence=el('section');evidence.append(el('h4','Original outcomes in this group'));
+    const rows=el('ul');
+    for(const id of group.qualifiedObservationIds)rows.append(el('li',outcomeName(id)+' · qualified'));
+    for(const id of group.impreciseObservationIds)rows.append(el('li',outcomeName(id)+' · above planned radius; cannot eliminate'));
+    for(const slot of group.missingSlots)rows.append(el('li',markName(slot.landmarkId)+' on '+trialName(slot.trialId)+' · missing'));
+    evidence.append(rows);detail.append(evidence);
+    const failures=el('section');failures.append(el('h4','Why no original source reading survives'));
+    for(const reading of group.readingEliminations){
+     const box=el('div',undefined,'jc-conflict-reading');box.append(el('strong',reading.readingLabel+' ['+reading.readingId+']'));
+     for(const mark of reading.blockedMarks){
+      box.append(el('p',markName(mark.landmarkId)+': every originally admitted rule is contradicted within this group.','small'));
+      const rules=el('ul');
+      for(const rule of mark.rules)rules.append(el('li',(names[rule.rule]||rule.rule)+' · rejected by '+rule.rejectingObservationIds.map(outcomeName).join('; ')));
+      box.append(rules);
+     }failures.append(box);
+    }detail.append(failures);
+    const necessity=el('section');necessity.append(el('h4','Why each workpiece is necessary to this group'));
+    const removals=el('ul');
+    for(const removal of group.singleRemovalSupport)removals.append(el('li','Within this group, omitting '+trialName(removal.removedTrialId)+' leaves '+removal.combinationCount.toLocaleString('en-US')+' original rule combination'+(removal.combinationCount===1?'':'s')+' across '+removal.viableReadingIds.length+' source reading'+(removal.viableReadingIds.length===1?'':'s')+'.'));
+    necessity.append(removals,el('p','This subset comparison does not change the full course or any retained outcome.','small'));detail.append(necessity);
+   };list.append(detail);
+  }
+  conflicts.replaceChildren(heading,summary,scope,list,el('p','Minimality is over whole workpieces, not individual observations. These groups do not identify faulty measurements or recommend removing evidence.','small boundary'));
+ }
  function render(){
   q.planFields.disabled=!getInvestigation();q.resultFields.disabled=!plan;q.export.disabled=!plan;q.freeze.textContent=plan?'Freeze a replacement plan':'Freeze predictions';
   root.dataset.planId=plan?.id??'';stale.hidden=true;switching.hidden=true;
-  if(!plan){summary.dataset.status='no-plan';summary.textContent='No frozen challenge yet.';count.textContent='The current shared-source investigation supplies the training. Open a complete challenge to restore its own training and outcomes.';slots.replaceChildren();readings.replaceChildren();sheetHint();return;}
-  const a=analyzeJointChallenge(plan,results),markName=id=>plan.investigation.source.landmarks.find(m=>m.id===id)?.label||id;
+  if(!plan){summary.dataset.status='no-plan';summary.textContent='No frozen challenge yet.';count.textContent='The current shared-source investigation supplies the training. Open a complete challenge to restore its own training and outcomes.';slots.replaceChildren();readings.replaceChildren();conflicts.hidden=true;conflicts.replaceChildren();sheetHint();return;}
+  const diagnostic=analyzeJointChallengeConflicts(plan,results),a=diagnostic.analysis,markName=id=>plan.investigation.source.landmarks.find(m=>m.id===id)?.label||id;
+  renderConflicts(diagnostic);
   stale.hidden=JSON.stringify(getInvestigation())===JSON.stringify(plan.investigation);
   stale.textContent='Training now differs from this frozen plan. These outcomes still test the retained original investigation. Opening this challenge restores that investigation; it never refits to the edited training.';
   summary.dataset.status=a.status;summary.textContent=titles[a.status];

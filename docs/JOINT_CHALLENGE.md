@@ -40,6 +40,19 @@ A missing result also cannot eliminate an explanation. Qualified evidence that c
 
 The exact order of status decisions is part of the scientific contract: known qualified contradiction takes precedence over collection or precision incompleteness.
 
+## Inspect contradictory workpiece groups
+
+The same consumer can inspect every inclusion-minimal group of future workpieces
+that contradicts the frozen joint explanations. All supplied mark outcomes stay
+with their workpiece. The disclosure retains original observation identities,
+shows how each source reading loses its rules, and explains why every member is
+necessary to that group. Alternative groups of different sizes remain visible.
+
+The complete source account and verdict remain intact. These groups do not
+identify faulty measurements or recommend removing evidence. See
+[Contradictory workpiece groups](JOINT_WORKPIECE_CONFLICTS.md) for the bounded
+enumeration, authored example, source custody and verification commands.
+
 ## Source custody and reopening
 
 A plan is a frozen snapshot. Editing the parent investigation does not silently change its source, training or predictions. The interface marks the old plan as stale relative to the edited investigation; a new challenge must be planned explicitly.
