@@ -1,0 +1,18 @@
+{
+  "status": "accepted",
+  "scope": "Supplemental canonical context comparison only; source review, no additional execution",
+  "sources": {
+    "src/joint-challenge-sequence.mjs": "9760e43d9bb87a61c1e57863e73fc1ba3b2d060635c677ec857e50e89165741e",
+    "web/joint-challenge-sequence.mjs": "16d39b1850584fa4d9de1586aa5612439d527dbc96cc9db77d4978f6f23b47c2",
+    "test/joint-challenge-sequence.test.mjs": "9e1a3d547a6e631f85e25eebfd3d3506596bb8697ad20d91db5b420440fbf8b3"
+  },
+  "findings": [
+    "Existing canonical comparison preserves array order and all values while removing object key-order sensitivity.",
+    "Already-admitted records remain the explicit API precondition; helper does not replace admission.",
+    "UI uses helper solely for retained-parent context notice; changed challenge/training and absent context remain different.",
+    "Regression actually establishes differing JSON serialization order, then checks unchanged context, changed challenge label, changed training label and missing context."
+  ],
+  "limitations": [
+    "Full browser receiving remains independently required; prior reviews retained."
+  ]
+}

@@ -94,3 +94,7 @@ Run the browser course against an already running maintained server, supplying t
     BASE_URL=http://127.0.0.1:8787 PLAYWRIGHT_PATH=/absolute/path/to/playwright node tools/browser-joint-challenge.mjs
 
 This receiving course uses Linux Chromium at /usr/bin/google-chrome and checks active namespace, PID, network and seccomp sandboxing. Authored controls are explicitly labeled. [The receiving history](receipts/joint-challenge-441/history.json) preserves earlier failed and incomplete harness attempts.
+
+## Continue from reported outcomes
+
+The [joint challenge sequence](JOINT_CHALLENGE_SEQUENCE.md) retains a complete challenge as its initial course and freezes later workpieces from the original explanations still compatible with its reported outcomes. Each later round binds the complete prior source, preserves earlier predictions and keeps actual outcomes separate from original training. Its separate format and consumer preserve the v1 challenge behavior described above.
