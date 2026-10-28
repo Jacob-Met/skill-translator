@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "checks": [
+    "actual authored recording decoded, explicitly previewed/played, then kept as ordinary File",
+    "failed replacement admission preserves prior kept File and pending preview;390px does not overflow",
+    "discard ends owned real media tracks and preserves prior accepted File",
+    "permission-adapter refusal visible; no real microphone permission requested",
+    "real encoded chunks exceeding byte limit retire capture without preview",
+    "real decoded duration above explicit limit refused independently of capture elapsed"
+  ],
+  "browser": "156.0.8078.73",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "sourceHashes": {
+    "recorder.mjs": "ed779143c86a36fc22cfddb6b3142f3fd3d69b6eb70f07d2496474d4b801da07",
+    "recorder-browser.mjs": "8851f80bc9ae031d09bd23b3d96f1394be716eadbd84d3c699e3bbade376e613"
+  },
+  "file": {
+    "sha256": "112b029947d374c77d2f5d2194096d436f1ce965adc2e87275136b8900886fa9",
+    "bytes": 7904,
+    "type": "audio/webm;codecs=opus",
+    "elapsedMilliseconds": 499,
+    "durationSeconds": 0.4799773242630386
+  },
+  "errors": [],
+  "limits": "Authored WebAudio source; real MediaRecorder/browser decoding and controls only. No microphone/device permission, speech identity, notebook attachment/source replay or physical learning claim."
+}

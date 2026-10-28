@@ -1,0 +1,17 @@
+{
+  "reviewer": "second-ground",
+  "finding": "No source/lifecycle/admission blocker found",
+  "hashes": {
+    "recorder.mjs": "ed779143c86a36fc22cfddb6b3142f3fd3d69b6eb70f07d2496474d4b801da07",
+    "recorder-browser.mjs": "8851f80bc9ae031d09bd23b3d96f1394be716eadbd84d3c699e3bbade376e613",
+    "recorder.test.mjs": "afb8ee75f47b19be24c54825193c14f84f3a50a99ea8d430ff5d66cdaefcd3ea"
+  },
+  "execution": "Existing eight native test bodies rerun successfully; no browser or microphone execution by reviewer",
+  "review": [
+    "Stream requested only on explicit start; late stream stopped after revision change; active tracks stopped on refusal/cancel/disposal/encoder failure.",
+    "Complete bytes bounded before preview; separately decoded finite positive duration bounded, not inferred from capture timer.",
+    "Pending decoder/admission completion fenced; prior accepted File retained through refusal/discard. Owner onKeep receives abort signal and isCurrent guard and must honor these before external adoption.",
+    "Preview object URLs revoked on replacement/clear; audio decoder context closes in finally.",
+    "Authored adapter tests are lifecycle controls, not microphone/device qualification; timer is stop target rather than duration guarantee."
+  ]
+}
