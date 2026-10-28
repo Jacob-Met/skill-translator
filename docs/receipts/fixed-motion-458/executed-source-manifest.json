@@ -1,0 +1,15 @@
+{
+  "src/common-disk-certificate.mjs": "64475b9f984e6f870222703c75da577fd8c046edb20c1f5de9a6f3a3e5b312c8",
+  "src/context-disk-support.mjs": "4f4c837d07176ce77f8db242603e341f3005c5ba5a2950baa66e6f16c5db8799",
+  "src/fixed-motion.mjs": "ba7b43f539cdd07d17324d51c9337cb588f7ce90801398ae7e4a2ab4ace2a411",
+  "web/fixed-motion-view.mjs": "ed3d139402df1c28b9396085430fb33d1e31cc8b9d07873b79f67ac1b022cdd5",
+  "web/fixed-motion-worker.mjs": "9cab7e2f5f6a337f212b468a49bd41d1ecaa52c7ce71e2a67f96b5f991553533",
+  "web/relationship-discovery.mjs": "ef98fe7d25aeb7383c4b25353f512007527193ebfdab482d1ce6cfccc4f56d33",
+  "web/relationship-discovery.html": "802b97f087e9f53137f4e7f93a1b2a32b9b286e72f7a862b7588b29f7b505369",
+  "web/relationship-discovery.css": "cebe7784423ae43592ae58905a60776221d87d0e4b1cbe00fb2c889334929397",
+  "server.mjs": "20cc26ea6eb0a23a0d63a3db21273847b8ddb3365b14643dcbcc482406dc860b",
+  "test/fixed-motion.test.mjs": "f77c9b444c3778479b0c77a228fc9f8be28cebd412fdb3dccc3ccd7b4ed7274b",
+  "tools/browser-fixed-motion.mjs": "691f57d105dcd71da4e6279029f977224b099c78e5028ab0a5638c677fdbf9ac",
+  "docs/FIXED_MOTION_INQUIRY.md": "ccbf10afce95d10f5f382b8494762914eb26b2a9c849640e02519ff728c96010",
+  "tools/browser-fixed-motion-source-fence.mjs": "e87502cb2f3ab53d7860dd70a78bd00dd1e1c3e81f462fcc210caa1b0f51f660"
+}

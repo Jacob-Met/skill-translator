@@ -1,3 +1,5 @@
+import {createFixedMotionView,FIXED_MOTION_FORMAT} from '/web/fixed-motion-view.mjs';
+import {inspectFixedMotion} from '/src/fixed-motion.mjs';
 import {renderSharedMotionPractice} from '/web/shared-motion-practice-view.mjs';
 import {createSharedMotionPractice,importSharedMotionPractice,assessSharedMotionPractice} from '/src/shared-motion-practice.mjs';
 import {createPractice} from '/src/practice.mjs';
@@ -12,7 +14,8 @@ import {derive} from '/src/geometry.mjs';
 const $=id=>document.getElementById(id);let study=null,result=null,revision=0,sequenceEvidence=null,pending=null,motionPractice=null,motionPracticeReport=null;
 const MOTION_PRACTICE_BUNDLE_FORMAT='skill-translator.shared-motion-practice-bundle/v1';
 const MAX_MOTION_PRACTICE_BYTES=MAX_DISCOVERY_BUNDLE_BYTES+256*1024+8192;
-function invalidate(){pending?.abort();pending=null;return ++revision;}
+const fixedMotion=createFixedMotionView($('fixedMotionHost'));
+function invalidate(){fixedMotion.invalidate();pending?.abort();pending=null;return ++revision;}
 const ns='http://www.w3.org/2000/svg';
 function node(tag,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;}
 function svg(tag,attrs){const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);return e;}
@@ -23,6 +26,7 @@ function accept(raw,evidence=null,comparison=null){
  const assessment=record?assessSharedMotionPractice(record):null,previous=sequenceEvidence;
  study=checked;result=computed;sequenceEvidence=evidence;motionPractice=record;motionPracticeReport=assessment;
  invalidate();$('deviation').value=study.deviationMm;$('save').disabled=false;$('motionPracticeStart').disabled=false;$('error').textContent='';$('transfer').textContent='';
+ fixedMotion.update(study,async()=>sequenceEvidence?JSON.parse(await (await makeSequenceDiscoveryBundle(sequenceEvidence.account,sequenceEvidence.assets)).text()):importRelationshipDiscovery(study));
  render();renderSharedMotionGroups(study,sequenceEvidence);renderSharedMotionSpans(study,sequenceEvidence);renderSharedMotionPractice(motionPractice,motionPracticeReport);
  if(previous&&previous.assets!==evidence?.assets)releaseSequenceAssets(previous.assets);
 }
@@ -68,17 +72,19 @@ $('reopen').onchange=async event=>{
  try{
   if(file.size>MAX_MOTION_PRACTICE_BYTES)throw Error('File exceeds the complete original-source and practice account limit.');
   const raw=JSON.parse(await file.text());if(token!==revision)return;
-  const savedPractice=raw?.format===MOTION_PRACTICE_BUNDLE_FORMAT;
-  if(!savedPractice&&file.size>MAX_DISCOVERY_BUNDLE_BYTES)throw Error('File exceeds the complete original-frame account limit.');
+  const savedPractice=raw?.format===MOTION_PRACTICE_BUNDLE_FORMAT,savedFixed=raw?.format===FIXED_MOTION_FORMAT;
+  if(!savedPractice&&!savedFixed&&file.size>MAX_DISCOVERY_BUNDLE_BYTES)throw Error('File exceeds the complete original-frame account limit.');
   if(savedPractice&&(!raw.comparison||typeof raw.comparison!=='object'))throw Error('A saved comparison needs its original practice inputs.');
-  const original=savedPractice?raw.discovery:raw,comparison=savedPractice?raw.comparison:null;
+  const original=savedPractice||savedFixed?raw.discovery:raw,comparison=savedPractice?raw.comparison:null;
   if(original?.format===SEQUENCE_DISCOVERY_BUNDLE_FORMAT){
    pending=new AbortController();
    received=await readSequenceDiscoveryBundle(new Blob([JSON.stringify(original)],{type:'application/json'}),{signal:pending.signal});
    if(token!==revision){releaseSequenceAssets(received.assets);return;}
    const derived=sequenceDiscoveryInputs(received.account);
+   if(savedFixed)inspectFixedMotion(derived.study,raw.selection,{maxWork:0});
    accept(derived.study,{...derived,assets:received.assets},comparison);
-  }else accept(original,null,comparison);
+  }else {if(savedFixed)inspectFixedMotion(original,raw.selection,{maxWork:0});accept(original,null,comparison);}
+  if(savedFixed)fixedMotion.restore(raw.selection);
   $('status').textContent=savedPractice?'Recomputed every group, original-source fit and retained actual round from the saved inputs.':'Recomputed every candidate from the retained original annotations.';
  }catch(error){
   if(received&&received.assets!==sequenceEvidence?.assets)releaseSequenceAssets(received.assets);
