@@ -6,6 +6,7 @@ import {requireChromiumSandbox} from './support/chromium-sandbox.mjs';
 import {createObservation} from '../src/evidence.mjs';
 import {jointSourceReading,createJointCalibrationHypothesis,exportJointCalibration} from '../src/joint-calibration.mjs';
 import {freezeJointChallengePlan as freeze,createJointChallengeResult as result,exportJointChallengeStudy as save} from '../src/joint-challenge.mjs';
+import {alternativeGroupCourse} from '../test/support/joint-challenge-conflict-fixtures.mjs';
 const source={provenance:'Authored rectangle controls',source:{widthMm:100,heightMm:80,corners:[{x:0,y:0},{x:100,y:0},{x:100,y:80},{x:0,y:80}]},landmarks:[['guide',20,30],['index',60,50]].map(([id,x,y])=>({id,label:id,kind:'edge_offset_mm',edge:'left',sourcePx:{x,y},toleranceMm:50}))};
 const row=(s,id,mark,x,y,w=100,h=80,u=50)=>createObservation(s,{id,landmarkId:mark,label:id,evidenceClass:'authored-example',widthMm:w,heightMm:h,xMm:x,yMm:y,uncertaintyMm:u});
 function study(s=source,alternatives=true){return exportJointCalibration(s,s.landmarks.map(m=>m.id),s.landmarks.map((m,i)=>row(s,'train-'+i,m.id,m.sourcePx.x,m.sourcePx.y)),alternatives?[createJointCalibrationHypothesis(s,{id:'wide',label:'Wide source',basis:'proposed-reading',reading:{...jointSourceReading(s),widthMm:150}})]:[]);}
@@ -16,10 +17,10 @@ const outcome=(p,mark,x,y,t='future',u=.01,id=t+'-'+mark)=>{const sheet=p.trials
 assert.equal(study().landmarkIds.length,2);assert.equal(plan().trials.length,1);assert.equal(save(plan(),[]).results.length,0);
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_PATH||'/home/ubuntu/.npm/_npx/f0a362733743bae2/node_modules/playwright');
 const base=process.env.BASE_URL;if(!base)throw Error('BASE_URL must identify the received maintained server');
-const out=new URL('../receipts/joint-challenge-browser/',import.meta.url);await mkdir(out,{recursive:true});
+const out=new URL('../receipts/joint-challenge-conflicts-browser/',import.meta.url);await mkdir(out,{recursive:true});
 const sha=b=>createHash('sha256').update(b).digest('hex'),receipt={startedAt:new Date().toISOString(),base,authoredExamples:true,checks:[],files:[],screenshots:[]};
 async function manifest(dir){for(const x of await readdir(new URL('../'+dir,import.meta.url),{withFileTypes:true}).catch(()=>[])){const p=dir+x.name;if(x.isDirectory()){if(!['node_modules','.git','receipts'].includes(x.name))await manifest(p+'/');}else if(/\.(mjs|html|css|json)$/.test(p)){const b=await readFile(new URL('../'+p,import.meta.url));receipt.files.push({path:p,bytes:b.length,sha256:sha(b)});}}}
-for(const d of ['src/','web/','native/','tools/','scripts/'])await manifest(d);
+for(const d of ['src/','web/','native/','tools/','scripts/','test/'])await manifest(d);
 let browser;
 try{
  browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,chromiumSandbox:true});
@@ -66,7 +67,61 @@ try{
   await page.locator('#jc-outcome-label').focus();await page.keyboard.press('Control+A');await page.keyboard.type('Keyboard '+width);assert.equal(await page.locator('#jc-outcome-label').inputValue(),'Keyboard '+width);await page.keyboard.press('Tab');assert.equal(await page.locator('#jc-class').evaluate(n=>n===document.activeElement),true);
   const path=new URL('joint-'+width+'.png',out);await page.screenshot({path:path.pathname,fullPage:true});const b=await readFile(path);receipt.screenshots.push({file:path.pathname,sha256:sha(b),bytes:b.length,width});
  }
- console.log("PHASE",new Date().toISOString());receipt.checks.push('six-sheet freeze; 1440/390/320 overflow, keyboard, focus and screenshots');assert.deepEqual(errors,[]);receipt.status='passed';
+ console.log("PHASE",new Date().toISOString());receipt.checks.push('six-sheet freeze; 1440/390/320 overflow, keyboard, focus and screenshots');
+ const conflictCourse=alternativeGroupCourse(),conflictRaw=JSON.stringify(save(conflictCourse.plan,conflictCourse.results));
+ await page.setViewportSize({width:1440,height:1000});await upload('#jc-file',conflictRaw);await status('none-compatible');
+ const groupIds=async()=>page.locator('.jc-conflict-group').evaluateAll(nodes=>nodes.map(node=>node.dataset.trials));
+ assert.deepEqual(await groupIds(),['three','one,two']);
+ assert.match(await page.locator('#jc-conflict-summary').innerText(),/2 inclusion-minimal groups/);
+ assert.match(await page.locator('#jc-conflicts').innerText(),/All 7 nonempty subsets/);
+ const paired=page.locator('.jc-conflict-group[data-trials="one,two"]');
+ await paired.locator('summary').focus();await page.keyboard.press('Enter');
+ await waitPredicate(page,()=>document.querySelector('.jc-conflict-group[data-trials="one,two"]').textContent.includes('Why each workpiece is necessary'));
+ assert.equal(await paired.evaluate(node=>node.open),true);
+ assert.match(await paired.innerText(),/one-guide/);assert.match(await paired.innerText(),/two-guide/);
+ assert.match(await paired.innerText(),/leaves 1 original rule combination/);
+ assert.equal(await paired.locator('summary').evaluate(node=>node===document.activeElement),true);
+ assert.ok(await paired.locator('summary').evaluate(node=>getComputedStyle(node).outlineStyle!=='none'&&parseFloat(getComputedStyle(node).outlineWidth)>=2));
+ assert.equal(await exported(),conflictRaw);
+ receipt.checks.push('all minimal workpiece groups of different sizes, original-outcome witnesses, necessity and keyboard disclosure');
+ await writeFile(new URL('conflict-export.json',out),conflictRaw);
+ await page.close();page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));await open();
+ await upload('#jc-file',conflictRaw);assert.deepEqual(await groupIds(),['three','one,two']);assert.equal(await exported(),conflictRaw);
+ const forgedConflict=JSON.parse(conflictRaw);forgedConflict.conflicts={minimalGroups:[],enumerationComplete:true};forgedConflict.plan.readings=[{id:'invented',marks:[]}];
+ await upload('#jc-file',forgedConflict);assert.deepEqual(await groupIds(),['three','one,two']);assert.equal(await exported(),conflictRaw);
+ const badConflict=JSON.parse(conflictRaw);badConflict.results[0].observation.sourceReference.landmark.sourcePx.x++;
+ await upload('#jc-file',badConflict);assert.equal(await page.locator('#jc-error').isVisible(),true);assert.deepEqual(await groupIds(),['three','one,two']);assert.equal(await exported(),conflictRaw);
+ assert.equal(await page.locator('#jc-stale').isVisible(),false);
+ await page.evaluate(()=>{const original=File.prototype.text;window.restoreFileText=()=>{File.prototype.text=original;};window.releaseRead=null;File.prototype.text=function(){const file=this;if(file.name!=='conflict-delayed.json')return original.call(file);return new Promise(resolve=>{window.releaseRead=async()=>resolve(await original.call(file));});};});
+ await page.locator('#studyFile').setInputFiles({name:'conflict-delayed.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(study()))});
+ await waitPredicate(page,()=>typeof window.releaseRead==='function');
+ const activeGroup=page.locator('.jc-conflict-group[data-trials="one,two"]');assert.equal(await activeGroup.evaluate(node=>node.open),false);
+ await activeGroup.locator('summary').focus();await page.keyboard.press('Enter');
+ await waitPredicate(page,()=>document.querySelector('.jc-conflict-group[data-trials="one,two"]').textContent.includes('Why each workpiece is necessary'));
+ await page.evaluate(async()=>{await Promise.race([window.releaseRead(),new Promise((_,reject)=>setTimeout(()=>reject(Error('Conflict delayed-read release timeout')),5000))]);window.restoreFileText();});
+ await waitPredicate(page,()=>document.querySelector('#studyFile').value==='');
+ assert.equal(await page.locator('#jc-stale').isVisible(),false);assert.equal(await exported(),conflictRaw);
+ await page.locator('#coherentExample').click();assert.equal(await page.locator('#jc-stale').isVisible(),true);assert.deepEqual(await groupIds(),['three','one,two']);assert.equal(await exported(),conflictRaw);
+ assert.equal('conflicts' in JSON.parse(conflictRaw),false);
+ const servedCore=await page.request.get(base+'/src/joint-challenge-conflicts.mjs');assert.equal(servedCore.status(),200);assert.equal(sha(await servedCore.body()),sha(await readFile(new URL('../src/joint-challenge-conflicts.mjs',import.meta.url))));
+ assert.equal((await page.request.get(base+'/test/support/joint-challenge-conflict-fixtures.mjs')).status(),404);
+ receipt.checks.push('conflict source-only fresh reopen and forged-cache recomputation; failed source retention; keyboard activity fences delayed parent import; stale frozen groups and served/private boundaries');
+ for(const width of [1440,390,320]){
+  await page.setViewportSize({width,height:1000});
+  await page.locator('.jc-conflict-group').evaluateAll(nodes=>nodes.forEach(node=>{node.open=false;}));
+  await page.locator('#jc-conflicts').evaluate(node=>node.scrollIntoView({block:'start'}));
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'conflict overview overflow '+width);
+  const overview=new URL('conflicts-'+width+'-overview.png',out);await page.screenshot({path:overview.pathname});let bytes=await readFile(overview);receipt.screenshots.push({file:overview.pathname,sha256:sha(bytes),bytes:bytes.length,width,kind:'conflict-overview'});
+  const group=page.locator('.jc-conflict-group[data-trials="one,two"]');
+  await group.locator('summary').focus();await page.keyboard.press('Enter');assert.equal(await group.evaluate(node=>node.open),true);
+  await group.locator('summary').evaluate(node=>node.scrollIntoView({block:'start'}));
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'conflict details overflow '+width);
+  const details=new URL('conflicts-'+width+'-details.png',out);await page.screenshot({path:details.pathname});bytes=await readFile(details);receipt.screenshots.push({file:details.pathname,sha256:sha(bytes),bytes:bytes.length,width,kind:'conflict-details'});
+ }
+ receipt.checks.push('conflict overview and complete disclosure at 1440/390/320 with keyboard focus, horizontal bounds and actual viewport captures');
+ assert.deepEqual(errors,[]);receipt.status='passed';
 }catch(e){receipt.status='failed';receipt.error=e.stack;if(e.receipt)receipt.sandbox=e.receipt;throw e;}
 finally{receipt.completedAt=new Date().toISOString();await writeFile(new URL('receipt.json',out),JSON.stringify(receipt,null,2));await browser?.close();}
 
