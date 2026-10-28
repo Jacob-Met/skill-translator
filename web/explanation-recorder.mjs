@@ -1,17 +1,14 @@
+import {inspectDecodedAudio as inspectRecordedFile} from './audio-decoded-duration.mjs';
 import {createRecorder} from './explanation-recorder-core.mjs';
 export function browserRecorder(stream){
  if(typeof MediaRecorder==='undefined')throw Error('This browser has no audio recording encoder');
  const mimeType=['audio/webm;codecs=opus','audio/ogg;codecs=opus','audio/mp4'].find(type=>MediaRecorder.isTypeSupported(type));
  return mimeType?new MediaRecorder(stream,{mimeType}):new MediaRecorder(stream);
 }
-export async function inspectRecordedFile(file,{signal}={}){
- if(signal?.aborted)throw Error('Audio operation replaced');
- const Context=globalThis.AudioContext??globalThis.webkitAudioContext;if(!Context)throw Error('This browser cannot decode recorded audio');
- const context=new Context();try{const bytes=await file.arrayBuffer();if(signal?.aborted)throw Error('Audio operation replaced');const audio=await context.decodeAudioData(bytes);if(signal?.aborted)throw Error('Audio operation replaced');return {durationSeconds:audio.duration};}finally{await context.close();}
-}
+export {inspectDecodedAudio as inspectRecordedFile} from './audio-decoded-duration.mjs';
 export function mountExplanationRecorder(host,{onKeep=async()=>{},getStream=()=>navigator.mediaDevices.getUserMedia({audio:true}),makeRecorder=browserRecorder,verifyFile=inspectRecordedFile,limits={}}={}){
  const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
- const panel=el('section'),heading=el('h2','Record a separate explanation'),note=el('p','Record only when you choose Start. This is a separately supplied account, not sound from the original demonstration or verified speaker identity. Preview your recording, then choose Keep to attach it. Your previous kept recording stays available if the new attachment is refused.');
+ const panel=el('section'),heading=el('h2','Record a separate explanation'),note=el('p','Record only when you choose Start. This is a separately supplied account, not sound from the original demonstration or verified speaker identity. Preview your recording, then choose Keep to pass it to this workspace. Keeping prepares a checked audio draft; any separate attachment action and attribution are still required. Your previous kept recording stays available if receiving is refused.');
  const start=el('button','Start recording'),stop=el('button','Stop recording'),discard=el('button','Discard new recording'),keep=el('button','Keep checked recording'),audio=el('audio'),status=el('p'),accepted=el('p');audio.controls=true;audio.preload='metadata';audio.setAttribute('aria-label','Preview the new recorded explanation');status.setAttribute('role','status');
  for(const [node,name] of [[start,'start'],[stop,'stop'],[discard,'discard'],[keep,'keep']]){node.type='button';node.dataset.recording=name;}
  panel.append(heading,note,el('p',`Capture stop target: ${(limits.maxMilliseconds??30000)/1000} s. Decoded audio limit: ${limits.maxDecodedSeconds??30} s. Audio size limit: ${(limits.maxBytes??5*1024*1024)/(1024*1024)} MiB.`),start,stop,discard,audio,keep,status,accepted);host.append(panel);let url=null,shown=null;

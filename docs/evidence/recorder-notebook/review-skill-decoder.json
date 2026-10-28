@@ -1,0 +1,25 @@
+{
+  "reviewer": "retained SKILL worker",
+  "status": "no blocker found",
+  "hashes": {
+    "web/audio-decoded-duration.mjs": "42fbdecc10850221f96099996163ef2378d8152d02aa00f06edc849160c30886",
+    "web/spoken-explanation-input.mjs": "74b978b49a1148cd6ec9fc6649dc07a2fa1bd7b16b581e7aa919263b07d2cb4a",
+    "web/explanation-recorder.mjs": "a380d5c88081e39c4cce0d966ab9500575301bc336097e0fbcc8015d6679776a"
+  },
+  "sourceReview": [
+    "One shared decoder reused by recorder and owner; recorder export alias retained",
+    "Fallback only on nonfinite loadeddata duration, never on finite out-of-bounds or media errors",
+    "Notebook independently redecodes complete retained File and enforces its300s bound on initial intake and fresh reopen",
+    "Signal/deadline retire late adoption, listener/timer cleanup and nonawaited context-close request inspected"
+  ],
+  "executedNativeControl": {
+    "kind": "authored adapter only",
+    "decoder": "never resolves",
+    "close": "never resolves",
+    "timeoutMilliseconds": 5,
+    "result": "rejected",
+    "closeRequests": 1,
+    "sourceHashesStable": true
+  },
+  "limits": "No native decoder cancellation guarantee, no real microphone or new browser test by reviewer"
+}

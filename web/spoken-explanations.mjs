@@ -1,3 +1,4 @@
+import {mountExplanationRecorder} from '/web/explanation-recorder.mjs';
 import {createSpokenExplanations, addSpokenExplanation, removeSpokenExplanation, MAX_EXPLANATIONS} from '/src/spoken-explanations.mjs';
 import {readSequenceBundle, releaseSequenceAssets} from '/web/sequence-input.mjs';
 import {loadExplanationAudio, releaseExplanationAudio, releaseExplanationAssets,
@@ -6,9 +7,19 @@ import {loadExplanationAudio, releaseExplanationAudio, releaseExplanationAssets,
 const $ = id => document.getElementById(id);
 let accepted = null, notebook = null, audioAssets = new Map(), draft = null;
 let revision = 0, sourceGeneration = 0, audioGeneration = 0;
-let receiving = null, loadingAudio = null, saving = null;
+let receiving = null, loadingAudio = null, saving = null, recorder = null, recorderDraft = false, recorderLoading = false;
 const status = message => { $('status').textContent = message; };
 const draftDirty = () => Boolean(draft || $('audio-file').value || $('attribution').value || $('description').value);
+
+function resetRecorder() {
+  recorder?.dispose(); recorder = null;
+  const targetSource = sourceGeneration, targetStep = $('step').value;
+  if (!notebook?.source.steps.some(step => step.id === targetStep) || receiving) return;
+  recorder = mountExplanationRecorder($('record-explanation'), {
+    limits: {maxBytes: 4 * 1024 * 1024},
+    onKeep: (file, context) => receiveAudio(file, {...context, targetSource, targetStep, fromRecorder: true}),
+  });
+}
 
 function pausePlayers() { for (const player of document.querySelectorAll('audio')) player.pause(); }
 function clearPlayer(player) { player.pause(); player.removeAttribute('src'); player.load(); }
@@ -40,7 +51,7 @@ function clearDraft({release = true} = {}) {
   loadingAudio?.abort(); loadingAudio = null;
   clearPlayer($('draft-audio'));
   if (release) releaseExplanationAudio(draft);
-  draft = null;
+  draft = null; recorderDraft = false;
   $('audio-file').value = ''; $('attribution').value = ''; $('description').value = '';
   $('draft-preview').hidden = true;
   $('audio-status').textContent = 'No audio selected.';
@@ -122,7 +133,7 @@ function install(next) {
   $('source-context').textContent = notebook.source.context || 'No additional source context supplied.';
   $('step').replaceChildren(...notebook.source.steps.map(step => new Option(step.title, step.id)));
   $('workspace').hidden = false; $('keep-work').hidden = false;
-  renderStep();
+  renderStep(); resetRecorder();
 }
 
 function releaseReceived(next) {
@@ -135,7 +146,7 @@ async function open(file, complete) {
   changed(); pausePlayers();
   loadingAudio?.abort(); loadingAudio = null; audioGeneration++;
   const controller = new AbortController(), version = revision;
-  receiving = controller; controls();
+  receiving = controller; resetRecorder(); controls();
   status('Opening ' + file.name + '. The accepted notebook stays in place until all original media checks finish.');
   let next = null;
   try {
@@ -149,29 +160,48 @@ async function open(file, complete) {
     status(complete ? 'Complete notebook reopened. Original frames and audio bytes checked; choose a step and press play when ready.' : 'Original frames checked. Choose a step and add a separately supplied explanation.');
   } catch (error) {
     if (version === revision && receiving === controller) status('Import refused: ' + error.message + ' The accepted notebook is unchanged.');
-  } finally { if (receiving === controller) receiving = null; controls(); }
+  } finally { if (receiving === controller) receiving = null; if (!recorder) resetRecorder(); controls(); }
 }
 
 for (const [id, complete] of [['source', false], ['notebook-file', true]]) {
   $(id).onchange = () => { const file = $(id).files[0]; $(id).value = ''; open(file, complete); };
 }
-$('step').onchange = () => { changed(); renderStep(); };
+$('step').onchange = () => {
+  changed();
+  if (recorderDraft) {
+    if (loadingAudio && !recorderLoading) {
+      // Retire the old recorded preview without cancelling the newer ordinary file intake.
+      clearPlayer($('draft-audio')); releaseExplanationAudio(draft); draft = null; recorderDraft = false;
+      $('draft-preview').hidden = true;
+    } else clearDraft();
+  } else if (recorderLoading) { audioGeneration++; loadingAudio?.abort(); loadingAudio = null; }
+  resetRecorder(); renderStep();
+};
 for (const id of ['attribution', 'description']) $(id).addEventListener('input', () => { changed(); controls(); });
 
-$('audio-file').onchange = async () => {
-  const file = $('audio-file').files[0]; if (!file || !notebook) return;
+async function receiveAudio(file, {signal, isCurrent = () => true, targetSource = sourceGeneration, targetStep, fromRecorder = false} = {}) {
+  const currentTarget = () => !signal?.aborted && isCurrent() && targetSource === sourceGeneration && (!fromRecorder || targetStep === $('step').value);
+  if (!file || !notebook || !currentTarget()) throw Error('The recording target was replaced.');
   changed(); pausePlayers(); loadingAudio?.abort();
   const controller = new AbortController(), version = ++audioGeneration, source = sourceGeneration;
-  loadingAudio = controller; controls(); $('audio-status').textContent = 'Checking ' + file.name + '…';
+  const abort = () => controller.abort(); signal?.addEventListener('abort', abort, {once: true});
+  loadingAudio = controller; recorderLoading = fromRecorder; controls(); $('audio-status').textContent = 'Checking ' + file.name + '…';
   try {
     const asset = await loadExplanationAudio(file, {signal: controller.signal});
-    if (version !== audioGeneration || source !== sourceGeneration || loadingAudio !== controller) { releaseExplanationAudio(asset); return; }
-    clearPlayer($('draft-audio')); releaseExplanationAudio(draft); draft = asset;
+    if (version !== audioGeneration || source !== sourceGeneration || loadingAudio !== controller || controller.signal.aborted || !currentTarget()) {
+      releaseExplanationAudio(asset); throw Error('The audio selection or recording target was replaced.');
+    }
+    clearPlayer($('draft-audio')); releaseExplanationAudio(draft); draft = asset; recorderDraft = fromRecorder;
     $('draft-audio').src = draft.url; $('draft-preview').hidden = false;
     $('audio-status').textContent = draft.identity.name + ' · ' + draft.durationSeconds.toFixed(2) + ' seconds. Preview, add attribution, then attach explicitly.';
   } catch (error) {
     if (version === audioGeneration && loadingAudio === controller) $('audio-status').textContent = 'Audio refused: ' + error.message + (draft ? ' The previous audio draft is retained.' : '');
-  } finally { if (loadingAudio === controller) loadingAudio = null; controls(); }
+    throw error;
+  } finally { signal?.removeEventListener('abort', abort); if (loadingAudio === controller) { loadingAudio = null; recorderLoading = false; } controls(); }
+}
+$('audio-file').onchange = () => {
+  const file = $('audio-file').files[0]; if (!file || !notebook) return;
+  resetRecorder(); void receiveAudio(file).catch(() => {});
 };
 
 $('draft-audio').addEventListener('play', () => {
@@ -180,7 +210,7 @@ $('draft-audio').addEventListener('play', () => {
       player.getAttribute('src') !== draft.url || player.currentSrc !== draft.url) return;
   for (const other of $('explanations').querySelectorAll('audio')) other.pause();
 });
-$('discard').onclick = () => { changed(); clearDraft(); controls(); status('Unattached draft discarded. Retained explanations are unchanged.'); };
+$('discard').onclick = () => { changed(); clearDraft(); resetRecorder(); controls(); status('Unattached draft discarded. Retained explanations are unchanged.'); };
 $('attach-form').onsubmit = event => {
   event.preventDefault();
   if ($('attach').disabled) return;
@@ -190,7 +220,7 @@ $('attach-form').onsubmit = event => {
     changed();
     const hash = draft.identity.sha256;
     if (audioAssets.has(hash)) releaseExplanationAudio(draft); else audioAssets.set(hash, draft);
-    notebook = next; clearDraft({release: false}); renderStep();
+    notebook = next; clearDraft({release: false}); resetRecorder(); renderStep();
     status('Spoken explanation attached to the selected original step. Download the notebook to keep the complete account.');
   } catch (error) { status('Attachment refused: ' + error.message + ' The accepted notebook is unchanged.'); controls(); }
 };
@@ -210,7 +240,9 @@ $('save').onclick = async () => {
   finally { if (saving === controller) saving = null; controls(); }
 };
 
+window.addEventListener('pageshow', event => { if (event.persisted && !recorder) resetRecorder(); });
 window.addEventListener('pagehide', event => {
+  recorder?.dispose(); recorder = null;
   receiving?.abort(); loadingAudio?.abort(); saving?.abort(); pausePlayers();
   if (event.persisted) return;
   if (accepted) releaseSequenceAssets(accepted.assets);
