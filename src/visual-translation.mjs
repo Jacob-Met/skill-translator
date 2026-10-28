@@ -38,14 +38,35 @@ export function compareSupportedTranslations(before, after, referenceSupport,
   return fitSupportedSamples(before, after, radius, {left, top, width, height}, false);
 }
 
-function fitSupportedSamples(before, after, radius, support, includeChangeRegions) {
-  const {widthPx: width, heightPx: height} = before;
+/** Complete finite integer costs using the incumbent histogram metric.
+ * Each directed pair fits its own brightness offset. This is not a physical
+ * correspondence or one globally registered photometric model. */
+export function profileTranslatedSamples(before, after, {radius = TRANSLATION_RADIUS, referenceSupport} = {}) {
+  compareSamplePixels(before, after);
+  if (!Number.isInteger(radius) || radius < 1 || radius > MAX_TRANSLATION_RADIUS)
+    throw Error(`Translation radius must be an integer from 1 to ${MAX_TRANSLATION_RADIUS}.`);
+  let support = referenceSupport === undefined
+    ? {left: radius, top: radius, width: before.widthPx - 2 * radius, height: before.heightPx - 2 * radius}
+    : referenceSupport;
+  if (referenceSupport !== undefined) {
+    const {left, top, width, height} = support ?? {};
+    if (![left, top, width, height].every(Number.isInteger) || width < 3 || height < 3
+        || left < radius || top < radius || left + width > before.widthPx - radius
+        || top + height > before.heightPx - radius)
+      throw Error('Use an integer reference rectangle at least 3 × 3 inside the complete search interior.');
+    support = {left, top, width, height};
+  }
   if (support.width < 3 || support.height < 3)
-    return {status: 'insufficient-common-support', radius, alternatives: [],
-      ...(includeChangeRegions ? {changeRegions: {status: 'unavailable', reason: 'There is insufficient common interior support.'}} : {})};
+    return {status: 'insufficient-common-support', radius, candidates: []};
+  const profile = finiteCostProfile(before, after, radius, support);
+  return {...profile, comparison: summarizeCostProfile(profile)};
+}
+
+function finiteCostProfile(before, after, radius, support) {
+  const {widthPx: width, heightPx: height} = before;
   const pixelCount = support.width * support.height, channelCount = pixelCount * 3;
   const histogram = new Uint32Array(511), rank = Math.floor((channelCount - 1) / 2);
-  let minimum = Infinity, zero = null, alternatives = [];
+  const candidates = [];
   for (let dy = -radius; dy <= radius; dy++) {
     for (let dx = -radius; dx <= radius; dx++) {
       histogram.fill(0);
@@ -63,19 +84,44 @@ function fitSupportedSamples(before, after, radius, support, includeChangeRegion
       let absoluteResidual = 0;
       for (let i = 0; i < histogram.length; i++) absoluteResidual += histogram[i] * Math.abs(i - median);
       const candidate = {dx, dy, uniformBrightnessShift: median - 255,
-        meanAdjustedChange: absoluteResidual / (channelCount * 255),
+        absoluteResidual,
         searchBoundary: Math.abs(dx) === radius || Math.abs(dy) === radius};
-      if (dx === 0 && dy === 0) zero = candidate;
-      if (absoluteResidual < minimum) { minimum = absoluteResidual; alternatives = [candidate]; }
-      else if (absoluteResidual === minimum) alternatives.push(candidate);
+      candidates.push(candidate);
     }
   }
+  return {status: 'complete', radius, widthPx: width, heightPx: height,
+    support: {...support, pixelCount, omittedPixels: width * height - pixelCount},
+    channelCount, candidates};
+}
+
+function fitSupportedSamples(before, after, radius, support, includeChangeRegions) {
+  const {widthPx: width, heightPx: height} = before;
+  if (support.width < 3 || support.height < 3)
+    return {status: 'insufficient-common-support', radius, alternatives: [],
+      ...(includeChangeRegions ? {changeRegions: {status: 'unavailable', reason: 'There is insufficient common interior support.'}} : {})};
+  const profile = finiteCostProfile(before, after, radius, support);
+  const result = summarizeCostProfile(profile);
+  if (includeChangeRegions) result.changeRegions = locateTranslatedChanges(before, after, result);
+  return result;
+}
+
+function summarizeCostProfile(profile) {
+  const {radius, widthPx: width, heightPx: height, support} = profile;
+  const {channelCount} = profile;
+  let minimum = Infinity, zero = null, alternatives = [];
+  for (const cost of profile.candidates) {
+    const candidate = {dx: cost.dx, dy: cost.dy, uniformBrightnessShift: cost.uniformBrightnessShift,
+      meanAdjustedChange: cost.absoluteResidual / (channelCount * 255), searchBoundary: cost.searchBoundary};
+    if (cost.dx === 0 && cost.dy === 0) zero = candidate;
+    if (cost.absoluteResidual < minimum) {minimum = cost.absoluteResidual; alternatives = [candidate];}
+    else if (cost.absoluteResidual === minimum) alternatives.push(candidate);
+  }
+  const pixelCount = support.width * support.height;
   const result = {status: alternatives.length > 1 ? 'ambiguous' : alternatives[0].searchBoundary ? 'search-boundary' : 'unique',
     radius, support: {...support, pixelCount, omittedPixels: width * height - pixelCount},
     candidateCount: (2 * radius + 1) ** 2, zero,
     meanAdjustedChange: minimum / (channelCount * 255), alternatives,
     boundary: 'Minimum RGB appearance residual on the same inset pixels, after one integer image shift and one additive brightness shift. This can also explain real scene or object motion. Borders, subpixel shifts, rotation and unseen frames are not assessed; no camera motion, action or physical correspondence is established.'};
-  if (includeChangeRegions) result.changeRegions = locateTranslatedChanges(before, after, result);
   return result;
 }
 

@@ -1,0 +1,14 @@
+{
+  "status": "accepted",
+  "hashes": {
+    "src/visual-translation.mjs": "536e9caf22e5c8f6690a9f156d6fd4cc286b0acf33942cf9eb4b3e9bd2d967c5",
+    "src/appearance-additive-cost.mjs": "57dd6bcb931828b53d7ef78b858763f85a09543c8c06499478ae8f2ffa53ae5b",
+    "web/appearance-triplet-worker.mjs": "fec01e357c67b883326588a6359ccfb96c777036f990fde0dfdab2cef6ba988c",
+    "web/appearance-pair-app.mjs": "d6571649fae50a5298e7ac78d0fa9ed42aa44d1a3ec36a774aac78e00c7be213",
+    "web/appearance-triplet-view.mjs": "6253d6e312e3ec4aa88ae328aca93f7b600c85091e13c6e88f05d1fc0481c28e"
+  },
+  "executed": "Seven defined native bodies in test/appearance-additive-cost.test.mjs rerun passed; Node outer file group one.",
+  "sourceReview": "Shared exact profile comparison summary, immutable original-source report, separate minima/cost questions, internal cached profiles, complete paged costs, source/revision/worker identity retirement and source-only export reviewed. No blocker.",
+  "workNote": "Initial compute also performs the separately bounded independent-minima join; two passes describe cost reduction only, repeated per cost page.",
+  "limits": "No browser rerun or visual qualification by this reviewer."
+}

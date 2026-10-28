@@ -1,0 +1,19 @@
+{
+  "status": "accepted source-only final delta",
+  "hashes": {
+    "src/visual-translation.mjs": "fef7b1f7233a6b45c7102e5596b475404ea26ac8413a3337f407d661d710fd6b",
+    "src/appearance-additive-cost.mjs": "6dbb418374d10ad530edc6dc62115db2ed71cf6e4f7562af274d739e9a373f56"
+  },
+  "previousReview": "review-worldlaw-incremental.json",
+  "assessment": [
+    "Reference support is canonicalized to left/top/width/height after incumbent validation, preventing unknown-key leakage.",
+    "Initial work preflight includes original independent-minima join plus both additive-cost passes.",
+    "initialWorkReservation names candidate-square counts as reserved upper bounds, distinct from executed join.checkedCombinations."
+  ],
+  "executed": "No additional tests or browser run by this reviewer for these narrow final changes. Earlier native receiving and source reviews remain attributed to their exact earlier hashes.",
+  "unchangedReviewedConsumerHashes": {
+    "web/appearance-triplet-worker.mjs": "fec01e357c67b883326588a6359ccfb96c777036f990fde0dfdab2cef6ba988c",
+    "web/appearance-pair-app.mjs": "d6571649fae50a5298e7ac78d0fa9ed42aa44d1a3ec36a774aac78e00c7be213",
+    "web/appearance-triplet-view.mjs": "6253d6e312e3ec4aa88ae328aca93f7b600c85091e13c6e88f05d1fc0481c28e"
+  }
+}

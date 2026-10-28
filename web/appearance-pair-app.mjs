@@ -15,8 +15,9 @@ const moments=()=>loaded?[...loaded.sequence.moments].sort((a,b)=>a.origin.media
 const hasPair=()=>{const rows=moments();return rows.length>=2&&rows.some(m=>m.origin.mediaTimeSeconds>rows[0].origin.mediaTimeSeconds);};
 function status(state,message){ui.status.dataset.state=state;ui.status.textContent=message;}
 const triple=()=>ui.mode.value==='triplet';
-function render(){if(result?.source.format===TRIPLET_FORMAT)renderAppearanceTripletResult(ui.result,result,{onPage:page});else renderAppearancePairResult(ui.result,result);}
+function render(){if(result?.source.format===TRIPLET_FORMAT)renderAppearanceTripletResult(ui.result,result,{onPage:page,onCostPage:costPage});else renderAppearancePairResult(ui.result,result);}
 function page(offset,limit){if(!worker||busy||!result)return;busy=true;controls();status('computing','Finding the requested page of complete additive combinations…');worker.postMessage({type:'page',requestId:revision,source:result.source,page:{offset,limit}});}
+function costPage(offset,limit){if(!worker||busy||!result)return;busy=true;controls();status('computing','Rechecking all finite additive combinations for this optimum page…');worker.postMessage({type:'cost-page',requestId:revision,source:result.source,page:{offset,limit}});}
 function controls(){ $('middle-choice').hidden=!triple();$('middle-figure').hidden=!triple();ui.settings.disabled=!loaded;ui.compute.disabled=!loaded||!hasPair()||busy;ui.cancel.disabled=!busy;ui.save.disabled=!result||busy;}
 function retire(){
   revision++;controller?.abort();controller=null;worker?.terminate();worker=null;busy=false;result=null;
@@ -108,6 +109,7 @@ async function compute(){
       if(ticket!==revision||worker!==next||(isTriple?event.data?.requestId:event.data?.revision)!==ticket)return;
       try{
         if(event.data.error)throw Error(event.data.error);
+        if(event.data.type==='cost-page'){if(!result||JSON.stringify(event.data.source)!==JSON.stringify(result.source))throw Error('Composition changed while paging');result={...result,additiveCost:event.data.additiveCost};render();finish(ticket,'complete','Complete optimum page ready; both bounded algebra passes were recomputed, without resampling images.');return;}
         if(event.data.type==='page'){if(!result||JSON.stringify(event.data.source)!==JSON.stringify(result.source))throw Error('Composition changed while paging');result={...result,join:event.data.join};render();finish(ticket,'complete','Complete additive witness page ready.');return;}
         const answer=event.data.result;
         if(!answer||JSON.stringify(answer.source)!==JSON.stringify(samples.source))throw Error('The returned comparison does not match the current source and settings.');

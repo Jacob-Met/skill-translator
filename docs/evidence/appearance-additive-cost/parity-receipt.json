@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "exactSerializedSuccessReports": 144,
+  "refusalOrInsufficientCases": 4,
+  "scope": "Fresh authored sampled rasters; whole-image, explicit-support and optional region reports compared against frozen original module"
+}

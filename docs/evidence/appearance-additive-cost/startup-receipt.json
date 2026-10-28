@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "paths": [
+    "src/appearance-additive-cost.mjs",
+    "src/visual-translation.mjs",
+    "web/appearance-triplet-worker.mjs",
+    "web/appearance-triplet-view.mjs",
+    "web/appearance-pair-app.mjs",
+    "web/appearance-pair.html"
+  ],
+  "serverSHA256": "550601c240ffad35c8768d12a3704b12a642462eab161ba14e6c0158d4e34232",
+  "scope": "Exact current server startup and six changed route bytes; unrelated upstream notebook not present in partial checkout"
+}
