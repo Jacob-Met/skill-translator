@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Spoken explanations · SKILL TRANSLATOR</title>
+  <link rel="stylesheet" href="/web/spoken-explanations.css">
+  <script type="module" src="/web/spoken-explanations.mjs"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brandmark">ST</span><span>SKILL TRANSLATOR</span></a>
+    <nav aria-label="Related workspaces"><a href="/sequence">Demonstration studio</a><a href="/workbenches">All workbenches</a></nav>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">THE AUTHOR'S ACCOUNT / SPOKEN EXPLANATIONS</p>
+      <h1 id="page-title">Keep the explanation<br class="wide-break"> with the moment.</h1>
+      <p class="lead">A useful cue may be easier to describe aloud. Keep a separately supplied audio explanation beside the original step, with its author and context intact.</p>
+    </section>
+    <section class="intake" aria-label="Open your work">
+      <div><label for="source">Start from a demonstration</label><input id="source" type="file" accept=".json,application/json"><p>Open the complete sequence saved in Demonstration studio. Up to 48 MiB.</p></div>
+      <div><label for="notebook-file">Continue a saved explanation notebook</label><input id="notebook-file" type="file" accept=".json,application/json"><p>Includes the original frames and attached audio. Up to 64 MiB.</p></div>
+    </section>
+    <p id="status" class="status" role="status">Choose a demonstration to begin. Files stay in this browser until you download them.</p>
+    <section id="workspace" class="workspace" hidden aria-label="Original step and supplied explanations">
+      <article class="source-panel">
+        <div class="section-heading"><p class="eyebrow">01 / ORIGINAL DEMONSTRATION</p><span id="source-badge" class="badge">Frames checked</span></div>
+        <h2 id="source-title"></h2>
+        <p id="source-context" class="muted"></p>
+        <label for="step">Choose the demonstrated step</label><select id="step"></select>
+        <p id="step-range" class="small muted"></p>
+        <div id="frames" class="frames"></div>
+        <details class="original-account" open><summary>The original written account</summary><dl id="original-account"></dl></details>
+      </article>
+      <aside class="explanation-panel" aria-labelledby="explanations-heading">
+        <div class="section-heading"><p class="eyebrow">02 / SEPARATELY SUPPLIED ACCOUNT</p><span id="explanation-count" class="badge">0 explanations</span></div>
+        <h2 id="explanations-heading">Hear the explanation.</h2>
+        <p class="muted">These recordings are attached by their supplier. They are separate from sound in the original demonstration.</p>
+        <div id="explanations" class="explanations"></div>
+        <form id="attach-form" class="attach-form">
+          <h3>Add an explanation for this step</h3>
+          <label for="audio-file">Choose a local audio file</label>
+          <input id="audio-file" type="file" accept="audio/wav,audio/x-wav,audio/mpeg,audio/ogg,audio/webm,audio/mp4,.wav,.mp3,.ogg,.opus,.webm,.m4a">
+          <p class="small muted">WAV, MP3, Ogg, WebM or M4A · up to 4 MiB and 5 minutes per file. Browser decoding support varies.</p>
+          <p id="audio-status" class="small" role="status">No audio selected.</p>
+          <div id="draft-preview" hidden><audio id="draft-audio" controls preload="metadata" aria-label="Preview the selected explanation"></audio></div>
+          <label for="attribution">Who supplied this explanation?</label>
+          <input id="attribution" type="text" maxlength="240" placeholder="Name or role, and how the account was supplied" required>
+          <label for="description">Written description <span class="optional">optional</span></label>
+          <textarea id="description" rows="3" maxlength="1800" placeholder="A short description helps someone choose what to listen to."></textarea>
+          <p id="attachment-target" class="small muted"></p>
+          <div class="actions"><button id="attach" class="primary" type="submit" disabled>Attach to this step</button><button id="discard" type="button" disabled>Discard draft</button></div>
+        </form>
+      </aside>
+    </section>
+    <section id="keep-work" class="keep-work" hidden aria-label="Save the complete notebook">
+      <div><p class="eyebrow">03 / KEEP THE COMPLETE ACCOUNT</p><h2>Take the frames and voice with you.</h2><p id="save-summary" class="muted"></p></div>
+      <button id="save" class="primary" disabled>Download explanation notebook</button>
+    </section>
+    <footer><p>The association and attribution are supplied accounts. This tool does not transcribe speech, authenticate expertise or establish physical skill. The original demonstration and its notes remain unchanged.</p></footer>
+  </main>
+</body>
+</html>
