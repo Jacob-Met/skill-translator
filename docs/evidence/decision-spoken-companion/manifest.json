@@ -1,0 +1,329 @@
+{
+  "base": "64c7d1ad82aa621fe26cb1f81fd4342c1df4f980",
+  "sourceAndClosure": {
+    "server.mjs": {
+      "sha256": "439fa5c121f021e0c1c13be4bf66c3c44fc699dea13727363fa3e1f479afdd61",
+      "gitBlob": "28df22d64ff4eb7e9591beff106fb0f990b0409f",
+      "candidate": true
+    },
+    "native/calibration-translation.mjs": {
+      "sha256": "a37e72c0f961e7916c86abbca1063d7799d7feb43d329f6f0a8d88a0c8486aca",
+      "gitBlob": "ee00fb87a94ffd9d459637a21621c702bc8b5fe2",
+      "candidate": false
+    },
+    "native/audio-intake.mjs": {
+      "sha256": "936e4cc63bb44cb74560dd45b7bbbf25fd46c395f9014c527abb55eea7c17c95",
+      "gitBlob": "ef4f31d7ec3b2efe844b77ec6d6f09f208d095e1",
+      "candidate": false
+    },
+    "native/sequence-edge.mjs": {
+      "sha256": "e6876ca95dc6494dfa0488d29b59ebd97869f3fe6f46da65328271298b821f9e",
+      "gitBlob": "5238c3d20c4b659fbbee0eeb257c92b2e6938e1d",
+      "candidate": false
+    },
+    "native/loopback-origin.mjs": {
+      "sha256": "6e2275930d3a01e1215b451a97c6b18df611631e541fa209cd77c25e18ab4b21",
+      "gitBlob": "dab56316d3ce37fb78c2692d1d9b5f563ff55e37",
+      "candidate": false
+    },
+    "src/decision-practice.mjs": {
+      "sha256": "df2d0a976e1cc2e983771ef20eae69a6b9370848f84c2fd3e5d16359c246b25f",
+      "gitBlob": "5e7d040eb72a9bab753beccc0ff151187daaeb99",
+      "candidate": false
+    },
+    "src/sequence-capture.mjs": {
+      "sha256": "4e6e14e6d4e96e03ba7e3fe366ce5f6c46aa19a1687d3ac53c4e26b42f7e4dfb",
+      "gitBlob": "cd583d5a4d3c3c28b6d4e1dd4fec3a1c2cd5847b",
+      "candidate": false
+    },
+    "src/sequence-edge-field.mjs": {
+      "sha256": "2f64058c6dbed20d4be4c5f3d9899c5916b2f78e338f0e98a4d19abbc58a76dd",
+      "gitBlob": "1515280bd71fe4066633b015b9bd8937dbb6263e",
+      "candidate": false
+    },
+    "src/demonstration-sequence.mjs": {
+      "sha256": "3fbad0308a50b8a0c546964d040b47e9bbafa8af91767dacb018acf12d5e9d52",
+      "gitBlob": "3030edd3ad809cab11fc220365aacb34e2d01b42",
+      "candidate": false
+    },
+    "src/capture.mjs": {
+      "sha256": "1229b217a934964b23a7c2cef6de53aa0f59a0800d469ef8c67955ca7d77090c",
+      "gitBlob": "763d09298e03c4275b802c83df92c773de62cd67",
+      "candidate": false
+    },
+    "src/sequence-edge.mjs": {
+      "sha256": "789b9f96cae89adcfaf833fc2d58dad625849b157988ce311bba2a7958533bc3",
+      "gitBlob": "ca6d46f12e5ad15c54a4d9c1acc430149071b818",
+      "candidate": false
+    },
+    "src/spoken-explanations.mjs": {
+      "sha256": "ef4e86bc0482f8e412f7a829370b09de01ecd7b1e0873ed0d8b21bbed38e0e7a",
+      "gitBlob": "bc99366b5a82c0745b272eaf31cd283898ca81cb",
+      "candidate": false
+    },
+    "src/capture-editing.mjs": {
+      "sha256": "8838883c5ad9838b9df36ee4678a09ec6228df1635935386b148299bf56e7d06",
+      "gitBlob": "570ee1ac63928e5837920288243e8ea7621936c9",
+      "candidate": false
+    },
+    "src/audio-decoder-clock.mjs": {
+      "sha256": "206123189c43be0c6700b6d4b59bf087c48839f15f976906a8cdcb5e71cf1597",
+      "gitBlob": "44063b32b8201055df38fb3cbf37131d29401945",
+      "candidate": false
+    },
+    "src/geometry.mjs": {
+      "sha256": "cb76f0ea3ce9abcc00ac2bb5738bb364f76cf0d95f79fab57ed811fc7f6e53e8",
+      "gitBlob": "ff9fb2268ead7ea4c78b8d74e1da0b00fdbf3061",
+      "candidate": false
+    },
+    "src/calibration-draft.mjs": {
+      "sha256": "9ef9c22499659fd74f15db10e4a438ba2ade50e024814158750458a1a55f44a9",
+      "gitBlob": "75a792fc6421bb0e08b048e92955ecda45f5c3ad",
+      "candidate": false
+    },
+    "src/frame-origin.mjs": {
+      "sha256": "2b6ccb509af38547fa38b36f11f79d69b7564867c2398eef65136a8c625984bf",
+      "gitBlob": "9154d9e63255de95152e3137d5790de5e9f00e42",
+      "candidate": false
+    },
+    "src/audio-activity.mjs": {
+      "sha256": "bc14b25656ce03694b2e826ec9fe0e9f8d1a258f9a7ad579ac5c0285f1f7164a",
+      "gitBlob": "143bef51e2eaf0fa3451bfe384118d889a003f6d",
+      "candidate": false
+    },
+    "src/audio-contrast.mjs": {
+      "sha256": "cc99f8a3be3735e727256ae251837ffc53e7133732127a1097a3a35f38671d3d",
+      "gitBlob": "47bb0a0aa936f814c29e6ee208a7b491d5571c98",
+      "candidate": false
+    },
+    "src/authoring.mjs": {
+      "sha256": "80e07264a109d1bab9758f2baa8faa9cb6b128b258f6673a5efa386923dbb29e",
+      "gitBlob": "01c7a2c25a2ce45f0786d6247f71cc2c239e1af5",
+      "candidate": false
+    },
+    "web/decision-practice.mjs": {
+      "sha256": "f4645fe9fb29939364868e3f0a9da95789bdedfe0fe3c1f6b91839dd3f188b30",
+      "gitBlob": "3a7a9ff1ca31f5287998d859ca6649efc71029fa",
+      "candidate": true
+    },
+    "web/decision-practice-input.mjs": {
+      "sha256": "da8e7f702bf9d5a245b685d6c48a1de8502163be9272c3cf7fd3a856fa880a8a",
+      "gitBlob": "f888aeef64f633adb372da1836b5651269b9cf01",
+      "candidate": false
+    },
+    "web/decision-spoken-companion.mjs": {
+      "sha256": "7b50c28890df80de1866567e558b77514911cd1fb2edaba9eb281cf1707a55f1",
+      "gitBlob": "c5edbed951aa0d788d3000a04bf568d446b2f2f2",
+      "candidate": true
+    },
+    "web/styles.css": {
+      "sha256": "312bf2bfd4c74ab8dc31982570e8273cb1bd8f9f3b562a49a26f319292dd0d60",
+      "gitBlob": "f541f3fd091191bf223a75a55b47ded7d61b64fc",
+      "candidate": false
+    },
+    "web/sequence-input.mjs": {
+      "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5",
+      "gitBlob": "bf4ece2d96b15bdb8ee88ff537d92f39032c5d6a",
+      "candidate": false
+    },
+    "web/audio-decoded-duration.mjs": {
+      "sha256": "42fbdecc10850221f96099996163ef2378d8152d02aa00f06edc849160c30886",
+      "gitBlob": "12ec9ec37d608c1663c0662b943abe28c882a999",
+      "candidate": false
+    },
+    "web/image-input.mjs": {
+      "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138",
+      "gitBlob": "954e74a63557cfd2adf53c7be028f134b287e59f",
+      "candidate": false
+    },
+    "web/decision-practice.css": {
+      "sha256": "40edacfc24a7bc046d6e1525b1735a33d4674b3a3568e39deea9c8d3bfe95829",
+      "gitBlob": "ac3591f84057e9a29b50daefe023b32bbc295cc2",
+      "candidate": true
+    },
+    "web/decision-handoff.mjs": {
+      "sha256": "2176c134f61de7100be5153a8cf5de924b7c9b18eab9fbe564db00475427d714",
+      "gitBlob": "9206753a27369ca3587313fe82320f6bc95094ae",
+      "candidate": false
+    },
+    "web/decision-practice.html": {
+      "sha256": "aba0687afce8805eaacf578a3faf51cabb448c4acd1bb765532b6fddef01ed1f",
+      "gitBlob": "83aea7b693d0c84d41bf28a676c9efee8dcf098f",
+      "candidate": false
+    },
+    "web/spoken-explanation-input.mjs": {
+      "sha256": "74b978b49a1148cd6ec9fc6649dc07a2fa1bd7b16b581e7aa919263b07d2cb4a",
+      "gitBlob": "469df4004e6fbecaa71b568b8861aae48b477285",
+      "candidate": false
+    },
+    "tools/audio-input-profile.mjs": {
+      "sha256": "a719397a68d2094c91f65967f2011d4445c765a740064fb4022786619d168a47",
+      "gitBlob": "5168e38deb1d8e59f869fd8b74d48b29981c127e",
+      "candidate": false
+    },
+    "tools/prepare-audio-activity.mjs": {
+      "sha256": "f4fe3545a15e5e9601800dab4637844bb2da2c804f4857cc904cabb21c2785a3",
+      "gitBlob": "c8714a5c617fe01818449d0fb74819c16d571b2c",
+      "candidate": false
+    }
+  },
+  "sourceReview": "WORLD and root source-only; browser executed by SKILL",
+  "receiving": {
+    "actualBrowserGroups": 7,
+    "nativeAdapterControls": 5,
+    "browserClosed": true,
+    "serverClosed": true,
+    "pixelReview": "desktop1440/narrow390 viewed; no clipping",
+    "privateQAExcluded": true,
+    "initialFailure": "Missing sparse server dependency before browserlaunch; restored exact maintained closure"
+  },
+  "serializationNormalizationAfterBrowser": [
+    "web/decision-practice.html"
+  ],
+  "limits": "Native adapter mocks distinct from actual PNG/audio browser receiving; no microphone or real bfcache navigation proof",
+  "actualInputs": {
+    "sourceBundleSHA256": "a9790a81aa12102e3524d3f78ab32043c170b6d9799f91b18ce4666ad259b59c",
+    "notebookSHA256": "a575a907d03accfd7bf4f2b6a28f714d7a93c3e7c4c784f60058723f458fcb6c",
+    "originalMoments": [
+      {
+        "id": "moment-d6a29ca7-73ae-4edc-b2f1-8a8b154117f6",
+        "origin": {
+          "kind": "local-video-frame",
+          "timing": "requestVideoFrameCallback",
+          "clip": {
+            "name": "scissors-original.webm",
+            "mimeType": "video/webm",
+            "sizeBytes": 1006547,
+            "sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+            "durationSeconds": 9.288
+          },
+          "requestedTimeSeconds": 0.1,
+          "mediaTimeSeconds": 0.112,
+          "frameSha256": "1f45c0bd38aafc7fe19ddf80b6274e5c16d1a9a39a782c5a940068120caed04e",
+          "widthPx": 1920,
+          "heightPx": 1080,
+          "decodedWidthPx": 1920,
+          "decodedHeightPx": 1080
+        },
+        "image": {
+          "sha256": "1f45c0bd38aafc7fe19ddf80b6274e5c16d1a9a39a782c5a940068120caed04e",
+          "widthPx": 1920,
+          "heightPx": 1080,
+          "mimeType": "image/png",
+          "name": "scissors-original-frame-0.112s.png",
+          "pixelCoordinates": "browser-oriented"
+        }
+      },
+      {
+        "id": "moment-70a19e87-19dc-49f1-ad47-421655bfcdcd",
+        "origin": {
+          "kind": "local-video-frame",
+          "timing": "requestVideoFrameCallback",
+          "clip": {
+            "name": "scissors-original.webm",
+            "mimeType": "video/webm",
+            "sizeBytes": 1006547,
+            "sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+            "durationSeconds": 9.288
+          },
+          "requestedTimeSeconds": 0.7,
+          "mediaTimeSeconds": 0.712,
+          "frameSha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+          "widthPx": 1920,
+          "heightPx": 1080,
+          "decodedWidthPx": 1920,
+          "decodedHeightPx": 1080
+        },
+        "image": {
+          "sha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+          "widthPx": 1920,
+          "heightPx": 1080,
+          "mimeType": "image/png",
+          "name": "scissors-original-frame-0.712s.png",
+          "pixelCoordinates": "browser-oriented"
+        }
+      },
+      {
+        "id": "moment-579c3545-40ca-4565-83a4-0d5123de6d16",
+        "origin": {
+          "kind": "local-video-frame",
+          "timing": "requestVideoFrameCallback",
+          "clip": {
+            "name": "scissors-original.webm",
+            "mimeType": "video/webm",
+            "sizeBytes": 1006547,
+            "sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+            "durationSeconds": 9.288
+          },
+          "requestedTimeSeconds": 1.3,
+          "mediaTimeSeconds": 1.312,
+          "frameSha256": "f26568141642695dfc61ffbe933f37b5e080f6c97bfcbf0f041fa9feeda71b5d",
+          "widthPx": 1920,
+          "heightPx": 1080,
+          "decodedWidthPx": 1920,
+          "decodedHeightPx": 1080
+        },
+        "image": {
+          "sha256": "f26568141642695dfc61ffbe933f37b5e080f6c97bfcbf0f041fa9feeda71b5d",
+          "widthPx": 1920,
+          "heightPx": 1080,
+          "mimeType": "image/png",
+          "name": "scissors-original-frame-1.312s.png",
+          "pixelCoordinates": "browser-oriented"
+        }
+      },
+      {
+        "id": "moment-a8e3ebae-1de2-4fad-88e1-50114c58f68f",
+        "origin": {
+          "kind": "local-video-frame",
+          "timing": "requestVideoFrameCallback",
+          "clip": {
+            "name": "scissors-original.webm",
+            "mimeType": "video/webm",
+            "sizeBytes": 1006547,
+            "sha256": "06d2a4355d6d157bae34da5372b2cc6f36379e50c541f24017367dc047cb86fe",
+            "durationSeconds": 9.288
+          },
+          "requestedTimeSeconds": 1.9000000000000001,
+          "mediaTimeSeconds": 1.912,
+          "frameSha256": "c926ca70091b7ea1ba99fdb780a1aaef2f658978a9e9188dacc86b79edbc1e75",
+          "widthPx": 1920,
+          "heightPx": 1080,
+          "decodedWidthPx": 1920,
+          "decodedHeightPx": 1080
+        },
+        "image": {
+          "sha256": "c926ca70091b7ea1ba99fdb780a1aaef2f658978a9e9188dacc86b79edbc1e75",
+          "widthPx": 1920,
+          "heightPx": 1080,
+          "mimeType": "image/png",
+          "name": "scissors-original-frame-1.912s.png",
+          "pixelCoordinates": "browser-oriented"
+        }
+      }
+    ],
+    "audioIdentities": [
+      {
+        "sha256": "7211a3187f7d39e502cc674880f51bca4740c2843cb9fca36a4ca8f57934fe49",
+        "mimeType": "audio/webm",
+        "sizeBytes": 9852,
+        "name": "recorded-explanation.webm"
+      }
+    ],
+    "scope": "Inputs to executed ordinary reader; original PNG payloads and encoded audio omitted. Oscillator audio authored, not human speech."
+  },
+  "executedProductHashes": {
+    "web/decision-spoken-companion.mjs": "7b50c28890df80de1866567e558b77514911cd1fb2edaba9eb281cf1707a55f1",
+    "web/decision-practice.mjs": "f4645fe9fb29939364868e3f0a9da95789bdedfe0fe3c1f6b91839dd3f188b30",
+    "web/decision-practice.css": "40edacfc24a7bc046d6e1525b1735a33d4674b3a3568e39deea9c8d3bfe95829",
+    "server.mjs": "439fa5c121f021e0c1c13be4bf66c3c44fc699dea13727363fa3e1f479afdd61"
+  },
+  "executedHarnessSHA256": "d87d9874704fcbf3564472d8fcb4059ec987a1191124d52b11c2a0e391176325",
+  "executedHTMLSHA256": "187707372a2a2a004aceff64cfae7a22a3068e9b6e4981af711264bb5b139d46",
+  "sourceAttribution": {
+    "url": "https://commons.wikimedia.org/wiki/File:Aerra%27s_Films_of_the_Ordinary_IV_--_Scissors_Cutting_Card_Stock.webm",
+    "author": "Aerra Carnicom / Aerrapc",
+    "license": "CC BY-SA 4.0",
+    "limits": "Retained original media only; authored receiving accounts/oscillator do not identify physical skill."
+  }
+}

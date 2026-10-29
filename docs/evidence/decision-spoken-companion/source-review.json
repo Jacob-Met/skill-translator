@@ -1,0 +1,14 @@
+{
+  "scope": "Independent source/lifecycle review only; no native/DOM/browser execution by this reviewer",
+  "assessment": "Accepted, no concrete blocker",
+  "sourceHashes": {
+    "web/decision-spoken-companion.mjs": "7b50c28890df80de1866567e558b77514911cd1fb2edaba9eb281cf1707a55f1",
+    "web/decision-practice.mjs": "f4645fe9fb29939364868e3f0a9da95789bdedfe0fe3c1f6b91839dd3f188b30"
+  },
+  "reviewed": [
+    "Late reader completions fenced by epoch, abort, source, step, reveal, busy and visibility; stale decoded assets released.",
+    "Retirement pauses/removes media; source replacement/reset/disposal release accepted assets; pagehide stops playback while preserving return context.",
+    "Complete canonical source comparison precedes accepted replacement; refusal restores retained companion.",
+    "No practice score/history/export or draft mutation; ordinary reveal remains prerequisite."
+  ]
+}

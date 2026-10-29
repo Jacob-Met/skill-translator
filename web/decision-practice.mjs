@@ -1,3 +1,4 @@
+import {mountDecisionSpokenCompanion} from '/web/decision-spoken-companion.mjs';
 import {createDecisionPractice,importDecisionPractice,recordDecisionAction,decisionPracticeFindings,decisionEvidence} from '/src/decision-practice.mjs';
 import {readSequenceBundle,releaseSequenceAssets} from '/web/sequence-input.mjs';
 import {makeDecisionPracticeBundle,readDecisionPracticeBundle} from '/web/decision-practice-input.mjs';
@@ -5,6 +6,7 @@ import {receiveDecisionHandoff} from '/web/decision-handoff.mjs';
 const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
 let cancelHandoff=()=>{};
 let source=null,assets=new Map(),session=null,revision=0,generation=0,controller=null,busy=false,predictionDirty=false,reflectionDirty=false;
+const spokenCompanion=mountDecisionSpokenCompanion($('account'));
 let pendingStepIds=new Set();
 const error=message=>{$('error').hidden=!message;$('error').textContent=message;};
 function seedPendingStepIds(next){pendingStepIds=new Set(next.stepIds);}
@@ -71,8 +73,9 @@ function historyEvidenceDetails(source,step,assets,returnTarget){
 
 function render(){
   renderStepChoices();
-  $('exercise').hidden=!session;if(!session){sync();return;}
+  $('exercise').hidden=!session;if(!session){spokenCompanion.render(null);sync();return;}
   const result=decisionPracticeFindings(source,session),state=result.steps[result.currentIndex],step=source.steps.find(s=>s.id===state.id);
+  spokenCompanion.render({source,stepId:state.id,revealed:state.revealed,busy});
   const before=source.moments.find(m=>m.id===step.beforeMomentId),after=source.moments.find(m=>m.id===step.afterMomentId);
   const returnTarget=!state.response?{id:'predictionHeading',label:'Return to your current prediction'}:state.revealed&&!state.reflection?{id:'reflectionHeading',label:'Return to your current reflection'}:{id:'stepTitle',label:'Return to your current step'};
   $('sourceContext').textContent=`Supplied demonstration context · ${source.title}${source.context?' — '+source.context:''}`;
@@ -104,9 +107,9 @@ function act(type,fields={}){try{
   if(draft){$('expectedChange').value=draft.expectedChange;$('decisionCue').value=draft.cue;$('recovery').value=draft.recovery;$('uncertain').checked=draft.uncertain;predictionDirty=true;sync();}
   $('status').textContent=draft?'Source reveal recorded before submission; your unsubmitted draft is retained.':'Action retained. Earlier submitted responses are unchanged.';
 }catch(e){error(e.message);}}
-function begin(){controller?.abort();controller=new AbortController();const request={token:++generation,revision,signal:controller.signal};busy=true;sync();return request;}
+function begin(){spokenCompanion.suspend();controller?.abort();controller=new AbortController();const request={token:++generation,revision,signal:controller.signal};busy=true;sync();return request;}
 const current=request=>request.token===generation&&!request.signal.aborted;
-function finish(request){if(request.token===generation){busy=false;controller=null;sync();}}
+function finish(request){if(request.token===generation){busy=false;controller=null;sync();if(session){const f=decisionPracticeFindings(source,session),s=f.steps[f.currentIndex];spokenCompanion.render({source,stepId:s.id,revealed:s.revealed,busy});}}}
 async function acceptSource(file,{complete=false,externalSignal}={}){
   const request=begin(),familiarity=$('familiarity').value;let loaded;
   const abort=()=>controller?.abort();externalSignal?.addEventListener('abort',abort,{once:true});
@@ -127,13 +130,13 @@ for(const [id,complete]of [['sourceFile',false],['completeFile',true]])$(id).add
 });
 $('sessionFile').addEventListener('change',async event=>{
   const file=event.target.files[0];if(!file||!source)return;cancelHandoff();const request=begin();
-  try{if(file.size<1||file.size>1024*1024)throw Error('Choose decision practice up to 1 MiB');const value=JSON.parse(await file.text());if(!current(request)||request.revision!==revision)return;const next=importDecisionPractice(source,value);session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;$('familiarity').value=session.priorFamiliarity;error('');render();$('status').textContent='Practice reopened by replaying source-bound actions. Saved verdicts are not trusted.';}catch(e){if(current(request))error('Practice refused; accepted exercise retained. '+e.message);}finally{finish(request);}
+  try{if(file.size<1||file.size>1024*1024)throw Error('Choose decision practice up to 1 MiB');const value=JSON.parse(await file.text());if(!current(request)||request.revision!==revision)return;const next=importDecisionPractice(source,value);spokenCompanion.reset();session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;$('familiarity').value=session.priorFamiliarity;error('');render();$('status').textContent='Practice reopened by replaying source-bound actions. Saved verdicts are not trusted.';}catch(e){if(current(request))error('Practice refused; accepted exercise retained. '+e.message);}finally{finish(request);}
 });
 function startFresh(stepIds){
   if(!source||busy)return;
   try{
     const next=createDecisionPractice(source,stepIds,$('familiarity').value);
-    session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;error('');render();
+    spokenCompanion.reset();session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;error('');render();
     $('status').textContent=stepIds?'A new empty exercise has begun on '+next.stepIds.length+' selected decisions from the same accepted source.':'A new empty exercise has begun on the same accepted source.';
   }catch(e){error(e.message);}
 }
@@ -161,6 +164,7 @@ $('saveComplete').addEventListener('click',async()=>{
   }catch(e){if(current(request))error(e.message);}finally{finish(request);}
 });
 cancelHandoff=receiveDecisionHandoff({accept:(file,signal)=>acceptSource(file,{externalSignal:signal}),onStatus:message=>{$('status').textContent=message;},onError:error});
-window.addEventListener('beforeunload',()=>{cancelHandoff();controller?.abort();releaseSequenceAssets(assets);});
+window.addEventListener('beforeunload',()=>{spokenCompanion.dispose();cancelHandoff();controller?.abort();releaseSequenceAssets(assets);});
+
 
 
