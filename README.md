@@ -504,3 +504,8 @@ Verification: `node --test --test-isolation=none test/response-holdout.test.mjs`
 
 Relationship Discovery now proposes complete multi-point shared-motion groups from the retained original annotations, highlighting each alternative in the original sequence frames. No group labels are required. The existing source-only save/reopen path recomputes the groups; overlapping, missing and unsupported geometry stays visible. See [shared motion groups](docs/SHARED_MOTION_GROUPS.md) for the fitted-model meaning, receiving and limits. Original sequence accounts also infer [contiguous shared-motion spans](docs/SHARED_MOTION_SPANS.md), exposing groups that move together for only part of a recording without manual interval boundaries.
 
+
+## Keep finite variation proposals consistent with observation acceptance
+
+The finite observation and calibration planners include both receiver comparison allowances when counting distinguishable rule pairs. Touching predictions remain unresolved, and the observation acceptance rule is unchanged. [The numerical guard and receiving guide](docs/FINITE_VARIATION_GUARDS.md) records the reproducible midpoint counterexample, scope and portable controls.
+
