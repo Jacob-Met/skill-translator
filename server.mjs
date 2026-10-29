@@ -8,6 +8,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/src/edge-gap.mjs":["src/edge-gap.mjs","text/javascript; charset=utf-8"],
+  "/src/whole-edge-gap.mjs":["src/whole-edge-gap.mjs","text/javascript; charset=utf-8"],
   "/web/edge-connection.css":["web/edge-connection.css","text/css; charset=utf-8"],
   "/src/edge-connection.mjs":["src/edge-connection.mjs","text/javascript; charset=utf-8"],
   "/src/whole-edge-connection.mjs":["src/whole-edge-connection.mjs","text/javascript; charset=utf-8"],
