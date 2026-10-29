@@ -221,6 +221,8 @@ The two authored controls illustrate agreement and an interior 4 mm discrepancy 
 ## Timed demonstration account
 
 Open `/sequence` to retain actual local video frames and explain a change through an intended result, visible evidence, supplied sensory cue and recovery note. Saved accounts embed the exact retained PNGs, validate their hashes on reopen and keep actual presented times distinct from requested seeks. The original video remains separate. [Demonstration sequence details](docs/DEMONSTRATION_SEQUENCE.md) describe the source contract, editing, limits and receiving. These authored accounts do not establish physical task success or learning.
+
+Choose **Save printable offline lesson** in Sequence Studio to keep all retained frames and attached calibrated annotations in a standalone HTML lesson for offline reading or printing. Keep the editable sequence JSON separately for revisions. See [Printable lessons](PRINTABLE_LESSONS.md) for saving, reopening, printing, and interpreting the supplied calibration.
 ## From observation evidence to deliberate practice
 
 Open **Review supported rule choices** in the workbench after retaining observations, or visit `/rule-adoption` and open the source and observation JSON files. The page reuses the maintained five-rule evidence analysis. Only rules compatible with observations for that mark can be selected; untested and contradicted rules remain unavailable. No rule is selected automatically. A choice among several survivors keeps those alternatives visible.
