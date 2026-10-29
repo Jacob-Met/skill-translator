@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';import{readFile,writeFile}from'node:fs/promises';
+import {planAdaptiveCueReadings,executeAdaptiveCueReadings} from '../src/cue-adaptive-repeat.mjs';
+import {planRepeatedCueReadings} from '../src/cue-repeat-schedule.mjs';
+const raw=JSON.parse(await readFile(new URL('./fixtures/repeated-cue-study.json',import.meta.url),'utf8'));
+const bundle=structuredClone(raw),rows=[[0,0,0],[0,1,0],[1,0,0],[1,0,1]];
+bundle.study.comparison.examples=rows.map((_,i)=>{const x=structuredClone(raw.study.comparison.examples[i%2]);x.source.title='Authored policy case '+(i+1);x.source.clip.sha256=String(i+1).repeat(64);for(const m of x.source.moments)m.origin.clip=structuredClone(x.source.clip);return x;});
+bundle.study.cues=['Gate cue','Left cue','Right cue'].map((label,i)=>({id:'c'+i,label,basis:'Authored categorical control, not inferred from pixels'}));
+bundle.study.rows=rows.map((values,i)=>({decision:'Represented decision '+i,basis:'Authored policy control',values:values.map(String)}));
+bundle.comparison.study=structuredClone(bundle.study.comparison);bundle.comparison.sources=rows.map((_,i)=>{const s=structuredClone(raw.comparison.sources[i%2]);s.sequence=structuredClone(bundle.study.comparison.examples[i].source);return s;});
+const inputs={maxErrors:1,basis:'One hypothetical TOTAL mismatch',events:[]},planning={maxAdditional:6,basis:'Bounded adaptive control'};
+assert.equal(planRepeatedCueReadings(bundle.study,inputs,planning).status,'no-fixed-schedule-within-bound');
+assert.equal(planAdaptiveCueReadings(bundle.study,inputs,planning).minimumWorstAdditional,5);
+const original=JSON.stringify(bundle),answers=[];let state=executeAdaptiveCueReadings(bundle.study,inputs,planning,answers);
+while(state.status==='question-ready'){
+ answers.push({cue:state.node.cue,value:'0',provenance:{kind:'hypothetical',basis:'Authored answer'}});
+ state=executeAdaptiveCueReadings(bundle.study,inputs,planning,answers);
+ assert.equal(state.remainingHorizon,6-answers.length);
+ assert.equal(state.account.active.length,answers.length);
+}
+assert.equal(state.status,'decision-resolved');assert.equal(state.node.decision,'Represented decision 0');assert.equal(JSON.stringify(bundle),original);
+assert.deepEqual(executeAdaptiveCueReadings(bundle.study,inputs,planning,JSON.parse(JSON.stringify(answers))),state);
+assert.throws(()=>executeAdaptiveCueReadings(bundle.study,inputs,planning,[{...answers[0],cue:'unrequested'}]),/current policy cue/);
+assert.throws(()=>executeAdaptiveCueReadings(bundle.study,inputs,planning,[...answers,answers[0]]),/No further question/);
+assert.throws(()=>executeAdaptiveCueReadings(bundle.study,inputs,planning,[{...answers[0],provenance:{kind:'source-inspection',basis:'Forged frame',exampleIndex:0,momentId:'missing',frameSha256:'0'.repeat(64)}}]));
+const history={...inputs,events:[{id:'r0',kind:'record',readingId:'prior',entry:{cue:'c0',value:'1',provenance:{kind:'hypothetical',basis:'Prior control'}}}]};
+const prior=planAdaptiveCueReadings(bundle.study,history,planning);assert.equal(prior.retained.find(r=>r.index===0).remaining,0);
+assert.equal(inputs.events.length,0);
+if(process.env.ADAPTIVE_FIXTURE_PATH)await writeFile(process.env.ADAPTIVE_FIXTURE_PATH,JSON.stringify(bundle));
+console.log(JSON.stringify({groups:7,decision:state.node.decision,used:answers.length,remaining:state.remainingHorizon,status:'pass'}));
+
+const capacityStudy=structuredClone(raw.study);capacityStudy.rows.forEach(r=>r.values[0]='common');
+const entry={cue:'c0',value:'common',provenance:{kind:'hypothetical',basis:'Capacity control'}};
+const records=n=>Array.from({length:n},(_,i)=>({id:'e'+i,readingId:'r'+i,kind:'record',entry:structuredClone(entry)}));
+const capacityInputs=events=>({maxErrors:0,basis:'Retained capacity control',events});
+assert.equal(planAdaptiveCueReadings(capacityStudy,capacityInputs(records(30)),planning).status,'insufficient-history-capacity');
+const twentyNine=capacityInputs(records(29)),fits=planAdaptiveCueReadings(capacityStudy,twentyNine,planning);
+assert.equal(fits.minimumWorstAdditional,1);assert.equal(fits.historyCapacity.maximumNewReadings,1);
+assert.equal(executeAdaptiveCueReadings(capacityStudy,twentyNine,planning,[{cue:'c1',value:'a',provenance:{kind:'hypothetical',basis:'Last available identity'}}]).status,'decision-resolved');
+const withdrawn=records(30).flatMap((e,i)=>[e,{id:'w'+i,kind:'withdraw',readingId:e.readingId,replaces:e.id,reason:'Explicit exclusion'}]);
+assert.equal(planAdaptiveCueReadings(capacityStudy,capacityInputs(withdrawn),planning).status,'insufficient-history-capacity');
+const revisions=records(1);for(let i=1;i<90;i++)revisions.push({id:'rev'+i,kind:'correct',readingId:'r0',replaces:i===1?'e0':'rev'+(i-1),value:'common',reason:'Transcript control'});
+assert.equal(planAdaptiveCueReadings(capacityStudy,capacityInputs(revisions),planning).status,'insufficient-history-capacity');
+assert.equal(planAdaptiveCueReadings(capacityStudy,capacityInputs(revisions.slice(0,89)),planning).status,'adaptive-policy-found');
+console.log(JSON.stringify({historyCapacityControls:5,status:'pass'}));
