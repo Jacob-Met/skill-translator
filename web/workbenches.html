@@ -19,7 +19,7 @@
   <div class="workbench-search">
     <label for="workbenchFilter">Find a workbench</label>
     <input id="workbenchFilter" type="search" autocomplete="off" aria-controls="workbenchGroups" placeholder="Search calibration, feedback, path…">
-    <p id="workbenchCount" role="status" aria-live="polite">85 workbenches available.</p>
+    <p id="workbenchCount" role="status" aria-live="polite">86 workbenches available.</p>
     <button id="workbenchClear" class="workbench-clear" type="button" hidden>Clear search</button>
     <label class="workbench-favorite-control" for="workbenchFavoriteOnly"><input id="workbenchFavoriteOnly" type="checkbox"> Show pinned only</label>
     <p id="workbenchFavoriteCount" class="workbench-favorite-count">0 workbenches pinned.</p>
@@ -27,7 +27,7 @@
   </div>
   <div id="workbenchGroups">
 <section class="workbench-section" data-workbench-section aria-labelledby="sources-heading">
-  <h2 id="sources-heading">Evidence, capture & calibration <span class="workbench-section-count">(20)</span></h2>
+  <h2 id="sources-heading">Evidence, capture & calibration <span class="workbench-section-count">(21)</span></h2>
   <p>Inspect the original observations and how they were prepared.</p>
   <ul class="workbench-list">
     <li data-workbench><a data-workbench-link href="/annotation-bound"><strong>Annotation bound</strong><small>How much does the annotation matter?</small> <span aria-hidden="true">↗</span></a></li>
@@ -50,6 +50,7 @@
     <li data-workbench><a data-workbench-link href="/sequence-change"><strong>Sequence change</strong><small>See what changed in the workpiece.</small> <span aria-hidden="true">↗</span></a></li>
     <li data-workbench><a data-workbench-link href="/sequence-edge"><strong>Sequence edge</strong><small>Inspect visible edges through a task</small> <span aria-hidden="true">↗</span></a></li>
     <li data-workbench><a data-workbench-link href="/sequence-contours"><strong>Original-frame contour walks</strong><small>Inspect curved image evidence with complete and omitted edge pixels</small> <span aria-hidden="true">↗</span></a></li>
+    <li data-workbench><a data-workbench-link href="/whole-frame-contours"><strong>Whole-original-frame contours</strong><small>Inspect one full native edge field without artificial tile seams.</small> <span aria-hidden="true">↗</span></a></li>
   </ul>
 </section>
 <section class="workbench-section" data-workbench-section aria-labelledby="practice-heading">

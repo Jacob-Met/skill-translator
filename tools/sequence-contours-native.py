@@ -14,10 +14,15 @@ MAX_VERTICES = 131072
 MAX_CHAINS = 4096
 
 
-def trace_field(edge, offset=(0, 0)):
+def trace_field(edge, offset=(0, 0), *, scope='roi'):
+    if scope not in ('roi', 'whole-original-frame'):
+        raise ValueError('Explicit supported contour scope required')
+    if scope == 'whole-original-frame' and offset != (0, 0):
+        raise ValueError('Whole original frame must start at original origin')
+    capacity = MAX_PIXELS if scope == 'roi' else 2097152
     if not isinstance(edge, np.ndarray) or edge.dtype != np.uint8 or edge.ndim != 2:
         raise ValueError('A two-dimensional uint8 binary field is required')
-    if not 0 < edge.size <= MAX_PIXELS or np.any((edge != 0) & (edge != 1)):
+    if not 0 < edge.size <= capacity or np.any((edge != 0) & (edge != 1)):
         raise ValueError('A complete bounded binary field is required')
     if len(offset) != 2 or any(type(v) is not int or v < 0 for v in offset):
         raise ValueError('Original nonnegative integer origin is required')
