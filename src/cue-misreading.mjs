@@ -1,0 +1,3 @@
+import {importCueStudy} from './cue-sufficiency.mjs';
+import {inspect,certificate} from './cue-misreading-core.mjs';
+export function inspectMisreading(study,inputs){if(!inputs||typeof inputs!=='object'||!Array.isArray(inputs.readings))throw Error('Explicit saved inputs and readings array required');const s=importCueStudy(study);const result=inspect({rows:s.rows,cues:s.cues.map(c=>c.id),readings:inputs.readings,maxErrors:inputs.maxErrors,basis:inputs.basis});const prior=s.cues.map(c=>inputs.readings.find(a=>a.cue===c.id)?.value);return {...result,ambiguityCertificates:certificate(s.rows,prior,inputs.maxErrors)};}

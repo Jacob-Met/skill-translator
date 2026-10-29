@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';import {pathToFileURL} from 'node:url';
+import {createAppServer} from '../server.mjs';
+const {withBrowserSession}=await import(pathToFileURL(process.env.BROWSER_HELPER));
+const out=resolve(process.env.QA_OUTPUT);await mkdir(out,{recursive:true});
+const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port+'/cue-misreading',receipt={groups:[]};
+try{await withBrowserSession({root:resolve(new URL('..',import.meta.url).pathname),chromeBin:'/opt/google/chrome/chrome',runDirectory:out+'-session'},async({send,evaluate,exceptions,sandbox})=>{
+await send('Page.enable');await send('Runtime.enable');
+const wait=async s=>{for(let i=0;i<100;i++){if(await evaluate(s))return;await new Promise(r=>setTimeout(r,50));}throw Error(s);};
+const nav=async()=>{await evaluate('window.oldDocument=true');await send('Page.navigate',{url});await wait("!window.oldDocument && document.readyState==='complete' && !!document.getElementById('open')");};
+const upload=async file=>{const {root}=await send('DOM.getDocument');const {nodeId}=await send('DOM.querySelector',{nodeId:root.nodeId,selector:'#open'});await send('DOM.setFileInputFiles',{nodeId,files:[file]});};
+await nav();
+const fixtureSource=await readFile(new URL('./browser-cue-sufficiency.mjs',import.meta.url),'utf8');
+const begin=fixtureSource.indexOf('const sources=await p.evaluate(async()=>{')+'const sources=await p.evaluate('.length;
+const end=fixtureSource.indexOf('\n\n const comparison=',begin);
+const expression='('+fixtureSource.slice(begin,end).trim().replace(/;$/,'').slice(0,-1)+')()';
+const sources=(await evaluate(expression)).slice(0,2);
+const comparison={format:'skill-translator.decision-comparison-bundle/v1',study:{format:'skill-translator.decision-comparison/v1',relationship:'unresolved',explanation:'',examples:sources.map(s=>({source:s.sequence,stepId:'step-1'}))},sources};
+const original={format:'skill-translator.cue-bundle/v1',comparison,study:{format:'skill-translator.cue-sufficiency/v1',comparison:comparison.study,cues:['c0','c1','c2'].map(id=>({id,label:id,basis:'Authored category'})),rows:['a','b'].map(x=>({decision:x,basis:'Authored decision',values:[x,x,x]}))}};
+await writeFile(out+'/input.json',JSON.stringify(original));await upload(out+'/input.json');await wait("document.querySelectorAll('#examples img').length===4");
+assert.equal(await evaluate("[...document.querySelectorAll('#examples img')].every(i=>i.complete&&i.naturalWidth===100)"),true);
+await evaluate("document.getElementById('basis').value='Authored hypothetical bound';document.getElementById('basis').dispatchEvent(new Event('input'));document.getElementById('inspect').click()");
+assert.equal(await evaluate("JSON.parse(document.getElementById('results').dataset.report).worstQuestions"),1);
+await evaluate("document.getElementById('budget').value='1';document.getElementById('budget').dispatchEvent(new Event('change'));document.getElementById('inspect').click()");
+assert.equal(await evaluate("JSON.parse(document.getElementById('results').dataset.report).worstQuestions"),3);receipt.groups.push('actual original PNG admission and0/1error question counts');
+await send('Browser.setDownloadBehavior',{behavior:'allow',downloadPath:out});await evaluate("document.getElementById('save').click()");
+let saved;for(let i=0;i<100;i++){try{saved=JSON.parse(await readFile(out+'/cue-misreading.json','utf8'));break;}catch{}await new Promise(r=>setTimeout(r,50));}assert.deepEqual(saved.original,original);assert.equal(saved.inputs.maxErrors,1);
+await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:false});await nav();await upload(out+'/cue-misreading.json');await wait("document.querySelectorAll('#examples img').length===4");await evaluate("document.getElementById('inspect').click()");assert.equal(await evaluate("JSON.parse(document.getElementById('results').dataset.report).worstQuestions"),3);
+assert.ok(await evaluate('document.documentElement.scrollWidth<=innerWidth+2'));receipt.groups.push('actual input-only download and fresh390px recomputation');
+for(const badInputs of [undefined,null,{maxErrors:1,basis:'bad'}]){
+ const malformed={...saved};if(badInputs===undefined)delete malformed.inputs;else malformed.inputs=badInputs;
+ await writeFile(out+'/malformed.json',JSON.stringify(malformed));await upload(out+'/malformed.json');await wait("document.getElementById('error').textContent.includes('Explicit saved inputs')");
+ assert.equal(await evaluate("document.querySelectorAll('#examples img').length"),4);
+ assert.equal(await evaluate("document.getElementById('basis').value"),'Authored hypothetical bound');
+}receipt.groups.push('malformed own-input refusal preserves accepted source and inputs');
+await evaluate("document.getElementById('inspect').click();document.getElementById('results').scrollIntoView()");const shot=await send('Page.captureScreenshot',{format:'png'});await writeFile(out+'/narrow.png',Buffer.from(shot.data,'base64'));
+await send('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:1,mobile:false});await evaluate("document.getElementById('results').scrollIntoView()");const desktop=await send('Page.captureScreenshot',{format:'png'});await writeFile(out+'/desktop.png',Buffer.from(desktop.data,'base64'));
+await evaluate("document.getElementById('basis').value='Changed';document.getElementById('basis').dispatchEvent(new Event('input'))");assert.equal(await evaluate("document.getElementById('results').textContent"),'');
+assert.deepEqual(exceptions,[]);receipt.sandbox=sandbox;receipt.status='pass';
+});}catch(e){receipt.status='failed';receipt.error=e.stack;throw e;}finally{await writeFile(out+'/receipt.json',JSON.stringify(receipt,null,2));await new Promise(r=>{server.close(r);server.closeAllConnections();});}
