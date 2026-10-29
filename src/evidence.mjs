@@ -128,7 +128,8 @@ export function proposeEvidenceVariation(demo,landmarkId,observations,uncertaint
       const a=predictions[i],b=predictions[j];
       const separationMm=Math.hypot(a.xMm-b.xMm,a.yMm-b.yMm);
       pairs.push({rules:[a.rule,b.rule],separationMm,
-        distinguishable:separationMm>2*uncertaintyMm+1e-9});
+        // Both predictions receive the same numerical allowance in scoreInterpretation.
+        distinguishable:separationMm>2*(uncertaintyMm+1e-9)});
     }
     const candidate={widthMm,heightMm,uncertaintyMm,predictions,pairs,
       separablePairs:pairs.filter(p=>p.distinguishable).length,totalPairs:pairs.length,
