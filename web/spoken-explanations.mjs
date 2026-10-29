@@ -1,5 +1,5 @@
 import {mountExplanationRecorder} from '/web/explanation-recorder.mjs';
-import {createSpokenExplanations, addSpokenExplanation, removeSpokenExplanation, MAX_EXPLANATIONS} from '/src/spoken-explanations.mjs';
+import {createSpokenExplanations, addSpokenExplanation, updateSpokenExplanation, removeSpokenExplanation, MAX_EXPLANATIONS} from '/src/spoken-explanations.mjs';
 import {readSequenceBundle, releaseSequenceAssets} from '/web/sequence-input.mjs';
 import {loadExplanationAudio, releaseExplanationAudio, releaseExplanationAssets,
   makeSpokenExplanationBundle, readSpokenExplanationBundle} from '/web/spoken-explanation-input.mjs';
@@ -8,6 +8,7 @@ const $ = id => document.getElementById(id);
 let accepted = null, notebook = null, audioAssets = new Map(), draft = null;
 let revision = 0, sourceGeneration = 0, audioGeneration = 0;
 let receiving = null, loadingAudio = null, saving = null, recorder = null, recorderDraft = false, recorderLoading = false;
+let editing = null;
 const status = message => { $('status').textContent = message; };
 const draftDirty = () => Boolean(draft || $('audio-file').value || $('attribution').value || $('description').value);
 
@@ -33,16 +34,17 @@ function changed() {
 function controls() {
   const step = notebook?.source.steps.find(value => value.id === $('step').value);
   const pending = Boolean(receiving || loadingAudio);
-  $('attach').disabled = !step || !draft || !$('attribution').value.trim() || pending || notebook.explanations.length >= MAX_EXPLANATIONS;
+  $('attach').disabled = !step || !draft || !$('attribution').value.trim() || pending || Boolean(editing) || notebook.explanations.length >= MAX_EXPLANATIONS;
   $('discard').disabled = !draftDirty() && !loadingAudio;
-  $('save').disabled = !notebook?.explanations.length || draftDirty() || pending || Boolean(saving);
+  $('save').disabled = !notebook?.explanations.length || draftDirty() || pending || Boolean(saving) || Boolean(editing);
+  for (const button of $('explanations').querySelectorAll('[data-account-action]')) button.disabled = Boolean(editing || receiving);
   for (const id of ['audio-file', 'attribution', 'description']) $(id).disabled = !step;
   $('attachment-target').textContent = step ? 'Will attach to: ' + step.title : 'Add a before/after step in Demonstration studio first.';
   if (notebook) {
     $('explanation-count').textContent = notebook.explanations.length + ' / ' + MAX_EXPLANATIONS + ' explanations';
     const unique = new Map(notebook.explanations.map(value => [value.audio.sha256, value.audio]));
     const bytes = [...unique.values()].reduce((sum, audio) => sum + audio.sizeBytes, 0);
-    $('save-summary').textContent = notebook.explanations.length + ' retained explanation(s), ' + (bytes / 1048576).toFixed(2) + ' / 8 MiB of audio, and every original frame. ' + (draftDirty() ? 'Attach or discard the current draft before saving.' : 'Reopening checks the original media again.');
+    $('save-summary').textContent = notebook.explanations.length + ' retained explanation(s), ' + (bytes / 1048576).toFixed(2) + ' / 8 MiB of audio, and every original frame. ' + (editing ? 'Save or cancel the text changes before downloading. ' : '') + (draftDirty() ? 'Attach or discard the current audio draft before saving.' : 'Reopening checks the original media again.');
   }
 }
 
@@ -107,23 +109,80 @@ function renderStep() {
     });
     const metadata = document.createElement('p'); metadata.className = 'audio-meta';
     metadata.textContent = explanation.audio.name + ' · ' + asset.durationSeconds.toFixed(2) + ' s · ' + explanation.audio.sizeBytes.toLocaleString() + ' bytes';
-    const end = document.createElement('div'), label = document.createElement('span'), remove = document.createElement('button');
-    end.className = 'card-end'; label.className = 'audio-meta'; label.textContent = 'Separately supplied account';
+    const end = document.createElement('div'), label = document.createElement('span'), remove = document.createElement('button'), edit = document.createElement('button');
+    end.className = 'card-end actions'; label.className = 'audio-meta'; label.textContent = 'Separately supplied account';
     remove.type = 'button'; remove.className = 'remove'; remove.textContent = 'Remove';
+    remove.dataset.accountAction = 'remove';
     remove.setAttribute('aria-label', 'Remove explanation supplied by ' + explanation.attribution);
+    edit.type = 'button'; edit.textContent = 'Edit text'; edit.dataset.accountAction = 'edit';
+    edit.setAttribute('aria-label', 'Edit text for explanation supplied by ' + explanation.attribution);
+    edit.onclick = () => {
+      if (editing || !currentCard()) return;
+      // Text correction has its own draft; it never borrows the audio attachment form.
+      const current = notebook.explanations.find(value => value.id === explanation.id);
+      const form = document.createElement('form'), attributionLabel = document.createElement('label'), attribution = document.createElement('input');
+      const descriptionLabel = document.createElement('label'), written = document.createElement('textarea');
+      const saveText = document.createElement('button'), cancel = document.createElement('button'), error = document.createElement('p');
+      const actions = document.createElement('div'); actions.className = 'actions';
+      form.dataset.correctionForm = ''; form.setAttribute('aria-label', 'Correct retained explanation text');
+      const token = {id: current.id, stepId: current.stepId, generation, audio: {...current.audio}, form};
+      attributionLabel.textContent = 'Who supplied this explanation'; attribution.type = 'text'; attribution.maxLength = 240;
+      attribution.value = current.attribution; attributionLabel.append(attribution);
+      attribution.name = 'correction-attribution';
+      descriptionLabel.textContent = 'Written description'; written.maxLength = 1800; written.rows = 4;
+      written.value = current.description; descriptionLabel.append(written);
+      written.name = 'correction-description';
+      for (const field of [attribution, written]) field.addEventListener('input', () => {
+        if (editing !== token) return;
+        changed(); controls();
+      });
+      saveText.type = 'submit'; saveText.textContent = 'Save text'; cancel.type = 'button'; cancel.textContent = 'Cancel';
+      error.setAttribute('role', 'alert');
+      const finish = () => {
+        if (editing !== token) return;
+        editing = null; form.remove(); edit.hidden = false; controls(); edit.focus();
+      };
+      const cancelEdit = () => { if (editing !== token) return; finish(); status('Text changes canceled. Retained explanations and the audio draft are unchanged.'); };
+      cancel.onclick = cancelEdit;
+      form.addEventListener('keydown', event => { if (event.key === 'Escape') { event.preventDefault(); cancelEdit(); } });
+      form.onsubmit = event => {
+        event.preventDefault();
+        const retained = notebook?.explanations.find(value => value.id === token.id);
+        if (editing !== token || !currentCard() || token.generation !== sourceGeneration ||
+          token.stepId !== $('step').value || retained?.stepId !== token.stepId ||
+          !['sha256', 'mimeType', 'sizeBytes', 'name'].every(key => retained?.audio[key] === token.audio[key])) {
+          error.textContent = 'This explanation is no longer available for this edit. The accepted notebook is unchanged.';
+          return;
+        }
+        try {
+          const next = updateSpokenExplanation(notebook, accepted.sequence, token.id, {attribution: attribution.value, description: written.value});
+          changed(); notebook = next;
+          const updated = notebook.explanations.find(value => value.id === token.id);
+          heading.textContent = updated.attribution; description.textContent = updated.description || 'No written description supplied.';
+          player.setAttribute('aria-label', 'Spoken explanation supplied by ' + updated.attribution);
+          edit.setAttribute('aria-label', 'Edit text for explanation supplied by ' + updated.attribution);
+          remove.setAttribute('aria-label', 'Remove explanation supplied by ' + updated.attribution);
+          finish(); status('Explanation text saved. The original demonstration and recording are unchanged. Download the notebook to keep the correction.');
+        } catch (failure) { error.textContent = 'Text change refused: ' + failure.message + ' The accepted notebook is unchanged.'; }
+      };
+      actions.append(saveText, cancel); form.append(attributionLabel, descriptionLabel, actions, error);
+      changed(); editing = token; edit.hidden = true; card.append(form); controls(); attribution.focus();
+    };
     remove.onclick = () => {
+      if (editing || !currentCard()) return;
       changed(); notebook = removeSpokenExplanation(notebook, explanation.id); clearPlayer(player);
       if (!notebook.explanations.some(value => value.audio.sha256 === explanation.audio.sha256)) {
         releaseExplanationAudio(audioAssets.get(explanation.audio.sha256)); audioAssets.delete(explanation.audio.sha256);
       }
       renderStep(); status('Explanation removed from this notebook. The original demonstration is unchanged.');
     };
-    end.append(label, remove); card.append(heading, description, player, metadata, end); $('explanations').append(card);
+    end.append(label, edit, remove); card.append(heading, description, player, metadata, end); $('explanations').append(card);
   }
   controls();
 }
 
 function install(next) {
+  editing = null;
   pausePlayers(); clearDraft();
   if (accepted) releaseSequenceAssets(accepted.assets);
   releaseExplanationAssets(audioAssets);
@@ -167,6 +226,7 @@ for (const [id, complete] of [['source', false], ['notebook-file', true]]) {
   $(id).onchange = () => { const file = $(id).files[0]; $(id).value = ''; open(file, complete); };
 }
 $('step').onchange = () => {
+  const canceledEdit = Boolean(editing); editing = null;
   changed();
   if (recorderDraft) {
     if (loadingAudio && !recorderLoading) {
@@ -176,6 +236,7 @@ $('step').onchange = () => {
     } else clearDraft();
   } else if (recorderLoading) { audioGeneration++; loadingAudio?.abort(); loadingAudio = null; }
   resetRecorder(); renderStep();
+  if (canceledEdit) status('Unapplied text changes canceled when changing steps. Retained explanations are unchanged.');
 };
 for (const id of ['attribution', 'description']) $(id).addEventListener('input', () => { changed(); controls(); });
 
@@ -249,3 +310,4 @@ window.addEventListener('pagehide', event => {
   releaseExplanationAssets(audioAssets); releaseExplanationAudio(draft);
 });
 controls();
+

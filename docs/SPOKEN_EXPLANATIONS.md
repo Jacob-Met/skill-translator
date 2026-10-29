@@ -35,6 +35,20 @@ Keep an earlier downloaded notebook if you need the earlier account. Nothing is
 uploaded or persisted automatically. Attach or discard a current draft before
 saving so the download does not silently omit it.
 
+To correct an attached account, choose **Edit text** on its card. Correct who
+supplied the explanation and its optional written description, then choose
+**Save text**. Attribution must contain text; the description may be empty.
+The same explanation, step, original source and recording are retained. The
+recording stays available to play while editing, and an unattached audio draft
+is kept separately. **Cancel** or Escape discards only the unapplied text
+changes. Changing steps also cancels unapplied text changes and shows a notice.
+
+Downloading, attaching another explanation and removing an explanation wait
+until you save or cancel the correction. After **Save text**, download the
+notebook to keep the corrected account; previously downloaded notebooks still
+contain their original text. A rejected correction or failed import preserves
+the accepted notebook. A successful import replaces it and closes the editor.
+
 ## Supported media and bounds
 
 The browser checks recognized WAV, MP3, Ogg, WebM and MP4/M4A containers and must
@@ -86,7 +100,7 @@ outcome's owner. This consumer requests no microphone permission.
 Native contract checks:
 
 ```sh
-node --test --test-isolation=none test/spoken-explanations.test.mjs
+node --test test/spoken-explanations.test.mjs test/spoken-explanation-correction.test.mjs
 ```
 
 The browser course uses actual checked original PNGs, actual tone-file
@@ -103,7 +117,18 @@ PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs \
 CHROME_BINARY=/path/to/chrome \
 QA_OUTPUT=/tmp/new-spoken-receiving \
 node tools/browser-spoken-explanations.mjs
+
+PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs \
+CHROME_BINARY=/path/to/chrome \
+QA_OUTPUT=/tmp/new-spoken-correction-receiving \
+node tools/browser-spoken-explanation-correction.mjs
 ```
+
+The correction course exercises canceled and invalid text, the unchanged
+recording and original-frame bytes after download and reopening, separate audio
+drafts, stale editors, import/export races, keyboard focus and a narrow layout.
+Its authored tone controls exercise playback and custody; they do not establish
+that a recording contains speech or that someone learned from it.
 
 The course requires a new output directory, retains partial results if a check
 fails, launches Chromium with its sandbox enabled, and closes only its owned
