@@ -8,6 +8,7 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+  "/web/decision-spoken-companion.mjs":["web/decision-spoken-companion.mjs","text/javascript; charset=utf-8"],
   "/web/audio-decoded-duration.mjs":["web/audio-decoded-duration.mjs","text/javascript; charset=utf-8"],
   "/web/explanation-recorder.mjs":["web/explanation-recorder.mjs","text/javascript; charset=utf-8"],
   "/web/explanation-recorder-core.mjs":["web/explanation-recorder-core.mjs","text/javascript; charset=utf-8"],

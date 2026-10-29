@@ -9,3 +9,10 @@ h2,#sourceContext,#account dd{overflow-wrap:anywhere}#sourceContext{white-space:
 .history-return{display:inline-block;padding:.5rem 0;color:#8edbc6;text-underline-offset:.18em}.history-return:focus-visible{outline:2px solid currentColor;outline-offset:3px}#stepTitle,#predictionHeading,#reflectionHeading{scroll-margin-block-start:16px}#stepTitle:focus,#predictionHeading:focus,#reflectionHeading:focus{outline:2px solid #8edbc6;outline-offset:6px}
 
 #selectionPanel{margin-block:1rem}#selectionPanel>summary{cursor:pointer;padding-block:.35rem}#selectionPanel>summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}#practiceStepChoices{min-inline-size:0;margin-block:.75rem}#practiceStepChoices .practice-step-choice{display:flex;align-items:flex-start;gap:.5rem;padding-block:.4rem}#practiceStepChoices .practice-step-choice input{flex:0 0 auto;inline-size:auto;margin-block-start:.2rem}#practiceStepChoices .practice-step-choice span{min-inline-size:0;overflow-wrap:anywhere}
+
+
+#decision-spoken-companion{min-width:0;border:1px solid var(--line,#ccd4cf);padding:1rem;margin:1rem 0;border-radius:8px}
+#decision-spoken-companion[hidden]{display:none}
+#decision-spoken-companion article{min-width:0;margin:1rem 0;padding-top:.5rem;border-top:1px solid var(--line,#ccd4cf)}
+#decision-spoken-companion audio{display:block;width:100%;max-width:100%}
+#decision-spoken-companion input{max-width:100%;box-sizing:border-box}

@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "checks": [
+    "unrevealed admission/playback gated",
+    "revealed native player and immutable source",
+    "late read releases both asset collections after step change",
+    "wrong complete source refuses while prior companion retained",
+    "hide retires source; reset/dispose release"
+  ],
+  "scope": "Actual component body with authored DOM/reader/canonicalizer adapters; no PNG decoding/browser/canonical-validator qualification"
+}
