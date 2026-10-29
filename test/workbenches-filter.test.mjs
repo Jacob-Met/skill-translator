@@ -40,7 +40,7 @@ function mount(href, source = script, options = {}) {
     }};
   });
   const entries = sections.flatMap(section => section.items);
-  assert.equal(entries.length, 87, 'actual maintained directory is the test population');
+  assert.equal(entries.length, 88, 'actual maintained directory is the test population');
   let current = new URL(href);
   const location = {get href() {return current.href;}};
   const history = {state: {from: 'directory'}, replacements: [], replaceState(state, unused, target) {
@@ -76,7 +76,7 @@ function mount(href, source = script, options = {}) {
   };
 }
 
-test('shared query restores a filtered original 87-route catalog without changing browser history', () => {
+test('shared query restores a filtered original 88-route catalog without changing browser history', () => {
   const h = mount('https://workbench.example/workbenches?mode=inspect&q=calibration#workbenchGroups');
   assert.equal(h.input.value, 'calibration');
   const visible = h.entries.filter(item => !item.hidden);
@@ -115,7 +115,7 @@ test('empty and unsupported terms keep the complete catalog recoverable', () => 
   assert.equal(h.url.searchParams.get('from'), 'project');
   assert.ok(h.entries.every(item => !item.hidden));
   assert.ok(h.sections.every(section => !section.hidden));
-  assert.equal(h.count.textContent, '87 workbenches available.');
+  assert.equal(h.count.textContent, '88 workbenches available.');
   assert.equal(h.clear.hidden, true);
 });
 
@@ -171,7 +171,7 @@ test('search sees original link copy but not the appended pin button', () => {
   assert.equal(h.count.textContent, 'No pinned workbenches yet. Use Pin beside a workbench.');
   assert.ok(h.entries.every(item => item.hidden));
   h.showPinned(false);
-  assert.equal(h.entries.filter(item => !item.hidden).length, 87);
+  assert.equal(h.entries.filter(item => !item.hidden).length, 88);
 });
 
 test('hostile stored routes are never admitted as pins', () => {
