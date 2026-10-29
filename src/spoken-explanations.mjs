@@ -77,8 +77,25 @@ export function addSpokenExplanation(notebook, explanation) {
   return validateSpokenExplanations(current.source, {...current, explanations: [...current.explanations, explanation]});
 }
 
+export function updateSpokenExplanation(value, source, id, patch) {
+  const current = validateSpokenExplanations(source, value);
+  if (!current.explanations.some(explanation => explanation.id === id)) throw Error('Choose a retained explanation to correct.');
+  record(patch, 'Explanation correction');
+  const changes = {};
+  for (const key of Reflect.ownKeys(patch)) {
+    if (key === 'attribution') changes.attribution = text(patch[key], 'Who supplied this explanation', 240, true);
+    else if (key === 'description') changes.description = text(patch[key], 'Written description', 1800);
+    else throw Error('Only attribution and written description can be corrected.');
+  }
+  // An empty correction is a validated no-op; omitted fields keep their current values.
+  return validateSpokenExplanations(current.source, {...current, explanations: current.explanations.map(
+    explanation => explanation.id === id ? {...explanation, ...changes} : explanation)});
+}
+
 export function removeSpokenExplanation(notebook, id) {
   const current = validateSpokenExplanations(notebook.source, notebook);
   if (!current.explanations.some(explanation => explanation.id === id)) throw Error('Choose a retained explanation to remove.');
   return validateSpokenExplanations(current.source, {...current, explanations: current.explanations.filter(explanation => explanation.id !== id)});
 }
+
+
