@@ -8,14 +8,29 @@ import {createPractice,placePractice,retryPractice} from '/src/practice.mjs';
 const $=id=>document.getElementById(id);
 const el=(tag,text)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
 const fmt=n=>n===null?'—':n.toFixed(2);
-let state=null,epoch=0,drills=[];
+// A complete review can contain the original task and eight separate drills.
+const REVIEW_FILE_LIMIT=24*1024*1024;
+let state=null,epoch=0,drills=[],savedReviewText=null;
+function prepareStudy(next){
+  const accepted=next?.schema===FOCUSED_REVIEW_SCHEMA?importFocusedReview(next):createFocusedReview(next);
+  const value=accepted.drills.length?accepted:accepted.review;
+  const text=JSON.stringify(value);
+  if(new TextEncoder().encode(text).byteLength>REVIEW_FILE_LIMIT)
+    throw Error('The complete saved review would exceed 24 MiB. Save the accepted review before starting another collection.');
+  return {accepted,text};
+}
+function acceptStudy(next){
+  const {accepted,text}=prepareStudy(next);
+  state=accepted.review;drills=accepted.drills;savedReviewText=text;epoch++;
+}
 const study=()=>({schema:FOCUSED_REVIEW_SCHEMA,review:state,drills});
-const focusedResults=mountFocusedResults({host:$('focusedResults'),getStudy:study,getRevision:()=>epoch,error,setStudy:next=>{const accepted=importFocusedReview(next);state=accepted.review;drills=accepted.drills;epoch++;render();}});
+const focusedResults=mountFocusedResults({host:$('focusedResults'),getStudy:study,getRevision:()=>epoch,error,setStudy:next=>{acceptStudy(next);render();}});
 const photoRoundFeedback=mountPhotoRoundFeedback({host:$('photoRoundFeedback'),getReview:()=>state,getRevision:()=>epoch});
 function error(message){$('error').hidden=!message;$('error').textContent=message;}
-function install(next,message){const accepted=next?.schema===FOCUSED_REVIEW_SCHEMA?importFocusedReview(next):createFocusedReview(next);state=accepted.review;drills=accepted.drills;epoch++;error('');render();$('status').textContent=message;}
-async function read(file,limit){if(!file||file.size>limit)throw Error('Choose a JSON file within the displayed source/session limits (256 KiB / 2 MiB).');return JSON.parse(await file.text());}
-function download(name,value){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));const a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function install(next,message){acceptStudy(next);error('');render();$('status').textContent=message;}
+async function read(file,limit,message='Choose a JSON file within the source/session limits (256 KiB / 2 MiB).'){if(!file||file.size>limit)throw Error(message);return JSON.parse(await file.text());}
+function downloadText(name,text){const url=URL.createObjectURL(new Blob([text],{type:'application/json'}));const a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function download(name,value){downloadText(name,JSON.stringify(value,null,2));}
 function drawTrend(host,observations,tolerance){
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 600 140');svg.setAttribute('role','img');svg.setAttribute('aria-label','Per-round error distances; missing rounds have no point. Exact values are in the table.');
   const maximum=Math.max(tolerance*1.3,...observations.map(o=>o.evaluation?.errorMm||0),1);
@@ -33,7 +48,11 @@ function render(){
   $('rounds').replaceChildren();for(const r of report.rounds){const card=el('article');card.className='round-card';card.append(el('strong',`Round ${r.round}${r.active?' · current':''}`),el('p',`${r.placed}/${r.total} placed · ${r.complete?(r.passed?'within all tolerances':'outside a tolerance'):'incomplete'}`),el('p',`Observed RMS ${fmt(r.rmsErrorMm)} mm`));$('rounds').append(card);}
   $('marks').replaceChildren();for(const mark of report.marks){
     const card=el('article');card.className='mark-card';card.dataset.id=mark.id;
-    const label=el('label'),check=el('input');check.type='checkbox';check.value=mark.id;check.checked=state.selectedIds.includes(mark.id);check.addEventListener('change',()=>{epoch++;state=importReview({...state,selectedIds:check.checked?[...state.selectedIds,mark.id]:state.selectedIds.filter(id=>id!==mark.id)});focus();});label.append(check,el('span',`${mark.label} · tolerance ${fmt(mark.toleranceMm)} mm`));card.append(label);
+    const label=el('label'),check=el('input');check.type='checkbox';check.value=mark.id;check.checked=state.selectedIds.includes(mark.id);check.addEventListener('change',()=>{
+      try{const review=importReview({...state,selectedIds:check.checked?[...state.selectedIds,mark.id]:state.selectedIds.filter(id=>id!==mark.id)});
+        acceptStudy({...study(),review});error('');focus();
+      }catch(e){check.checked=state.selectedIds.includes(mark.id);error('Selection refused; accepted review retained. '+e.message);}
+    });label.append(check,el('span',`${mark.label} · tolerance ${fmt(mark.toleranceMm)} mm`));card.append(label);
     card.append(el('p',`${mark.observedRounds} observed rounds; ${mark.outsideRounds} outside tolerance. Selected-round change: ${mark.changeMm===null?'unavailable (missing placement)':fmt(mark.changeMm)+' mm'} (later minus earlier).`));drawTrend(card,mark.observations,mark.toleranceMm);
     const wrap=el('div');wrap.className='table-wrap';const table=el('table'),head=el('tr');for(const title of ['Round','x / y · mm','dx / dy · mm','Error · mm','Result'])head.append(el('th',title));const thead=el('thead');thead.append(head);table.append(thead);const body=el('tbody');
     for(const o of mark.observations){const row=el('tr');for(const text of [String(o.round),o.placed?`${fmt(o.attempt.xMm)} / ${fmt(o.attempt.yMm)}`:'Missing',o.placed?`${fmt(o.evaluation.dxMm)} / ${fmt(o.evaluation.dyMm)}`:'—',fmt(o.evaluation?.errorMm??null),o.placed?(o.evaluation.within?'Within':'Outside'):'Unobserved'])row.append(el('td',text));body.append(row);}table.append(body);wrap.append(table);card.append(wrap);$('marks').append(card);
@@ -42,9 +61,9 @@ function render(){
 function focus(){const count=state.selectedIds.length;$('focusSummary').textContent=count?`${count} of ${state.demo.landmarks.length} marks explicitly selected. Rules and tolerances remain unchanged.`:'Choose one or more marks above.';$('startDrill').disabled=$('exportSource').disabled=!count;}
 for(const id of ['sourceFile','sessionFile','reviewFile'])$(id).addEventListener('change',()=>epoch++);
 $('openPair').addEventListener('submit',async event=>{event.preventDefault();const token=++epoch;try{const [demo,session]=await Promise.all([read($('sourceFile').files[0],256*1024),read($('sessionFile').files[0],2*1024*1024)]);const next=createReview(demo,session);if(token!==epoch)return;install(next,'Source and raw practice rounds opened. All results were recomputed.');}catch(e){if(token===epoch)error('Import refused; accepted review retained. '+e.message);}});
-$('reviewFile').addEventListener('change',async event=>{const token=++epoch;try{const raw=await read(event.target.files[0],2*1024*1024);const next=raw?.schema===FOCUSED_REVIEW_SCHEMA?importFocusedReview(raw):importReview(raw);if(token!==epoch)return;install(next,'Review reopened from source and raw placements; saved verdicts are ignored.');}catch(e){if(token===epoch)error('Review refused; accepted review retained. '+e.message);}});
-for(const id of ['baseline','comparison'])$(id).addEventListener('change',()=>{epoch++;try{const next=importReview({...state,baselineRound:Number($('baseline').value),comparisonRound:Number($('comparison').value)});state=next;error('');render();}catch(e){error(e.message);render();}});
+$('reviewFile').addEventListener('change',async event=>{const token=++epoch;try{const raw=await read(event.target.files[0],REVIEW_FILE_LIMIT,'Choose a saved review no larger than 24 MiB.');const next=raw?.schema===FOCUSED_REVIEW_SCHEMA?importFocusedReview(raw):importReview(raw);if(token!==epoch)return;install(next,'Review reopened from source and raw placements; saved verdicts are ignored.');}catch(e){if(token===epoch)error('Review refused; accepted review retained. '+e.message);}});
+for(const id of ['baseline','comparison'])$(id).addEventListener('change',()=>{try{const review=importReview({...state,baselineRound:Number($('baseline').value),comparisonRound:Number($('comparison').value)});acceptStudy({...study(),review});error('');render();}catch(e){error('Round selection refused; accepted review retained. '+e.message);render();}});
 $('example').addEventListener('click',()=>{const demo=structuredClone(demonstration),width=320,height=190,target=adapt(derive(demo),width,height);let session=createPractice(demo,width,height);for(const mark of target.landmarks)session=placePractice(demo,width,height,session,mark.id,{xMm:mark.xMm+4,yMm:mark.yMm+3});session=retryPractice(demo,width,height,session);for(const mark of target.landmarks.slice(0,2))session=placePractice(demo,width,height,session,mark.id,{xMm:mark.xMm+1,yMm:mark.yMm});install(createReview(demo,session),'Authored analytic example, not a measured learner study. The second round deliberately omits one mark.');});
-$('saveReview').addEventListener('click',()=>download('practice-review.json',drills.length?importFocusedReview(study()):importReview(state)));
+$('saveReview').addEventListener('click',()=>{try{if(savedReviewText===null)throw Error('Open a review before saving.');downloadText('practice-review.json',savedReviewText);}catch(e){error('Could not save review. '+e.message);}});
 $('exportSource').addEventListener('click',()=>download('focused-source.json',focusedPractice(state).demo));
 $('startDrill').addEventListener('click',()=>{try{const input=focusedPractice(state);sessionStorage.setItem('skill-translator-practice-input/v1',JSON.stringify(input));location.assign('/practice');}catch(e){error('Could not open focused practice. '+e.message);}});

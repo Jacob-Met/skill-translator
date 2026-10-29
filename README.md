@@ -103,6 +103,8 @@ For two or more placements, a descriptive common-translation diagnostic separate
 
 Export the session and source annotations to reopen the same setup. Outcomes are recomputed from placements; saved verdict fields are not trusted. Sessions bind source geometry, image identity where present, transfer rules, tolerances and target dimensions. Mismatched imports are refused transactionally. Open `/practice` directly to use the authored example.
 
+Practice Review retains the original task and up to eight separate focused attempts in one saved review. [Saving and reopening complete reviews](docs/PRACTICE_REVIEW_STORAGE.md) explains the aggregate file limit and how rejected changes preserve accepted evidence.
+
 ### Observe a learner's photographed attempt
 
 Choose **Observe a learner photo** in complete-task practice. Pair a separate local PNG or JPEG, identify the four corners of the practice workpiece and annotate the existing task marks. The practice dimensions stay fixed. The page maps these raw pixels through the supplied planar calibration and evaluates them using the same target geometry and tolerances as manual practice. Missing marks remain incomplete.
