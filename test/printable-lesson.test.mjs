@@ -1,17 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash, webcrypto} from 'node:crypto';
+import {frameOrigin} from '../src/frame-origin.mjs';
 import {makePrintableLesson} from '../web/printable-lesson.mjs';
 if(!globalThis.crypto)globalThis.crypto=webcrypto;
 const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jFMkAAAAASUVORK5CYII=','base64');
 const hash=createHash('sha256').update(png).digest('hex');
+const clip={name:'expert.mp4',mimeType:'video/mp4',sha256:'b'.repeat(64),durationSeconds:6,sizeBytes:200};
+function moment(id,time){
+ const image={name:id+'.png',mimeType:'image/png',sha256:hash,widthPx:1,heightPx:1,pixelCoordinates:'browser-oriented'};
+ return {id,label:id,visibleState:'Visible change & context',image,origin:frameOrigin(clip,time+.1,{mediaTime:time,width:1,height:1},image)};
+}
 function sample(){
- const moment=(id,time)=>({id,label:id,visibleState:'Visible change & context',
-   image:{mimeType:'image/png',sha256:hash},origin:{mediaTimeSeconds:time,requestedTimeSeconds:time+.1}});
  return {format:'skill-translator.sequence-bundle/v1',sequence:{
   format:'skill-translator.demonstration-sequence/v1',title:'Task guide',context:'A task with evidence',
-  clip:{name:'expert.mp4',mimeType:'video/mp4',sha256:'b'.repeat(64),durationSeconds:6,sizeBytes:200},
-  moments:[moment('Before',1),moment('After',3)],steps:[{title:'Make a change',beforeMomentId:'Before',afterMomentId:'After',
+  clip,
+  moments:[moment('Before',1),moment('After',3)],steps:[{id:'change',title:'Make a change',beforeMomentId:'Before',afterMomentId:'After',
    intent:'Good fit',visibleChange:'Changed',sensoryCue:'',recoveryCue:'Stop'}]},
  frames:[{momentId:'Before',pngBase64:png.toString('base64')},{momentId:'After',pngBase64:png.toString('base64')}]};
 }
@@ -38,14 +42,14 @@ test('hostile author strings stay inert even in printed HTML',async()=>{
  assert.equal((html.match(/<img /g)||[]).length,2);
 });
 test('modified PNG, duplicate and missing frames refuse',async()=>{
- const a=sample();a.sequence.moments[0].image.sha256='f'.repeat(64);
+ const a=sample();a.sequence.moments[0].image.sha256='f'.repeat(64);a.sequence.moments[0].origin.frameSha256='f'.repeat(64);
  await assert.rejects(makePrintableLesson(wrap(a)),/no longer matches/);
  const b=sample();b.frames[1].momentId='Before';
  await assert.rejects(makePrintableLesson(wrap(b)),/duplicated/);
  const c=sample();c.frames.pop();
  await assert.rejects(makePrintableLesson(wrap(c)),/incomplete/);
  const d=sample();d.sequence.steps[0].beforeMomentId='Wrong';
- await assert.rejects(makePrintableLesson(wrap(d)),/lost its original frame/);
+ await assert.rejects(makePrintableLesson(wrap(d)),/Each step must reference two retained source moments/);
 });
 test('malformed payload and aborted work produce no document',async()=>{
  const a=sample();a.format='wrong';
@@ -57,7 +61,7 @@ test('malformed payload and aborted work produce no document',async()=>{
 });
 test('unassigned frames are included once and source values are not changed',async()=>{
  const s=sample(),snap=JSON.stringify(s);
- s.sequence.moments.push({id:'Extra',label:'Unassigned',visibleState:'',image:{mimeType:'image/png',sha256:hash},origin:{mediaTimeSeconds:5,requestedTimeSeconds:5.1}});
+ s.sequence.moments.push({...moment('Extra',5),label:'Unassigned',visibleState:''});
  s.frames.push({momentId:'Extra',pngBase64:png.toString('base64')});
  const html=await (await makePrintableLesson(wrap(s))).text();
  assert.match(html,/id="source-Extra"/);
