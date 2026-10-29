@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-29T21:31:23.478854+00:00",
+  "result": "accepted for qualified publication",
+  "scope": "Root final visual and mathematical witness inspection plus qualification attribution; production source independently reviewed by WORLD",
+  "packetSHA256": "8451c16918d9918a1856a42918d9bb4daf7f3b36f4c13769f043c2ce66c3c8cf",
+  "fileCount": 20,
+  "findings": [
+    "All four focused1440/390 panels legibly expose six directed intervals, selected shifts/costs, transient-source explanation and exact witness/cycle.",
+    "Even witnessA0/B0/C10/D0 satisfies all six displayed intervals. Odd forwardC-to-D-to-B-to-C bounds sum to-10 with correct original upper/lower labels.",
+    "Incompatibility excludes simultaneous independent minima for the selected account only; higher-loss photometry and other accounts remain distinct questions.",
+    "Legacy objective/report parity, actual maintained-minimizer selection, private worker ownership, source-only reopen and delayedA-B-A retirement are separately attributed to author/peer receiving.",
+    "Originalcreate_issue remainsUNKNOWN and unrepeated; positive parent482 continuation6508320754 establishes this successor scope."
+  ],
+  "attribution": {
+    "native": "118oldreport/14refusal/216intervaloracles;2oldquadreport/4refusalparity;36actualoptima/145bindingrefusals",
+    "browser": "6ordinaryauthoredPNG groups plus4focused captures;13served HTTP bytechecks",
+    "peer": "review-worldlaw-source.json"
+  },
+  "visuallyInspected": [
+    "review-images/even-brightness-1440.png",
+    "review-images/even-brightness-390.png",
+    "review-images/odd-brightness-1440.png",
+    "review-images/odd-brightness-390.png"
+  ],
+  "captureCustody": "Private authored QA inspected through image viewer; raw images excluded from publication.",
+  "limits": "Mathematical declared-raster account, no physical identity/calibration/global registration or installed/deployed claim. Solver-only reservation is distinct from surrounding sample/worker/adapter work."
+}

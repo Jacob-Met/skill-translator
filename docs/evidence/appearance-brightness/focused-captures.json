@@ -1,0 +1,12 @@
+{
+  "scope": "Focused final visual captures only, no lifecycle repetition",
+  "browser": "156.0.8078.73",
+  "cases": [
+    "even",
+    "odd"
+  ],
+  "widths": [
+    1440,
+    390
+  ]
+}
