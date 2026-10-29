@@ -30,7 +30,14 @@ def inspect(request):
     ys,xs=np.nonzero(edge)
     if not compact and len(xs)>20000:raise ValueError('Complete edge cloud exceeds20000pixels; narrow the ROI')
     raw=cv2.HoughLinesP(edge,1,np.pi/180,40,minLineLength=80,maxLineGap=10)
-    lines=[] if raw is None else [tuple(map(int,row)) for row in raw[:,0]]
+    if raw is None:
+        lines=[]
+    else:
+        if not isinstance(raw,np.ndarray) or raw.dtype.kind not in ('i','u') or not ((raw.ndim==2 and raw.shape[1]==4) or (raw.ndim==3 and raw.shape[1:]==(1,4))):
+            raise ValueError('Unsupported native Hough segment layout')
+        # OpenCV5 returns N x 4; legacy bindings return N x 1 x 4.
+        # Normalize only these complete endpoint layouts, without dropping rows.
+        lines=[tuple(map(int,row)) for row in raw.reshape(-1,4)]
     if len(lines)>256:raise ValueError('More than256 complete candidates; narrow the ROI')
     lines=sorted(set(tuple(min((a,b),(c,d))+max((a,b),(c,d))) for a,b,c,d in lines))
     candidates=[]

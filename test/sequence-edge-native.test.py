@@ -50,4 +50,28 @@ class Native(unittest.TestCase):
         r['representation']='complete-field';actual=module.inspect(r);self.assertGreater(actual['field']['count'],20000);self.assertLessEqual(len(actual['candidates']),256)
     def test_complete_repeat_is_deterministic_in_fixed_runtime(self):
         self.assertEqual(module.inspect(request()),module.inspect(request()))
+class HoughLayouts(unittest.TestCase):
+    def test_native_layouts_preserve_complete_report(self):
+        from unittest.mock import patch
+        native=cv2.HoughLinesP
+        reports=[]
+        for shape in ((-1,4),(-1,1,4)):
+            def wrapped(*args,**kwargs):
+                raw=native(*args,**kwargs)
+                return None if raw is None else raw.reshape(shape)
+            with patch.object(cv2,'HoughLinesP',wrapped):
+                r=request();r['representation']='complete-field';reports.append(module.inspect(r))
+        self.assertGreater(len(reports[0]['candidates']),0)
+        self.assertEqual(reports[0],reports[1])
+    def test_invalid_layouts_refuse_without_partial_report(self):
+        from unittest.mock import patch
+        for raw in (np.zeros(4,np.int32),np.zeros((2,2),np.int32),np.zeros((2,2,4),np.int32),np.zeros((2,4),np.float64)):
+            with self.subTest(shape=raw.shape,dtype=str(raw.dtype)),patch.object(cv2,'HoughLinesP',return_value=raw):
+                with self.assertRaisesRegex(ValueError,'layout'):module.inspect(request())
+    def test_known_endpoint_pairs_not_collapsed(self):
+        from unittest.mock import patch
+        endpoints=np.array([[30,60,270,140],[40,80,260,80]],dtype=np.int32)
+        for raw in (endpoints,endpoints.reshape(2,1,4)):
+            with patch.object(cv2,'HoughLinesP',return_value=raw):report=module.inspect(request())
+            self.assertEqual([(c['a']['x'],c['a']['y'],c['b']['x'],c['b']['y'])for c in report['candidates']],[(30,60,270,140),(40,80,260,80)])
 if __name__=='__main__':unittest.main()
