@@ -12,3 +12,5 @@ label{display:block;font-size:.83rem;font-weight:650;min-width:0}input,select,bu
 @media(max-width:560px){main{padding:18px 16px 40px}nav{margin-bottom:20px}.card,.appearance-pair-result{padding:17px}.choice-grid{grid-template-columns:minmax(0,1fr);gap:13px}.frames{grid-template-columns:minmax(0,1fr);gap:16px}h1{max-width:16ch}.appearance-pair-settings{grid-template-columns:minmax(0,1fr);gap:3px}.appearance-pair-settings dd{margin-bottom:9px}.actions button{flex:1}#save{width:100%}}
 
 #middle-choice[hidden],#middle-figure[hidden]{display:none}
+
+.four-account-scroll{max-width:100%;overflow:auto}.four-account-scroll table{min-width:34rem}

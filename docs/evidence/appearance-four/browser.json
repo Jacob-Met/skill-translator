@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "groups": [
+    "Actual four original PNGs admitted, six maintained profiles/direct reducer received beside worker consumer, complete source-only export preserves originals",
+    "Desktop and390px layouts bounded; every complete original pair disclosure keyboard opens/closes",
+    "Fresh source-only reopen preserves four exact identities/settings and recomputes despite forged saved findings",
+    "Authored actual PNGs reproduce315 triangle-bound gap and exact26982 six-pair optimum",
+    "All225 authored flat-image optima remain paged; complete six-pair participation and disclosure state retained",
+    "Actual delayed page retired on settings change; explicit out-of-domain request refuses without stale export",
+    "Incumbent pair and triplet ordinary modes still compute through their existing paths"
+  ],
+  "browser": "156.0.8078.73",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "errors": [],
+  "inputSHA256": "4a77e8160865a2b417382c9ead748f7a261d8a7511aa69e5c8e66d5a033a524f",
+  "savedSHA256": "254e87d93d92dc8856111b7f4085ab92ce397075edc7ce93ccc6f29528a3c1a9",
+  "frames": [
+    {
+      "momentId": "moment-d6a29ca7-73ae-4edc-b2f1-8a8b154117f6",
+      "sha256": "1f45c0bd38aafc7fe19ddf80b6274e5c16d1a9a39a782c5a940068120caed04e",
+      "presentedSeconds": 0.112
+    },
+    {
+      "momentId": "moment-70a19e87-19dc-49f1-ad47-421655bfcdcd",
+      "sha256": "3cc12294ee9b126ce8996ca54d93e9d73808dea0b8136b2ab7062b9acad7d393",
+      "presentedSeconds": 0.712
+    },
+    {
+      "momentId": "moment-579c3545-40ca-4565-83a4-0d5123de6d16",
+      "sha256": "f26568141642695dfc61ffbe933f37b5e080f6c97bfcbf0f041fa9feeda71b5d",
+      "presentedSeconds": 1.312
+    },
+    {
+      "momentId": "moment-a8e3ebae-1de2-4fad-88e1-50114c58f68f",
+      "sha256": "c926ca70091b7ea1ba99fdb780a1aaef2f658978a9e9188dacc86b79edbc1e75",
+      "presentedSeconds": 1.912
+    }
+  ],
+  "scope": "Actual retained original PNG receiving plus separately authored encoded-PNG counterexample/flat controls; no physical track or global brightness registration claim",
+  "sourceHashes": {
+    "src/appearance-quadruple.mjs": "dfe9cdf513d41e72e5129e3ea9e0af3fbd1aefa275d2f4d29e4d5266490a6d55",
+    "web/appearance-quadruple-input.mjs": "380bd8e331eccc0e661a53120ad5a7c771543e3f288887b59de6a07aeed2a345",
+    "web/appearance-triplet-worker.mjs": "b6c2707c6adeb338b9c08481b8da14870ae4935baab976cada39fb650a3e6768",
+    "web/appearance-pair-app.mjs": "d8a35a63eee3fa2fcb07d1c2adef6a19702edc98fd8d3d89c70b141dbf2cca0a",
+    "web/appearance-quadruple-view.mjs": "23d4e66435af8e7640cb7ba555ce929bc0cc266fefeec6daf04d5c28ff546a26",
+    "web/appearance-pair.html": "ffee61006d3db02a7541a79348ec25aa1acfa39b29d349d3dc4847e3a6554bd3",
+    "web/appearance-pair.css": "e943727809e7c38a5316a1f12dec1059ea7514e8cd99f382a63c26529ea4b8cf",
+    "server.mjs": "877f53d517a0ba49048e73ed91bf77437cc5b34e22979e6b758c6cd064d07bd2",
+    "tools/browser-appearance-quadruple.mjs": "fea01443780f219f13ef3b9e5d807d9ad058cd910c05779baa4458124773f1dd"
+  }
+}

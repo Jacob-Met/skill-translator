@@ -1,0 +1,8 @@
+{
+  "scope": "Root final constructor guard delta review",
+  "initialInspectedCore": "b51293dc7256dd45a64703036b80d2483386431b4fc12f3ea59ad6647c0ccbf8",
+  "finalCore": "dfe9cdf513d41e72e5129e3ea9e0af3fbd1aefa275d2f4d29e4d5266490a6d55",
+  "method": "Removing the exact one-line early radius-domain guard reproduces the initially inspected complete core byte hash.",
+  "finding": "Explicit radius1\u20134 refusal now precedes maintained pair-support admission; scoring/enumeration/admission acceptance unchanged.",
+  "qualification": "Actual final seven-group browser receipt and five-native-body evidence refer to final core. Earlier root source receipt fingerprint was taken after this concurrent guard update; this separate delta review closes that attribution explicitly."
+}

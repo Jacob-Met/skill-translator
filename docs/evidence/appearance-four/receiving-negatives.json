@@ -1,0 +1,19 @@
+{
+  "scope": "Two bounded receiving failures preserved before final seven-group pass",
+  "failures": [
+    {
+      "kind": "test-selector",
+      "finding": "Participant disclosure selector matched parent plus six nested summaries; strict locator refused.",
+      "repair": "Use a direct-child summary selector.",
+      "productChanged": false,
+      "priorReceiptSHA256": "e3c9e9ec3d9ce748cbef2161662a8be5bbe0977214445111d04a639cb006b663"
+    },
+    {
+      "kind": "constructor-admission-message-order",
+      "finding": "Radius5 on a9x9 source was safely refused by incumbent pair support before the four-frame1\u20134 domain message.",
+      "repair": "Check the explicit four-frame radius domain before constructing maintained pair requests.",
+      "numericScoringChanged": false,
+      "priorReceiptSHA256": "f73323ed026ccd0e7ab12b538417c5d1abe54482484579314bd819c0fbdd22aa"
+    }
+  ]
+}
