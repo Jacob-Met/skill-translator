@@ -1,3 +1,16 @@
 main{max-width:1100px;margin:auto;padding:24px}section{padding:22px;margin-bottom:18px;background:var(--panel,#151c25);border:1px solid #344151;border-radius:12px}h1{font-size:clamp(2rem,5vw,3.8rem);max-width:900px}label{display:grid;gap:8px;margin:12px 0}input,select{max-width:100%;min-width:0;padding:10px}button{margin:6px 8px 6px 0}p{line-height:1.6}#error{color:#ffb8a7;padding:16px;border:1px solid #cc8965}.round-select{display:flex;gap:24px}.rounds{display:flex;flex-wrap:wrap;gap:10px}.round-card{padding:12px;border:1px solid #46576a;border-radius:8px;flex:1 1 170px}.mark-card{border-top:1px solid #46576a;padding:16px 0}.mark-card label{display:flex;align-items:center;font-weight:bold}.mark-card svg{width:100%;height:140px;border:1px solid #344151;background:#0e141d}.mark-card table{width:100%;border-collapse:collapse;font-size:.9rem}.mark-card th,.mark-card td{text-align:left;padding:8px;border-bottom:1px solid #344151}.table-wrap{overflow-x:auto}.topbar{flex-wrap:wrap;gap:12px}#status{overflow-wrap:anywhere}.mark-card input{width:auto}button:disabled{opacity:.45}svg text{fill:#c1ccdb;font-size:18px}@media(max-width:600px){main{padding:12px}section{padding:14px}.round-select{display:block}.topbar{padding:16px}.mark-card th,.mark-card td{padding:6px;font-size:.8rem}}
 
 .topbar a{color:#8edbc6}svg{overflow:visible}
+
+/* Read-only original / focused placement inspection. */
+#focusedResults [data-inspect-mark]{display:block;white-space:normal;text-align:left;font-size:.85rem}
+#focusedResults .placement-inspection{border:1px solid #62788c;border-radius:8px;padding:16px;margin-top:16px;overflow-wrap:anywhere}
+#focusedResults .placement-inspection h4{font-size:1.15rem;margin:0 0 12px}
+#focusedResults .placement-inspection h5{font-size:1rem;margin:0 0 12px}
+#focusedResults .placement-inspection-sides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+#focusedResults .placement-inspection-sides>div{min-width:0;background:#0e141d;padding:14px;border-radius:6px}
+#focusedResults .placement-inspection dl{margin:0}
+#focusedResults .placement-inspection dt{color:#c1ccdb;margin-top:10px}
+#focusedResults .placement-inspection dd{margin:3px 0 0;font-variant-numeric:tabular-nums}
+#focusedResults .placement-inspection :focus-visible{outline:2px solid #8edbc6;outline-offset:4px}
+@media(max-width:600px){#focusedResults .placement-inspection-sides{grid-template-columns:1fr}#focusedResults .placement-inspection{padding:12px}}

@@ -105,6 +105,8 @@ Export the session and source annotations to reopen the same setup. Outcomes are
 
 Practice Review retains the original task and up to eight separate focused attempts in one saved review. [Saving and reopening complete reviews](docs/PRACTICE_REVIEW_STORAGE.md) explains the aggregate file limit and how rejected changes preserve accepted evidence.
 
+[Inspect original and focused placements](docs/FOCUSED_PLACEMENT_INSPECTION.md) explains the signed offsets, retained coordinates, missing placements and keyboard controls available from each attached drill’s comparison.
+
 ### Observe a learner's photographed attempt
 
 Choose **Observe a learner photo** in complete-task practice. Pair a separate local PNG or JPEG, identify the four corners of the practice workpiece and annotate the existing task marks. The practice dimensions stay fixed. The page maps these raw pixels through the supplied planar calibration and evaluates them using the same target geometry and tolerances as manual practice. Missing marks remain incomplete.
