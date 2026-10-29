@@ -1,0 +1,17 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {executeFixedReadings} from '../src/cue-fixed-execution.mjs';
+const saved={original:JSON.parse(fs.readFileSync(process.env.FIXED_SOURCE_BUNDLE??new URL('./fixtures/repeated-cue-study.json',import.meta.url),'utf8')),inputs:{maxErrors:1,basis:'One declared hypothetical total disagreement',events:[]}};
+const study=structuredClone(saved.original.study);study.cues.push({id:'common',label:'Authored nondiscriminating cue',basis:'Capacity control only'});study.rows.forEach(r=>r.values.push('same'));
+saved.original.study.cues=saved.original.study.cues.slice(0,1);saved.original.study.rows.forEach(r=>r.values=r.values.slice(0,1));
+const planning={maxAdditional:6,basis:'Retained history capacity controls'},entry={cue:'common',value:'same',provenance:{kind:'hypothetical',basis:'Authored control'}};
+const records=n=>Array.from({length:n},(_,i)=>({kind:'record',id:'e'+i,readingId:'r'+i,entry:structuredClone(entry)}));
+const inputs=events=>({maxErrors:1,basis:'One total mismatch',events});
+assert.equal(executeFixedReadings(study,inputs(records(28)),planning,[]).status,'insufficient-history-capacity');
+assert.equal(executeFixedReadings(study,inputs(records(27)),planning,[]).status,'reading-ready');
+const withdrawn=records(30).flatMap(e=>[e,{id:'w'+e.id,readingId:e.readingId,kind:'withdraw',replaces:e.id,reason:'Retained exclusion'}]);
+assert.equal(executeFixedReadings(study,inputs(withdrawn),planning,[]).status,'insufficient-history-capacity');
+const revisions=records(1);for(let i=1;i<88;i++)revisions.push({kind:'correct',id:'c'+i,readingId:'r0',replaces:i===1?'e0':'c'+(i-1),value:'same',reason:'Explicit transcription revision'});
+assert.equal(executeFixedReadings(study,inputs(revisions),planning,[]).status,'insufficient-history-capacity');
+assert.equal(executeFixedReadings(study,inputs(revisions.slice(0,87)),planning,[]).status,'reading-ready');
+assert.throws(()=>executeFixedReadings(study,inputs([]),planning,[{cue:'common',value:'same',provenance:entry.provenance}]),/next fixed cue/);
+const unknown=structuredClone(study);unknown.rows[0].decision=null;assert.equal(executeFixedReadings(unknown,inputs([]),planning,[]).status,'unknown-decision');
+console.log(JSON.stringify({boundaryControls:7,pass:true}));
