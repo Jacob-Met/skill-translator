@@ -11,9 +11,21 @@ continuous first-frame anchor. Export the original temporal query, then run:
 
     python tools/temporal-points/produce.py INPUT.json NEW_OUTPUT.json --profile grayscale-probe
 
-The producer requires NumPy, Pillow, and exactly PyPNG 0.20220715.0. It accepts
-original 8-bit grayscale PNGs only. The receiver accepts only reports declaring
-`grayscale-probe`; opaque and other unqualified profiles are refused.
+The producer requires NumPy, Pillow, and exactly PyPNG 0.20220715.0. Prepared
+runtime archives include the offline producer and its pinned source dependencies.
+Use Python 3.12 in a separate environment and install the supplied dependency set:
+
+    python3.12 -m venv .temporal-venv
+    .temporal-venv/bin/python -m pip install -r requirements-temporal.txt
+
+These are Linux/macOS shell examples; on Windows use the environment's
+Scripts/python.exe. Invoke produce.py with that environment's Python executable.
+For the Node restart command, set TEMPORAL_PYTHON to the single executable path,
+not a shell command. Python and these packages are not bundled in the archive;
+release notes identify the platforms actually received.
+
+The producer accepts original 8-bit grayscale PNGs only. The receiver accepts only
+reports declaring `grayscale-probe`; opaque and other unqualified profiles are refused.
 
 Unchanged MATERIALTRUTH modules at commit
 `62df17886aa84ad8c74665b9f9e24cb40f9a6afd` supply gradient features and local

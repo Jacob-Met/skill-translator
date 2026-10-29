@@ -1,0 +1,4 @@
+# Qualified temporal grayscale workflow dependency set for Python 3.12.
+numpy==1.26.4
+Pillow==13.0.0
+pypng==0.20220715.0

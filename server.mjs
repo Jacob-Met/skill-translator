@@ -47,6 +47,7 @@ const routes=Object.freeze({
   "/web/joint-challenge-sequence.mjs":["web/joint-challenge-sequence.mjs","text/javascript; charset=utf-8"],
   "/src/joint-challenge-conflicts.mjs":["src/joint-challenge-conflicts.mjs","text/javascript; charset=utf-8"],
   '/src/temporal-point-proposals.mjs':['src/temporal-point-proposals.mjs','text/javascript; charset=utf-8'],
+  '/src/temporal-point-restart.mjs':['src/temporal-point-restart.mjs','text/javascript; charset=utf-8'],
   '/src/temporal-choice-state.mjs':['src/temporal-choice-state.mjs','text/javascript; charset=utf-8'],
   '/web/temporal-point-view.mjs':['web/temporal-point-view.mjs','text/javascript; charset=utf-8'],
   "/src/joint-challenge.mjs":["src/joint-challenge.mjs","text/javascript; charset=utf-8"],
