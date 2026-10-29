@@ -1,0 +1,9 @@
+{
+  "repository": "Jacob-Met/second-ground",
+  "commit": "b7a0dab6c919c08e1eec52907d0cffda27cf98b0",
+  "path": "src/joint-height-system.mjs",
+  "gitBlob": "68f69d08fa8eb0c38c6a0313975e8d1c9d5726cc",
+  "sha256": "d0c24724b264f93183c1b55a2539f2bd958c26058134d798baab59d4d696af52",
+  "consumer": "src/appearance-brightness-consistency.mjs",
+  "modifications": "None. Exact maintained source bytes."
+}

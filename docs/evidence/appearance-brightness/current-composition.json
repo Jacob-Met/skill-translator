@@ -1,0 +1,243 @@
+{
+  "authorComposition": {
+    "scope": "Current server-only composition. Original six browser groups at historical server; no repeated browser. Thirteen executed appearance routes unchanged; current adaptive entry HTTP exact bytes. No full adaptive app claim.",
+    "base": "e7fd3a3db2246f5d6a6010b5f8dff83b67a0ec42",
+    "baseTree": "eb491cbeba729e34c4363f373deabeff27fe5cc1",
+    "originalPacketSHA256": "8451c16918d9918a1856a42918d9bb4daf7f3b36f4c13769f043c2ce66c3c8cf",
+    "newPacketSHA256": "83866adff0533c938ccbdb6d35cdee65175cc5d6b3c396b15dacfab054554f37",
+    "expectedTree": "e3739ed8bd41dadebf222fc366edcd4ce30e0947",
+    "serverBaseBlob": "5e57678d1c3985f28045caac73993663fb97a022",
+    "serverSHA256": "ceb54c9757bc1e874f0ccd906747e0593b734cbe5e100d47628e9f56060ea17c",
+    "delta": "Exactly two additive brightness/vendor route lines; deleting them reproduces exact current server. All other 19 payloads unchanged; all current preimages matched.",
+    "httpRows": [
+      {
+        "path": "web/cue-adaptive-repeat.html",
+        "sha256": "c2e4890cba303a1e0a5804fca4b17468f4f903a76c02e775f238fc38d1d6c52e"
+      },
+      {
+        "path": "src/visual-translation.mjs",
+        "sha256": "880fccaac17ca6accaa61f7717b53d847febbe2f78ce37b776a6242618529b30"
+      },
+      {
+        "path": "src/appearance-quadruple.mjs",
+        "sha256": "c607f4c09a57e82758ed97f77c674666850923fd99805604e9be68c75c14b625"
+      },
+      {
+        "path": "src/appearance-brightness-consistency.mjs",
+        "sha256": "e629da7dca846535ce2af4e8173fc104b820738b58782dc4eb519635097733cd"
+      },
+      {
+        "path": "vendor/second-ground/joint-height-system.mjs",
+        "sha256": "d0c24724b264f93183c1b55a2539f2bd958c26058134d798baab59d4d696af52"
+      },
+      {
+        "path": "web/appearance-triplet-worker.mjs",
+        "sha256": "dfe6962fa7a002f274cd19bd708ad545ff3cb93b2223e9223598441aa57c48ea"
+      },
+      {
+        "path": "web/appearance-pair-app.mjs",
+        "sha256": "44a3cf4e6015b2f9e52b35746bb0bb57ea87bbd08899cca5a6f546a6ac51071b"
+      },
+      {
+        "path": "web/appearance-quadruple-view.mjs",
+        "sha256": "647813190577aec98b3ea6feab00a86f0fc41120eadd5b4b4204ff211a5c7e98"
+      },
+      {
+        "path": "web/appearance-quadruple-input.mjs",
+        "sha256": "380bd8e331eccc0e661a53120ad5a7c771543e3f288887b59de6a07aeed2a345"
+      },
+      {
+        "path": "web/appearance-pair-input.mjs",
+        "sha256": "af50024d1cc86ed1cfcbaf9dfb7f00af5c2fb2d71b46cf7a74faccad1b793f7a"
+      },
+      {
+        "path": "web/sequence-input.mjs",
+        "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+      },
+      {
+        "path": "web/image-input.mjs",
+        "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138"
+      },
+      {
+        "path": "web/appearance-pair.html",
+        "sha256": "ffee61006d3db02a7541a79348ec25aa1acfa39b29d349d3dc4847e3a6554bd3"
+      },
+      {
+        "path": "web/appearance-pair.css",
+        "sha256": "e943727809e7c38a5316a1f12dec1059ea7514e8cd99f382a63c26529ea4b8cf"
+      }
+    ],
+    "checks": [
+      {
+        "path": "src/visual-translation.mjs",
+        "baseBlob": "a9fa2ee2097246fd08aa8d6acdcad87c89d2e999",
+        "sha256": "880fccaac17ca6accaa61f7717b53d847febbe2f78ce37b776a6242618529b30"
+      },
+      {
+        "path": "src/appearance-quadruple.mjs",
+        "baseBlob": "19eed19d04ad50618bfb4da2a0af119c21046ddd",
+        "sha256": "c607f4c09a57e82758ed97f77c674666850923fd99805604e9be68c75c14b625"
+      },
+      {
+        "path": "src/appearance-brightness-consistency.mjs",
+        "baseBlob": null,
+        "sha256": "e629da7dca846535ce2af4e8173fc104b820738b58782dc4eb519635097733cd"
+      },
+      {
+        "path": "web/appearance-triplet-worker.mjs",
+        "baseBlob": "3e3601217948235fd108d5e5906066bfc1cb905f",
+        "sha256": "dfe6962fa7a002f274cd19bd708ad545ff3cb93b2223e9223598441aa57c48ea"
+      },
+      {
+        "path": "web/appearance-pair-app.mjs",
+        "baseBlob": "7511afd0ed069f0d3c3e0c6bdddbd137dd09b9dd",
+        "sha256": "44a3cf4e6015b2f9e52b35746bb0bb57ea87bbd08899cca5a6f546a6ac51071b"
+      },
+      {
+        "path": "web/appearance-quadruple-view.mjs",
+        "baseBlob": "1d9fb7e3fd3e5f60743b0bf3e7595c732c4173ef",
+        "sha256": "647813190577aec98b3ea6feab00a86f0fc41120eadd5b4b4204ff211a5c7e98"
+      },
+      {
+        "path": "server.mjs",
+        "baseBlob": "5e57678d1c3985f28045caac73993663fb97a022",
+        "sha256": "ceb54c9757bc1e874f0ccd906747e0593b734cbe5e100d47628e9f56060ea17c"
+      },
+      {
+        "path": "vendor/second-ground/joint-height-system.mjs",
+        "baseBlob": null,
+        "sha256": "d0c24724b264f93183c1b55a2539f2bd958c26058134d798baab59d4d696af52"
+      },
+      {
+        "path": "vendor/second-ground/source-lock.json",
+        "baseBlob": null,
+        "sha256": "69020843a4188294e060a979767497f9670c031d23199b0d2195087f00eaa2ba"
+      },
+      {
+        "path": "vendor/second-ground/PROVENANCE.md",
+        "baseBlob": null,
+        "sha256": "b5874780ec5acb12529381d5667375ebc875ca824c742ae96a9471b3a8ab031f"
+      },
+      {
+        "path": "test/appearance-brightness.test.mjs",
+        "baseBlob": null,
+        "sha256": "86a142f7f7331879b0d4f67e2d0a66a8ed08665ebec7a8a92d4bddd2fa76c17a"
+      },
+      {
+        "path": "tools/browser-appearance-brightness.mjs",
+        "baseBlob": null,
+        "sha256": "59a009cc3f844dd64aeac912bb60dd20ba3d24213e2f1c00a2acdaef75f46a04"
+      },
+      {
+        "path": "docs/APPEARANCE_BRIGHTNESS.md",
+        "baseBlob": null,
+        "sha256": "552a850ccb208f9bce29dd6110d3d23e6787c2eb75361607f9c5b4f3c547f5fb"
+      },
+      {
+        "path": "docs/evidence/appearance-brightness/browser.json",
+        "baseBlob": null,
+        "sha256": "438b65a62c45f85458a41f90f95c25d4ce936aeb9a94faa570cd0acbfefb0b0b"
+      },
+      {
+        "path": "docs/evidence/appearance-brightness/focused-captures.json",
+        "baseBlob": null,
+        "sha256": "10b0ae3223a4680f09bf169f1d09a5b189a0d7641002ededa24dac284a99ae8a"
+      },
+      {
+        "path": "docs/evidence/appearance-brightness/histogram-parity.json",
+        "baseBlob": null,
+        "sha256": "30d3a20e6f248e025d846eeccb1fa63b23de27dbbdff9efcd31336d6267d33d0"
+      },
+      {
+        "path": "docs/evidence/appearance-brightness/http.json",
+        "baseBlob": null,
+        "sha256": "eedcfdd574941b22b89e48b5d1efce1b0a57f22b25de6af813c9a0b3aec9b97c"
+      },
+      {
+        "path": "docs/evidence/appearance-brightness/original-png.json",
+        "baseBlob": null,
+        "sha256": "9e80548f7d7574913b8e756ea2aaa166b68e8e5313983891452fb7a40be49db0"
+      },
+      {
+        "path": "docs/evidence/appearance-brightness/peer-review.json",
+        "baseBlob": null,
+        "sha256": "b3d5103708d13833a3f7c829083149ad6ad0c3aaee537191c5aac9937fcafd09"
+      },
+      {
+        "path": "docs/evidence/appearance-brightness/wrapper-parity.json",
+        "baseBlob": null,
+        "sha256": "30a40bca7a96e627b8f224269f089f51c3f04fbca2ee105ec4fce6bcfda7f30e"
+      }
+    ],
+    "serverClosed": true
+  },
+  "authorRouteReceiving": {
+    "scope": "Post-browser exact maintained-server HTTP source-byte verification, not another browser run",
+    "rows": [
+      {
+        "path": "web/cue-adaptive-repeat.html",
+        "sha256": "c2e4890cba303a1e0a5804fca4b17468f4f903a76c02e775f238fc38d1d6c52e"
+      },
+      {
+        "path": "src/visual-translation.mjs",
+        "sha256": "880fccaac17ca6accaa61f7717b53d847febbe2f78ce37b776a6242618529b30"
+      },
+      {
+        "path": "src/appearance-quadruple.mjs",
+        "sha256": "c607f4c09a57e82758ed97f77c674666850923fd99805604e9be68c75c14b625"
+      },
+      {
+        "path": "src/appearance-brightness-consistency.mjs",
+        "sha256": "e629da7dca846535ce2af4e8173fc104b820738b58782dc4eb519635097733cd"
+      },
+      {
+        "path": "vendor/second-ground/joint-height-system.mjs",
+        "sha256": "d0c24724b264f93183c1b55a2539f2bd958c26058134d798baab59d4d696af52"
+      },
+      {
+        "path": "web/appearance-triplet-worker.mjs",
+        "sha256": "dfe6962fa7a002f274cd19bd708ad545ff3cb93b2223e9223598441aa57c48ea"
+      },
+      {
+        "path": "web/appearance-pair-app.mjs",
+        "sha256": "44a3cf4e6015b2f9e52b35746bb0bb57ea87bbd08899cca5a6f546a6ac51071b"
+      },
+      {
+        "path": "web/appearance-quadruple-view.mjs",
+        "sha256": "647813190577aec98b3ea6feab00a86f0fc41120eadd5b4b4204ff211a5c7e98"
+      },
+      {
+        "path": "web/appearance-quadruple-input.mjs",
+        "sha256": "380bd8e331eccc0e661a53120ad5a7c771543e3f288887b59de6a07aeed2a345"
+      },
+      {
+        "path": "web/appearance-pair-input.mjs",
+        "sha256": "af50024d1cc86ed1cfcbaf9dfb7f00af5c2fb2d71b46cf7a74faccad1b793f7a"
+      },
+      {
+        "path": "web/sequence-input.mjs",
+        "sha256": "77f8a873e0ab6b2fdf9356b220eacc4b3dd98739209a0128526013afb2245cf5"
+      },
+      {
+        "path": "web/image-input.mjs",
+        "sha256": "215777343756d9c3087cd05e3f3d62682d8e889aadaf017c79619a92eed17138"
+      },
+      {
+        "path": "web/appearance-pair.html",
+        "sha256": "ffee61006d3db02a7541a79348ec25aa1acfa39b29d349d3dc4847e3a6554bd3"
+      },
+      {
+        "path": "web/appearance-pair.css",
+        "sha256": "e943727809e7c38a5316a1f12dec1059ea7514e8cd99f382a63c26529ea4b8cf"
+      }
+    ]
+  },
+  "rootIndependentComposition": {
+    "at": "2026-10-29T21:43:37.782478+00:00",
+    "result": "accepted",
+    "all20CurrentPreimagesMatched": true,
+    "onlyChangedFrozenPayload": "server.mjs",
+    "serverDelta": "Deleting exactly the two added brightness/vendor route lines reproduces current server Git blob5e57678d1c3985f28045caac73993663fb97a022. All19 other qualified payloads unchanged.",
+    "scope": "Current route/source composition, preserving adaptive-repeat routes; historical functional browser evidence remains attached to its original served source. No new functional browser claim."
+  }
+}

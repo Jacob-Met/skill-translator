@@ -41,7 +41,14 @@ export function compareSupportedTranslations(before, after, referenceSupport,
 /** Complete finite integer costs using the incumbent histogram metric.
  * Each directed pair fits its own brightness offset. This is not a physical
  * correspondence or one globally registered photometric model. */
-export function profileTranslatedSamples(before, after, {radius = TRANSLATION_RADIUS, referenceSupport} = {}) {
+export function profileTranslatedSamples(before, after, options = {}) {
+  return admittedCostProfile(before, after, options, null);
+}
+export function profileTranslatedBrightnessIntervals(before, after, options = {}) {
+  const intervals = [];
+  return {profile: admittedCostProfile(before, after, options, intervals), intervals};
+}
+function admittedCostProfile(before, after, {radius = TRANSLATION_RADIUS, referenceSupport} = {}, intervals) {
   compareSamplePixels(before, after);
   if (!Number.isInteger(radius) || radius < 1 || radius > MAX_TRANSLATION_RADIUS)
     throw Error(`Translation radius must be an integer from 1 to ${MAX_TRANSLATION_RADIUS}.`);
@@ -58,11 +65,11 @@ export function profileTranslatedSamples(before, after, {radius = TRANSLATION_RA
   }
   if (support.width < 3 || support.height < 3)
     return {status: 'insufficient-common-support', radius, candidates: []};
-  const profile = finiteCostProfile(before, after, radius, support);
+  const profile = finiteCostProfile(before, after, radius, support, intervals);
   return {...profile, comparison: summarizeCostProfile(profile)};
 }
 
-function finiteCostProfile(before, after, radius, support) {
+function finiteCostProfile(before, after, radius, support, intervals = null) {
   const {widthPx: width, heightPx: height} = before;
   const pixelCount = support.width * support.height, channelCount = pixelCount * 3;
   const histogram = new Uint32Array(511), rank = Math.floor((channelCount - 1) / 2);
@@ -76,10 +83,14 @@ function finiteCostProfile(before, after, radius, support) {
           for (let c = 0; c < 3; c++) histogram[after.rgba[b + c] - before.rgba[a + c] + 255]++;
         }
       }
-      let cumulative = 0, median = 0;
+      let cumulative = 0, median = 0, lowerFound = false;
       for (let i = 0; i < histogram.length; i++) {
         cumulative += histogram[i];
-        if (cumulative > rank) { median = i; break; }
+        if (!lowerFound && cumulative > rank) { median = i; lowerFound = true; }
+        if (cumulative > (intervals ? Math.floor(channelCount / 2) : rank)) {
+          if (intervals) intervals.push({dx, dy, lower: median - 255, upper: i - 255});
+          break;
+        }
       }
       let absoluteResidual = 0;
       for (let i = 0; i < histogram.length; i++) absoluteResidual += histogram[i] * Math.abs(i - median);

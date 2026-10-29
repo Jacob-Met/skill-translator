@@ -1,5 +1,5 @@
 import {FORMAT as PAIR_FORMAT,admitAppearanceRequest,defaultAppearanceRequest,BOUNDARY as PAIR_BOUNDARY} from './appearance-pair.mjs';
-import {profileTranslatedSamples} from './visual-translation.mjs';
+import {profileTranslatedSamples,profileTranslatedBrightnessIntervals} from './visual-translation.mjs';
 import {minimizeAdditiveAppearanceCosts} from './appearance-additive-cost.mjs';
 export const FORMAT='skill-translator.appearance-quadruple/v1';
 export const PAIRS=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
@@ -53,11 +53,14 @@ export function minimizeQuadrupleAppearanceCosts(profiles,{offset=0,limit=20}={}
  check(offset===0||offset<count,'Requested page is outside the complete optimum family');
  return {optimalIntegerResidual:optimum,independentLowerBound,excessOverIndependent:optimum-independentLowerBound,triangleOptima:triangles.map(t=>t.optimalIntegerResidual),triangleLowerBound:{numerator:triangleSum,denominator:2},twiceExcessOverTriangleBound:2*optimum-triangleSum,simultaneousTriangleOptima:2*optimum===triangleSum,count,feasibleAssignments:feasible,denominator:6*profiles[0].channelCount*255,participatingIndexes:participating.map(s=>[...s].sort((a,b)=>a-b)),participatingAlternatives:participating.map((s,p)=>[...s].sort((a,b)=>a-b).map(index=>({index,...sets[p][index]}))),witnessByAlternative:witnesses.map(m=>[...m].sort((a,b)=>a[0]-b[0]).map(([index,indexes])=>({index,indexes}))),page:{offset,limit,indexes:accounts,accounts:accounts.map(indices=>({positions:[{dx:0,dy:0},...indices.slice(0,3).map((i,p)=>({dx:sets[p][i].dx,dy:sets[p][i].dy}))],pairs:indices.map((i,p)=>({...sets[p][i]}))}))},workReservation:{commonAssignmentVisits:reservation.commonAssignmentVisits,trianglePairVisits:reservation.trianglePairVisits,totalAlgebraVisits:reservation.totalAlgebraVisits},boundary:BOUNDARY};
 }
-export function inspectAppearanceQuadrupleSamples(raw,sequence,samples){
+export function inspectAppearanceQuadrupleSamples(raw,sequence,samples){return inspectFourSamples(raw,sequence,samples,false);}
+export function inspectAppearanceQuadrupleBrightnessSamples(raw,sequence,samples){return inspectFourSamples(raw,sequence,samples,true);}
+function inspectFourSamples(raw,sequence,samples,includeIntervals){
  const source=admitAppearanceQuadruple(raw,sequence),q=source.request,pairSources=appearanceQuadruplePairs(source,sequence);
  check(Array.isArray(samples)&&samples.length===4&&samples.every(s=>s?.widthPx===q.widthPx&&s?.heightPx===q.heightPx),'Supply all four original samples at the declared raster');
  const workReservation=reserveQuadrupleWork(q);
- const profiles=PAIRS.map(([a,b])=>profileTranslatedSamples(samples[a],samples[b],{radius:q.radius,referenceSupport:q.support}));
+ const fitted=PAIRS.map(([a,b])=>(includeIntervals?profileTranslatedBrightnessIntervals:profileTranslatedSamples)(samples[a],samples[b],{radius:q.radius,referenceSupport:q.support}));
+ const profiles=includeIntervals?fitted.map(p=>p.profile):fitted;
  const comparisons=profiles.map((p,i)=>({source:pairSources[i],comparison:p.comparison,boundary:PAIR_BOUNDARY}));
- return {source,comparisons,commonCost:minimizeQuadrupleAppearanceCosts(profiles,{limit:10}),workReservation,profiles,boundary:BOUNDARY};
+ return {source,comparisons,commonCost:minimizeQuadrupleAppearanceCosts(profiles,{limit:10}),workReservation,profiles,boundary:BOUNDARY,...(includeIntervals?{intervals:fitted.map(p=>p.intervals)}:{})};
 }

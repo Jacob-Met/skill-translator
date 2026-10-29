@@ -1,0 +1,594 @@
+{
+  "scope": "Actual encoded original authored PNG admission and browser decoding, maintained source request/sampling/global minimizer, isolated selected-brightness adapter. Synthetic clip attribution only, no source video acquisition or physical inference. Complete source-only export/reopen exact; not production UI receiving.",
+  "at": "2026-10-29T21:00:55.183Z",
+  "browser": "156.0.8078.73",
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNamespace\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tNo\nPtrace Protection with Yama LSM (Non-broker)\tNo\n\nYou are adequately sandboxed.",
+  "results": [
+    {
+      "even": false,
+      "frames": [
+        {
+          "id": "m0",
+          "image": {
+            "sha256": "d8287e2cb31942e210390e89e7d2d92661cf541d0fc0b5fc6b227d6946ad7576",
+            "widthPx": 9,
+            "heightPx": 9,
+            "mimeType": "image/png",
+            "name": "authored-0.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored-brightness-false.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 100,
+              "sha256": "6582dc5f200700f9e313922f41f3aa4745ec6185309ca04bff43b2f00c2c5ea8",
+              "durationSeconds": 5
+            },
+            "requestedTimeSeconds": 0,
+            "mediaTimeSeconds": 0.1,
+            "frameSha256": "d8287e2cb31942e210390e89e7d2d92661cf541d0fc0b5fc6b227d6946ad7576",
+            "widthPx": 9,
+            "heightPx": 9,
+            "decodedWidthPx": 9,
+            "decodedHeightPx": 9
+          }
+        },
+        {
+          "id": "m1",
+          "image": {
+            "sha256": "a9bf866415baf896649a2ea3a57f1aa40f619430805c2a8eec72c3712545ed76",
+            "widthPx": 9,
+            "heightPx": 9,
+            "mimeType": "image/png",
+            "name": "authored-1.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored-brightness-false.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 100,
+              "sha256": "6582dc5f200700f9e313922f41f3aa4745ec6185309ca04bff43b2f00c2c5ea8",
+              "durationSeconds": 5
+            },
+            "requestedTimeSeconds": 1,
+            "mediaTimeSeconds": 1.1,
+            "frameSha256": "a9bf866415baf896649a2ea3a57f1aa40f619430805c2a8eec72c3712545ed76",
+            "widthPx": 9,
+            "heightPx": 9,
+            "decodedWidthPx": 9,
+            "decodedHeightPx": 9
+          }
+        },
+        {
+          "id": "m2",
+          "image": {
+            "sha256": "e1da8a190dfd9ef039fe9cb3d76f08b3cd5cc4bd3365d2129116323c4e3497d2",
+            "widthPx": 9,
+            "heightPx": 9,
+            "mimeType": "image/png",
+            "name": "authored-2.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored-brightness-false.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 100,
+              "sha256": "6582dc5f200700f9e313922f41f3aa4745ec6185309ca04bff43b2f00c2c5ea8",
+              "durationSeconds": 5
+            },
+            "requestedTimeSeconds": 2,
+            "mediaTimeSeconds": 2.1,
+            "frameSha256": "e1da8a190dfd9ef039fe9cb3d76f08b3cd5cc4bd3365d2129116323c4e3497d2",
+            "widthPx": 9,
+            "heightPx": 9,
+            "decodedWidthPx": 9,
+            "decodedHeightPx": 9
+          }
+        },
+        {
+          "id": "m3",
+          "image": {
+            "sha256": "d8287e2cb31942e210390e89e7d2d92661cf541d0fc0b5fc6b227d6946ad7576",
+            "widthPx": 9,
+            "heightPx": 9,
+            "mimeType": "image/png",
+            "name": "authored-3.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored-brightness-false.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 100,
+              "sha256": "6582dc5f200700f9e313922f41f3aa4745ec6185309ca04bff43b2f00c2c5ea8",
+              "durationSeconds": 5
+            },
+            "requestedTimeSeconds": 3,
+            "mediaTimeSeconds": 3.1,
+            "frameSha256": "d8287e2cb31942e210390e89e7d2d92661cf541d0fc0b5fc6b227d6946ad7576",
+            "widthPx": 9,
+            "heightPx": 9,
+            "decodedWidthPx": 9,
+            "decodedHeightPx": 9
+          }
+        }
+      ],
+      "count": 4,
+      "cost": 2160,
+      "answer": {
+        "source": {
+          "format": "skill-translator.appearance-quadruple/v1",
+          "request": {
+            "clipSha256": "6582dc5f200700f9e313922f41f3aa4745ec6185309ca04bff43b2f00c2c5ea8",
+            "frames": [
+              {
+                "momentId": "m0",
+                "sha256": "d8287e2cb31942e210390e89e7d2d92661cf541d0fc0b5fc6b227d6946ad7576",
+                "presentedSeconds": 0.1
+              },
+              {
+                "momentId": "m1",
+                "sha256": "a9bf866415baf896649a2ea3a57f1aa40f619430805c2a8eec72c3712545ed76",
+                "presentedSeconds": 1.1
+              },
+              {
+                "momentId": "m2",
+                "sha256": "e1da8a190dfd9ef039fe9cb3d76f08b3cd5cc4bd3365d2129116323c4e3497d2",
+                "presentedSeconds": 2.1
+              },
+              {
+                "momentId": "m3",
+                "sha256": "d8287e2cb31942e210390e89e7d2d92661cf541d0fc0b5fc6b227d6946ad7576",
+                "presentedSeconds": 3.1
+              }
+            ],
+            "widthPx": 9,
+            "heightPx": 9,
+            "radius": 1,
+            "support": {
+              "left": 1,
+              "top": 1,
+              "width": 7,
+              "height": 7
+            },
+            "sampler": "canvas2d-drawImage-full-frame-default-smoothing",
+            "brightnessConvention": "rgb-l1-lower-median-shared-channel-offset-div255"
+          }
+        },
+        "selection": {
+          "positions": [
+            {
+              "dx": 0,
+              "dy": 0
+            },
+            {
+              "dx": 1,
+              "dy": 1
+            },
+            {
+              "dx": 0,
+              "dy": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0
+            }
+          ],
+          "indexes": [
+            8,
+            4,
+            4,
+            0,
+            0,
+            4
+          ]
+        },
+        "selectedIntegerResidual": 2160,
+        "intervals": [
+          {
+            "pair": 0,
+            "from": 0,
+            "to": 1,
+            "index": 8,
+            "dx": 1,
+            "dy": 1,
+            "lower": 0,
+            "upper": 0,
+            "absoluteResidual": 420
+          },
+          {
+            "pair": 1,
+            "from": 0,
+            "to": 2,
+            "index": 4,
+            "dx": 0,
+            "dy": 0,
+            "lower": 10,
+            "upper": 10,
+            "absoluteResidual": 480
+          },
+          {
+            "pair": 2,
+            "from": 0,
+            "to": 3,
+            "index": 4,
+            "dx": 0,
+            "dy": 0,
+            "lower": 0,
+            "upper": 0,
+            "absoluteResidual": 0
+          },
+          {
+            "pair": 3,
+            "from": 1,
+            "to": 2,
+            "index": 0,
+            "dx": -1,
+            "dy": -1,
+            "lower": 0,
+            "upper": 0,
+            "absoluteResidual": 300
+          },
+          {
+            "pair": 4,
+            "from": 1,
+            "to": 3,
+            "index": 0,
+            "dx": -1,
+            "dy": -1,
+            "lower": 0,
+            "upper": 0,
+            "absoluteResidual": 480
+          },
+          {
+            "pair": 5,
+            "from": 2,
+            "to": 3,
+            "index": 4,
+            "dx": 0,
+            "dy": 0,
+            "lower": -10,
+            "upper": -10,
+            "absoluteResidual": 480
+          }
+        ],
+        "status": "contradiction",
+        "forwardCycle": [
+          {
+            "from": 2,
+            "to": 3,
+            "label": {
+              "pair": 5,
+              "side": "upper"
+            },
+            "bound": {
+              "integer": "-10",
+              "binaryExponent": 0
+            }
+          },
+          {
+            "from": 3,
+            "to": 1,
+            "label": {
+              "pair": 4,
+              "side": "lower"
+            },
+            "bound": {
+              "integer": "0",
+              "binaryExponent": 0
+            }
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": {
+              "pair": 3,
+              "side": "upper"
+            },
+            "bound": {
+              "integer": "0",
+              "binaryExponent": 0
+            }
+          }
+        ],
+        "sum": {
+          "integer": "-10",
+          "binaryExponent": 0
+        },
+        "solverWorkReservation": {
+          "relaxationVisits": 48,
+          "witnessEdgeChecks": 12
+        },
+        "boundary": "Only simultaneous attainment of the selected directed pair minima is assessed. No higher-residual fit, other spatial account, physical identity or globally registered photometry is excluded or established."
+      },
+      "reopenExact": true,
+      "bundleSHA256": "6571f716966c022a3648b7f4ad2ca5ac3cb37207ab3014b2786244f841e8d2b7"
+    },
+    {
+      "even": true,
+      "frames": [
+        {
+          "id": "m0",
+          "image": {
+            "sha256": "98798afb924e862ee9141ae0d702994fb11ba9a642454f8321055dd05eebe951",
+            "widthPx": 8,
+            "heightPx": 8,
+            "mimeType": "image/png",
+            "name": "authored-0.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored-brightness-true.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 100,
+              "sha256": "b78685fe0099a8cb0aa90753e8ae5dc3064cfff305c0d28457726bc5a42c3b17",
+              "durationSeconds": 5
+            },
+            "requestedTimeSeconds": 0,
+            "mediaTimeSeconds": 0.1,
+            "frameSha256": "98798afb924e862ee9141ae0d702994fb11ba9a642454f8321055dd05eebe951",
+            "widthPx": 8,
+            "heightPx": 8,
+            "decodedWidthPx": 8,
+            "decodedHeightPx": 8
+          }
+        },
+        {
+          "id": "m1",
+          "image": {
+            "sha256": "01243790481b49759f799b54635b990b03372fc5eef3686c5037df0b428de5e6",
+            "widthPx": 8,
+            "heightPx": 8,
+            "mimeType": "image/png",
+            "name": "authored-1.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored-brightness-true.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 100,
+              "sha256": "b78685fe0099a8cb0aa90753e8ae5dc3064cfff305c0d28457726bc5a42c3b17",
+              "durationSeconds": 5
+            },
+            "requestedTimeSeconds": 1,
+            "mediaTimeSeconds": 1.1,
+            "frameSha256": "01243790481b49759f799b54635b990b03372fc5eef3686c5037df0b428de5e6",
+            "widthPx": 8,
+            "heightPx": 8,
+            "decodedWidthPx": 8,
+            "decodedHeightPx": 8
+          }
+        },
+        {
+          "id": "m2",
+          "image": {
+            "sha256": "83c40af124d0f6e86d029975257846ffbfbe5c6785065e25ded61ff5a35f2554",
+            "widthPx": 8,
+            "heightPx": 8,
+            "mimeType": "image/png",
+            "name": "authored-2.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored-brightness-true.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 100,
+              "sha256": "b78685fe0099a8cb0aa90753e8ae5dc3064cfff305c0d28457726bc5a42c3b17",
+              "durationSeconds": 5
+            },
+            "requestedTimeSeconds": 2,
+            "mediaTimeSeconds": 2.1,
+            "frameSha256": "83c40af124d0f6e86d029975257846ffbfbe5c6785065e25ded61ff5a35f2554",
+            "widthPx": 8,
+            "heightPx": 8,
+            "decodedWidthPx": 8,
+            "decodedHeightPx": 8
+          }
+        },
+        {
+          "id": "m3",
+          "image": {
+            "sha256": "98798afb924e862ee9141ae0d702994fb11ba9a642454f8321055dd05eebe951",
+            "widthPx": 8,
+            "heightPx": 8,
+            "mimeType": "image/png",
+            "name": "authored-3.png",
+            "pixelCoordinates": "browser-oriented"
+          },
+          "origin": {
+            "kind": "local-video-frame",
+            "timing": "requestVideoFrameCallback",
+            "clip": {
+              "name": "authored-brightness-true.webm",
+              "mimeType": "video/webm",
+              "sizeBytes": 100,
+              "sha256": "b78685fe0099a8cb0aa90753e8ae5dc3064cfff305c0d28457726bc5a42c3b17",
+              "durationSeconds": 5
+            },
+            "requestedTimeSeconds": 3,
+            "mediaTimeSeconds": 3.1,
+            "frameSha256": "98798afb924e862ee9141ae0d702994fb11ba9a642454f8321055dd05eebe951",
+            "widthPx": 8,
+            "heightPx": 8,
+            "decodedWidthPx": 8,
+            "decodedHeightPx": 8
+          }
+        }
+      ],
+      "count": 32,
+      "cost": 1380,
+      "answer": {
+        "source": {
+          "format": "skill-translator.appearance-quadruple/v1",
+          "request": {
+            "clipSha256": "b78685fe0099a8cb0aa90753e8ae5dc3064cfff305c0d28457726bc5a42c3b17",
+            "frames": [
+              {
+                "momentId": "m0",
+                "sha256": "98798afb924e862ee9141ae0d702994fb11ba9a642454f8321055dd05eebe951",
+                "presentedSeconds": 0.1
+              },
+              {
+                "momentId": "m1",
+                "sha256": "01243790481b49759f799b54635b990b03372fc5eef3686c5037df0b428de5e6",
+                "presentedSeconds": 1.1
+              },
+              {
+                "momentId": "m2",
+                "sha256": "83c40af124d0f6e86d029975257846ffbfbe5c6785065e25ded61ff5a35f2554",
+                "presentedSeconds": 2.1
+              },
+              {
+                "momentId": "m3",
+                "sha256": "98798afb924e862ee9141ae0d702994fb11ba9a642454f8321055dd05eebe951",
+                "presentedSeconds": 3.1
+              }
+            ],
+            "widthPx": 8,
+            "heightPx": 8,
+            "radius": 1,
+            "support": {
+              "left": 1,
+              "top": 1,
+              "width": 6,
+              "height": 6
+            },
+            "sampler": "canvas2d-drawImage-full-frame-default-smoothing",
+            "brightnessConvention": "rgb-l1-lower-median-shared-channel-offset-div255"
+          }
+        },
+        "selection": {
+          "positions": [
+            {
+              "dx": 0,
+              "dy": 0
+            },
+            {
+              "dx": -1,
+              "dy": -1
+            },
+            {
+              "dx": -1,
+              "dy": -1
+            },
+            {
+              "dx": -1,
+              "dy": -1
+            }
+          ],
+          "indexes": [
+            0,
+            0,
+            0,
+            4,
+            4,
+            4
+          ]
+        },
+        "selectedIntegerResidual": 1380,
+        "intervals": [
+          {
+            "pair": 0,
+            "from": 0,
+            "to": 1,
+            "index": 0,
+            "dx": -1,
+            "dy": -1,
+            "lower": 0,
+            "upper": 0,
+            "absoluteResidual": 300
+          },
+          {
+            "pair": 1,
+            "from": 0,
+            "to": 2,
+            "index": 0,
+            "dx": -1,
+            "dy": -1,
+            "lower": 10,
+            "upper": 10,
+            "absoluteResidual": 0
+          },
+          {
+            "pair": 2,
+            "from": 0,
+            "to": 3,
+            "index": 0,
+            "dx": -1,
+            "dy": -1,
+            "lower": 0,
+            "upper": 0,
+            "absoluteResidual": 0
+          },
+          {
+            "pair": 3,
+            "from": 1,
+            "to": 2,
+            "index": 4,
+            "dx": 0,
+            "dy": 0,
+            "lower": 0,
+            "upper": 10,
+            "absoluteResidual": 540
+          },
+          {
+            "pair": 4,
+            "from": 1,
+            "to": 3,
+            "index": 4,
+            "dx": 0,
+            "dy": 0,
+            "lower": -10,
+            "upper": 0,
+            "absoluteResidual": 540
+          },
+          {
+            "pair": 5,
+            "from": 2,
+            "to": 3,
+            "index": 4,
+            "dx": 0,
+            "dy": 0,
+            "lower": -10,
+            "upper": -10,
+            "absoluteResidual": 0
+          }
+        ],
+        "status": "feasible",
+        "anchoredOffsets": [
+          "0",
+          "0",
+          "10",
+          "0"
+        ],
+        "solverWorkReservation": {
+          "relaxationVisits": 48,
+          "witnessEdgeChecks": 12
+        },
+        "boundary": "Only simultaneous attainment of the selected directed pair minima is assessed. No higher-residual fit, other spatial account, physical identity or globally registered photometry is excluded or established."
+      },
+      "reopenExact": true,
+      "bundleSHA256": "2b83c6f8f34ad55851c98397010257120d6349357b44af5224787d0a766d94f8"
+    }
+  ]
+}

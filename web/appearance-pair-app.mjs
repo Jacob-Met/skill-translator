@@ -11,7 +11,7 @@ import {receiveAppearanceHandoff} from '/web/decision-handoff.mjs';
 
 const $=id=>document.getElementById(id);
 const ui={mode:$('comparison-mode'),middle:$('middle'),third:$('third'),file:$('source-file'),before:$('before'),after:$('after'),width:$('width'),radius:$('radius'),compute:$('compute'),cancel:$('cancel'),save:$('save'),status:$('status'),result:$('result'),settings:$('settings')};
-let loaded=null,revision=0,controller=null,worker=null,result=null,busy=false;
+let loaded=null,revision=0,controller=null,worker=null,result=null,busy=false,brightnessSelection=0;
 let cancelHandoff=()=>{},handoffActive=new URLSearchParams(location.hash.slice(1)).has('source');
 const downloads=new Set();
 const moments=()=>loaded?[...loaded.sequence.moments].sort((a,b)=>a.origin.mediaTimeSeconds-b.origin.mediaTimeSeconds):[];
@@ -19,13 +19,19 @@ const hasPair=()=>{const rows=moments();return rows.length>=2&&rows.some(m=>m.or
 function status(state,message){ui.status.dataset.state=state;ui.status.textContent=message;}
 const triple=()=>ui.mode.value==='triplet';
 const four=()=>ui.mode.value==='four';
-function render(){if(result?.source.format===FOUR_FORMAT)renderAppearanceQuadrupleResult(ui.result,result,{onPage:fourPage});else if(result?.source.format===TRIPLET_FORMAT)renderAppearanceTripletResult(ui.result,result,{onPage:page,onCostPage:costPage});else renderAppearancePairResult(ui.result,result);}
+function render(){if(result?.source.format===FOUR_FORMAT)renderAppearanceQuadrupleResult(ui.result,result,{onPage:fourPage,onBrightness:brightnessAccount});else if(result?.source.format===TRIPLET_FORMAT)renderAppearanceTripletResult(ui.result,result,{onPage:page,onCostPage:costPage});else renderAppearancePairResult(ui.result,result);}
 function page(offset,limit){if(!worker||busy||!result)return;busy=true;controls();status('computing','Finding the requested page of complete additive combinations…');worker.postMessage({type:'page',requestId:revision,source:result.source,page:{offset,limit}});}
 function costPage(offset,limit){if(!worker||busy||!result)return;busy=true;controls();status('computing','Rechecking all finite additive combinations for this optimum page…');worker.postMessage({type:'cost-page',requestId:revision,source:result.source,page:{offset,limit}});}
-function fourPage(offset,limit){if(!worker||busy||!result)return;busy=true;controls();status('computing','Rechecking the complete four-frame domain and triangle bounds for this page…');worker.postMessage({type:'four-page',requestId:revision,source:result.source,page:{offset,limit}});}
+function fourPage(offset,limit){if(!worker||busy||!result)return;brightnessSelection++;delete result.brightness;busy=true;render();controls();status('computing','Rechecking the complete four-frame domain and triangle bounds for this page…');worker.postMessage({type:'four-page',requestId:revision,source:result.source,page:{offset,limit}});}
+function brightnessAccount(positions,indexes){
+ if(!worker||busy||result?.source.format!==FOUR_FORMAT)return;
+ const selectionId=++brightnessSelection;delete result.brightness;busy=true;render();controls();
+ status('computing','Checking complete optimal brightness intervals for this selected arrangement…');
+ worker.postMessage({type:'brightness-account',requestId:revision,selectionId,selection:{source:result.source,positions,indexes}});
+}
 function controls(){ $('middle-choice').hidden=!(triple()||four());$('middle-figure').hidden=!(triple()||four());$('third-choice').hidden=!four();$('third-figure').hidden=!four();ui.settings.disabled=!loaded;ui.compute.disabled=!loaded||!hasPair()||busy;ui.cancel.disabled=!busy;ui.save.disabled=!result||busy;}
 function retire(){
-  revision++;controller?.abort();controller=null;worker?.terminate();worker=null;busy=false;result=null;
+  revision++;brightnessSelection++;controller?.abort();controller=null;worker?.terminate();worker=null;busy=false;result=null;
   renderAppearancePairResult(ui.result,null);controls();return revision;
 }
 function clearSource(){
@@ -114,6 +120,11 @@ async function compute(){
       if(ticket!==revision||worker!==next||(isComposition?event.data?.requestId:event.data?.revision)!==ticket)return;
       try{
         if(event.data.error)throw Error(event.data.error);
+        if(event.data.type==='brightness-account'){
+          if(event.data.selectionId!==brightnessSelection)return;
+          if(!result||JSON.stringify(event.data.answer?.source)!==JSON.stringify(result.source))throw Error('Selected brightness source changed');
+          result={...result,brightness:event.data.answer};render();finish(ticket,'complete','Selected arrangement checked. Source-only save retains originals and settings; reselect an arrangement after reopening.');return;
+        }
         if(event.data.type==='four-page'){if(!result||JSON.stringify(event.data.source)!==JSON.stringify(result.source))throw Error('Four-frame source changed while paging');result={...result,commonCost:event.data.commonCost};render();finish(ticket,'complete','Complete four-frame optimum page ready; common and triangle algebra passes recomputed without resampling images.');return;}
         if(event.data.type==='cost-page'){if(!result||JSON.stringify(event.data.source)!==JSON.stringify(result.source))throw Error('Composition changed while paging');result={...result,additiveCost:event.data.additiveCost};render();finish(ticket,'complete','Complete optimum page ready; both bounded algebra passes were recomputed, without resampling images.');return;}
         if(event.data.type==='page'){if(!result||JSON.stringify(event.data.source)!==JSON.stringify(result.source))throw Error('Composition changed while paging');result={...result,join:event.data.join};render();finish(ticket,'complete','Complete additive witness page ready.');return;}

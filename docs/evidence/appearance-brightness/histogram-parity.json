@@ -1,0 +1,19 @@
+{
+  "scope": "Actual production-candidate histogram native parity; authored sampled rasters, no original-PNG/browser consumer qualification",
+  "executedAt": "2026-10-29T21:08:52.113Z",
+  "node": "v24.22.1",
+  "reports": 118,
+  "refusals": 14,
+  "completeCandidateIntervalOracles": 216,
+  "offsetsPerOracle": 511,
+  "allRadii": [
+    1,
+    16
+  ],
+  "genericMaximumSide": 160,
+  "hashes": {
+    "baseline.mjs": "18c23b02bdf9d095aed4b5ea3675b2a01c0524c3b98931702d9f778e6916b311",
+    "/tmp/hamon-7bb49db0-brightness-production/receiver/src/visual-translation.mjs": "880fccaac17ca6accaa61f7717b53d847febbe2f78ce37b776a6242618529b30",
+    "receive-production-core.mjs": "ab6c3d05f9a259d55079d40da59245d1b8ae181665c7d763da03f25b369ac9e1"
+  }
+}

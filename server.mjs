@@ -8,6 +8,8 @@ import {fileURLToPath} from "node:url";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const routes=Object.freeze({
+"/src/appearance-brightness-consistency.mjs":["src/appearance-brightness-consistency.mjs", "text/javascript; charset=utf-8"],
+"/vendor/second-ground/joint-height-system.mjs":["vendor/second-ground/joint-height-system.mjs", "text/javascript; charset=utf-8"],
   "/cue-adaptive-repeat":["web/cue-adaptive-repeat.html","text/html; charset=utf-8"],
   "/web/cue-adaptive-repeat.mjs":["web/cue-adaptive-repeat.mjs","text/javascript; charset=utf-8"],
   "/src/cue-adaptive-repeat.mjs":["src/cue-adaptive-repeat.mjs","text/javascript; charset=utf-8"],
