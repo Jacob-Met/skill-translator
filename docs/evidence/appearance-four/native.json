@@ -1,0 +1,16 @@
+{
+  "scope": "Five authored native bodies, not original PNG/browser proof",
+  "command": "node --test test/appearance-quadruple.test.mjs",
+  "reportedFileGroups": 1,
+  "definedBodies": 5,
+  "failures": 0,
+  "coreSHA256": "dfe9cdf513d41e72e5129e3ea9e0af3fbd1aefa275d2f4d29e4d5266490a6d55",
+  "testSHA256": "4bd00232bfcf2ffba1f12c7e79474e1681ddf57df7fe565345878873331c49e1",
+  "checks": [
+    "Canonical four original source and old-reader refusal",
+    "Maintained sampled-RGBA315-gap counterexample and exact incumbent pair reports",
+    "24independent coordinate-span oracles including half-integer bounds and witness participation",
+    "All225flat optima through complete pages and136161radius4family count",
+    "Malformed populations and full sampled-raster/algebra reservations"
+  ]
+}

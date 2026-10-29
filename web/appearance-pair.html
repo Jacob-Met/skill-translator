@@ -26,10 +26,11 @@
     <h2 id="choose-title">Choose the comparison</h2>
     <fieldset id="settings" disabled>
       <legend class="visually-hidden">Original frame pair and sampling settings</legend>
-      <label>Question<select id="comparison-mode"><option value="pair">Two-frame difference</option><option value="triplet">Three-frame additive composition</option></select></label>
+      <label>Question<select id="comparison-mode"><option value="pair">Two-frame difference</option><option value="triplet">Three-frame additive composition</option><option value="four">Four-frame common appearance account · radius 1–4</option></select></label>
       <div class="choice-grid">
         <label>First original frame<select id="before"></select></label>
         <label id="middle-choice" hidden>Middle original frame<select id="middle"></select></label>
+        <label id="third-choice" hidden>Third original frame<select id="third"></select></label>
         <label>Later original frame<select id="after"></select></label>
         <label>Sample width · pixels<input id="width" type="number" min="3" max="160" step="1" value="160" inputmode="numeric"></label>
         <label>Search radius · sampled pixels<input id="radius" type="number" min="1" max="16" step="1" value="16" inputmode="numeric"></label>
@@ -39,6 +40,7 @@
     <div class="frames">
       <figure><div class="frame"><img id="before-image" alt="" hidden></div><figcaption id="before-caption">First original frame</figcaption></figure>
       <figure id="middle-figure" hidden><div class="frame"><img id="middle-image" alt="" hidden></div><figcaption id="middle-caption">Middle original frame</figcaption></figure>
+      <figure id="third-figure" hidden><div class="frame"><img id="third-image" alt="" hidden></div><figcaption id="third-caption">Third original frame</figcaption></figure>
       <figure><div class="frame"><img id="after-image" alt="" hidden></div><figcaption id="after-caption">Later original frame</figcaption></figure>
     </div>
     <div class="actions">

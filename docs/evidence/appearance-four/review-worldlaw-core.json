@@ -1,0 +1,30 @@
+{
+  "scope": "Independent actual core/source/input/worker review plus actual five named native bodies; no browser/PNG receiving",
+  "assessment": "Accepted, no concrete blocker",
+  "hashes": {
+    "src/appearance-quadruple.mjs": "b51293dc7256dd45a64703036b80d2483386431b4fc12f3ea59ad6647c0ccbf8",
+    "web/appearance-quadruple-input.mjs": "380bd8e331eccc0e661a53120ad5a7c771543e3f288887b59de6a07aeed2a345",
+    "web/appearance-triplet-worker.mjs": "b6c2707c6adeb338b9c08481b8da14870ae4935baab976cada39fb650a3e6768",
+    "test/appearance-quadruple.test.mjs": "4bd00232bfcf2ffba1f12c7e79474e1681ddf57df7fe565345878873331c49e1"
+  },
+  "execution": {
+    "command": "node test/appearance-quadruple.test.mjs",
+    "namedPassed": 5,
+    "failed": 0
+  },
+  "reviewed": [
+    "Six forward chronological pair admissions bind original IDs, PNG hashes, original media times, clip and common settings; no directed reversal assumption.",
+    "All profiles admitted through four overlapping maintained triangle reductions before common enumeration; their intersections connect every support/raster/channel declaration.",
+    "Common A=0/B/C/D domain retains all six bounded directed differences; two passes count every tie and expose complete pages/participating indexes with full witnesses.",
+    "Half-integer triangle lower bound remains exact numerator/2; doubled excess avoids premature rounding. Every directed edge occurs twice.",
+    "At radius4 two common passes plus four triangle reducers reserve1115370 visits; six profile scans plus12 full RGB traversals and histogram-bin counts retained separately. Cost integer sums remain safe.",
+    "Worker clears both retained report and profiles before new compute; page source must match canonical retained source and correct four-frame mode.",
+    "Input uses maintained complete original-sequence reader/assets, rejects nested appearance requests, abort-checks async boundaries, releases refused assets and exports complete original source within existing byte cap.",
+    "Concurrent b51293dc adds only participatingAlternatives copies bounded to six times81 candidates; deleting that exact field reproduces reviewed2034844e hash. Source field mapping reviewed, no scoring/admission delta."
+  ],
+  "limitations": [
+    "Independent pair brightness fits/support coordinates are not globally registered photometry or object identity.",
+    "Sampled-raster reservation excludes original PNG decoding and total CPU instructions as documented.",
+    "No ordinary consumer/browser receiving by this reviewer."
+  ]
+}
