@@ -2,21 +2,25 @@
 import assert from 'node:assert/strict';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-const sourceRoot=resolve(process.env.SKILL_SOURCE_ROOT||new URL('..',import.meta.url).pathname);
+const sourceRoot=resolve(process.env.SKILL_SOURCE_ROOT||fileURLToPath(new URL('..',import.meta.url)));
 const sourceImport=p=>import(pathToFileURL(resolve(sourceRoot,p)).href);
 const {createAppServer}=await sourceImport('server.mjs');
 const {requireChromiumSandbox}=await import('./support/chromium-sandbox.mjs');
 const {createCapture,appendCaptureMark}=await sourceImport('src/capture.mjs');
 const {frameOrigin}=await sourceImport('src/frame-origin.mjs');
 const {createSequence,appendMoment,upsertStep,attachMomentCalibration}=await sourceImport('src/demonstration-sequence.mjs');
-const {chromium}=await import(process.env.PLAYWRIGHT_PATH||'/home/ubuntu/work/hamon-astra-estate-1929-browser-tools/node_modules/playwright/index.mjs');
+// Install Playwright in the checkout, or point PLAYWRIGHT_PATH at its module file.
+const playwrightModule=process.env.PLAYWRIGHT_PATH?pathToFileURL(resolve(process.env.PLAYWRIGHT_PATH)).href:'playwright';
+let chromium;try{({chromium}=await import(playwrightModule));}catch(cause){throw new Error('Install Playwright or set PLAYWRIGHT_PATH to its module file (for example, playwright/index.mjs).',{cause});}
 const out=resolve(process.env.RECEIPT_DIR||'/tmp/skill-printable-annotations');await mkdir(out,{recursive:true});
 const receipt={result:'FAIL',fixture:'Authored PNG controls and declared timing; no video decoding or physical skill claim',checks:[],errors:[],externalRequests:[]};
-const server=process.env.SKILL_RECEIVE_BASE_URL?null:createAppServer();if(server)await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=process.env.SKILL_RECEIVE_BASE_URL||`http://127.0.0.1:${server.address().port}`;let browser;
+const suppliedOrigin=process.env.SKILL_RECEIVE_BASE_URL;
+if(suppliedOrigin&&!/^http:\/\/127\.0\.0\.1(?::[0-9]{1,5})?\/?$/.test(suppliedOrigin))throw Error('Use an HTTP origin on literal 127.0.0.1, without credentials, paths, queries or fragments.');
+const externalOrigin=suppliedOrigin?new URL(suppliedOrigin).origin:null;
+const server=externalOrigin?null:createAppServer();if(server)await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=externalOrigin||`http://127.0.0.1:${server.address().port}`;let browser;
 receipt.sourceRoot=sourceRoot;receipt.origin=origin;
-if(new URL(origin).hostname!=='127.0.0.1')throw Error('Browser course origin must be literal 127.0.0.1');
 async function until(page,fn){for(let i=0;i<150;i++){if(await page.evaluate(fn))return;await new Promise(r=>setTimeout(r,100));}throw Error('Browser condition timed out: '+JSON.stringify(await page.evaluate(()=>({status:document.querySelector('#status')?.textContent,summary:document.querySelector('#calibration-summary')?.textContent,markCount:document.querySelectorAll('#calibration-marks li').length}))));}
 try{
  browser=await chromium.launch({headless:true,chromiumSandbox:true,executablePath:process.env.CHROME_BINARY||'/usr/bin/google-chrome-stable'});receipt.browser=browser.version();
