@@ -41,3 +41,25 @@ node tools/browser-contours.mjs
 ```
 
 The eight reports are named `frame-0-tile-0.json` through `frame-3-tile-1.json`. Use an ordinary sandboxed browser and a fresh task-owned run directory. This qualification is local; it is not a Nebius execution, cloud deployment, perception-accuracy or physical reliability result.
+
+## Original PNG coordinate interpretation
+
+The contour wrapper refuses PNG EXIF orientation (`eXIf`) and animation (`acTL`) metadata before invoking the maintained native edge producer. The contour viewer also checks the selected original PNG before adopting a separate report or reopening a saved contour study. It retains all source PNG bytes unchanged and refuses an ambiguous coordinate interpretation; it does not rotate, strip metadata, choose an animation frame, or repair the source automatically. Other retained context frames remain available.
+
+An authored asymmetric 48×48 PNG with EXIF orientation 3 demonstrated the problem: native unchanged decoding retained the unrotated field while actual Chrome displayed the same source rotated 180 degrees. Matching dimensions and PNG hashes did not establish matching displayed coordinates. This decoder control is separate from the attributed scissors demonstration and is not a physical-accuracy test.
+
+Four native admission controls check an unchanged ordinary result, all eight EXIF orientations and animation refusal before delegated decoding, a harmless literal-text control, and truncated chunks. The unchanged three native contour groups still pass. The browser course verifies atomic saved-input refusal, exact retained PNG export, separate-report refusal, and cancellation of a delayed selected-byte read after a distinct source replaces it. The source and native arithmetic are unchanged for ordinary admitted PNGs.
+
+```sh
+python3 test/contour-png-native.test.py
+node --test test/contour-png.test.mjs
+ROI_COORDINATE_TEST_OUTPUT=/absolute/path/to/new/fixtures \
+python3 test/contour-png-fixtures.py
+BROWSER_HELPER=/absolute/path/to/maintained/browser-session.mjs \
+CHROME_BINARY=/absolute/path/to/sandboxed/chrome \
+ROI_COORDINATE_TEST_OUTPUT=/absolute/path/to/new/fixtures \
+QA_OUTPUT=/absolute/path/to/fresh/output \
+node tools/browser-contour-png.mjs
+```
+
+The fixture generator uses the maintained authored repeated-cue PNG bundle. Its oriented report is deliberately constructed to exercise old-report admission; it is not presented as a new native result. Browser receiving requires the real maintained application server and ordinary sandbox admission.
