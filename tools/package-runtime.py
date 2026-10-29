@@ -56,12 +56,20 @@ def build(repo, commit, output):
                 'requirements-native-edge.txt',
                 'tools/audio-input-profile.mjs', 'tools/prepare-audio-activity.mjs',
                 'tools/calibration-translation-native.py', 'tools/sequence-edge-native.py',
-                'vendor/microverse/fiducials.py'}
+                'vendor/microverse/fiducials.py',
+                'requirements-temporal.txt',
+                'tools/temporal-points/restart.mjs',
+                'tools/temporal-points/produce.py',
+                'tools/temporal-points/validate-input.mjs',
+                'tools/temporal-points/vendor/suggest_capture_alignment.py',
+                'tools/temporal-points/vendor/prepare_capture_stack.py',
+                'tools/temporal-points/vendor/estimate_capture_offsets.py'}
     missing = required - objects.keys()
     if missing:
         raise ValueError('Missing runtime inputs: ' + ', '.join(sorted(missing)))
-    # Keep complete runtime/vendor roots and the four inspected native helper tools.
-    # No receiving tools, fixtures, receipt archives or local workspace data are copied.
+    # Keep complete runtime/vendor roots and explicit native workflow tools.
+    # Their pinned producer dependencies retain the same relative paths.
+    # Unselected tools, fixtures, receipt archives and local workspace data are not copied.
     paths = sorted(p for p in objects
                 if p in required or p.startswith(('src/', 'web/', 'native/', 'vendor/'))
                 or ('/' not in p and p.endswith('.md'))
@@ -126,6 +134,13 @@ Native sequence-edge and stationary calibration translation additionally need
 Python 3 with the pinned OpenCV/NumPy dependencies in requirements-native-edge.txt.
 Use a separate Python environment and set SKILL_EDGE_PYTHON and
 SKILL_CALIBRATION_PYTHON to its interpreter path (default: python3 on PATH).
+To generate temporal point proposals or run explicit restarts offline, use Python
+3.12 with NumPy, Pillow and exactly PyPNG 0.20220715.0. Create a separate Python environment
+and install requirements-temporal.txt; these dependencies are not bundled.
+Set TEMPORAL_PYTHON to that environment's single Python executable path when
+running tools/temporal-points/restart.mjs. The original-query producer is included
+at tools/temporal-points/produce.py. See TEMPORAL_POINTS.md and TEMPORAL_RESTART.md
+for input preparation, invocation and the original-frame review required afterward.
 These optional helpers process supplied inputs locally. Their presence in this
 archive does not establish a tested native runtime on your platform.
 Node.js and optional native executables are not bundled.
