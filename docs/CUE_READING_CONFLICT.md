@@ -1,0 +1,9 @@
+# Explain why no retained example fits
+
+When the active account admits no retained example, the withdrawal inquiry shows one inclusion-minimal conflicting set. It preserves each active reading identity, current corrected revision, value and declared origin. Withdrawn readings remain listed outside the active evidence. Each retained example has more disagreements within the certificate than the one declared total bound.
+
+For each member, the explanation supplies every retained example compatible with the remaining certificate after that member is hypothetically omitted. This proves inclusion minimality: no proper subset of the certificate remains conflicting. It does not claim minimum cardinality, identify a physically wrong reading, recommend withdrawal, or establish that any retained example is true. Other active readings outside the certificate are not part of these subset checks. Unknown source cells do not count as disagreements; unknown decisions are not invented.
+
+The algorithm admits the whole current account through the unchanged withdrawal reducer, then greedily removes unnecessary positions using the exact retained disagreement sets. Monotonicity of nonnegative mismatch counts makes the single deletion pass inclusion-minimal. No source, event, current bound or export format changes. Original input-only save/reopen recomputes the explanation.
+
+Run node --test test/cue-reading-conflict.test.mjs plus the maintained repeated/provenance/correction/withdrawal/history tests. The browser course tools/browser-reading-conflict.mjs takes explicit BROWSER_HELPER, CHROME_BINARY, QA_OUTPUT and SOURCE_BUNDLE. Its attributed scissors source and deliberately contrary answer are authored controls, not verified cue truth or physical reliability. It checks removal examples, source versus hypothetical origins, withdrawn identity, exact original save and fresh narrow replay.
