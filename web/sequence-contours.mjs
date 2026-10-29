@@ -1,5 +1,5 @@
 import {readSequenceBundle,makeSequenceBundle,releaseSequenceAssets} from './sequence-input.mjs';
-import {receiveSequenceContours} from '../src/sequence-contours.mjs';
+import {receiveSequenceContours,inspectContourSourcePng} from '../src/sequence-contours.mjs';
 import {receiveEdgeField} from '../src/sequence-edge-field.mjs';
 const $=id=>document.getElementById(id),format='skill-translator.sequence-contour-study/v1';
 let source=null,report=null,epoch=0,pending=false;
@@ -21,13 +21,18 @@ function draw(){
   $('frame').replaceChildren(svg);
 }
 function adoptReport(next){report=next;const all=document.createElement('option');all.value='all';all.textContent='All native walks';$('chain').replaceChildren(all,...next.chains.map(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=`Walk ${c.id} · ${c.points.length} vertices`;return o;}));draw();}
+async function receiveReport(staged,raw){
+ const accepted=receiveSequenceContours(staged.sequence,raw);
+ const bytes=new Uint8Array(await staged.assets.get(accepted.edgeReport.momentId).file.arrayBuffer());
+ inspectContourSourcePng(bytes);return accepted;
+}
 async function openSource(file){const ticket=++epoch;pending=true;$('save').disabled=true;let staged;
- try{if(!file||file.size>60*1024*1024)throw Error('Choose a bounded source study');const raw=JSON.parse(await file.text());if(ticket!==epoch)return;const own=raw.format===format;staged=await readSequenceBundle(new Blob([JSON.stringify(own?raw.source:raw)]));const accepted=own?receiveSequenceContours(staged.sequence,raw.report):null;if(ticket!==epoch){releaseSequenceAssets(staged.assets);return;}if(source)releaseSequenceAssets(source.assets);source=staged;staged=null;report=null;if(accepted)adoptReport(accepted);else draw();say(accepted?'Saved source and contour report reopened.':'Original PNG sequence accepted. Load its native contour report.');}
+ try{if(!file||file.size>60*1024*1024)throw Error('Choose a bounded source study');const raw=JSON.parse(await file.text());if(ticket!==epoch)return;const own=raw.format===format;staged=await readSequenceBundle(new Blob([JSON.stringify(own?raw.source:raw)]));const accepted=own?await receiveReport(staged,raw.report):null;if(ticket!==epoch){releaseSequenceAssets(staged.assets);return;}if(source)releaseSequenceAssets(source.assets);source=staged;staged=null;report=null;if(accepted)adoptReport(accepted);else draw();say(accepted?'Saved source and contour report reopened.':'Original PNG sequence accepted. Load its native contour report.');}
  catch(error){if(staged)releaseSequenceAssets(staged.assets);if(ticket===epoch)say(error.message);}
  finally{if(ticket===epoch){pending=false;$('save').disabled=!report;}}
 }
 $('source').addEventListener('change',()=>openSource($('source').files[0]));
-$('report').addEventListener('change',async()=>{if(!source||pending){say('Accept an original sequence first.');return;}const ticket=++epoch;pending=true;$('save').disabled=true;try{const file=$('report').files[0];if(!file||file.size>8*1024*1024)throw Error('Choose a contour report up to 8 MiB');const raw=JSON.parse(await file.text());if(ticket!==epoch)return;adoptReport(receiveSequenceContours(source.sequence,raw));say('Contour report accepted against original source.');}catch(error){if(ticket===epoch)say(error.message);}finally{if(ticket===epoch){pending=false;$('save').disabled=!report;}}});
+$('report').addEventListener('change',async()=>{if(!source||pending){say('Accept an original sequence first.');return;}const ticket=++epoch;pending=true;$('save').disabled=true;try{const file=$('report').files[0];if(!file||file.size>8*1024*1024)throw Error('Choose a contour report up to 8 MiB');const raw=JSON.parse(await file.text());if(ticket!==epoch)return;const accepted=await receiveReport(source,raw);if(ticket!==epoch)return;adoptReport(accepted);say('Contour report accepted against original source.');}catch(error){if(ticket===epoch)say(error.message);}finally{if(ticket===epoch){pending=false;$('save').disabled=!report;}}});
 for(const id of ['chain','pixels','missing'])$(id).addEventListener('change',draw);
 $('save').addEventListener('click',async()=>{if(!source||!report||pending)return;const ticket=epoch,accepted=report;try{const original=JSON.parse(await(await makeSequenceBundle(source.sequence,source.assets)).text());if(ticket!==epoch)return;const blob=new Blob([JSON.stringify({format,source:original,report:accepted})],{type:'application/json'});if(blob.size>60*1024*1024)throw Error('Study exceeds 60 MiB');const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='source-contours.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);say('Saved original PNGs and complete report; no physical labels added.');}catch(error){if(ticket===epoch)say(error.message);}});
 addEventListener('pagehide',()=>{epoch++;if(source)releaseSequenceAssets(source.assets);});

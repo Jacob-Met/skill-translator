@@ -51,6 +51,22 @@ def inspect(request, edge_inspect):
     # is retained, including settings, ROI, source identities and straight lines.
     if request.get('representation') != 'complete-field':
         raise ValueError('Complete-field original PNG request required')
+    data = base64.b64decode(request['pngBase64'], validate=True)
+    if not 24 <= len(data) <= 16 * 1024 * 1024 or data[:8] != b'\x89PNG\r\n\x1a\n':
+        raise ValueError('Bounded original PNG bytes required')
+    at = 8
+    while at < len(data):
+        if at + 12 > len(data):
+            raise ValueError('Truncated PNG chunk')
+        length = int.from_bytes(data[at:at+4], 'big')
+        kind = data[at+4:at+8]
+        if at + 12 + length > len(data):
+            raise ValueError('Truncated PNG chunk')
+        if kind in (b'eXIf', b'acTL'):
+            raise ValueError('EXIF-oriented or animated PNG needs an explicit source interpretation')
+        at += 12 + length
+        if kind == b'IEND':
+            break
     report = edge_inspect(request)
     x, y, width, height = report['roi']
     bits = np.unpackbits(np.frombuffer(base64.b64decode(report['field']['data'], validate=True),

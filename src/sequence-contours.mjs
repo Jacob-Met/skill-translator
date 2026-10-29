@@ -43,3 +43,18 @@ export function receiveSequenceContours(sequence,raw){
   check(coverage.edgePixels===edge.field.count&&coverage.visitedEdgePixels===count&&count+coverage.omittedEdgePixels===edge.field.count,'Contour coverage totals differ');
   return structuredClone(raw);
 }
+
+/** Selected original bytes only; no orientation or animation is silently normalized. */
+export function inspectContourSourcePng(bytes){
+ check(bytes instanceof Uint8Array&&bytes.length>=24&&bytes.length<=16*1024*1024,'Bounded original PNG bytes required');
+ check([137,80,78,71,13,10,26,10].every((v,i)=>bytes[i]===v),'Original PNG required');
+ const view=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength);
+ let at=8;
+ while(at<bytes.length){
+  check(at+12<=bytes.length,'Truncated PNG chunk');
+  const length=view.getUint32(at),kind=String.fromCharCode(...bytes.subarray(at+4,at+8));
+  check(at+12+length<=bytes.length,'Truncated PNG chunk');
+  check(kind!=='eXIf'&&kind!=='acTL','EXIF-oriented or animated PNG needs an explicit source interpretation');
+  at+=12+length;if(kind==='IEND')break;
+ }
+}
