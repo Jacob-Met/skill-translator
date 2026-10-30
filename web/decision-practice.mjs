@@ -7,7 +7,7 @@ const $=id=>document.getElementById(id),node=(tag,text)=>{const n=document.creat
 let cancelHandoff=()=>{};
 let source=null,assets=new Map(),session=null,revision=0,generation=0,controller=null,busy=false,predictionDirty=false,reflectionDirty=false;
 const spokenCompanion=mountDecisionSpokenCompanion($('account'));
-let pendingStepIds=new Set();
+let pendingStepIds=new Set(),exampleAttempt=0;
 const error=message=>{$('error').hidden=!message;$('error').textContent=message;};
 function seedPendingStepIds(next){pendingStepIds=new Set(next.stepIds);}
 function selectedStepIds(){return source?source.steps.filter(step=>pendingStepIds.has(step.id)).map(step=>step.id):[];}
@@ -32,6 +32,7 @@ function renderStepChoices(){
 }
 
 function sync(){
+  $('authoredExample').hidden=!!source;$('loadExample').disabled=busy;
   syncStepChoices();
   $('restart').disabled=!source||busy;$('sessionFile').disabled=!source||busy;
   $('saveComplete').disabled=!session||busy||predictionDirty||reflectionDirty;
@@ -115,6 +116,7 @@ async function acceptSource(file,{complete=false,externalSignal}={}){
   const abort=()=>controller?.abort();externalSignal?.addEventListener('abort',abort,{once:true});
   try{
     if(externalSignal?.aborted)throw Error('The source handoff was canceled.');
+    if(typeof file==='function')file=await file(request.signal);
     loaded=await (complete?readDecisionPracticeBundle:readSequenceBundle)(file,{signal:request.signal});
     if(!current(request)||request.revision!==revision)throw Error('The exercise changed while reading; accepted work remains.');
     const next=complete?loaded.session:createDecisionPractice(loaded.sequence,undefined,familiarity),old=assets;
@@ -124,6 +126,20 @@ async function acceptSource(file,{complete=false,externalSignal}={}){
   }catch(e){if(loaded)releaseSequenceAssets(loaded.assets);e.stale=!current(request);throw e;}
   finally{externalSignal?.removeEventListener('abort',abort);finish(request);}
 }
+$('loadExample').addEventListener('click',async()=>{
+  if(source||busy)return;cancelHandoff();
+  $('status').textContent='Opening the authored example…';
+  try{
+    await acceptSource(async signal=>{
+      // Data-only local module uses the existing script-src policy. A fresh
+      // attempt URL lets a failed asset load be retried without changing CSP.
+      const {bundle}=await import('/web/examples/decision-registration.mjs?attempt='+ ++exampleAttempt);
+      if(signal.aborted)throw Error('The example was replaced by a newer source choice.');
+      return new File([JSON.stringify(bundle)],'paper-registration-example.json',{type:'application/json'});
+    });
+    $('stepTitle').focus();
+  }catch(e){if(!e.stale){error('Example could not be opened. Try again or open your own demonstration. '+e.message);$('status').textContent='Choose the example again, or open your saved demonstration.';}}
+});
 for(const [id,complete]of [['sourceFile',false],['completeFile',true]])$(id).addEventListener('change',async event=>{
   const file=event.target.files[0];if(!file)return;cancelHandoff();
   try{await acceptSource(file,{complete});}catch(e){if(!e.stale)error('Source refused; accepted exercise retained. '+e.message);}
