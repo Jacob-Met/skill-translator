@@ -575,6 +575,7 @@ const routes=Object.freeze({
   "/src/practice.mjs":["src/practice.mjs","text/javascript; charset=utf-8"],
   "/web/index.html":["web/index.html","text/html; charset=utf-8"],
   "/web/styles.css":["web/styles.css","text/css; charset=utf-8"],
+  "/web/index.css":["web/index.css","text/css; charset=utf-8"],
   "/web/app.mjs":["web/app.mjs","text/javascript; charset=utf-8"],
   "/capture":["web/capture.html","text/html; charset=utf-8"],
   "/web/capture.mjs":["web/capture.mjs","text/javascript; charset=utf-8"],
