@@ -30,7 +30,7 @@ test("actual HTTP serves interactive app assets without internet dependencies or
       const r=await fetch(base+url);
       assert.equal(r.status,200,url);
       assert.ok(r.headers.get("content-type").includes(type));
-      assert.equal(r.headers.get("content-security-policy").includes("connect-src 'none'"),true);
+      assert.equal(r.headers.get("content-security-policy").includes(url==="/"?"connect-src 'self'":"connect-src 'none'"),true);
       assert.ok((await r.text()).length>50);
     }
     for(const route of ['/src/scan-change-regions.mjs','/web/scan-change-regions.mjs']) {

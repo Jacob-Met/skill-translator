@@ -22,6 +22,7 @@ const rounded=x=>Number(x).toFixed(3);
 let demo=demonstration,derived=derive(demo),target,selected=0,attempt=null,verdict=null;
 let alternateChoice="fraction";
 let observations=[],viewObservationId=null,observationImportVersion=0;
+let nemotronReadings=null,nemotronLandmarkId=null;
 const ruleNames={fraction:"Proportional position",left:"Fixed left clearance",
   right:"Fixed right clearance",top:"Fixed top clearance",bottom:"Fixed bottom clearance"};
 let box={x:80,y:50,width:560,height:320},dragging=false;
@@ -294,7 +295,12 @@ function updateEvidence(){
     failures.textContent=candidate.contradictions.length?"Contradicted by: "+candidate.contradictions
       .map(id=>result.observations.find(o=>o.id===id).label).join("; "):
       candidate.residuals.length?"Every entered mark is within its declared measurement radius.":"";
-    card.append(title,status,detail,failures);cards.append(card);
+    card.append(title,status,detail,failures);
+    if(nemotronReadings&&nemotronLandmarkId===chosen().id){
+      const hit=nemotronReadings.find(r=>r.rule===candidate.rule);
+      if(hit){const reading=document.createElement("p");reading.className="candidate-reading";reading.textContent="Nemotron reading: "+hit.reading;card.append(reading);}
+    }
+    cards.append(card);
   });
   const list=$("observationRows");list.replaceChildren();
   for(const observation of result.observations){
@@ -560,6 +566,28 @@ $("observationFile").addEventListener("change",async e=>{
     $("evidenceStatus").textContent="Imported "+next.length+" source-matched observations.";
   }catch(err){error("Observation import refused; previous evidence retained. "+err.message);}
   finally{e.target.value="";}
+});
+// Asks the server for Nemotron readings of the selected mark. The model proposes; the evaluator above decides.
+function markReadingInput(){
+  const mark=derived.landmarks[selected],W=derived.source.widthMm,H=derived.source.heightMm;
+  return {label:mark.label,authoredRule:mark.kind==="fraction"?"fraction":mark.edge,sourceWidthMm:W,sourceHeightMm:H,
+    sourceFraction:{u:mark.uv.u,v:mark.uv.v},
+    sourceEdgeDistancesMm:{left:mark.uv.u*W,right:(1-mark.uv.u)*W,top:mark.uv.v*H,bottom:(1-mark.uv.v)*H}};
+}
+$("askNemotron").addEventListener("click",async()=>{
+  const status=$("nemotronStatus"),button=$("askNemotron"),landmarkId=chosen().id;
+  button.disabled=true;status.textContent="Asking Nemotron on Nebius Token Factory...";
+  try{
+    const response=await fetch("/api/rule-interpretations",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(markReadingInput())});
+    const body=await response.json();
+    if(!response.ok)throw Error(body.error||"Request failed.");
+    if(!body.available){status.textContent=body.message;nemotronReadings=null;return;}
+    if(landmarkId!==chosen().id){status.textContent="Mark changed while asking; reading discarded.";return;}
+    nemotronReadings=body.readings;nemotronLandmarkId=landmarkId;
+    status.textContent="Readings from "+body.model+". "+body.checkedBy;
+    updateEvidence();
+  }catch(err){status.textContent="Nemotron reading unavailable. "+err.message+" The app still checks every rule.";}
+  finally{button.disabled=false;}
 });
 recompute();
 

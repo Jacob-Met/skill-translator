@@ -1,6 +1,7 @@
 import {serveAudioIntake} from './native/audio-intake.mjs';
 import {serveCalibrationTranslation} from "./native/calibration-translation.mjs";
 import {serveSequenceEdge} from "./native/sequence-edge.mjs";
+import {configFromEnv,requestReadings} from "./src/rule-interpretations.mjs";
 import http from "node:http";
 import {lstat,readFile} from "node:fs/promises";
 import {dirname,join,resolve} from "node:path";
@@ -610,6 +611,27 @@ async function readBrowserAsset(relative){
   return readFile(path);
 }
 
+
+// POST /api/rule-interpretations: Nemotron proposes plain readings; the browser's evaluator checks them.
+async function serveRuleInterpretations(req,res){
+  const send=(status,body)=>{res.writeHead(status,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});res.end(JSON.stringify(body));};
+  let raw="";
+  try{
+    for await(const chunk of req){raw+=chunk;if(raw.length>16384){send(413,{error:"Request too large."});req.destroy();return;}}
+  }catch{send(400,{error:"Request could not be read."});return;}
+  const config=configFromEnv(process.env);
+  if(!config.apiKey){send(200,{available:false,message:"Set NEBIUS_API_KEY on the server to ask Nemotron on Nebius Token Factory. The app still checks every rule without it."});return;}
+  let input;
+  try{input=JSON.parse(raw);}catch{send(400,{error:"Send JSON."});return;}
+  try{
+    const result=await requestReadings({input,apiKey:config.apiKey,model:config.model});
+    send(200,{available:true,...result});
+  }catch(error){
+    const status=error?.status===400?400:502;
+    send(status,{error:status===400?error.message:"Nemotron on Token Factory did not return a usable reading. Try again."});
+  }
+}
+
 export function createAppServer(){
   return http.createServer(async(req,res)=>{
     res.setHeader("X-Content-Type-Options","nosniff");
@@ -622,10 +644,12 @@ export function createAppServer(){
     if(path==="/sequence-contours")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/sequence-edge")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/api/sequence-edge"&&req.method==="POST"){await serveSequenceEdge(req,res);return;}
+    if(path==="/")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/capture")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' blob:; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/api/calibration-translation"&&req.method==="POST"){await serveCalibrationTranslation(req,res);return;}
     if(path==="/sequence"||path==="/web/sequence.html")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/api/audio-intake"&&req.method==="POST"){await serveAudioIntake(req,res);return;}
+    if(path==="/api/rule-interpretations"&&req.method==="POST"){await serveRuleInterpretations(req,res);return;}
     const route=Object.prototype.hasOwnProperty.call(routes,path)?routes[path]:null;
     if(req.method!=="GET"&&req.method!=="HEAD"){
       res.writeHead(405,{"Allow":"GET, HEAD"});res.end("Method not allowed");return;

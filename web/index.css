@@ -197,6 +197,9 @@ input::file-selector-button{border:1px solid var(--ink);background:transparent;p
 .experiment-proposal label{max-width:320px}
 .experiment-proposal input{margin-top:5px}
 .experiment-proposal p{font-size:.92rem}
+.nemotron-readings{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:16px}
+.nemotron-readings p{flex:1 1 320px;margin:0}
+.candidate-reading{font-style:italic;border-top:1px dashed var(--construct);padding-top:6px}
 .candidate-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:20px}
 .candidate-card{min-width:0;border:1px solid var(--construct);border-top:3px solid var(--construct);background:var(--sheet);padding:12px}
 .candidate-card h4{margin:0 0 10px;font-size:.92rem;font-weight:600;line-height:1.35}
