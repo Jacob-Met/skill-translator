@@ -10,6 +10,7 @@ import {createHash} from 'node:crypto';
 import {createAppServer} from '../server.mjs';
 import {createSequence, appendMoment, upsertStep, sequenceFindings} from '../src/demonstration-sequence.mjs';
 import {frameOrigin} from '../src/frame-origin.mjs';
+import {requireBrowserSandbox} from './browser-sandbox-admission.mjs';
 
 const output = resolve(process.env.QA_OUTPUT || '/tmp/skill-spoken-receiving');
 await mkdir(dirname(output), {recursive: true});
@@ -118,7 +119,10 @@ try {
   await prepareApplication();
   const modulePath = process.env.PLAYWRIGHT_MODULE;
   const {chromium} = await import(modulePath?.startsWith('/') ? pathToFileURL(modulePath).href : modulePath || 'playwright');
-  browser = await chromium.launch({headless: true, executablePath: process.env.CHROME_BINARY, chromiumSandbox: true});
+  receipt.sandbox_admission_helper_sha256 = sha(await readFile(new URL('./browser-sandbox-admission.mjs', import.meta.url)));
+  receipt.requested_browser_launch = {headless: true, executablePath: process.env.CHROME_BINARY ?? null, chromiumSandbox: true, args: ['--enable-automation']};
+  browser = await chromium.launch({...receipt.requested_browser_launch, executablePath: process.env.CHROME_BINARY});
+  await requireBrowserSandbox(browser, {receipt, saveReceipt, requestedExecutable: process.env.CHROME_BINARY, platform: process.platform});
   const desktop = await context(), page = desktop.page;
   const clip = {name: 'authored-bookbinding.webm', mimeType: 'video/webm', sizeBytes: 1234, sha256: 'a'.repeat(64), durationSeconds: 20};
   let sequence = createSequence(clip, {title: 'A fold explained by its author', context: 'Authored bookbinding frames and generated audio tones for software receiving.'});

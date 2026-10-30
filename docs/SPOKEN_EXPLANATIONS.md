@@ -141,8 +141,25 @@ They check the exact manifested files and served routes before opening the
 browser; failed external receiving never falls back to a source server. Keep
 `QA_OUTPUT` outside the extracted runtime so evidence does not alter its inventory.
 
-The course requires a new output directory, retains partial results if a check
-fails, launches Chromium with its sandbox enabled, and closes only its owned
-browser and server. It preserves the app's CSP. A second, explicitly scoped
-same-origin stylesheet supplies the wide-source visual comparison; the shipped
-layout keeps the original step and spoken account beside one another.
+The courses require a new output directory and retain partial results if a
+check fails. They request Chromium sandboxing, then inspect the same browser's
+actual `chrome://sandbox` and `chrome://version` observations before opening
+the application. Receipts retain the raw observations, effective executable,
+version, command line and profile, plus the receiver and admission-helper
+hashes. Missing or contradictory observations, disabled protections, or a
+shared profile fail admission before any feature group.
+
+The currently verified admission policy is Linux with the Namespace sandbox,
+PID and network namespaces, Seccomp-BPF, an ephemeral Playwright profile under
+`/tmp`, and pipe debugging. Other platforms or configurations remain
+unverified by this receiving policy; that does not establish application
+incompatibility. Choose an installed native browser executable that meets the
+policy. A wrapper can override requested flags, so the launch option alone is
+not evidence of sandboxing. There is no unsandboxed fallback or host-security
+change. The admission regression checks run with
+`node --test test/browser-sandbox-admission.test.mjs`.
+
+The courses close only their owned browser and server and preserve the app's
+CSP. A second, explicitly scoped same-origin stylesheet supplies the
+wide-source visual comparison; the shipped layout keeps the original step and
+spoken account beside one another.
