@@ -31,6 +31,9 @@ sequence metadata and selected PNG frames, not the complete video.
 
 Remove an explanation explicitly to change the current notebook. Removing one
 association does not remove a shared recording still used by another step.
+You can download a notebook with no explanations, including after removing the
+last one. That download keeps the original sequence and PNG frames without
+retaining the removed recordings.
 Keep an earlier downloaded notebook if you need the earlier account. Nothing is
 uploaded or persisted automatically. Attach or discard a current draft before
 saving so the download does not silently omit it.
@@ -129,6 +132,14 @@ recording and original-frame bytes after download and reopening, separate audio
 drafts, stale editors, import/export races, keyboard focus and a narrow layout.
 Its authored tone controls exercise playback and custody; they do not establish
 that a recording contains speech or that someone learned from it.
+
+Both browser courses can receive a separately extracted runtime launched with
+its maintained `start.sh`. Set `SKILL_RECEIVE_BASE_URL` to its printed HTTP
+`127.0.0.1` origin, `SKILL_RECEIVE_ROOT` to the extracted application directory,
+and `SKILL_RECEIVE_COMMIT` to the independently expected full source commit.
+They check the exact manifested files and served routes before opening the
+browser; failed external receiving never falls back to a source server. Keep
+`QA_OUTPUT` outside the extracted runtime so evidence does not alter its inventory.
 
 The course requires a new output directory, retains partial results if a check
 fails, launches Chromium with its sandbox enabled, and closes only its owned

@@ -3,7 +3,9 @@
 import assert from 'node:assert/strict';
 import {mkdir, readFile, writeFile, open} from 'node:fs/promises';
 import {join, dirname, resolve} from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {pathToFileURL, fileURLToPath} from 'node:url';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
 import {createHash} from 'node:crypto';
 import {createAppServer} from '../server.mjs';
 import {createSequence, appendMoment, upsertStep, sequenceFindings} from '../src/demonstration-sequence.mjs';
@@ -13,15 +15,56 @@ const output = resolve(process.env.QA_OUTPUT || '/tmp/skill-spoken-receiving');
 await mkdir(dirname(output), {recursive: true});
 await mkdir(output); // A stale download must never satisfy a new receiving run.
 const sha = data => createHash('sha256').update(data).digest('hex');
-const receipt = {startedAt: new Date().toISOString(), state: 'running', fixtureClass: 'Authored PNG and tone software controls', groups: [], pageErrors: [], externalRequests: []};
+const receiverSHA = sha(await readFile(fileURLToPath(import.meta.url)));
+const receipt = {receiver_sha256: receiverSHA, source_commit: null, startedAt: new Date().toISOString(), state: 'running', fixtureClass: 'Authored PNG and tone software controls', groups: [], pageErrors: [], externalRequests: []};
 const saveReceipt = () => writeFile(join(output, 'browser.json'), JSON.stringify(receipt, null, 2) + '\n');
 await saveReceipt();
-const modulePath = process.env.PLAYWRIGHT_MODULE;
-const {chromium} = await import(modulePath?.startsWith('/') ? pathToFileURL(modulePath).href : modulePath || 'playwright');
-const server = createAppServer();
-await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
-const base = 'http://127.0.0.1:' + server.address().port;
-let browser;
+let server = null, base = null, browser;
+
+function loopbackOrigin(value) {
+  assert(/^http:\/\/127\.0\.0\.1(?::[0-9]{1,5})?\/?$/.test(value),
+    'External receiving requires an HTTP 127.0.0.1 origin without credentials, path, query or fragment');
+  const url = new URL(value), port = Number(url.port || 80);
+  assert(Number.isInteger(port) && port >= 1 && port <= 65535, 'Invalid receiving port');
+  return url.origin;
+}
+
+async function prepareApplication() {
+  const externalURL = process.env.SKILL_RECEIVE_BASE_URL;
+  if (externalURL !== undefined) {
+    base = loopbackOrigin(externalURL);
+    const root = process.env.SKILL_RECEIVE_ROOT, commit = process.env.SKILL_RECEIVE_COMMIT;
+    assert(root && /^[a-f0-9]{40}$/.test(commit || ''), 'Supply SKILL_RECEIVE_ROOT and independently expected full lowercase SKILL_RECEIVE_COMMIT');
+    receipt.hosting = 'external'; receipt.base_url = base;
+    receipt.runtime_root = resolve(root); receipt.source_commit = commit;
+    const receiver = fileURLToPath(new URL('./receive-runtime.mjs', import.meta.url));
+    const expectedReceiverSHA = sha(await readFile(receiver));
+    let result;
+    try {
+      result = await promisify(execFile)(process.execPath, [receiver, resolve(root), commit], {
+        env: {...process.env, SKILL_RECEIVE_BASE_URL: base}, maxBuffer: 16 * 1024 * 1024,
+      });
+    } catch (error) {
+      await writeFile(join(output, 'external-static-receipt.json'), String(error.stdout || ''));
+      await writeFile(join(output, 'external-static-stderr.txt'), String(error.stderr || error.message));
+      throw error; // An external failure must never fall back to our source server.
+    }
+    await writeFile(join(output, 'external-static-receipt.json'), result.stdout);
+    if (result.stderr) await writeFile(join(output, 'external-static-stderr.txt'), result.stderr);
+    const verified = JSON.parse(result.stdout);
+    assert.equal(verified.result, 'passed'); assert.equal(verified.hosting, 'external');
+    assert.equal(verified.base_url, base); assert.equal(verified.source_commit, commit);
+    assert.equal(verified.receiver_sha256, expectedReceiverSHA);
+    receipt.external_static_receiver_sha256 = verified.receiver_sha256;
+    receipt.external_static_receipt_sha256 = sha(result.stdout);
+  } else {
+    server = createAppServer();
+    await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+    base = 'http://127.0.0.1:' + server.address().port;
+    receipt.hosting = 'receiver self-hosted'; receipt.base_url = base;
+  }
+  await saveReceipt();
+}
 
 function wave(seconds, frequency = 330) {
   const rate = 8000, samples = Math.ceil(seconds * rate), data = Buffer.alloc(44 + samples);
@@ -72,6 +115,9 @@ async function readNotebook(page, file) {
 }
 
 try {
+  await prepareApplication();
+  const modulePath = process.env.PLAYWRIGHT_MODULE;
+  const {chromium} = await import(modulePath?.startsWith('/') ? pathToFileURL(modulePath).href : modulePath || 'playwright');
   browser = await chromium.launch({headless: true, executablePath: process.env.CHROME_BINARY, chromiumSandbox: true});
   const desktop = await context(), page = desktop.page;
   const clip = {name: 'authored-bookbinding.webm', mimeType: 'video/webm', sizeBytes: 1234, sha256: 'a'.repeat(64), durationSeconds: 20};
@@ -145,6 +191,50 @@ try {
     await alternative.page.screenshot({path: join(output, 'desktop-wide-source-alternative.png'), fullPage: true});
     await alternative.context.close();
     return {downloadBytes: firstDownload.bytes.length, downloadSha256: sha(firstDownload.bytes)};
+  });
+
+
+  await group('final explanation removal downloads and freshly reopens with original source intact', async () => {
+    const removed = await context({width: 390, height: 844});
+    assert.equal(await removed.page.locator('#save').isDisabled(), true, 'no notebook has been accepted');
+    await readNotebook(removed.page, firstDownload.path);
+    assert.equal(await removed.page.locator('.explanation-card').count(), 1);
+    await removed.page.locator('.remove').focus();
+    await removed.page.keyboard.press('Enter');
+    assert.equal(await removed.page.locator('.explanation-card').count(), 0);
+    assert.equal(await removed.page.locator('#save').isDisabled(), false, 'the final removal must be downloadable');
+    const empty = await download(removed.page, 'after-final-removal.json');
+    const value = JSON.parse(empty.bytes);
+    assert.deepEqual(value.notebook.explanations, []);
+    assert.deepEqual(value.recordings, []);
+    assert.deepEqual(value.notebook.source, sequence);
+    assert.deepEqual(value.sourceBundle, bundle);
+    assert.deepEqual(await readFile(sourceFile), originalSource);
+    await removed.context.close();
+
+    const reopened = await context({width: 390, height: 844});
+    await readNotebook(reopened.page, empty.path);
+    assert.equal(await reopened.page.locator('.explanation-card').count(), 0);
+    assert.equal(await reopened.page.locator('#save').isDisabled(), false);
+    await reopened.page.locator('#step').focus();
+    await reopened.page.keyboard.press('ArrowDown');
+    await reopened.page.waitForFunction(() => document.querySelector('#step').value === 'step-1');
+    assert.equal(await reopened.page.locator('.explanation-card').count(), 0);
+    assert.deepEqual(await reopened.page.locator('#frames img').evaluateAll(images => images.map(image => [image.naturalWidth, image.naturalHeight])), [[640, 360], [640, 360]]);
+    assert.match(await reopened.page.locator('#original-account').textContent(), /Original supplied account: resistance may change/);
+    assert.equal(await reopened.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+    await reopened.page.screenshot({path: join(output, 'after-final-removal-narrow.png'), fullPage: true});
+    await reopened.page.locator('#attribution').fill('Unattached text remains a draft');
+    assert.equal(await reopened.page.locator('#save').isDisabled(), true, 'an empty notebook must not bypass a draft');
+    await reopened.page.locator('#discard').click();
+    assert.equal(await reopened.page.locator('#save').isDisabled(), false);
+    const repeated = await download(reopened.page, 'empty-notebook-reopened.json');
+    assert.deepEqual(repeated.bytes, empty.bytes);
+    await reopened.page.setViewportSize({width: 1380, height: 1050});
+    await reopened.page.screenshot({path: join(output, 'after-final-removal-desktop.png'), fullPage: true});
+    await reopened.context.close();
+    return {remainingExplanations: 0, retainedRecordings: 0, originalSourceUnchanged: true, freshReopen: true, draftGuardPreserved: true,
+      downloadSha256: sha(empty.bytes), downloadBytes: empty.bytes.length};
   });
 
   const narrow = await context({width: 390, height: 844}), small = narrow.page;
@@ -247,8 +337,8 @@ try {
     assert.equal(await page.locator('#status').textContent(), replacementStatus);
     assert.equal(await page.locator('.explanation-card').count(), 0);
     assert.equal(await page.locator('#draft-preview').isHidden(), true);
-    assert.equal(await page.locator('#save').isDisabled(), true);
-    return {oldPlaybackPaused: true, lateAudioNotAttached: true};
+    assert.equal(await page.locator('#save').isDisabled(), false);
+    return {oldPlaybackPaused: true, lateAudioNotAttached: true, emptyNotebookSaveable: true};
   });
 
   await group('changed draft retires an in-flight complete export', async () => {
@@ -310,5 +400,6 @@ try {
   receipt.state = 'failed'; receipt.error = String(error?.stack || error); process.exitCode = 1; console.error(receipt.error);
 } finally {
   receipt.finishedAt = new Date().toISOString(); await saveReceipt();
-  await browser?.close(); await new Promise(resolve => server.close(resolve));
+  await browser?.close();
+  if (server) await new Promise(resolve => server.close(resolve));
 }

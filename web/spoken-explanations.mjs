@@ -36,7 +36,7 @@ function controls() {
   const pending = Boolean(receiving || loadingAudio);
   $('attach').disabled = !step || !draft || !$('attribution').value.trim() || pending || Boolean(editing) || notebook.explanations.length >= MAX_EXPLANATIONS;
   $('discard').disabled = !draftDirty() && !loadingAudio;
-  $('save').disabled = !notebook?.explanations.length || draftDirty() || pending || Boolean(saving) || Boolean(editing);
+  $('save').disabled = !notebook || draftDirty() || pending || Boolean(saving) || Boolean(editing);
   for (const button of $('explanations').querySelectorAll('[data-account-action]')) button.disabled = Boolean(editing || receiving);
   for (const id of ['audio-file', 'attribution', 'description']) $(id).disabled = !step;
   $('attachment-target').textContent = step ? 'Will attach to: ' + step.title : 'Add a before/after step in Demonstration studio first.';
