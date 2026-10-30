@@ -3,136 +3,226 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark">
-<title>SKILL TRANSLATOR · Task Space</title>
-<link rel="stylesheet" href="/web/styles.css">
+<meta name="color-scheme" content="light">
+<title>Skill Translator · Task Space</title>
+<link rel="stylesheet" href="/web/index.css">
 <script type="module" src="/web/app.mjs"></script>
 </head>
 <body>
 <header class="topbar">
-  <div class="brand"><span class="brandmark">ST</span><span>SKILL TRANSLATOR <small>/ TASK SPACE LAB</small></span></div>
-  <a class="status-chip" href="/calibration-checks">CHECK SOURCE CALIBRATION →</a>
-<a href="/tool-access">Compare a different tool →</a>
-<a href="/response-family">Investigate workpiece response</a>
+  <div class="brand">
+    <span class="brandmark" aria-hidden="true">ST</span>
+    <span class="brand-text"><strong>Skill Translator</strong><small>Task Space Lab · transferred marks</small></span>
+  </div>
+  <details class="menu">
+    <summary>Workbenches</summary>
+    <nav class="menu-panel" aria-label="Workbenches">
+      <a class="menu-all" href="/workbenches">All workbenches →</a>
+      <p class="menu-group">Source and calibration</p>
+      <a href="/capture">Annotate a source photo</a>
+      <a href="/calibration">Alternative source calibrations</a>
+      <a href="/calibration-checks">Check source calibration</a>
+      <a href="/joint-calibration">Several marks under one reading</a>
+      <p class="menu-group">Compare and investigate</p>
+      <a href="/tool-access">Compare a different tool</a>
+      <a href="/response-family">Investigate workpiece response</a>
+      <a href="/feature-clearance">Compare feature separation</a>
+      <a href="/sequence">Explain a timed demonstration</a>
+      <a href="/instrument-trace">Inspect instrument readings</a>
+      <a href="/footprint">Inspect a declared contact patch</a>
+      <p class="menu-group">Practice</p>
+      <a href="/decision-practice">Practice decisions</a>
+      <a href="/rehearsal">Rehearse across workpiece sizes</a>
+    </nav>
+  </details>
 </header>
-<main>
-  <section class="hero">
-    <p class="eyebrow">01 / RELATIONSHIPS, NOT POSES</p>
-    <h1>What stays true when the workpiece changes?</h1>
-    <p><a class="capture-link" href="/workbenches">Explore all workbenches and learning tools →</a></p>
-    <p class="lead">Inspect marked evidence from an annotated demonstration. Transfer physical clearances and proportional alignments to a different sheet, then test your own placement in millimetres.</p>
-    <p class="truth">ILLUSTRATIVE GEOMETRY ONLY · No contact, pressure or skill outcome is inferred from this 2D exercise.</p>
-    <p><a href="/calibration">Investigate how alternative source calibrations change the rule →</a></p>
-  </section>
-  <p><a href="/joint-calibration">Compare multiple marks under one shared source reading →</a></p>
-  <section class="toolbar" aria-label="Source and target">
-    <div class="input-column">
-      <label for="demoFile">SOURCE ANNOTATIONS <span class="hint">Choose local JSON (optional, ≤256 KB)</span></label>
-      <input id="demoFile" type="file" accept=".json,application/json">
-      <p class="input-note" id="demoLabel">Synthetic bookbinding demonstration · 3 source marks</p>
-      <a class="capture-link" href="/capture">Annotate your own source photo ↗</a>
-      <p><a class="capture-link" href="/feature-clearance">Compare feature separation as the workpiece changes ↗</a></p>
-      <p><a class="capture-link" href="/sequence">Explain a timed demonstration through before and after frames ↗</a></p>
-      <p><a class="capture-link" href="/instrument-trace">Inspect supplied instrument readings beside the original demonstration ↗</a></p>
-      <p><a class="capture-link" href="/decision-practice">Practice decisions from retained demonstrations ↗</a></p>
-    </div>
-    <div class="input-column">
-      <label for="widthMm">TARGET WIDTH <span class="hint">millimetres</span></label>
-      <input id="widthMm" type="number" min="1" max="10000" value="320" step="1">
-    </div>
-    <div class="input-column">
-      <label for="heightMm">TARGET HEIGHT <span class="hint">millimetres</span></label>
-      <input id="heightMm" type="number" min="1" max="10000" value="190" step="1">
-    </div>
-    <div class="input-column">
-      <label for="handed">VIEW ORIENTATION</label>
-      <select id="handed">
-        <option value="standard">Standard</option>
-        <option value="mirrored">Mirrored workspace (left-handed view)</option>
-      </select>
-      <p class="input-note">View changes; physical rules don't.</p>
-    </div>
-  </section>
+<main class="sheet-page">
+  <p class="intro">Marked relationships from a source drawing, transferred to a different sheet. Place your own mark and check it in millimetres.</p>
+
   <p id="error" role="alert" class="error" hidden></p>
-  <section class="workspace" aria-label="Comparison workbench">
-    <article class="work-panel">
-      <div class="panel-head"><span class="step">A / 01</span><h2>Annotated source</h2><span class="panel-badge">AUTHORED</span></div>
-      <svg id="sourceSvg" viewBox="0 0 520 390" tabindex="0" role="application" aria-label="Annotated source page with numbered marks. Click inside page to propose a new source annotation; or use the numeric coordinate fields below."></svg>
+
+  <div class="drawings" aria-label="Comparison workbench">
+    <article class="drawing drawing-source" aria-labelledby="sourceTitle">
+      <header class="drawing-head">
+        <span class="drawing-no">A</span>
+        <h2 id="sourceTitle">Annotated source</h2>
+        <span class="tag">Authored</span>
+      </header>
+      <svg id="sourceSvg" class="canvas" viewBox="0 0 520 390" tabindex="0" role="application" aria-label="Annotated source page with numbered marks. Click inside page to propose a new source annotation; or use the numeric coordinate fields below."></svg>
       <p class="undergraph">Four source corners establish a planar perspective transform. Each mark remains linked to its original pixel coordinate, not a presumed movement trajectory.</p>
       <p class="source-provenance" id="provenance"></p>
-      <div class="source-photo-tools">
-        <label for="sourcePhoto">PAIR THE ORIGINAL PHOTO <span class="hint">For photo-backed annotations</span></label>
-        <input id="sourcePhoto" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg">
-        <p id="sourcePhotoStatus" role="status">The included source is an authored illustration. Start in Source Studio to annotate a local photo.</p>
-      </div>
-      <form id="authorForm" class="author-panel">
-        <p class="eyebrow">ANNOTATE / CAPTURE A NEW RELATIONSHIP</p>
-        <p class="author-intro">Click inside the source sheet or enter its pixel location, then explicitly describe what the mark means. No geometry can reveal an unmeasured force or expert intention.</p>
-        <div class="author-grid">
-          <label for="sourceX">SOURCE X · PX<input id="sourceX" type="number" step="any" placeholder="Click source or enter x"></label>
-          <label for="sourceY">SOURCE Y · PX<input id="sourceY" type="number" step="any" placeholder="Click source or enter y"></label>
-          <label class="author-wide" for="annotationLabel">MARK NAME<input id="annotationLabel" type="text" maxlength="100" value="New alignment mark" required></label>
-          <label for="annotationKind">RULE INTERPRETATION<select id="annotationKind"><option value="fraction">Proportional position</option><option value="edge_offset_mm">Fixed physical edge clearance</option></select></label>
-          <label for="annotationEdge">PHYSICAL REFERENCE EDGE<select id="annotationEdge" disabled><option value="left">Left</option><option value="right">Right</option><option value="top">Top</option><option value="bottom">Bottom</option></select></label>
-          <label for="annotationTolerance">TOLERANCE · MM<input id="annotationTolerance" type="number" value="4" min="0.1" max="50" step="0.1"></label>
+
+      <details class="fold">
+        <summary>Pair the original photo</summary>
+        <div class="source-photo-tools">
+          <label for="sourcePhoto">Original photo <span class="hint">for photo-backed annotations</span></label>
+          <input id="sourcePhoto" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg">
+          <p id="sourcePhotoStatus" role="status">The included source is an authored illustration. Start in Source Studio to annotate a local photo.</p>
         </div>
-        <div class="author-actions"><button class="primary" type="submit">Add authored mark</button><button id="downloadSource" type="button">Download source JSON</button></div>
-        <p id="annotationStatus" role="status" class="author-status">No new annotation placed.</p>
-      </form>
+      </details>
+
+      <details class="fold">
+        <summary>Annotate a new mark</summary>
+        <form id="authorForm" class="author-panel">
+          <p class="author-intro">Click inside the source sheet or enter its pixel location, then explicitly describe what the mark means. No geometry can reveal an unmeasured force or expert intention.</p>
+          <div class="author-grid">
+            <label for="sourceX">Source x · px<input id="sourceX" type="number" step="any" placeholder="Click source or enter x"></label>
+            <label for="sourceY">Source y · px<input id="sourceY" type="number" step="any" placeholder="Click source or enter y"></label>
+            <label class="author-wide" for="annotationLabel">Mark name<input id="annotationLabel" type="text" maxlength="100" value="New alignment mark" required></label>
+            <label for="annotationKind">Rule<select id="annotationKind"><option value="fraction">Proportional position</option><option value="edge_offset_mm">Fixed edge clearance</option></select></label>
+            <label for="annotationEdge">Reference edge<select id="annotationEdge" disabled><option value="left">Left</option><option value="right">Right</option><option value="top">Top</option><option value="bottom">Bottom</option></select></label>
+            <label for="annotationTolerance">Tolerance · mm<input id="annotationTolerance" type="number" value="4" min="0.1" max="50" step="0.1"></label>
+          </div>
+          <div class="author-actions"><button class="primary" type="submit">Add authored mark</button><button id="downloadSource" type="button">Download source JSON</button></div>
+          <p id="annotationStatus" role="status" class="author-status">No new annotation placed.</p>
+        </form>
+      </details>
     </article>
-    <article class="work-panel work-panel-target">
-      <div class="panel-head"><span class="step">B / 02</span><h2>Adapted workpiece</h2><span class="panel-badge">EDITABLE</span></div>
-      <svg id="targetSvg" viewBox="0 0 720 420" tabindex="0" role="application" aria-label="Target sheet; click to place your trial mark, arrow keys to adjust by one millimetre, Shift and arrow by five."></svg>
+
+    <article class="drawing drawing-target" aria-labelledby="targetTitle">
+      <header class="drawing-head">
+        <span class="drawing-no">B</span>
+        <h2 id="targetTitle">Adapted workpiece</h2>
+        <span class="tag tag-live">Editable</span>
+      </header>
+      <svg id="targetSvg" class="canvas" viewBox="0 0 720 420" tabindex="0" role="application" aria-label="Target sheet; click to place your trial mark, arrow keys to adjust by one millimetre, Shift and arrow by five."></svg>
       <div class="practice-row">
         <label class="switch"><input id="showGoal" type="checkbox" checked> Show target marks</label>
-        <span>CLICK / DRAG TO TRY · ARROWS ±1 MM · SHIFT ±5 MM</span>
+        <span class="hint-line">Click or drag to try · arrows ±1 mm · Shift ±5 mm</span>
       </div>
-      <div class="actions"><button id="check" class="primary">Evaluate placement ↗</button><button id="reset">Reset attempt</button><button id="export">Export evidence JSON</button><button id="practiceTask">Practice the complete task</button><button id="inspectTool">Adapt this task to a tool</button></div>
-      <p><a href="/footprint" class="capture-link">Inspect a declared contact patch at the task point →</a> <span class="input-note">Open source annotations or explore the authored geometry.</span></p>
-      <p><a href="/rehearsal" class="capture-link">Rehearse across changing workpiece sizes →</a> <span class="input-note">Open your source annotations or use the authored example.</span></p>
+      <div class="actions">
+        <button id="reset">Reset attempt</button>
+        <button id="export">Export evidence JSON</button>
+        <button id="practiceTask">Practice the complete task</button>
+        <button id="inspectTool">Adapt this task to a tool</button>
+      </div>
       <p id="evaluation" class="evaluation" aria-live="polite">Select a relationship, place the ring on the page, and evaluate your attempt.</p>
     </article>
-  </section>
-  <section class="inspector" aria-label="Selected physical relationship">
-    <div class="inspector-heading"><p class="eyebrow">02 / THE INVARIANT</p><h2>Inspect the rule behind the mark</h2></div>
+  </div>
+
+  <div class="sheet-foot">
+    <section class="legend" aria-label="Drawing key">
+      <p class="legend-title">Key</p>
+      <ul>
+        <li><span class="key key-source"></span>Source mark, from the authored annotation</li>
+        <li><span class="key key-target"></span>Target position for the selected rule</li>
+        <li><span class="key key-other"></span>Position under the competing rule</li>
+        <li><span class="key key-attempt"></span>Your placement</li>
+        <li><span class="key key-dim"></span>Dimension, millimetres</li>
+      </ul>
+    </section>
+
+    <aside class="titleblock" aria-label="Specification sheet">
+      <p class="tb-title">Transfer specification</p>
+      <div class="tb-row">
+        <label for="demoFile">Source annotations <span class="hint">JSON, up to 256 KB</span></label>
+        <input id="demoFile" type="file" accept=".json,application/json">
+        <p class="tb-note" id="demoLabel">Synthetic bookbinding demonstration · 3 source marks</p>
+      </div>
+      <div class="tb-pair">
+        <div class="tb-row">
+          <label for="widthMm">Target width <span class="hint">mm</span></label>
+          <input id="widthMm" type="number" min="1" max="10000" value="320" step="1">
+        </div>
+        <div class="tb-row">
+          <label for="heightMm">Target height <span class="hint">mm</span></label>
+          <input id="heightMm" type="number" min="1" max="10000" value="190" step="1">
+        </div>
+      </div>
+      <div class="tb-row">
+        <label for="handed">View</label>
+        <select id="handed">
+          <option value="standard">Standard</option>
+          <option value="mirrored">Mirrored workspace (left-handed view)</option>
+        </select>
+        <p class="tb-note">The view changes; physical rules do not.</p>
+      </div>
+      <div class="tb-action">
+        <button id="check" class="primary">Evaluate placement</button>
+      </div>
+    </aside>
+  </div>
+
+  <section class="inspector" aria-labelledby="inspectorHeading">
+    <header class="section-head">
+      <h2 id="inspectorHeading">The relationship behind the mark</h2>
+    </header>
     <div id="markChoices" class="mark-choices" aria-label="Source mark selection"></div>
     <div class="detail-grid">
-      <div><span class="detail-label">PRESERVED RELATIONSHIP</span><p id="rule" class="main-detail"></p><p id="why"></p></div>
-      <div><span class="detail-label">ORIGINAL ANNOTATION</span><p id="sourcePosition" class="main-detail"></p><p id="sourceFraction"></p></div>
-      <div><span class="detail-label">ADAPTED TARGET</span><p id="targetPosition" class="main-detail"></p><p id="targetTolerance"></p></div>
+      <div><span class="detail-label">Preserved relationship</span><p id="rule" class="main-detail"></p><p id="why"></p></div>
+      <div><span class="detail-label">Original annotation</span><p id="sourcePosition" class="main-detail"></p><p id="sourceFraction"></p></div>
+      <div><span class="detail-label">Adapted target</span><p id="targetPosition" class="main-detail"></p><p id="targetTolerance"></p></div>
     </div>
     <div class="hypothesis-box">
-      <div><p class="eyebrow">COUNTERFACTUAL / SAME SOURCE EVIDENCE</p><h3>What if the mark meant a different rule?</h3><p>The original pixels do not tell us which interpretation the expert intended. Compare the predictions, then ask for a discriminating demonstration.</p></div>
-      <div class="hypothesis-results"><label for="alternateRule">COMPARE AGAINST AN ALTERNATIVE</label><select id="alternateRule"></select><p id="alternativeOutcome" aria-live="polite"></p><p id="variationIdea"></p></div>
+      <div>
+        <p class="detail-label">Same source, different rule</p>
+        <h3>What if the mark meant something else?</h3>
+        <p>The original pixels do not tell us which interpretation the expert intended. Compare the predictions, then ask for a discriminating demonstration.</p>
+      </div>
+      <div class="hypothesis-results">
+        <label for="alternateRule">Compare against</label>
+        <select id="alternateRule"></select>
+        <p id="alternativeOutcome" aria-live="polite"></p>
+        <p id="variationIdea"></p>
+      </div>
     </div>
   </section>
+
   <section id="evidenceLab" class="evidence-lab" aria-labelledby="evidenceHeading">
-    <div class="evidence-heading"><div><p class="eyebrow">03 / CHALLENGE THE RELATIONSHIP</p><h2 id="evidenceHeading">Let another demonstration test the rule.</h2></div><p>Add a mark observed on a differently sized sheet. The five candidate rules stay anchored to the original annotation; each new observation can expose a disagreement.</p></div>
+    <header class="section-head">
+      <h2 id="evidenceHeading">Let another demonstration test the rule</h2>
+      <p>Add a mark observed on a differently sized sheet. The five candidate rules stay anchored to the original annotation; each new observation can expose a disagreement.</p>
+    </header>
     <p id="evidenceSummary" class="evidence-summary" aria-live="polite"></p>
     <p id="evidenceCounts" class="input-note"></p>
     <div class="evidence-workspace">
       <form id="observationForm" class="observation-form">
         <h3>Add an observation for the selected mark</h3>
         <div class="author-grid">
-          <label class="author-wide" for="obsLabel">SOURCE LABEL<input id="obsLabel" type="text" maxlength="160" placeholder="Sheet B · overhead frame 120" required></label>
-          <label class="author-wide" for="obsClass">EVIDENCE TYPE<select id="obsClass"><option value="reported-measurement">Reported measurement</option><option value="authored-example">Authored example</option></select></label>
-          <label for="obsWidth">OBSERVED SHEET WIDTH · MM<input id="obsWidth" type="number" value="320" min="1" max="10000" step="any" required></label>
-          <label for="obsHeight">OBSERVED SHEET HEIGHT · MM<input id="obsHeight" type="number" value="190" min="1" max="10000" step="any" required></label>
-          <label for="obsX">MARK X FROM LEFT · MM<input id="obsX" type="number" min="0" max="10000" step="any" placeholder="Observed x" required></label>
-          <label for="obsY">MARK Y FROM TOP · MM<input id="obsY" type="number" min="0" max="10000" step="any" placeholder="Observed y" required></label>
-          <label class="author-wide" for="obsUncertainty">MEASUREMENT UNCERTAINTY RADIUS · MM<input id="obsUncertainty" type="number" min="0" max="1000" step="any" value="2" required></label>
+          <label class="author-wide" for="obsLabel">Source label<input id="obsLabel" type="text" maxlength="160" placeholder="Sheet B · overhead frame 120" required></label>
+          <label class="author-wide" for="obsClass">Evidence type<select id="obsClass"><option value="reported-measurement">Reported measurement</option><option value="authored-example">Authored example</option></select></label>
+          <label for="obsWidth">Observed width · mm<input id="obsWidth" type="number" value="320" min="1" max="10000" step="any" required></label>
+          <label for="obsHeight">Observed height · mm<input id="obsHeight" type="number" value="190" min="1" max="10000" step="any" required></label>
+          <label for="obsX">Mark x from left · mm<input id="obsX" type="number" min="0" max="10000" step="any" placeholder="Observed x" required></label>
+          <label for="obsY">Mark y from top · mm<input id="obsY" type="number" min="0" max="10000" step="any" placeholder="Observed y" required></label>
+          <label class="author-wide" for="obsUncertainty">Measurement uncertainty radius · mm<input id="obsUncertainty" type="number" min="0" max="1000" step="any" value="2" required></label>
         </div>
         <p class="input-note">Use physical sheet coordinates. This radius describes the added measurement, separately from practice tolerance. Predictions condition on the original calibration.</p>
         <div class="author-actions"><button class="primary" type="submit">Test against all five rules</button><button id="useTargetSize" type="button">Use target dimensions</button></div>
       </form>
-      <div class="observation-view"><svg id="evidenceSvg" viewBox="0 0 680 330" role="img" aria-label="Observed mark and measurement radius compared with numbered candidate predictions"></svg><p id="observationView" class="undergraph"></p><div class="experiment-proposal"><label for="planUncertainty">NEXT OBSERVATION UNCERTAINTY · MM<input id="planUncertainty" type="number" min="0" max="1000" step="any" value="2"></label><p id="evidenceProposal" aria-live="polite"></p><p class="input-note">Compares a bounded set of sheet sizes and keeps every compatible rule. This is a geometric experiment proposal.</p></div></div>
+      <div class="observation-view">
+        <svg id="evidenceSvg" viewBox="0 0 680 330" role="img" aria-label="Observed mark and measurement radius compared with numbered candidate predictions"></svg>
+        <p id="observationView" class="undergraph"></p>
+        <div class="experiment-proposal">
+          <label for="planUncertainty">Next observation uncertainty · mm<input id="planUncertainty" type="number" min="0" max="1000" step="any" value="2"></label>
+          <p id="evidenceProposal" aria-live="polite"></p>
+          <p class="input-note">Compares a bounded set of sheet sizes and keeps every compatible rule. This is a geometric experiment proposal.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nemotron-readings">
+      <button id="askNemotron" type="button">Ask Nemotron for plain readings of this mark</button>
+      <p id="nemotronStatus" role="status" class="input-note">Nemotron on Nebius Token Factory proposes readings. The five rule cards below are still tested by the app.</p>
     </div>
     <div id="candidateCards" class="candidate-cards" aria-label="Candidate rule evidence"></div>
     <div id="observationTable" class="observation-table" hidden><table><caption>Observations for the selected source mark · choose a source to inspect it</caption><thead><tr><th scope="col">Source</th><th scope="col">Sheet</th><th scope="col">Mark x / y</th><th scope="col">Uncertainty</th><th scope="col">Action</th></tr></thead><tbody id="observationRows"></tbody></table></div>
-    <div class="evidence-files"><button id="exportObservations" type="button">Export observations</button><button id="reviewRuleChoices" type="button">Choose a supported rule for practice →</button><label for="observationFile">Reopen observations for this source<input id="observationFile" type="file" accept=".json,application/json"></label><p id="evidenceStatus" role="status">Evidence stays in this browser session until you export it.</p></div>
+    <div class="evidence-files">
+      <button id="exportObservations" type="button">Export observations</button>
+      <button id="reviewRuleChoices" type="button">Choose a supported rule for practice →</button>
+      <label for="observationFile">Reopen observations for this source<input id="observationFile" type="file" accept=".json,application/json"></label>
+      <p id="evidenceStatus" role="status">Evidence stays in this browser session until you export it.</p>
+    </div>
   </section>
-  <section class="limits"><div><p class="eyebrow">04 / WHAT THE EVIDENCE CANNOT SAY</p><h2>Unmeasured stays unmeasured.</h2></div><ul id="unknowns"></ul></section>
-  <footer><span>SKILL TRANSLATOR · TASK SPACE / LOCAL GEOMETRY</span><span>Prototype · Adapted marks are proposed, not instructions for physical safety or expert certification.</span></footer>
+
+  <section class="limits" aria-labelledby="limitsHeading">
+    <header class="section-head"><h2 id="limitsHeading">Unmeasured stays unmeasured</h2></header>
+    <ul id="unknowns"></ul>
+  </section>
+
+  <footer class="sheet-footnote">
+    <span>Illustrative geometry only. No contact, pressure or skill outcome is inferred from this 2D exercise.</span>
+    <span>Prototype. Adapted marks are proposed, not instructions for physical safety or expert certification.</span>
+  </footer>
 </main>
 </body>
 </html>

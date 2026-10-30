@@ -22,6 +22,7 @@ const rounded=x=>Number(x).toFixed(3);
 let demo=demonstration,derived=derive(demo),target,selected=0,attempt=null,verdict=null;
 let alternateChoice="fraction";
 let observations=[],viewObservationId=null,observationImportVersion=0;
+let nemotronReadings=null,nemotronLandmarkId=null;
 const ruleNames={fraction:"Proportional position",left:"Fixed left clearance",
   right:"Fixed right clearance",top:"Fixed top clearance",bottom:"Fixed bottom clearance"};
 let box={x:80,y:50,width:560,height:320},dragging=false;
@@ -98,7 +99,7 @@ function markButtons(){
   const div=$("markChoices");div.replaceChildren();
   target.landmarks.forEach((mark,i)=>{
     const b=document.createElement("button");b.type="button";
-    b.textContent=String(i+1).padStart(2,"0")+" / "+mark.label;
+    b.textContent=mark.label;
     if(i===selected)b.classList.add("is-selected");
     b.setAttribute("aria-pressed",String(i===selected));
     b.addEventListener("click",()=>{selected=i;resetAlternativeChoice();resetAttempt();paint();});
@@ -151,24 +152,45 @@ function sourceDrawing(){
   if(!meta)svgEl(s,"text",{x:24,y:373,class:"svg-label"},
     "TL · TR · BR · BL  →  NORMALIZED PLANAR COORDINATES");
 }
+function dimensionDefs(s){
+  const defs=svgEl(s,"defs");
+  const marker=svgEl(defs,"marker",{id:"dimArrow",viewBox:"0 0 10 10",refX:10,refY:5,
+    markerWidth:7,markerHeight:7,orient:"auto-start-reverse"});
+  svgEl(marker,"path",{d:"M0,0 L10,5 L0,10 z",class:"dim-arrow"});
+}
+function dimensionH(s,x1,x2,featureY,dimY,label){
+  for(const x of [x1,x2])svgEl(s,"line",{x1:x,y1:featureY-4,x2:x,y2:dimY-4,class:"dim-ext"});
+  svgEl(s,"line",{x1,y1:dimY,x2,y2:dimY,class:"dim-line","marker-start":"url(#dimArrow)","marker-end":"url(#dimArrow)"});
+  svgEl(s,"text",{x:(x1+x2)/2,y:dimY-7,class:"dim-label"},label);
+}
+function dimensionV(s,y1,y2,featureX,dimX,label){
+  for(const y of [y1,y2])svgEl(s,"line",{x1:featureX-4,y1:y,x2:dimX-4,y2:y,class:"dim-ext"});
+  svgEl(s,"line",{x1:dimX,y1,x2:dimX,y2,class:"dim-line","marker-start":"url(#dimArrow)","marker-end":"url(#dimArrow)"});
+  const tx=dimX-8,ty=(y1+y2)/2;
+  svgEl(s,"text",{x:tx,y:ty,class:"dim-label",transform:"rotate(-90 "+tx+" "+ty+")"},label);
+}
+// Labels sit away from the markers with a thin leader line, in fixed quadrants.
+function leaderLabel(s,p,dx,dy,text,cls,anchorEnd){
+  const len=Math.hypot(dx,dy),r=10;
+  const lx=p.x+dx,ly=p.y+dy,tx=lx+(anchorEnd?-4:4);
+  svgEl(s,"line",{x1:p.x+dx/len*r,y1:p.y+dy/len*r,x2:lx,y2:ly,class:"leader"});
+  svgEl(s,"text",{x:tx,y:ly+4,class:cls,"text-anchor":anchorEnd?"end":"start"},text);
+}
 function targetDrawing(){
   const s=$("targetSvg");s.replaceChildren();box=bounds();
-  svgEl(s,"text",{x:22,y:29,class:"svg-label"},
-    mirrored()?"MIRRORED WORKSPACE VIEW · PHYSICAL EDGES STAY NAMED":"STANDARD WORKSPACE VIEW");
+  dimensionDefs(s);
+  svgEl(s,"text",{x:22,y:410,class:"svg-label"},
+    mirrored()?"Mirrored workspace view · physical edges stay named":"Standard workspace view");
   svgEl(s,"rect",{x:box.x,y:box.y,width:box.width,height:box.height,
-    rx:3,class:"sheet-target"});
+    rx:0,class:"sheet-target"});
   for(const frac of [0.25,0.5,0.75]){
     svgEl(s,"line",{x1:box.x+box.width*frac,y1:box.y,
       x2:box.x+box.width*frac,y2:box.y+box.height,class:"sheet-grid"});
     svgEl(s,"line",{x1:box.x,y1:box.y+box.height*frac,
       x2:box.x+box.width,y2:box.y+box.height*frac,class:"sheet-grid"});
   }
-  svgEl(s,"text",{x:360,y:box.y+box.height+24,class:"dim-label"},
-    mm(target.widthMm)+" physical sheet width");
-  const heightLabelX=box.x-23,heightLabelY=box.y+box.height/2;
-  svgEl(s,"text",{x:heightLabelX,y:heightLabelY,class:"dim-label",
-    transform:"rotate(-90 "+heightLabelX+" "+heightLabelY+")"},
-    mm(target.heightMm)+" physical sheet height");
+  dimensionH(s,box.x,box.x+box.width,box.y,box.y-26,mm(target.widthMm)+" sheet width");
+  dimensionV(s,box.y,box.y+box.height,box.x,box.x-26,mm(target.heightMm)+" sheet height");
   for(const [i,mark] of target.landmarks.entries()){
     if(!$("showGoal").checked)continue;
     const p=toDisplay(mark,target,box,mirrored());
@@ -177,7 +199,7 @@ function targetDrawing(){
       class:"goal-tolerance"});
     svgEl(s,"circle",{cx:p.x,cy:p.y,r:i===selected?8.5:5.5,
       class:"goal"+(i===selected?" selected":"")});
-    if(i===selected)svgEl(s,"text",{x:p.x+14,y:p.y-14,
+    if(i===selected)svgEl(s,"text",{x:p.x+14,y:p.y+4,
       class:"svg-target-label"},"TARGET "+(i+1));
   }
   if($("showGoal").checked){
@@ -185,7 +207,7 @@ function targetDrawing(){
     if(c){
       const other=toDisplay(c.rival,target,box,mirrored());
       svgEl(s,"circle",{cx:other.x,cy:other.y,r:10,class:"alternative-goal"});
-      svgEl(s,"text",{x:other.x+14,y:other.y+27,class:"alternative-text"},"OTHER RULE");
+      leaderLabel(s,other,46,-52,"OTHER RULE","alternative-text",false);
     }
   }
   if(attempt){
@@ -193,13 +215,13 @@ function targetDrawing(){
     svgEl(s,"line",{x1:p.x-17,y1:p.y,x2:p.x+17,y2:p.y,class:"attempt-cross"});
     svgEl(s,"line",{x1:p.x,y1:p.y-17,x2:p.x,y2:p.y+17,class:"attempt-cross"});
     svgEl(s,"circle",{cx:p.x,cy:p.y,r:8,class:"attempt"});
-    svgEl(s,"text",{x:p.x+13,y:p.y+22,class:"svg-target-label"},"YOUR MARK");
+    leaderLabel(s,p,46,34,"YOUR MARK","svg-target-label",false);
   }
 }
 function feedback(){
   const el=$("evaluation");el.className="evaluation";
   if(!verdict){
-    el.textContent="Select a relationship; click or drag the ring on the sheet, then evaluate.";
+    el.textContent="Step 1: click or drag the ring onto the sheet. Step 2: press Evaluate placement.";
     return;
   }
   el.classList.add(verdict.within?"success":"failure");
@@ -264,7 +286,7 @@ function updateEvidence(){
   result.candidates.forEach((candidate,i)=>{
     const card=document.createElement("article");card.className="candidate-card "+candidate.status;
     card.dataset.rule=candidate.rule;card.dataset.status=candidate.status;
-    const title=document.createElement("h4");title.textContent=(i+1)+" / "+ruleNames[candidate.rule];
+    const title=document.createElement("h4");title.textContent=ruleNames[candidate.rule];
     const status=document.createElement("strong");status.textContent=candidate.status.toUpperCase();
     const detail=document.createElement("p");
     detail.textContent=!candidate.residuals.length?"Waiting for an additional demonstration.":
@@ -273,7 +295,12 @@ function updateEvidence(){
     failures.textContent=candidate.contradictions.length?"Contradicted by: "+candidate.contradictions
       .map(id=>result.observations.find(o=>o.id===id).label).join("; "):
       candidate.residuals.length?"Every entered mark is within its declared measurement radius.":"";
-    card.append(title,status,detail,failures);cards.append(card);
+    card.append(title,status,detail,failures);
+    if(nemotronReadings&&nemotronLandmarkId===chosen().id){
+      const hit=nemotronReadings.find(r=>r.rule===candidate.rule);
+      if(hit){const reading=document.createElement("p");reading.className="candidate-reading";reading.textContent="Nemotron reading: "+hit.reading;card.append(reading);}
+    }
+    cards.append(card);
   });
   const list=$("observationRows");list.replaceChildren();
   for(const observation of result.observations){
@@ -539,6 +566,28 @@ $("observationFile").addEventListener("change",async e=>{
     $("evidenceStatus").textContent="Imported "+next.length+" source-matched observations.";
   }catch(err){error("Observation import refused; previous evidence retained. "+err.message);}
   finally{e.target.value="";}
+});
+// Asks the server for Nemotron readings of the selected mark. The model proposes; the evaluator above decides.
+function markReadingInput(){
+  const mark=derived.landmarks[selected],W=derived.source.widthMm,H=derived.source.heightMm;
+  return {label:mark.label,authoredRule:mark.kind==="fraction"?"fraction":mark.edge,sourceWidthMm:W,sourceHeightMm:H,
+    sourceFraction:{u:mark.uv.u,v:mark.uv.v},
+    sourceEdgeDistancesMm:{left:mark.uv.u*W,right:(1-mark.uv.u)*W,top:mark.uv.v*H,bottom:(1-mark.uv.v)*H}};
+}
+$("askNemotron").addEventListener("click",async()=>{
+  const status=$("nemotronStatus"),button=$("askNemotron"),landmarkId=chosen().id;
+  button.disabled=true;status.textContent="Asking Nemotron on Nebius Token Factory...";
+  try{
+    const response=await fetch("/api/rule-interpretations",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(markReadingInput())});
+    const body=await response.json();
+    if(!response.ok)throw Error(body.error||"Request failed.");
+    if(!body.available){status.textContent=body.message;nemotronReadings=null;return;}
+    if(landmarkId!==chosen().id){status.textContent="Mark changed while asking; reading discarded.";return;}
+    nemotronReadings=body.readings;nemotronLandmarkId=landmarkId;
+    status.textContent="Readings from "+body.model+". "+body.checkedBy;
+    updateEvidence();
+  }catch(err){status.textContent="Nemotron reading unavailable. "+err.message+" The app still checks every rule.";}
+  finally{button.disabled=false;}
 });
 recompute();
 
