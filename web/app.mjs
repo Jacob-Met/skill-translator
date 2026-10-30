@@ -98,7 +98,7 @@ function markButtons(){
   const div=$("markChoices");div.replaceChildren();
   target.landmarks.forEach((mark,i)=>{
     const b=document.createElement("button");b.type="button";
-    b.textContent=String(i+1).padStart(2,"0")+" / "+mark.label;
+    b.textContent=mark.label;
     if(i===selected)b.classList.add("is-selected");
     b.setAttribute("aria-pressed",String(i===selected));
     b.addEventListener("click",()=>{selected=i;resetAlternativeChoice();resetAttempt();paint();});
@@ -220,7 +220,7 @@ function targetDrawing(){
 function feedback(){
   const el=$("evaluation");el.className="evaluation";
   if(!verdict){
-    el.textContent="Select a relationship; click or drag the ring on the sheet, then evaluate.";
+    el.textContent="Step 1: click or drag the ring onto the sheet. Step 2: press Evaluate placement.";
     return;
   }
   el.classList.add(verdict.within?"success":"failure");
@@ -285,7 +285,7 @@ function updateEvidence(){
   result.candidates.forEach((candidate,i)=>{
     const card=document.createElement("article");card.className="candidate-card "+candidate.status;
     card.dataset.rule=candidate.rule;card.dataset.status=candidate.status;
-    const title=document.createElement("h4");title.textContent=(i+1)+" / "+ruleNames[candidate.rule];
+    const title=document.createElement("h4");title.textContent=ruleNames[candidate.rule];
     const status=document.createElement("strong");status.textContent=candidate.status.toUpperCase();
     const detail=document.createElement("p");
     detail.textContent=!candidate.residuals.length?"Waiting for an additional demonstration.":

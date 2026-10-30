@@ -1,0 +1,141 @@
+{
+  "url": "http://127.0.0.1:4308/",
+  "width": 1440,
+  "height": 900,
+  "voice": "sage",
+  "steps": [
+    {
+      "say": "Skill Translator helps a bookbinding teacher move a marked position from one drawing to a sheet of a different size. It tells you how far off your placement is, in millimetres.",
+      "do": [
+        {
+          "wait": 300
+        }
+      ]
+    },
+    {
+      "say": "On the left is the source drawing. It has three marks. Each mark follows a rule about where it sits.",
+      "do": [
+        {
+          "click": "#markChoices button:nth-child(2)"
+        }
+      ]
+    },
+    {
+      "say": "On the right is the target sheet, three hundred and twenty by one hundred and ninety millimetres. The red dot is where the mark should go.",
+      "do": [
+        {
+          "wait": 400
+        }
+      ]
+    },
+    {
+      "say": "Now place your own mark. Select the target sheet, then nudge the ring with the arrow keys. Each press moves it one millimetre.",
+      "do": [
+        {
+          "eval": "document.getElementById('targetSvg').focus()"
+        },
+        {
+          "press": "ArrowLeft"
+        },
+        {
+          "press": "ArrowLeft"
+        },
+        {
+          "press": "ArrowUp"
+        }
+      ]
+    },
+    {
+      "say": "Press Evaluate placement. The app checks your ring against the tolerance for this mark.",
+      "do": [
+        {
+          "click": "#check"
+        }
+      ]
+    },
+    {
+      "say": "The result line says whether you are within tolerance, and it gives the distance in millimetres.",
+      "do": [
+        {
+          "wait": 400
+        }
+      ]
+    },
+    {
+      "say": "Next, look at the question behind the mark. What if the mark meant a different rule? Scroll down to find out.",
+      "do": [
+        {
+          "scroll": "#alternateRule"
+        }
+      ]
+    },
+    {
+      "say": "Choose another rule to compare. Here it is a fixed distance from the top edge. The app predicts where that rule would put the mark.",
+      "do": [
+        {
+          "select": [
+            "#alternateRule",
+            "top"
+          ]
+        }
+      ]
+    },
+    {
+      "say": "Add a measurement from a second sheet size. Give the sheet size, where the mark sits, and how sure you are.",
+      "do": [
+        {
+          "scroll": "#observationForm"
+        },
+        {
+          "type": [
+            "#obsLabel",
+            "Sheet B, frame 120"
+          ]
+        },
+        {
+          "type": [
+            "#obsWidth",
+            "408"
+          ]
+        },
+        {
+          "type": [
+            "#obsHeight",
+            "272"
+          ]
+        },
+        {
+          "type": [
+            "#obsX",
+            "208"
+          ]
+        },
+        {
+          "type": [
+            "#obsY",
+            "134"
+          ]
+        }
+      ]
+    },
+    {
+      "say": "Press Test against all five rules. Only the proportional rule still fits. The other cards show which rules this measurement rules out.",
+      "do": [
+        {
+          "click": "#observationForm button.primary"
+        },
+        {
+          "scroll": "#candidateCards"
+        }
+      ]
+    },
+    {
+      "say": "That is Skill Translator. Place a mark, check it, then test the rule with a new measurement.",
+      "do": [
+        {
+          "wait": 400
+        }
+      ]
+    }
+  ]
+}

@@ -27,10 +27,20 @@ body{margin:0;min-width:320px;background:var(--film);
 body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0,transparent 55%,rgba(36,41,45,.08))}
 h1,h2,h3,p{margin:0}
 button,input,select,summary{font:inherit;color:inherit}
-button{cursor:pointer;border:1px solid var(--ink);background:transparent;padding:.55rem .85rem;border-radius:2px;letter-spacing:.02em}
+button{cursor:pointer;border:1px solid var(--ink);background:transparent;padding:.55rem .85rem;border-radius:2px;letter-spacing:.02em;transition:background-color .15s ease,color .15s ease,border-color .15s ease,transform .08s ease}
 button:hover{background:var(--ink);color:var(--sheet)}
+button:active{transform:translateY(1px) scale(.99)}
+button:disabled{cursor:not-allowed;opacity:.45;background:transparent;color:inherit;transform:none}
 button.primary{background:var(--ink);color:var(--sheet);font-weight:600}
 button.primary:hover{background:var(--dim);border-color:var(--dim)}
+input[type=number],input[type=text],select{transition:border-color .15s ease,box-shadow .15s ease}
+input[type=number]:hover,input[type=text]:hover,select:hover{border-color:var(--ink-2)}
+input[type=number]:focus-visible,input[type=text]:focus-visible,select:focus-visible{border-color:var(--focus);box-shadow:0 0 0 2px var(--sheet),0 0 0 4px var(--focus);outline:none}
+input::placeholder{color:#5b666d;opacity:1}
+.fold>summary:hover{color:var(--dim)}
+.menu summary{transition:background-color .15s ease,color .15s ease}
+.menu-panel a{transition:background-color .15s ease,border-color .15s ease}
+.switch input{cursor:pointer}
 input[type=number],input[type=text],select{width:100%;background:var(--sheet);color:var(--ink);border:1px solid var(--construct);padding:.5rem .6rem;border-radius:2px}
 input[type=file]{font-size:.8rem;max-width:100%}
 input::file-selector-button{border:1px solid var(--ink);background:transparent;padding:.3rem .55rem;margin-right:.6rem;border-radius:2px;cursor:pointer}
