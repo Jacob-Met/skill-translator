@@ -166,7 +166,7 @@ No source file or practice attempt leaves the browser through an API. Export is 
 
 Four page corners define a 2D projective homography. Source pixel annotations are mapped to normalized page coordinates and transferred into a differently sized physical sheet. Mirroring is **display-only**, not an assessment of left- versus right-handed mechanics. Coordinates and distances are informational landmarks, not safe force, adhesive, grain direction, tool contact, body motion or validated physical task outcomes. A planar view does not measure depth or pressure. Passing a positional tolerance does not establish skill acquisition or expert equivalence.
 
-Local photos and selected video frames now supply inspectable pixels. Automatic object-state interpretation, contact measurement, expert correction, independent learner trials, and genuine NVIDIA model/Nebius runtime integration remain **unimplemented and unqualified**. The [product seed](docs/PRODUCT_SEED.md) remains an open-ended vision rather than a completion checklist.
+Local photos and selected video frames now supply inspectable pixels. The optional rule-interpretations endpoint can request plain-language rule readings from NVIDIA Nemotron on Nebius Token Factory when `NEBIUS_API_KEY` is configured; the application checks the returned readings against its supported rule set. Automatic object-state interpretation, contact measurement, expert correction, and independent learner trials remain **unimplemented and unqualified**. The [product seed](docs/PRODUCT_SEED.md) remains an open-ended vision rather than a completion checklist.
 
 ## Actual Chrome course
 
