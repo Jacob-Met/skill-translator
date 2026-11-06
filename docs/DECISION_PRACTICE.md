@@ -74,3 +74,20 @@ readers refuse rather than silently discard reconsideration. Existing v1 files
 remain readable and ordinary reflections still export v1. The same event and file
 bounds apply. Selected references do not establish physical causation, validate an
 authored account, or demonstrate learning.
+
+
+## Keep retained practice within its file budget
+
+Ordinary decision practice admits each complete source/account and each action only
+when its compact UTF-8 JSON fits the existing 1 MiB practice-reader budget.
+An oversized replacement or action leaves the accepted exercise unchanged; a
+refused response draft remains editable. Responses-only downloads remain readable
+JSON when that fits, and use lossless compact JSON when indentation alone would
+exceed the budget. Complete-practice downloads use the same compact account bound
+and retain the original PNGs under their existing separate source budget.
+
+Capacity regression: `node --test test/decision-capacity.test.mjs`.
+Actual browser receiving: `PLAYWRIGHT_PATH=/path/to/playwright-core CHROME_BINARY=/path/to/chrome QA_OUTPUT=/owned/output node tools/decision-capacity-browser.mjs`.
+Use an ordinary non-root account with the Chromium sandbox available. `APP_URL`
+can point the same course at the maintained extracted-package launcher. Fixtures
+are authored Unicode/PNG capacity controls, not physical or learning evidence.

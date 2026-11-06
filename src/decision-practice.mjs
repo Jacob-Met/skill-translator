@@ -63,3 +63,15 @@ function replay(sequence,bundle){
 export function importDecisionPractice(sequence,bundle){return replay(sequence,bundle).session;}
 export function decisionPracticeFindings(sequence,bundle){const {session,...findings}=replay(sequence,bundle);return findings;}
 export function recordDecisionAction(sequence,bundle,action){const accepted=importDecisionPractice(sequence,bundle);return importDecisionPractice(sequence,{...accepted,format:Object.hasOwn(action,'reconsideration')?EVIDENCE_PRACTICE_FORMAT:accepted.format,events:[...accepted.events,structuredClone(action)]});}
+
+// Ordinary decision-practice downloads share this receiver budget. Other
+// consumers of the replay reducer retain their own independent file budgets.
+export const MAX_DECISION_PRACTICE_BYTES=1024*1024;
+export function exportDecisionPractice(sequence,bundle,{pretty=true}={}){
+  const accepted=importDecisionPractice(sequence,bundle),compact=JSON.stringify(accepted);
+  const bytes=value=>new TextEncoder().encode(value).length;
+  check(bytes(compact)<=MAX_DECISION_PRACTICE_BYTES,'This exercise would exceed the 1 MiB practice limit. Accepted work is unchanged. Use a smaller source or shorten the current draft.');
+  if(!pretty)return compact;
+  const readable=JSON.stringify(accepted,null,2);
+  return bytes(readable)<=MAX_DECISION_PRACTICE_BYTES?readable:compact;
+}
