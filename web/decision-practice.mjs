@@ -1,5 +1,5 @@
 import {mountDecisionSpokenCompanion} from '/web/decision-spoken-companion.mjs';
-import {createDecisionPractice,importDecisionPractice,recordDecisionAction,decisionPracticeFindings,decisionEvidence} from '/src/decision-practice.mjs';
+import {createDecisionPractice,importDecisionPractice,recordDecisionAction,decisionPracticeFindings,decisionEvidence,exportDecisionPractice,MAX_DECISION_PRACTICE_BYTES} from '/src/decision-practice.mjs';
 import {readSequenceBundle,releaseSequenceAssets} from '/web/sequence-input.mjs';
 import {makeDecisionPracticeBundle,readDecisionPracticeBundle} from '/web/decision-practice-input.mjs';
 import {receiveDecisionHandoff} from '/web/decision-handoff.mjs';
@@ -104,7 +104,7 @@ function render(){
 }
 function act(type,fields={}){try{
   const draft=type==='reveal'&&predictionDirty?{expectedChange:$('expectedChange').value,cue:$('decisionCue').value,recovery:$('recovery').value,uncertain:$('uncertain').checked}:null;
-  const findings=decisionPracticeFindings(source,session);session=recordDecisionAction(source,session,{type,stepId:findings.currentStepId,...fields});predictionDirty=false;reflectionDirty=false;revision++;error('');render();
+  const findings=decisionPracticeFindings(source,session),next=recordDecisionAction(source,session,{type,stepId:findings.currentStepId,...fields});exportDecisionPractice(source,next,{pretty:false});session=next;predictionDirty=false;reflectionDirty=false;revision++;error('');render();
   if(draft){$('expectedChange').value=draft.expectedChange;$('decisionCue').value=draft.cue;$('recovery').value=draft.recovery;$('uncertain').checked=draft.uncertain;predictionDirty=true;sync();}
   $('status').textContent=draft?'Source reveal recorded before submission; your unsubmitted draft is retained.':'Action retained. Earlier submitted responses are unchanged.';
 }catch(e){error(e.message);}}
@@ -119,7 +119,7 @@ async function acceptSource(file,{complete=false,externalSignal}={}){
     if(typeof file==='function')file=await file(request.signal);
     loaded=await (complete?readDecisionPracticeBundle:readSequenceBundle)(file,{signal:request.signal});
     if(!current(request)||request.revision!==revision)throw Error('The exercise changed while reading; accepted work remains.');
-    const next=complete?loaded.session:createDecisionPractice(loaded.sequence,undefined,familiarity),old=assets;
+    const next=complete?loaded.session:createDecisionPractice(loaded.sequence,undefined,familiarity);exportDecisionPractice(loaded.sequence,next,{pretty:false});const old=assets;
     source=loaded.sequence;assets=loaded.assets;loaded=null;session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;
     $('familiarity').value=session.priorFamiliarity;error('');render();releaseSequenceAssets(old);
     $('status').textContent=complete?'Complete practice reopened: every original PNG was verified and retained actions were replayed.':'Retained source frames verified. Describe the first situation before revealing the account.';
@@ -146,12 +146,12 @@ for(const [id,complete]of [['sourceFile',false],['completeFile',true]])$(id).add
 });
 $('sessionFile').addEventListener('change',async event=>{
   const file=event.target.files[0];if(!file||!source)return;cancelHandoff();const request=begin();
-  try{if(file.size<1||file.size>1024*1024)throw Error('Choose decision practice up to 1 MiB');const value=JSON.parse(await file.text());if(!current(request)||request.revision!==revision)return;const next=importDecisionPractice(source,value);spokenCompanion.reset();session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;$('familiarity').value=session.priorFamiliarity;error('');render();$('status').textContent='Practice reopened by replaying source-bound actions. Saved verdicts are not trusted.';}catch(e){if(current(request))error('Practice refused; accepted exercise retained. '+e.message);}finally{finish(request);}
+  try{if(file.size<1||file.size>MAX_DECISION_PRACTICE_BYTES)throw Error('Choose decision practice up to 1 MiB');const value=JSON.parse(await file.text());if(!current(request)||request.revision!==revision)return;const next=importDecisionPractice(source,value);exportDecisionPractice(source,next,{pretty:false});spokenCompanion.reset();session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;$('familiarity').value=session.priorFamiliarity;error('');render();$('status').textContent='Practice reopened by replaying source-bound actions. Saved verdicts are not trusted.';}catch(e){if(current(request))error('Practice refused; accepted exercise retained. '+e.message);}finally{finish(request);}
 });
 function startFresh(stepIds){
   if(!source||busy)return;
   try{
-    const next=createDecisionPractice(source,stepIds,$('familiarity').value);
+    const next=createDecisionPractice(source,stepIds,$('familiarity').value);exportDecisionPractice(source,next,{pretty:false});
     spokenCompanion.reset();session=next;seedPendingStepIds(next);predictionDirty=reflectionDirty=false;revision++;error('');render();
     $('status').textContent=stepIds?'A new empty exercise has begun on '+next.stepIds.length+' selected decisions from the same accepted source.':'A new empty exercise has begun on the same accepted source.';
   }catch(e){error(e.message);}
@@ -168,7 +168,7 @@ $('predictionForm').addEventListener('submit',event=>{event.preventDefault();act
 $('reveal').addEventListener('click',()=>act('reveal'));
 $('reflectionForm').addEventListener('submit',event=>{event.preventDefault();const anchors=[...$('evidenceChoices').querySelectorAll('input:checked')].map(input=>input.value),judgment=$('revisedJudgment').value,question=$('remainingQuestion').value;act('reflect',{comparison:$('comparison').value,note:$('reflection').value,...(anchors.length||judgment.trim()||question.trim()?{reconsideration:{anchors,judgment,question}}:{})});});
 $('advance').addEventListener('click',()=>act('advance'));
-$('saveSession').addEventListener('click',()=>{try{if(predictionDirty||reflectionDirty)throw Error('Retain your draft before exporting');const accepted=importDecisionPractice(source,session),blob=new Blob([JSON.stringify(accepted,null,2)],{type:'application/json'});if(blob.size>1024*1024)throw Error('Practice exceeds the 1 MiB export limit');const url=URL.createObjectURL(blob),link=node('a');link.href=url;link.download='decision-practice.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){error(e.message);}});
+$('saveSession').addEventListener('click',()=>{try{if(predictionDirty||reflectionDirty)throw Error('Retain your draft before exporting');const blob=new Blob([exportDecisionPractice(source,session)],{type:'application/json'});const url=URL.createObjectURL(blob),link=node('a');link.href=url;link.download='decision-practice.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){error(e.message);}});
 $('saveComplete').addEventListener('click',async()=>{
   if(!session||predictionDirty||reflectionDirty)return;
   const request=begin();
