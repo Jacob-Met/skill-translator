@@ -207,6 +207,12 @@ The [video orientation receiving course](docs/VIDEO_ORIENTATION_RECEIVING.md) ch
 
 The evidence course exercises additional demonstrations, contradictory results, uncertainty-sensitive experiment proposals, actual observation downloads, source binding, transactional reimport, source replacement and fresh mobile reopening. Its inputs are analytic authored controls. It writes review screenshots and receipts to `docs/receipts/rule-evidence-20261024` (or `QA_OUTPUT`) when run.
 
+The retained-observation correction course requires Node.js 22 or later with built-in WebSocket and an existing Chrome executable. Set `CHROME_BINARY` and a new, nonexistent `QA_OUTPUT` directory for each run:
+
+    CHROME_BINARY=/path/to/chrome QA_OUTPUT=/path/to/new-receipts node tools/browser-observation-corrections.mjs
+
+The course checks Edit/Cancel/Apply, raw coordinate precision and retained observation/source identity, invalid corrections, stale actions, correction at the 60-observation limit, and actual JSON download/reopen. It exercises desktop and 390-pixel layouts in desktop Chrome using authored analytic geometry; physical-device behavior and learning outcomes are unqualified. `SKILL_SOURCE_DIR` selects the checkout or freshly extracted runtime and defaults to the repository root. By default, the course starts and closes its own maintained `createAppServer`. For an already launched package, set `SKILL_RECEIVE_BASE_URL` to its plain `http://127.0.0.1:PORT` origin and first run the maintained `receive-runtime.mjs` against that same origin with the expected full commit. External mode leaves the existing server's lifecycle with its caller. The example uses POSIX shell syntax; Windows callers can set the same environment variables in PowerShell.
+
 The complete-task course checks retained multi-mark attempts, incomplete/failing/passing results, shared-shift diagnosis without automatic correction, mirrored keyboard placement, archived retries, actual session downloads, source/setup mismatch refusal and fresh mobile reopening. Its authored review evidence is written to `docs/receipts/task-practice-20261024` (or `QA_OUTPUT`).
 
 
