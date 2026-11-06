@@ -22,6 +22,9 @@ const rounded=x=>Number(x).toFixed(3);
 let demo=demonstration,derived=derive(demo),target,selected=0,attempt=null,verdict=null;
 let alternateChoice="fraction";
 let observations=[],viewObservationId=null,observationImportVersion=0;
+let editingObservation=null,newObservationDraft=null;
+const observationFields={obsLabel:"label",obsClass:"evidenceClass",obsWidth:"widthMm",
+  obsHeight:"heightMm",obsX:"xMm",obsY:"yMm",obsUncertainty:"uncertaintyMm"};
 let nemotronReadings=null,nemotronLandmarkId=null;
 const ruleNames={fraction:"Proportional position",left:"Fixed left clearance",
   right:"Fixed right clearance",top:"Fixed top clearance",bottom:"Fixed bottom clearance"};
@@ -270,7 +273,50 @@ function evidenceDrawing(result){
     (observed.evidenceClass==="authored-example"?"authored example":"reported measurement")+
     ". Cross: entered location. Circle: ±"+mm(observed.uncertaintyMm)+" measurement radius. Numbered points use the rules below.";
 }
+function observationEditControls(editing){
+  $("observationFormHeading").textContent=editing?"Correct a retained observation":"Add an observation for the selected mark";
+  // A replaced submit control identifies the exact Add/Edit action that was
+  // offered, including when a pending import retires an earlier editor.
+  const previous=$("submitObservation"),submit=previous.cloneNode(false);
+  submit.textContent=editing?"Apply correction":"Test against all five rules";
+  previous.replaceWith(submit);
+  $("cancelObservationEdit").hidden=!editing;
+}
+function finishObservationEdit(message){
+  if(!editingObservation)return null;
+  const id=editingObservation.id;
+  editingObservation=null;
+  for(const [field,value] of Object.entries(newObservationDraft))$(field).value=value;
+  newObservationDraft=null;
+  observationEditControls(false);
+  $("observationEditStatus").textContent=message;
+  return id;
+}
+function beginObservationEdit(id){
+  if(editingObservation)return;
+  try{
+    const row=observations.find(o=>o.id===id);
+    if(!row||row.landmarkId!==chosen().id)throw Error("Choose an observation for the selected source mark.");
+    exportEvidence(demo,[row]);
+    newObservationDraft=Object.fromEntries(Object.keys(observationFields).map(field=>[field,$(field).value]));
+    editingObservation=row;
+    for(const [field,key] of Object.entries(observationFields))$(field).value=String(row[key]);
+    viewObservationId=row.id;
+    observationEditControls(true);
+    $("observationEditStatus").textContent="Correcting “"+row.label+"” for “"+chosen().label+"”. Saved evidence stays unchanged until Apply correction. Cancel edit restores your new-observation draft.";
+    error("");updateEvidence();$("obsLabel").focus();
+  }catch(err){error("Correction could not be opened; previous evidence retained. "+err.message);}
+}
+function reconcileObservationEdit(){
+  if(!editingObservation)return;
+  if(!observations.includes(editingObservation)){
+    finishObservationEdit("Correction canceled because the retained observations changed. No unapplied correction was saved; your new-observation draft is restored.");
+  }else if(editingObservation.landmarkId!==chosen().id){
+    finishObservationEdit("Correction canceled because the selected source mark changed. No unapplied correction was saved; your new-observation draft is restored.");
+  }
+}
 function updateEvidence(){
+  reconcileObservationEdit();
   const result=analyzeEvidence(demo,chosen().id,observations);
   const summary=$("evidenceSummary");summary.dataset.status=result.status;
   $("contextStudy").disabled=result.observations.length<2;
@@ -314,10 +360,16 @@ function updateEvidence(){
       mm(observation.xMm)+" / "+mm(observation.yMm),"±"+mm(observation.uncertaintyMm)]){
       const td=document.createElement("td");td.textContent=text;row.append(td);
     }
-    const action=document.createElement("td"),remove=document.createElement("button");
+    const action=document.createElement("td"),actions=document.createElement("div");
+    actions.className="observation-row-actions";
+    const edit=document.createElement("button"),remove=document.createElement("button");
+    edit.id="editObservation-"+observation.id;edit.type="button";
+    edit.textContent=editingObservation?.id===observation.id?"Editing":"Edit";
+    edit.disabled=!!editingObservation;edit.setAttribute("aria-label","Edit "+observation.label);
+    edit.addEventListener("click",()=>beginObservationEdit(observation.id));
     remove.type="button";remove.textContent="Remove";remove.setAttribute("aria-label","Remove "+observation.label);
     remove.addEventListener("click",()=>{observations=observations.filter(o=>o.id!==observation.id);updateEvidence();});
-    action.append(remove);row.append(action);list.append(row);
+    actions.append(edit,remove);action.append(actions);row.append(action);list.append(row);
   }
   $("observationTable").hidden=!result.observations.length;
   evidenceDrawing(result);updateEvidenceProposal();
@@ -502,19 +554,44 @@ $("export").addEventListener("click",()=>{
 $("observationForm").addEventListener("submit",e=>{
   e.preventDefault();
   try{
-    if(observations.length>=60)throw Error("Keep at most 60 observations; export and remove older trials first.");
-    let n=1;while(observations.some(o=>o.id==="observation-"+n))n++;
+    // Preserve buttonless requestSubmit() for the established Add path only.
+    if((e.submitter&&e.submitter!==$("submitObservation"))||(!e.submitter&&editingObservation)){
+      throw Error("That form action is no longer current. Review the form and use its current submit button.");
+    }
+    const editing=editingObservation;
+    if(editing&&(!observations.includes(editing)||editing.landmarkId!==chosen().id)){
+      throw Error("This correction no longer matches the retained observation. Cancel edit and select it again.");
+    }
+    if(!editing&&observations.length>=60)throw Error("Keep at most 60 observations; export and remove older trials first.");
+    let n=1;if(!editing)while(observations.some(o=>o.id==="observation-"+n))n++;
     const numeric=id=>{
       if(!$(id).value.trim())throw Error("Complete all observation measurements.");
       return Number($(id).value);
     };
-    const added=createObservation(demo,{id:"observation-"+n,landmarkId:chosen().id,
+    const saved=createObservation(demo,{id:editing?editing.id:"observation-"+n,
+      landmarkId:editing?editing.landmarkId:chosen().id,
       label:$("obsLabel").value,evidenceClass:$("obsClass").value,
       widthMm:numeric("obsWidth"),heightMm:numeric("obsHeight"),
       xMm:numeric("obsX"),yMm:numeric("obsY"),uncertaintyMm:numeric("obsUncertainty")});
-    observations=[...observations,added];viewObservationId=added.id;error("");updateEvidence();
-    $("evidenceStatus").textContent="Observation retained in this session. Export observations to keep the evidence.";
+    if(editing){
+      saved.sourceReference=editing.sourceReference;
+      const next=observations.map(row=>row===editing?saved:row);
+      exportEvidence(demo,next);
+      observations=next;
+      finishObservationEdit("Correction applied. Your new-observation draft is restored.");
+    }else{
+      observations=[...observations,saved];
+    }
+    viewObservationId=saved.id;error("");updateEvidence();
+    $("evidenceStatus").textContent=editing?"Observation corrected in this session. Export observations to keep the corrected evidence.":
+      "Observation retained in this session. Export observations to keep the evidence.";
+    if(editing)$("editObservation-"+saved.id)?.focus();
   }catch(err){error("Observation refused; previous evidence retained. "+err.message);}
+});
+$("cancelObservationEdit").addEventListener("click",()=>{
+  const id=finishObservationEdit("Correction canceled; retained observations are unchanged. Your new-observation draft is restored.");
+  if(!id)return;
+  error("");updateEvidence();$("editObservation-"+id)?.focus();
 });
 $("useTargetSize").addEventListener("click",()=>{
   $("obsWidth").value=target.widthMm;$("obsHeight").value=target.heightMm;

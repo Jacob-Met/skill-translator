@@ -177,7 +177,8 @@
     <p id="evidenceCounts" class="input-note"></p>
     <div class="evidence-workspace">
       <form id="observationForm" class="observation-form">
-        <h3>Add an observation for the selected mark</h3>
+        <h3 id="observationFormHeading">Add an observation for the selected mark</h3>
+        <p id="observationEditStatus" class="input-note" role="status">Choose Edit beside a retained observation to correct its measurements.</p>
         <div class="author-grid">
           <label class="author-wide" for="obsLabel">Source label<input id="obsLabel" type="text" maxlength="160" placeholder="Sheet B · overhead frame 120" required></label>
           <label class="author-wide" for="obsClass">Evidence type<select id="obsClass"><option value="reported-measurement">Reported measurement</option><option value="authored-example">Authored example</option></select></label>
@@ -188,7 +189,7 @@
           <label class="author-wide" for="obsUncertainty">Measurement uncertainty radius · mm<input id="obsUncertainty" type="number" min="0" max="1000" step="any" value="2" required></label>
         </div>
         <p class="input-note">Use physical sheet coordinates. This radius describes the added measurement, separately from practice tolerance. Predictions condition on the original calibration.</p>
-        <div class="author-actions"><button class="primary" type="submit">Test against all five rules</button><button id="useTargetSize" type="button">Use target dimensions</button></div>
+        <div class="author-actions"><button id="submitObservation" class="primary" type="submit">Test against all five rules</button><button id="cancelObservationEdit" type="button" hidden>Cancel edit</button><button id="useTargetSize" type="button">Use target dimensions</button></div>
       </form>
       <div class="observation-view">
         <svg id="evidenceSvg" viewBox="0 0 680 330" role="img" aria-label="Observed mark and measurement radius compared with numbered candidate predictions"></svg>
