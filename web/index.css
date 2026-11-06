@@ -218,6 +218,8 @@ input::file-selector-button{border:1px solid var(--ink);background:transparent;p
 .observation-link{padding:0;background:none;border:0;text-decoration:underline;text-underline-offset:3px;text-align:left;overflow-wrap:anywhere}
 .observation-link:hover{background:none;color:var(--dim)}
 .observation-table td:last-child button{font-size:.78rem;padding:.3rem .5rem}
+.observation-row-actions{display:flex;flex-wrap:wrap;gap:6px}
+#observationEditStatus{overflow-wrap:anywhere}
 .evidence-files{display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;border-top:1px solid var(--ink);margin-top:20px;padding-top:16px}
 .evidence-files label{font-size:.72rem;max-width:340px}
 .evidence-files input{margin-top:5px}
