@@ -73,7 +73,7 @@
             <label for="annotationEdge">Reference edge<select id="annotationEdge" disabled><option value="left">Left</option><option value="right">Right</option><option value="top">Top</option><option value="bottom">Bottom</option></select></label>
             <label for="annotationTolerance">Tolerance · mm<input id="annotationTolerance" type="number" value="4" min="0.1" max="50" step="0.1"></label>
           </div>
-          <div class="author-actions"><button class="primary" type="submit">Add authored mark</button><button id="downloadSource" type="button">Download source JSON</button></div>
+          <div class="author-actions"><button class="primary" type="submit">Add authored mark</button></div>
           <p id="annotationStatus" role="status" class="author-status">No new annotation placed.</p>
         </form>
       </details>
@@ -118,6 +118,8 @@
         <label for="demoFile">Source annotations <span class="hint">JSON, up to 256 KB</span></label>
         <input id="demoFile" type="file" accept=".json,application/json">
         <p class="tb-note" id="demoLabel">Synthetic bookbinding demonstration · 3 source marks</p>
+        <button id="downloadSource" type="button">Download source JSON</button>
+        <p class="tb-note">Download accepted source annotations to reopen with your observations. Keep original images separately.</p>
       </div>
       <div class="tb-pair">
         <div class="tb-row">

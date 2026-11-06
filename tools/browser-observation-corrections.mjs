@@ -40,8 +40,8 @@ async function fill(id,value){await click('#'+id);await key('a','KeyA',65,2);awa
 async function form(values){for(const [id,value]of Object.entries(values))if(id==='obsClass'){await click('#obsClass');await key('Home','Home',36);if(value==='authored-example')await key('ArrowDown','ArrowDown',40);await key('Tab','Tab',9);}else await fill(id,value);}
 async function upload(id,file){const doc=await cdp('DOM.getDocument'),r=await cdp('DOM.querySelector',{nodeId:doc.root.nodeId,selector:'#'+id});await cdp('DOM.setFileInputFiles',{nodeId:r.nodeId,files:[file]});}
 async function state(){return evaluate("(()=>({fields:"+JSON.stringify(fields)+".map(id=>document.getElementById(id).value),active:document.activeElement?.id,cancelHidden:document.getElementById('cancelObservationEdit').hidden,status:document.getElementById('observationEditStatus').textContent,error:document.getElementById('error').textContent,rows:document.querySelectorAll('#observationRows tr').length,rules:[...document.querySelectorAll('#candidateCards .compatible')].map(e=>e.dataset.rule),heading:document.getElementById('observationFormHeading').textContent}))()");}
-async function download(button='exportObservations'){
- const before=downloads.length;await click('#'+button);
+async function download(button='exportObservations',keyboard=false){
+ const before=downloads.length;if(keyboard){assert.equal(await evaluate('document.activeElement?.id'),button);await key('Enter','Enter',13);}else await click('#'+button);
  await until(()=>downloads.slice(before).some(e=>e.method==='Browser.downloadWillBegin'),'Real download begins');
  const begin=downloads.slice(before).find(e=>e.method==='Browser.downloadWillBegin');assert(begin);
  await until(()=>downloads.slice(before).some(e=>e.method==='Browser.downloadProgress'&&e.guid===begin.guid&&e.state==='completed'),'Matching real download completion');assert(/^[a-zA-Z0-9-]+$/.test(begin.guid));
@@ -50,6 +50,11 @@ async function download(button='exportObservations'){
  report.downloads.push({path:'downloads/'+begin.guid,suggestedFilename:begin.suggestedFilename,bytes:bytes.length,sha256:sha(bytes)});return {file,data};
 }
 async function shot(name){await evaluate("document.getElementById('observationForm').scrollIntoView({block:'start'})");const r=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});save(name,Buffer.from(r.data,'base64'));}
+async function sourceControlsShot(name){
+ const visible=await evaluate("(()=>{const e=document.getElementById('downloadSource');e.scrollIntoView({block:'center'});const r=e.getBoundingClientRect(),d=document.getElementById('authorForm').closest('details');return{annotationOpen:d.open,bounds:{x:r.x,y:r.y,width:r.width,height:r.height},ancestorDetails:e.closest('details')?.open??null}})()");
+ assert.equal(visible.annotationOpen,false);assert(visible.bounds.width>0&&visible.bounds.height>0);assert(visible.ancestorDetails!==false);
+ const r=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});save(name,Buffer.from(r.data,'base64'));return visible;
+}
 const note=(name,details={})=>report.tests.push({name,...details});
 async function run(){
  const {createObservation,exportEvidence}=await import(pathToFileURL(path.join(source,'src/evidence.mjs')));
@@ -112,15 +117,14 @@ async function run(){
  await click('#editObservation-observation-1');await fill('obsLabel','Stale mark draft');await click('#markChoices button:nth-child(2)');st=await state();assert.equal(st.cancelHidden,true);assert.deepEqual(st.fields,addDraft);
  await click('#markChoices button:first-child');assert.deepEqual((await download()).data,atCapacity);note('Changing selected source mark retires correction without rebinding');
  await shot('desktop-corrections.png');
+ report.desktopSourceControls=await sourceControlsShot('desktop-source-controls.png');
+ const desktopSource=await download('downloadSource');const keyboardSource=await download('downloadSource',true);assert.deepEqual(keyboardSource.data,desktopSource.data);assert.deepEqual(desktopSource.data,demo);note('Visible desktop source export with annotation disclosure closed; native Enter repeats exact download');
  await cdp('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:false});
  await click('#editObservation-observation-1');await fill('obsLabel','Mobile correction');await shot('mobile-edit-mode.png');await key('Enter','Enter',13);await wait("document.getElementById('cancelObservationEdit').hidden",'Mobile native Enter');
  const mobile=(await download()).data;assert.equal(mobile.observations[0].label,'Mobile correction');assert.equal(mobile.observations[0].id,'observation-1');assert.deepEqual(mobile.observations[0].sourceReference,row.sourceReference);
  const width=await evaluate('({page:document.documentElement.scrollWidth,viewport:innerWidth})');assert(width.page<=width.viewport+2);await shot('mobile-corrections.png');
- const sourceDisclosure=await evaluate("(()=>{const e=document.getElementById('downloadSource'),d=e.closest('details'),r=e.getBoundingClientRect();return{open:d.open,bounds:{x:r.x,y:r.y,width:r.width,height:r.height}}})()");
- report.sourceDisclosureBefore=sourceDisclosure;
- if(!sourceDisclosure.open)await click('details:has(#authorForm)>summary');
- await wait("document.getElementById('downloadSource').closest('details').open",'Source export disclosure opened');
- const savedSource=await download('downloadSource'),savedEvidence=await download();const n=navigation;await cdp('Page.reload',{ignoreCache:true});await until(()=>navigation>n,'Fresh document');
+ report.mobileSourceControls=await sourceControlsShot('mobile-source-controls.png');
+ const savedSource=await download('downloadSource');assert.deepEqual(savedSource.data,desktopSource.data);assert.equal(await evaluate("document.getElementById('authorForm').closest('details').open"),false);const savedEvidence=await download();const n=navigation;await cdp('Page.reload',{ignoreCache:true});await until(()=>navigation>n,'Fresh document');
  await wait("Boolean(document.querySelector('#markChoices button')&&document.querySelector('#candidateCards > *')&&document.getElementById('evidenceSummary')?.dataset.status)",'Reloaded entry');await upload('demoFile',savedSource.file);await wait("document.getElementById('demoLabel').textContent.includes('Authored correction control')",'Reopened source');
  await upload('observationFile',savedEvidence.file);await wait("document.querySelectorAll('#observationRows tr').length===60",'Reopened evidence');
  assert.deepEqual((await download()).data,mobile);note('390px real downloaded source/evidence reopen with exact corrected records');
