@@ -205,6 +205,22 @@ $("example").addEventListener("click",()=>action(()=>{
 }));
 resetDraft();resetObservationDraft();render();
 
+try{
+ const key="skill-translator.calibration-input",saved=sessionStorage.getItem(key);
+ if(saved!==null){
+  if(new TextEncoder().encode(saved).byteLength>1024*1024)throw Error("This investigation exceeds the supported 1 MiB import limit.");
+  const loaded=importCalibrationInvestigation(JSON.parse(saved));
+  setSource(loaded.source,loaded.landmarkId);
+  observations=loaded.observations;studies.set(markId,loaded.hypotheses);render();
+  const mark=source.landmarks.find(mark=>mark.id===markId);
+  $("handoffStatus").textContent="Received “"+mark.label+"” with "+observations.length+" retained source observations. This is an independent copy; Task Space and its drafts stay in the original tab. Export the investigation to save it.";
+  $("handoffStatus").hidden=false;
+  // Consume only after the complete source and investigation are accepted.
+  try{sessionStorage.removeItem(key);}
+  catch(err){error("The investigation was received, but its pending browser copy could not be cleared. Export before reloading. "+err.message);}
+ }
+}catch(err){error("Task Space handoff refused. Open saved source and observation files to continue. "+err.message);}
+
 $("challengeStudy").addEventListener("click",()=>action(()=>{
  const bundle=exportCalibrationInvestigation(source,markId,observations,variants());
  const analysis=analyzeCalibrationEvidence(source,markId,observations,variants());

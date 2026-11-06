@@ -57,6 +57,8 @@ Choose **Edit** beside a retained observation to correct its source label, evide
 
 Export observations to retain them; reopen them after loading the corresponding source annotation. Each record binds to source dimensions, corners, provenance and the original landmark pixel. If the source includes image metadata, its SHA-256 digest and pixel dimensions are also bound; renaming the same image does not invalidate it. A mismatched import is refused transactionally. If an observation file is still opening, a newer file choice or an accepted source or observation edit takes precedence; the delayed import leaves that work intact. A successfully replaced source clears previous comparisons; adding a new mark preserves evidence for unchanged marks. Data stays in the browser session until explicitly exported. Source-calibration uncertainty, sheet-dimension error and physical variability are not modeled by the added observation radius; predictions condition on the supplied reference geometry.
 
+Choose **Investigate this mark in Calibration** to open an independent copy of the accepted source, all retained observations and the selected mark in a new Calibration tab. Apply or cancel an active observation correction and let selected source or observation files finish opening first. Unsubmitted observation and annotation drafts, along with the original image, stay in Task Space. The new tab validates the existing investigation format; it does not automatically adopt a rule or save a backup. Export the investigation to keep it. If browser storage or the new tab is unavailable, download source JSON and observations and open those files in Calibration instead. The ordinary Calibration menu link still opens a separate investigation without this handoff.
+
 An analytic example: on a 100×80 mm source, a mark at (20,30) mm is compatible with every rule. On a 200×160 mm sheet, a mark at (20,60) mm with ±0.5 mm measurement uncertainty supports only fixed-left clearance; (40,60) supports proportional position. If both are entered as observations of the same relationship, every supported rule is contradicted. These are authored controls, not a measured learning study.
 
 You can load your **own local annotated geometry JSON** (≤256 KB) without uploading it. The tool visualizes annotations, transfers each declared invariant and refuses degenerate calibration or a target too small to maintain fixed physical clearance. It does **not** infer invariant types from video; the author must label each relationship.
@@ -215,6 +217,23 @@ The course checks Edit/Cancel/Apply, raw coordinate precision and retained obser
 
 The complete-task course checks retained multi-mark attempts, incomplete/failing/passing results, shared-shift diagnosis without automatic correction, mirrored keyboard placement, archived retries, actual session downloads, source/setup mismatch refusal and fresh mobile reopening. Its authored review evidence is written to `docs/receipts/task-practice-20261024` (or `QA_OUTPUT`).
 
+
+### Task Space to Calibration handoff receiving
+
+The regression course `tools/browser-calibration-handoff.mjs` requires Node.js 22 or later with built-in WebSocket and an existing Chrome executable. It needs no browser automation package or dependency installation. Set `CHROME_BINARY` and a new, nonexistent `QA_OUTPUT` directory:
+
+```sh
+CHROME_BINARY=/path/to/chrome QA_OUTPUT=/path/to/new-receipts \
+  node tools/browser-calibration-handoff.mjs
+```
+
+This example uses POSIX shell syntax; Windows callers set the same environment variables in PowerShell. `SKILL_SOURCE_DIR` selects a checkout or extracted runtime and defaults to the repository root. The course normally starts and closes its own maintained `createAppServer`. To receive an already launched runtime, set `SKILL_RECEIVE_BASE_URL` to its plain `http://127.0.0.1:PORT` origin. First verify that package and origin with the maintained runtime receiver and expected full source commit. External mode never starts a substitute server or manages the caller's server lifecycle.
+
+The course uses native clicks and an actual new browser tab to receive the selected second source mark and observations for both marks. It verifies that the original Add/source drafts and prior handoff key remain intact, the destination detaches its opener and consumes its accepted key, and exported investigation data matches the original source and all observations. It continues through the existing Calibration-to-Challenge handoff, saves a frozen prediction before separately entering an authored contradiction, and reopens the actual downloaded study at a 390-pixel viewport.
+
+Six clearly labeled authored controls exercise a blocked popup, storage write failure, pending source and observation reads, a malformed receiver bundle, and a key-removal failure after successful acceptance. Their temporary browser API overrides are restored; held reads are released in cleanup. The normal popup path uses the production handlers unchanged. Runtime/network listeners attach after popup creation, so early popup event coverage is partial; source and download comparisons establish accepted-state custody.
+
+Receipts retain source hashes, real JSON downloads, desktop/390-pixel captures, process identity and cleanup outcomes. These are authored analytic controls with simulated collection-order declarations. They do not qualify original-photo lifetime, physical mobile devices, independently verified chronology or learning outcomes.
 
 ## Independent calibration checks
 

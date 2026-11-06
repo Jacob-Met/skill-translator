@@ -7,6 +7,7 @@ import {imageMetadata,validateCapturedDemo,assertImageMatches} from "/src/captur
 import {loadLocalImage,releaseImage} from "/web/image-input.mjs";
 import {createObservation,analyzeEvidence,proposeEvidenceVariation,
   exportEvidence,importEvidence} from "/src/evidence.mjs";
+import {exportCalibrationInvestigation} from "/src/calibration-evidence.mjs";
 
 const $=id=>document.getElementById(id);
 const contextButton=document.createElement("button");contextButton.id="contextStudy";contextButton.type="button";contextButton.disabled=true;contextButton.textContent="Check a comparable context →";$("reviewRuleChoices").after(contextButton);
@@ -597,6 +598,50 @@ $("useTargetSize").addEventListener("click",()=>{
   $("obsWidth").value=target.widthMm;$("obsHeight").value=target.heightMm;
 });
 $("planUncertainty").addEventListener("input",updateEvidenceProposal);
+$("calibrationStudy").addEventListener("click",()=>{
+  try{
+    if(editingObservation)throw Error("Apply or cancel this observation correction before opening Calibration. Your draft remains here.");
+    if($("demoFile").files.length||$("observationFile").files.length){
+      throw Error("Wait for the selected source or observation file to finish opening, then try again.");
+    }
+    // Copy accepted records, including observations for marks outside the visible
+    // table. Unsubmitted fields and the paired image stay in this Task Space.
+    const accepted=exportCalibrationInvestigation(demo,chosen().id,observations,[]);
+    const input=JSON.stringify(accepted),key="skill-translator.calibration-input";
+    if(new TextEncoder().encode(input).byteLength>1024*1024){
+      throw Error("This investigation exceeds Calibration's 1 MiB import limit.");
+    }
+    const previous=sessionStorage.getItem(key);
+    let staged=false,calibrationPage=null,launchError=null,restoreError=null;
+    try{
+      sessionStorage.setItem(key,input);staged=true;
+      // Match Source Studio's existing handoff: a new same-origin tab receives
+      // an independent session copy before its opener is detached.
+      calibrationPage=window.open("/calibration","_blank");
+      if(!calibrationPage)throw Error("The Calibration tab was blocked. Allow a new tab and try again, or use the saved files.");
+      calibrationPage.opener=null;
+    }catch(err){launchError=err;}
+    finally{
+      if(staged)try{
+        if(previous===null)sessionStorage.removeItem(key);
+        else sessionStorage.setItem(key,previous);
+      }catch(err){restoreError=err;}
+    }
+    if(launchError||restoreError){
+      const messages=[];
+      if(launchError)messages.push(launchError.message);
+      if(restoreError)messages.push("The previous browser Calibration setup could not be restored: "+restoreError.message);
+      if(calibrationPage)try{calibrationPage.close();}catch(err){messages.push("The opened Calibration tab could not be closed: "+err.message);}
+      throw Error(messages.join(" "));
+    }
+    error("");
+    const mark=accepted.source.landmarks.find(mark=>mark.id===accepted.landmarkId);
+    $("calibrationStudyStatus").textContent="Calibration is opening in a new tab for “"+mark.label+"”. Your source image and unsubmitted drafts remain here. Export source and observations to save a separate copy.";
+  }catch(err){
+    error("Calibration handoff did not complete. "+err.message);
+    $("calibrationStudyStatus").textContent="Your current work and drafts remain here. Download source JSON and export observations, then open those files in Calibration.";
+  }
+});
 $("contextStudy").addEventListener("click",()=>{
   try{sessionStorage.setItem("skill-translator-context-input/v1",JSON.stringify({schema:"skill-translator-context-input/v1",source:demo,selectedMark:chosen().id,observationEvidence:exportEvidence(demo,observations)}));location.assign("/context-consistency");}
   catch(err){error("Context input could not be opened; previous evidence remains. "+err.message);}
