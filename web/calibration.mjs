@@ -30,6 +30,17 @@ function resetDraft(){
   source.source.corners.forEach((p,i)=>{$(`corner${i}x`).value=p.x;$(`corner${i}y`).value=p.y;});
   $("readingLabel").value="Alternative source reading";$("readingBasis").value="proposed-reading";
 }
+function draftSelectedReading(){
+  const selected=variants().find(h=>h.id===readingId);
+  if(!selected){resetDraft();}else{
+    const r=selected.reading;
+    $("sourceWidth").value=r.widthMm;$("sourceHeight").value=r.heightMm;
+    $("sourceX").value=r.sourcePx.x;$("sourceY").value=r.sourcePx.y;
+    r.corners.forEach((p,i)=>{$(`corner${i}x`).value=p.x;$(`corner${i}y`).value=p.y;});
+    $("readingLabel").value="Alternative source reading";$("readingBasis").value="proposed-reading";
+  }
+  $("readingLabel").focus();
+}
 function resetObservationDraft(){
   const d=derive(source),m=d.landmarks.find(m=>m.id===markId);
   $("obsWidth").value=Math.min(10000,source.source.widthMm*1.5);
@@ -169,6 +180,7 @@ $("observationForm").addEventListener("submit",e=>{e.preventDefault();action(()=
   revision++;observations=next;trialId=candidate.id;render();
 });});
 $("restoreDraft").addEventListener("click",()=>action(resetDraft));
+$("draftSelectedReading").addEventListener("click",()=>action(draftSelectedReading));
 $("landmark").addEventListener("change",()=>action(()=>{revision++;markId=$("landmark").value;readingId="nominal";resetDraft();resetObservationDraft();render();}));
 $("readingChoice").addEventListener("change",()=>action(()=>{readingId=$("readingChoice").value;render();}));
 $("trialChoice").addEventListener("change",()=>action(()=>{trialId=$("trialChoice").value;render();}));
