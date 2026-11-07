@@ -12,6 +12,7 @@ const fmt=(n,d=2)=>Number(n.toFixed(d)).toLocaleString("en-US",{maximumFractionD
 const clone=value=>JSON.parse(JSON.stringify(value));
 let source=clone(demonstration),markId=source.landmarks[0].id,observations=[],studies=new Map();
 let readingId="nominal",trialId="",serial=0,revision=0;
+let handoffSource=null;
 const variants=()=>studies.get(markId)||[];
 function nextId(prefix){
   const ids=new Set([...observations.map(o=>o.id),...[...studies.values()].flat().map(h=>h.id)]);
@@ -141,6 +142,9 @@ function renderResults(analysis){
       `At ${fmt(proposal.widthMm)} × ${fmt(proposal.heightMm)} mm, ${proposal.separablePairs} of ${proposal.totalPairs} rule pairs separate for every surviving entered reading at ±${fmt(proposal.uncertaintyMm)} mm. The closest predictions are ${fmt(proposal.minSeparationMm)} mm apart. ${proposal.admissibleDimensions} of 16 tested sizes fit every surviving explanation.`;
 }
 function render(){
+  if(handoffSource&&handoffSource!==source){
+    handoffSource=null;$("handoffStatus").hidden=true;$("handoffStatus").textContent="";
+  }
   const a=analyzeCalibrationEvidence(source,markId,observations,variants());
   $("sourceTitle").textContent=source.title||"Local annotated demonstration";
   $("sourceSummary").textContent=String(source.provenance||"Authored annotation")+(source.source.image?` · Original image SHA-256 ${source.source.image.sha256.slice(0,12)}…`:"");
@@ -210,7 +214,7 @@ try{
  if(saved!==null){
   if(new TextEncoder().encode(saved).byteLength>1024*1024)throw Error("This investigation exceeds the supported 1 MiB import limit.");
   const loaded=importCalibrationInvestigation(JSON.parse(saved));
-  setSource(loaded.source,loaded.landmarkId);
+  setSource(loaded.source,loaded.landmarkId);handoffSource=source;
   observations=loaded.observations;studies.set(markId,loaded.hypotheses);render();
   const mark=source.landmarks.find(mark=>mark.id===markId);
   $("handoffStatus").textContent="Received “"+mark.label+"” with "+observations.length+" retained source observations. This is an independent copy; Task Space and its drafts stay in the original tab. Export the investigation to save it.";
