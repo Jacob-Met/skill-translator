@@ -128,7 +128,12 @@ That receipt is distinct from saved source annotations; do not import it as sour
 The example is authored geometry, not evidence of skill extraction or learning.
 
 The geometry and browser workbenches run locally. Export your work explicitly:
-browser session state is not a saved project. Retain original media separately.
+browser session state is not a saved project. In Source Studio (/capture), choose
+Save editable source package to keep the original photo or captured-frame PNG
+with accepted annotations (at least one mark) in one .stsource file. Apply or revert
+calibration edits and save or discard mark drafts first. Reopen one editable source package
+restores that pair for further editing. Original video clips are not included.
+Keep original media separately for annotation-only exports and other workbenches.
 Native audio processing additionally needs ffmpeg and ffprobe on PATH.
 Native sequence-edge and stationary calibration translation additionally need
 Python 3 with the pinned OpenCV/NumPy dependencies in requirements-native-edge.txt.

@@ -24,6 +24,10 @@
         </form>
         <p id="reopenStatus" role="status">Both files must match. Rejected files leave your current work intact. Video frame annotations retain the clip reference; reopening its PNG does not verify the original clip.</p>
       </details>
+      <details class="video-source"><summary>Reopen one editable source package</summary>
+        <form id="capturePackageForm"><label for="savedSourcePackage">ORIGINAL STILL IMAGE + ACCEPTED ANNOTATIONS<input id="savedSourcePackage" type="file" accept=".stsource,application/octet-stream" required></label><button type="submit">Reopen editable package</button></form>
+        <p>Replaces this studio's current work only after the image and annotations match. Save current accepted work first. No original clip is included.</p>
+      </details>
       <details id="videoSourcePanel" class="video-source">
         <summary>Use a moment from a demonstration clip</summary>
         <label for="videoFile">LOCAL MP4 OR WEBM · UP TO 128 MB<input id="videoFile" type="file" accept="video/mp4,video/webm,.mp4,.webm"></label>
@@ -72,7 +76,7 @@
       </form></section>
     </aside>
   </div>
-  <section class="studio-finish"><div><p class="eyebrow">04 / INVESTIGATE THE ADAPTATION</p><h2 id="markCount">No marks yet</h2><ul id="capturedMarks"></ul><p class="input-note">Open accepted marks directly in geometric placement practice, or download the annotations to keep them. To inspect the photo in Task Space, import the JSON there and pair the same photo. The photo itself is never included in the JSON.</p><p id="capturePracticeStatus" class="input-note" role="status">Add at least one source mark before practicing. The original image stays in Source Studio.</p></div><div class="finish-actions"><button id="practiceCapture" class="primary" type="button" disabled>Practice these marks in a new tab ↗</button><button id="downloadCapture" class="primary" disabled>Download annotations ↓</button><a class="studio-back" href="/mark-inspector">Inspect source mark pixels ↗</a><a class="studio-back" href="/">Continue to Task Space ↗</a></div></section>
+  <section class="studio-finish"><div><p class="eyebrow">04 / INVESTIGATE THE ADAPTATION</p><h2 id="markCount">No marks yet</h2><ul id="capturedMarks"></ul><p class="input-note">Open accepted marks directly in geometric placement practice, or download the annotations to keep them. To inspect the photo in Task Space, import the JSON there and pair the same photo. The photo itself is never included in the JSON.</p><p id="capturePracticeStatus" class="input-note" role="status">Add at least one source mark before practicing. The original image stays in Source Studio.</p></div><div class="finish-actions"><button id="practiceCapture" class="primary" type="button" disabled>Practice these marks in a new tab ↗</button><button id="downloadCapture" class="primary" disabled>Download annotations ↓</button><button id="downloadSourcePackage" type="button" disabled>Save editable source package ↓</button><p id="sourcePackageStatus" class="input-note" role="status">Keeps the original still image and accepted annotations together. Apply or discard drafts first; original clip bytes are not included.</p><a class="studio-back" href="/mark-inspector">Inspect source mark pixels ↗</a><a class="studio-back" href="/">Continue to Task Space ↗</a></div></section>
   <footer><span>Human-authored measurements and meaning</span><span>Still images leave pressure, tactile cues, and physical success unmeasured.</span></footer>
 </main>
 </body></html>
