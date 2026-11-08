@@ -39,7 +39,7 @@ test('corrupt identity, framing and invalid UTF8 refuse',async()=>{
   const {image,text}=fixture(), packed=await packSource(text,image);
   const corrupt=packed.slice();corrupt[corrupt.length-1]^=1;
   await assert.rejects(unpackSource(corrupt),/match/);
-  const length=packed.slice();new DataView(length.buffer).setUint32(10,MAX_ANNOTATION_BYTES+1);
+  const length=packed.slice();new DataView(length.buffer).setUint32(Buffer.byteLength('STSOURCE1\n'),MAX_ANNOTATION_BYTES+1);
   await assert.rejects(unpackSource(length),/length/);
   const utf8=packed.slice();utf8[14]=255;
   await assert.rejects(unpackSource(utf8));
@@ -49,6 +49,11 @@ test('corrupt identity, framing and invalid UTF8 refuse',async()=>{
 test('no BOM stripping or literal lone-surrogate substitution',async()=>{
   const {image,text,demo}=fixture();
   await assert.rejects(packSource('\uFEFF'+text,image));
+  const packed=await packSource(text,image), magicLength=Buffer.byteLength('STSOURCE1\n');
+  const headerLength=magicLength+4, annotationBytes=Buffer.from('\uFEFF'+text,'utf8');
+  const bomPackage=Buffer.concat([Buffer.from(packed.subarray(0,headerLength)),annotationBytes,image]);
+  bomPackage.writeUInt32BE(annotationBytes.length,magicLength);
+  await assert.rejects(unpackSource(bomPackage));
   const literal=text.replace('Transport fixture','Transport '+String.fromCharCode(0xD800));
   await assert.rejects(packSource(literal,image),/UTF-8/);
   demo.transportContext.escaped=String.fromCharCode(0xD800);
