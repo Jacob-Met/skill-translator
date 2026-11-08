@@ -1,3 +1,4 @@
+import {packSource,unpackSource,MAX_SOURCE_PACKAGE_BYTES} from "/src/source-package.mjs";
 import {installCalibrationDraft} from "/web/calibration-draft.mjs";
 import {createCapture,appendCaptureMark,validateCapturedDemo} from "/src/capture.mjs";
 import {loadLocalImage,releaseImage} from "/web/image-input.mjs";
@@ -10,7 +11,23 @@ const PRACTICE_INPUT_KEY = "skill-translator-practice-input/v1";
 let media = null, corners = [null,null,null,null], activeCorner = 0, demo = null, loadVersion = 0, calibrationDirty = false;
 let clip=null,sourceOrigin=null,sourceFrameFile=null,frameController=null,frameBusy=false;
 let editingMarkId=null, calibrationDraftEvidence=null;
+let originalSourceFile=null, packageIntent=0, packagePending=false;
+function retirePackage(){
+  packageIntent++;
+  if(packagePending)$("sourcePackageStatus").textContent="Earlier package action cancelled because you changed the source or a draft. Your current work is preserved; choose the action again when ready.";
+  packagePending=false;
+}
+// Only the package operations observe this intent fence; existing import logic
+// and source-acceptance behavior remain owned by their maintained handlers.
+for(const name of ["input","change","click","submit"])
+  document.addEventListener(name,event=>{
+    if(event.target.closest("#downloadSourcePackage"))return;
+    if(event.target.closest("#capturePackageForm")&&name!=="input"&&name!=="change")return;
+    if(name==="click"&&!event.target.closest("#cornerRows button,#capturedMarks button,#captureSvg,#referencePatchSvg,#applyCalibration,#revertCalibration,#cancelMarkEdit,#captureFrame,#clearReferencePatches,#proposeCalibration,#loadCalibrationReference"))return;
+    if(event.target.closest(".studio-main"))retirePackage();
+  },true);
 const calibrationTransfer=installCalibrationDraft({target:()=>media,propose:draft=>{
+  retirePackage();
   corners=structuredClone(draft.corners);calibrationDraftEvidence=structuredClone(draft.evidence);
   $("captureWidth").value=draft.widthMm;$("captureHeight").value=draft.heightMm;
   activeCorner=null;calibrationDirty=true;syncCorners();
@@ -47,6 +64,7 @@ function render() {
   $("addCaptureMark").disabled=!demo||calibrationDirty;
   $("downloadCapture").disabled=!demo?.landmarks.length||calibrationDirty;
   const practiceProblem=practiceUnavailable();
+  $("downloadSourcePackage").disabled=Boolean(practiceProblem)||!originalSourceFile;
   $("practiceCapture").disabled=Boolean(practiceProblem);
   $("capturePracticeStatus").textContent=practiceProblem||"Practice opens in a new tab at the accepted source dimensions, with target marks hidden. Source Studio and its original image stay open. You can change the workpiece size in practice setup.";
   $("revertCalibration").disabled=!demo||!calibrationDirty;
@@ -84,7 +102,7 @@ labels.forEach((label,i)=>{
 });
 $("photoFile").addEventListener("change",async event=>{
   const file=event.target.files[0];if(!file)return;const version=++loadVersion;calibrationTransfer.invalidate();cancelFrame();
-  try{const loaded=await loadLocalImage(file);if(version!==loadVersion){releaseImage(loaded);return;}acceptSource(loaded);}
+  try{const loaded=await loadLocalImage(file);if(version!==loadVersion){releaseImage(loaded);return;}acceptSource(loaded,null,null,file);}
   catch(error){if(version===loadVersion)problem("Photo refused; previous work preserved. "+error.message);}
   finally{event.target.value="";}
 });
@@ -101,7 +119,7 @@ $("reopenCaptureForm").addEventListener("submit",async event=>{
     candidate=await loadLocalImage(photo);
     if(version!==loadVersion){releaseImage(candidate);candidate=null;return;}
     const restored=reopenCapture(text,candidate.image);
-    acceptSource(candidate,restored.source.origin||null,restored.source.origin?photo:null);candidate=null;
+    acceptSource(candidate,restored.source.origin||null,restored.source.origin?photo:null,photo);candidate=null;
     demo=restored;calibrationDraftEvidence=demo.source.calibrationDraftEvidence||null;corners=structuredClone(demo.source.corners);activeCorner=null;calibrationDirty=false;
     $("captureTitle").value=typeof demo.title==="string"?demo.title:"Reopened demonstration";
     $("captureWidth").value=demo.source.widthMm;$("captureHeight").value=demo.source.heightMm;
@@ -179,7 +197,8 @@ function videoControls(){
   $("downloadFrame").disabled=!sourceFrameFile;
 }
 function cancelFrame(){frameController?.abort();frameController=null;frameBusy=false;videoControls();}
-function acceptSource(loaded,origin=null,frameFile=null){
+function acceptSource(loaded,origin=null,frameFile=null,originalFile=frameFile){
+  retirePackage();originalSourceFile=originalFile;
   calibrationTransfer.invalidate();calibrationDraftEvidence=null;releaseImage(media);media=loaded;sourceOrigin=origin;sourceFrameFile=frameFile;
   corners=[null,null,null,null];activeCorner=0;demo=null;calibrationDirty=false;clearDraft();syncCorners();
   $("photoIdentity").textContent=media.image.name+" · "+media.image.widthPx+" × "+media.image.heightPx+" px · SHA-256 "+media.image.sha256.slice(0,16)+"…"+(origin?" · source clip "+origin.clip.name+" at "+origin.mediaTimeSeconds.toFixed(3)+" s":"");
@@ -224,6 +243,47 @@ $("captureFrame").addEventListener("click",async()=>{
 $("downloadFrame").addEventListener("click",()=>{
   if(!sourceFrameFile)return;const url=URL.createObjectURL(sourceFrameFile),a=document.createElement("a");a.href=url;a.download=sourceFrameFile.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
 });
-window.addEventListener("pagehide",event=>{cancelFrame();clip?.video.pause();if(!event.persisted){releaseImage(media);releaseVideo(clip);}});
+
+$("downloadSourcePackage").addEventListener("click",async()=>{
+  const ticket=++packageIntent, accepted=demo, acceptedMedia=media, file=originalSourceFile;
+  const current=()=>ticket===packageIntent&&accepted===demo&&acceptedMedia===media&&file===originalSourceFile;
+  try{
+    const unavailable=practiceUnavailable();if(unavailable)throw Error(unavailable);
+    if(!file)throw Error("The original source image is unavailable.");
+    const annotations=exportCapture(accepted);packagePending=true;
+    const bytes=await file.arrayBuffer();if(!current())return;
+    const packed=await packSource(annotations,bytes);if(!current())return;
+    const url=URL.createObjectURL(new Blob([packed],{type:"application/octet-stream"}));
+    const link=document.createElement("a");link.href=url;link.download="skill-editable-source.stsource";link.click();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    packagePending=false;$("sourcePackageStatus").textContent="Editable package downloaded: original still image and accepted annotations. Clip bytes and unfinished drafts are not included.";
+    problem();
+  }catch(error){if(current()){packagePending=false;problem("Package save refused; current work preserved. "+error.message);}}
+});
+$("capturePackageForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const file=$("savedSourcePackage").files[0];if(!file){problem("Choose an editable source package.");return;}
+  const ticket=++packageIntent, version=++loadVersion, accepted=demo, acceptedMedia=media;
+  calibrationTransfer.invalidate();cancelFrame();let candidate=null;packagePending=true;
+  const current=()=>ticket===packageIntent&&version===loadVersion&&accepted===demo&&acceptedMedia===media;
+  try{
+    if(file.size>MAX_SOURCE_PACKAGE_BYTES)throw Error("Package exceeds the existing 12 MiB image plus 256 KiB annotation limits.");
+    const input=await file.arrayBuffer();if(!current())return;
+    const pair=await unpackSource(input);if(!current())return;
+    const photo=new File([pair.imageBytes],pair.name,{type:pair.mimeType});
+    candidate=await loadLocalImage(photo);
+    if(!current()){releaseImage(candidate);candidate=null;return;}
+    const restored=reopenCapture(pair.annotations,candidate.image);
+    acceptSource(candidate,restored.source.origin||null,restored.source.origin?photo:null,photo);candidate=null;
+    demo=restored;calibrationDraftEvidence=demo.source.calibrationDraftEvidence||null;corners=structuredClone(demo.source.corners);activeCorner=null;calibrationDirty=false;
+    $("captureTitle").value=typeof demo.title==="string"?demo.title:"Reopened demonstration";
+    $("captureWidth").value=demo.source.widthMm;$("captureHeight").value=demo.source.heightMm;
+    clearDraft();syncCorners();render();problem();
+    $("calibrationStatus").textContent="Saved calibration reopened. Existing source pixels and mark identities are retained.";
+    $("sourcePackageStatus").textContent="Editable package reopened with matching original image bytes. Original clip bytes were not included or checked.";
+  }catch(error){releaseImage(candidate);if(current()){packagePending=false;problem("Package reopen refused; previous work preserved. "+error.message);}}
+});
+
+window.addEventListener("pagehide",event=>{retirePackage();cancelFrame();clip?.video.pause();if(!event.persisted){releaseImage(media);releaseVideo(clip);}});
 render();
 

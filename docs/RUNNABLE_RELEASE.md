@@ -49,9 +49,18 @@ The server binds only loopback. Set `PORT` to an available port if necessary.
 `npm install` is unnecessary. Development commands such as `npm test` in the
 included README require the source checkout; tests are not part of this runtime.
 
-Follow `START_HERE.txt` for an authored synthetic placement example. Save source
-annotations and their original media separately. A geometry/attempt receipt is
-not source annotation JSON. Browser session state is not durable project storage.
+Follow `START_HERE.txt` for an authored synthetic placement example. Browser
+session state is not durable project storage.
+
+In Source Studio (`/capture`), **Save editable source package** downloads one
+`.stsource` file containing the original photo or captured-frame PNG and accepted
+annotations with at least one mark. Apply or revert calibration edits and save or discard mark drafts
+first. Under **Reopen one editable source package**, choose that file and select
+**Reopen editable package** to continue editing. Reopening checks the image and
+annotations before replacing the studio's current work; save current accepted
+work first. Original video clips are not included or verified. Annotation-only
+JSON exports and other workbenches still require original media to be retained
+separately. A geometry/attempt receipt is not source annotation JSON.
 
 Optional original-audio preparation requires `ffmpeg` and `ffprobe` on PATH.
 Native sequence-edge and stationary calibration translation require Python 3 and

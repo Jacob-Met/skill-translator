@@ -549,6 +549,7 @@ const routes=Object.freeze({
   "/web/challenge.css":["web/challenge.css","text/css; charset=utf-8"],
   "/web/challenge.mjs":["web/challenge.mjs","text/javascript; charset=utf-8"],
   "/src/calibration-challenge.mjs":["src/calibration-challenge.mjs","text/javascript; charset=utf-8"],
+  "/src/source-package.mjs":["src/source-package.mjs","text/javascript; charset=utf-8"],
   "/src/capture-editing.mjs":["src/capture-editing.mjs","text/javascript; charset=utf-8"],
   "/sensitivity":["web/sensitivity.html","text/html; charset=utf-8"],
   "/web/sensitivity.css":["web/sensitivity.css","text/css; charset=utf-8"],
