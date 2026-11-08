@@ -61,6 +61,7 @@ function render() {
   const svg=$("captureSvg");svg.replaceChildren();
   $("emptyPhoto").hidden=Boolean(media);
   $("applyCalibration").disabled=!media;
+  $("downloadOriginalImage").disabled=!originalSourceFile;
   $("addCaptureMark").disabled=!demo||calibrationDirty;
   $("downloadCapture").disabled=!demo?.landmarks.length||calibrationDirty;
   const practiceProblem=practiceUnavailable();
@@ -239,6 +240,17 @@ $("captureFrame").addEventListener("click",async()=>{
     $("videoStatus").textContent="Frame captured · requested "+origin.requestedTimeSeconds.toFixed(3)+" s · presented "+origin.mediaTimeSeconds.toFixed(3)+" s. Calibrate the frame below; save its PNG to pair later.";
   }catch(error){releaseImage(candidate);if(version===loadVersion)problem("Frame refused; previous source preserved. "+error.message);}
   finally{if(frameController===controller){frameController=null;frameBusy=false;}videoControls();}
+});
+$("downloadOriginalImage").addEventListener("click",()=>{
+  const file=originalSourceFile;if(!file)return;
+  let url=null;
+  try{
+    // Download the accepted original File itself: no canvas, re-encoding,
+    // annotation changes or draft acceptance. Browser filename rules still apply.
+    url=URL.createObjectURL(file);
+    const link=document.createElement("a");link.href=url;link.download=file.name||media.image.name;link.click();
+  }catch(error){problem("Original image download could not start. "+error.message);}
+  finally{if(url)setTimeout(()=>URL.revokeObjectURL(url),2000);}
 });
 $("downloadFrame").addEventListener("click",()=>{
   if(!sourceFrameFile)return;const url=URL.createObjectURL(sourceFrameFile),a=document.createElement("a");a.href=url;a.download=sourceFrameFile.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
