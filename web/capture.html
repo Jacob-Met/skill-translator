@@ -44,21 +44,17 @@
       <p id="originalImageHelp" class="input-note">Save the accepted photo or frame PNG without changing its bytes or orientation metadata. Pair it with Download annotations in Task Space or other image-based workbenches. This does not save annotations, drafts or the original video clip; the browser may adjust the filename.</p>
     </section>
     <aside class="studio-controls">
-      <section class="studio-card"><p class="eyebrow">01 / MEASURE THE WORKPIECE</p>
-        <label for="captureTitle">DEMONSTRATION NAME<input id="captureTitle" type="text" maxlength="160" value="My workpiece demonstration"></label>
-        <div class="two-fields"><label for="captureWidth">WIDTH · MM<input id="captureWidth" type="number" min="1" max="10000" step="any" value="240"></label><label for="captureHeight">HEIGHT · MM<input id="captureHeight" type="number" min="1" max="10000" step="any" value="160"></label></div>
+      <section class="studio-card"><h2 class="studio-section-title">Workpiece measurements</h2>
+        <label for="captureTitle">Demonstration name<input id="captureTitle" type="text" maxlength="160" value="My workpiece demonstration"></label>
+        <div class="two-fields"><label for="captureWidth">Width · mm<input id="captureWidth" type="number" min="1" max="10000" step="any" value="240"></label><label for="captureHeight">Height · mm<input id="captureHeight" type="number" min="1" max="10000" step="any" value="160"></label></div>
         <p class="input-note">Measure the same boundary that your selected corners enclose. The photo cannot supply scale by itself.</p>
       </section>
-      <section class="studio-card"><p class="eyebrow">02 / CALIBRATE FOUR CORNERS</p><p class="input-note">Select a corner below, then click its location in the photo. Use the fields for precise keyboard entry.</p>
+      <section class="studio-card"><h2 class="studio-section-title">Calibrate the image</h2>
         <div class="photo-corners">
-          <h3>Find the workpiece outline</h3>
-          <p class="input-note">Find visible four-sided regions in this photo. Choose an outline, inspect it on the original, then correct its corners before applying. The photo cannot identify your intended workpiece.</p>
-          <button id="findPhotoCorners" type="button" disabled>Find outlines in this photo</button>
-          <svg id="photoOutlineDetail" role="img" aria-label="Selected outline on the original source image" hidden></svg>
+          <div class="photo-corner-actions"><button id="findPhotoCorners" type="button" disabled>Find outlines in this photo</button><button id="inspectPhotoCorners" type="button" disabled>Inspect and adjust corners</button></div>
           <div id="photoCornerChoices" class="photo-corner-choices" aria-label="Proposed workpiece outlines"></div>
-          <div class="photo-corner-actions"><button id="rotatePhotoCorners" type="button" disabled>Rotate corner labels</button><button id="usePhotoCorners" type="button" disabled>Use outline as draft</button></div>
-          <p id="photoCornersStatus" class="input-note" role="status">Find visible four-sided regions, then choose which one is your workpiece.</p>
-          <p class="input-note">Analysis uses an opaque preview up to 1024 pixels per side. Small details, shadows and clipped edges can be missed. Original pixels and your measured dimensions stay available.</p>
+          <p id="photoCornersStatus" class="input-note" role="status">Find an outline or inspect and place the corners yourself.</p>
+          <details><summary>What an outline can tell you</summary><p>An outline is a visible region, not proof of the intended workpiece. Shadows, texture, clipping and small details can cause omissions or wrong boundaries. The original pixels and your measurements are retained.</p><p id="photoCornersAnalysis"></p></details>
         </div>
         <details class="video-source" id="calibrationTransferPanel"><summary>Draft corners from a calibrated reference PNG</summary>
           <p class="input-note">For another equal-sized view of the same flat workpiece: reuse its dimensions and four corners after matching at least two patches fixed relative to that plane. Translation only; this does not identify task marks.</p>
@@ -77,7 +73,7 @@
         <div class="corner-heading"><span>CORNER</span><span>X · PX</span><span>Y · PX</span></div><div id="cornerRows"></div>
         <button id="applyCalibration" class="primary" disabled>Apply calibration</button><button id="revertCalibration" type="button" disabled>Revert draft edits</button><p id="calibrationStatus" class="input-note" role="status">Four corners are needed.</p>
       </section>
-      <section class="studio-card"><p class="eyebrow">03 / NAME A RELATIONSHIP</p><form id="captureMarkForm">
+      <section class="studio-card"><h2 class="studio-section-title">Name a relationship</h2><form id="captureMarkForm">
         <p class="input-note">Once calibrated, click a source mark or enter its pixel coordinates.</p>
         <div class="two-fields"><label for="markX">X · PX<input id="markX" type="number" step="any"></label><label for="markY">Y · PX<input id="markY" type="number" step="any"></label></div>
         <label for="markLabel">MARK NAME<input id="markLabel" type="text" maxlength="100" value="Alignment guide" required></label>
@@ -91,6 +87,14 @@
   </div>
   <section class="studio-finish"><div><p class="eyebrow">04 / INVESTIGATE THE ADAPTATION</p><h2 id="markCount">No marks yet</h2><ul id="capturedMarks"></ul><p class="input-note">Open accepted marks directly in geometric placement practice, or download the annotations to keep them. To inspect the photo in Task Space, import the JSON there and pair the same photo. The photo itself is never included in the JSON.</p><p id="capturePracticeStatus" class="input-note" role="status">Add at least one source mark before practicing. The original image stays in Source Studio.</p></div><div class="finish-actions"><button id="practiceCapture" class="primary" type="button" disabled>Practice these marks in a new tab ↗</button><button id="downloadCapture" class="primary" disabled>Download annotations ↓</button><button id="downloadSourcePackage" type="button" disabled>Save editable source package ↓</button><p id="sourcePackageStatus" class="input-note" role="status">Keeps the original still image and accepted annotations together. Apply or discard drafts first; original clip bytes are not included.</p><a class="studio-back" href="/mark-inspector">Inspect source mark pixels ↗</a><a class="studio-back" href="/">Continue to Task Space ↗</a></div></section>
   <footer><span>Human-authored measurements and meaning</span><span>Still images leave pressure, tactile cues, and physical success unmeasured.</span></footer>
+  <dialog id="photoCornerInspector" aria-labelledby="photoCornerInspectorTitle">
+    <div class="photo-inspector-head"><h2 id="photoCornerInspectorTitle">Inspect and adjust corners</h2><button id="closePhotoCornerInspector" type="button" aria-label="Close without using corner edits">Close</button></div>
+    <div class="photo-inspector-stage"><svg id="photoOutlineDetail" role="img" tabindex="0" aria-label="Original photograph with editable corners. Select a corner, then tap or drag its position; arrow keys nudge it."></svg><div class="photo-inspector-zoom"><button id="photoCornerZoom" type="button">1×</button><button id="photoCornerFit" type="button">Fit</button></div></div>
+    <div class="photo-inspector-fields"><label>Corner<select id="photoCornerActive"><option value="0">1 · Top left</option><option value="1">2 · Top right</option><option value="2">3 · Bottom right</option><option value="3">4 · Bottom left</option></select></label><label>X · px<input id="photoCornerEditX" type="number" step="any"></label><label>Y · px<input id="photoCornerEditY" type="number" step="any"></label></div>
+    <div class="photo-inspector-tools"><div class="photo-inspector-nudge" aria-label="Move selected corner by one pixel"><button type="button" data-corner-nudge="-1,0" aria-label="Move corner left one pixel">←</button><button type="button" data-corner-nudge="0,-1" aria-label="Move corner up one pixel">↑</button><button type="button" data-corner-nudge="0,1" aria-label="Move corner down one pixel">↓</button><button type="button" data-corner-nudge="1,0" aria-label="Move corner right one pixel">→</button></div><button id="rotatePhotoCorners" type="button" disabled>Rotate labels</button></div>
+    <div class="photo-inspector-help"><p id="photoCornerEditStatus" role="status"></p><p id="photoCornerDimensions"></p></div>
+    <div class="photo-inspector-accept"><button id="usePhotoCorners" type="button" class="primary" disabled>Use corners as draft</button></div>
+  </dialog>
 </main>
 </body></html>
 

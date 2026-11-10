@@ -1,14 +1,13 @@
-.photo-corners { border-bottom: 1px solid #414b50; padding: 0 0 1rem; margin: 0 0 1rem; }
-.photo-corners h3 { margin: 0 0 .4rem; font-size: 1rem; }
-.photo-corners p { line-height: 1.5; }
-.photo-corner-choices { display: grid; gap: .35rem; margin: .65rem 0; }
-.photo-outline-choice { width: 100%; text-align: left; white-space: normal; }
-.photo-outline-choice[aria-pressed="true"] { border-color: #79dece; color: #d9fff8; background: #193d38; }
-.photo-corner-actions { display: flex; flex-wrap: wrap; gap: .4rem; }
-#photoCornersStatus { overflow-wrap: anywhere; }
-
-.studio-intro { padding: 18px 0 20px; }
-.studio-intro h1 { font-size: clamp(1.5rem, 2.2vw, 2rem); margin: 0 0 .35rem; }
-.studio-intro .lead { font-size: 1rem; margin: 0; max-width: none; }
-#photoOutlineDetail { display: none; width: 100%; max-height: 280px; background: #0b1512; margin: .7rem 0; }
-@media(max-width:850px) { #photoOutlineDetail:not([hidden]) { display: block; } }
+.photo-corners{border-bottom:1px solid #414b50;padding:0 0 1rem;margin:0 0 1rem}.photo-corners h3{margin:0 0 .5rem;font-size:1rem}.photo-corner-choices{display:grid;gap:.35rem;margin:.65rem 0}.photo-outline-choice{width:100%;text-align:left;white-space:normal}.photo-outline-choice[aria-pressed="true"]{border-color:#79dece;color:#d9fff8;background:#193d38}.photo-corner-actions{display:flex;flex-wrap:wrap;gap:.4rem}.photo-corners details{font-size:.8rem;color:#a9bcb4;margin-top:.7rem}.photo-corners details summary{cursor:pointer}.photo-corners details p{line-height:1.5}.studio-intro{padding:18px 0 20px}.studio-intro h1{font-size:clamp(1.5rem,2.2vw,2rem);margin:0 0 .35rem}.studio-intro .lead{font-size:1rem;margin:0;max-width:none}.studio-image-panel,.studio-card,.studio-finish{border-radius:2px}.studio-section-title{font-size:1.05rem;margin:0 0 12px}.studio-card label{letter-spacing:0;font-size:.8rem}.studio-card .input-note{line-height:1.45}
+#photoCornerInspector{width:min(960px,calc(100vw - 32px));height:min(840px,calc(100dvh - 32px));max-width:none;max-height:none;padding:0;border:1px solid #52675f;border-radius:2px;background:#10201a;color:#e8f1eb;overflow:hidden}
+#photoCornerInspector::backdrop{background:#000b}
+#photoCornerInspector[open]{display:grid;grid-template-rows:auto minmax(140px,1fr) auto auto auto auto}
+.photo-inspector-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #344b41;gap:12px}.photo-inspector-head h2{font-size:1.05rem;margin:0}.photo-inspector-head button{padding:8px 12px}
+.photo-inspector-stage{position:relative;min-height:0;background:#08110d;overflow:hidden}#photoOutlineDetail{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;outline:none}#photoOutlineDetail:focus-visible{box-shadow:inset 0 0 0 2px #b4e6cd}
+.photo-inspector-zoom{position:absolute;right:10px;top:10px;display:flex;gap:4px}.photo-inspector-zoom button{min-width:44px;padding:8px;background:#14281ee8}
+.photo-inspector-fields{display:grid;grid-template-columns:minmax(140px,1.6fr) minmax(70px,1fr) minmax(70px,1fr);gap:8px;padding:10px 14px 0}
+.photo-inspector-fields label{font-size:.75rem;color:#bfcec5}.photo-inspector-fields input,.photo-inspector-fields select{display:block;width:100%;min-width:0;margin-top:4px;padding:8px;border-radius:2px;font-size:.9rem}
+.photo-inspector-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 14px}.photo-inspector-nudge{display:flex;gap:3px}.photo-inspector-nudge button{min-width:40px;padding:9px;font-size:1rem}.photo-inspector-tools>button{padding:10px;font-size:.8rem}
+.photo-inspector-help{padding:0 14px 8px;font-size:.75rem;color:#b9c9bf}.photo-inspector-help p{margin:0 0 5px;line-height:1.3}
+.photo-inspector-accept{padding:10px 14px;border-top:1px solid #344b41}.photo-inspector-accept button{width:100%;padding:12px;font-size:.95rem}
+@media(max-width:600px){#photoCornerInspector{width:100vw;height:100dvh;border:0;border-radius:0;margin:0}.photo-inspector-head{padding:9px 12px}.photo-inspector-fields{padding:8px 12px 0}.photo-inspector-tools{padding:8px 12px}.photo-inspector-help{padding:0 12px 6px}.photo-inspector-accept{padding:8px 12px}.photo-inspector-help p{margin-bottom:4px}}
