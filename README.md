@@ -22,6 +22,8 @@ incomplete or mistaken. Details and test instructions are in
 
 ## Try it
 
+[Download the prepared experimental runtime](https://github.com/Jacob-Met/skill-translator/blob/749d4e9ff061d2e86750f3ec02d6160f281d9abc/downloads/README.md) for source version `b71cfdc6530e`. Extract it and run `node launch.mjs` with Node 20 or newer. This interim repository download includes source attribution, a checksum, launch instructions and actual app screenshots/clip; formal GitHub Release publication remains open.
+
 In **Demonstration sequence**, use **Find moments by visual change** to scan a
 local clip before authoring its steps. Inspect raw and brightness-adjusted image
 changes, choose a candidate, and retain its original full-resolution frame through
