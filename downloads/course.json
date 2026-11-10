@@ -1,0 +1,67 @@
+{
+  "result": "PASS",
+  "source": "OpenCV samples/data/left02.jpg",
+  "source_blob": "457820e90aa2ff189ffb62fd7fdcc81d66c7885e",
+  "source_commit": "b71cfdc6530ebd776ccb1e6ab49b71dba86f3fe2",
+  "checks": [
+    "390×844 phone: actual photograph at least280px high, active corner, coordinate fields and adopt control all inside same viewport.",
+    "Zoom and one-pixel pointer/keyboard nudges work; Close discards edits without populating the calibration draft.",
+    "Reviewed2px correction remains separate from recorded original proposal; explicit calibration,305×198 test dimensions, JSON/.stsource reopen and practice retain the mark.",
+    "Same inspector accepts all four manual corners without a detector proposal, selects an existing handle by pointer and allows keyboard correction."
+  ],
+  "errors": [],
+  "layout": {
+    "photoOutlineDetail": {
+      "x": 0,
+      "y": 59.1875,
+      "width": 390,
+      "height": 552.6875,
+      "bottom": 611.875,
+      "right": 390
+    },
+    "photoCornerActive": {
+      "x": 12,
+      "y": 640.515625,
+      "width": 155.546875,
+      "height": 36,
+      "bottom": 676.515625,
+      "right": 167.546875
+    },
+    "photoCornerEditX": {
+      "x": 175.546875,
+      "y": 640.515625,
+      "width": 97.21875,
+      "height": 37.96875,
+      "bottom": 678.484375,
+      "right": 272.765625
+    },
+    "photoCornerEditY": {
+      "x": 280.765625,
+      "y": 640.515625,
+      "width": 97.234375,
+      "height": 37.96875,
+      "bottom": 678.484375,
+      "right": 378
+    },
+    "usePhotoCorners": {
+      "x": 12,
+      "y": 788.921875,
+      "width": 366,
+      "height": 47.078125,
+      "bottom": 836,
+      "right": 378
+    },
+    "originalPhoto": {
+      "x": 0,
+      "y": 189.28125,
+      "width": 390,
+      "height": 292.5,
+      "bottom": 481.78125,
+      "right": 390
+    }
+  },
+  "browser": "Chrome/156.0.8078.47",
+  "sandbox_admitted": true,
+  "dimensions_notice": "305 x 198 mm are test values, not measured truth for the photograph",
+  "video_notice": "Actual browser interaction, slowed to two-thirds speed for readability"
+}
