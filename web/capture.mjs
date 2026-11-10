@@ -27,11 +27,11 @@ for(const name of ["input","change","click","submit"])
     if(name==="click"&&!event.target.closest("#cornerRows button,#capturedMarks button,#captureSvg,#referencePatchSvg,#applyCalibration,#revertCalibration,#cancelMarkEdit,#captureFrame,#clearReferencePatches,#proposeCalibration,#loadCalibrationReference"))return;
     if(event.target.closest(".studio-main"))retirePackage();
   },true);
-const photoCorners=installPhotoCorners({target:()=>media,redraw:()=>render(),propose:draft=>{
+const photoCorners=installPhotoCorners({target:()=>media,readDraft:()=>({corners,evidence:calibrationDraftEvidence}),redraw:()=>render(),propose:draft=>{
   retirePackage();calibrationTransfer.invalidate();
   corners=structuredClone(draft.corners);calibrationDraftEvidence=structuredClone(draft.evidence);
   activeCorner=null;calibrationDirty=true;syncCorners();
-  $("calibrationStatus").textContent="Photo outline is an editable draft. Check each corner and your measured dimensions, then apply calibration.";render();
+  $("calibrationStatus").textContent="Reviewed corners are an editable draft. Check each corner and your measured dimensions, then apply calibration.";render();
 }});
 const calibrationTransfer=installCalibrationDraft({target:()=>media,propose:draft=>{
   retirePackage();photoCorners.invalidate({clear:true});

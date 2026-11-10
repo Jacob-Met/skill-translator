@@ -2,7 +2,7 @@
 
 ## Current gaps and independent review
 
-Independent product judgment is pending on the exact release candidate. The author has verified the browser journey and finite authored controls; those are not an independent usability verdict or a physical-accuracy study.
+Independent review of merged `9bd9c09` found a material phone usability gap: proposal controls could occupy the screen while the photograph was elsewhere in the page. Functional phone checks had passed but missed that visual failure. This revision opens an image-first inspection mode with original pixels, draggable corner handles, coordinate entry, zoom, one-pixel correction and explicit draft adoption together. The same mode supports manual placement without a detector proposal. Independent visual recheck is pending in task `skill-translator-photo-use-judge-kestrel71b9`; author checks below are not a replacement for that verdict.
 
 The detector is deliberately limited to well-separated, opaque, approximately four-sided regions. Complex backgrounds, shadows, occlusion, texture, curved boundaries, clipped workpieces and very thin images can yield no proposal or the wrong visible region. Every proposal remains an editable draft. Manual calibration remains available.
 
@@ -32,9 +32,9 @@ Run `node server.mjs` with Node 20 or newer, then open
 
 1. Choose a local PNG or JPEG. Enter the workpiece dimensions you measured.
 2. Select **Find outlines in this photo**. Nothing is chosen or applied automatically.
-3. Select an outline to inspect its numbered corners on the original image. The list is ordered by image area, not probability or intended workpiece identity. On a phone, a second local preview stays beside the choices.
-4. Use **Rotate corner labels** if necessary so 1, 2, 3 and 4 mean the physical top left, top right, bottom right and bottom left.
-5. Select **Use outline as draft**. Correct any corner numerically or through the existing image controls, then select **Apply calibration**.
+3. Select an outline to open the image inspector. The original photo, numbered corners, correction controls and draft action stay on one screen. The list is ordered by image area, not probability or intended workpiece identity.
+4. Select the corner you want to correct; drag it, tap its intended position, edit X/Y or use the one-pixel arrow controls. Keyboard arrow keys move one pixel; Shift moves ten. Use **1× / 2× / 4×** to inspect the active corner and **Fit** to see the whole image. Use **Rotate labels** if needed so 1–4 mean physical top left, top right, bottom right and bottom left.
+5. Select **Use corners as draft**, then review the measured dimensions and select **Apply calibration**. **Close** or Escape discards inspector edits. To place or revise corners without detection, choose **Inspect and adjust corners**. No calibration changes until you explicitly adopt and apply the draft.
 6. Add a meaningful source mark. Save an editable source package, or open the existing placement-practice workflow.
 
 The proposal never supplies physical width, height, scale, uncertainty or task semantics. The existing calibration/mark validation still decides whether the authored geometry can be accepted. Accepted source marks retain their original image coordinates when calibration is revised.
@@ -59,6 +59,7 @@ The author ran these on fleet host `hamon-browser-7` using Node 22.23.4 and sand
 - Thirty existing capture, editing, source-package and sequence-capture checks, plus eight maintained native calibration groups and five existing JavaScript calibration-draft groups.
 - A real browser course: original 1400×1000 PNG → 1024 preview → explicit choice → corrected 320×210 mm calibration → source mark → JSON and editable package → fresh reopen → existing practice. Alternative selection, rotated labels, no-proposal outcomes, changed-draft retirement and a 390-pixel phone layout were exercised. The retained authored quadrilateral coordinates differed by less than 1 original pixel before manual correction in this one control.
 - Exact MICROVERSE detector verification.
+- An additional real-photo phone course on OpenCV `left02.jpg`: image and correction/adoption controls within one 390×844 viewport; zoomed drag, button/keyboard nudges, cancel without adopting, a 2-pixel manual correction with original proposed coordinates retained, JSON/editable-package reopen and practice. The 305×198 mm values are test inputs, not measured truth for that photograph. A manual four-corner path without scanning uses the same inspector. Actual phone and desktop screenshots were inspected.
 
 Run the applicable tests with:
 
@@ -66,6 +67,7 @@ Run the applicable tests with:
 node --test --test-concurrency=2 test/photo-corners.test.mjs test/capture.test.mjs test/capture-editing.test.mjs test/source-package.test.mjs test/sequence-capture.test.mjs
 node tools/verify-pixel-core.mjs
 PLAYWRIGHT_PATH=/path/to/playwright CHROME_BINARY=/path/to/chrome RECEIPT_DIR=/absolute/new/receipt node tools/browser-photo-corners.mjs
+PLAYWRIGHT_PATH=/path/to/playwright CHROME_BINARY=/path/to/chrome RECEIPT_DIR=/absolute/new/inspection node tools/browser-photo-inspection.mjs /absolute/path/to/opencv/left02.jpg
 ```
 
 The browser course generates its own clearly authored original images, records the actual interaction, and saves desktop/phone screenshots, a short browser video, JSON and an editable source package. It uses the application's normal controls; no target coordinates are passed to the detector. For additional supplied images, use `tools/inspect-photo-corners.mjs /absolute/image.png` with the same environment variables.
