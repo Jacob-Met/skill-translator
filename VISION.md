@@ -42,25 +42,29 @@ unrelated geometry; the dedicated Practice decisions action correctly carried
 the account into a separate tab. Chrome Back restored the former page in that
 observed run; a fresh route did not restore unsaved work.
 
+On the same date, Wren accepted the revised Sequence workspace after using a real
+88-second, 1920×1080 bookbinding clip. The clip input moved from y1076 to y227 on
+desktop and from y1503 to y369 on a true390px phone viewport. Wren inspected the
+original before/after frames beside the account, wrong/matching-clip pairing,
+actual full and single-frame export/reopen, cancelled unsaved departure, and the
+retained-frame display after reopening. This accepts the source experience;
+the actual downloadable release still needs the same observer's package check.
+
 ## Ranked open gaps
 
-1. **Coherent author-to-learner use.** Keep source, capture and explanation together,
-   make the task-specific handoff obvious, and protect unfinished work. The
-   Sequence workspace change is being independently judged; a merged source or
-   screenshot alone is not acceptance of a released product.
-2. **Useful learner-facing lessons.** The existing offline lesson puts provenance
+1. **Useful learner-facing lessons.** The existing offline lesson puts provenance
    before instruction and source images. Decision Practice also spends too much
    of the initial screen on setup; its comparison error should appear next to
    the evidence-reference choice. These are real observed journey gaps.
-3. **Finding moments in real footage.** The visual scan completes on the observer's
+2. **Finding moments in real footage.** The visual scan completes on the observer's
    bookbinding clip, but its numerical interval list separates the user from the
    video. A source contact sheet with inspectable measurements is more useful
    than an expanding list of metrics.
-4. **Demonstrated teaching value.** Local geometry and authored clips establish
+3. **Demonstrated teaching value.** Local geometry and authored clips establish
    software behavior, not expert correctness, automatic extraction, physical
    success or skill transfer. Expert-authored material and unfamiliar learner
    trials must determine which capabilities are actually worth improving.
-5. **Delivery and continuity.** Keep the downloadable runtime current with main.
+4. **Delivery and continuity.** Keep the downloadable runtime current with main.
    An explicit sequence export contains retained frames and accepted notes; it
    does not contain the original clip or every unfinished draft. No automatic
    cloud storage or service-side persistence is implied.
