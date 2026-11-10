@@ -56,6 +56,7 @@ def build(repo, commit, output):
                 'requirements-native-edge.txt',
                 'tools/audio-input-profile.mjs', 'tools/prepare-audio-activity.mjs',
                 'tools/calibration-translation-native.py', 'tools/sequence-edge-native.py',
+                'tools/photo-corners-native.py', 'tools/setup-native.py',
                 'vendor/microverse/fiducials.py',
                 'requirements-temporal.txt',
                 'tools/temporal-points/restart.mjs',
@@ -102,8 +103,11 @@ def build(repo, commit, output):
     if set(assets) - selected.keys():
         raise ValueError('Missing served assets: ' + ', '.join(sorted(set(assets) - selected.keys())))
     selected['launch.mjs'] = b'''import {createAppServer} from './server.mjs';
+import {discoverOpenCvRuntime} from './native/optional-opencv.mjs';
 const major=Number(process.versions.node.split('.')[0]);
 if(major<20)throw Error('Node.js 20 or later is required.');
+const nativeRuntime=await discoverOpenCvRuntime();
+if(nativeRuntime)for(const key of ['SKILL_PHOTO_PYTHON','SKILL_EDGE_PYTHON','SKILL_CALIBRATION_PYTHON'])process.env[key]||=nativeRuntime.interpreter;
 const port=Number(process.env.PORT||8787);
 if(!Number.isInteger(port)||port<1||port>65535)throw Error('Invalid PORT');
 const server=createAppServer();
@@ -140,6 +144,16 @@ with accepted annotations (at least one mark) in one .stsource file. Apply or re
 calibration edits and save or discard mark drafts first. Reopen one editable source package
 restores that pair for further editing. Original video clips are not included.
 Keep original media separately for annotation-only exports and other workbenches.
+For the stronger photo outline scan, install Python 3 (qualified on Python 3.12),
+then run: python3 tools/setup-native.py (Windows: python tools/setup-native.py).
+This installs the existing pinned OpenCV/NumPy dependencies into .venv-native
+beside this application; it needs internet access and roughly 250 MB of disk space.
+Restart with the normal launcher. The everyday Find outlines action discovers
+that environment automatically; no settings screen or environment variable is needed.
+An already installed Python/OpenCV runtime on PATH is also discovered.
+Without OpenCV, the browser scan and manual corner inspector remain available.
+The native page scan is stronger on evaluated paper photos but still misses pages
+and offers interior regions: inspect the intended boundary and measured dimensions.
 Native audio processing additionally needs ffmpeg and ffprobe on PATH.
 Native sequence-edge and stationary calibration translation additionally need
 Python 3 with the pinned OpenCV/NumPy dependencies in requirements-native-edge.txt.

@@ -7,14 +7,20 @@ Independent reviewer **astra-kestrel-71b9** accepted the image-first inspector a
 The remaining ranked gaps are:
 
 1. **Whole-object versus interior-region choice.** Sudoku and clutter can still produce internal regions or omissions rather than the intended outer workpiece.
-2. **Known physical geometry in ordinary scenes.** Validate ordinary colored paper/boards against independently known geometry. Current selected checkerboard views and test dimensions do not establish physical accuracy.
+2. **Physical accuracy and correction burden.** Ordinary-paper image-coordinate validation is now retained in PAPER_BOUNDARY_EVALUATION.md. It does not establish physical accuracy or a human time saving. Fourteen final-set pages required a non-first alternative and thirty were omitted.
 3. **Formal release publication.** A [versioned interim runtime download](https://github.com/Jacob-Met/skill-translator/blob/749d4e9ff061d2e86750f3ec02d6160f281d9abc/downloads/README.md) is available, with source, launch instructions, actual screenshots/clip and SHA-256. It is distinct from a GitHub Release; the estate release integration's permission gap remains open.
 
 Independent work is recorded separately as `skill-translator-photo-use-judge-kestrel71b9`. The author tests below are evidence about implementation behavior, not an independent physical-accuracy study.
 
 The detector is deliberately limited to well-separated, opaque, approximately four-sided regions. Complex backgrounds, shadows, occlusion, texture, curved boundaries, clipped workpieces and very thin images can yield no proposal or the wrong visible region. Every proposal remains an editable draft. Manual calibration remains available.
 
-## Photographic comparison
+## Ordinary paper photos and the optional native scan
+
+The current ordinary-paper improvement uses the already maintained OpenCV runtime when it is installed. In the final reserved 90-frame SmartDoc course, the actual app provided 40 good first choices and 54 good outer-page alternatives, versus 23 for the previous app; 30 images still had no proposal. Two previous good results were lost. First choice is ordered by area, not confidence. See [the complete comparison, failures, costs and reproduction](PAPER_BOUNDARY_EVALUATION.md). Independent review of this new method is recorded under skill-translator-paper-use-judge-kestrel71b9; the earlier accepted inspector judgment above remains separate.
+
+For the stronger scan, run python3 tools/setup-native.py from the source checkout or extracted runtime, then restart the normal launcher. This creates the app-local environment using the unchanged requirements-native-edge.txt pins. The scan discovers installed OpenCV automatically; there is no extra settings screen. Without it, the existing browser method remains, with a lower-contrast pass only after the original passes return no candidates. That fallback preserves all prior nonempty proposal sets. Native binaries are optional and are not bundled.
+
+## Earlier browser photographic comparison
 
 The first filled-region-only candidate omitted all four board photographs below. The revised method was developed using `left01.jpg`, then frozen before receiving `left02.jpg`, `left07.jpg` and `left11.jpg`. Author inspection of the retained original-image overlays found that each revised proposal follows the printed checkerboard face; it does not select the surrounding dark backing. The author must measure the same boundary they accept.
 
@@ -36,7 +42,7 @@ The input source is [OpenCV samples/data](https://github.com/opencv/opencv/tree/
 ## Use in the existing Source Studio
 
 Run `node server.mjs` with Node 20 or newer, then open
-<http://127.0.0.1:8787/capture>. No package installation, external service or key is needed for this workflow.
+<http://127.0.0.1:8787/capture>. No external service or key is needed. The browser scan needs only Node; the stronger optional native scan uses the setup described above.
 
 1. Choose a local PNG or JPEG. Enter the workpiece dimensions you measured.
 2. Select **Find outlines in this photo**. Nothing is chosen or applied automatically.
@@ -49,15 +55,15 @@ The proposal never supplies physical width, height, scale, uncertainty or task s
 
 ## Method and provenance
 
-The browser creates an explicitly disclosed analysis raster of at most 1024 pixels per side. It retains the original image unchanged and maps candidate pixel-cell coordinates back with the separate original/analysis width and height ratios. Preview sampling can shift a boundary; the author should inspect and correct it.
+The browser-only path creates an explicitly disclosed analysis raster of at most1024 pixels per side. Installed OpenCV uses an explicitly browser-oriented PNG analysis raster of at most2048 pixels per side and 2,097,152 pixels, with a verified raster hash and recorded method/runtime identity. It retains the original image unchanged and maps candidate pixel-cell coordinates back with the separate original/analysis width and height ratios. Preview sampling can shift a boundary; the author should inspect and correct it.
 
-The method compares a global Otsu intensity split and a fixed local-contrast profile through the existing pinned MICROVERSE `analyzePixels` implementation, in both polarities. Boundary-touching and small regions are excluded. A convex hull of each component's pixel cells is simplified as a closed curve. Dense quadrilateral regions can survive directly. Sparse printed or outlined regions additionally require at least 92% support on each proposed side from that same observed component; an open three-sided shape is not completed. At most eight deduplicated candidates are shown and further omissions are explicit.
+The browser method compares a global Otsu intensity split and a fixed local-contrast profile at threshold16 through the existing pinned MICROVERSE `analyzePixels` implementation, in both polarities. It tries threshold8 only after those original passes produce no candidates. Boundary-touching and small regions are excluded. A convex hull of each component's pixel cells is simplified as a closed curve. Dense quadrilateral regions can survive directly. Sparse printed or outlined regions additionally require at least 92% support on each proposed side from that same observed component; an open three-sided shape is not completed. At most eight deduplicated candidates are shown and further omissions are explicit.
 
 This is a conventional contour-approximation approach, consistent with the comparison in [OpenCV's square-detection sample](https://docs.opencv.org/3.4.17/db/d00/samples_2cpp_2squares_8cpp-example.html). It does not make an algorithm-novelty claim. The interaction preserves human inspection and correction, as image-annotation systems such as [Label Studio's polygon annotation](https://labelstud.io/tags/polygonlabels) do; SKILL TRANSLATOR additionally carries the accepted geometry into its existing physical-dimension and practice workflow.
 
-The pinned detector remains byte-identical. `node tools/verify-pixel-core.mjs` checks the maintained MICROVERSE source pin. The new algorithm lives in `src/photo-corners.mjs`; the browser worker performs the bounded analysis without blocking the authoring thread.
+The pinned MICROVERSE kernel remains byte-identical. `node tools/verify-pixel-core.mjs` checks the maintained MICROVERSE source pin. The new algorithm lives in `src/photo-corners.mjs`; the browser worker performs the bounded analysis without blocking the authoring thread.
 
-Saved `source.calibrationDraftEvidence` records the image identity, analysis size, threshold, selected region, corner-label rotation and original proposed coordinates. Accepted corner coordinates are stored separately. Later manual corrections therefore do not turn the old proposal into a claim that the final corners were automatically measured.
+Saved `source.calibrationDraftEvidence` records the image identity, analysis size, method settings, selected region, corner-label rotation and original proposed coordinates. Accepted corner coordinates are stored separately. Later manual corrections therefore do not turn the old proposal into a claim that the final corners were automatically measured.
 
 ## Verification and reproduction
 

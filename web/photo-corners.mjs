@@ -2,14 +2,14 @@ import {originalPhotoCorners,PHOTO_CORNERS_LIMITS} from '../src/photo-corners.mj
 const $=id=>document.getElementById(id),ns='http://www.w3.org/2000/svg';
 const names=['Top left','Top right','Bottom right','Bottom left'];
 export function installPhotoCorners({target,readDraft,propose,redraw}) {
-  let worker=null,version=0,report=null,source=null,selected=null,rotation=0;
+  let worker=null,scanAbort=null,scanning=false,version=0,report=null,source=null,selected=null,rotation=0;
   let editing=null,active=0,zoom=1,dragging=false,viewCenter=null;
   const dialog=$('photoCornerInspector'),detail=$('photoOutlineDetail');
   const status=text=>$('photoCornersStatus').textContent=text;
   function clearPreview(){$('usePhotoCorners').disabled=true;$('rotatePhotoCorners').disabled=true;report=null;source=null;selected=null;rotation=0;$('photoCornerChoices').replaceChildren();}
   function closeInspector(){if(dialog.open)dialog.close();editing=null;dragging=false;}
   function invalidate({clear=false}={}){
-    version++;worker?.terminate();worker=null;$('findPhotoCorners').disabled=!target();
+    version++;scanAbort?.abort();scanAbort=null;scanning=false;worker?.terminate();worker=null;$('findPhotoCorners').disabled=!target();
     if(clear){closeInspector();clearPreview();status('Find an outline or inspect and place the corners yourself.');$('photoCornersAnalysis').textContent='';redraw();}
   }
   function points(){if(!selected||source!==target())return null;return originalPhotoCorners(selected,report.width,report.height,source.image.widthPx,source.image.heightPx,rotation);}
@@ -36,9 +36,9 @@ export function installPhotoCorners({target,readDraft,propose,redraw}) {
     const p=points(),draft=readDraft();
     editing={source:current,corners:structuredClone(p||draft.corners),evidence:p?{
       format:report.version,image:structuredClone(current.image),
-      analysis:{width:report.width,height:report.height,kernel:report.kernel,settings:structuredClone(selected.settings)},
+      analysis:{width:report.width,height:report.height,kernel:report.kernel,settings:structuredClone(selected.settings),...(report.rasterSha256?{rasterSha256:report.rasterSha256}:{})},
       selectedOutline:structuredClone(selected),rotation,proposedCorners:structuredClone(p),
-      limits:'Intensity-region outline proposal, reviewed by the author. Sampling, shadows, occlusion and texture can shift corners or omit a workpiece. The image does not identify the intended workpiece, dimensions, uncertainty or physical accuracy.'
+      limits:(selected.method==='opencv-colour-contours'?'Colour/edge contour':'Intensity-region')+' outline proposal, reviewed by the author. Sampling, shadows, occlusion and texture can shift corners or omit a workpiece. The image does not identify the intended workpiece, dimensions, uncertainty or physical accuracy.'
     }:structuredClone(draft.evidence),proposal:Boolean(p)};
     active=0;zoom=1;viewCenter=null;dialog.showModal();drawInspector();detail.focus();
   }
@@ -63,34 +63,59 @@ export function installPhotoCorners({target,readDraft,propose,redraw}) {
   detail.addEventListener('keydown',event=>{const step=event.shiftKey?10:1,dir={ArrowLeft:[-step,0],ArrowRight:[step,0],ArrowUp:[0,-step],ArrowDown:[0,step]}[event.key];if(dir){event.preventDefault();nudge(...dir);}});
   for(const button of document.querySelectorAll('[data-corner-nudge]'))button.onclick=()=>nudge(...button.dataset.cornerNudge.split(',').map(Number));
   window.addEventListener('resize',drawInspector);
+  function showReport(next,current){
+    report=next;source=current;
+    for(const candidate of report.candidates){
+      const button=document.createElement('button');button.type='button';button.className='photo-outline-choice';button.dataset.outline=candidate.id;button.setAttribute('aria-pressed','false');
+      button.textContent='Inspect outline '+candidate.id.split('-')[1]+' · '+Math.round(candidate.coverage*100)+'% of image';
+      button.onclick=()=>{selected=candidate;rotation=0;for(const node of $('photoCornerChoices').children)node.setAttribute('aria-pressed',String(node===button));status('Outline selected. Inspect and adjust it before using the draft.');redraw();openInspector();};
+      $('photoCornerChoices').append(button);
+    }
+    $('photoCornersAnalysis').textContent='Analyzed '+report.width+' × '+report.height+' pixels; corners map to the original '+current.image.widthPx+' × '+current.image.heightPx+' image.'+(report.omitted?' '+report.omitted+' additional outlines omitted.':'');
+    status(report.candidates.length?report.candidates.length+' outline'+(report.candidates.length===1?'':'s')+' found. Choose one to inspect.':'No complete four-sided outline found. Inspect and place the corners manually.');
+  }
   $('findPhotoCorners').onclick=async()=>{
     invalidate();clearPreview();redraw();const token=version,current=target();if(!current)return;
-    $('findPhotoCorners').disabled=true;status('Finding four-sided outlines…');
+    scanning=true;$('findPhotoCorners').disabled=true;status('Finding four-sided outlines…');
     try{
       const image=new Image();image.src=current.url;await image.decode();if(token!==version||current!==target())return;
-      const factor=Math.min(1,PHOTO_CORNERS_LIMITS.side/Math.max(current.image.widthPx,current.image.heightPx));
-      const canvas=document.createElement('canvas');canvas.width=Math.round(current.image.widthPx*factor);canvas.height=Math.round(current.image.heightPx*factor);
-      if(Math.min(canvas.width,canvas.height)<16||canvas.width>1024||canvas.height>1024)throw Error('This image is too narrow. Place corners manually.');
-      const context=canvas.getContext('2d',{willReadFrequently:true});context.drawImage(image,0,0,canvas.width,canvas.height);
+      const canvas=document.createElement('canvas');
+      function draw(factor,round=Math.round){
+        canvas.width=round(current.image.widthPx*factor);canvas.height=round(current.image.heightPx*factor);
+        if(Math.min(canvas.width,canvas.height)<16)throw Error('This image is too narrow. Place corners manually.');
+        const context=canvas.getContext('2d',{willReadFrequently:true});context.drawImage(image,0,0,canvas.width,canvas.height);return context;
+      }
+      const capability=await fetch('/api/photo-corners').then(r=>r.ok?r.json():({available:false}));
+      if(token!==version||current!==target())return;
+      if(capability.available){
+      const nativeFactor=Math.min(1,2048/Math.max(current.image.widthPx,current.image.heightPx),Math.sqrt(2097152/(current.image.widthPx*current.image.heightPx)));
+      draw(nativeFactor,Math.floor);
+      const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+      if(!blob)throw Error('The image could not be prepared for scanning.');
+      const bytes=await blob.arrayBuffer(),digest=await crypto.subtle.digest('SHA-256',bytes);
+      const sha256=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+      const pngBase64=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.onerror=()=>reject(Error('The image could not be prepared for scanning.'));reader.readAsDataURL(blob);});
+      if(token!==version||current!==target())return;
+      scanAbort=new AbortController();
+      const response=await fetch('/api/photo-corners',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:current.image,raster:{width:canvas.width,height:canvas.height,pngBase64,sha256}}),signal:scanAbort.signal});
+      if(token!==version||current!==target())return;
+      scanAbort=null;
+      if(response.ok){const next=await response.json();if(token!==version||current!==target())return;scanning=false;$('findPhotoCorners').disabled=false;showReport(next,current);return;}
+      if(response.status!==503){const error=await response.json();throw Error(error.error||'The scan could not finish. Place corners manually.');}
+      }
+      // Node-only downloads retain their browser scan when optional OpenCV is absent.
+      const factor=Math.min(1,PHOTO_CORNERS_LIMITS.side/Math.max(current.image.widthPx,current.image.heightPx)),context=draw(factor);
       const raster=context.getImageData(0,0,canvas.width,canvas.height);
       worker=new Worker('/web/photo-corners-worker.mjs',{type:'module'});
       worker.onmessage=event=>{
         if(token!==version||current!==target())return;
-        worker.terminate();worker=null;$('findPhotoCorners').disabled=false;
+        worker.terminate();worker=null;scanning=false;$('findPhotoCorners').disabled=false;
         if(event.data.error){status('No draft changed. '+event.data.error);return;}
-        report=event.data.report;source=current;
-        for(const candidate of report.candidates){
-          const button=document.createElement('button');button.type='button';button.className='photo-outline-choice';button.dataset.outline=candidate.id;button.setAttribute('aria-pressed','false');
-          button.textContent='Inspect outline '+candidate.id.split('-')[1]+' · '+Math.round(candidate.coverage*100)+'% of image';
-          button.onclick=()=>{selected=candidate;rotation=0;for(const node of $('photoCornerChoices').children)node.setAttribute('aria-pressed',String(node===button));status('Outline selected. Inspect and adjust it before using the draft.');redraw();openInspector();};
-          $('photoCornerChoices').append(button);
-        }
-        $('photoCornersAnalysis').textContent='Analyzed '+report.width+' × '+report.height+' pixels; corners map to the original '+current.image.widthPx+' × '+current.image.heightPx+' image.'+(report.omitted?' '+report.omitted+' additional outlines omitted.':'');
-        status(report.candidates.length?report.candidates.length+' outline'+(report.candidates.length===1?'':'s')+' found. Choose one to inspect.':'No complete four-sided outline found. Inspect and place the corners manually.');
+        showReport(event.data.report,current);
       };
-      worker.onerror=()=>{if(token===version){worker?.terminate();worker=null;$('findPhotoCorners').disabled=false;status('The scan could not finish. Place corners manually.');}};
+      worker.onerror=()=>{if(token===version){worker?.terminate();worker=null;scanning=false;$('findPhotoCorners').disabled=false;status('The scan could not finish. Place corners manually.');}};
       worker.postMessage({width:raster.width,height:raster.height,data:raster.data},[raster.data.buffer]);
-    }catch(error){if(token===version){$('findPhotoCorners').disabled=false;status('No draft changed. '+error.message);}}
+    }catch(error){if(token===version){scanning=false;scanAbort=null;$('findPhotoCorners').disabled=false;status('No draft changed. '+error.message);}}
   };
   $('rotatePhotoCorners').onclick=()=>{
     if(!editing)return;editing.corners.push(editing.corners.shift());
@@ -111,7 +136,7 @@ export function installPhotoCorners({target,readDraft,propose,redraw}) {
     invalidate,
     instruction(){return points()?'Selected outline is a preview until you use its draft.':null;},
     render(svg,add,scale){
-      $('findPhotoCorners').disabled=!target()||Boolean(worker);$('inspectPhotoCorners').disabled=!target();
+      $('findPhotoCorners').disabled=!target()||scanning;$('inspectPhotoCorners').disabled=!target();
       const p=points();if(!p)return;
       add(svg,'polygon',{points:p.map(q=>q.x+','+q.y).join(' '),fill:'none',stroke:'#79dece','stroke-width':3*scale,'stroke-dasharray':8*scale+' '+5*scale});
       p.forEach((q,i)=>{add(svg,'circle',{cx:q.x,cy:q.y,r:14*scale,fill:'#102928',stroke:'#79dece','stroke-width':2*scale});add(svg,'text',{x:q.x,y:q.y,'text-anchor':'middle','dominant-baseline':'central','font-size':14*scale,fill:'#d9fff8'},String(i+1));});

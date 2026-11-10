@@ -1,3 +1,4 @@
+import {servePhotoCorners} from './native/photo-corners.mjs';
 import {serveAudioIntake} from './native/audio-intake.mjs';
 import {serveCalibrationTranslation} from "./native/calibration-translation.mjs";
 import {serveSequenceEdge} from "./native/sequence-edge.mjs";
@@ -649,6 +650,7 @@ export function createAppServer(){
     if(path==="/whole-frame-contours")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/sequence-contours")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/sequence-edge")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'");
+    if(path==="/api/photo-corners"&&(req.method==="POST"||req.method==="GET")){await servePhotoCorners(req,res);return;}
     if(path==="/api/sequence-edge"&&req.method==="POST"){await serveSequenceEdge(req,res);return;}
     if(path==="/")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
     if(path==="/capture")res.setHeader("Content-Security-Policy","default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' blob:; img-src 'self' blob:; media-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'");
