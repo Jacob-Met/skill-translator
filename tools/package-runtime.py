@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare a private runnable distribution from an exact Git commit (stdlib only)."""
+"""Prepare a runnable distribution from an exact Git commit (stdlib only)."""
 import argparse
 import hashlib
 import json
@@ -107,8 +107,8 @@ if(major<20)throw Error('Node.js 20 or later is required.');
 const port=Number(process.env.PORT||8787);
 if(!Number.isInteger(port)||port<1||port>65535)throw Error('Invalid PORT');
 const server=createAppServer();
-server.on('error',error=>{console.error('Cannot start Task Space Lab:',error.message);process.exitCode=1;});
-server.listen(port,'127.0.0.1',()=>console.log('Task Space Lab: http://127.0.0.1:'+port+' (Ctrl+C to stop)'));
+server.on('error',error=>{console.error('Cannot start Skill Translator:',error.message);process.exitCode=1;});
+server.listen(port,'127.0.0.1',()=>console.log('Skill Translator: http://127.0.0.1:'+port+'/sequence (Ctrl+C to stop)'));
 '''
     selected['start.sh'] = b'#!/bin/sh\ncd -- "$(dirname -- "$0")" || exit 1\nexec node launch.mjs\n'
     selected['start.cmd'] = b'@echo off\r\ncd /d "%~dp0"\r\nnode launch.mjs\r\nif errorlevel 1 pause\r\n'
@@ -118,14 +118,20 @@ Source commit: {commit}
 Extract the entire archive before starting. Install Node.js 20 or later.
 Windows: run start.cmd. macOS/Linux: run sh start.sh from a terminal.
 All platforms: node launch.mjs from this directory. No npm install is needed.
-Open http://127.0.0.1:8787 in a modern browser. Ctrl+C stops the server.
+Open http://127.0.0.1:8787/sequence in a modern browser. Ctrl+C stops the server.
 If the port is busy, close the other instance or set PORT to an unused port.
 
-First try the included synthetic bookbinding example: select a mark, change the
-target sheet dimensions, place the mark by click or arrow keys, then choose
-Evaluate placement. Export its local geometry/attempt receipt for inspection.
-That receipt is distinct from saved source annotations; do not import it as source.
-The example is authored geometry, not evidence of skill extraction or learning.
+Start with a local demonstration video in Demonstration studio (/sequence).
+Retain a before and an after moment, then explain the intended and visible change
+beside their original frames. Save sequence with frames downloads the accepted
+account and original PNGs. You can also save a single retained moment before
+writing a step. Open sequence restores that work; pair the matching original
+video to capture more. Keep that original video separately.
+Save an authored step before exporting an offline lesson or choosing Practice
+decisions in a new tab. Practice preserves the author's supplied account and
+keeps the learner's own prediction and comparison separate.
+For photographed workpieces, open Source Studio at /capture.
+The geometry example at / is authored, not evidence of skill extraction or learning.
 
 The geometry and browser workbenches run locally. Export your work explicitly:
 browser session state is not a saved project. In Source Studio (/capture), choose
@@ -149,7 +155,7 @@ for input preparation, invocation and the original-frame review required afterwa
 These optional helpers process supplied inputs locally. Their presence in this
 archive does not establish a tested native runtime on your platform.
 Node.js and optional native executables are not bundled.
-This is a private experimental application, not proof of physical skill or learning.
+This is an experimental application, not proof of physical skill or learning.
 See README.md for workflows and limits; vendor/ retains upstream notices.
 README development/test commands require a source checkout; tests are not bundled.
 The release notes identify platforms actually verified for this exact archive.

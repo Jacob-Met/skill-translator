@@ -29,11 +29,69 @@ function endIO(request){if(current(request)){busy=false;controller=null;syncButt
 function commit(next){sequence=validateSequence(next);revision++;render();}
 function download(blob,name){const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const calibrationMoment=()=>sequence?.moments.find(m=>m.id===selectedCalibration);
+
+// The selected evidence stays beside the account. Rendering never changes its pixels.
+let editorEvidenceKey='';
+
+function renderReopenedSource(){
+  if(clip)return;
+  const moment=sequence?.moments.find(m=>m.id===editingMoment)||sequence?.moments.find(m=>m.id===$('step-before').value)||sequence?.moments[0];
+  if(!moment||!assets.has(moment.id))return;
+  const host=$('video-host'),url=assets.get(moment.id).media.url,key=moment.id+url+moment.label;
+  if(host.dataset.retainedSource===key&&host.querySelector('.retained-source'))return;
+  host.dataset.retainedSource=key;
+  const figure=element('figure',undefined,'retained-source'),image=element('img');
+  image.src=url;image.alt='Saved original frame: '+moment.label;
+  figure.append(image,element('figcaption','Retained frame · '+moment.label+' · '+time(moment.origin.mediaTimeSeconds)+'. Open the matching original clip to capture more.'));
+  host.replaceChildren(figure);
+}
+
+function renderEditorEvidence(){
+  const container=$('step-source-preview');if(!container)return;
+  const before=sequence?.moments.find(m=>m.id===$('step-before').value);
+  const after=sequence?.moments.find(m=>m.id===$('step-after').value);
+  const key=JSON.stringify([before?.id,before?.label,before?.image.sha256,assets.get(before?.id)?.media.url,after?.id,after?.label,after?.image.sha256,assets.get(after?.id)?.media.url]);
+  if(key===editorEvidenceKey)return;editorEvidenceKey=key;container.replaceChildren();
+  for(const [role,moment] of [['Before',before],['After',after]]){
+    if(moment&&assets.has(moment.id)){
+      const figure=element('figure'),image=element('img');
+      image.src=assets.get(moment.id).media.url;image.alt=role+': '+moment.label;
+      figure.append(image,element('figcaption',role+' · '+moment.label+' · '+time(moment.origin.mediaTimeSeconds)));
+      container.append(figure);
+    }
+  }
+  $('step-source-hint').textContent=!before||!after?'Retain a before and an after moment to explain what changes.':before.id===after.id?'Choose different before and after moments.':'These are the original retained frames for the step you are writing.';
+}
+let savedAccount='';
+function accountSignature(includeDrafts=true){
+  return JSON.stringify({
+    sequence:sequence?{...sequence,title:$('sequence-title').value,context:$('sequence-context').value}:null,
+    title:$('sequence-title').value,context:$('sequence-context').value,
+    step:includeDrafts&&(stepDirty||editingStep)?['step-before','step-after','step-title','step-intent','step-change','step-sensory','step-recovery'].map(id=>$(id).value):null,
+    moment:includeDrafts&&(editingMoment||$('moment-label').value||$('moment-state').value)?[editingMoment,$('moment-label').value,$('moment-state').value]:null
+  });
+}
+function hasUnsavedAccount(){
+  const meaningful=sequence?.moments.length||stepDirty||editingMoment||$('moment-label').value||$('moment-state').value||$('sequence-context').value||$('sequence-title').value!=='A task explained through its changes';
+  return Boolean(meaningful&&accountSignature()!==savedAccount);
+}
+function updateSaveState(){
+  const node=$('save-state');if(!node)return;
+  const dirty=hasUnsavedAccount();node.dataset.dirty=String(dirty);
+  node.textContent=dirty?'Unsaved changes · Save sequence to keep them':sequence?.moments.length?'Matches last opened or exported sequence':'Nothing retained yet';
+}
+function markAccountSaved(){savedAccount=accountSignature(false);updateSaveState();}
+window.addEventListener('beforeunload',event=>{if(hasUnsavedAccount()){event.preventDefault();event.returnValue='';}});
+for(const id of ['sequence-title','sequence-context','moment-label','moment-state'])$(id).addEventListener('input',updateSaveState);
+
 function releaseVideo(loaded){
   if(loaded)for(const event of ['seeking','seeked'])loaded.video.removeEventListener(event,syncButtons);
   releaseLocalVideo(loaded);
 }
 function syncButtons(){
+  renderReopenedSource();
+  renderEditorEvidence();
+  updateSaveState();
   visualScanner?.sync();
   narrationNavigator?.sync();
   audioNavigator?.sync();
@@ -43,10 +101,10 @@ function syncButtons(){
   $('moment-time').disabled=Boolean(editingMoment);$('cancel-moment').hidden=!editingMoment;
   $('use-playhead').disabled=busy||seeking||!clip||Boolean(editingMoment);
   $('save-step').disabled=busy||!sequence||sequence.moments.length<2;
-  $('export-sequence').disabled=busy||!sequence?.steps.length||stepDirty||Boolean(editingMoment);
-  $('practice-decisions').disabled=$('export-sequence').disabled;
+  $('export-sequence').disabled=busy||!sequence?.moments.length||stepDirty||Boolean(editingMoment);
+  $('practice-decisions').disabled=$('export-sequence').disabled||!sequence?.steps.length;
   $('compare-appearance').disabled=busy||!sequence||sequence.moments.length<2||Boolean(editingMoment);
-  $('print-lesson').disabled=$('export-sequence').disabled;
+  $('print-lesson').disabled=$('export-sequence').disabled||!sequence?.steps.length;
   $('draft-status').textContent=stepDirty?'Unsaved step draft. Save or clear it before exporting.':editingStep?'Editing the selected step. Its retained frame identities stay unchanged.':sequence?.moments.length>=2?'Choose the evidence, then describe the intended change.':'Retain two moments to explain a change.';
   for(const button of document.querySelectorAll('.moment-actions button,.detail-heading button'))button.disabled=busy;
   const moment=calibrationMoment(),task=moment?.calibratedTask;
@@ -105,7 +163,7 @@ function render(){
     const actions=element('div',undefined,'moment-actions');
     actions.append(button('Use as before',()=>{$('step-before').value=moment.id;stepDirty=true;revision++;syncButtons();}),button('Use as after',()=>{$('step-after').value=moment.id;stepDirty=true;revision++;syncButtons();}),
       button('Edit notes',()=>{editingMoment=moment.id;$('moment-label').value=moment.label;$('moment-state').value=moment.visibleState;$('moment-time').value=moment.origin.requestedTimeSeconds;syncButtons();$('moment-label').focus();}),
-      button('Calibrate / practice',()=>{selectedCalibration=moment.id;revision++;renderCalibration();syncButtons();$('calibration-heading').scrollIntoView({block:'start'});}),
+      button('Calibrate / practice',()=>{selectedCalibration=moment.id;revision++;renderCalibration();syncButtons();$('calibration-panel').open=true;$('calibration-heading').scrollIntoView({block:'start'});}),
       button('Remove',()=>{try{const next=removeMoment(sequence,moment.id),old=assets.get(moment.id);assets.delete(moment.id);if(editingMoment===moment.id)resetMomentEditor();commit(next);releaseImage(old.media);status('Moment removed. Remaining source identities are unchanged.');}catch(e){status(e.message);}}));
     body.append(actions);card.append(image,body);$('moments').append(card);
   }
@@ -219,7 +277,7 @@ $('sequence-file').addEventListener('change',async()=>{
     const old=assets;assets=candidate.assets;const next=candidate.sequence;candidate=null;
     selectedStep=next.steps[0]?.id||null;sequence=next;resetMomentEditor();resetStepEditor();
     $('sequence-title').value=next.title;$('sequence-context').value=next.context;commit(next);releaseSequenceAssets(old);
-    status('Reopened '+next.moments.length+' verified source frames and '+next.steps.length+' authored steps. Findings were recomputed.');
+    markAccountSaved();status('Reopened '+next.moments.length+' verified source frames and '+next.steps.length+' authored steps. Findings were recomputed.');
   }catch(error){if(candidate)releaseSequenceAssets(candidate.assets);reportFailure(request,error);}finally{endIO(request);}
 });
 $('export-sequence').addEventListener('click',async()=>{
@@ -230,7 +288,7 @@ $('export-sequence').addEventListener('click',async()=>{
     const blob=await makeSequenceBundle(next,snapshot,{signal:request.signal});if(!current(request))return;
     if(version!==revision){status('Work changed while saving. Save again to include the current account.');return;}
     const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='demonstration-sequence.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-    status('Saved the authored account with its exact retained PNG frames. Keep the original video separately.');
+    markAccountSaved();status('Saved the authored account with its exact retained PNG frames. Keep the original video separately.');
   }catch(error){reportFailure(request,error);}finally{endIO(request);}
 });
 $('print-lesson').addEventListener('click',async()=>{
@@ -270,11 +328,12 @@ $('practice-decisions').addEventListener('click',async()=>{
   }catch(error){reportFailure(request,error);}finally{endIO(request);}
 });
 $('clear-sequence').addEventListener('click',()=>{
+  if(hasUnsavedAccount()&&!window.confirm('Start a new demonstration? Current unsaved changes will be discarded. Cancel and save the sequence first to keep them.'))return;
   controller?.abort();generation++;controller=null;busy=false;releaseVideo(clip);clip=null;releaseSequenceAssets(assets);assets=new Map();sequence=null;selectedStep=null;revision++;
   visualScanner.clear();
   $('video-host').replaceChildren(element('p','Local video preview'));$('clip-file').value='';$('sequence-file').value='';
   $('sequence-title').value='A task explained through its changes';$('sequence-context').value='';$('moment-time').value='0';
-  resetMomentEditor();resetStepEditor();render();status('New demonstration. Choose its original clip.');
+  resetMomentEditor();resetStepEditor();render();markAccountSaved();status('New demonstration. Choose its original clip.');
 });
 window.addEventListener('pagehide',event=>{if(!event.persisted){controller?.abort();releaseVideo(clip);releaseSequenceAssets(assets);}});
 function previewRequestedMoment(seconds){
@@ -292,4 +351,4 @@ const audioHost=document.createElement('details');
 document.getElementById('narration-moments').after(audioHost);
 audioNavigator=createAudioActivityNavigator({host:audioHost,getClip:()=>clip,isBusy:()=>busy,canSelect:()=>!editingMoment,onSelect:previewRequestedMoment});
 render();
-
+markAccountSaved();

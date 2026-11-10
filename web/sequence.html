@@ -6,21 +6,31 @@
   <title>Demonstration sequence · Skill Translator</title>
   <link rel="stylesheet" href="/web/sequence.css">
   <link rel="stylesheet" href="/web/narration-moments.css">
+  <link rel="stylesheet" href="/web/sequence-workspace.css">
 </head>
-<body>
-  <header class="topbar"><a class="brand" href="/">SKILL TRANSLATOR</a><nav aria-label="Workbenches"><a href="/appearance-pair">Compare retained frames</a><a href="/capture">Source capture</a><a href="/practice">Practice</a><a href="/task-readiness">Reason about next steps</a><a href="/prerequisite-rehearsal">Rehearse prerequisites</a> <a href="/order-evidence">Compare demonstrated order</a> <a href="/decision-comparison">Compare decision cues</a> <a href="/timed-narration">Inspect supplied narration</a> <a href="/spoken-explanations">Keep a spoken explanation</a></nav></header>
+<body class="sequence-studio">
+  <header class="topbar"><a class="brand" href="/" target="_blank" rel="noopener">SKILL TRANSLATOR</a><h1>Demonstration studio</h1><details class="workbench-menu"><summary>Other tools ↗</summary><nav aria-label="Workbenches"><a href="/appearance-pair" target="_blank" rel="noopener">Compare retained frames</a><a href="/capture" target="_blank" rel="noopener">Source capture</a><a href="/practice" target="_blank" rel="noopener">Practice</a><a href="/task-readiness" target="_blank" rel="noopener">Reason about next steps</a><a href="/prerequisite-rehearsal" target="_blank" rel="noopener">Rehearse prerequisites</a> <a href="/order-evidence" target="_blank" rel="noopener">Compare demonstrated order</a> <a href="/decision-comparison" target="_blank" rel="noopener">Compare decision cues</a> <a href="/timed-narration" target="_blank" rel="noopener">Inspect supplied narration</a> <a href="/spoken-explanations" target="_blank" rel="noopener">Keep a spoken explanation</a><a href="/sequence-edge" target="_blank" rel="noopener">Inspect visible edge proposals</a></nav><p class="note">Opens separately. Your demonstration stays here.</p></details></header>
   <main>
-    <section class="intro"><p class="eyebrow">THE EXPERT'S ACCOUNT</p><h1>The moments that<br>change a task.</h1><p class="lead">Keep the evidence before and after an action. Explain the intended result, the cue you notice, and what you would do if it goes wrong.</p></section>
     <section class="document-card" aria-label="Demonstration details">
-      <div><label for="sequence-title">Demonstration title</label><input id="sequence-title" type="text" maxlength="160" value="A task explained through its changes"><label for="sequence-context">Expert and task context</label><textarea id="sequence-context" rows="2" maxlength="2400" placeholder="Who is demonstrating, what material or tool is involved, and what should the learner know?"></textarea></div>
-      <div class="document-actions"><label for="sequence-file">Reopen a saved sequence</label><input id="sequence-file" type="file" accept=".json,application/json"><button id="export-sequence" class="primary" disabled>Save sequence with frames</button><button id="print-lesson" class="quiet" disabled>Save printable offline lesson</button><button id="practice-decisions" class="primary" disabled>Practice decisions in a new tab</button><button id="clear-sequence" class="quiet">Start a new demonstration</button><p class="note">Saved files include retained PNG frames and your notes. The original video stays separate.</p></div>
+      <div class="document-title"><label for="sequence-title">Demonstration title</label><input id="sequence-title" type="text" maxlength="160" value="A task explained through its changes"></div>
+      <div class="document-actions"><label class="open-file" for="sequence-file">Open sequence<input id="sequence-file" type="file" accept=".json,application/json"></label><button id="export-sequence" class="primary" disabled>Save sequence with frames</button><button id="print-lesson" class="quiet" disabled>Save printable offline lesson</button></div>
+      <details class="context-details"><summary>Expert and task context</summary><label for="sequence-context">Who is demonstrating, and what should the learner know?</label><textarea id="sequence-context" rows="2" maxlength="2400" placeholder="Name the person, material, tools and conditions that matter."></textarea></details>
+      <p id="save-state" class="save-state" role="status">Nothing retained yet</p>
     </section>
     <p id="status" role="status" aria-live="polite">Choose a local clip, or reopen a saved demonstration.</p>
     <div class="workspace">
-      <section class="card source-card"><p class="eyebrow">01 / RETAIN THE EVIDENCE</p><h2>Choose useful moments</h2>
-        <label for="clip-file">Original MP4 or WebM clip</label><input id="clip-file" type="file" accept=".mp4,.webm,video/mp4,video/webm">
-        <div id="video-host" class="video-host"><p>Local video preview</p></div>
-        <p id="clip-summary" class="note">The video and retained images stay in your browser.</p>
+      <section class="card source-card" aria-label="Source clip and retained moments">
+        <div class="source-toolbar"><h2>Source clip</h2><label for="clip-file" class="open-file">Open local video<input id="clip-file" type="file" accept=".mp4,.webm,video/mp4,video/webm"></label></div>
+        <div id="video-host" class="video-host"><div class="video-empty"><strong>Start with the demonstration.</strong><p>Open an MP4 or WebM, pause at a useful moment, then retain its frame.</p></div></div>
+        <p id="clip-summary" class="note">Your video stays on this device. Retained frames travel with the sequence.</p>
+        <div class="moment-editor" aria-label="Retain a moment">
+          <div class="capture-row"><div class="time-field"><label for="moment-time">Requested time · seconds</label><div class="time-controls"><input id="moment-time" type="number" min="0" step="0.001" value="0"><button id="use-playhead" class="quiet" disabled>Use video playhead</button></div></div><div><label for="moment-label">Moment title</label><input id="moment-label" type="text" maxlength="120" placeholder="Before the fold"></div><button id="capture-moment" class="primary" disabled>Retain this moment</button></div>
+          <label for="moment-state">What is visibly present?</label><textarea id="moment-state" rows="1" maxlength="1600" placeholder="The material, tool, support or alignment you can see."></textarea>
+          <button id="cancel-moment" class="quiet" hidden>Cancel note edit</button>
+        </div>
+        <section class="moments-section"><div class="section-heading"><div><h2>Retained moments</h2></div><span id="moment-count" class="count">0 / 12</span></div><div class="actions"><button id="compare-appearance" class="primary" disabled>Compare retained frames in a new tab</button></div><div id="moments" class="moment-grid"><p class="empty">Retained frames will appear here in presented-time order.</p></div></section>
+
+        <details class="analysis-tools"><summary>Find moments using image changes, narration or sound</summary>
         <details class="visual-scan" id="visual-scan">
           <summary>Find moments by visual change</summary>
           <p>Sample the clip to locate changes worth inspecting. You choose which original moments to retain.</p>
@@ -50,13 +60,11 @@
  <div class="actions"><button id="narration-previous" class="quiet" disabled>Previous 50 cues</button><button id="narration-next" class="quiet" data-last="true" disabled>Next 50 cues</button></div>
  <p class="note">Start, midpoint and end are requested times. Preview does not retain a frame. Use the studio's Retain this moment button; its actual presented time and full PNG remain the evidence. Out-of-clip times are not clamped. Narration settings remain local to this clip session; keep the original transcript and save the authored sequence. Use <a href="/timed-narration">Inspect supplied narration</a> to retain explicit quotations beside authored steps.</p>
 </details>
-        <div class="two-fields"><div><label for="moment-time">Requested time · seconds</label><input id="moment-time" type="number" min="0" step="0.001" value="0"><button id="use-playhead" class="quiet" disabled>Use video playhead</button></div><div><label for="moment-label">Moment title</label><input id="moment-label" type="text" maxlength="120" placeholder="Before the fold"></div></div>
-        <label for="moment-state">What is visibly present?</label><textarea id="moment-state" rows="2" maxlength="1600" placeholder="Describe the material, tool, support or alignment you can see."></textarea>
-        <div class="actions"><button id="capture-moment" class="primary" disabled>Retain this moment</button><button id="cancel-moment" class="quiet" hidden>Cancel note edit</button></div>
-        <p class="note">Enter a time or use the video playhead, then retain the moment. The saved frame shows its actual presented time. An unchanged paused seek may briefly play muted to obtain a new frame.</p>
+        </details>
       </section>
-      <section class="card account-card"><p class="eyebrow">02 / EXPLAIN THE CHANGE</p><h2 id="step-editor-heading">Author a step</h2>
+      <section class="card account-card"><h2 id="step-editor-heading">Author a step</h2><p id="step-source-hint" class="note">Retain a before and an after moment to explain what changes.</p>
         <div class="two-fields"><div><label for="step-before">Before</label><select id="step-before"></select></div><div><label for="step-after">After</label><select id="step-after"></select></div></div>
+        <div id="step-source-preview" class="editor-pair" aria-label="Selected before and after evidence"></div>
         <label for="step-title">Step title</label><input id="step-title" type="text" maxlength="160" placeholder="Set the fold">
         <label for="step-intent">What result are you trying to achieve?</label><textarea id="step-intent" rows="2" maxlength="1800" placeholder="Name the relationship or condition that matters."></textarea>
         <label for="step-change">What visibly changed?</label><textarea id="step-change" rows="2" maxlength="1800" placeholder="Separate what you see from what you infer."></textarea>
@@ -65,10 +73,10 @@
         <div class="actions"><button id="save-step" class="primary" disabled>Save authored step</button><button id="cancel-step" class="quiet">Clear step draft</button></div><p id="draft-status" class="note">Retain two moments to explain a change.</p>
       </section>
     </div>
-    <p><a href="/sequence-edge">Inspect visible edge proposals in original frames without physical calibration</a>.</p><section class="moments-section"><div class="section-heading"><div><p class="eyebrow">SOURCE MOMENTS</p><h2>Retained evidence</h2></div><span id="moment-count" class="count">0 / 12</span></div><div class="actions"><button id="compare-appearance" class="primary" disabled>Compare retained frames in a new tab</button></div><p class="note">Choose any two original retained frames in the comparison. No authored step is required; an unsaved step draft stays here.</p><div id="moments" class="moment-grid"><p class="empty">Retained frames will appear here in presented-time order.</p></div></section>
-    <section class="explanation-section"><p class="eyebrow">03 / INSPECT THE ACCOUNT</p><h2>What changes, and why it matters</h2><div id="steps" class="step-tabs" aria-label="Authored steps"></div><div id="step-detail" class="step-detail"><p class="empty">Save an authored step to compare its before and after evidence.</p></div><p id="account-gaps" class="note"></p></section>
-    <section id="calibration-panel" class="calibration-section card" aria-labelledby="calibration-heading">
-      <p class="eyebrow">04 / PRACTICE A RETAINED STATE</p><h2 id="calibration-heading">Calibrate a retained moment</h2>
+    <div class="lesson-actions"><button id="practice-decisions" class="primary" disabled>Practice decisions in a new tab</button><p class="note">Opens this demonstration and its retained frames for the learner.</p><button id="clear-sequence" class="quiet">Start a new demonstration</button></div>
+    <section class="explanation-section"><h2>Your lesson</h2><div id="steps" class="step-tabs" aria-label="Authored steps"></div><div id="step-detail" class="step-detail"><p class="empty">Save an authored step to compare its before and after evidence.</p></div><p id="account-gaps" class="note"></p></section>
+    <details id="calibration-panel" class="calibration-section card"><summary>Attach calibrated practice to a moment</summary><div class="calibration-content" aria-labelledby="calibration-heading">
+      <h2 id="calibration-heading">Calibrate a retained moment</h2>
       <p class="lead">Keep a geometric task beside the moment it came from. Save its exact PNG, annotate it in <a href="/capture" target="_blank" rel="noopener">Source capture in a new tab</a>, then attach the exported annotations here. With both states calibrated, save the sequence and <a href="/sequence-change" target="_blank" rel="noopener">compare their declared geometric change</a>, or <a href="/sampled-path" target="_blank" rel="noopener">inspect matched intermediate states along a sampled path</a>, or <a href="/relationship-discovery" target="_blank" rel="noopener">discover relationships across all calibrated moments from this one saved sequence</a>.</p>
       <div class="calibration-grid"><div>
         <label for="calibration-moment">Source moment</label><select id="calibration-moment"></select>
@@ -80,10 +88,10 @@
         <div class="calibration-actions actions"><button id="practice-moment" class="primary" disabled>Open practice in a new tab</button><button id="save-moment-task" class="quiet" disabled>Save task source</button><button id="remove-moment-task" class="quiet" disabled>Remove annotations</button></div>
         <p class="note">Practice uses the selected state's geometric relationships. It does not assess action timing, force, sensory judgment or mastery of the whole demonstration. Save any step or moment draft before opening the task.</p>
       </div><div><div id="calibration-preview" class="calibration-preview" hidden></div><ol id="calibration-marks" class="calibration-marks"></ol></div></div>
-    </section>
+    </div></details>
     <details class="source-details"><summary>Source identity and evidence limits</summary><pre id="source-identity">No source retained.</pre><p class="note">Frame pixels and timestamps are retained evidence. Intent, sensory cues and recovery notes are the author's account. A matching file hash checks consistency with the saved record; it does not authenticate capture or establish contact, force, physical success or learning.</p></details>
   </main>
-  <footer>Inspect the evidence. Preserve what the expert knows. Keep unanswered questions visible.</footer>
+  <footer>Local files · Export a sequence to keep editing it, or an offline lesson to share.</footer>
   <script type="module" src="/web/sequence.mjs"></script>
 </body>
 </html>
