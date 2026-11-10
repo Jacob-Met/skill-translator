@@ -65,6 +65,8 @@ You can load your **own local annotated geometry JSON** (≤256 KB) without uplo
 
 ## Annotate a source photograph
 
+Source Studio can now **Find outlines in this photo**, preview multiple four-sided regions, rotate their physical corner labels, and copy a chosen outline into editable calibration fields. Your measured dimensions remain yours to supply. The original image is preserved; no workpiece is selected automatically. [Workflow, method and limits](docs/PHOTO_CORNERS.md).
+
 Open **Annotate your own source photo** or visit `/capture`. Choose a local PNG or JPEG, enter the measured width and height of a flat workpiece, and select its four corners in top-left, top-right, bottom-right, bottom-left order. You can click the photo or use numeric coordinates. Apply the calibration, then click an observed mark and explicitly give it a proportional or physical-edge meaning and a positional tolerance.
 
 Choose **Practice these marks in a new tab** to use the accepted annotations directly in geometric placement practice. The original studio and image stay open; practice starts at the accepted source dimensions with target marks hidden. Apply or revert calibration edits and save or discard mark drafts first. See [Source Studio to practice](docs/CAPTURE_PRACTICE.md) for changed-size practice, saved rounds and recovery when a browser blocks the handoff.
