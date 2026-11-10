@@ -6,8 +6,8 @@ import {createAppServer} from '../server.mjs';
 import {requireChromiumSandbox} from './support/chromium-sandbox.mjs';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_PATH);
 const out=resolve(process.env.RECEIPT_DIR||'/tmp/photo-corners-receipt');await mkdir(out,{recursive:true});
-const server=createAppServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
-const origin='http://127.0.0.1:'+server.address().port,receipt={result:'FAIL',checks:[],errors:[]};
+const server=process.env.APP_URL?null:createAppServer();if(server)await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const origin=process.env.APP_URL||'http://127.0.0.1:'+server.address().port,receipt={result:'FAIL',checks:[],errors:[]};
 let browser;
 try{
  browser=await chromium.launch({headless:true,chromiumSandbox:true,executablePath:process.env.CHROME_BINARY});
@@ -42,7 +42,7 @@ try{
  await page.locator('#markX').fill('660');await page.locator('#markY').fill('480');await page.locator('#markLabel').fill('Bookbinding alignment');await page.locator('#addCaptureMark').click();
  assert.match(await page.locator('#markCount').textContent(),/1 source mark/);
  const jsonDownload=page.waitForEvent('download');await page.locator('#downloadCapture').click();const json=await jsonDownload;await json.saveAs(out+'/accepted-source.json');const accepted=JSON.parse(await readFile(out+'/accepted-source.json','utf8'));
- assert.equal(accepted.source.widthMm,320);assert.equal(accepted.source.heightMm,210);assert.equal(accepted.source.corners[0].x,draft[0]+1);assert.equal(accepted.source.calibrationDraftEvidence.format,'skill-translator.photo-corners/v1');assert.ok(['global','local-contrast'].includes(accepted.source.calibrationDraftEvidence.analysis.settings.method));
+ assert.equal(accepted.source.widthMm,320);assert.equal(accepted.source.heightMm,210);assert.equal(accepted.source.corners[0].x,draft[0]+1);assert.equal(accepted.source.calibrationDraftEvidence.format,'skill-translator.photo-corners/v1');assert.ok(['global','local-contrast','opencv-colour-contours'].includes(accepted.source.calibrationDraftEvidence.analysis.settings.method));
  const download=page.waitForEvent('download');await page.locator('#downloadSourcePackage').click();await(await download).saveAs(out+'/source.stsource');
  const popup=context.waitForEvent('page');await page.locator('#practiceCapture').click();const practice=await popup;await practice.waitForURL('**/practice');await practice.waitForLoadState();assert.match(await practice.locator('body').innerText(),/Bookbinding alignment/);await practice.screenshot({path:out+'/practice.png'});await practice.close();
  receipt.checks.push('Opaque 1400×1000 authored original → 1024 preview → original-pixel proposal → explicit choice → corrected 320×210 mm calibration → mark → JSON, editable package and practice.');
@@ -56,4 +56,4 @@ try{
  assert.deepEqual(receipt.errors,[]);receipt.result='PASS';receipt.originalCoordinates=draft;receipt.source={width:1400,height:1000,evidence:'authored controls, not real-photo accuracy'};
  await context.close();
 } catch(error){receipt.failure=error.stack;process.exitCode=1;}
-finally{await browser?.close();await new Promise(r=>server.close(r));await writeFile(out+'/receipt.json',JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt,null,2));}
+finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await writeFile(out+'/receipt.json',JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt,null,2));}

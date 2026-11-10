@@ -73,8 +73,13 @@ export function proposePhotoCorners(image) {
     throw Error('Supply an opaque RGBA analysis raster from 16 to 1024 pixels per side.');
   const {threshold,contrast}=thresholdFor(data),candidates=[],rejected={boundary:0,shape:0,small:0};
   if(contrast<8)return {version:PHOTO_CORNERS_VERSION,kernel:PIXEL_VERSION,width,height,threshold,contrast,candidates,rejected,omitted:0};
-  for(const method of ['global','local-contrast'])for(const polarity of ['bright','dark']){
-    const analysis=analyzePixels(image,{method,polarity,threshold:method==='global'?threshold:16,radius:24,minArea:Math.max(64,Math.ceil(width*height*.001)),maxArea:width*height});
+  for(const profile of [{method:'global',threshold},{method:'local-contrast',threshold:16},{method:'local-contrast',threshold:8,fallback:true}]){
+    // Weak local contrast can outline an exterior halo around an already clear
+    // edge. Use it only when the original passes found no selectable outline.
+    if(profile.fallback&&candidates.length)break;
+    for(const polarity of ['bright','dark']){
+    const {method}=profile;
+    const analysis=analyzePixels(image,{method,polarity,threshold:profile.threshold,radius:24,minArea:Math.max(64,Math.ceil(width*height*.001)),maxArea:width*height});
     const eligible=new Map();
     for(const c of analysis.components){
       if(!c.accepted){rejected.small++;continue;}if(c.touchesBoundary){rejected.boundary++;continue;}
@@ -97,6 +102,7 @@ export function proposePhotoCorners(image) {
       const duplicate=candidates.findIndex(c=>c.corners.every((p,i)=>Math.hypot(p.x-corners[i].x,p.y-corners[i].y)<5));
       if(duplicate<0)candidates.push(candidate);
       else if(Math.min(...support)>Math.min(...candidates[duplicate].sideSupport))candidates[duplicate]=candidate;
+    }
     }
   }
   candidates.sort((a,b)=>b.outlineAreaPx-a.outlineAreaPx||a.corners[0].y-b.corners[0].y||a.corners[0].x-b.corners[0].x);

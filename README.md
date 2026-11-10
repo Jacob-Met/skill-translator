@@ -544,3 +544,7 @@ Relationship Discovery now proposes complete multi-point shared-motion groups fr
 
 The finite observation and calibration planners include both receiver comparison allowances when counting distinguishable rule pairs. Touching predictions remain unresolved, and the observation acceptance rule is unchanged. [The numerical guard and receiving guide](docs/FINITE_VARIATION_GUARDS.md) records the reproducible midpoint counterexample, scope and portable controls.
 
+
+### Stronger ordinary-paper photo outlines
+
+Source Studio uses the existing optional OpenCV runtime when installed. Run python3 tools/setup-native.py once, then restart the normal launcher; the scan button discovers the app-local runtime automatically. Node-only scanning and manual correction remain available. See [the ordinary-paper evaluation](docs/PAPER_BOUNDARY_EVALUATION.md) for measured gains, remaining omissions, non-first choices, installation cost and exact reproduction.
