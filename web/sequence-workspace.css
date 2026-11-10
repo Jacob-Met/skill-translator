@@ -1,0 +1,138 @@
+/* Sequence is an authoring workspace: the source and the account share one view.
+   This sheet is deliberately local to /sequence; analysis workbenches keep their layouts. */
+:root{font:15px/1.45 system-ui,sans-serif;color:#22312f;background:#f3f4f0;color-scheme:light;--accent:#1d6557;--muted:#52655e;--line:#cdd5ce}
+body.sequence-studio{margin:0}
+.sequence-studio .topbar{min-height:58px;padding:12px 26px;gap:24px;align-items:center;background:#fff;border-bottom:1px solid var(--line)}
+.sequence-studio .brand{font-size:.72rem;letter-spacing:.08em;color:#37534a}
+.sequence-studio h1{font-size:1.05rem;letter-spacing:-.02em;font-weight:650;margin:0;line-height:1.3;flex:1}
+.sequence-studio h2{font-size:1.05rem;margin:0;line-height:1.35;letter-spacing:-.02em}
+.sequence-studio h3{font-size:1rem}
+.sequence-studio main{max-width:1680px;padding:0 26px 32px}
+.sequence-studio a{color:#205b4b}
+.sequence-studio .document-card{background:transparent;border:0;border-radius:0;padding:20px 0 10px;display:grid;grid-template-columns:minmax(260px,1fr) auto;gap:8px 22px}
+.sequence-studio .document-title label{margin:0 0 5px;font-size:.72rem}
+.sequence-studio .document-title input{font-size:1.22rem;font-weight:600;background:transparent;border:0;border-bottom:1px solid #aebfb3;border-radius:0;padding:4px 0;line-height:1.4}
+.sequence-studio .document-actions{display:flex;flex-direction:row;gap:8px;align-items:end;flex-wrap:wrap}
+.sequence-studio label{margin:10px 0 5px;font-size:.75rem;color:#415b50}
+.sequence-studio input,.sequence-studio select,.sequence-studio textarea{background:#fff;color:#243c32;border-color:#b6c7bb;border-radius:3px;padding:8px 10px;font-size:.85rem}
+.sequence-studio textarea{line-height:1.4}
+.sequence-studio button{background:#e8eee7;color:#244f3c;border:1px solid #b6c7bb;border-radius:3px;font-size:.76rem;padding:9px 12px;line-height:1.35}
+.sequence-studio button:disabled{opacity:.42}
+.sequence-studio .primary{background:#1d6557;border-color:#1d6557;color:#fff;font-weight:650}
+.sequence-studio .quiet{background:transparent;color:#315b4d}
+.sequence-studio button:focus-visible,.sequence-studio a:focus-visible,.sequence-studio input:focus-visible,.sequence-studio textarea:focus-visible,.sequence-studio select:focus-visible,.sequence-studio summary:focus-visible{outline:3px solid #ac7325;outline-offset:3px}
+.sequence-studio .note{font-size:.75rem;line-height:1.45;color:#52655e;margin:8px 0;overflow-wrap:anywhere}
+.sequence-studio .open-file{display:inline-flex;position:relative;align-items:center;min-height:36px;margin:0!important;padding:8px 11px;border:1px solid #aabbad;border-radius:3px;background:#fff;cursor:pointer;color:#315b4d;font-size:.76rem;white-space:nowrap}
+.sequence-studio .open-file input{position:absolute;inset:0;opacity:0;width:100%;height:100%;padding:0;cursor:pointer}
+.sequence-studio .open-file:focus-within{outline:3px solid #ac7325;outline-offset:3px}
+.sequence-studio .context-details{align-self:start;font-size:.76rem;max-width:680px}
+.sequence-studio .context-details summary{cursor:pointer;color:#39594c}
+.sequence-studio .save-state{font-size:.73rem;color:#5a7061;margin:0;text-align:right;align-self:start}
+.sequence-studio .save-state[data-dirty=true]{color:#8a4c15}
+.sequence-studio #status{padding:8px 12px;margin:8px 0 16px;border-left:2px solid #688a75;background:#e9eee7;font-size:.79rem;min-height:34px}
+.sequence-studio .workspace{grid-template-columns:minmax(0,1.65fr) minmax(330px,1fr);gap:24px;align-items:start}
+.sequence-studio .card{border-radius:0;border:0;background:transparent;padding:0}
+.sequence-studio .source-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.sequence-studio .video-host{margin:0;min-height:220px;aspect-ratio:16/9;background:#121c18;border:1px solid #1e3025;border-radius:3px;max-height:400px}
+.sequence-studio .video-host video{width:100%;height:100%;max-height:398px;object-fit:contain}
+.sequence-studio .video-empty{max-width:400px;padding:28px;text-align:center;color:#d4dfd4}
+.sequence-studio .video-empty strong{font-size:1.1rem;font-weight:500}
+.sequence-studio .video-empty p{color:#a6b9aa;font-size:.85rem;margin-bottom:0;line-height:1.55}
+.sequence-studio .video-host>p{padding:25px;color:#d4dfd4}
+.sequence-studio .moment-editor{border-top:1px solid var(--line);margin-top:10px;padding-top:4px}
+.sequence-studio .capture-row{display:grid;grid-template-columns:minmax(170px,.9fr) minmax(120px,1fr) auto;gap:10px;align-items:end}
+.sequence-studio .time-controls{display:flex;gap:6px}
+.sequence-studio .time-controls input{width:90px;flex:1}
+.sequence-studio #use-playhead{font-size:.69rem;padding:7px;max-width:85px}
+.sequence-studio #capture-moment{min-height:38px;margin-bottom:0}
+.sequence-studio #moment-state{min-height:38px}
+.sequence-studio .account-card{background:#fff;padding:18px;border:1px solid var(--line);border-top:3px solid #1d6557;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;overscroll-behavior:contain}
+.sequence-studio .account-card .two-fields{margin-top:8px}
+.sequence-studio .editor-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin:10px 0}
+.sequence-studio .editor-pair:empty{display:none}
+.sequence-studio .editor-pair figure{margin:0;min-width:0}
+.sequence-studio .editor-pair img{width:100%;height:114px;object-fit:contain;display:block;background:#142219;border:0;border-radius:0}
+.sequence-studio .editor-pair figcaption{color:#425b4c;font-size:.7rem;line-height:1.35;margin-top:5px}
+.sequence-studio .editor-pair .empty{font-size:.75rem;padding:12px;border:1px dashed #aebfb3}
+.sequence-studio .moments-section{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.sequence-studio .section-heading{align-items:center}
+.sequence-studio .count{color:#52655e}
+.sequence-studio .moments-section>.actions{margin:8px 0}
+.sequence-studio .moments-section>.actions button{font-size:.7rem;padding:6px 10px;background:transparent;color:#355b46;border-color:#bfcdc0}
+.sequence-studio .moment-grid{display:flex;overflow-x:auto;gap:10px;align-items:stretch;padding-bottom:8px;scroll-snap-type:x proximity}
+.sequence-studio .moment-card{flex:0 0 185px;border-radius:2px;background:#fff;border:1px solid var(--line);scroll-snap-align:start}
+.sequence-studio .moment-card img{height:105px}
+.sequence-studio .moment-body{padding:10px}
+.sequence-studio .moment-body h3{font-size:.8rem;color:#203b2d}
+.sequence-studio .moment-body p{font-size:.68rem;color:#52655e;line-height:1.4}
+.sequence-studio .moment-actions{gap:5px;margin-top:8px}
+.sequence-studio .moment-actions button{font-size:.63rem;padding:5px 6px;background:#eff2eb;color:#2f5541}
+.sequence-studio .empty{color:#64766a;font-size:.83rem;padding:12px 0}
+.sequence-studio .analysis-tools{margin-top:20px;border-top:1px solid var(--line);padding-top:12px;font-size:.8rem}
+.sequence-studio summary{cursor:pointer}
+.sequence-studio .analysis-tools>.visual-scan,.sequence-studio .analysis-tools>.narration-moments,.sequence-studio .audio-activity{background:#edf1e9;border:1px solid var(--line);border-radius:3px;color:#294034}
+.sequence-studio .analysis-tools summary{color:#2e5946}
+.sequence-studio .regional-appearance{background:#e6ecdf;color:#243b2b}
+.sequence-studio .regional-appearance summary{color:#315b3d}
+.sequence-studio .lesson-actions{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin-top:24px}
+.sequence-studio .lesson-actions>.note{flex:1}
+.sequence-studio .explanation-section{margin-top:24px}
+.sequence-studio .step-tabs{margin-top:12px}
+.sequence-studio .step-tabs button[aria-pressed=true]{background:#1d6557;color:#fff}
+.sequence-studio .step-detail{padding:20px;border:1px solid var(--line);border-radius:3px;background:#fff}
+.sequence-studio .step-detail figcaption{color:#405e4c}
+.sequence-studio .step-detail dt{color:#42624b}
+.sequence-studio .calibration-section{margin-top:24px;padding:16px 0;border-top:1px solid var(--line)}
+.sequence-studio .calibration-content{padding-top:20px}
+.sequence-studio .calibration-content .lead{color:#3e5847;font-size:.87rem}
+.sequence-studio .calibration-marks{color:#3e5847}
+.sequence-studio .calibration-marks small{color:#52655e}
+.sequence-studio .source-details{margin-top:16px;padding-top:12px}
+.sequence-studio .source-details summary{color:#3e5847}
+.sequence-studio pre{color:#52655e}
+.sequence-studio footer{padding:18px 26px;color:#59705f}
+.sequence-studio .workbench-menu{position:relative;font-size:.76rem}
+.sequence-studio .workbench-menu>summary{color:#315744;white-space:nowrap;padding:6px}
+.sequence-studio .workbench-menu nav{position:absolute;right:0;top:35px;z-index:10;display:flex;flex-direction:column;gap:0;width:285px;background:#fff;border:1px solid var(--line);box-shadow:0 7px 22px #172a1b20;padding:8px}
+.sequence-studio .workbench-menu nav a{padding:8px;text-decoration:none;font-size:.79rem}
+.sequence-studio .workbench-menu nav a:hover{background:#edf1e9}
+.sequence-studio .workbench-menu>.note{display:none}
+@media(max-width:1050px){
+.sequence-studio main{padding-left:18px;padding-right:18px}
+.sequence-studio .topbar{padding:12px 18px}
+.sequence-studio .document-card{grid-template-columns:1fr}
+.sequence-studio .document-actions{align-items:center}
+.sequence-studio .save-state{text-align:left}
+.sequence-studio .workspace{gap:16px;grid-template-columns:minmax(0,1.3fr) minmax(310px,1fr)}
+.sequence-studio .capture-row{grid-template-columns:minmax(150px,1fr) minmax(110px,1fr)}
+.sequence-studio #capture-moment{grid-column:1 / -1}
+}
+@media(max-width:740px){
+.sequence-studio .topbar{gap:12px;padding:12px 14px;flex-wrap:wrap}
+.sequence-studio .brand{font-size:.62rem}
+.sequence-studio h1{font-size:.92rem}
+.sequence-studio .workbench-menu{margin-left:auto}
+.sequence-studio main{padding:0 14px 28px}
+.sequence-studio .document-card{padding-top:15px;gap:10px}
+.sequence-studio .document-title input{font-size:1.1rem}
+.sequence-studio .document-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sequence-studio .document-actions .open-file{justify-content:center}
+.sequence-studio #print-lesson{grid-column:1 / -1}
+.sequence-studio .workspace{display:flex;flex-direction:column;gap:24px}
+.sequence-studio .source-card,.sequence-studio .account-card{width:100%}
+.sequence-studio .account-card{position:static;max-height:none;padding:15px}
+.sequence-studio .video-host{min-height:160px}
+.sequence-studio .capture-row{grid-template-columns:minmax(150px,1fr) minmax(100px,1fr)}
+.sequence-studio #capture-moment{grid-column:1 / -1}
+.sequence-studio .lesson-actions{align-items:stretch;flex-direction:column;gap:6px}
+.sequence-studio .moment-card{flex-basis:175px}
+.sequence-studio .compare-grid{grid-template-columns:1fr}
+.sequence-studio .source-toolbar{margin-top:0}
+.sequence-studio .source-toolbar h2{font-size:1rem}
+.sequence-studio .step-detail{padding:14px}
+}
+@media(prefers-reduced-motion:reduce){.sequence-studio *{scroll-behavior:auto!important}}
+
+.sequence-studio .video-host .retained-source{width:100%;height:100%;min-height:0;display:flex;flex-direction:column;margin:0}
+.sequence-studio .retained-source img{display:block;width:100%;height:calc(100% - 42px);min-height:0;flex:1;object-fit:contain;background:#121c18;border:0;border-radius:0}
+.sequence-studio .retained-source figcaption{flex:0 0 auto;font-size:.7rem;line-height:1.4;color:#c4d5c6;margin:0;padding:7px 10px;background:#1b2c21}

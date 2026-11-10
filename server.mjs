@@ -519,6 +519,7 @@ const routes=Object.freeze({
   "/sequence":["web/sequence.html","text/html; charset=utf-8"],
   "/web/sequence.html":["web/sequence.html","text/html; charset=utf-8"],
   "/web/sequence.css":["web/sequence.css","text/css; charset=utf-8"],
+  "/web/sequence-workspace.css":["web/sequence-workspace.css","text/css; charset=utf-8"],
   "/web/sequence.mjs":["web/sequence.mjs","text/javascript; charset=utf-8"],
   "/src/audio-contrast.mjs":["src/audio-contrast.mjs","text/javascript; charset=utf-8"],
   "/src/audio-activity.mjs":["src/audio-activity.mjs","text/javascript; charset=utf-8"],
