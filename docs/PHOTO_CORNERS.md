@@ -2,7 +2,15 @@
 
 ## Current gaps and independent review
 
-Independent review of merged `9bd9c09` found a material phone usability gap: proposal controls could occupy the screen while the photograph was elsewhere in the page. Functional phone checks had passed but missed that visual failure. This revision opens an image-first inspection mode with original pixels, draggable corner handles, coordinate entry, zoom, one-pixel correction and explicit draft adoption together. The same mode supports manual placement without a detector proposal. Independent visual recheck is pending in task `skill-translator-photo-use-judge-kestrel71b9`; author checks below are not a replacement for that verdict.
+Independent reviewer **astra-kestrel-71b9** accepted the image-first inspector as a real product improvement after rechecking frozen `49c06b94`, whose tree matches merged `b71cfdc6530ebd776ccb1e6ab49b71dba86f3fe2`. On original OpenCV `left07.jpg` at 390×844, they viewed the actual phone screenshot and exercised a 2-pixel correction, zoom/Fit, adoption, reopening/cancel without changing the draft, explicit calibration, saved/reopened `.stsource` and downstream practice with the retained mark. They observed no page errors or horizontal overflow. The photograph, four numbered corners and immediate correction/adoption controls stayed together. This resolves the earlier independent finding that controls could fill the phone screen without the photograph.
+
+The remaining ranked gaps are:
+
+1. **Whole-object versus interior-region choice.** Sudoku and clutter can still produce internal regions or omissions rather than the intended outer workpiece.
+2. **Known physical geometry in ordinary scenes.** Validate ordinary colored paper/boards against independently known geometry. Current selected checkerboard views and test dimensions do not establish physical accuracy.
+3. **Formal release publication.** A [versioned interim runtime download](https://github.com/Jacob-Met/skill-translator/blob/749d4e9ff061d2e86750f3ec02d6160f281d9abc/downloads/README.md) is available, with source, launch instructions, actual screenshots/clip and SHA-256. It is distinct from a GitHub Release; the estate release integration's permission gap remains open.
+
+Independent work is recorded separately as `skill-translator-photo-use-judge-kestrel71b9`. The author tests below are evidence about implementation behavior, not an independent physical-accuracy study.
 
 The detector is deliberately limited to well-separated, opaque, approximately four-sided regions. Complex backgrounds, shadows, occlusion, texture, curved boundaries, clipped workpieces and very thin images can yield no proposal or the wrong visible region. Every proposal remains an editable draft. Manual calibration remains available.
 
