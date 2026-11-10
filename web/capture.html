@@ -5,12 +5,13 @@
 <meta name="color-scheme" content="dark"><title>Source Studio · SKILL TRANSLATOR</title>
 <link rel="stylesheet" href="/web/styles.css"><link rel="stylesheet" href="/web/capture.css">
 <link rel="stylesheet" href="/web/calibration-draft.css">
+<link rel="stylesheet" href="/web/photo-corners.css">
 <script type="module" src="/web/capture.mjs"></script>
 </head>
 <body>
 <header class="topbar"><a class="brand studio-home" href="/"><span class="brandmark">ST</span><span>SKILL TRANSLATOR <small>/ SOURCE STUDIO</small></span></a><a class="studio-back" href="/">Open Task Space ↗</a></header>
 <main class="studio-main">
-  <section class="studio-intro"><p class="eyebrow">A DEMONSTRATION / YOUR EVIDENCE</p><h1>Start with what you can see.</h1><p class="lead">Choose a photo or a moment from a demonstration clip, mark the workpiece corners, and describe the relationships you want to investigate.</p></section>
+  <section class="studio-intro"><h1>Calibrate a source image</h1><p class="lead">Choose your image, check the workpiece outline, and supply its measured dimensions.</p></section>
   <div id="studioError" class="error" role="alert" hidden></div>
   <div class="studio-grid">
     <section class="studio-image-panel" aria-label="Original source image">
@@ -46,9 +47,19 @@
       <section class="studio-card"><p class="eyebrow">01 / MEASURE THE WORKPIECE</p>
         <label for="captureTitle">DEMONSTRATION NAME<input id="captureTitle" type="text" maxlength="160" value="My workpiece demonstration"></label>
         <div class="two-fields"><label for="captureWidth">WIDTH · MM<input id="captureWidth" type="number" min="1" max="10000" step="any" value="240"></label><label for="captureHeight">HEIGHT · MM<input id="captureHeight" type="number" min="1" max="10000" step="any" value="160"></label></div>
-        <p class="input-note">Enter dimensions you measured. The photo cannot supply scale by itself.</p>
+        <p class="input-note">Measure the same boundary that your selected corners enclose. The photo cannot supply scale by itself.</p>
       </section>
       <section class="studio-card"><p class="eyebrow">02 / CALIBRATE FOUR CORNERS</p><p class="input-note">Select a corner below, then click its location in the photo. Use the fields for precise keyboard entry.</p>
+        <div class="photo-corners">
+          <h3>Find the workpiece outline</h3>
+          <p class="input-note">Find visible four-sided regions in this photo. Choose an outline, inspect it on the original, then correct its corners before applying. The photo cannot identify your intended workpiece.</p>
+          <button id="findPhotoCorners" type="button" disabled>Find outlines in this photo</button>
+          <svg id="photoOutlineDetail" role="img" aria-label="Selected outline on the original source image" hidden></svg>
+          <div id="photoCornerChoices" class="photo-corner-choices" aria-label="Proposed workpiece outlines"></div>
+          <div class="photo-corner-actions"><button id="rotatePhotoCorners" type="button" disabled>Rotate corner labels</button><button id="usePhotoCorners" type="button" disabled>Use outline as draft</button></div>
+          <p id="photoCornersStatus" class="input-note" role="status">Find visible four-sided regions, then choose which one is your workpiece.</p>
+          <p class="input-note">Analysis uses an opaque preview up to 1024 pixels per side. Small details, shadows and clipped edges can be missed. Original pixels and your measured dimensions stay available.</p>
+        </div>
         <details class="video-source" id="calibrationTransferPanel"><summary>Draft corners from a calibrated reference PNG</summary>
           <p class="input-note">For another equal-sized view of the same flat workpiece: reuse its dimensions and four corners after matching at least two patches fixed relative to that plane. Translation only; this does not identify task marks.</p>
           <label for="referenceTask">REFERENCE ANNOTATIONS JSON<input id="referenceTask" type="file" accept=".json,application/json"></label>

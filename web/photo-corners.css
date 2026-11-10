@@ -1,0 +1,14 @@
+.photo-corners { border-bottom: 1px solid #414b50; padding: 0 0 1rem; margin: 0 0 1rem; }
+.photo-corners h3 { margin: 0 0 .4rem; font-size: 1rem; }
+.photo-corners p { line-height: 1.5; }
+.photo-corner-choices { display: grid; gap: .35rem; margin: .65rem 0; }
+.photo-outline-choice { width: 100%; text-align: left; white-space: normal; }
+.photo-outline-choice[aria-pressed="true"] { border-color: #79dece; color: #d9fff8; background: #193d38; }
+.photo-corner-actions { display: flex; flex-wrap: wrap; gap: .4rem; }
+#photoCornersStatus { overflow-wrap: anywhere; }
+
+.studio-intro { padding: 18px 0 20px; }
+.studio-intro h1 { font-size: clamp(1.5rem, 2.2vw, 2rem); margin: 0 0 .35rem; }
+.studio-intro .lead { font-size: 1rem; margin: 0; max-width: none; }
+#photoOutlineDetail { display: none; width: 100%; max-height: 280px; background: #0b1512; margin: .7rem 0; }
+@media(max-width:850px) { #photoOutlineDetail:not([hidden]) { display: block; } }
